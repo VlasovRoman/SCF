@@ -95,7 +95,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	char v4; // al
 	int * v5; // edi
 	int v6; // eax
-	HANDLE v7; // eax
+	HANDLE currentProcess; // eax
 	int v8; // eax
 	HANDLE v9; // eax
 	void * v10; // ecx
@@ -141,7 +141,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 	//sub_938FE0((int)sub_4F1500); //validate cmd line args, if not throw an error
 	SystemAffinityMask = (DWORD)&v13;
-
+	//FIX
 	if( lstrcmp(lpCmdLine, "/singleproc") ) {
 		currentProcess = GetCurrentProcess();
 		GetProcessAffinityMask(currentProcess, (PDWORD_PTR)&ProcessAffinityMask, (PDWORD_PTR)&SystemAffinityMask);
@@ -149,7 +149,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		readyProcessAffinityMask = 1 << affinityMaskIndex;
 		SetProcessAffinityMask(currentProcess, readyProcessAffinityMask);
 	}
-	
+
 	if (lstrcmp(lpCmdLine, "/purgecache") == 0)
 	{
 		//sub_8CA070(); //delete the cache files if those are present, maybe logs too
