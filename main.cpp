@@ -132,7 +132,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	SystemAffinityMask = (DWORD) & v13;
 	v4 = lstrcmp(lpCmdLine, "/alloclog");
 	v5 = v21;
-	if (v4) {
+	if (v4==0) {
 		if ( * (_DWORD * )(v21 + 24) < 0x10u)
 			v6 = (int)v21 + 4;
 		else
@@ -142,7 +142,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//sub_938FE0((int)sub_4F1500); //validate cmd line args, if not throw an error
 	SystemAffinityMask = (DWORD)&v13;
 	//FIX
-	if( lstrcmp(lpCmdLine, "/singleproc") ) {
+	if( lstrcmp(lpCmdLine, "/singleproc")==0) {
 		currentProcess = GetCurrentProcess();
 		GetProcessAffinityMask(currentProcess, (PDWORD_PTR)&ProcessAffinityMask, (PDWORD_PTR)&SystemAffinityMask);
 		_BitScanForward(&affinityMaskIndex, (DWORD)&ProcessAffinityMask);
