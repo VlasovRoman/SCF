@@ -55,16 +55,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	    wc.lpszMenuName  = NULL;
 	    wc.lpszClassName = g_szClassName;
 	    wc.hIconSm       = LoadIcon(NULL, IDI_APPLICATION);
-		
+
 		if(!RegisterClassEx(&wc))
 	    {
 	        MessageBox(NULL, "Window Registration Failed!", "Error!",
 	            MB_ICONEXCLAMATION | MB_OK);
 	        return 0;
 	    }
-		
+
 			MessageBox(NULL, lpCmdLine, "WinMain Demo", 0);
-		
+
 	    // Step 2: Creating the Window
 	    hwnd = CreateWindowEx(
 	        WS_EX_CLIENTEDGE,
@@ -137,18 +137,23 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			v6 = (int)v21 + 4;
 		else
 			v6 = (int)&v21 + 4;
-		set_PerformanceFrequency((char*)v6); //write the performance frequency to log to a file. 
+		set_PerformanceFrequency((char*)v6); //write the performance frequency to log to a file.
 	}
 	//sub_938FE0((int)sub_4F1500); //validate cmd line args, if not throw an error
 	SystemAffinityMask = (DWORD)&v13;
-	if (lstrcmp(lpCmdLine, "/purgecache") == 0) 
+	if (lstrcmp(lpCmdLine, "/purgecache") == 0)
 	{
 		//sub_8CA070(); //delete the cache files if those are present, maybe logs too
 	}
-	//SystemParametersInfoW(0x3Au, 8u, &dword_F57888, 0); //Retrieves or sets the value of one of the system-wide parameters. 
-	//SystemParametersInfoW(0x34u, 8u, &dword_F57890, 0); //https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-systemparametersinfoa
-	//SystemParametersInfoW(0x32u, 0x18u, &dword_F57898, 0);
 	
+	STICKYKEYS stickyKeys = { sizeof(STICKYKEYS), 0 };
+	TOGGLEKEYS toggleKeys = { sizeof(TOGGLEKEYS), 0 };
+	FILTERKEYS filterKeys = { sizeof(FILTERKEYS), 0 };
+
+	SystemParametersInfoW(SPI_GETSTICKYKEYS, sizeof(STICKYKEYS), &stickyKeys, 0);
+	SystemParametersInfoW(SPI_GETTOGGLEKEYS, sizeof(TOGGLEKEYS), &toggleKeys, 0);
+	SystemParametersInfoW(SPI_GETFILTERKEYS, sizeof(FILTERKEYS), &filterKeys, 0);
+
 	//sub_8D4320(0); //more system info checks and sets the values
 	//sub_8CE0A0(v10, (int)&v15); //strings as the name of the game, pobably an entry into engine's class constructor.
 	//LOBYTE(v19) = 2;
