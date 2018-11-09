@@ -12,6 +12,8 @@
 
 #include <tchar.h>
 
+#include <cstdio>
+
 //----------------------
 
 #include "src/startup.h"
@@ -115,11 +117,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	v18 = & v14;
 	get_performance_count_ptr_stub( & v24);
-	*(float * ) & ProcessAffinityMask = * reinterpret_cast < float * > ( & v13);
+	*(float * ) &ProcessAffinityMask = *reinterpret_cast <float*> (&v13);
 	if (lstrcmp(lpCmdLine, "/waitfordebugger") == 0) {
-		MessageBoxW(0, L "...", L "trap to debugger", 0);
+		MessageBoxW(0, L"...", L"trap to debugger", 0);
 	}
-	*(float * ) & ProcessAffinityMask = * reinterpret_cast < float * > ( & v13);
+	*(float * ) &ProcessAffinityMask = *reinterpret_cast <float*> (&v13);
 	if (lstrcmp(lpCmdLine, "/aqtime") == 0) {
 		//sub_9071C0(0); //set some byte variable to 0
 	}
@@ -131,11 +133,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	v4 = lstrcmp(lpCmdLine, "/alloclog");
 	v5 = v21;
 	if (v4) {
-		if ( * (_DWORD * )(v21 + 24) < 0x10 u)
-			v6 = (const char * )(v21 + 4);
+		if ( * (_DWORD * )(v21 + 24) < 0x10u)
+			v6 = (int)v21 + 4;
 		else
-			v6 = * (const char ** )(v21 + 4);
-		//sub_8D2170(v6); //write the performance log to a file. 
+			v6 = (int)&v21 + 4;
+		set_PerformanceFrequency((char*)v6); //write the performance frequency to log to a file. 
 	}
 	//sub_938FE0((int)sub_4F1500); //validate cmd line args, if not throw an error
 	SystemAffinityMask = (DWORD)&v13;
@@ -143,15 +145,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	{
 		//sub_8CA070(); //delete the cache files if those are present, maybe logs too
 	}
-	SystemParametersInfoW(0x3Au, 8u, &dword_F57888, 0); //Retrieves or sets the value of one of the system-wide parameters. 
-	SystemParametersInfoW(0x34u, 8u, &dword_F57890, 0); //https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-systemparametersinfoa
-	SystemParametersInfoW(0x32u, 0x18u, &dword_F57898, 0);
+	//SystemParametersInfoW(0x3Au, 8u, &dword_F57888, 0); //Retrieves or sets the value of one of the system-wide parameters. 
+	//SystemParametersInfoW(0x34u, 8u, &dword_F57890, 0); //https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-systemparametersinfoa
+	//SystemParametersInfoW(0x32u, 0x18u, &dword_F57898, 0);
 	
 	//sub_8D4320(0); //more system info checks and sets the values
 	//sub_8CE0A0(v10, (int)&v15); //strings as the name of the game, pobably an entry into engine's class constructor.
 	//LOBYTE(v19) = 2;
-	//sub_4F20B0(&v15); //this probably checks operating system version / compatibility
-	v18 = 1;
+	//sub_4F20B0(&v15); //this checks operating system version / compatibility / WINDOW IS CREATED HERE.
+	//v18 = 1;
 	//*(float * ) &ProcessAffinityMask = sub_4A3560( &v23); //this goes into the get_performance_count_ptr_stub
 /* 	SystemAffinityMask = (signed int) * (float *) &ProcessAffinityMask;
 	v12 = (signed int) SystemAffinityMask % 60;
