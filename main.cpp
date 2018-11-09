@@ -146,7 +146,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		currentProcess = GetCurrentProcess();
 		GetProcessAffinityMask(currentProcess, (PDWORD_PTR)&ProcessAffinityMask, (PDWORD_PTR)&SystemAffinityMask);
 		_BitScanForward(&affinityMaskIndex, (DWORD)&ProcessAffinityMask);
-		readyProcessAffinityMask = 1 << affinityMaskIndex;
+		currentProcessAffinityMask = 1 << affinityMaskIndex;
 		SetProcessAffinityMask(currentProcess, readyProcessAffinityMask);
 	}
 
