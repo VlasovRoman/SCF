@@ -155,9 +155,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		//sub_8CA070(); //delete the cache files if those are present, maybe logs too
 	}
 
-	STICKYKEYS stickyKeys = { sizeof(STICKYKEYS), 0 };
-	TOGGLEKEYS toggleKeys = { sizeof(TOGGLEKEYS), 0 };
-	FILTERKEYS filterKeys = { sizeof(FILTERKEYS), 0 };
+	stickyKeys = { sizeof(STICKYKEYS), 0 };
+	toggleKeys = { sizeof(TOGGLEKEYS), 0 };
+	filterKeys = { sizeof(FILTERKEYS), 0 };
 
 	SystemParametersInfoW(SPI_GETSTICKYKEYS, sizeof(STICKYKEYS), &stickyKeys, 0);
 	SystemParametersInfoW(SPI_GETTOGGLEKEYS, sizeof(TOGGLEKEYS), &toggleKeys, 0);
