@@ -1,10 +1,15 @@
+#pragma once
 #include "defs.h"
 #include "temp_data.h"
+#include "gpg.h"
+#include <shlobj.h>
 #include <cstdio>
 #include <windows.h>
 #include <iostream>
 
-_BYTE* sub_1048D030(_BYTE *a1, _BYTE *a2, int a3, _BYTE *a4, int a5, _BYTE *a6);
+using namespace std;
+
+int* sub_1048D030(int *a1, int *a2, int a3, int *a4, int a5, int *a6);
 
 class Moho
 {
@@ -12,12 +17,11 @@ class Moho
 	
 	Moho(){};
 	
-	__attribute__((cdecl)) CHAR* Moho::USER_GetAppCacheDir(CHAR *a1);
-	void Moho::USER_PurgeAppCacheDir();
-	__attribute__((cdecl)) void* Moho::USER_GetAppDataDir(void *a1);
-	
-	
-	
+	__attribute__((cdecl)) string USER_GetAppCacheDir(string a1);
+	void USER_PurgeAppCacheDir();
+	__attribute__((cdecl)) string USER_GetAppDataDir(string a1);
 	
 	private:
-}
+	string game_name = "Supreme Commander Forged Alliance";
+	string dev_company = "Gas Powered Games";
+};
