@@ -2,39 +2,48 @@
 
 _DWORD* get_performance_count_ptr_stub(_DWORD *_this)
 {
-  _DWORD *v1; // esi
+	_DWORD *v1; // esi
 
-  v1 = _this;
-  *(LARGE_INTEGER *)_this = get_performance_count_ptr();
-  return v1;	
+	v1 = _this;
+	*(LARGE_INTEGER *)_this = get_performance_count_ptr();
+	return v1;
 }
 
 LARGE_INTEGER get_performance_count_ptr()
 {
-  __int64 v0; // kr00_8
-  unsigned int v1; // ecx
-  DWORD v2; // ebx
-  LARGE_INTEGER PerformanceCount; // [esp+0h] [ebp-8h]
+	__int64 v0; // kr00_8
+	unsigned int v1; // ecx
+	DWORD v2; // ebx
+	LARGE_INTEGER PerformanceCount; // [esp+0h] [ebp-8h]
 
-  QueryPerformanceCounter(&PerformanceCount);
-  do
-  {
-    v0 = qword_F8ED68;
-    v1 = PerformanceCount.u.HighPart;
-    if ( PerformanceCount.u.HighPart > SHIDWORD(qword_F8ED68) )
-    {
-      v2 = PerformanceCount.u.LowPart;
-    }
-    else if ( PerformanceCount.u.HighPart < SHIDWORD(qword_F8ED68)
-           || (v2 = PerformanceCount.u.LowPart, PerformanceCount.u.LowPart < (unsigned int)qword_F8ED68) )
-    {
-      v1 = (unsigned __int64)(qword_F8ED68 + 1) >> 32;
-      v2 = qword_F8ED68 + 1;
-      PerformanceCount.QuadPart = qword_F8ED68 + 1;
-    }
-  }
-  while ( _InterlockedCompareExchange64(&qword_F8ED68, __PAIR__(v1, v2), qword_F8ED68) != v0 );
-  return PerformanceCount;
+	QueryPerformanceCounter(&PerformanceCount);
+	do
+	{
+		v0 = qword_F8ED68;
+		v1 = PerformanceCount.u.HighPart;
+		if ( PerformanceCount.u.HighPart > SHIDWORD(qword_F8ED68) )
+		{
+			v2 = PerformanceCount.u.LowPart;
+		}
+		else if ( PerformanceCount.u.HighPart < SHIDWORD(qword_F8ED68)
+		          || (v2 = PerformanceCount.u.LowPart, PerformanceCount.u.LowPart < (unsigned int)qword_F8ED68) )
+		{
+			v1 = (unsigned __int64)(qword_F8ED68 + 1) >> 32;
+			v2 = qword_F8ED68 + 1;
+			PerformanceCount.QuadPart = qword_F8ED68 + 1;
+		}
+	}
+	while ( _InterlockedCompareExchange64(&qword_F8ED68, __PAIR__(v1, v2), qword_F8ED68) != v0 );
+	return PerformanceCount;
+}
+
+void debug_pause()
+{
+	cout<<"Press any key to continue..."<<endl;
+	cin.clear();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	cin.get();
+	exit(1);
 }
 
 /* void __cdecl sub_8D1E50(char a1, char a2, char a3)
@@ -160,37 +169,37 @@ LARGE_INTEGER get_performance_count_ptr()
 
 int sub_957EF0(int a1)
 {
-  int result; // eax
+	int result; // eax
 
-  result = a1;
-  dword_F8F330 = (int (cdecl *)(_DWORD, _DWORD, _DWORD))a1;
-  return result;
+	result = a1;
+	dword_F8F330 = (int (cdecl *)(_DWORD, _DWORD, _DWORD))a1;
+	return result;
 }
 
 void close_criticalSection_file(void)
 {
-  sub_957EF0(0);
-  fclose(File);
-  File = 0;
-  DeleteCriticalSection(&CriticalSection);
+	sub_957EF0(0);
+	fclose(File);
+	File = 0;
+	DeleteCriticalSection(&CriticalSection);
 }
 
 FILE set_PerformanceFrequency(const char *a1)
 {
-  FILE *result; // eax
-  FILE *v2; // esi
-  LARGE_INTEGER Frequency; // [esp+4h] [ebp-8h]
+	FILE *result; // eax
+	FILE *v2; // esi
+	LARGE_INTEGER Frequency; // [esp+4h] [ebp-8h]
 
-  result = fopen(a1, "wb");
-  v2 = result;
-  if ( result )
-  {
-    QueryPerformanceFrequency(&Frequency);
-    fwrite(&Frequency, 8u, 1u, v2);
-    InitializeCriticalSection(&CriticalSection);
-    File = v2;
-    atexit(close_criticalSection_file);
-   // result = (FILE *)sub_957EF0((int)sub_8D1E50); //this function is big, leave for now...
-  }
-  //return result;
+	result = fopen(a1, "wb");
+	v2 = result;
+	if ( result )
+	{
+		QueryPerformanceFrequency(&Frequency);
+		fwrite(&Frequency, 8u, 1u, v2);
+		InitializeCriticalSection(&CriticalSection);
+		File = v2;
+		atexit(close_criticalSection_file);
+		// result = (FILE *)sub_957EF0((int)sub_8D1E50); //this function is big, leave for now...
+	}
+	//return result;
 }

@@ -1,6 +1,6 @@
 #include "checkSystemInfo.h"
 
-int checkSystemInfo(bool a1) {
+/* int checkSystemInfo(bool a1) {
   int result; // eax
   int STICKYKEYS_Str_exem; // [esp+8h] [ebp-28h]
   unsigned int v3; // [esp+Ch] [ebp-24h]
@@ -49,4 +49,4 @@ int checkSystemInfo(bool a1) {
   }
   return result;
 }
-}
+} */

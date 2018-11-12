@@ -1,26 +1,7 @@
-#include <string>
-
-#include <iostream>
-
-#include <limits>
-
-#include <fstream>
-
-#include <vector>
-
-#include <windows.h>
-
-#include <tchar.h>
-
-#include <cstdio>
-
-//----------------------
-
 #include "src/startup.h"
 
-using namespace std;
-
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+{
 
 	char v4; // al
 	int * v5; // edi
@@ -44,15 +25,18 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	_DWORD v24; // [esp+164h] [ebp+1Ch]
 	DWORD ProcessAffinityMask; // [esp+16Ch] [ebp+24h]
 	DWORD SystemAffinityMask; // [esp+170h] [ebp+28h]
+	Moho obj;
 
 	v18 = & v14;
 	get_performance_count_ptr_stub( & v24);
 	*(float * ) &ProcessAffinityMask = *reinterpret_cast <float*> (&v13);
-	if (lstrcmp(lpCmdLine, "/waitfordebugger") == 0) {
+	if (lstrcmp(lpCmdLine, "/waitfordebugger") == 0)
+	{
 		MessageBoxW(0, L"...", L"trap to debugger", 0);
 	}
 	*(float * ) &ProcessAffinityMask = *reinterpret_cast <float*> (&v13);
-	if (lstrcmp(lpCmdLine, "/aqtime") == 0) {
+	if (lstrcmp(lpCmdLine, "/aqtime") == 0)
+	{
 		//sub_9071C0(0); //set some byte variable to 0
 	}
 	v21 = 0;
@@ -62,7 +46,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	SystemAffinityMask = (DWORD) & v13;
 	v4 = lstrcmp(lpCmdLine, "/alloclog");
 	v5 = v21;
-	if (v4==0) {
+	if (v4==0)
+	{
 		if ( * (_DWORD * )(v21 + 24) < 0x10u)
 			v6 = (int)v21 + 4;
 		else
@@ -72,18 +57,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//sub_938FE0((int)sub_4F1500); //validate cmd line args, if not throw an error
 	SystemAffinityMask = (DWORD)&v13;
 	//FIX
-	if( lstrcmp(lpCmdLine, "/singleproc")==0) {
+	if( lstrcmp(lpCmdLine, "/singleproc")==0)
+	{
 		currentProcess = GetCurrentProcess();
-		GetProcessAffinityMask(currentProcess, (PDWORD_PTR)&ProcessAffinityMask, (PDWORD_PTR)&SystemAffinityMask);
-		_BitScanForward(&affinityMaskIndex, (DWORD)&ProcessAffinityMask);
-		currentProcessAffinityMask = 1 << affinityMaskIndex;
-		SetProcessAffinityMask(currentProcess, readyProcessAffinityMask);
+		//GetProcessAffinityMask(currentProcess, (PDWORD_PTR)&ProcessAffinityMask, (PDWORD_PTR)&SystemAffinityMask);
+		//_BitScanForward(&affinityMaskIndex, (DWORD)&ProcessAffinityMask);
+		//currentProcessAffinityMask = 1 << affinityMaskIndex;
+		//SetProcessAffinityMask(currentProcess, readyProcessAffinityMask);
 	}
 
-	if (lstrcmp(lpCmdLine, "/purgecache") == 0)
-	{
-		//sub_8CA070(); //delete the cache files if those are present, maybe logs too
-	}
+	//if (lstrcmp(lpCmdLine, "/purgecache") == 0)
+	//{
+	obj.USER_PurgeAppCacheDir(); //delete the cache files if those are present, maybe logs too
+	//}
 
 	stickyKeys = { sizeof(STICKYKEYS), 0 };
 	toggleKeys = { sizeof(TOGGLEKEYS), 0 };
@@ -99,24 +85,25 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//sub_4F20B0(&v15); //this checks operating system version / compatibility / WINDOW IS CREATED HERE.
 	//v18 = 1;
 	//*(float * ) &ProcessAffinityMask = sub_4A3560( &v23); //this goes into the get_performance_count_ptr_stub
-/* 	SystemAffinityMask = (signed int) * (float *) &ProcessAffinityMask;
-	v12 = (signed int) SystemAffinityMask % 60;
-	sub_937CB0(
-		(int)
-		"Run time: %dh%02dm%02ds",
-		(signed int) SystemAffinityMask / 3600,
-		(signed int) SystemAffinityMask % 3600 / 60,
-		v12);
-	sub_8D4320(1);
-	sub_8D4410();
-	v10 = v15;
-	sub_8D5280( & v16);
-	sub_8CD400( & v14);
-	if (v5) {
-		v12 = SystemAffinityMask;
-		sub_40D540(v5, v21);
-		sub_957A60(v5);
-	}
-	return v10;	 */
+	/* 	SystemAffinityMask = (signed int) * (float *) &ProcessAffinityMask;
+		v12 = (signed int) SystemAffinityMask % 60;
+		sub_937CB0(
+			(int)
+			"Run time: %dh%02dm%02ds",
+			(signed int) SystemAffinityMask / 3600,
+			(signed int) SystemAffinityMask % 3600 / 60,
+			v12);
+		sub_8D4320(1);
+		sub_8D4410();
+		v10 = v15;
+		sub_8D5280( & v16);
+		sub_8CD400( & v14);
+		if (v5) {
+			v12 = SystemAffinityMask;
+			sub_40D540(v5, v21);
+			sub_957A60(v5);
+		}
+		return v10;	 */
 
+	debug_pause();
 }
