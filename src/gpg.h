@@ -51,13 +51,12 @@ static string STR_WideToUtf8(string utf8, LPWSTR str)
 	{
 		//for ( i = (char *)*str; (_WORD)i; ++v3 )
 		//{
-			//v5 = gpg::STR_EncodeUtf8Char((gpg *)&str, i, (unsigned int)&a3, v7);
-			//std::basic_string<char,std::char_traits<char>,std::allocator<char>>::append(a1, &str, v5 - (char *)&str);
-			//i = (char *)v3[1];
+		//v5 = gpg::STR_EncodeUtf8Char((gpg *)&str, i, (unsigned int)&a3, v7);
+		//std::basic_string<char,std::char_traits<char>,std::allocator<char>>::append(a1, &str, v5 - (char *)&str);
+		//i = (char *)v3[1];
 		//}
 	}
 	return utf8;
 }
-
 
 };//namespace gpg

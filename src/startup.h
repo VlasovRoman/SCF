@@ -10,10 +10,11 @@
 #include <vector>
 #include <tchar.h>
 #include <string>
+#include <Shlobj.h>
 
 using namespace std;
 
-#define DEBUG
+//#define DEBUG
 
 //--------------------------------
 

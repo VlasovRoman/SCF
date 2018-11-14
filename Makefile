@@ -21,7 +21,8 @@ LINKER_FLAGS = -static-libgcc -static-libstdc++ -lmingw32 -lkernel32 -lm -ldxgui
 #OBJ_NAME specifies the name of our exectuable 
 OBJ_NAME = ForgedAlliance.exe 
 
+FUNC_CALL_PARAMS_FLAGS = -mpush-args -mno-accumulate-outgoing-args -mno-stack-arg-probe
 
 #This is the target that compiles our executable 
 all : 
-	$(CC) $(OBJS) $(HEADS) $(INCLUDE_PATHS) $(LIBRARY_PATHS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
+	$(CC) -O0 $(OBJS) $(HEADS) $(INCLUDE_PATHS) $(LIBRARY_PATHS) $(FUNC_CALL_PARAMS_FLAGS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)

@@ -28,11 +28,9 @@ string Moho::replaceAll( const string& s, const string& f, const string& r )
 string Moho::USER_GetAppDataDir()
 {
 	string v1; // eax
-	LPWSTR pszPath; // [esp+28h] [ebp-214h]
-
-	if ( SHGetFolderPathW(0, 28, 0, 0, pszPath) >= 0 )
+	if (SHGetFolderPathA(NULL, CSIDL_LOCAL_APPDATA, NULL, NULL, Path) >=0)
 	{
-		//v1 = gpg::STR_WideToUtf8(pszPath);
+		v1 = string(Path);
 		v1+="\\";
 		v1+=dev_company;
 		v1+="\\";
@@ -49,8 +47,8 @@ string Moho::USER_GetAppCacheDir()
 	AppDataDir = USER_GetAppDataDir();
 	AppDataDir = replaceAll( AppDataDir, &leftslash[0],rightslash);
 	AppDataDir+="/cache";
-
-	bool isDirCreated = CreateDirectoryA(AppDataDir.c_str(), nullptr);
+	
+	bool isDirCreated = CreateDirectoryA(&AppDataDir[0], nullptr);
 	DWORD dw = ::GetLastError();
 	if (!isDirCreated)
 	{
@@ -67,52 +65,24 @@ string Moho::USER_GetAppCacheDir()
 
 void Moho::USER_PurgeAppCacheDir()
 {
-	string v0; // eax
-	int v1; // esi
-	int v2; // eax
-	const char *v3; // [esp+0h] [ebp-88h]
-	char v4; // [esp+Eh] [ebp-7Ah]
-	char v5; // [esp+Fh] [ebp-79h]
-	char v6; // [esp+10h] [ebp-78h]
-	char v7; // [esp+18h] [ebp-70h]
-	char v8; // [esp+20h] [ebp-68h]
-	const CHAR *v9; // [esp+24h] [ebp-64h]
-	unsigned int v10; // [esp+38h] [ebp-50h]
-	string v11; // [esp+3Ch] [ebp-4Ch]
-	struct _SHFILEOPSTRUCTA FileOp; // [esp+58h] [ebp-30h]
-	int v13; // [esp+84h] [ebp-4h]
-
-	v0 = USER_GetAppCacheDir();
-// v11==v0.append("/*");
-// v13 = 0;
-
-// v11 = replaceAll( v11, rightslash, double_left_slash);
-
-// cout<<v11<<endl;
-
-	/*   std::operator+<char,std::char_traits<char>,std::allocator<char>>(&v8, v0, "/*");
-	  LOBYTE(v13) = 2;
-	  std::basic_string<char,std::char_traits<char>,std::allocator<char>>::~basic_string<char,std::char_traits<char>,std::allocator<char>>(&v11);
-	  v4 = 92;
-	  v5 = 47;
-	  v1 = std::basic_string<char,std::char_traits<char>,std::allocator<char>>::end(&v8, &v6);
-	  v2 = std::basic_string<char,std::char_traits<char>,std::allocator<char>>::begin(&v8, &v7);
-	  sub_1048D030(&v5, &v4, *(_DWORD *)v2, *(int **)(v2 + 4), *(_DWORD *)v1, *(int **)(v1 + 4));
-	  std::basic_string<char,std::char_traits<char>,std::allocator<char>>::operator+=(&v8, 0);
-	  FileOp.hwnd = 0;
-	  FileOp.pFrom = 0;
-	  FileOp.pTo = 0;
-	  *(_QWORD *)&FileOp.fFlags = 0i64;
-	  *(LPVOID *)((char *)&FileOp.hNameMappings + 2) = 0;
-	  HIWORD(FileOp.lpszProgressTitle) = 0;
-	  FileOp.wFunc = 3;
-	  if ( v10 < 0x10 )
-	    FileOp.pFrom = (LPCSTR)&v9;
-	  else
-	    FileOp.pFrom = v9;
-	  FileOp.fFlags = 1044;
-	  if ( SHFileOperationA(&FileOp) )
-	   // gpg::Warnf((gpg *)"unable to purge cache directory", v3); */
-// v13 = -1;
-// std::basic_string<char,std::char_traits<char>,std::allocator<char>>::~basic_string<char,std::char_traits<char>,std::allocator<char>>(&v8);
+	string path;
+	int err;
+	
+	path = USER_GetAppCacheDir();
+	path+="/*";
+	path = replaceAll( path, rightslash, leftslash);
+	path+="\\0";
+	
+	SHFILEOPSTRUCT FileOp;
+    FileOp.hwnd = NULL;
+    FileOp.wFunc=FO_DELETE; 
+    FileOp.pFrom= path.c_str();
+    FileOp.pTo = NULL;
+    FileOp.fFlags=FOF_ALLOWUNDO|FOF_NOCONFIRMATION;
+    FileOp.hNameMappings=NULL;      
+	
+	if ( err = SHFileOperationA(&FileOp) )
+	{
+		cout<<"Unable to purge cache directory "<<err<<endl;
+	}
 }

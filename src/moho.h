@@ -16,9 +16,10 @@ public:
 	string replaceAll( const string& s, const string& f, const string& r );
 
 private:
+	LPTSTR Path; 
 	string game_name = "Supreme Commander Forged Alliance";
 	string dev_company = "Gas Powered Games";
 	string leftslash = "\\";
 	string rightslash = "/";
-	string double_left_slash = "\\";
+	string double_left_slash = "\\\\";
 };
