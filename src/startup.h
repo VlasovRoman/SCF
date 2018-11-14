@@ -18,6 +18,18 @@ using namespace std;
 
 //--------------------------------
 
+/* Common forgedalliance.exe symbols and addresses:
+
+sub_4059E0 = std::basic_string<>() ctor
+sub_405130 = std::exception () ctor
+sub_938F10 = exception
+sub_9556D0 = get_performance_count_ptr_stub()
+
+
+
+*/
+//--------------------------------
+
 __attribute__((thiscall)) _DWORD* get_performance_count_ptr_stub(_DWORD *_this);
 LARGE_INTEGER get_performance_count_ptr();
 __attribute__((cdecl)) int sub_957EF0(int a1);
