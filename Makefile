@@ -20,7 +20,7 @@ LIBRARY_PATHS = -L ./lib
 INCLUDE_PATHS = -I ./include
 
 #LINKER_FLAGS specifies the libraries we're linking against 
-LINKER_FLAGS = -static-libgcc -static-libstdc++ 
+LINKER_FLAGS = -static-libgcc -static-libstdc++
 
 WINAPI = -lmingw32 -lkernel32 -lm -ldxguid -ldxerr8 -luser32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lgdi32 -lcomdlg32 -lwinspool 
 WINAPI+= -lcomctl32 -luuid -lrpcrt4 -ladvapi32 -lwsock32 -lshlwapi -lversion
@@ -28,9 +28,10 @@ WINAPI+= -lcomctl32 -luuid -lrpcrt4 -ladvapi32 -lwsock32 -lshlwapi -lversion
 #OBJ_NAME specifies the name of our exectuable 
 OBJ_NAME = ForgedAlliance.exe 
 
-WX = -lwxexpat -lwxjpeg -lwxpng -lwxregexu -lwxscintilla -lwxtiff -lwxzlib -lwxbase31u -lwxbase31u_net -lwxbase31u_xml
-WX+= -lwxmsw31u_adv -lwxmsw31u_aui -lwxmsw31u_core -lwxmsw31u_gl -lwxmsw31u_html -lwxmsw31u_media -lwxmsw31u_propgrid
+WX = -lwxexpat -lwxregexu -lwxscintilla -lwxbase31u_net -lwxbase31u_xml
+WX+= -lwxmsw31u_adv -lwxmsw31u_aui -lwxmsw31u_gl -lwxmsw31u_html -lwxmsw31u_media -lwxmsw31u_propgrid
 WX+= -lwxmsw31u_qa -lwxmsw31u_ribbon -lwxmsw31u_richtext -lwxmsw31u_stc -lwxmsw31u_webview -lwxmsw31u_xrc
+WX+= -lwxmsw31u_core -lwxbase31u -luxtheme -loleacc -lodbc32 -lwxjpeg -lwxpng -lwxtiff -lwxzlib
 
 FUNC_CALL_PARAMS_FLAGS = -mpush-args -mno-accumulate-outgoing-args -mno-stack-arg-probe
 

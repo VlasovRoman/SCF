@@ -147,7 +147,7 @@ void Moho::WIN_AppExecute(CScApp__vftable *vft)
 		hhookSysMsg = SetWindowsHookExW(WH_KEYBOARD_LL, (HOOKPROC)&fn, v2, 0);
 		wstring foo = towstring(fn);
 		GetModuleHandleExW(6u, &foo[0], (HMODULE *)&vft);
-		//wxEntry((HINSTANCE)this, 0, 0, 0, 0);
+		wxEntry((HINSTANCE)vft, 0, 0, 0);
 /* 		if ( sub_4F2000() )
 		{
 			v32 = 2;
