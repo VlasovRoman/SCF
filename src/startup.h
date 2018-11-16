@@ -1,6 +1,7 @@
 #include "defs.h"
 #include "temp_data.h"
 #include "moho.h"
+#include "supportCode.h"
 #include <shlobj.h>
 #include <cstdio>
 #include <windows.h>
@@ -11,6 +12,12 @@
 #include <tchar.h>
 #include <string>
 #include <Shlobj.h>
+
+// WXWINDGETS-------
+#include <wx/app.h> 
+
+
+//------------------
 
 using namespace std;
 

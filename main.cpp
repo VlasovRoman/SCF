@@ -2,7 +2,6 @@
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-
 	char v4; // al
 	int * v5; // edi
 	int v6; // eax
@@ -74,12 +73,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	SystemParametersInfoW(SPI_GETFILTERKEYS, sizeof(FILTERKEYS), &filterKeys, 0);
 
 	//checkSystemInfo(0); //more system info checks and sets the values
-	Moho obj((int)&v15); //strings as the name of the game, pobably an entry into engine's class constructor.
+	CScApp__vftable vft;
+	Moho obj(vft); //strings as the name of the game, pobably an entry into engine's class constructor.
 
 	if (lstrcmp(lpCmdLine, "/purgecache") == 0)
 	{
 		obj.USER_PurgeAppCacheDir(); //delete the cache files if those are present, maybe logs too
 	}
+	
+	obj.WIN_AppExecute(&vft);
 
 	//LOBYTE(v19) = 2;
 	//sub_4F20B0(&v15); //this checks operating system version / compatibility / WINDOW IS CREATED HERE.

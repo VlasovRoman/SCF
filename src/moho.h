@@ -34,8 +34,11 @@ class Moho
 {
 public:
 
-	Moho(int a2);
-	init_unk_sv(CScApp__vftable &vft, string s1, string s2);
+	Moho(){};
+	Moho(CScApp__vftable &vft);
+	void WIN_AppExecute(CScApp__vftable *vft);
+	int init_unk_sv(CScApp__vftable &vft, string s1, string s2);
+	LRESULT fn(int code, WPARAM wParam, LPARAM lParam);
 
 	__attribute__((cdecl)) string USER_GetAppCacheDir();
 	void USER_PurgeAppCacheDir();
@@ -54,4 +57,5 @@ private:
 	DWORD dword_10A6488;
 	DWORD dword_10A6480;
 	DWORD dword_10A6484;
+	DWORD dword_10A63BC;
 };
