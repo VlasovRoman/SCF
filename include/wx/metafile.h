@@ -23,27 +23,27 @@
 #define wxMakeMetaFilePlaceable wxMakeMetafilePlaceable
 
 #if defined(__WXMSW__)
-    #if wxUSE_ENH_METAFILE
-        #include "wx/msw/enhmeta.h"
+#if wxUSE_ENH_METAFILE
+#include "wx/msw/enhmeta.h"
 
-        #if wxUSE_WIN_METAFILES_ALWAYS
-            // use normal metafiles as well
-            #include "wx/msw/metafile.h"
-        #else // also map all metafile classes to enh metafile
-            typedef wxEnhMetaFile wxMetafile;
-            typedef wxEnhMetaFileDC wxMetafileDC;
-            #if wxUSE_DATAOBJ
-                typedef wxEnhMetaFileDataObject wxMetafileDataObject;
-            #endif
+#if wxUSE_WIN_METAFILES_ALWAYS
+// use normal metafiles as well
+#include "wx/msw/metafile.h"
+#else // also map all metafile classes to enh metafile
+typedef wxEnhMetaFile wxMetafile;
+typedef wxEnhMetaFileDC wxMetafileDC;
+#if wxUSE_DATAOBJ
+typedef wxEnhMetaFileDataObject wxMetafileDataObject;
+#endif
 
-            // this flag will be set if wxMetafile class is wxEnhMetaFile
-            #define wxMETAFILE_IS_ENH
-        #endif // wxUSE_WIN_METAFILES_ALWAYS
-    #else // !wxUSE_ENH_METAFILE
-        #include "wx/msw/metafile.h"
-    #endif
+// this flag will be set if wxMetafile class is wxEnhMetaFile
+#define wxMETAFILE_IS_ENH
+#endif // wxUSE_WIN_METAFILES_ALWAYS
+#else // !wxUSE_ENH_METAFILE
+#include "wx/msw/metafile.h"
+#endif
 #elif defined(__WXMAC__)
-    #include "wx/osx/metafile.h"
+#include "wx/osx/metafile.h"
 #endif
 
 #endif // wxUSE_METAFILE

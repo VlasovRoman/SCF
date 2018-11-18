@@ -18,57 +18,68 @@
 class WXDLLIMPEXP_ADV wxDataViewRenderer: public wxDataViewCustomRendererBase
 {
 public:
-    wxDataViewRenderer( const wxString &varianttype,
-                        wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-                        int align = wxDVR_DEFAULT_ALIGNMENT );
-    virtual ~wxDataViewRenderer();
+	wxDataViewRenderer( const wxString &varianttype,
+	                    wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
+	                    int align = wxDVR_DEFAULT_ALIGNMENT );
+	virtual ~wxDataViewRenderer();
 
-    virtual wxDC *GetDC() wxOVERRIDE;
+	virtual wxDC *GetDC() wxOVERRIDE;
 
-    virtual void SetAlignment( int align ) wxOVERRIDE;
-    virtual int GetAlignment() const wxOVERRIDE;
+	virtual void SetAlignment( int align ) wxOVERRIDE;
+	virtual int GetAlignment() const wxOVERRIDE;
 
-    virtual void EnableEllipsize(wxEllipsizeMode mode = wxELLIPSIZE_MIDDLE) wxOVERRIDE
-        { m_ellipsizeMode = mode; }
-    virtual wxEllipsizeMode GetEllipsizeMode() const wxOVERRIDE
-        { return m_ellipsizeMode; }
+	virtual void EnableEllipsize(wxEllipsizeMode mode = wxELLIPSIZE_MIDDLE) wxOVERRIDE
+	{ m_ellipsizeMode = mode; }
+	virtual wxEllipsizeMode GetEllipsizeMode() const wxOVERRIDE
+	{
+		return m_ellipsizeMode;
+	}
 
-    virtual void SetMode( wxDataViewCellMode mode ) wxOVERRIDE
-        { m_mode = mode; }
-    virtual wxDataViewCellMode GetMode() const wxOVERRIDE
-        { return m_mode; }
+	virtual void SetMode( wxDataViewCellMode mode ) wxOVERRIDE
+	{ m_mode = mode; }
+	virtual wxDataViewCellMode GetMode() const wxOVERRIDE
+	{
+		return m_mode;
+	}
 
-    // implementation
+	// implementation
 
-    // This callback is used by generic implementation of wxDVC itself.  It's
-    // different from the corresponding ActivateCell() method which should only
-    // be overridable for the custom renderers while the generic implementation
-    // uses this one for all of them, including the standard ones.
+	// This callback is used by generic implementation of wxDVC itself.  It's
+	// different from the corresponding ActivateCell() method which should only
+	// be overridable for the custom renderers while the generic implementation
+	// uses this one for all of them, including the standard ones.
 
-    virtual bool WXActivateCell(const wxRect& WXUNUSED(cell),
-                                wxDataViewModel *WXUNUSED(model),
-                                const wxDataViewItem & WXUNUSED(item),
-                                unsigned int WXUNUSED(col),
-                                const wxMouseEvent* WXUNUSED(mouseEvent))
-        { return false; }
+	virtual bool WXActivateCell(const wxRect& WXUNUSED(cell),
+	                            wxDataViewModel *WXUNUSED(model),
+	                            const wxDataViewItem & WXUNUSED(item),
+	                            unsigned int WXUNUSED(col),
+	                            const wxMouseEvent* WXUNUSED(mouseEvent))
+	{
+		return false;
+	}
 
-    void SetState(int state) { m_state = state; }
+	void SetState(int state)
+	{
+		m_state = state;
+	}
 
 protected:
-    virtual bool IsHighlighted() const wxOVERRIDE
-        { return m_state & wxDATAVIEW_CELL_SELECTED; }
+	virtual bool IsHighlighted() const wxOVERRIDE
+	{
+		return m_state & wxDATAVIEW_CELL_SELECTED;
+	}
 
 private:
-    int                          m_align;
-    wxDataViewCellMode           m_mode;
+	int                          m_align;
+	wxDataViewCellMode           m_mode;
 
-    wxEllipsizeMode m_ellipsizeMode;
+	wxEllipsizeMode m_ellipsizeMode;
 
-    wxDC *m_dc;
+	wxDC *m_dc;
 
-    int m_state;
+	int m_state;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewRenderer);
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewRenderer);
 };
 
 #endif // _WX_GENERIC_DVRENDERER_H_

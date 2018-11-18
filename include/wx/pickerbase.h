@@ -35,136 +35,169 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxButtonNameStr[];
 class WXDLLIMPEXP_CORE wxPickerBase : public wxNavigationEnabled<wxControl>
 {
 public:
-    // ctor: text is the associated text control
-    wxPickerBase() : m_text(NULL), m_picker(NULL), m_sizer(NULL)
-        { }
-    virtual ~wxPickerBase() {}
+	// ctor: text is the associated text control
+	wxPickerBase() : m_text(NULL), m_picker(NULL), m_sizer(NULL)
+	{ }
+	virtual ~wxPickerBase() {}
 
 
-    // if present, intercepts wxPB_USE_TEXTCTRL style and creates the text control
-    // The 3rd argument is the initial wxString to display in the text control
-    bool CreateBase(wxWindow *parent,
-                    wxWindowID id,
-                    const wxString& text = wxEmptyString,
-                    const wxPoint& pos = wxDefaultPosition,
-                    const wxSize& size = wxDefaultSize,
-                    long style = 0,
-                    const wxValidator& validator = wxDefaultValidator,
-                    const wxString& name = wxButtonNameStr);
+	// if present, intercepts wxPB_USE_TEXTCTRL style and creates the text control
+	// The 3rd argument is the initial wxString to display in the text control
+	bool CreateBase(wxWindow *parent,
+	                wxWindowID id,
+	                const wxString& text = wxEmptyString,
+	                const wxPoint& pos = wxDefaultPosition,
+	                const wxSize& size = wxDefaultSize,
+	                long style = 0,
+	                const wxValidator& validator = wxDefaultValidator,
+	                const wxString& name = wxButtonNameStr);
 
 public:     // public API
 
-    // margin between the text control and the picker
-    void SetInternalMargin(int newmargin)
-        { GetTextCtrlItem()->SetBorder(newmargin); m_sizer->Layout(); }
-    int GetInternalMargin() const
-        { return GetTextCtrlItem()->GetBorder(); }
+	// margin between the text control and the picker
+	void SetInternalMargin(int newmargin)
+	{
+		GetTextCtrlItem()->SetBorder(newmargin);
+		m_sizer->Layout();
+	}
+	int GetInternalMargin() const
+	{
+		return GetTextCtrlItem()->GetBorder();
+	}
 
-    // proportion of the text control
-    void SetTextCtrlProportion(int prop)
-        { GetTextCtrlItem()->SetProportion(prop); m_sizer->Layout(); }
-    int GetTextCtrlProportion() const
-        { return GetTextCtrlItem()->GetProportion(); }
+	// proportion of the text control
+	void SetTextCtrlProportion(int prop)
+	{
+		GetTextCtrlItem()->SetProportion(prop);
+		m_sizer->Layout();
+	}
+	int GetTextCtrlProportion() const
+	{
+		return GetTextCtrlItem()->GetProportion();
+	}
 
-    // proportion of the picker control
-    void SetPickerCtrlProportion(int prop)
-        { GetPickerCtrlItem()->SetProportion(prop); m_sizer->Layout(); }
-    int GetPickerCtrlProportion() const
-        { return GetPickerCtrlItem()->GetProportion(); }
+	// proportion of the picker control
+	void SetPickerCtrlProportion(int prop)
+	{
+		GetPickerCtrlItem()->SetProportion(prop);
+		m_sizer->Layout();
+	}
+	int GetPickerCtrlProportion() const
+	{
+		return GetPickerCtrlItem()->GetProportion();
+	}
 
-    bool IsTextCtrlGrowable() const
-        { return (GetTextCtrlItem()->GetFlag() & wxGROW) != 0; }
-    void SetTextCtrlGrowable(bool grow = true)
-    {
-        DoSetGrowableFlagFor(GetTextCtrlItem(), grow);
-    }
+	bool IsTextCtrlGrowable() const
+	{
+		return (GetTextCtrlItem()->GetFlag() & wxGROW) != 0;
+	}
+	void SetTextCtrlGrowable(bool grow = true)
+	{
+		DoSetGrowableFlagFor(GetTextCtrlItem(), grow);
+	}
 
-    bool IsPickerCtrlGrowable() const
-        { return (GetPickerCtrlItem()->GetFlag() & wxGROW) != 0; }
-    void SetPickerCtrlGrowable(bool grow = true)
-    {
-        DoSetGrowableFlagFor(GetPickerCtrlItem(), grow);
-    }
+	bool IsPickerCtrlGrowable() const
+	{
+		return (GetPickerCtrlItem()->GetFlag() & wxGROW) != 0;
+	}
+	void SetPickerCtrlGrowable(bool grow = true)
+	{
+		DoSetGrowableFlagFor(GetPickerCtrlItem(), grow);
+	}
 
-    bool HasTextCtrl() const
-        { return m_text != NULL; }
-    wxTextCtrl *GetTextCtrl()
-        { return m_text; }
-    wxControl *GetPickerCtrl()
-        { return m_picker; }
+	bool HasTextCtrl() const
+	{
+		return m_text != NULL;
+	}
+	wxTextCtrl *GetTextCtrl()
+	{
+		return m_text;
+	}
+	wxControl *GetPickerCtrl()
+	{
+		return m_picker;
+	}
 
-    void SetTextCtrl(wxTextCtrl* text)
-        { m_text = text; }
-    void SetPickerCtrl(wxControl* picker)
-        { m_picker = picker; }
+	void SetTextCtrl(wxTextCtrl* text)
+	{
+		m_text = text;
+	}
+	void SetPickerCtrl(wxControl* picker)
+	{
+		m_picker = picker;
+	}
 
-    // methods that derived class must/may override
-    virtual void UpdatePickerFromTextCtrl() = 0;
-    virtual void UpdateTextCtrlFromPicker() = 0;
+	// methods that derived class must/may override
+	virtual void UpdatePickerFromTextCtrl() = 0;
+	virtual void UpdateTextCtrlFromPicker() = 0;
 
 protected:
-    // overridden base class methods
+	// overridden base class methods
 #if wxUSE_TOOLTIPS
-    virtual void DoSetToolTip(wxToolTip *tip) wxOVERRIDE;
+	virtual void DoSetToolTip(wxToolTip *tip) wxOVERRIDE;
 #endif // wxUSE_TOOLTIPS
 
 
-    // event handlers
-    void OnTextCtrlDelete(wxWindowDestroyEvent &);
-    void OnTextCtrlUpdate(wxCommandEvent &);
-    void OnTextCtrlKillFocus(wxFocusEvent &);
+	// event handlers
+	void OnTextCtrlDelete(wxWindowDestroyEvent &);
+	void OnTextCtrlUpdate(wxCommandEvent &);
+	void OnTextCtrlKillFocus(wxFocusEvent &);
 
-    // returns the set of styles for the attached wxTextCtrl
-    // from given wxPickerBase's styles
-    virtual long GetTextCtrlStyle(long style) const
-        { return (style & wxWINDOW_STYLE_MASK); }
+	// returns the set of styles for the attached wxTextCtrl
+	// from given wxPickerBase's styles
+	virtual long GetTextCtrlStyle(long style) const
+	{
+		return (style & wxWINDOW_STYLE_MASK);
+	}
 
-    // returns the set of styles for the m_picker
-    virtual long GetPickerStyle(long style) const
-        { return (style & wxWINDOW_STYLE_MASK); }
+	// returns the set of styles for the m_picker
+	virtual long GetPickerStyle(long style) const
+	{
+		return (style & wxWINDOW_STYLE_MASK);
+	}
 
 
-    wxSizerItem *GetPickerCtrlItem() const
-    {
-        if (this->HasTextCtrl())
-            return m_sizer->GetItem((size_t)1);
-        return m_sizer->GetItem((size_t)0);
-    }
+	wxSizerItem *GetPickerCtrlItem() const
+	{
+		if (this->HasTextCtrl())
+			return m_sizer->GetItem((size_t)1);
+		return m_sizer->GetItem((size_t)0);
+	}
 
-    wxSizerItem *GetTextCtrlItem() const
-    {
-        wxASSERT(this->HasTextCtrl());
-        return m_sizer->GetItem((size_t)0);
-    }
+	wxSizerItem *GetTextCtrlItem() const
+	{
+		wxASSERT(this->HasTextCtrl());
+		return m_sizer->GetItem((size_t)0);
+	}
 
 #if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED_MSG("useless and will be removed in the future")
-    int GetDefaultPickerCtrlFlag() const
-    {
-        return wxALIGN_CENTER_VERTICAL;
-    }
+	wxDEPRECATED_MSG("useless and will be removed in the future")
+	int GetDefaultPickerCtrlFlag() const
+	{
+		return wxALIGN_CENTER_VERTICAL;
+	}
 
-    wxDEPRECATED_MSG("useless and will be removed in the future")
-    int GetDefaultTextCtrlFlag() const
-    {
-        return wxALIGN_CENTER_VERTICAL | wxRIGHT;
-    }
+	wxDEPRECATED_MSG("useless and will be removed in the future")
+	int GetDefaultTextCtrlFlag() const
+	{
+		return wxALIGN_CENTER_VERTICAL | wxRIGHT;
+	}
 #endif // WXWIN_COMPATIBILITY_3_0
 
-    void PostCreation();
+	void PostCreation();
 
 protected:
-    wxTextCtrl *m_text;     // can be NULL
-    wxControl *m_picker;
-    wxBoxSizer *m_sizer;
+	wxTextCtrl *m_text;     // can be NULL
+	wxControl *m_picker;
+	wxBoxSizer *m_sizer;
 
 private:
-    // Common implementation of Set{Text,Picker}CtrlGrowable().
-    void DoSetGrowableFlagFor(wxSizerItem* item, bool grow);
+	// Common implementation of Set{Text,Picker}CtrlGrowable().
+	void DoSetGrowableFlagFor(wxSizerItem* item, bool grow);
 
-    wxDECLARE_ABSTRACT_CLASS(wxPickerBase);
+	wxDECLARE_ABSTRACT_CLASS(wxPickerBase);
 };
 
 
 #endif
-    // _WX_PICKERBASE_H_BASE_
+// _WX_PICKERBASE_H_BASE_

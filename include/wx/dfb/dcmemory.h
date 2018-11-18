@@ -16,21 +16,27 @@
 class WXDLLIMPEXP_CORE wxMemoryDCImpl : public wxDFBDCImpl
 {
 public:
-    wxMemoryDCImpl(wxMemoryDC *owner);
-    wxMemoryDCImpl(wxMemoryDC *owner, wxBitmap& bitmap);
-    wxMemoryDCImpl(wxMemoryDC *owner, wxDC *dc); // create compatible DC
+	wxMemoryDCImpl(wxMemoryDC *owner);
+	wxMemoryDCImpl(wxMemoryDC *owner, wxBitmap& bitmap);
+	wxMemoryDCImpl(wxMemoryDC *owner, wxDC *dc); // create compatible DC
 
-    // override wxMemoryDC-specific base class virtual methods
-    virtual const wxBitmap& GetSelectedBitmap() const { return m_bmp; }
-    virtual wxBitmap& GetSelectedBitmap() { return m_bmp; }
-    virtual void DoSelect(const wxBitmap& bitmap);
+	// override wxMemoryDC-specific base class virtual methods
+	virtual const wxBitmap& GetSelectedBitmap() const
+	{
+		return m_bmp;
+	}
+	virtual wxBitmap& GetSelectedBitmap()
+	{
+		return m_bmp;
+	}
+	virtual void DoSelect(const wxBitmap& bitmap);
 
 private:
-    void Init();
+	void Init();
 
-    wxBitmap m_bmp;
+	wxBitmap m_bmp;
 
-    wxDECLARE_DYNAMIC_CLASS(wxMemoryDCImpl);
+	wxDECLARE_DYNAMIC_CLASS(wxMemoryDCImpl);
 };
 
 #endif // _WX_DFB_DCMEMORY_H_

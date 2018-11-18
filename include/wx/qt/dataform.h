@@ -13,29 +13,29 @@ class QString;
 class WXDLLIMPEXP_CORE wxDataFormat
 {
 public:
-    wxDataFormat();
-    wxDataFormat( wxDataFormatId formatId );
-    wxDataFormat(const wxString &id);
-    wxDataFormat(const QString &id);
-    wxDataFormat(const wxChar *id);
+	wxDataFormat();
+	wxDataFormat( wxDataFormatId formatId );
+	wxDataFormat(const wxString &id);
+	wxDataFormat(const QString &id);
+	wxDataFormat(const wxChar *id);
 
-    void SetId( const wxChar *id );
-    
-    bool operator==(wxDataFormatId format) const;
-    bool operator!=(wxDataFormatId format) const;
-    bool operator==(const wxDataFormat& format) const;
-    bool operator!=(const wxDataFormat& format) const;
+	void SetId( const wxChar *id );
 
-    // string ids are used for custom types - this SetId() must be used for
-    // application-specific formats
-    wxString GetId() const;
-    void SetId( const wxString& id );
+	bool operator==(wxDataFormatId format) const;
+	bool operator!=(wxDataFormatId format) const;
+	bool operator==(const wxDataFormat& format) const;
+	bool operator!=(const wxDataFormat& format) const;
 
-    // implementation
-    wxDataFormatId GetType() const;
-    void SetType( wxDataFormatId type );
+	// string ids are used for custom types - this SetId() must be used for
+	// application-specific formats
+	wxString GetId() const;
+	void SetId( const wxString& id );
 
-    wxString m_MimeType;
+	// implementation
+	wxDataFormatId GetType() const;
+	void SetType( wxDataFormatId type );
+
+	wxString m_MimeType;
 };
 
 #endif // _WX_QT_DATAFORM_H_

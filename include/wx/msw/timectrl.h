@@ -17,46 +17,49 @@
 class WXDLLIMPEXP_ADV wxTimePickerCtrl : public wxTimePickerCtrlBase
 {
 public:
-    // ctors
-    wxTimePickerCtrl() { }
+	// ctors
+	wxTimePickerCtrl() { }
 
-    wxTimePickerCtrl(wxWindow *parent,
-                     wxWindowID id,
-                     const wxDateTime& dt = wxDefaultDateTime,
-                     const wxPoint& pos = wxDefaultPosition,
-                     const wxSize& size = wxDefaultSize,
-                     long style = wxTP_DEFAULT,
-                     const wxValidator& validator = wxDefaultValidator,
-                     const wxString& name = wxTimePickerCtrlNameStr)
-    {
-        Create(parent, id, dt, pos, size, style, validator, name);
-    }
+	wxTimePickerCtrl(wxWindow *parent,
+	                 wxWindowID id,
+	                 const wxDateTime& dt = wxDefaultDateTime,
+	                 const wxPoint& pos = wxDefaultPosition,
+	                 const wxSize& size = wxDefaultSize,
+	                 long style = wxTP_DEFAULT,
+	                 const wxValidator& validator = wxDefaultValidator,
+	                 const wxString& name = wxTimePickerCtrlNameStr)
+	{
+		Create(parent, id, dt, pos, size, style, validator, name);
+	}
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxDateTime& dt = wxDefaultDateTime,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxTP_DEFAULT,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxTimePickerCtrlNameStr)
-    {
-        return MSWCreateDateTimePicker(parent, id, dt,
-                                       pos, size, style,
-                                       validator, name);
-    }
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxDateTime& dt = wxDefaultDateTime,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxTP_DEFAULT,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxTimePickerCtrlNameStr)
+	{
+		return MSWCreateDateTimePicker(parent, id, dt,
+		                               pos, size, style,
+		                               validator, name);
+	}
 
-    // Override MSW-specific functions used during control creation.
-    virtual WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const wxOVERRIDE;
+	// Override MSW-specific functions used during control creation.
+	virtual WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const wxOVERRIDE;
 
 protected:
 #if wxUSE_INTL
-    virtual wxLocaleInfo MSWGetFormat() const wxOVERRIDE;
+	virtual wxLocaleInfo MSWGetFormat() const wxOVERRIDE;
 #endif // wxUSE_INTL
-    virtual bool MSWAllowsNone() const wxOVERRIDE { return false; }
-    virtual bool MSWOnDateTimeChange(const tagNMDATETIMECHANGE& dtch) wxOVERRIDE;
+	virtual bool MSWAllowsNone() const wxOVERRIDE
+	{
+		return false;
+	}
+	virtual bool MSWOnDateTimeChange(const tagNMDATETIMECHANGE& dtch) wxOVERRIDE;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxTimePickerCtrl);
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxTimePickerCtrl);
 };
 
 #endif // _WX_MSW_TIMECTRL_H_

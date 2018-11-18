@@ -26,44 +26,44 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxCollapsibleHeaderCtrlNameStr[];
 class WXDLLIMPEXP_CORE wxCollapsibleHeaderCtrlBase : public wxControl
 {
 public:
-    wxCollapsibleHeaderCtrlBase() { }
+	wxCollapsibleHeaderCtrlBase() { }
 
-    wxCollapsibleHeaderCtrlBase(wxWindow *parent,
-        wxWindowID id,
-        const wxString& label,
-        const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize,
-        long style = wxBORDER_NONE,
-        const wxValidator& validator = wxDefaultValidator,
-        const wxString& name = wxCollapsibleHeaderCtrlNameStr)
-    {
-        Create(parent, id, label, pos, size, style, validator, name);
-    }
+	wxCollapsibleHeaderCtrlBase(wxWindow *parent,
+	                            wxWindowID id,
+	                            const wxString& label,
+	                            const wxPoint& pos = wxDefaultPosition,
+	                            const wxSize& size = wxDefaultSize,
+	                            long style = wxBORDER_NONE,
+	                            const wxValidator& validator = wxDefaultValidator,
+	                            const wxString& name = wxCollapsibleHeaderCtrlNameStr)
+	{
+		Create(parent, id, label, pos, size, style, validator, name);
+	}
 
-    bool Create(wxWindow *parent,
-        wxWindowID id,
-        const wxString& label,
-        const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize,
-        long style = wxBORDER_NONE,
-        const wxValidator& validator = wxDefaultValidator,
-        const wxString& name = wxCollapsibleHeaderCtrlNameStr)
-    {
-        if ( !wxControl::Create(parent, id, pos, size, style, validator, name) )
-            return false;
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxBORDER_NONE,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxCollapsibleHeaderCtrlNameStr)
+	{
+		if ( !wxControl::Create(parent, id, pos, size, style, validator, name) )
+			return false;
 
-        SetLabel(label);
+		SetLabel(label);
 
-        return true;
-    }
+		return true;
+	}
 
-    virtual void SetCollapsed(bool collapsed = true) = 0;
+	virtual void SetCollapsed(bool collapsed = true) = 0;
 
-    virtual bool IsCollapsed() const = 0;
+	virtual bool IsCollapsed() const = 0;
 
 private:
 
-    wxDECLARE_NO_COPY_CLASS(wxCollapsibleHeaderCtrlBase);
+	wxDECLARE_NO_COPY_CLASS(wxCollapsibleHeaderCtrlBase);
 };
 
 wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_COLLAPSIBLEHEADER_CHANGED, wxCommandEvent);
@@ -79,26 +79,26 @@ wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_COLLAPSIBLEHEADER_CHANGED, wxCo
 #include "wx/generic/collheaderctrl.h"
 
 class WXDLLIMPEXP_CORE wxCollapsibleHeaderCtrl
-    : public wxGenericCollapsibleHeaderCtrl
+	: public wxGenericCollapsibleHeaderCtrl
 {
 public:
-    wxCollapsibleHeaderCtrl() { }
+	wxCollapsibleHeaderCtrl() { }
 
-    wxCollapsibleHeaderCtrl(wxWindow *parent,
-        wxWindowID id,
-        const wxString& label,
-        const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize,
-        long style = wxBORDER_NONE,
-        const wxValidator& validator = wxDefaultValidator,
-        const wxString& name = wxCollapsibleHeaderCtrlNameStr)
-    {
-        Create(parent, id, label, pos, size, style, validator, name);
-    }
+	wxCollapsibleHeaderCtrl(wxWindow *parent,
+	                        wxWindowID id,
+	                        const wxString& label,
+	                        const wxPoint& pos = wxDefaultPosition,
+	                        const wxSize& size = wxDefaultSize,
+	                        long style = wxBORDER_NONE,
+	                        const wxValidator& validator = wxDefaultValidator,
+	                        const wxString& name = wxCollapsibleHeaderCtrlNameStr)
+	{
+		Create(parent, id, label, pos, size, style, validator, name);
+	}
 
 private:
 
-    wxDECLARE_NO_COPY_CLASS(wxCollapsibleHeaderCtrl);
+	wxDECLARE_NO_COPY_CLASS(wxCollapsibleHeaderCtrl);
 };
 
 #endif // wxUSE_COLLPANE

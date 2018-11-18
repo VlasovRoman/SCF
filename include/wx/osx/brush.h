@@ -21,36 +21,42 @@ class WXDLLIMPEXP_FWD_CORE wxBrush;
 class WXDLLIMPEXP_CORE wxBrush: public wxBrushBase
 {
 public:
-    wxBrush();
-    wxBrush(const wxColour& col, wxBrushStyle style = wxBRUSHSTYLE_SOLID);
-    wxBrush(const wxBitmap& stipple);
-    virtual ~wxBrush();
+	wxBrush();
+	wxBrush(const wxColour& col, wxBrushStyle style = wxBRUSHSTYLE_SOLID);
+	wxBrush(const wxBitmap& stipple);
+	virtual ~wxBrush();
 
-    virtual void SetColour(const wxColour& col) ;
-    virtual void SetColour(unsigned char r, unsigned char g, unsigned char b) ;
-    virtual void SetStyle(wxBrushStyle style)  ;
-    virtual void SetStipple(const wxBitmap& stipple)  ;
+	virtual void SetColour(const wxColour& col) ;
+	virtual void SetColour(unsigned char r, unsigned char g, unsigned char b) ;
+	virtual void SetStyle(wxBrushStyle style)  ;
+	virtual void SetStipple(const wxBitmap& stipple)  ;
 
-    bool operator==(const wxBrush& brush) const;
-    bool operator!=(const wxBrush& brush) const { return !(*this == brush); }
+	bool operator==(const wxBrush& brush) const;
+	bool operator!=(const wxBrush& brush) const
+	{
+		return !(*this == brush);
+	}
 
-    wxColour GetColour() const;
-    wxBrushStyle GetStyle() const ;
-    wxBitmap *GetStipple() const ;
+	wxColour GetColour() const;
+	wxBrushStyle GetStyle() const ;
+	wxBitmap *GetStipple() const ;
 
 
-    wxDEPRECATED_MSG("use wxBRUSHSTYLE_XXX constants")
-    wxBrush(const wxColour& col, int style);
+	wxDEPRECATED_MSG("use wxBRUSHSTYLE_XXX constants")
+	wxBrush(const wxColour& col, int style);
 
-    wxDEPRECATED_MSG("use wxBRUSHSTYLE_XXX constants")
-    void SetStyle(int style) { SetStyle((wxBrushStyle)style); }
+	wxDEPRECATED_MSG("use wxBRUSHSTYLE_XXX constants")
+	void SetStyle(int style)
+	{
+		SetStyle((wxBrushStyle)style);
+	}
 
 protected:
-    virtual wxGDIRefData *CreateGDIRefData() const;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
+	virtual wxGDIRefData *CreateGDIRefData() const;
+	virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxBrush);
+	wxDECLARE_DYNAMIC_CLASS(wxBrush);
 };
 
 #endif // _WX_BRUSH_H_

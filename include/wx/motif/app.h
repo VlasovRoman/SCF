@@ -39,55 +39,64 @@ WX_DECLARE_VOIDPTR_HASH_MAP( wxPerDisplayData*, wxPerDisplayDataMap );
 
 class WXDLLIMPEXP_CORE wxApp : public wxAppBase
 {
-    wxDECLARE_DYNAMIC_CLASS(wxApp);
+	wxDECLARE_DYNAMIC_CLASS(wxApp);
 
 public:
-    wxApp();
-    virtual ~wxApp();
+	wxApp();
+	virtual ~wxApp();
 
-    // override base class (pure) virtuals
-    // -----------------------------------
+	// override base class (pure) virtuals
+	// -----------------------------------
 
-    virtual int MainLoop();
+	virtual int MainLoop();
 
-    virtual void Exit();
+	virtual void Exit();
 
-    virtual void WakeUpIdle(); // implemented in motif/evtloop.cpp
+	virtual void WakeUpIdle(); // implemented in motif/evtloop.cpp
 
-    // implementation from now on
-    // --------------------------
+	// implementation from now on
+	// --------------------------
 
 protected:
-    bool                  m_showOnInit;
+	bool                  m_showOnInit;
 
 public:
-    // Implementation
-    virtual bool Initialize(int& argc, wxChar **argv);
-    virtual void CleanUp();
+	// Implementation
+	virtual bool Initialize(int& argc, wxChar **argv);
+	virtual void CleanUp();
 
-    // Motif-specific
-    WXAppContext   GetAppContext() const { return m_appContext; }
-    WXWidget       GetTopLevelWidget();
-    WXWidget       GetTopLevelRealizedWidget();
-    WXColormap     GetMainColormap(WXDisplay* display);
-    WXDisplay*     GetInitialDisplay() const { return m_initialDisplay; }
+	// Motif-specific
+	WXAppContext   GetAppContext() const
+	{
+		return m_appContext;
+	}
+	WXWidget       GetTopLevelWidget();
+	WXWidget       GetTopLevelRealizedWidget();
+	WXColormap     GetMainColormap(WXDisplay* display);
+	WXDisplay*     GetInitialDisplay() const
+	{
+		return m_initialDisplay;
+	}
 
-    void           SetTopLevelWidget(WXDisplay* display, WXWidget widget);
-    void           SetTopLevelRealizedWidget(WXDisplay* display,
-                                             WXWidget widget);
+	void           SetTopLevelWidget(WXDisplay* display, WXWidget widget);
+	void           SetTopLevelRealizedWidget(WXDisplay* display,
+	        WXWidget widget);
 
-    // This handler is called when a property change event occurs
-    virtual void   HandlePropertyChange(WXEvent *event);
+	// This handler is called when a property change event occurs
+	virtual void   HandlePropertyChange(WXEvent *event);
 
-    wxXVisualInfo* GetVisualInfo(WXDisplay* display);
-    virtual void* GetXVisualInfo() { return NULL; }
+	wxXVisualInfo* GetVisualInfo(WXDisplay* display);
+	virtual void* GetXVisualInfo()
+	{
+		return NULL;
+	}
 
 private:
-    // Motif-specific
-    WXAppContext          m_appContext;
-    WXColormap            m_mainColormap;
-    WXDisplay*            m_initialDisplay;
-    wxPerDisplayDataMap*  m_perDisplayData;
+	// Motif-specific
+	WXAppContext          m_appContext;
+	WXColormap            m_mainColormap;
+	WXDisplay*            m_initialDisplay;
+	wxPerDisplayDataMap*  m_perDisplayData;
 };
 
 #endif

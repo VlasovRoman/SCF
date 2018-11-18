@@ -22,22 +22,25 @@ class wxTimerDesc;
 class WXDLLIMPEXP_BASE wxGenericTimerImpl : public wxTimerImpl
 {
 public:
-    wxGenericTimerImpl(wxTimer* timer) : wxTimerImpl(timer) { Init(); }
-    virtual ~wxGenericTimerImpl();
+	wxGenericTimerImpl(wxTimer* timer) : wxTimerImpl(timer)
+	{
+		Init();
+	}
+	virtual ~wxGenericTimerImpl();
 
-    virtual bool Start(int millisecs = -1, bool oneShot = false);
-    virtual void Stop();
+	virtual bool Start(int millisecs = -1, bool oneShot = false);
+	virtual void Stop();
 
-    virtual bool IsRunning() const;
+	virtual bool IsRunning() const;
 
-    // implementation
-    static void NotifyTimers();
+	// implementation
+	static void NotifyTimers();
 
 protected:
-    void Init();
+	void Init();
 
 private:
-    wxTimerDesc *m_desc;
+	wxTimerDesc *m_desc;
 };
 
 #endif // wxUSE_TIMER

@@ -19,17 +19,17 @@
 
 class WXDLLIMPEXP_CORE wxMacPrinter: public wxPrinterBase
 {
-    wxDECLARE_DYNAMIC_CLASS(wxMacPrinter);
+	wxDECLARE_DYNAMIC_CLASS(wxMacPrinter);
 
 public:
-    wxMacPrinter(wxPrintDialogData *data = NULL);
-    virtual ~wxMacPrinter();
+	wxMacPrinter(wxPrintDialogData *data = NULL);
+	virtual ~wxMacPrinter();
 
-    virtual bool Print(wxWindow *parent,
-                       wxPrintout *printout,
-                       bool prompt = true);
-    virtual wxDC* PrintDialog(wxWindow *parent);
-  virtual bool Setup(wxWindow *parent);
+	virtual bool Print(wxWindow *parent,
+	                   wxPrintout *printout,
+	                   bool prompt = true);
+	virtual wxDC* PrintDialog(wxWindow *parent);
+	virtual bool Setup(wxWindow *parent);
 
 };
 
@@ -40,20 +40,20 @@ public:
 
 class WXDLLIMPEXP_CORE wxMacPrintPreview: public wxPrintPreviewBase
 {
-    wxDECLARE_CLASS(wxMacPrintPreview);
+	wxDECLARE_CLASS(wxMacPrintPreview);
 
 public:
-    wxMacPrintPreview(wxPrintout *printout,
-                          wxPrintout *printoutForPrinting = NULL,
-                          wxPrintDialogData *data = NULL);
-    wxMacPrintPreview(wxPrintout *printout,
-                          wxPrintout *printoutForPrinting,
-                          wxPrintData *data);
-    virtual ~wxMacPrintPreview();
+	wxMacPrintPreview(wxPrintout *printout,
+	                  wxPrintout *printoutForPrinting = NULL,
+	                  wxPrintDialogData *data = NULL);
+	wxMacPrintPreview(wxPrintout *printout,
+	                  wxPrintout *printoutForPrinting,
+	                  wxPrintData *data);
+	virtual ~wxMacPrintPreview();
 
-  virtual bool Print(bool interactive);
-    virtual void DetermineScaling();
+	virtual bool Print(bool interactive);
+	virtual void DetermineScaling();
 };
 
 #endif
-    // _WX_PRINTWIN_H_
+// _WX_PRINTWIN_H_

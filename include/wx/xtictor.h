@@ -27,8 +27,8 @@
 class WXDLLIMPEXP_BASE wxObjectAllocatorAndCreator
 {
 public:
-    virtual ~wxObjectAllocatorAndCreator() { }
-    virtual bool Create(wxObject * &o, wxAny *args) = 0;
+	virtual ~wxObjectAllocatorAndCreator() { }
+	virtual bool Create(wxObject * &o, wxAny *args) = 0;
 };
 
 // a direct constructor bridge calls the operator new for this class and
@@ -37,7 +37,7 @@ public:
 class WXDLLIMPEXP_BASE wxObjectAllocator : public wxObjectAllocatorAndCreator
 {
 public:
-    virtual bool Create(wxObject * &o, wxAny *args) = 0;
+	virtual bool Create(wxObject * &o, wxAny *args) = 0;
 };
 
 
@@ -50,19 +50,19 @@ public:
 template<typename Class>
 struct wxObjectAllocatorAndCreator_0 : public wxObjectAllocatorAndCreator
 {
-    bool Create(wxObject * &o, wxAny *)
-    {
-        Class *obj = wx_dynamic_cast(Class*, o);
-        return obj->Create();
-    }
+	bool Create(wxObject * &o, wxAny *)
+	{
+		Class *obj = wx_dynamic_cast(Class*, o);
+		return obj->Create();
+	}
 };
 
 struct wxObjectAllocatorAndCreator_Dummy : public wxObjectAllocatorAndCreator
 {
-    bool Create(wxObject *&, wxAny *)
-    {
-        return true;
-    }
+	bool Create(wxObject *&, wxAny *)
+	{
+		return true;
+	}
 };
 
 #define wxCONSTRUCTOR_0(klass) \
@@ -82,11 +82,11 @@ struct wxObjectAllocatorAndCreator_Dummy : public wxObjectAllocatorAndCreator
 template<typename Class>
 struct wxDirectConstructorBridge_0 : public wxObjectAllocator
 {
-    bool Create(wxObject * &o, wxAny *args)
-    {
-        o = new Class( );
-        return o != NULL;
-    }
+	bool Create(wxObject * &o, wxAny *args)
+	{
+		o = new Class( );
+		return o != NULL;
+	}
 };
 
 #define wxDIRECT_CONSTRUCTOR_0(klass) \
@@ -101,13 +101,13 @@ struct wxDirectConstructorBridge_0 : public wxObjectAllocator
 template<typename Class, typename T0>
 struct wxObjectAllocatorAndCreator_1 : public wxObjectAllocatorAndCreator
 {
-    bool Create(wxObject * &o, wxAny *args)
-    {
-        Class *obj = wx_dynamic_cast(Class*, o);
-        return obj->Create(
-            (args[0]).As(static_cast<T0*>(NULL))
-            );
-    }
+	bool Create(wxObject * &o, wxAny *args)
+	{
+		Class *obj = wx_dynamic_cast(Class*, o);
+		return obj->Create(
+		           (args[0]).As(static_cast<T0*>(NULL))
+		       );
+	}
 };
 
 #define wxCONSTRUCTOR_1(klass,t0,v0) \
@@ -121,13 +121,13 @@ struct wxObjectAllocatorAndCreator_1 : public wxObjectAllocatorAndCreator
 template<typename Class, typename T0>
 struct wxDirectConstructorBridge_1 : public wxObjectAllocator
 {
-    bool Create(wxObject * &o, wxAny *args)
-    {
-        o = new Class(
-            (args[0]).As(static_cast<T0*>(NULL))
-            );
-        return o != NULL;
-    }
+	bool Create(wxObject * &o, wxAny *args)
+	{
+		o = new Class(
+		    (args[0]).As(static_cast<T0*>(NULL))
+		);
+		return o != NULL;
+	}
 };
 
 #define wxDIRECT_CONSTRUCTOR_1(klass,t0,v0) \
@@ -140,17 +140,17 @@ struct wxDirectConstructorBridge_1 : public wxObjectAllocator
 // 2 params
 
 template<typename Class,
-typename T0, typename T1>
+         typename T0, typename T1>
 struct wxObjectAllocatorAndCreator_2 : public wxObjectAllocatorAndCreator
 {
-    bool Create(wxObject * &o, wxAny *args)
-    {
-        Class *obj = wx_dynamic_cast(Class*, o);
-        return obj->Create(
-            (args[0]).As(static_cast<T0*>(NULL)),
-            (args[1]).As(static_cast<T1*>(NULL))
-            );
-    }
+	bool Create(wxObject * &o, wxAny *args)
+	{
+		Class *obj = wx_dynamic_cast(Class*, o);
+		return obj->Create(
+		           (args[0]).As(static_cast<T0*>(NULL)),
+		           (args[1]).As(static_cast<T1*>(NULL))
+		       );
+	}
 };
 
 #define wxCONSTRUCTOR_2(klass,t0,v0,t1,v1) \
@@ -162,17 +162,17 @@ struct wxObjectAllocatorAndCreator_2 : public wxObjectAllocatorAndCreator
 // direct constructor version
 
 template<typename Class,
-typename T0, typename T1>
+         typename T0, typename T1>
 struct wxDirectConstructorBridge_2 : public wxObjectAllocator
 {
-    bool Create(wxObject * &o, wxAny *args)
-    {
-        o = new Class(
-            (args[0]).As(static_cast<T0*>(NULL)),
-            (args[1]).As(static_cast<T1*>(NULL))
-            );
-        return o != NULL;
-    }
+	bool Create(wxObject * &o, wxAny *args)
+	{
+		o = new Class(
+		    (args[0]).As(static_cast<T0*>(NULL)),
+		    (args[1]).As(static_cast<T1*>(NULL))
+		);
+		return o != NULL;
+	}
 };
 
 #define wxDIRECT_CONSTRUCTOR_2(klass,t0,v0,t1,v1) \
@@ -185,18 +185,18 @@ struct wxDirectConstructorBridge_2 : public wxObjectAllocator
 // 3 params
 
 template<typename Class,
-typename T0, typename T1, typename T2>
+         typename T0, typename T1, typename T2>
 struct wxObjectAllocatorAndCreator_3 : public wxObjectAllocatorAndCreator
 {
-    bool Create(wxObject * &o, wxAny *args)
-    {
-        Class *obj = wx_dynamic_cast(Class*, o);
-        return obj->Create(
-            (args[0]).As(static_cast<T0*>(NULL)),
-            (args[1]).As(static_cast<T1*>(NULL)),
-            (args[2]).As(static_cast<T2*>(NULL))
-            );
-    }
+	bool Create(wxObject * &o, wxAny *args)
+	{
+		Class *obj = wx_dynamic_cast(Class*, o);
+		return obj->Create(
+		           (args[0]).As(static_cast<T0*>(NULL)),
+		           (args[1]).As(static_cast<T1*>(NULL)),
+		           (args[2]).As(static_cast<T2*>(NULL))
+		       );
+	}
 };
 
 #define wxCONSTRUCTOR_3(klass,t0,v0,t1,v1,t2,v2) \
@@ -208,18 +208,18 @@ struct wxObjectAllocatorAndCreator_3 : public wxObjectAllocatorAndCreator
 // direct constructor version
 
 template<typename Class,
-typename T0, typename T1, typename T2>
+         typename T0, typename T1, typename T2>
 struct wxDirectConstructorBridge_3 : public wxObjectAllocator
 {
-    bool Create(wxObject * &o, wxAny *args)
-    {
-        o = new Class(
-            (args[0]).As(static_cast<T0*>(NULL)),
-            (args[1]).As(static_cast<T1*>(NULL)),
-            (args[2]).As(static_cast<T2*>(NULL))
-            );
-        return o != NULL;
-    }
+	bool Create(wxObject * &o, wxAny *args)
+	{
+		o = new Class(
+		    (args[0]).As(static_cast<T0*>(NULL)),
+		    (args[1]).As(static_cast<T1*>(NULL)),
+		    (args[2]).As(static_cast<T2*>(NULL))
+		);
+		return o != NULL;
+	}
 };
 
 #define wxDIRECT_CONSTRUCTOR_3(klass,t0,v0,t1,v1,t2,v2) \
@@ -232,19 +232,19 @@ struct wxDirectConstructorBridge_3 : public wxObjectAllocator
 // 4 params
 
 template<typename Class,
-typename T0, typename T1, typename T2, typename T3>
+         typename T0, typename T1, typename T2, typename T3>
 struct wxObjectAllocatorAndCreator_4 : public wxObjectAllocatorAndCreator
 {
-    bool Create(wxObject * &o, wxAny *args)
-    {
-        Class *obj = wx_dynamic_cast(Class*, o);
-        return obj->Create(
-            (args[0]).As(static_cast<T0*>(NULL)),
-            (args[1]).As(static_cast<T1*>(NULL)),
-            (args[2]).As(static_cast<T2*>(NULL)),
-            (args[3]).As(static_cast<T3*>(NULL))
-            );
-    }
+	bool Create(wxObject * &o, wxAny *args)
+	{
+		Class *obj = wx_dynamic_cast(Class*, o);
+		return obj->Create(
+		           (args[0]).As(static_cast<T0*>(NULL)),
+		           (args[1]).As(static_cast<T1*>(NULL)),
+		           (args[2]).As(static_cast<T2*>(NULL)),
+		           (args[3]).As(static_cast<T3*>(NULL))
+		       );
+	}
 };
 
 #define wxCONSTRUCTOR_4(klass,t0,v0,t1,v1,t2,v2,t3,v3) \
@@ -257,19 +257,19 @@ struct wxObjectAllocatorAndCreator_4 : public wxObjectAllocatorAndCreator
 // direct constructor version
 
 template<typename Class,
-typename T0, typename T1, typename T2, typename T3>
+         typename T0, typename T1, typename T2, typename T3>
 struct wxDirectConstructorBridge_4 : public wxObjectAllocator
 {
-    bool Create(wxObject * &o, wxAny *args)
-    {
-        o = new Class(
-            (args[0]).As(static_cast<T0*>(NULL)),
-            (args[1]).As(static_cast<T1*>(NULL)),
-            (args[2]).As(static_cast<T2*>(NULL)),
-            (args[3]).As(static_cast<T3*>(NULL))
-            );
-        return o != NULL;
-    }
+	bool Create(wxObject * &o, wxAny *args)
+	{
+		o = new Class(
+		    (args[0]).As(static_cast<T0*>(NULL)),
+		    (args[1]).As(static_cast<T1*>(NULL)),
+		    (args[2]).As(static_cast<T2*>(NULL)),
+		    (args[3]).As(static_cast<T3*>(NULL))
+		);
+		return o != NULL;
+	}
 };
 
 #define wxDIRECT_CONSTRUCTOR_4(klass,t0,v0,t1,v1,t2,v2,t3,v3) \
@@ -283,20 +283,20 @@ struct wxDirectConstructorBridge_4 : public wxObjectAllocator
 // 5 params
 
 template<typename Class,
-typename T0, typename T1, typename T2, typename T3, typename T4>
+         typename T0, typename T1, typename T2, typename T3, typename T4>
 struct wxObjectAllocatorAndCreator_5 : public wxObjectAllocatorAndCreator
 {
-    bool Create(wxObject * &o, wxAny *args)
-    {
-        Class *obj = wx_dynamic_cast(Class*, o);
-        return obj->Create(
-            (args[0]).As(static_cast<T0*>(NULL)),
-            (args[1]).As(static_cast<T1*>(NULL)),
-            (args[2]).As(static_cast<T2*>(NULL)),
-            (args[3]).As(static_cast<T3*>(NULL)),
-            (args[4]).As(static_cast<T4*>(NULL))
-            );
-    }
+	bool Create(wxObject * &o, wxAny *args)
+	{
+		Class *obj = wx_dynamic_cast(Class*, o);
+		return obj->Create(
+		           (args[0]).As(static_cast<T0*>(NULL)),
+		           (args[1]).As(static_cast<T1*>(NULL)),
+		           (args[2]).As(static_cast<T2*>(NULL)),
+		           (args[3]).As(static_cast<T3*>(NULL)),
+		           (args[4]).As(static_cast<T4*>(NULL))
+		       );
+	}
 };
 
 #define wxCONSTRUCTOR_5(klass,t0,v0,t1,v1,t2,v2,t3,v3,t4,v4) \
@@ -309,20 +309,20 @@ struct wxObjectAllocatorAndCreator_5 : public wxObjectAllocatorAndCreator
 // direct constructor version
 
 template<typename Class,
-typename T0, typename T1, typename T2, typename T3, typename T4>
+         typename T0, typename T1, typename T2, typename T3, typename T4>
 struct wxDirectConstructorBridge_5 : public wxObjectAllocator
 {
-    bool Create(wxObject * &o, wxAny *args)
-    {
-        o = new Class(
-            (args[0]).As(static_cast<T0*>(NULL)),
-            (args[1]).As(static_cast<T1*>(NULL)),
-            (args[2]).As(static_cast<T2*>(NULL)),
-            (args[3]).As(static_cast<T3*>(NULL)),
-            (args[4]).As(static_cast<T4*>(NULL))
-            );
-        return o != NULL;
-    }
+	bool Create(wxObject * &o, wxAny *args)
+	{
+		o = new Class(
+		    (args[0]).As(static_cast<T0*>(NULL)),
+		    (args[1]).As(static_cast<T1*>(NULL)),
+		    (args[2]).As(static_cast<T2*>(NULL)),
+		    (args[3]).As(static_cast<T3*>(NULL)),
+		    (args[4]).As(static_cast<T4*>(NULL))
+		);
+		return o != NULL;
+	}
 };
 
 #define wxDIRECT_CONSTRUCTOR_5(klass,t0,v0,t1,v1,t2,v2,t3,v3,t4,v4) \
@@ -336,21 +336,21 @@ struct wxDirectConstructorBridge_5 : public wxObjectAllocator
 // 6 params
 
 template<typename Class,
-typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
+         typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
 struct wxObjectAllocatorAndCreator_6 : public wxObjectAllocatorAndCreator
 {
-    bool Create(wxObject * &o, wxAny *args)
-    {
-        Class *obj = wx_dynamic_cast(Class*, o);
-        return obj->Create(
-            (args[0]).As(static_cast<T0*>(NULL)),
-            (args[1]).As(static_cast<T1*>(NULL)),
-            (args[2]).As(static_cast<T2*>(NULL)),
-            (args[3]).As(static_cast<T3*>(NULL)),
-            (args[4]).As(static_cast<T4*>(NULL)),
-            (args[5]).As(static_cast<T5*>(NULL))
-            );
-    }
+	bool Create(wxObject * &o, wxAny *args)
+	{
+		Class *obj = wx_dynamic_cast(Class*, o);
+		return obj->Create(
+		           (args[0]).As(static_cast<T0*>(NULL)),
+		           (args[1]).As(static_cast<T1*>(NULL)),
+		           (args[2]).As(static_cast<T2*>(NULL)),
+		           (args[3]).As(static_cast<T3*>(NULL)),
+		           (args[4]).As(static_cast<T4*>(NULL)),
+		           (args[5]).As(static_cast<T5*>(NULL))
+		       );
+	}
 };
 
 #define wxCONSTRUCTOR_6(klass,t0,v0,t1,v1,t2,v2,t3,v3,t4,v4,t5,v5) \
@@ -363,21 +363,21 @@ struct wxObjectAllocatorAndCreator_6 : public wxObjectAllocatorAndCreator
 // direct constructor version
 
 template<typename Class,
-typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
+         typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
 struct wxDirectConstructorBridge_6 : public wxObjectAllocator
 {
-    bool Create(wxObject * &o, wxAny *args)
-    {
-        o = new Class(
-            (args[0]).As(static_cast<T0*>(NULL)),
-            (args[1]).As(static_cast<T1*>(NULL)),
-            (args[2]).As(static_cast<T2*>(NULL)),
-            (args[3]).As(static_cast<T3*>(NULL)),
-            (args[4]).As(static_cast<T4*>(NULL)),
-            (args[5]).As(static_cast<T5*>(NULL))
-            );
-        return o != NULL;
-    }
+	bool Create(wxObject * &o, wxAny *args)
+	{
+		o = new Class(
+		    (args[0]).As(static_cast<T0*>(NULL)),
+		    (args[1]).As(static_cast<T1*>(NULL)),
+		    (args[2]).As(static_cast<T2*>(NULL)),
+		    (args[3]).As(static_cast<T3*>(NULL)),
+		    (args[4]).As(static_cast<T4*>(NULL)),
+		    (args[5]).As(static_cast<T5*>(NULL))
+		);
+		return o != NULL;
+	}
 };
 
 #define wxDIRECT_CONSTRUCTOR_6(klass,t0,v0,t1,v1,t2,v2,t3,v3,t4,v4,t5,v5) \
@@ -391,22 +391,22 @@ struct wxDirectConstructorBridge_6 : public wxObjectAllocator
 // 7 params
 
 template<typename Class,
-typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
+         typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
 struct wxObjectAllocatorAndCreator_7 : public wxObjectAllocatorAndCreator
 {
-    bool Create(wxObject * &o, wxAny *args)
-    {
-        Class *obj = wx_dynamic_cast(Class*, o);
-        return obj->Create(
-            (args[0]).As(static_cast<T0*>(NULL)),
-            (args[1]).As(static_cast<T1*>(NULL)),
-            (args[2]).As(static_cast<T2*>(NULL)),
-            (args[3]).As(static_cast<T3*>(NULL)),
-            (args[4]).As(static_cast<T4*>(NULL)),
-            (args[5]).As(static_cast<T5*>(NULL)),
-            (args[6]).As(static_cast<T6*>(NULL))
-            );
-    }
+	bool Create(wxObject * &o, wxAny *args)
+	{
+		Class *obj = wx_dynamic_cast(Class*, o);
+		return obj->Create(
+		           (args[0]).As(static_cast<T0*>(NULL)),
+		           (args[1]).As(static_cast<T1*>(NULL)),
+		           (args[2]).As(static_cast<T2*>(NULL)),
+		           (args[3]).As(static_cast<T3*>(NULL)),
+		           (args[4]).As(static_cast<T4*>(NULL)),
+		           (args[5]).As(static_cast<T5*>(NULL)),
+		           (args[6]).As(static_cast<T6*>(NULL))
+		       );
+	}
 };
 
 #define wxCONSTRUCTOR_7(klass,t0,v0,t1,v1,t2,v2,t3,v3,t4,v4,t5,v5,t6,v6) \
@@ -419,22 +419,22 @@ struct wxObjectAllocatorAndCreator_7 : public wxObjectAllocatorAndCreator
 // direct constructor version
 
 template<typename Class,
-typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
+         typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
 struct wxDirectConstructorBridge_7 : public wxObjectAllocator
 {
-    bool Create(wxObject * &o, wxAny *args)
-    {
-        o = new Class(
-            (args[0]).As(static_cast<T0*>(NULL)),
-            (args[1]).As(static_cast<T1*>(NULL)),
-            (args[2]).As(static_cast<T2*>(NULL)),
-            (args[3]).As(static_cast<T3*>(NULL)),
-            (args[4]).As(static_cast<T4*>(NULL)),
-            (args[5]).As(static_cast<T5*>(NULL)),
-            (args[6]).As(static_cast<T6*>(NULL))
-            );
-        return o != NULL;
-    }
+	bool Create(wxObject * &o, wxAny *args)
+	{
+		o = new Class(
+		    (args[0]).As(static_cast<T0*>(NULL)),
+		    (args[1]).As(static_cast<T1*>(NULL)),
+		    (args[2]).As(static_cast<T2*>(NULL)),
+		    (args[3]).As(static_cast<T3*>(NULL)),
+		    (args[4]).As(static_cast<T4*>(NULL)),
+		    (args[5]).As(static_cast<T5*>(NULL)),
+		    (args[6]).As(static_cast<T6*>(NULL))
+		);
+		return o != NULL;
+	}
 };
 
 #define wxDIRECT_CONSTRUCTOR_7(klass,t0,v0,t1,v1,t2,v2,t3,v3,t4,v4,t5,v5,t6,v6) \
@@ -448,24 +448,24 @@ struct wxDirectConstructorBridge_7 : public wxObjectAllocator
 // 8 params
 
 template<typename Class,
-typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, \
-typename T6, typename T7>
+         typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, \
+         typename T6, typename T7>
 struct wxObjectAllocatorAndCreator_8 : public wxObjectAllocatorAndCreator
 {
-    bool Create(wxObject * &o, wxAny *args)
-    {
-        Class *obj = wx_dynamic_cast(Class*, o);
-        return obj->Create(
-            (args[0]).As(static_cast<T0*>(NULL)),
-            (args[1]).As(static_cast<T1*>(NULL)),
-            (args[2]).As(static_cast<T2*>(NULL)),
-            (args[3]).As(static_cast<T3*>(NULL)),
-            (args[4]).As(static_cast<T4*>(NULL)),
-            (args[5]).As(static_cast<T5*>(NULL)),
-            (args[6]).As(static_cast<T6*>(NULL)),
-            (args[7]).As(static_cast<T7*>(NULL))
-            );
-    }
+	bool Create(wxObject * &o, wxAny *args)
+	{
+		Class *obj = wx_dynamic_cast(Class*, o);
+		return obj->Create(
+		           (args[0]).As(static_cast<T0*>(NULL)),
+		           (args[1]).As(static_cast<T1*>(NULL)),
+		           (args[2]).As(static_cast<T2*>(NULL)),
+		           (args[3]).As(static_cast<T3*>(NULL)),
+		           (args[4]).As(static_cast<T4*>(NULL)),
+		           (args[5]).As(static_cast<T5*>(NULL)),
+		           (args[6]).As(static_cast<T6*>(NULL)),
+		           (args[7]).As(static_cast<T7*>(NULL))
+		       );
+	}
 };
 
 #define wxCONSTRUCTOR_8(klass,t0,v0,t1,v1,t2,v2,t3,v3,t4,v4,t5,v5,t6,v6,t7,v7) \
@@ -478,24 +478,24 @@ struct wxObjectAllocatorAndCreator_8 : public wxObjectAllocatorAndCreator
 // direct constructor version
 
 template<typename Class,
-typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, \
-typename T6, typename T7>
+         typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, \
+         typename T6, typename T7>
 struct wxDirectConstructorBridge_8 : public wxObjectAllocator
 {
-    bool Create(wxObject * &o, wxAny *args)
-    {
-        o = new Class(
-            (args[0]).As(static_cast<T0*>(NULL)),
-            (args[1]).As(static_cast<T1*>(NULL)),
-            (args[2]).As(static_cast<T2*>(NULL)),
-            (args[3]).As(static_cast<T3*>(NULL)),
-            (args[4]).As(static_cast<T4*>(NULL)),
-            (args[5]).As(static_cast<T5*>(NULL)),
-            (args[6]).As(static_cast<T6*>(NULL)),
-            (args[7]).As(static_cast<T7*>(NULL))
-            );
-        return o != NULL;
-    }
+	bool Create(wxObject * &o, wxAny *args)
+	{
+		o = new Class(
+		    (args[0]).As(static_cast<T0*>(NULL)),
+		    (args[1]).As(static_cast<T1*>(NULL)),
+		    (args[2]).As(static_cast<T2*>(NULL)),
+		    (args[3]).As(static_cast<T3*>(NULL)),
+		    (args[4]).As(static_cast<T4*>(NULL)),
+		    (args[5]).As(static_cast<T5*>(NULL)),
+		    (args[6]).As(static_cast<T6*>(NULL)),
+		    (args[7]).As(static_cast<T7*>(NULL))
+		);
+		return o != NULL;
+	}
 };
 
 #define wxDIRECT_CONSTRUCTOR_8(klass,t0,v0,t1,v1,t2,v2,t3,v3,t4,v4,t5,v5,t6,v6,t7,v7) \

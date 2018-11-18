@@ -17,58 +17,83 @@
 // Colour
 class WXDLLIMPEXP_CORE wxColour : public wxColourBase
 {
-    wxDECLARE_DYNAMIC_CLASS(wxColour);
+	wxDECLARE_DYNAMIC_CLASS(wxColour);
 public:
-    // constructors
-    // ------------
-    DEFINE_STD_WXCOLOUR_CONSTRUCTORS
+	// constructors
+	// ------------
+	DEFINE_STD_WXCOLOUR_CONSTRUCTORS
 
-    // copy ctors and assignment operators
-    wxColour( const wxColour& col );
-    wxColour& operator = ( const wxColour& col );
+	// copy ctors and assignment operators
+	wxColour( const wxColour& col );
+	wxColour& operator = ( const wxColour& col );
 
-    // dtor
-    virtual ~wxColour();
+	// dtor
+	virtual ~wxColour();
 
 
-    // accessors
-    virtual bool IsOk() const {return m_isInit; }
-    unsigned char Red() const { return m_red; }
-    unsigned char Green() const { return m_green; }
-    unsigned char Blue() const { return m_blue; }
+	// accessors
+	virtual bool IsOk() const
+	{
+		return m_isInit;
+	}
+	unsigned char Red() const
+	{
+		return m_red;
+	}
+	unsigned char Green() const
+	{
+		return m_green;
+	}
+	unsigned char Blue() const
+	{
+		return m_blue;
+	}
 
-    WXPixel GetPixel() const { return m_pixel; }
-    void SetPixel(WXPixel pixel) { m_pixel = pixel; m_isInit = true; }
+	WXPixel GetPixel() const
+	{
+		return m_pixel;
+	}
+	void SetPixel(WXPixel pixel)
+	{
+		m_pixel = pixel;
+		m_isInit = true;
+	}
 
-    inline bool operator == (const wxColour& colour) const { return (m_red == colour.m_red && m_green == colour.m_green && m_blue == colour.m_blue); }
+	inline bool operator == (const wxColour& colour) const
+	{
+		return (m_red == colour.m_red && m_green == colour.m_green && m_blue == colour.m_blue);
+	}
 
-    inline bool operator != (const wxColour& colour) const { return (!(m_red == colour.m_red && m_green == colour.m_green && m_blue == colour.m_blue)); }
+	inline bool operator != (const wxColour& colour) const
+	{
+		return (!(m_red == colour.m_red && m_green == colour.m_green && m_blue == colour.m_blue));
+	}
 
-    // Allocate a colour, or nearest colour, using the given display.
-    // If realloc is true, ignore the existing pixel, otherwise just return
-    // the existing one.
-    // Returns the allocated pixel.
+	// Allocate a colour, or nearest colour, using the given display.
+	// If realloc is true, ignore the existing pixel, otherwise just return
+	// the existing one.
+	// Returns the allocated pixel.
 
-    // TODO: can this handle mono displays? If not, we should have an extra
-    // flag to specify whether this should be black or white by default.
+	// TODO: can this handle mono displays? If not, we should have an extra
+	// flag to specify whether this should be black or white by default.
 
-    WXPixel AllocColour(WXDisplay* display, bool realloc = false);
+	WXPixel AllocColour(WXDisplay* display, bool realloc = false);
 
 protected:
-    // Helper function
-    void Init();
+	// Helper function
+	void Init();
 
-    virtual void
-    InitRGBA(unsigned char r, unsigned char g, unsigned char b, unsigned char a);
+	virtual void
+	InitRGBA(unsigned char r, unsigned char g, unsigned char b, unsigned char a);
 
 private:
-    bool          m_isInit;
-    unsigned char m_red;
-    unsigned char m_blue;
-    unsigned char m_green;
+	bool          m_isInit;
+	unsigned char m_red;
+	unsigned char m_blue;
+	unsigned char m_green;
 
 public:
-    WXPixel       m_pixel;
+	WXPixel       m_pixel;
 };
 
 #endif

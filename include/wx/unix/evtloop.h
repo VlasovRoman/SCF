@@ -22,39 +22,42 @@ class wxWakeUpPipeMT;
 
 class WXDLLIMPEXP_BASE wxConsoleEventLoop
 #ifdef __WXOSX__
-: public wxCFEventLoop
+	: public wxCFEventLoop
 #else
-: public wxEventLoopManual
+	: public wxEventLoopManual
 #endif
 {
 public:
-    // initialize the event loop, use IsOk() to check if we were successful
-    wxConsoleEventLoop();
-    virtual ~wxConsoleEventLoop();
+	// initialize the event loop, use IsOk() to check if we were successful
+	wxConsoleEventLoop();
+	virtual ~wxConsoleEventLoop();
 
-    // implement base class pure virtuals
-    virtual bool Pending() const wxOVERRIDE;
-    virtual bool Dispatch() wxOVERRIDE;
-    virtual int DispatchTimeout(unsigned long timeout) wxOVERRIDE;
-    virtual void WakeUp() wxOVERRIDE;
-    virtual bool IsOk() const wxOVERRIDE { return m_dispatcher != NULL; }
+	// implement base class pure virtuals
+	virtual bool Pending() const wxOVERRIDE;
+	virtual bool Dispatch() wxOVERRIDE;
+	virtual int DispatchTimeout(unsigned long timeout) wxOVERRIDE;
+	virtual void WakeUp() wxOVERRIDE;
+	virtual bool IsOk() const wxOVERRIDE
+	{
+		return m_dispatcher != NULL;
+	}
 
 protected:
-    virtual void OnNextIteration() wxOVERRIDE;
-    virtual void DoYieldFor(long eventsToProcess) wxOVERRIDE;
+	virtual void OnNextIteration() wxOVERRIDE;
+	virtual void DoYieldFor(long eventsToProcess) wxOVERRIDE;
 
 private:
-    // pipe used for wake up messages: when a child thread wants to wake up
-    // the event loop in the main thread it writes to this pipe
-    wxWakeUpPipeMT *m_wakeupPipe;
+	// pipe used for wake up messages: when a child thread wants to wake up
+	// the event loop in the main thread it writes to this pipe
+	wxWakeUpPipeMT *m_wakeupPipe;
 
-    // the event loop source used to monitor this pipe
-    wxEventLoopSource* m_wakeupSource;
+	// the event loop source used to monitor this pipe
+	wxEventLoopSource* m_wakeupSource;
 
-    // either wxSelectDispatcher or wxEpollDispatcher
-    wxFDIODispatcher *m_dispatcher;
+	// either wxSelectDispatcher or wxEpollDispatcher
+	wxFDIODispatcher *m_dispatcher;
 
-    wxDECLARE_NO_COPY_CLASS(wxConsoleEventLoop);
+	wxDECLARE_NO_COPY_CLASS(wxConsoleEventLoop);
 };
 
 #endif // wxUSE_CONSOLE_EVENTLOOP

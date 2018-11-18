@@ -18,8 +18,8 @@
 
 enum wxDateTimeWidgetKind
 {
-    wxDateTimeWidget_YearMonthDay,
-    wxDateTimeWidget_HourMinuteSecond
+	wxDateTimeWidget_YearMonthDay,
+	wxDateTimeWidget_HourMinuteSecond
 };
 
 // ----------------------------------------------------------------------------
@@ -28,34 +28,34 @@ enum wxDateTimeWidgetKind
 
 class wxDateTimeWidgetImpl
 #if wxOSX_USE_COCOA
-    : public wxWidgetCocoaImpl
+	: public wxWidgetCocoaImpl
 #else
-    #error "Unsupported platform"
+#error "Unsupported platform"
 #endif
 {
 public:
-    static wxDateTimeWidgetImpl*
-    CreateDateTimePicker(wxDateTimePickerCtrl* wxpeer,
-                         const wxDateTime& dt,
-                         const wxPoint& pos,
-                         const wxSize& size,
-                         long style,
-                         wxDateTimeWidgetKind kind);
+	static wxDateTimeWidgetImpl*
+	CreateDateTimePicker(wxDateTimePickerCtrl* wxpeer,
+	                     const wxDateTime& dt,
+	                     const wxPoint& pos,
+	                     const wxSize& size,
+	                     long style,
+	                     wxDateTimeWidgetKind kind);
 
-    virtual void SetDateTime(const wxDateTime& dt) = 0;
-    virtual wxDateTime GetDateTime() const = 0;
+	virtual void SetDateTime(const wxDateTime& dt) = 0;
+	virtual wxDateTime GetDateTime() const = 0;
 
-    virtual void SetDateRange(const wxDateTime& dt1, const wxDateTime& dt2) = 0;
-    virtual bool GetDateRange(wxDateTime* dt1, wxDateTime* dt2) = 0;
+	virtual void SetDateRange(const wxDateTime& dt1, const wxDateTime& dt2) = 0;
+	virtual bool GetDateRange(wxDateTime* dt1, wxDateTime* dt2) = 0;
 
-    virtual ~wxDateTimeWidgetImpl() { }
+	virtual ~wxDateTimeWidgetImpl() { }
 
 protected:
 #if wxOSX_USE_COCOA
-    wxDateTimeWidgetImpl(wxDateTimePickerCtrl* wxpeer, WXWidget view)
-        : wxWidgetCocoaImpl(wxpeer, view)
-    {
-    }
+	wxDateTimeWidgetImpl(wxDateTimePickerCtrl* wxpeer, WXWidget view)
+		: wxWidgetCocoaImpl(wxpeer, view)
+	{
+	}
 #endif
 };
 

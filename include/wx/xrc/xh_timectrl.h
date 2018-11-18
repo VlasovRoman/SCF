@@ -17,12 +17,12 @@
 class WXDLLIMPEXP_XRC wxTimeCtrlXmlHandler : public wxXmlResourceHandler
 {
 public:
-    wxTimeCtrlXmlHandler();
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	wxTimeCtrlXmlHandler();
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxTimeCtrlXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxTimeCtrlXmlHandler);
 };
 
 #endif // wxUSE_XRC && wxUSE_TIMEPICKCTRL

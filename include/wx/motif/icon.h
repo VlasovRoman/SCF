@@ -17,45 +17,47 @@
 class WXDLLIMPEXP_CORE wxIcon : public wxBitmap
 {
 public:
-    wxIcon();
+	wxIcon();
 
-    // Initialize with XBM data
-    wxIcon(const char bits[], int width, int height);
+	// Initialize with XBM data
+	wxIcon(const char bits[], int width, int height);
 
-    // Initialize with XPM data
-    wxIcon(const char* const* data);
+	// Initialize with XPM data
+	wxIcon(const char* const* data);
 #ifdef wxNEEDS_CHARPP
-    wxIcon(char **data);
+	wxIcon(char **data);
 #endif
 
-    wxIcon(const wxString& name, wxBitmapType type = wxICON_DEFAULT_TYPE,
-           int desiredWidth = -1, int desiredHeight = -1)
-    {
-        LoadFile(name, type, desiredWidth, desiredHeight);
-    }
+	wxIcon(const wxString& name, wxBitmapType type = wxICON_DEFAULT_TYPE,
+	       int desiredWidth = -1, int desiredHeight = -1)
+	{
+		LoadFile(name, type, desiredWidth, desiredHeight);
+	}
 
-    wxIcon(const wxIconLocation& loc)
-    {
-        LoadFile(loc.GetFileName(), wxBITMAP_TYPE_ANY);
-    }
+	wxIcon(const wxIconLocation& loc)
+	{
+		LoadFile(loc.GetFileName(), wxBITMAP_TYPE_ANY);
+	}
 
-    virtual ~wxIcon();
+	virtual ~wxIcon();
 
-    bool LoadFile(const wxString& name, wxBitmapType type,
-                  int desiredWidth, int desiredHeight);
+	bool LoadFile(const wxString& name, wxBitmapType type,
+	              int desiredWidth, int desiredHeight);
 
-    // unhide the base class version
-    virtual bool LoadFile(const wxString& name,
-                          wxBitmapType flags = wxICON_DEFAULT_TYPE)
-        { return LoadFile(name, flags); }
+	// unhide the base class version
+	virtual bool LoadFile(const wxString& name,
+	                      wxBitmapType flags = wxICON_DEFAULT_TYPE)
+	{
+		return LoadFile(name, flags);
+	}
 
-    // create from bitmap (which should have a mask unless it's monochrome):
-    // there shouldn't be any implicit bitmap -> icon conversion (i.e. no
-    // ctors, assignment operators...), but it's ok to have such function
-    void CopyFromBitmap(const wxBitmap& bmp);
+	// create from bitmap (which should have a mask unless it's monochrome):
+	// there shouldn't be any implicit bitmap -> icon conversion (i.e. no
+	// ctors, assignment operators...), but it's ok to have such function
+	void CopyFromBitmap(const wxBitmap& bmp);
 
 
-    wxDECLARE_DYNAMIC_CLASS(wxIcon);
+	wxDECLARE_DYNAMIC_CLASS(wxIcon);
 };
 
 #endif // _WX_ICON_H_

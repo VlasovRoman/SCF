@@ -15,30 +15,30 @@
 // 0, or if the platform is not Windows, use TCP/IP for IPC implementation
 
 #if !defined(wxUSE_DDE_FOR_IPC)
-    #ifdef __WINDOWS__
-        #define wxUSE_DDE_FOR_IPC 1
-    #else
-        #define wxUSE_DDE_FOR_IPC 0
-    #endif
+#ifdef __WINDOWS__
+#define wxUSE_DDE_FOR_IPC 1
+#else
+#define wxUSE_DDE_FOR_IPC 0
+#endif
 #endif // !defined(wxUSE_DDE_FOR_IPC)
 
 #if !defined(__WINDOWS__)
-    #undef wxUSE_DDE_FOR_IPC
-    #define wxUSE_DDE_FOR_IPC 0
+#undef wxUSE_DDE_FOR_IPC
+#define wxUSE_DDE_FOR_IPC 0
 #endif
 
 #if wxUSE_DDE_FOR_IPC
-    #define wxConnection    wxDDEConnection
-    #define wxServer        wxDDEServer
-    #define wxClient        wxDDEClient
+#define wxConnection    wxDDEConnection
+#define wxServer        wxDDEServer
+#define wxClient        wxDDEClient
 
-    #include "wx/dde.h"
+#include "wx/dde.h"
 #else // !wxUSE_DDE_FOR_IPC
-    #define wxConnection    wxTCPConnection
-    #define wxServer        wxTCPServer
-    #define wxClient        wxTCPClient
+#define wxConnection    wxTCPConnection
+#define wxServer        wxTCPServer
+#define wxClient        wxTCPClient
 
-    #include "wx/sckipc.h"
+#include "wx/sckipc.h"
 #endif // wxUSE_DDE_FOR_IPC/!wxUSE_DDE_FOR_IPC
 
 #endif // _WX_IPC_H_

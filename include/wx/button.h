@@ -26,40 +26,46 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxButtonNameStr[];
 class WXDLLIMPEXP_CORE wxButtonBase : public wxAnyButton
 {
 public:
-    wxButtonBase() { }
+	wxButtonBase() { }
 
-    // show the authentication needed symbol on the button: this is currently
-    // only implemented on Windows Vista and newer (on which it shows the UAC
-    // shield symbol)
-    void SetAuthNeeded(bool show = true) { DoSetAuthNeeded(show); }
-    bool GetAuthNeeded() const { return DoGetAuthNeeded(); }
+	// show the authentication needed symbol on the button: this is currently
+	// only implemented on Windows Vista and newer (on which it shows the UAC
+	// shield symbol)
+	void SetAuthNeeded(bool show = true)
+	{
+		DoSetAuthNeeded(show);
+	}
+	bool GetAuthNeeded() const
+	{
+		return DoGetAuthNeeded();
+	}
 
-    // make this button the default button in its top level window
-    //
-    // returns the old default item (possibly NULL)
-    virtual wxWindow *SetDefault();
+	// make this button the default button in its top level window
+	//
+	// returns the old default item (possibly NULL)
+	virtual wxWindow *SetDefault();
 
-    // returns the default button size for this platform
-    static wxSize GetDefaultSize();
+	// returns the default button size for this platform
+	static wxSize GetDefaultSize();
 
 protected:
-    wxDECLARE_NO_COPY_CLASS(wxButtonBase);
+	wxDECLARE_NO_COPY_CLASS(wxButtonBase);
 };
 
 #if defined(__WXUNIVERSAL__)
-    #include "wx/univ/button.h"
+#include "wx/univ/button.h"
 #elif defined(__WXMSW__)
-    #include "wx/msw/button.h"
+#include "wx/msw/button.h"
 #elif defined(__WXMOTIF__)
-    #include "wx/motif/button.h"
+#include "wx/motif/button.h"
 #elif defined(__WXGTK20__)
-    #include "wx/gtk/button.h"
+#include "wx/gtk/button.h"
 #elif defined(__WXGTK__)
-    #include "wx/gtk1/button.h"
+#include "wx/gtk1/button.h"
 #elif defined(__WXMAC__)
-    #include "wx/osx/button.h"
+#include "wx/osx/button.h"
 #elif defined(__WXQT__)
-    #include "wx/qt/button.h"
+#include "wx/qt/button.h"
 #endif
 
 #endif // wxUSE_BUTTON

@@ -13,31 +13,31 @@
 class WXDLLIMPEXP_CORE wxWindowDCImpl : public wxQtDCImpl
 {
 public:
-    wxWindowDCImpl( wxDC *owner );
-    wxWindowDCImpl( wxDC *owner, wxWindow *win );
+	wxWindowDCImpl( wxDC *owner );
+	wxWindowDCImpl( wxDC *owner, wxWindow *win );
 
-    ~wxWindowDCImpl();
+	~wxWindowDCImpl();
 
 protected:
-    wxWindow *m_window;
+	wxWindow *m_window;
 };
 
 
 class WXDLLIMPEXP_CORE wxClientDCImpl : public wxWindowDCImpl
 {
 public:
-    wxClientDCImpl( wxDC *owner );
-    wxClientDCImpl( wxDC *owner, wxWindow *win );
+	wxClientDCImpl( wxDC *owner );
+	wxClientDCImpl( wxDC *owner, wxWindow *win );
 
-    ~wxClientDCImpl();
+	~wxClientDCImpl();
 };
 
 
 class WXDLLIMPEXP_CORE wxPaintDCImpl : public wxWindowDCImpl
 {
 public:
-    wxPaintDCImpl( wxDC *owner );
-    wxPaintDCImpl( wxDC *owner, wxWindow *win );
+	wxPaintDCImpl( wxDC *owner );
+	wxPaintDCImpl( wxDC *owner, wxWindow *win );
 };
 
 #endif // _WX_QT_DCCLIENT_H_

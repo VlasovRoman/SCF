@@ -15,18 +15,18 @@
 #if wxUSE_FSWATCHER
 
 class WXDLLIMPEXP_BASE wxKqueueFileSystemWatcher :
-        public wxFileSystemWatcherBase
+	public wxFileSystemWatcherBase
 {
 public:
-    wxKqueueFileSystemWatcher();
+	wxKqueueFileSystemWatcher();
 
-    wxKqueueFileSystemWatcher(const wxFileName& path,
-                              int events = wxFSW_EVENT_ALL);
+	wxKqueueFileSystemWatcher(const wxFileName& path,
+	                          int events = wxFSW_EVENT_ALL);
 
-    virtual ~wxKqueueFileSystemWatcher();
+	virtual ~wxKqueueFileSystemWatcher();
 
 protected:
-    bool Init();
+	bool Init();
 };
 
 #endif

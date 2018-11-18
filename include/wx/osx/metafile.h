@@ -39,77 +39,93 @@ class wxMetafileRefData ;
 class WXDLLIMPEXP_CORE wxMetafile : public wxGDIObject
 {
 public:
-    wxMetafile(const wxString& file = wxEmptyString);
-    virtual ~wxMetafile(void);
+	wxMetafile(const wxString& file = wxEmptyString);
+	virtual ~wxMetafile(void);
 
-    // After this is called, the metafile cannot be used for anything
-    // since it is now owned by the clipboard.
-    virtual bool SetClipboard(int width = 0, int height = 0);
+	// After this is called, the metafile cannot be used for anything
+	// since it is now owned by the clipboard.
+	virtual bool SetClipboard(int width = 0, int height = 0);
 
-    virtual bool Play(wxDC *dc);
+	virtual bool Play(wxDC *dc);
 
-    wxSize GetSize() const;
-    int GetWidth() const { return GetSize().x; }
-    int GetHeight() const { return GetSize().y; }
+	wxSize GetSize() const;
+	int GetWidth() const
+	{
+		return GetSize().x;
+	}
+	int GetHeight() const
+	{
+		return GetSize().y;
+	}
 
-    // Implementation
-    WXHMETAFILE GetHMETAFILE() const ;
-    void SetHMETAFILE(WXHMETAFILE mf) ;
+	// Implementation
+	WXHMETAFILE GetHMETAFILE() const ;
+	void SetHMETAFILE(WXHMETAFILE mf) ;
 protected:
-    virtual wxGDIRefData *CreateGDIRefData() const;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
+	virtual wxGDIRefData *CreateGDIRefData() const;
+	virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
 
-    wxDECLARE_DYNAMIC_CLASS(wxMetafile);
+	wxDECLARE_DYNAMIC_CLASS(wxMetafile);
 };
 
 
 class WXDLLIMPEXP_CORE wxMetafileDCImpl: public wxGCDCImpl
 {
 public:
-    wxMetafileDCImpl( wxDC *owner,
-                      const wxString& filename,
-                      int width, int height,
-                      const wxString& description );
+	wxMetafileDCImpl( wxDC *owner,
+	                  const wxString& filename,
+	                  int width, int height,
+	                  const wxString& description );
 
-    virtual ~wxMetafileDCImpl();
+	virtual ~wxMetafileDCImpl();
 
-    // Should be called at end of drawing
-    virtual wxMetafile *Close();
+	// Should be called at end of drawing
+	virtual wxMetafile *Close();
 
-    // Implementation
-    wxMetafile *GetMetaFile(void) const { return m_metaFile; }
-    void SetMetaFile(wxMetafile *mf) { m_metaFile = mf; }
+	// Implementation
+	wxMetafile *GetMetaFile(void) const
+	{
+		return m_metaFile;
+	}
+	void SetMetaFile(wxMetafile *mf)
+	{
+		m_metaFile = mf;
+	}
 
 protected:
-    virtual void DoGetSize(int *width, int *height) const;
+	virtual void DoGetSize(int *width, int *height) const;
 
-    wxMetafile*   m_metaFile;
+	wxMetafile*   m_metaFile;
 
 private:
-    wxDECLARE_CLASS(wxMetafileDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxMetafileDCImpl);
+	wxDECLARE_CLASS(wxMetafileDCImpl);
+	wxDECLARE_NO_COPY_CLASS(wxMetafileDCImpl);
 };
 
 class WXDLLIMPEXP_CORE wxMetafileDC: public wxDC
 {
- public:
-    // the ctor parameters specify the filename (empty for memory metafiles),
-    // the metafile picture size and the optional description/comment
-    wxMetafileDC(  const wxString& filename = wxEmptyString,
-                    int width = 0, int height = 0,
-                    const wxString& description = wxEmptyString ) :
-      wxDC( new wxMetafileDCImpl( this, filename, width, height, description) )
-    { }
+public:
+	// the ctor parameters specify the filename (empty for memory metafiles),
+	// the metafile picture size and the optional description/comment
+	wxMetafileDC(  const wxString& filename = wxEmptyString,
+	               int width = 0, int height = 0,
+	               const wxString& description = wxEmptyString ) :
+		wxDC( new wxMetafileDCImpl( this, filename, width, height, description) )
+	{ }
 
-    wxMetafile *GetMetafile() const
-       { return ((wxMetafileDCImpl*)m_pimpl)->GetMetaFile(); }
+	wxMetafile *GetMetafile() const
+	{
+		return ((wxMetafileDCImpl*)m_pimpl)->GetMetaFile();
+	}
 
-    wxMetafile *Close()
-       { return ((wxMetafileDCImpl*)m_pimpl)->Close(); }
+	wxMetafile *Close()
+	{
+		return ((wxMetafileDCImpl*)m_pimpl)->Close();
+	}
 
 private:
-    wxDECLARE_CLASS(wxMetafileDC);
-    wxDECLARE_NO_COPY_CLASS(wxMetafileDC);
+	wxDECLARE_CLASS(wxMetafileDC);
+	wxDECLARE_NO_COPY_CLASS(wxMetafileDC);
 };
 
 
@@ -135,36 +151,46 @@ bool WXDLLIMPEXP_CORE wxMakeMetaFilePlaceable(const wxString& filename, int x1, 
 class WXDLLIMPEXP_CORE wxMetafileDataObject : public wxDataObjectSimple
 {
 public:
-  // ctors
-  wxMetafileDataObject()
-    : wxDataObjectSimple(wxDF_METAFILE) {  }
-  wxMetafileDataObject(const wxMetafile& metafile)
-    : wxDataObjectSimple(wxDF_METAFILE), m_metafile(metafile) { }
+	// ctors
+	wxMetafileDataObject()
+		: wxDataObjectSimple(wxDF_METAFILE) {  }
+	wxMetafileDataObject(const wxMetafile& metafile)
+		: wxDataObjectSimple(wxDF_METAFILE), m_metafile(metafile) { }
 
-    // virtual functions which you may override if you want to provide data on
-    // demand only - otherwise, the trivial default versions will be used
-    virtual void SetMetafile(const wxMetafile& metafile)
-        { m_metafile = metafile; }
-    virtual wxMetafile GetMetafile() const
-        { return m_metafile; }
+	// virtual functions which you may override if you want to provide data on
+	// demand only - otherwise, the trivial default versions will be used
+	virtual void SetMetafile(const wxMetafile& metafile)
+	{
+		m_metafile = metafile;
+	}
+	virtual wxMetafile GetMetafile() const
+	{
+		return m_metafile;
+	}
 
-    // implement base class pure virtuals
-    virtual size_t GetDataSize() const;
-    virtual bool GetDataHere(void *buf) const;
-    virtual bool SetData(size_t len, const void *buf);
+	// implement base class pure virtuals
+	virtual size_t GetDataSize() const;
+	virtual bool GetDataHere(void *buf) const;
+	virtual bool SetData(size_t len, const void *buf);
 
-    virtual size_t GetDataSize(const wxDataFormat& WXUNUSED(format)) const
-        { return GetDataSize(); }
-    virtual bool GetDataHere(const wxDataFormat& WXUNUSED(format),
-                             void *buf) const
-        { return GetDataHere(buf); }
-    virtual bool SetData(const wxDataFormat& WXUNUSED(format),
-                         size_t len, const void *buf)
-        { return SetData(len, buf); }
+	virtual size_t GetDataSize(const wxDataFormat& WXUNUSED(format)) const
+	{
+		return GetDataSize();
+	}
+	virtual bool GetDataHere(const wxDataFormat& WXUNUSED(format),
+	                         void *buf) const
+	{
+		return GetDataHere(buf);
+	}
+	virtual bool SetData(const wxDataFormat& WXUNUSED(format),
+	                     size_t len, const void *buf)
+	{
+		return SetData(len, buf);
+	}
 protected:
-  wxMetafile   m_metafile;
+	wxMetafile   m_metafile;
 };
 #endif
 
 #endif
-    // _WX_METAFIILE_H_
+// _WX_METAFIILE_H_

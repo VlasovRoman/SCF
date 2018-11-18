@@ -16,40 +16,40 @@ class WXDLLIMPEXP_FWD_CORE wxSizer;
 class WXDLLIMPEXP_CORE wxGenericMessageDialog : public wxMessageDialogBase
 {
 public:
-    wxGenericMessageDialog(wxWindow *parent,
-                           const wxString& message,
-                           const wxString& caption = wxMessageBoxCaptionStr,
-                           long style = wxOK|wxCENTRE,
-                           const wxPoint& pos = wxDefaultPosition);
+	wxGenericMessageDialog(wxWindow *parent,
+	                       const wxString& message,
+	                       const wxString& caption = wxMessageBoxCaptionStr,
+	                       long style = wxOK|wxCENTRE,
+	                       const wxPoint& pos = wxDefaultPosition);
 
-    virtual int ShowModal() wxOVERRIDE;
+	virtual int ShowModal() wxOVERRIDE;
 
 protected:
-    // Creates a message dialog taking any options that have been set after
-    // object creation into account such as custom labels.
-    void DoCreateMsgdialog();
+	// Creates a message dialog taking any options that have been set after
+	// object creation into account such as custom labels.
+	void DoCreateMsgdialog();
 
-    void OnYes(wxCommandEvent& event);
-    void OnNo(wxCommandEvent& event);
-    void OnHelp(wxCommandEvent& event);
-    void OnCancel(wxCommandEvent& event);
+	void OnYes(wxCommandEvent& event);
+	void OnNo(wxCommandEvent& event);
+	void OnHelp(wxCommandEvent& event);
+	void OnCancel(wxCommandEvent& event);
 
-    // can be overridden to provide more contents to the dialog
-    virtual void AddMessageDialogCheckBox(wxSizer *WXUNUSED(sizer)) { }
-    virtual void AddMessageDialogDetails(wxSizer *WXUNUSED(sizer)) { }
+	// can be overridden to provide more contents to the dialog
+	virtual void AddMessageDialogCheckBox(wxSizer *WXUNUSED(sizer)) { }
+	virtual void AddMessageDialogDetails(wxSizer *WXUNUSED(sizer)) { }
 
 private:
-    // Creates and returns a standard button sizer using the style of this
-    // dialog and the custom labels, if any.
-    //
-    // May return NULL on smart phone platforms not using buttons at all.
-    wxSizer *CreateMsgDlgButtonSizer();
+	// Creates and returns a standard button sizer using the style of this
+	// dialog and the custom labels, if any.
+	//
+	// May return NULL on smart phone platforms not using buttons at all.
+	wxSizer *CreateMsgDlgButtonSizer();
 
-    wxPoint m_pos;
-    bool m_created;
+	wxPoint m_pos;
+	bool m_created;
 
-    wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS(wxGenericMessageDialog);
+	wxDECLARE_EVENT_TABLE();
+	wxDECLARE_DYNAMIC_CLASS(wxGenericMessageDialog);
 };
 
 #endif // _WX_GENERIC_MSGDLGG_H_

@@ -21,48 +21,51 @@
 class WXDLLIMPEXP_CORE wxTextWrapper
 {
 public:
-    wxTextWrapper() { m_eol = false; }
+	wxTextWrapper()
+	{
+		m_eol = false;
+	}
 
-    // win is used for getting the font, text is the text to wrap, width is the
-    // max line width or -1 to disable wrapping
-    void Wrap(wxWindow *win, const wxString& text, int widthMax);
+	// win is used for getting the font, text is the text to wrap, width is the
+	// max line width or -1 to disable wrapping
+	void Wrap(wxWindow *win, const wxString& text, int widthMax);
 
-    // we don't need it, but just to avoid compiler warnings
-    virtual ~wxTextWrapper() { }
+	// we don't need it, but just to avoid compiler warnings
+	virtual ~wxTextWrapper() { }
 
 protected:
-    // line may be empty
-    virtual void OnOutputLine(const wxString& line) = 0;
+	// line may be empty
+	virtual void OnOutputLine(const wxString& line) = 0;
 
-    // called at the start of every new line (except the very first one)
-    virtual void OnNewLine() { }
+	// called at the start of every new line (except the very first one)
+	virtual void OnNewLine() { }
 
 private:
-    // call OnOutputLine() and set m_eol to true
-    void DoOutputLine(const wxString& line)
-    {
-        OnOutputLine(line);
+	// call OnOutputLine() and set m_eol to true
+	void DoOutputLine(const wxString& line)
+	{
+		OnOutputLine(line);
 
-        m_eol = true;
-    }
+		m_eol = true;
+	}
 
-    // this function is a destructive inspector: when it returns true it also
-    // resets the flag to false so calling it again wouldn't return true any
-    // more
-    bool IsStartOfNewLine()
-    {
-        if ( !m_eol )
-            return false;
+	// this function is a destructive inspector: when it returns true it also
+	// resets the flag to false so calling it again wouldn't return true any
+	// more
+	bool IsStartOfNewLine()
+	{
+		if ( !m_eol )
+			return false;
 
-        m_eol = false;
+		m_eol = false;
 
-        return true;
-    }
+		return true;
+	}
 
 
-    bool m_eol;
+	bool m_eol;
 
-    wxDECLARE_NO_COPY_CLASS(wxTextWrapper);
+	wxDECLARE_NO_COPY_CLASS(wxTextWrapper);
 };
 
 #if wxUSE_STATTEXT
@@ -79,47 +82,50 @@ private:
 class wxTextSizerWrapper : public wxTextWrapper
 {
 public:
-    wxTextSizerWrapper(wxWindow *win)
-    {
-        m_win = win;
-        m_hLine = 0;
-    }
+	wxTextSizerWrapper(wxWindow *win)
+	{
+		m_win = win;
+		m_hLine = 0;
+	}
 
-    wxSizer *CreateSizer(const wxString& text, int widthMax)
-    {
-        m_sizer = new wxBoxSizer(wxVERTICAL);
-        Wrap(m_win, text, widthMax);
-        return m_sizer;
-    }
+	wxSizer *CreateSizer(const wxString& text, int widthMax)
+	{
+		m_sizer = new wxBoxSizer(wxVERTICAL);
+		Wrap(m_win, text, widthMax);
+		return m_sizer;
+	}
 
-    wxWindow *GetParent() const { return m_win; }
+	wxWindow *GetParent() const
+	{
+		return m_win;
+	}
 
 protected:
-    virtual wxWindow *OnCreateLine(const wxString& line)
-    {
-        return new wxStaticText(m_win, wxID_ANY,
-                                wxControl::EscapeMnemonics(line));
-    }
+	virtual wxWindow *OnCreateLine(const wxString& line)
+	{
+		return new wxStaticText(m_win, wxID_ANY,
+		                        wxControl::EscapeMnemonics(line));
+	}
 
-    virtual void OnOutputLine(const wxString& line) wxOVERRIDE
-    {
-        if ( !line.empty() )
-        {
-            m_sizer->Add(OnCreateLine(line));
-        }
-        else // empty line, no need to create a control for it
-        {
-            if ( !m_hLine )
-                m_hLine = m_win->GetCharHeight();
+	virtual void OnOutputLine(const wxString& line) wxOVERRIDE
+	{
+		if ( !line.empty() )
+		{
+			m_sizer->Add(OnCreateLine(line));
+		}
+		else // empty line, no need to create a control for it
+		{
+			if ( !m_hLine )
+				m_hLine = m_win->GetCharHeight();
 
-            m_sizer->Add(5, m_hLine);
-        }
-    }
+			m_sizer->Add(5, m_hLine);
+		}
+	}
 
 private:
-    wxWindow *m_win;
-    wxSizer *m_sizer;
-    int m_hLine;
+	wxWindow *m_win;
+	wxSizer *m_sizer;
+	int m_hLine;
 };
 
 #endif // wxUSE_STATTEXT

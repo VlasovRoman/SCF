@@ -19,9 +19,9 @@
 #include "wx/osx/core/cfref.h"
 
 #ifdef WORDS_BIGENDIAN
-    #define kCFStringEncodingUTF32Native kCFStringEncodingUTF32BE
+#define kCFStringEncodingUTF32Native kCFStringEncodingUTF32BE
 #else
-    #define kCFStringEncodingUTF32Native kCFStringEncodingUTF32LE
+#define kCFStringEncodingUTF32Native kCFStringEncodingUTF32LE
 #endif
 
 class WXDLLIMPEXP_FWD_BASE wxString;
@@ -36,43 +36,46 @@ WXDLLIMPEXP_BASE void wxMacWakeUp() ;
 class WXDLLIMPEXP_BASE wxCFStringRef : public wxCFRef< CFStringRef >
 {
 public:
-    wxCFStringRef()
-    {
-    }
+	wxCFStringRef()
+	{
+	}
 
-    wxCFStringRef(const wxString &str,
-                        wxFontEncoding encoding = wxFONTENCODING_DEFAULT) ;
+	wxCFStringRef(const wxString &str,
+	              wxFontEncoding encoding = wxFONTENCODING_DEFAULT) ;
 
 #ifdef __WXMAC__
-    wxCFStringRef(NSString* ref)
-        : wxCFRef< CFStringRef >((CFStringRef) ref)
-    {
-    }
+	wxCFStringRef(NSString* ref)
+		: wxCFRef< CFStringRef >((CFStringRef) ref)
+	{
+	}
 #endif
 
-    wxCFStringRef(CFStringRef ref)
-        : wxCFRef< CFStringRef >(ref)
-    {
-    }
+	wxCFStringRef(CFStringRef ref)
+		: wxCFRef< CFStringRef >(ref)
+	{
+	}
 
-    wxCFStringRef(const wxCFStringRef& otherRef )
-        : wxCFRef< CFStringRef >(otherRef)
-    {
-    }
+	wxCFStringRef(const wxCFStringRef& otherRef )
+		: wxCFRef< CFStringRef >(otherRef)
+	{
+	}
 
-    ~wxCFStringRef()
-    {
-    }
+	~wxCFStringRef()
+	{
+	}
 
-    wxString AsString( wxFontEncoding encoding = wxFONTENCODING_DEFAULT ) const;
+	wxString AsString( wxFontEncoding encoding = wxFONTENCODING_DEFAULT ) const;
 
-    static wxString AsString( CFStringRef ref, wxFontEncoding encoding = wxFONTENCODING_DEFAULT ) ;
-    static wxString AsStringWithNormalizationFormC( CFStringRef ref, wxFontEncoding encoding = wxFONTENCODING_DEFAULT ) ;
+	static wxString AsString( CFStringRef ref, wxFontEncoding encoding = wxFONTENCODING_DEFAULT ) ;
+	static wxString AsStringWithNormalizationFormC( CFStringRef ref, wxFontEncoding encoding = wxFONTENCODING_DEFAULT ) ;
 #ifdef __WXMAC__
-    static wxString AsString( NSString* ref, wxFontEncoding encoding = wxFONTENCODING_DEFAULT ) ;
-    static wxString AsStringWithNormalizationFormC( NSString* ref, wxFontEncoding encoding = wxFONTENCODING_DEFAULT ) ;
+	static wxString AsString( NSString* ref, wxFontEncoding encoding = wxFONTENCODING_DEFAULT ) ;
+	static wxString AsStringWithNormalizationFormC( NSString* ref, wxFontEncoding encoding = wxFONTENCODING_DEFAULT ) ;
 
-    NSString* AsNSString() const { return (NSString*)(CFStringRef) *this; }
+	NSString* AsNSString() const
+	{
+		return (NSString*)(CFStringRef) *this;
+	}
 #endif
 private:
 } ;
@@ -82,16 +85,16 @@ private:
 class WXDLLIMPEXP_BASE wxMacUniCharBuffer
 {
 public :
-    wxMacUniCharBuffer( const wxString &str ) ;
+	wxMacUniCharBuffer( const wxString &str ) ;
 
-    ~wxMacUniCharBuffer() ;
+	~wxMacUniCharBuffer() ;
 
-    UniCharPtr GetBuffer() ;
+	UniCharPtr GetBuffer() ;
 
-    UniCharCount GetChars() ;
+	UniCharCount GetChars() ;
 
 private :
-    UniCharPtr m_ubuf ;
-    UniCharCount m_chars ;
+	UniCharPtr m_ubuf ;
+	UniCharCount m_chars ;
 };
 #endif //__WXCFSTRINGHOLDER_H__

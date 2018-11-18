@@ -132,10 +132,10 @@
  * the comments in wx/setup.h.
  */
 #if wxUSE_COMPILER_TLS == 1
-    #if !wxCHECK_VISUALC_VERSION(11) || defined(_USING_V110_SDK71_)
-        #undef wxUSE_COMPILER_TLS
-        #define wxUSE_COMPILER_TLS 0
-    #endif
+#if !wxCHECK_VISUALC_VERSION(11) || defined(_USING_V110_SDK71_)
+#undef wxUSE_COMPILER_TLS
+#define wxUSE_COMPILER_TLS 0
+#endif
 #endif
 
 
@@ -157,7 +157,7 @@
 #endif /* compiler doesn't support SEH */
 
 #if defined(__GNUWIN32__)
-    /* These don't work as expected for mingw32 and cygwin32 */
+/* These don't work as expected for mingw32 and cygwin32 */
 #   undef  wxUSE_MEMORY_TRACING
 #   define wxUSE_MEMORY_TRACING            0
 
@@ -179,8 +179,8 @@
 
 /* MinGW32 doesn't provide wincred.h defining the API needed by this */
 #ifdef __MINGW32_TOOLCHAIN__
-    #undef wxUSE_SECRETSTORE
-    #define wxUSE_SECRETSTORE 0
+#undef wxUSE_SECRETSTORE
+#define wxUSE_SECRETSTORE 0
 #endif
 
 #if wxUSE_SPINCTRL
@@ -212,7 +212,7 @@
 #ifdef __BORLANDC__
 
 #if __BORLANDC__ < 0x500
-    /* BC++ 4.0 can't compile JPEG library */
+/* BC++ 4.0 can't compile JPEG library */
 #   undef wxUSE_LIBJPEG
 #   define wxUSE_LIBJPEG 0
 #endif
@@ -408,19 +408,19 @@
 #endif /* wxUSE_ACTIVITYINDICATOR */
 
 #if wxUSE_STACKWALKER && !wxUSE_DBGHELP
-    /*
-        Don't give an error in this case because wxUSE_DBGHELP could be 0
-        because the compiler just doesn't support it, there is really no other
-        choice than to disable wxUSE_STACKWALKER too in this case.
+/*
+    Don't give an error in this case because wxUSE_DBGHELP could be 0
+    because the compiler just doesn't support it, there is really no other
+    choice than to disable wxUSE_STACKWALKER too in this case.
 
-        Unfortunately we can't distinguish between the missing compiler support
-        and explicitly disabling wxUSE_DBGHELP (which would ideally result in
-        an error if wxUSE_STACKWALKER is not disabled too), but it's better to
-        avoid giving a compiler error in the former case even if it means not
-        giving it neither in the latter one.
-     */
-    #undef wxUSE_STACKWALKER
-    #define wxUSE_STACKWALKER 0
+    Unfortunately we can't distinguish between the missing compiler support
+    and explicitly disabling wxUSE_DBGHELP (which would ideally result in
+    an error if wxUSE_STACKWALKER is not disabled too), but it's better to
+    avoid giving a compiler error in the former case even if it means not
+    giving it neither in the latter one.
+ */
+#undef wxUSE_STACKWALKER
+#define wxUSE_STACKWALKER 0
 #endif /* wxUSE_STACKWALKER && !wxUSE_DBGHELP */
 
 #if !wxUSE_THREADS

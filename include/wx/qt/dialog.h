@@ -14,32 +14,32 @@ class QDialog;
 class WXDLLIMPEXP_CORE wxDialog : public wxDialogBase
 {
 public:
-    wxDialog();
-    wxDialog( wxWindow *parent, wxWindowID id,
-            const wxString &title,
-            const wxPoint &pos = wxDefaultPosition,
-            const wxSize &size = wxDefaultSize,
-            long style = wxDEFAULT_DIALOG_STYLE,
-            const wxString &name = wxDialogNameStr );
+	wxDialog();
+	wxDialog( wxWindow *parent, wxWindowID id,
+	          const wxString &title,
+	          const wxPoint &pos = wxDefaultPosition,
+	          const wxSize &size = wxDefaultSize,
+	          long style = wxDEFAULT_DIALOG_STYLE,
+	          const wxString &name = wxDialogNameStr );
 
-    virtual ~wxDialog();
-    
-    bool Create( wxWindow *parent, wxWindowID id,
-            const wxString &title,
-            const wxPoint &pos = wxDefaultPosition,
-            const wxSize &size = wxDefaultSize,
-            long style = wxDEFAULT_DIALOG_STYLE,
-            const wxString &name = wxDialogNameStr );
+	virtual ~wxDialog();
 
-    virtual int ShowModal();
-    virtual void EndModal(int retCode);
-    virtual bool IsModal() const;
+	bool Create( wxWindow *parent, wxWindowID id,
+	             const wxString &title,
+	             const wxPoint &pos = wxDefaultPosition,
+	             const wxSize &size = wxDefaultSize,
+	             long style = wxDEFAULT_DIALOG_STYLE,
+	             const wxString &name = wxDialogNameStr );
 
-    QDialog *GetDialogHandle() const;
+	virtual int ShowModal();
+	virtual void EndModal(int retCode);
+	virtual bool IsModal() const;
+
+	QDialog *GetDialogHandle() const;
 
 private:
 
-    wxDECLARE_DYNAMIC_CLASS( wxDialog );
+	wxDECLARE_DYNAMIC_CLASS( wxDialog );
 };
 
 

@@ -26,25 +26,28 @@
 class WXDLLIMPEXP_BASE wxBackingFile
 {
 public:
-    enum { DefaultBufSize = 16384 };
+	enum { DefaultBufSize = 16384 };
 
-    // Takes ownership of stream. If the stream is smaller than bufsize, the
-    // backing file is never created and the backing is done with memory.
-    wxBackingFile(wxInputStream *stream,
-                  size_t bufsize = DefaultBufSize,
-                  const wxString& prefix = wxT("wxbf"));
+	// Takes ownership of stream. If the stream is smaller than bufsize, the
+	// backing file is never created and the backing is done with memory.
+	wxBackingFile(wxInputStream *stream,
+	              size_t bufsize = DefaultBufSize,
+	              const wxString& prefix = wxT("wxbf"));
 
-    wxBackingFile() : m_impl(NULL) { }
-    ~wxBackingFile();
+	wxBackingFile() : m_impl(NULL) { }
+	~wxBackingFile();
 
-    wxBackingFile(const wxBackingFile& backer);
-    wxBackingFile& operator=(const wxBackingFile& backer);
+	wxBackingFile(const wxBackingFile& backer);
+	wxBackingFile& operator=(const wxBackingFile& backer);
 
-    operator bool() const { return m_impl != NULL; }
+	operator bool() const
+	{
+		return m_impl != NULL;
+	}
 
 private:
-    class wxBackingFileImpl *m_impl;
-    friend class wxBackedInputStream;
+	class wxBackingFileImpl *m_impl;
+	friend class wxBackedInputStream;
 };
 
 // ----------------------------------------------------------------------------
@@ -54,27 +57,30 @@ private:
 class WXDLLIMPEXP_BASE wxBackedInputStream : public wxInputStream
 {
 public:
-    wxBackedInputStream(const wxBackingFile& backer);
+	wxBackedInputStream(const wxBackingFile& backer);
 
-    // If the length of the backer's parent stream is unknown then GetLength()
-    // returns wxInvalidOffset until the parent has been read to the end.
-    wxFileOffset GetLength() const wxOVERRIDE;
+	// If the length of the backer's parent stream is unknown then GetLength()
+	// returns wxInvalidOffset until the parent has been read to the end.
+	wxFileOffset GetLength() const wxOVERRIDE;
 
-    // Returns the length, reading the parent stream to the end if necessary.
-    wxFileOffset FindLength() const;
+	// Returns the length, reading the parent stream to the end if necessary.
+	wxFileOffset FindLength() const;
 
-    bool IsSeekable() const wxOVERRIDE { return true; }
+	bool IsSeekable() const wxOVERRIDE
+	{
+		return true;
+	}
 
 protected:
-    size_t OnSysRead(void *buffer, size_t size) wxOVERRIDE;
-    wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) wxOVERRIDE;
-    wxFileOffset OnSysTell() const wxOVERRIDE;
+	size_t OnSysRead(void *buffer, size_t size) wxOVERRIDE;
+	wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) wxOVERRIDE;
+	wxFileOffset OnSysTell() const wxOVERRIDE;
 
 private:
-    wxBackingFile m_backer;
-    wxFileOffset m_pos;
+	wxBackingFile m_backer;
+	wxFileOffset m_pos;
 
-    wxDECLARE_NO_COPY_CLASS(wxBackedInputStream);
+	wxDECLARE_NO_COPY_CLASS(wxBackedInputStream);
 };
 
 #endif // wxUSE_FILESYSTEM

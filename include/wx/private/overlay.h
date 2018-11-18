@@ -16,11 +16,11 @@
 #ifdef wxHAS_NATIVE_OVERLAY
 
 #if defined(__WXOSX__) && wxOSX_USE_COCOA
-    #include "wx/osx/cocoa/private/overlay.h"
+#include "wx/osx/cocoa/private/overlay.h"
 #elif defined(__WXDFB__)
-    #include "wx/dfb/private/overlay.h"
+#include "wx/dfb/private/overlay.h"
 #else
-    #error "unknown native wxOverlay implementation"
+#error "unknown native wxOverlay implementation"
 #endif
 
 #else // !wxHAS_NATIVE_OVERLAY
@@ -33,32 +33,32 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 class wxOverlayImpl
 {
 public:
-    wxOverlayImpl();
-    ~wxOverlayImpl();
+	wxOverlayImpl();
+	~wxOverlayImpl();
 
 
-    // clears the overlay without restoring the former state
-    // to be done eg when the window content has been changed and repainted
-    void Reset();
+	// clears the overlay without restoring the former state
+	// to be done eg when the window content has been changed and repainted
+	void Reset();
 
-    // returns true if it has been setup
-    bool IsOk();
+	// returns true if it has been setup
+	bool IsOk();
 
-    void Init(wxDC* dc, int x , int y , int width , int height);
+	void Init(wxDC* dc, int x, int y, int width, int height);
 
-    void BeginDrawing(wxDC* dc);
+	void BeginDrawing(wxDC* dc);
 
-    void EndDrawing(wxDC* dc);
+	void EndDrawing(wxDC* dc);
 
-    void Clear(wxDC* dc);
+	void Clear(wxDC* dc);
 
 private:
-    wxBitmap m_bmpSaved ;
-    int m_x ;
-    int m_y ;
-    int m_width ;
-    int m_height ;
-    wxWindow* m_window ;
+	wxBitmap m_bmpSaved ;
+	int m_x ;
+	int m_y ;
+	int m_width ;
+	int m_height ;
+	wxWindow* m_window ;
 };
 
 #endif // wxHAS_NATIVE_OVERLAY/!wxHAS_NATIVE_OVERLAY

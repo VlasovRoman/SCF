@@ -25,10 +25,10 @@
     check below.
  */
 #ifdef __cplusplus
-    /*
-        Test for _WINDOWS_, used as header guard by windows.h itself, not our
-        own __WINDOWS__, which is not defined yet.
-     */
+/*
+    Test for _WINDOWS_, used as header guard by windows.h itself, not our
+    own __WINDOWS__, which is not defined yet.
+ */
 #   ifdef _WINDOWS_
 #       include "wx/msw/winundef.h"
 #   endif /* WIN32 */
@@ -67,22 +67,22 @@
 #endif /*__cplusplus*/
 
 #ifndef __WXWINDOWS__
-    #define __WXWINDOWS__ 1
+#define __WXWINDOWS__ 1
 #endif
 
 #ifndef wxUSE_BASE
-    /*  by default consider that this is a monolithic build */
-    #define wxUSE_BASE 1
+/*  by default consider that this is a monolithic build */
+#define wxUSE_BASE 1
 #endif
 
 #if !wxUSE_GUI && !defined(__WXBASE__)
-    #define __WXBASE__
+#define __WXBASE__
 #endif
 
 /*  suppress some Visual C++ warnings */
 #ifdef __VISUALC__
-    /*  the only "real" warning here is 4244 but there are just too many of them */
-    /*  in our code... one day someone should go and fix them but until then... */
+/*  the only "real" warning here is 4244 but there are just too many of them */
+/*  in our code... one day someone should go and fix them but until then... */
 #   pragma warning(disable:4097)    /*  typedef used as class */
 #   pragma warning(disable:4201)    /*  nonstandard extension used: nameless struct/union */
 #   pragma warning(disable:4244)    /*  conversion from double to float */
@@ -92,69 +92,69 @@
 #   pragma warning(disable:4514)   /*  unreferenced inline func has been removed */
 #   pragma warning(disable:4710)    /*  function not inlined */
 
-    /*
-        TODO: this warning should really be enabled as it can be genuinely
-              useful, check where does it occur in wxWidgets
-     */
-    #pragma warning(disable: 4127) /*  conditional expression is constant */
+/*
+    TODO: this warning should really be enabled as it can be genuinely
+          useful, check where does it occur in wxWidgets
+ */
+#pragma warning(disable: 4127) /*  conditional expression is constant */
 
-    /* There are too many false positivies for this one, particularly when
-       using templates like wxVector<T> */
-    /* class 'foo' needs to have dll-interface to be used by clients of
-       class 'bar'" */
+/* There are too many false positivies for this one, particularly when
+   using templates like wxVector<T> */
+/* class 'foo' needs to have dll-interface to be used by clients of
+   class 'bar'" */
 #   pragma warning(disable:4251)
 
-    /*
-        This is a similar warning which occurs when deriving from standard
-        containers. MSDN even mentions that it can be ignored in this case
-        (albeit only in debug build while the warning is the same in release
-        too and seems equally harmless).
-     */
+/*
+    This is a similar warning which occurs when deriving from standard
+    containers. MSDN even mentions that it can be ignored in this case
+    (albeit only in debug build while the warning is the same in release
+    too and seems equally harmless).
+ */
 #if wxUSE_STD_CONTAINERS
 #   pragma warning(disable:4275)
 #endif /* wxUSE_STD_CONTAINERS */
 
 #   ifdef __VISUALC5__
-    /* For VC++ 5.0 for release mode, the warning 'C4702: unreachable code */
-    /* is buggy, and occurs for code that does actually get executed */
+/* For VC++ 5.0 for release mode, the warning 'C4702: unreachable code */
+/* is buggy, and occurs for code that does actually get executed */
 #   ifndef __WXDEBUG__
 #       pragma warning(disable:4702)    /* unreachable code */
 #   endif
 
-    /* The VC++ 5.0 warning 'C4003: not enough actual parameters for macro'
-     * is incompatible with the wxWidgets headers since it is given when
-     * parameters are empty but not missing. */
+/* The VC++ 5.0 warning 'C4003: not enough actual parameters for macro'
+ * is incompatible with the wxWidgets headers since it is given when
+ * parameters are empty but not missing. */
 #       pragma warning(disable:4003)    /* not enough actual parameters for macro */
 #   endif
 
-    /*
-       When compiling with VC++ 7 /Wp64 option we get thousands of warnings for
-       conversion from size_t to int or long. Some precious few of them might
-       be worth looking into but unfortunately it seems infeasible to fix all
-       the other, harmless ones (e.g. inserting static_cast<int>(s.length())
-       everywhere this method is used though we are quite sure that using >4GB
-       strings is a bad idea anyhow) so just disable it globally for now.
-     */
-    #if wxCHECK_VISUALC_VERSION(7)
-        /* conversion from 'size_t' to 'unsigned long', possible loss of data */
-        #pragma warning(disable:4267)
-    #endif /* VC++ 7 or later */
+/*
+   When compiling with VC++ 7 /Wp64 option we get thousands of warnings for
+   conversion from size_t to int or long. Some precious few of them might
+   be worth looking into but unfortunately it seems infeasible to fix all
+   the other, harmless ones (e.g. inserting static_cast<int>(s.length())
+   everywhere this method is used though we are quite sure that using >4GB
+   strings is a bad idea anyhow) so just disable it globally for now.
+ */
+#if wxCHECK_VISUALC_VERSION(7)
+/* conversion from 'size_t' to 'unsigned long', possible loss of data */
+#pragma warning(disable:4267)
+#endif /* VC++ 7 or later */
 
-    /*
-       VC++ 8 gives a warning when using standard functions such as sprintf,
-       localtime, ... -- stop this madness, unless the user had already done it
-     */
-    #if wxCHECK_VISUALC_VERSION(8)
-        #ifndef _CRT_SECURE_NO_DEPRECATE
-            #define _CRT_SECURE_NO_DEPRECATE 1
-        #endif
-        #ifndef _CRT_NON_CONFORMING_SWPRINTFS
-            #define _CRT_NON_CONFORMING_SWPRINTFS 1
-        #endif
-        #ifndef _SCL_SECURE_NO_WARNINGS
-            #define _SCL_SECURE_NO_WARNINGS 1
-        #endif
-    #endif /* VC++ 8 */
+/*
+   VC++ 8 gives a warning when using standard functions such as sprintf,
+   localtime, ... -- stop this madness, unless the user had already done it
+ */
+#if wxCHECK_VISUALC_VERSION(8)
+#ifndef _CRT_SECURE_NO_DEPRECATE
+#define _CRT_SECURE_NO_DEPRECATE 1
+#endif
+#ifndef _CRT_NON_CONFORMING_SWPRINTFS
+#define _CRT_NON_CONFORMING_SWPRINTFS 1
+#endif
+#ifndef _SCL_SECURE_NO_WARNINGS
+#define _SCL_SECURE_NO_WARNINGS 1
+#endif
+#endif /* VC++ 8 */
 #endif /*  __VISUALC__ */
 
 /*  suppress some Borland C++ warnings */
@@ -230,11 +230,11 @@
 /*  note that these definitions should work both in C++ and C code, so don't */
 /*  use true/false below */
 #ifndef TRUE
-    #define TRUE 1
+#define TRUE 1
 #endif
 
 #ifndef FALSE
-    #define FALSE 0
+#define FALSE 0
 #endif
 
 typedef short int WXTYPE;
@@ -259,44 +259,44 @@ typedef short int WXTYPE;
 
 /* check for override keyword support */
 #ifndef HAVE_OVERRIDE
-    #if __cplusplus >= 201103L
-        /* All C++11 compilers should have it. */
-        #define HAVE_OVERRIDE
-    #elif wxCHECK_VISUALC_VERSION(11)
-        /*
-           VC++ supports override keyword since version 8 but doesn't define
-           __cplusplus as indicating C++11 support (at least up to and
-           including 12), so handle its case specially.
+#if __cplusplus >= 201103L
+/* All C++11 compilers should have it. */
+#define HAVE_OVERRIDE
+#elif wxCHECK_VISUALC_VERSION(11)
+/*
+   VC++ supports override keyword since version 8 but doesn't define
+   __cplusplus as indicating C++11 support (at least up to and
+   including 12), so handle its case specially.
 
-           Also note that while the keyword is supported, using it with
-           versions 8, 9 and 10 results in C4481 compiler warning ("nonstandard
-           extension used") and so we avoid using it there, you could disable
-           this warning and predefine HAVE_OVERRIDE if you don't care about it.
-         */
-        #define HAVE_OVERRIDE
-    #elif WX_HAS_CLANG_FEATURE(cxx_override_control)
-        #define HAVE_OVERRIDE
-    #endif
+   Also note that while the keyword is supported, using it with
+   versions 8, 9 and 10 results in C4481 compiler warning ("nonstandard
+   extension used") and so we avoid using it there, you could disable
+   this warning and predefine HAVE_OVERRIDE if you don't care about it.
+ */
+#define HAVE_OVERRIDE
+#elif WX_HAS_CLANG_FEATURE(cxx_override_control)
+#define HAVE_OVERRIDE
+#endif
 #endif /* !HAVE_OVERRIDE */
 
 #ifdef HAVE_OVERRIDE
-    #define wxOVERRIDE override
+#define wxOVERRIDE override
 #else /*  !HAVE_OVERRIDE */
-    #define wxOVERRIDE
+#define wxOVERRIDE
 #endif /*  HAVE_OVERRIDE */
 
 /* wxFALLTHROUGH is used to notate explicit fallthroughs in switch statements */
 
 #if __cplusplus >= 201703L
-    #define wxFALLTHROUGH [[fallthrough]]
+#define wxFALLTHROUGH [[fallthrough]]
 #elif __cplusplus >= 201103L && defined(__has_warning) && WX_HAS_CLANG_FEATURE(cxx_attributes)
-    #define wxFALLTHROUGH [[clang::fallthrough]]
+#define wxFALLTHROUGH [[clang::fallthrough]]
 #elif wxCHECK_GCC_VERSION(7, 0)
-    #define wxFALLTHROUGH __attribute__ ((fallthrough))
+#define wxFALLTHROUGH __attribute__ ((fallthrough))
 #endif
 
 #ifndef wxFALLTHROUGH
-    #define wxFALLTHROUGH ((void)0)
+#define wxFALLTHROUGH ((void)0)
 #endif
 
 /* these macros are obsolete, use the standard C++ casts directly now */
@@ -310,71 +310,71 @@ typedef short int WXTYPE;
    as it results in warnings when using some compilers (SGI mipspro for example)
  */
 #if defined(__INTELC__)
-    template <typename T, typename X>
-    inline T wx_truncate_cast_impl(X x)
-    {
-        #pragma warning(push)
-        /* implicit conversion of a 64-bit integral type to a smaller integral type */
-        #pragma warning(disable: 1682)
-        /* conversion from "X" to "T" may lose significant bits */
-        #pragma warning(disable: 810)
-        /* non-pointer conversion from "foo" to "bar" may lose significant bits */
-        #pragma warning(disable: 2259)
+template <typename T, typename X>
+inline T wx_truncate_cast_impl(X x)
+{
+#pragma warning(push)
+	/* implicit conversion of a 64-bit integral type to a smaller integral type */
+#pragma warning(disable: 1682)
+	/* conversion from "X" to "T" may lose significant bits */
+#pragma warning(disable: 810)
+	/* non-pointer conversion from "foo" to "bar" may lose significant bits */
+#pragma warning(disable: 2259)
 
-        return x;
+	return x;
 
-        #pragma warning(pop)
-    }
+#pragma warning(pop)
+}
 
-    #define wx_truncate_cast(t, x) wx_truncate_cast_impl<t>(x)
+#define wx_truncate_cast(t, x) wx_truncate_cast_impl<t>(x)
 
 #elif defined(__VISUALC__) && __VISUALC__ >= 1310
-    template <typename T, typename X>
-    inline T wx_truncate_cast_impl(X x)
-    {
-        #pragma warning(push)
-        /* conversion from 'size_t' to 'type', possible loss of data */
-        #pragma warning(disable: 4267)
-        /* conversion from 'type1' to 'type2', possible loss of data */
-        #pragma warning(disable: 4242)
+template <typename T, typename X>
+inline T wx_truncate_cast_impl(X x)
+{
+#pragma warning(push)
+	/* conversion from 'size_t' to 'type', possible loss of data */
+#pragma warning(disable: 4267)
+	/* conversion from 'type1' to 'type2', possible loss of data */
+#pragma warning(disable: 4242)
 
-        return x;
+	return x;
 
-        #pragma warning(pop)
-    }
+#pragma warning(pop)
+}
 
-    #define wx_truncate_cast(t, x) wx_truncate_cast_impl<t>(x)
+#define wx_truncate_cast(t, x) wx_truncate_cast_impl<t>(x)
 #else
-    #define wx_truncate_cast(t, x) ((t)(x))
+#define wx_truncate_cast(t, x) ((t)(x))
 #endif
 
 /* for consistency with wxStatic/DynamicCast defined in wx/object.h */
 #define wxConstCast(obj, className) const_cast<className *>(obj)
 
 #ifndef HAVE_STD_WSTRING
-    #if __cplusplus >= 201103L
-        #define HAVE_STD_WSTRING
-    #elif defined(__VISUALC__)
-        #define HAVE_STD_WSTRING
-    #elif defined(__MINGW32__)
-        #define HAVE_STD_WSTRING
-    #endif
+#if __cplusplus >= 201103L
+#define HAVE_STD_WSTRING
+#elif defined(__VISUALC__)
+#define HAVE_STD_WSTRING
+#elif defined(__MINGW32__)
+#define HAVE_STD_WSTRING
+#endif
 #endif
 
 #ifndef HAVE_STD_STRING_COMPARE
-    #if __cplusplus >= 201103L
-        #define HAVE_STD_STRING_COMPARE
-    #elif defined(__VISUALC__)
-        #define HAVE_STD_STRING_COMPARE
-    #elif defined(__MINGW32__) || defined(__CYGWIN32__)
-        #define HAVE_STD_STRING_COMPARE
-    #endif
+#if __cplusplus >= 201103L
+#define HAVE_STD_STRING_COMPARE
+#elif defined(__VISUALC__)
+#define HAVE_STD_STRING_COMPARE
+#elif defined(__MINGW32__) || defined(__CYGWIN32__)
+#define HAVE_STD_STRING_COMPARE
+#endif
 #endif
 
 #ifndef HAVE_TR1_TYPE_TRAITS
-    #if defined(__VISUALC__) && (_MSC_FULL_VER >= 150030729)
-        #define HAVE_TR1_TYPE_TRAITS
-    #endif
+#if defined(__VISUALC__) && (_MSC_FULL_VER >= 150030729)
+#define HAVE_TR1_TYPE_TRAITS
+#endif
 #endif
 
 /*
@@ -383,98 +383,98 @@ typedef short int WXTYPE;
     would cause ABI issues otherwise (see #18034).
 */
 #ifndef __WX_SETUP_H__
-    /*
-        Check for C++11 compilers, it is important to do it before the
-        __has_include() checks because at least g++ 4.9.2+ __has_include() returns
-        true for C++11 headers which can't be compiled in non-C++11 mode.
-     */
-    #if __cplusplus >= 201103L || wxCHECK_VISUALC_VERSION(10)
-        #ifndef HAVE_TYPE_TRAITS
-            #define HAVE_TYPE_TRAITS
-        #endif
-        #ifndef HAVE_STD_UNORDERED_MAP
-            #define HAVE_STD_UNORDERED_MAP
-        #endif
-        #ifndef HAVE_STD_UNORDERED_SET
-            #define HAVE_STD_UNORDERED_SET
-        #endif
-    #elif defined(__has_include)
-        /*
-            We're in non-C++11 mode here, so only test for pre-C++11 headers. As
-            mentioned above, using __has_include() to test for C++11 would wrongly
-            detect them even though they can't be used in this case, don't do it.
-         */
-        #if !defined(HAVE_TR1_TYPE_TRAITS) && __has_include(<tr1/type_traits>)
-            #define HAVE_TR1_TYPE_TRAITS
-        #endif
+/*
+    Check for C++11 compilers, it is important to do it before the
+    __has_include() checks because at least g++ 4.9.2+ __has_include() returns
+    true for C++11 headers which can't be compiled in non-C++11 mode.
+ */
+#if __cplusplus >= 201103L || wxCHECK_VISUALC_VERSION(10)
+#ifndef HAVE_TYPE_TRAITS
+#define HAVE_TYPE_TRAITS
+#endif
+#ifndef HAVE_STD_UNORDERED_MAP
+#define HAVE_STD_UNORDERED_MAP
+#endif
+#ifndef HAVE_STD_UNORDERED_SET
+#define HAVE_STD_UNORDERED_SET
+#endif
+#elif defined(__has_include)
+/*
+    We're in non-C++11 mode here, so only test for pre-C++11 headers. As
+    mentioned above, using __has_include() to test for C++11 would wrongly
+    detect them even though they can't be used in this case, don't do it.
+ */
+#if !defined(HAVE_TR1_TYPE_TRAITS) && __has_include(<tr1/type_traits>)
+#define HAVE_TR1_TYPE_TRAITS
+#endif
 
-        #if !defined(HAVE_TR1_UNORDERED_MAP) && __has_include(<tr1/unordered_map>)
-            #define HAVE_TR1_UNORDERED_MAP
-        #endif
+#if !defined(HAVE_TR1_UNORDERED_MAP) && __has_include(<tr1/unordered_map>)
+#define HAVE_TR1_UNORDERED_MAP
+#endif
 
-        #if !defined(HAVE_TR1_UNORDERED_SET) && __has_include(<tr1/unordered_set>)
-            #define HAVE_TR1_UNORDERED_SET
-        #endif
-    #endif /* defined(__has_include) */
+#if !defined(HAVE_TR1_UNORDERED_SET) && __has_include(<tr1/unordered_set>)
+#define HAVE_TR1_UNORDERED_SET
+#endif
+#endif /* defined(__has_include) */
 
-    #endif /* __cplusplus */
+#endif /* __cplusplus */
 #endif /* __WX_SETUP_H__ */
 
 /* provide replacement for C99 va_copy() if the compiler doesn't have it */
 
 /* could be already defined by configure or the user */
 #ifndef wxVaCopy
-    /* if va_copy is a macro or configure detected that we have it, use it */
-    #if defined(va_copy) || defined(HAVE_VA_COPY)
-        #define wxVaCopy va_copy
-    #else /* no va_copy, try to provide a replacement */
-        /*
-           configure tries to determine whether va_list is an array or struct
-           type, but it may not be used under Windows, so deal with a few
-           special cases.
-         */
+/* if va_copy is a macro or configure detected that we have it, use it */
+#if defined(va_copy) || defined(HAVE_VA_COPY)
+#define wxVaCopy va_copy
+#else /* no va_copy, try to provide a replacement */
+/*
+   configure tries to determine whether va_list is an array or struct
+   type, but it may not be used under Windows, so deal with a few
+   special cases.
+ */
 
-        #if defined(__PPC__) && (defined(_CALL_SYSV) || defined (_WIN32))
-            /*
-                PPC using SysV ABI and NT/PPC are special in that they use an
-                extra level of indirection.
-             */
-            #define VA_LIST_IS_POINTER
-        #endif /* SysV or Win32 on __PPC__ */
+#if defined(__PPC__) && (defined(_CALL_SYSV) || defined (_WIN32))
+/*
+    PPC using SysV ABI and NT/PPC are special in that they use an
+    extra level of indirection.
+ */
+#define VA_LIST_IS_POINTER
+#endif /* SysV or Win32 on __PPC__ */
 
-        /*
-            note that we use memmove(), not memcpy(), in case anybody tries
-            to do wxVaCopy(ap, ap)
-         */
-        #if defined(VA_LIST_IS_POINTER)
-            #define wxVaCopy(d, s)  memmove(*(d), *(s), sizeof(va_list))
-        #elif defined(VA_LIST_IS_ARRAY)
-            #define wxVaCopy(d, s) memmove((d), (s), sizeof(va_list))
-        #else /* we can only hope that va_lists are simple lvalues */
-            #define wxVaCopy(d, s) ((d) = (s))
-        #endif
-    #endif /* va_copy/!va_copy */
+/*
+    note that we use memmove(), not memcpy(), in case anybody tries
+    to do wxVaCopy(ap, ap)
+ */
+#if defined(VA_LIST_IS_POINTER)
+#define wxVaCopy(d, s)  memmove(*(d), *(s), sizeof(va_list))
+#elif defined(VA_LIST_IS_ARRAY)
+#define wxVaCopy(d, s) memmove((d), (s), sizeof(va_list))
+#else /* we can only hope that va_lists are simple lvalues */
+#define wxVaCopy(d, s) ((d) = (s))
+#endif
+#endif /* va_copy/!va_copy */
 #endif /* wxVaCopy */
 
 #ifndef HAVE_WOSTREAM
-    /*
-        Mingw <= 3.4 and all versions of Cygwin don't have std::wostream
-     */
-    #if (defined(__MINGW32__) && !wxCHECK_GCC_VERSION(4, 0)) || \
+/*
+    Mingw <= 3.4 and all versions of Cygwin don't have std::wostream
+ */
+#if (defined(__MINGW32__) && !wxCHECK_GCC_VERSION(4, 0)) || \
         defined(__CYGWIN__)
-        #define wxNO_WOSTREAM
-    #endif
+#define wxNO_WOSTREAM
+#endif
 
-    /* VC++ doesn't have it in the old iostream library */
-    #if defined(__VISUALC__) && wxUSE_IOSTREAMH
-        #define wxNO_WOSTREAM
-    #endif
+/* VC++ doesn't have it in the old iostream library */
+#if defined(__VISUALC__) && wxUSE_IOSTREAMH
+#define wxNO_WOSTREAM
+#endif
 
-    #ifndef wxNO_WOSTREAM
-        #define HAVE_WOSTREAM
-    #endif
+#ifndef wxNO_WOSTREAM
+#define HAVE_WOSTREAM
+#endif
 
-    #undef wxNO_WOSTREAM
+#undef wxNO_WOSTREAM
 #endif /* HAVE_WOSTREAM */
 
 /*  ---------------------------------------------------------------------------- */
@@ -483,38 +483,38 @@ typedef short int WXTYPE;
 
 /*  stdcall is used for all functions called by Windows under Windows */
 #if defined(__WINDOWS__)
-    #if defined(__GNUWIN32__)
-        #define wxSTDCALL __attribute__((stdcall))
-    #else
-        /*  both VC++ and Borland understand this */
-        #define wxSTDCALL _stdcall
-    #endif
+#if defined(__GNUWIN32__)
+#define wxSTDCALL __attribute__((stdcall))
+#else
+/*  both VC++ and Borland understand this */
+#define wxSTDCALL _stdcall
+#endif
 
 #else /*  Win */
-    /*  no such stupidness under Unix */
-    #define wxSTDCALL
+/*  no such stupidness under Unix */
+#define wxSTDCALL
 #endif /*  platform */
 
 /*  LINKAGEMODE mode is most likely empty everywhere */
 #ifndef LINKAGEMODE
-    #define LINKAGEMODE
+#define LINKAGEMODE
 #endif /*  LINKAGEMODE */
 
 /*  wxCALLBACK should be used for the functions which are called back by */
 /*  Windows (such as compare function for wxListCtrl) */
 #if defined(__WIN32__)
-    #define wxCALLBACK wxSTDCALL
+#define wxCALLBACK wxSTDCALL
 #else
-    /*  no stdcall under Unix nor Win16 */
-    #define wxCALLBACK
+/*  no stdcall under Unix nor Win16 */
+#define wxCALLBACK
 #endif /*  platform */
 
 /*  generic calling convention for the extern "C" functions */
 
 #if defined(__VISUALC__)
-  #define   wxC_CALLING_CONV    _cdecl
+#define   wxC_CALLING_CONV    _cdecl
 #else   /*  !Visual C++ */
-  #define   wxC_CALLING_CONV
+#define   wxC_CALLING_CONV
 #endif  /*  compiler */
 
 /*  callling convention for the qsort(3) callback */
@@ -558,9 +558,9 @@ typedef short int WXTYPE;
 #endif
 
 #if defined(__GNUC__)
-    #define WX_ATTRIBUTE_UNUSED __attribute__ ((unused))
+#define WX_ATTRIBUTE_UNUSED __attribute__ ((unused))
 #else
-    #define WX_ATTRIBUTE_UNUSED
+#define WX_ATTRIBUTE_UNUSED
 #endif
 
 /*
@@ -574,13 +574,13 @@ typedef short int WXTYPE;
 
 /* The basic compiler-specific construct to generate a deprecation warning. */
 #ifdef __clang__
-    #define wxDEPRECATED_DECL __attribute__((deprecated))
+#define wxDEPRECATED_DECL __attribute__((deprecated))
 #elif defined(__GNUC__)
-    #define wxDEPRECATED_DECL __attribute__((deprecated))
+#define wxDEPRECATED_DECL __attribute__((deprecated))
 #elif defined(__VISUALC__)
-    #define wxDEPRECATED_DECL __declspec(deprecated)
+#define wxDEPRECATED_DECL __declspec(deprecated)
 #else
-    #define wxDEPRECATED_DECL
+#define wxDEPRECATED_DECL
 #endif
 
 /*
@@ -590,17 +590,17 @@ typedef short int WXTYPE;
     simple wxDEPRECATED(), i.e. at least gives a warning, if possible.
  */
 #if defined(__clang__) && defined(__has_extension)
-    #if __has_extension(attribute_deprecated_with_message)
-        #define wxDEPRECATED_MSG(msg) __attribute__((deprecated(msg)))
-    #else
-        #define wxDEPRECATED_MSG(msg) __attribute__((deprecated))
-    #endif
-#elif wxCHECK_GCC_VERSION(4, 5)
-    #define wxDEPRECATED_MSG(msg) __attribute__((deprecated(msg)))
-#elif wxCHECK_VISUALC_VERSION(8)
-    #define wxDEPRECATED_MSG(msg) __declspec(deprecated("deprecated: " msg))
+#if __has_extension(attribute_deprecated_with_message)
+#define wxDEPRECATED_MSG(msg) __attribute__((deprecated(msg)))
 #else
-    #define wxDEPRECATED_MSG(msg) wxDEPRECATED_DECL
+#define wxDEPRECATED_MSG(msg) __attribute__((deprecated))
+#endif
+#elif wxCHECK_GCC_VERSION(4, 5)
+#define wxDEPRECATED_MSG(msg) __attribute__((deprecated(msg)))
+#elif wxCHECK_VISUALC_VERSION(8)
+#define wxDEPRECATED_MSG(msg) __declspec(deprecated("deprecated: " msg))
+#else
+#define wxDEPRECATED_MSG(msg) wxDEPRECATED_DECL
 #endif
 
 /*
@@ -611,13 +611,13 @@ typedef short int WXTYPE;
 #define wxDEPRECATED(x) wxDEPRECATED_DECL x
 
 #if defined(__GNUC__) && !wxCHECK_GCC_VERSION(3, 4)
-    /*
-        We need to add dummy "inline" to allow gcc < 3.4 to handle the
-        deprecation attribute on the constructors.
-    */
-    #define  wxDEPRECATED_CONSTRUCTOR(x) wxDEPRECATED( inline x)
+/*
+    We need to add dummy "inline" to allow gcc < 3.4 to handle the
+    deprecation attribute on the constructors.
+*/
+#define  wxDEPRECATED_CONSTRUCTOR(x) wxDEPRECATED( inline x)
 #else
-    #define  wxDEPRECATED_CONSTRUCTOR(x) wxDEPRECATED(x)
+#define  wxDEPRECATED_CONSTRUCTOR(x) wxDEPRECATED(x)
 #endif
 
 /*
@@ -792,23 +792,23 @@ typedef short int WXTYPE;
 
 /*  Macro to cut down on compiler warnings. */
 #if 1 /*  there should be no more any compilers needing the "#else" version */
-    #define WXUNUSED(identifier) /* identifier */
+#define WXUNUSED(identifier) /* identifier */
 #else  /*  stupid, broken compiler */
-    #define WXUNUSED(identifier) identifier
+#define WXUNUSED(identifier) identifier
 #endif
 
 /*  some arguments are not used in unicode mode */
 #if wxUSE_UNICODE
-    #define WXUNUSED_IN_UNICODE(param)  WXUNUSED(param)
+#define WXUNUSED_IN_UNICODE(param)  WXUNUSED(param)
 #else
-    #define WXUNUSED_IN_UNICODE(param)  param
+#define WXUNUSED_IN_UNICODE(param)  param
 #endif
 
 /*  unused parameters in non stream builds */
 #if wxUSE_STREAMS
-    #define WXUNUSED_UNLESS_STREAMS(param)  param
+#define WXUNUSED_UNLESS_STREAMS(param)  param
 #else
-    #define WXUNUSED_UNLESS_STREAMS(param)  WXUNUSED(param)
+#define WXUNUSED_UNLESS_STREAMS(param)  WXUNUSED(param)
 #endif
 
 /*  some compilers give warning about a possibly unused variable if it is */
@@ -816,9 +816,9 @@ typedef short int WXTYPE;
 /*  when declared, but other compilers then give warnings about unused variable */
 /*  value -- this should satisfy both of them */
 #if defined(__VISUALC__)
-    #define wxDUMMY_INITIALIZE(val) = val
+#define wxDUMMY_INITIALIZE(val) = val
 #else
-    #define wxDUMMY_INITIALIZE(val)
+#define wxDUMMY_INITIALIZE(val)
 #endif
 
 /*  sometimes the value of a variable is *really* not used, to suppress  the */
@@ -827,8 +827,8 @@ typedef short int WXTYPE;
 #   ifdef __BORLANDC__
 #       define wxUnusedVar(identifier) identifier
 #   else
-        template <class T>
-            inline void wxUnusedVar(const T& WXUNUSED(t)) { }
+template <class T>
+inline void wxUnusedVar(const T& WXUNUSED(t)) { }
 #   endif
 #endif
 
@@ -850,82 +850,82 @@ typedef short int WXTYPE;
 // everybody gets the assert and other debug macros
 #include "wx/debug.h"
 
-    // delete pointer if it is not NULL and NULL it afterwards
-    template <typename T>
-    inline void wxDELETE(T*& ptr)
-    {
-        typedef char TypeIsCompleteCheck[sizeof(T)] WX_ATTRIBUTE_UNUSED;
+// delete pointer if it is not NULL and NULL it afterwards
+template <typename T>
+inline void wxDELETE(T*& ptr)
+{
+	typedef char TypeIsCompleteCheck[sizeof(T)] WX_ATTRIBUTE_UNUSED;
 
-        if ( ptr != NULL )
-        {
-            delete ptr;
-            ptr = NULL;
-        }
-    }
+	if ( ptr != NULL )
+	{
+		delete ptr;
+		ptr = NULL;
+	}
+}
 
-    // delete an array and NULL it (see comments above)
-    template <typename T>
-    inline void wxDELETEA(T*& ptr)
-    {
-        typedef char TypeIsCompleteCheck[sizeof(T)] WX_ATTRIBUTE_UNUSED;
+// delete an array and NULL it (see comments above)
+template <typename T>
+inline void wxDELETEA(T*& ptr)
+{
+	typedef char TypeIsCompleteCheck[sizeof(T)] WX_ATTRIBUTE_UNUSED;
 
-        if ( ptr != NULL )
-        {
-            delete [] ptr;
-            ptr = NULL;
-        }
-    }
+	if ( ptr != NULL )
+	{
+		delete [] ptr;
+		ptr = NULL;
+	}
+}
 
-    // trivial implementation of std::swap() for primitive types
-    template <typename T>
-    inline void wxSwap(T& first, T& second)
-    {
-        T tmp(first);
-        first = second;
-        second = tmp;
-    }
+// trivial implementation of std::swap() for primitive types
+template <typename T>
+inline void wxSwap(T& first, T& second)
+{
+	T tmp(first);
+	first = second;
+	second = tmp;
+}
 
 /* And also define a couple of simple functions to cast pointer to/from it. */
 inline wxUIntPtr wxPtrToUInt(const void *p)
 {
-    /*
-       VC++ 7.1 gives warnings about casts such as below even when they're
-       explicit with /Wp64 option, suppress them as we really know what we're
-       doing here. Same thing with icc with -Wall.
-     */
+	/*
+	   VC++ 7.1 gives warnings about casts such as below even when they're
+	   explicit with /Wp64 option, suppress them as we really know what we're
+	   doing here. Same thing with icc with -Wall.
+	 */
 #ifdef __VISUALC__
-    #pragma warning(push)
-    /* pointer truncation from '' to '' */
-    #pragma warning(disable: 4311)
+#pragma warning(push)
+	/* pointer truncation from '' to '' */
+#pragma warning(disable: 4311)
 #elif defined(__INTELC__)
-    #pragma warning(push)
-    /* conversion from pointer to same-sized integral type */
-    #pragma warning(disable: 1684)
+#pragma warning(push)
+	/* conversion from pointer to same-sized integral type */
+#pragma warning(disable: 1684)
 #endif
 
-    return reinterpret_cast<wxUIntPtr>(p);
+	return reinterpret_cast<wxUIntPtr>(p);
 
 #if defined(__VISUALC__) || defined(__INTELC__)
-    #pragma warning(pop)
+#pragma warning(pop)
 #endif
 }
 
 inline void *wxUIntToPtr(wxUIntPtr p)
 {
 #ifdef __VISUALC__
-    #pragma warning(push)
-    /* conversion to type of greater size */
-    #pragma warning(disable: 4312)
+#pragma warning(push)
+	/* conversion to type of greater size */
+#pragma warning(disable: 4312)
 #elif defined(__INTELC__)
-    #pragma warning(push)
-    /* invalid type conversion: "wxUIntPtr={unsigned long}" to "void *" */
-    #pragma warning(disable: 171)
+#pragma warning(push)
+	/* invalid type conversion: "wxUIntPtr={unsigned long}" to "void *" */
+#pragma warning(disable: 171)
 #endif
 
-    return reinterpret_cast<void *>(p);
+	return reinterpret_cast<void *>(p);
 
 #if defined(__VISUALC__) || defined(__INTELC__)
-    #pragma warning(pop)
+#pragma warning(pop)
 #endif
 }
 #endif /*__cplusplus*/
@@ -950,11 +950,11 @@ typedef double wxDouble;
     for them and to 1 for all the others.
  */
 #ifndef wxWCHAR_T_IS_REAL_TYPE
-    /*
-        VC++ typedefs wchar_t as unsigned short by default until VC8, that is
-        unless /Za or /Zc:wchar_t option is used in which case _WCHAR_T_DEFINED
-        is defined.
-     */
+/*
+    VC++ typedefs wchar_t as unsigned short by default until VC8, that is
+    unless /Za or /Zc:wchar_t option is used in which case _WCHAR_T_DEFINED
+    is defined.
+ */
 #   if defined(__VISUALC__) && !defined(_NATIVE_WCHAR_T_DEFINED)
 #       define wxWCHAR_T_IS_REAL_TYPE 0
 #   else /* compiler having standard-conforming wchar_t */
@@ -965,9 +965,9 @@ typedef double wxDouble;
 /* Helper macro for doing something dependent on whether wchar_t is or isn't a
    typedef inside another macro. */
 #if wxWCHAR_T_IS_REAL_TYPE
-    #define wxIF_WCHAR_T_TYPE(x) x
+#define wxIF_WCHAR_T_TYPE(x) x
 #else /* !wxWCHAR_T_IS_REAL_TYPE */
-    #define wxIF_WCHAR_T_TYPE(x)
+#define wxIF_WCHAR_T_TYPE(x)
 #endif /* wxWCHAR_T_IS_REAL_TYPE/!wxWCHAR_T_IS_REAL_TYPE */
 
 /*
@@ -986,17 +986,17 @@ typedef double wxDouble;
 /* Define wxChar16 and wxChar32                                              */
 
 #if SIZEOF_WCHAR_T == 2
-    #define wxWCHAR_T_IS_WXCHAR16
-    typedef wchar_t wxChar16;
+#define wxWCHAR_T_IS_WXCHAR16
+typedef wchar_t wxChar16;
 #else
-    typedef wxUint16 wxChar16;
+typedef wxUint16 wxChar16;
 #endif
 
 #if SIZEOF_WCHAR_T == 4
-    #define wxWCHAR_T_IS_WXCHAR32
-    typedef wchar_t wxChar32;
+#define wxWCHAR_T_IS_WXCHAR32
+typedef wchar_t wxChar32;
 #else
-    typedef wxUint32 wxChar32;
+typedef wxUint32 wxChar32;
 #endif
 
 
@@ -1101,7 +1101,7 @@ typedef double wxDouble;
 /*  machine specific byte swapping */
 
 #ifdef wxLongLong_t
-    #define wxUINT64_SWAP_ALWAYS(val) \
+#define wxUINT64_SWAP_ALWAYS(val) \
        ((wxUint64) ( \
         (((wxUint64) (val) & (wxUint64) wxULL(0x00000000000000ff)) << 56) | \
         (((wxUint64) (val) & (wxUint64) wxULL(0x000000000000ff00)) << 40) | \
@@ -1112,7 +1112,7 @@ typedef double wxDouble;
         (((wxUint64) (val) & (wxUint64) wxULL(0x00ff000000000000)) >> 40) | \
         (((wxUint64) (val) & (wxUint64) wxULL(0xff00000000000000)) >> 56)))
 
-    #define wxINT64_SWAP_ALWAYS(val) \
+#define wxINT64_SWAP_ALWAYS(val) \
        ((wxInt64) ( \
         (((wxUint64) (val) & (wxUint64) wxULL(0x00000000000000ff)) << 56) | \
         (((wxUint64) (val) & (wxUint64) wxULL(0x000000000000ff00)) << 40) | \
@@ -1123,7 +1123,7 @@ typedef double wxDouble;
         (((wxUint64) (val) & (wxUint64) wxULL(0x00ff000000000000)) >> 40) | \
         (((wxUint64) (val) & (wxUint64) wxULL(0xff00000000000000)) >> 56)))
 #elif wxUSE_LONGLONG /*  !wxLongLong_t */
-    #define wxUINT64_SWAP_ALWAYS(val) \
+#define wxUINT64_SWAP_ALWAYS(val) \
        ((wxUint64) ( \
         ((wxULongLong(val) & wxULongLong(0L, 0x000000ffU)) << 56) | \
         ((wxULongLong(val) & wxULongLong(0L, 0x0000ff00U)) << 40) | \
@@ -1134,7 +1134,7 @@ typedef double wxDouble;
         ((wxULongLong(val) & wxULongLong(0x00ff0000L, 0U)) >> 40) | \
         ((wxULongLong(val) & wxULongLong(0xff000000L, 0U)) >> 56)))
 
-    #define wxINT64_SWAP_ALWAYS(val) \
+#define wxINT64_SWAP_ALWAYS(val) \
        ((wxInt64) ( \
         ((wxLongLong(val) & wxLongLong(0L, 0x000000ffU)) << 56) | \
         ((wxLongLong(val) & wxLongLong(0L, 0x0000ff00U)) << 40) | \
@@ -1147,62 +1147,62 @@ typedef double wxDouble;
 #endif /*  wxLongLong_t/!wxLongLong_t */
 
 #ifdef WORDS_BIGENDIAN
-    #define wxUINT16_SWAP_ON_BE(val)  wxUINT16_SWAP_ALWAYS(val)
-    #define wxINT16_SWAP_ON_BE(val)   wxINT16_SWAP_ALWAYS(val)
-    #define wxUINT16_SWAP_ON_LE(val)  (val)
-    #define wxINT16_SWAP_ON_LE(val)   (val)
-    #define wxUINT32_SWAP_ON_BE(val)  wxUINT32_SWAP_ALWAYS(val)
-    #define wxINT32_SWAP_ON_BE(val)   wxINT32_SWAP_ALWAYS(val)
-    #define wxUINT32_SWAP_ON_LE(val)  (val)
-    #define wxINT32_SWAP_ON_LE(val)   (val)
-    #if wxHAS_INT64
-        #define wxUINT64_SWAP_ON_BE(val)  wxUINT64_SWAP_ALWAYS(val)
-        #define wxUINT64_SWAP_ON_LE(val)  (val)
-        #define wxINT64_SWAP_ON_BE(val)  wxINT64_SWAP_ALWAYS(val)
-        #define wxINT64_SWAP_ON_LE(val)  (val)
+#define wxUINT16_SWAP_ON_BE(val)  wxUINT16_SWAP_ALWAYS(val)
+#define wxINT16_SWAP_ON_BE(val)   wxINT16_SWAP_ALWAYS(val)
+#define wxUINT16_SWAP_ON_LE(val)  (val)
+#define wxINT16_SWAP_ON_LE(val)   (val)
+#define wxUINT32_SWAP_ON_BE(val)  wxUINT32_SWAP_ALWAYS(val)
+#define wxINT32_SWAP_ON_BE(val)   wxINT32_SWAP_ALWAYS(val)
+#define wxUINT32_SWAP_ON_LE(val)  (val)
+#define wxINT32_SWAP_ON_LE(val)   (val)
+#if wxHAS_INT64
+#define wxUINT64_SWAP_ON_BE(val)  wxUINT64_SWAP_ALWAYS(val)
+#define wxUINT64_SWAP_ON_LE(val)  (val)
+#define wxINT64_SWAP_ON_BE(val)  wxINT64_SWAP_ALWAYS(val)
+#define wxINT64_SWAP_ON_LE(val)  (val)
 
-        #define wxUINT64_SWAP_ON_BE_IN_PLACE(val)   val = wxUINT64_SWAP_ALWAYS(val)
-        #define wxINT64_SWAP_ON_BE_IN_PLACE(val)   val = wxINT64_SWAP_ALWAYS(val)
-        #define wxUINT64_SWAP_ON_LE_IN_PLACE(val)
-        #define wxINT64_SWAP_ON_LE_IN_PLACE(val)
-    #endif
+#define wxUINT64_SWAP_ON_BE_IN_PLACE(val)   val = wxUINT64_SWAP_ALWAYS(val)
+#define wxINT64_SWAP_ON_BE_IN_PLACE(val)   val = wxINT64_SWAP_ALWAYS(val)
+#define wxUINT64_SWAP_ON_LE_IN_PLACE(val)
+#define wxINT64_SWAP_ON_LE_IN_PLACE(val)
+#endif
 
-    #define wxUINT16_SWAP_ON_BE_IN_PLACE(val)   val = wxUINT16_SWAP_ALWAYS(val)
-    #define wxINT16_SWAP_ON_BE_IN_PLACE(val)   val = wxINT16_SWAP_ALWAYS(val)
-    #define wxUINT16_SWAP_ON_LE_IN_PLACE(val)
-    #define wxINT16_SWAP_ON_LE_IN_PLACE(val)
-    #define wxUINT32_SWAP_ON_BE_IN_PLACE(val)   val = wxUINT32_SWAP_ALWAYS(val)
-    #define wxINT32_SWAP_ON_BE_IN_PLACE(val)   val = wxINT32_SWAP_ALWAYS(val)
-    #define wxUINT32_SWAP_ON_LE_IN_PLACE(val)
-    #define wxINT32_SWAP_ON_LE_IN_PLACE(val)
+#define wxUINT16_SWAP_ON_BE_IN_PLACE(val)   val = wxUINT16_SWAP_ALWAYS(val)
+#define wxINT16_SWAP_ON_BE_IN_PLACE(val)   val = wxINT16_SWAP_ALWAYS(val)
+#define wxUINT16_SWAP_ON_LE_IN_PLACE(val)
+#define wxINT16_SWAP_ON_LE_IN_PLACE(val)
+#define wxUINT32_SWAP_ON_BE_IN_PLACE(val)   val = wxUINT32_SWAP_ALWAYS(val)
+#define wxINT32_SWAP_ON_BE_IN_PLACE(val)   val = wxINT32_SWAP_ALWAYS(val)
+#define wxUINT32_SWAP_ON_LE_IN_PLACE(val)
+#define wxINT32_SWAP_ON_LE_IN_PLACE(val)
 #else
-    #define wxUINT16_SWAP_ON_LE(val)  wxUINT16_SWAP_ALWAYS(val)
-    #define wxINT16_SWAP_ON_LE(val)   wxINT16_SWAP_ALWAYS(val)
-    #define wxUINT16_SWAP_ON_BE(val)  (val)
-    #define wxINT16_SWAP_ON_BE(val)   (val)
-    #define wxUINT32_SWAP_ON_LE(val)  wxUINT32_SWAP_ALWAYS(val)
-    #define wxINT32_SWAP_ON_LE(val)   wxINT32_SWAP_ALWAYS(val)
-    #define wxUINT32_SWAP_ON_BE(val)  (val)
-    #define wxINT32_SWAP_ON_BE(val)   (val)
-    #if wxHAS_INT64
-        #define wxUINT64_SWAP_ON_LE(val)  wxUINT64_SWAP_ALWAYS(val)
-        #define wxUINT64_SWAP_ON_BE(val)  (val)
-        #define wxINT64_SWAP_ON_LE(val)  wxINT64_SWAP_ALWAYS(val)
-        #define wxINT64_SWAP_ON_BE(val)  (val)
-        #define wxUINT64_SWAP_ON_BE_IN_PLACE(val)
-        #define wxINT64_SWAP_ON_BE_IN_PLACE(val)
-        #define wxUINT64_SWAP_ON_LE_IN_PLACE(val)   val = wxUINT64_SWAP_ALWAYS(val)
-        #define wxINT64_SWAP_ON_LE_IN_PLACE(val)   val = wxINT64_SWAP_ALWAYS(val)
-    #endif
+#define wxUINT16_SWAP_ON_LE(val)  wxUINT16_SWAP_ALWAYS(val)
+#define wxINT16_SWAP_ON_LE(val)   wxINT16_SWAP_ALWAYS(val)
+#define wxUINT16_SWAP_ON_BE(val)  (val)
+#define wxINT16_SWAP_ON_BE(val)   (val)
+#define wxUINT32_SWAP_ON_LE(val)  wxUINT32_SWAP_ALWAYS(val)
+#define wxINT32_SWAP_ON_LE(val)   wxINT32_SWAP_ALWAYS(val)
+#define wxUINT32_SWAP_ON_BE(val)  (val)
+#define wxINT32_SWAP_ON_BE(val)   (val)
+#if wxHAS_INT64
+#define wxUINT64_SWAP_ON_LE(val)  wxUINT64_SWAP_ALWAYS(val)
+#define wxUINT64_SWAP_ON_BE(val)  (val)
+#define wxINT64_SWAP_ON_LE(val)  wxINT64_SWAP_ALWAYS(val)
+#define wxINT64_SWAP_ON_BE(val)  (val)
+#define wxUINT64_SWAP_ON_BE_IN_PLACE(val)
+#define wxINT64_SWAP_ON_BE_IN_PLACE(val)
+#define wxUINT64_SWAP_ON_LE_IN_PLACE(val)   val = wxUINT64_SWAP_ALWAYS(val)
+#define wxINT64_SWAP_ON_LE_IN_PLACE(val)   val = wxINT64_SWAP_ALWAYS(val)
+#endif
 
-    #define wxUINT16_SWAP_ON_BE_IN_PLACE(val)
-    #define wxINT16_SWAP_ON_BE_IN_PLACE(val)
-    #define wxUINT16_SWAP_ON_LE_IN_PLACE(val)   val = wxUINT16_SWAP_ALWAYS(val)
-    #define wxINT16_SWAP_ON_LE_IN_PLACE(val)   val = wxINT16_SWAP_ALWAYS(val)
-    #define wxUINT32_SWAP_ON_BE_IN_PLACE(val)
-    #define wxINT32_SWAP_ON_BE_IN_PLACE(val)
-    #define wxUINT32_SWAP_ON_LE_IN_PLACE(val)   val = wxUINT32_SWAP_ALWAYS(val)
-    #define wxINT32_SWAP_ON_LE_IN_PLACE(val)   val = wxINT32_SWAP_ALWAYS(val)
+#define wxUINT16_SWAP_ON_BE_IN_PLACE(val)
+#define wxINT16_SWAP_ON_BE_IN_PLACE(val)
+#define wxUINT16_SWAP_ON_LE_IN_PLACE(val)   val = wxUINT16_SWAP_ALWAYS(val)
+#define wxINT16_SWAP_ON_LE_IN_PLACE(val)   val = wxINT16_SWAP_ALWAYS(val)
+#define wxUINT32_SWAP_ON_BE_IN_PLACE(val)
+#define wxINT32_SWAP_ON_BE_IN_PLACE(val)
+#define wxUINT32_SWAP_ON_LE_IN_PLACE(val)   val = wxUINT32_SWAP_ALWAYS(val)
+#define wxINT32_SWAP_ON_LE_IN_PLACE(val)   val = wxINT32_SWAP_ALWAYS(val)
 #endif
 
 /*  ---------------------------------------------------------------------------- */
@@ -1211,8 +1211,8 @@ typedef double wxDouble;
 
 enum wxGeometryCentre
 {
-    wxCENTRE                  = 0x0001,
-    wxCENTER                  = wxCENTRE
+	wxCENTRE                  = 0x0001,
+	wxCENTER                  = wxCENTRE
 };
 
 /*  centering into frame rather than screen (obsolete) */
@@ -1223,112 +1223,112 @@ enum wxGeometryCentre
 
 enum wxOrientation
 {
-    /* don't change the values of these elements, they are used elsewhere */
-    wxHORIZONTAL              = 0x0004,
-    wxVERTICAL                = 0x0008,
+	/* don't change the values of these elements, they are used elsewhere */
+	wxHORIZONTAL              = 0x0004,
+	wxVERTICAL                = 0x0008,
 
-    wxBOTH                    = wxVERTICAL | wxHORIZONTAL,
+	wxBOTH                    = wxVERTICAL | wxHORIZONTAL,
 
-    /*  a mask to extract orientation from the combination of flags */
-    wxORIENTATION_MASK        = wxBOTH
+	/*  a mask to extract orientation from the combination of flags */
+	wxORIENTATION_MASK        = wxBOTH
 };
 
 enum wxDirection
 {
-    wxLEFT                    = 0x0010,
-    wxRIGHT                   = 0x0020,
-    wxUP                      = 0x0040,
-    wxDOWN                    = 0x0080,
+	wxLEFT                    = 0x0010,
+	wxRIGHT                   = 0x0020,
+	wxUP                      = 0x0040,
+	wxDOWN                    = 0x0080,
 
-    wxTOP                     = wxUP,
-    wxBOTTOM                  = wxDOWN,
+	wxTOP                     = wxUP,
+	wxBOTTOM                  = wxDOWN,
 
-    wxNORTH                   = wxUP,
-    wxSOUTH                   = wxDOWN,
-    wxWEST                    = wxLEFT,
-    wxEAST                    = wxRIGHT,
+	wxNORTH                   = wxUP,
+	wxSOUTH                   = wxDOWN,
+	wxWEST                    = wxLEFT,
+	wxEAST                    = wxRIGHT,
 
-    wxALL                     = (wxUP | wxDOWN | wxRIGHT | wxLEFT),
+	wxALL                     = (wxUP | wxDOWN | wxRIGHT | wxLEFT),
 
-    /*  a mask to extract direction from the combination of flags */
-    wxDIRECTION_MASK           = wxALL
+	/*  a mask to extract direction from the combination of flags */
+	wxDIRECTION_MASK           = wxALL
 };
 
 enum wxAlignment
 {
-    /*
-        0 is a valid wxAlignment value (both wxALIGN_LEFT and wxALIGN_TOP
-        use it) so define a symbolic name for an invalid alignment value
-        which can be assumed to be different from anything else
-     */
-    wxALIGN_INVALID           = -1,
+	/*
+	    0 is a valid wxAlignment value (both wxALIGN_LEFT and wxALIGN_TOP
+	    use it) so define a symbolic name for an invalid alignment value
+	    which can be assumed to be different from anything else
+	 */
+	wxALIGN_INVALID           = -1,
 
-    wxALIGN_NOT               = 0x0000,
-    wxALIGN_CENTER_HORIZONTAL = 0x0100,
-    wxALIGN_CENTRE_HORIZONTAL = wxALIGN_CENTER_HORIZONTAL,
-    wxALIGN_LEFT              = wxALIGN_NOT,
-    wxALIGN_TOP               = wxALIGN_NOT,
-    wxALIGN_RIGHT             = 0x0200,
-    wxALIGN_BOTTOM            = 0x0400,
-    wxALIGN_CENTER_VERTICAL   = 0x0800,
-    wxALIGN_CENTRE_VERTICAL   = wxALIGN_CENTER_VERTICAL,
+	wxALIGN_NOT               = 0x0000,
+	wxALIGN_CENTER_HORIZONTAL = 0x0100,
+	wxALIGN_CENTRE_HORIZONTAL = wxALIGN_CENTER_HORIZONTAL,
+	wxALIGN_LEFT              = wxALIGN_NOT,
+	wxALIGN_TOP               = wxALIGN_NOT,
+	wxALIGN_RIGHT             = 0x0200,
+	wxALIGN_BOTTOM            = 0x0400,
+	wxALIGN_CENTER_VERTICAL   = 0x0800,
+	wxALIGN_CENTRE_VERTICAL   = wxALIGN_CENTER_VERTICAL,
 
-    wxALIGN_CENTER            = (wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL),
-    wxALIGN_CENTRE            = wxALIGN_CENTER,
+	wxALIGN_CENTER            = (wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL),
+	wxALIGN_CENTRE            = wxALIGN_CENTER,
 
-    /*  a mask to extract alignment from the combination of flags */
-    wxALIGN_MASK              = 0x0f00
+	/*  a mask to extract alignment from the combination of flags */
+	wxALIGN_MASK              = 0x0f00
 };
 
 /* misc. flags for wxSizer items */
 enum wxSizerFlagBits
 {
-    /*
-        wxADJUST_MINSIZE doesn't do anything any more but we still define
-        it for compatibility. Notice that it may be also predefined (as 0,
-        hopefully) in the user code in order to use it even in
-        !WXWIN_COMPATIBILITY_2_8 builds so don't redefine it in such case.
-     */
+	/*
+	    wxADJUST_MINSIZE doesn't do anything any more but we still define
+	    it for compatibility. Notice that it may be also predefined (as 0,
+	    hopefully) in the user code in order to use it even in
+	    !WXWIN_COMPATIBILITY_2_8 builds so don't redefine it in such case.
+	 */
 #if WXWIN_COMPATIBILITY_2_8 && !defined(wxADJUST_MINSIZE)
-    wxADJUST_MINSIZE               = 0,
+	wxADJUST_MINSIZE               = 0,
 #endif
-    wxFIXED_MINSIZE                = 0x8000,
-    wxRESERVE_SPACE_EVEN_IF_HIDDEN = 0x0002,
+	wxFIXED_MINSIZE                = 0x8000,
+	wxRESERVE_SPACE_EVEN_IF_HIDDEN = 0x0002,
 
-    /*  a mask to extract wxSizerFlagBits from combination of flags */
-    wxSIZER_FLAG_BITS_MASK         = 0x8002
+	/*  a mask to extract wxSizerFlagBits from combination of flags */
+	wxSIZER_FLAG_BITS_MASK         = 0x8002
 };
 
 enum wxStretch
 {
-    wxSTRETCH_NOT             = 0x0000,
-    wxSHRINK                  = 0x1000,
-    wxGROW                    = 0x2000,
-    wxEXPAND                  = wxGROW,
-    wxSHAPED                  = 0x4000,
-    wxTILE                    = wxSHAPED | wxFIXED_MINSIZE,
+	wxSTRETCH_NOT             = 0x0000,
+	wxSHRINK                  = 0x1000,
+	wxGROW                    = 0x2000,
+	wxEXPAND                  = wxGROW,
+	wxSHAPED                  = 0x4000,
+	wxTILE                    = wxSHAPED | wxFIXED_MINSIZE,
 
-    /*  a mask to extract stretch from the combination of flags */
-    wxSTRETCH_MASK            = 0x7000 /* sans wxTILE */
+	/*  a mask to extract stretch from the combination of flags */
+	wxSTRETCH_MASK            = 0x7000 /* sans wxTILE */
 };
 
 /*  border flags: the values are chosen for backwards compatibility */
 enum wxBorder
 {
-    /*  this is different from wxBORDER_NONE as by default the controls do have */
-    /*  border */
-    wxBORDER_DEFAULT = 0,
+	/*  this is different from wxBORDER_NONE as by default the controls do have */
+	/*  border */
+	wxBORDER_DEFAULT = 0,
 
-    wxBORDER_NONE   = 0x00200000,
-    wxBORDER_STATIC = 0x01000000,
-    wxBORDER_SIMPLE = 0x02000000,
-    wxBORDER_RAISED = 0x04000000,
-    wxBORDER_SUNKEN = 0x08000000,
-    wxBORDER_DOUBLE = 0x10000000, /* deprecated */
-    wxBORDER_THEME  = wxBORDER_DOUBLE,
+	wxBORDER_NONE   = 0x00200000,
+	wxBORDER_STATIC = 0x01000000,
+	wxBORDER_SIMPLE = 0x02000000,
+	wxBORDER_RAISED = 0x04000000,
+	wxBORDER_SUNKEN = 0x08000000,
+	wxBORDER_DOUBLE = 0x10000000, /* deprecated */
+	wxBORDER_THEME  = wxBORDER_DOUBLE,
 
-    /*  a mask to extract border style from the combination of flags */
-    wxBORDER_MASK   = 0x1f200000
+	/*  a mask to extract border style from the combination of flags */
+	wxBORDER_MASK   = 0x1f200000
 };
 
 /* This makes it easier to specify a 'normal' border for a control */
@@ -1666,40 +1666,40 @@ enum wxBorder
  */
 enum wxBackgroundStyle
 {
-    /*
-        background is erased in the EVT_ERASE_BACKGROUND handler or using
-        the system default background if no such handler is defined (this
-        is the default style)
-     */
-    wxBG_STYLE_ERASE,
+	/*
+	    background is erased in the EVT_ERASE_BACKGROUND handler or using
+	    the system default background if no such handler is defined (this
+	    is the default style)
+	 */
+	wxBG_STYLE_ERASE,
 
-    /*
-        background is erased by the system, no EVT_ERASE_BACKGROUND event
-        is generated at all
-     */
-    wxBG_STYLE_SYSTEM,
+	/*
+	    background is erased by the system, no EVT_ERASE_BACKGROUND event
+	    is generated at all
+	 */
+	wxBG_STYLE_SYSTEM,
 
-    /*
-        background is erased in EVT_PAINT handler and not erased at all
-        before it, this should be used if the paint handler paints over
-        the entire window to avoid flicker
-     */
-    wxBG_STYLE_PAINT,
+	/*
+	    background is erased in EVT_PAINT handler and not erased at all
+	    before it, this should be used if the paint handler paints over
+	    the entire window to avoid flicker
+	 */
+	wxBG_STYLE_PAINT,
 
-    /*
-        Indicates that the window background is not erased, letting the parent
-        window show through.
-     */
-    wxBG_STYLE_TRANSPARENT,
+	/*
+	    Indicates that the window background is not erased, letting the parent
+	    window show through.
+	 */
+	wxBG_STYLE_TRANSPARENT,
 
-    /* this style is deprecated and doesn't do anything, don't use */
-    wxBG_STYLE_COLOUR,
+	/* this style is deprecated and doesn't do anything, don't use */
+	wxBG_STYLE_COLOUR,
 
-    /*
-        this style is deprecated and is synonymous with
-        wxBG_STYLE_PAINT, use the new name
-     */
-    wxBG_STYLE_CUSTOM = wxBG_STYLE_PAINT
+	/*
+	    this style is deprecated and is synonymous with
+	    wxBG_STYLE_PAINT, use the new name
+	 */
+	wxBG_STYLE_CUSTOM = wxBG_STYLE_PAINT
 };
 
 /*
@@ -1707,9 +1707,9 @@ enum wxBackgroundStyle
  */
 enum wxKeyType
 {
-    wxKEY_NONE,
-    wxKEY_INTEGER,
-    wxKEY_STRING
+	wxKEY_NONE,
+	wxKEY_INTEGER,
+	wxKEY_STRING
 };
 
 /*  ---------------------------------------------------------------------------- */
@@ -1719,196 +1719,196 @@ enum wxKeyType
 /*  Standard menu IDs */
 enum wxStandardID
 {
-    /*
-       These ids delimit the range used by automatically-generated ids
-       (i.e. those used when wxID_ANY is specified during construction).
-     */
+	/*
+	   These ids delimit the range used by automatically-generated ids
+	   (i.e. those used when wxID_ANY is specified during construction).
+	 */
 #if defined(__WXMSW__) || wxUSE_AUTOID_MANAGEMENT
-    /*
-       On MSW the range is always restricted no matter if id management
-       is used or not because the native window ids are limited to short
-       range.  On other platforms the range is only restricted if id
-       management is used so the reference count buffer won't be so big.
-     */
-    wxID_AUTO_LOWEST = -32000,
-    wxID_AUTO_HIGHEST = -2000,
+	/*
+	   On MSW the range is always restricted no matter if id management
+	   is used or not because the native window ids are limited to short
+	   range.  On other platforms the range is only restricted if id
+	   management is used so the reference count buffer won't be so big.
+	 */
+	wxID_AUTO_LOWEST = -32000,
+	wxID_AUTO_HIGHEST = -2000,
 #else
-    wxID_AUTO_LOWEST = -1000000,
-    wxID_AUTO_HIGHEST = -2000,
+	wxID_AUTO_LOWEST = -1000000,
+	wxID_AUTO_HIGHEST = -2000,
 #endif
 
-    /* no id matches this one when compared to it */
-    wxID_NONE = -3,
+	/* no id matches this one when compared to it */
+	wxID_NONE = -3,
 
-    /*  id for a separator line in the menu (invalid for normal item) */
-    wxID_SEPARATOR = -2,
+	/*  id for a separator line in the menu (invalid for normal item) */
+	wxID_SEPARATOR = -2,
 
-    /* any id: means that we don't care about the id, whether when installing
-     * an event handler or when creating a new window */
-    wxID_ANY = -1,
+	/* any id: means that we don't care about the id, whether when installing
+	 * an event handler or when creating a new window */
+	wxID_ANY = -1,
 
 
-    /* all predefined ids are between wxID_LOWEST and wxID_HIGHEST */
-    wxID_LOWEST = 4999,
+	/* all predefined ids are between wxID_LOWEST and wxID_HIGHEST */
+	wxID_LOWEST = 4999,
 
-    wxID_OPEN,
-    wxID_CLOSE,
-    wxID_NEW,
-    wxID_SAVE,
-    wxID_SAVEAS,
-    wxID_REVERT,
-    wxID_EXIT,
-    wxID_UNDO,
-    wxID_REDO,
-    wxID_HELP,
-    wxID_PRINT,
-    wxID_PRINT_SETUP,
-    wxID_PAGE_SETUP,
-    wxID_PREVIEW,
-    wxID_ABOUT,
-    wxID_HELP_CONTENTS,
-    wxID_HELP_INDEX,
-    wxID_HELP_SEARCH,
-    wxID_HELP_COMMANDS,
-    wxID_HELP_PROCEDURES,
-    wxID_HELP_CONTEXT,
-    wxID_CLOSE_ALL,
-    wxID_PREFERENCES,
+	wxID_OPEN,
+	wxID_CLOSE,
+	wxID_NEW,
+	wxID_SAVE,
+	wxID_SAVEAS,
+	wxID_REVERT,
+	wxID_EXIT,
+	wxID_UNDO,
+	wxID_REDO,
+	wxID_HELP,
+	wxID_PRINT,
+	wxID_PRINT_SETUP,
+	wxID_PAGE_SETUP,
+	wxID_PREVIEW,
+	wxID_ABOUT,
+	wxID_HELP_CONTENTS,
+	wxID_HELP_INDEX,
+	wxID_HELP_SEARCH,
+	wxID_HELP_COMMANDS,
+	wxID_HELP_PROCEDURES,
+	wxID_HELP_CONTEXT,
+	wxID_CLOSE_ALL,
+	wxID_PREFERENCES,
 
-    wxID_EDIT = 5030,
-    wxID_CUT,
-    wxID_COPY,
-    wxID_PASTE,
-    wxID_CLEAR,
-    wxID_FIND,
-    wxID_DUPLICATE,
-    wxID_SELECTALL,
-    wxID_DELETE,
-    wxID_REPLACE,
-    wxID_REPLACE_ALL,
-    wxID_PROPERTIES,
+	wxID_EDIT = 5030,
+	wxID_CUT,
+	wxID_COPY,
+	wxID_PASTE,
+	wxID_CLEAR,
+	wxID_FIND,
+	wxID_DUPLICATE,
+	wxID_SELECTALL,
+	wxID_DELETE,
+	wxID_REPLACE,
+	wxID_REPLACE_ALL,
+	wxID_PROPERTIES,
 
-    wxID_VIEW_DETAILS,
-    wxID_VIEW_LARGEICONS,
-    wxID_VIEW_SMALLICONS,
-    wxID_VIEW_LIST,
-    wxID_VIEW_SORTDATE,
-    wxID_VIEW_SORTNAME,
-    wxID_VIEW_SORTSIZE,
-    wxID_VIEW_SORTTYPE,
+	wxID_VIEW_DETAILS,
+	wxID_VIEW_LARGEICONS,
+	wxID_VIEW_SMALLICONS,
+	wxID_VIEW_LIST,
+	wxID_VIEW_SORTDATE,
+	wxID_VIEW_SORTNAME,
+	wxID_VIEW_SORTSIZE,
+	wxID_VIEW_SORTTYPE,
 
-    wxID_FILE = 5050,
-    wxID_FILE1,
-    wxID_FILE2,
-    wxID_FILE3,
-    wxID_FILE4,
-    wxID_FILE5,
-    wxID_FILE6,
-    wxID_FILE7,
-    wxID_FILE8,
-    wxID_FILE9,
+	wxID_FILE = 5050,
+	wxID_FILE1,
+	wxID_FILE2,
+	wxID_FILE3,
+	wxID_FILE4,
+	wxID_FILE5,
+	wxID_FILE6,
+	wxID_FILE7,
+	wxID_FILE8,
+	wxID_FILE9,
 
-    /*  Standard button and menu IDs */
-    wxID_OK = 5100,
-    wxID_CANCEL,
-    wxID_APPLY,
-    wxID_YES,
-    wxID_NO,
-    wxID_STATIC,
-    wxID_FORWARD,
-    wxID_BACKWARD,
-    wxID_DEFAULT,
-    wxID_MORE,
-    wxID_SETUP,
-    wxID_RESET,
-    wxID_CONTEXT_HELP,
-    wxID_YESTOALL,
-    wxID_NOTOALL,
-    wxID_ABORT,
-    wxID_RETRY,
-    wxID_IGNORE,
-    wxID_ADD,
-    wxID_REMOVE,
+	/*  Standard button and menu IDs */
+	wxID_OK = 5100,
+	wxID_CANCEL,
+	wxID_APPLY,
+	wxID_YES,
+	wxID_NO,
+	wxID_STATIC,
+	wxID_FORWARD,
+	wxID_BACKWARD,
+	wxID_DEFAULT,
+	wxID_MORE,
+	wxID_SETUP,
+	wxID_RESET,
+	wxID_CONTEXT_HELP,
+	wxID_YESTOALL,
+	wxID_NOTOALL,
+	wxID_ABORT,
+	wxID_RETRY,
+	wxID_IGNORE,
+	wxID_ADD,
+	wxID_REMOVE,
 
-    wxID_UP,
-    wxID_DOWN,
-    wxID_HOME,
-    wxID_REFRESH,
-    wxID_STOP,
-    wxID_INDEX,
+	wxID_UP,
+	wxID_DOWN,
+	wxID_HOME,
+	wxID_REFRESH,
+	wxID_STOP,
+	wxID_INDEX,
 
-    wxID_BOLD,
-    wxID_ITALIC,
-    wxID_JUSTIFY_CENTER,
-    wxID_JUSTIFY_FILL,
-    wxID_JUSTIFY_RIGHT,
-    wxID_JUSTIFY_LEFT,
-    wxID_UNDERLINE,
-    wxID_INDENT,
-    wxID_UNINDENT,
-    wxID_ZOOM_100,
-    wxID_ZOOM_FIT,
-    wxID_ZOOM_IN,
-    wxID_ZOOM_OUT,
-    wxID_UNDELETE,
-    wxID_REVERT_TO_SAVED,
-    wxID_CDROM,
-    wxID_CONVERT,
-    wxID_EXECUTE,
-    wxID_FLOPPY,
-    wxID_HARDDISK,
-    wxID_BOTTOM,
-    wxID_FIRST,
-    wxID_LAST,
-    wxID_TOP,
-    wxID_INFO,
-    wxID_JUMP_TO,
-    wxID_NETWORK,
-    wxID_SELECT_COLOR,
-    wxID_SELECT_FONT,
-    wxID_SORT_ASCENDING,
-    wxID_SORT_DESCENDING,
-    wxID_SPELL_CHECK,
-    wxID_STRIKETHROUGH,
+	wxID_BOLD,
+	wxID_ITALIC,
+	wxID_JUSTIFY_CENTER,
+	wxID_JUSTIFY_FILL,
+	wxID_JUSTIFY_RIGHT,
+	wxID_JUSTIFY_LEFT,
+	wxID_UNDERLINE,
+	wxID_INDENT,
+	wxID_UNINDENT,
+	wxID_ZOOM_100,
+	wxID_ZOOM_FIT,
+	wxID_ZOOM_IN,
+	wxID_ZOOM_OUT,
+	wxID_UNDELETE,
+	wxID_REVERT_TO_SAVED,
+	wxID_CDROM,
+	wxID_CONVERT,
+	wxID_EXECUTE,
+	wxID_FLOPPY,
+	wxID_HARDDISK,
+	wxID_BOTTOM,
+	wxID_FIRST,
+	wxID_LAST,
+	wxID_TOP,
+	wxID_INFO,
+	wxID_JUMP_TO,
+	wxID_NETWORK,
+	wxID_SELECT_COLOR,
+	wxID_SELECT_FONT,
+	wxID_SORT_ASCENDING,
+	wxID_SORT_DESCENDING,
+	wxID_SPELL_CHECK,
+	wxID_STRIKETHROUGH,
 
-    /*  System menu IDs (used by wxUniv): */
-    wxID_SYSTEM_MENU = 5200,
-    wxID_CLOSE_FRAME,
-    wxID_MOVE_FRAME,
-    wxID_RESIZE_FRAME,
-    wxID_MAXIMIZE_FRAME,
-    wxID_ICONIZE_FRAME,
-    wxID_RESTORE_FRAME,
+	/*  System menu IDs (used by wxUniv): */
+	wxID_SYSTEM_MENU = 5200,
+	wxID_CLOSE_FRAME,
+	wxID_MOVE_FRAME,
+	wxID_RESIZE_FRAME,
+	wxID_MAXIMIZE_FRAME,
+	wxID_ICONIZE_FRAME,
+	wxID_RESTORE_FRAME,
 
-    /* MDI window menu ids */
-    wxID_MDI_WINDOW_FIRST = 5230,
-    wxID_MDI_WINDOW_CASCADE = wxID_MDI_WINDOW_FIRST,
-    wxID_MDI_WINDOW_TILE_HORZ,
-    wxID_MDI_WINDOW_TILE_VERT,
-    wxID_MDI_WINDOW_ARRANGE_ICONS,
-    wxID_MDI_WINDOW_PREV,
-    wxID_MDI_WINDOW_NEXT,
-    wxID_MDI_WINDOW_LAST = wxID_MDI_WINDOW_NEXT,
+	/* MDI window menu ids */
+	wxID_MDI_WINDOW_FIRST = 5230,
+	wxID_MDI_WINDOW_CASCADE = wxID_MDI_WINDOW_FIRST,
+	wxID_MDI_WINDOW_TILE_HORZ,
+	wxID_MDI_WINDOW_TILE_VERT,
+	wxID_MDI_WINDOW_ARRANGE_ICONS,
+	wxID_MDI_WINDOW_PREV,
+	wxID_MDI_WINDOW_NEXT,
+	wxID_MDI_WINDOW_LAST = wxID_MDI_WINDOW_NEXT,
 
-    /* OS X system menu ids */
-    wxID_OSX_MENU_FIRST = 5250,
-    wxID_OSX_HIDE = wxID_OSX_MENU_FIRST,
-    wxID_OSX_HIDEOTHERS,
-    wxID_OSX_SHOWALL,
+	/* OS X system menu ids */
+	wxID_OSX_MENU_FIRST = 5250,
+	wxID_OSX_HIDE = wxID_OSX_MENU_FIRST,
+	wxID_OSX_HIDEOTHERS,
+	wxID_OSX_SHOWALL,
 #if wxABI_VERSION >= 30001
-    wxID_OSX_SERVICES,
-    wxID_OSX_MENU_LAST = wxID_OSX_SERVICES,
+	wxID_OSX_SERVICES,
+	wxID_OSX_MENU_LAST = wxID_OSX_SERVICES,
 #else
-    wxID_OSX_MENU_LAST = wxID_OSX_SHOWALL,
+	wxID_OSX_MENU_LAST = wxID_OSX_SHOWALL,
 #endif
 
-    /*  IDs used by generic file dialog (13 consecutive starting from this value) */
-    wxID_FILEDLGG = 5900,
+	/*  IDs used by generic file dialog (13 consecutive starting from this value) */
+	wxID_FILEDLGG = 5900,
 
-    /*  IDs used by generic file ctrl (4 consecutive starting from this value) */
-    wxID_FILECTRL = 5950,
+	/*  IDs used by generic file ctrl (4 consecutive starting from this value) */
+	wxID_FILECTRL = 5950,
 
-    wxID_HIGHEST = 5999
+	wxID_HIGHEST = 5999
 };
 
 /*  ---------------------------------------------------------------------------- */
@@ -1924,7 +1924,7 @@ enum wxStandardID
  * (as it uses them).
  */
 #if defined(__cplusplus) && wxUSE_GUI
-    #include "wx/windowid.h"
+#include "wx/windowid.h"
 #endif
 
 /*  ---------------------------------------------------------------------------- */
@@ -1934,12 +1934,12 @@ enum wxStandardID
 /*  menu and toolbar item kinds */
 enum wxItemKind
 {
-    wxITEM_SEPARATOR = -1,
-    wxITEM_NORMAL,
-    wxITEM_CHECK,
-    wxITEM_RADIO,
-    wxITEM_DROPDOWN,
-    wxITEM_MAX
+	wxITEM_SEPARATOR = -1,
+	wxITEM_NORMAL,
+	wxITEM_CHECK,
+	wxITEM_RADIO,
+	wxITEM_DROPDOWN,
+	wxITEM_MAX
 };
 
 /*
@@ -1948,36 +1948,36 @@ enum wxItemKind
  */
 enum wxCheckBoxState
 {
-    wxCHK_UNCHECKED,
-    wxCHK_CHECKED,
-    wxCHK_UNDETERMINED /* 3-state checkbox only */
+	wxCHK_UNCHECKED,
+	wxCHK_CHECKED,
+	wxCHK_UNDETERMINED /* 3-state checkbox only */
 };
 
 
 /*  hit test results */
 enum wxHitTest
 {
-    wxHT_NOWHERE,
+	wxHT_NOWHERE,
 
-    /*  scrollbar */
-    wxHT_SCROLLBAR_FIRST = wxHT_NOWHERE,
-    wxHT_SCROLLBAR_ARROW_LINE_1,    /*  left or upper arrow to scroll by line */
-    wxHT_SCROLLBAR_ARROW_LINE_2,    /*  right or down */
-    wxHT_SCROLLBAR_ARROW_PAGE_1,    /*  left or upper arrow to scroll by page */
-    wxHT_SCROLLBAR_ARROW_PAGE_2,    /*  right or down */
-    wxHT_SCROLLBAR_THUMB,           /*  on the thumb */
-    wxHT_SCROLLBAR_BAR_1,           /*  bar to the left/above the thumb */
-    wxHT_SCROLLBAR_BAR_2,           /*  bar to the right/below the thumb */
-    wxHT_SCROLLBAR_LAST,
+	/*  scrollbar */
+	wxHT_SCROLLBAR_FIRST = wxHT_NOWHERE,
+	wxHT_SCROLLBAR_ARROW_LINE_1,    /*  left or upper arrow to scroll by line */
+	wxHT_SCROLLBAR_ARROW_LINE_2,    /*  right or down */
+	wxHT_SCROLLBAR_ARROW_PAGE_1,    /*  left or upper arrow to scroll by page */
+	wxHT_SCROLLBAR_ARROW_PAGE_2,    /*  right or down */
+	wxHT_SCROLLBAR_THUMB,           /*  on the thumb */
+	wxHT_SCROLLBAR_BAR_1,           /*  bar to the left/above the thumb */
+	wxHT_SCROLLBAR_BAR_2,           /*  bar to the right/below the thumb */
+	wxHT_SCROLLBAR_LAST,
 
-    /*  window */
-    wxHT_WINDOW_OUTSIDE,            /*  not in this window at all */
-    wxHT_WINDOW_INSIDE,             /*  in the client area */
-    wxHT_WINDOW_VERT_SCROLLBAR,     /*  on the vertical scrollbar */
-    wxHT_WINDOW_HORZ_SCROLLBAR,     /*  on the horizontal scrollbar */
-    wxHT_WINDOW_CORNER,             /*  on the corner between 2 scrollbars */
+	/*  window */
+	wxHT_WINDOW_OUTSIDE,            /*  not in this window at all */
+	wxHT_WINDOW_INSIDE,             /*  in the client area */
+	wxHT_WINDOW_VERT_SCROLLBAR,     /*  on the vertical scrollbar */
+	wxHT_WINDOW_HORZ_SCROLLBAR,     /*  on the horizontal scrollbar */
+	wxHT_WINDOW_CORNER,             /*  on the corner between 2 scrollbars */
 
-    wxHT_MAX
+	wxHT_MAX
 };
 
 /*  ---------------------------------------------------------------------------- */
@@ -2012,20 +2012,20 @@ enum wxHitTest
 //     wxBRUSHSTYLE_XXX_HATCH and wxPENSTYLE_XXX_HATCH instead.
 enum wxHatchStyle
 {
-    wxHATCHSTYLE_INVALID = -1,
+	wxHATCHSTYLE_INVALID = -1,
 
-    /*
-        The value of the first style is chosen to fit with
-        wxDeprecatedGUIConstants values below, don't change it.
-     */
-    wxHATCHSTYLE_FIRST = 111,
-    wxHATCHSTYLE_BDIAGONAL = wxHATCHSTYLE_FIRST,
-    wxHATCHSTYLE_CROSSDIAG,
-    wxHATCHSTYLE_FDIAGONAL,
-    wxHATCHSTYLE_CROSS,
-    wxHATCHSTYLE_HORIZONTAL,
-    wxHATCHSTYLE_VERTICAL,
-    wxHATCHSTYLE_LAST = wxHATCHSTYLE_VERTICAL
+	/*
+	    The value of the first style is chosen to fit with
+	    wxDeprecatedGUIConstants values below, don't change it.
+	 */
+	wxHATCHSTYLE_FIRST = 111,
+	wxHATCHSTYLE_BDIAGONAL = wxHATCHSTYLE_FIRST,
+	wxHATCHSTYLE_CROSSDIAG,
+	wxHATCHSTYLE_FDIAGONAL,
+	wxHATCHSTYLE_CROSS,
+	wxHATCHSTYLE_HORIZONTAL,
+	wxHATCHSTYLE_VERTICAL,
+	wxHATCHSTYLE_LAST = wxHATCHSTYLE_VERTICAL
 };
 
 /*
@@ -2037,299 +2037,299 @@ enum wxHatchStyle
 /* don't use any elements of this enum in the new code */
 enum wxDeprecatedGUIConstants
 {
-    /*  Text font families */
-    wxDEFAULT    = 70,
-    wxDECORATIVE,
-    wxROMAN,
-    wxSCRIPT,
-    wxSWISS,
-    wxMODERN,
-    wxTELETYPE,  /* @@@@ */
+	/*  Text font families */
+	wxDEFAULT    = 70,
+	wxDECORATIVE,
+	wxROMAN,
+	wxSCRIPT,
+	wxSWISS,
+	wxMODERN,
+	wxTELETYPE,  /* @@@@ */
 
-    /*  Proportional or Fixed width fonts (not yet used) */
-    wxVARIABLE   = 80,
-    wxFIXED,
+	/*  Proportional or Fixed width fonts (not yet used) */
+	wxVARIABLE   = 80,
+	wxFIXED,
 
-    wxNORMAL     = 90,
-    wxLIGHT,
-    wxBOLD,
-    /*  Also wxNORMAL for normal (non-italic text) */
-    wxITALIC,
-    wxSLANT,
+	wxNORMAL     = 90,
+	wxLIGHT,
+	wxBOLD,
+	/*  Also wxNORMAL for normal (non-italic text) */
+	wxITALIC,
+	wxSLANT,
 
-    /*  Pen styles */
-    wxSOLID      =   100,
-    wxDOT,
-    wxLONG_DASH,
-    wxSHORT_DASH,
-    wxDOT_DASH,
-    wxUSER_DASH,
+	/*  Pen styles */
+	wxSOLID      =   100,
+	wxDOT,
+	wxLONG_DASH,
+	wxSHORT_DASH,
+	wxDOT_DASH,
+	wxUSER_DASH,
 
-    wxTRANSPARENT,
+	wxTRANSPARENT,
 
-    /*  Brush & Pen Stippling. Note that a stippled pen cannot be dashed!! */
-    /*  Note also that stippling a Pen IS meaningful, because a Line is */
-    wxSTIPPLE_MASK_OPAQUE, /* mask is used for blitting monochrome using text fore and back ground colors */
-    wxSTIPPLE_MASK,        /* mask is used for masking areas in the stipple bitmap (TO DO) */
-    /*  drawn with a Pen, and without any Brush -- and it can be stippled. */
-    wxSTIPPLE =          110,
+	/*  Brush & Pen Stippling. Note that a stippled pen cannot be dashed!! */
+	/*  Note also that stippling a Pen IS meaningful, because a Line is */
+	wxSTIPPLE_MASK_OPAQUE, /* mask is used for blitting monochrome using text fore and back ground colors */
+	wxSTIPPLE_MASK,        /* mask is used for masking areas in the stipple bitmap (TO DO) */
+	/*  drawn with a Pen, and without any Brush -- and it can be stippled. */
+	wxSTIPPLE =          110,
 
-    wxBDIAGONAL_HATCH = wxHATCHSTYLE_BDIAGONAL,
-    wxCROSSDIAG_HATCH = wxHATCHSTYLE_CROSSDIAG,
-    wxFDIAGONAL_HATCH = wxHATCHSTYLE_FDIAGONAL,
-    wxCROSS_HATCH = wxHATCHSTYLE_CROSS,
-    wxHORIZONTAL_HATCH = wxHATCHSTYLE_HORIZONTAL,
-    wxVERTICAL_HATCH = wxHATCHSTYLE_VERTICAL,
-    wxFIRST_HATCH = wxHATCHSTYLE_FIRST,
-    wxLAST_HATCH = wxHATCHSTYLE_LAST
+	wxBDIAGONAL_HATCH = wxHATCHSTYLE_BDIAGONAL,
+	wxCROSSDIAG_HATCH = wxHATCHSTYLE_CROSSDIAG,
+	wxFDIAGONAL_HATCH = wxHATCHSTYLE_FDIAGONAL,
+	wxCROSS_HATCH = wxHATCHSTYLE_CROSS,
+	wxHORIZONTAL_HATCH = wxHATCHSTYLE_HORIZONTAL,
+	wxVERTICAL_HATCH = wxHATCHSTYLE_VERTICAL,
+	wxFIRST_HATCH = wxHATCHSTYLE_FIRST,
+	wxLAST_HATCH = wxHATCHSTYLE_LAST
 };
 
 /*  ToolPanel in wxFrame (VZ: unused?) */
 enum
 {
-    wxTOOL_TOP = 1,
-    wxTOOL_BOTTOM,
-    wxTOOL_LEFT,
-    wxTOOL_RIGHT
+	wxTOOL_TOP = 1,
+	wxTOOL_BOTTOM,
+	wxTOOL_LEFT,
+	wxTOOL_RIGHT
 };
 
 /*  the values of the format constants should be the same as corresponding */
 /*  CF_XXX constants in Windows API */
 enum wxDataFormatId
 {
-    wxDF_INVALID =          0,
-    wxDF_TEXT =             1,  /* CF_TEXT */
-    wxDF_BITMAP =           2,  /* CF_BITMAP */
-    wxDF_METAFILE =         3,  /* CF_METAFILEPICT */
-    wxDF_SYLK =             4,
-    wxDF_DIF =              5,
-    wxDF_TIFF =             6,
-    wxDF_OEMTEXT =          7,  /* CF_OEMTEXT */
-    wxDF_DIB =              8,  /* CF_DIB */
-    wxDF_PALETTE =          9,
-    wxDF_PENDATA =          10,
-    wxDF_RIFF =             11,
-    wxDF_WAVE =             12,
-    wxDF_UNICODETEXT =      13,
-    wxDF_ENHMETAFILE =      14,
-    wxDF_FILENAME =         15, /* CF_HDROP */
-    wxDF_LOCALE =           16,
-    wxDF_PRIVATE =          20,
-    wxDF_HTML =             30, /* Note: does not correspond to CF_ constant */
-    wxDF_MAX
+	wxDF_INVALID =          0,
+	wxDF_TEXT =             1,  /* CF_TEXT */
+	wxDF_BITMAP =           2,  /* CF_BITMAP */
+	wxDF_METAFILE =         3,  /* CF_METAFILEPICT */
+	wxDF_SYLK =             4,
+	wxDF_DIF =              5,
+	wxDF_TIFF =             6,
+	wxDF_OEMTEXT =          7,  /* CF_OEMTEXT */
+	wxDF_DIB =              8,  /* CF_DIB */
+	wxDF_PALETTE =          9,
+	wxDF_PENDATA =          10,
+	wxDF_RIFF =             11,
+	wxDF_WAVE =             12,
+	wxDF_UNICODETEXT =      13,
+	wxDF_ENHMETAFILE =      14,
+	wxDF_FILENAME =         15, /* CF_HDROP */
+	wxDF_LOCALE =           16,
+	wxDF_PRIVATE =          20,
+	wxDF_HTML =             30, /* Note: does not correspond to CF_ constant */
+	wxDF_MAX
 };
 
 /* Key codes */
 enum wxKeyCode
 {
-    WXK_NONE    =    0,
+	WXK_NONE    =    0,
 
-    WXK_CONTROL_A = 1,
-    WXK_CONTROL_B,
-    WXK_CONTROL_C,
-    WXK_CONTROL_D,
-    WXK_CONTROL_E,
-    WXK_CONTROL_F,
-    WXK_CONTROL_G,
-    WXK_CONTROL_H,
-    WXK_CONTROL_I,
-    WXK_CONTROL_J,
-    WXK_CONTROL_K,
-    WXK_CONTROL_L,
-    WXK_CONTROL_M,
-    WXK_CONTROL_N,
-    WXK_CONTROL_O,
-    WXK_CONTROL_P,
-    WXK_CONTROL_Q,
-    WXK_CONTROL_R,
-    WXK_CONTROL_S,
-    WXK_CONTROL_T,
-    WXK_CONTROL_U,
-    WXK_CONTROL_V,
-    WXK_CONTROL_W,
-    WXK_CONTROL_X,
-    WXK_CONTROL_Y,
-    WXK_CONTROL_Z,
+	WXK_CONTROL_A = 1,
+	WXK_CONTROL_B,
+	WXK_CONTROL_C,
+	WXK_CONTROL_D,
+	WXK_CONTROL_E,
+	WXK_CONTROL_F,
+	WXK_CONTROL_G,
+	WXK_CONTROL_H,
+	WXK_CONTROL_I,
+	WXK_CONTROL_J,
+	WXK_CONTROL_K,
+	WXK_CONTROL_L,
+	WXK_CONTROL_M,
+	WXK_CONTROL_N,
+	WXK_CONTROL_O,
+	WXK_CONTROL_P,
+	WXK_CONTROL_Q,
+	WXK_CONTROL_R,
+	WXK_CONTROL_S,
+	WXK_CONTROL_T,
+	WXK_CONTROL_U,
+	WXK_CONTROL_V,
+	WXK_CONTROL_W,
+	WXK_CONTROL_X,
+	WXK_CONTROL_Y,
+	WXK_CONTROL_Z,
 
-    WXK_BACK    =    8, /* backspace */
-    WXK_TAB     =    9,
-    WXK_RETURN  =    13,
-    WXK_ESCAPE  =    27,
+	WXK_BACK    =    8, /* backspace */
+	WXK_TAB     =    9,
+	WXK_RETURN  =    13,
+	WXK_ESCAPE  =    27,
 
-    /* values from 33 to 126 are reserved for the standard ASCII characters */
+	/* values from 33 to 126 are reserved for the standard ASCII characters */
 
-    WXK_SPACE   =    32,
-    WXK_DELETE  =    127,
+	WXK_SPACE   =    32,
+	WXK_DELETE  =    127,
 
-    /* values from 128 to 255 are reserved for ASCII extended characters
-       (note that there isn't a single fixed standard for the meaning
-       of these values; avoid them in portable apps!) */
+	/* values from 128 to 255 are reserved for ASCII extended characters
+	   (note that there isn't a single fixed standard for the meaning
+	   of these values; avoid them in portable apps!) */
 
-    /* These are not compatible with unicode characters.
-       If you want to get a unicode character from a key event, use
-       wxKeyEvent::GetUnicodeKey                                    */
-    WXK_START   = 300,
-    WXK_LBUTTON,
-    WXK_RBUTTON,
-    WXK_CANCEL,
-    WXK_MBUTTON,
-    WXK_CLEAR,
-    WXK_SHIFT,
-    WXK_ALT,
-    WXK_CONTROL,
-    WXK_MENU,
-    WXK_PAUSE,
-    WXK_CAPITAL,
-    WXK_END,
-    WXK_HOME,
-    WXK_LEFT,
-    WXK_UP,
-    WXK_RIGHT,
-    WXK_DOWN,
-    WXK_SELECT,
-    WXK_PRINT,
-    WXK_EXECUTE,
-    WXK_SNAPSHOT,
-    WXK_INSERT,
-    WXK_HELP,
-    WXK_NUMPAD0,
-    WXK_NUMPAD1,
-    WXK_NUMPAD2,
-    WXK_NUMPAD3,
-    WXK_NUMPAD4,
-    WXK_NUMPAD5,
-    WXK_NUMPAD6,
-    WXK_NUMPAD7,
-    WXK_NUMPAD8,
-    WXK_NUMPAD9,
-    WXK_MULTIPLY,
-    WXK_ADD,
-    WXK_SEPARATOR,
-    WXK_SUBTRACT,
-    WXK_DECIMAL,
-    WXK_DIVIDE,
-    WXK_F1,
-    WXK_F2,
-    WXK_F3,
-    WXK_F4,
-    WXK_F5,
-    WXK_F6,
-    WXK_F7,
-    WXK_F8,
-    WXK_F9,
-    WXK_F10,
-    WXK_F11,
-    WXK_F12,
-    WXK_F13,
-    WXK_F14,
-    WXK_F15,
-    WXK_F16,
-    WXK_F17,
-    WXK_F18,
-    WXK_F19,
-    WXK_F20,
-    WXK_F21,
-    WXK_F22,
-    WXK_F23,
-    WXK_F24,
-    WXK_NUMLOCK,
-    WXK_SCROLL,
-    WXK_PAGEUP,
-    WXK_PAGEDOWN,
-    WXK_NUMPAD_SPACE,
-    WXK_NUMPAD_TAB,
-    WXK_NUMPAD_ENTER,
-    WXK_NUMPAD_F1,
-    WXK_NUMPAD_F2,
-    WXK_NUMPAD_F3,
-    WXK_NUMPAD_F4,
-    WXK_NUMPAD_HOME,
-    WXK_NUMPAD_LEFT,
-    WXK_NUMPAD_UP,
-    WXK_NUMPAD_RIGHT,
-    WXK_NUMPAD_DOWN,
-    WXK_NUMPAD_PAGEUP,
-    WXK_NUMPAD_PAGEDOWN,
-    WXK_NUMPAD_END,
-    WXK_NUMPAD_BEGIN,
-    WXK_NUMPAD_INSERT,
-    WXK_NUMPAD_DELETE,
-    WXK_NUMPAD_EQUAL,
-    WXK_NUMPAD_MULTIPLY,
-    WXK_NUMPAD_ADD,
-    WXK_NUMPAD_SEPARATOR,
-    WXK_NUMPAD_SUBTRACT,
-    WXK_NUMPAD_DECIMAL,
-    WXK_NUMPAD_DIVIDE,
+	/* These are not compatible with unicode characters.
+	   If you want to get a unicode character from a key event, use
+	   wxKeyEvent::GetUnicodeKey                                    */
+	WXK_START   = 300,
+	WXK_LBUTTON,
+	WXK_RBUTTON,
+	WXK_CANCEL,
+	WXK_MBUTTON,
+	WXK_CLEAR,
+	WXK_SHIFT,
+	WXK_ALT,
+	WXK_CONTROL,
+	WXK_MENU,
+	WXK_PAUSE,
+	WXK_CAPITAL,
+	WXK_END,
+	WXK_HOME,
+	WXK_LEFT,
+	WXK_UP,
+	WXK_RIGHT,
+	WXK_DOWN,
+	WXK_SELECT,
+	WXK_PRINT,
+	WXK_EXECUTE,
+	WXK_SNAPSHOT,
+	WXK_INSERT,
+	WXK_HELP,
+	WXK_NUMPAD0,
+	WXK_NUMPAD1,
+	WXK_NUMPAD2,
+	WXK_NUMPAD3,
+	WXK_NUMPAD4,
+	WXK_NUMPAD5,
+	WXK_NUMPAD6,
+	WXK_NUMPAD7,
+	WXK_NUMPAD8,
+	WXK_NUMPAD9,
+	WXK_MULTIPLY,
+	WXK_ADD,
+	WXK_SEPARATOR,
+	WXK_SUBTRACT,
+	WXK_DECIMAL,
+	WXK_DIVIDE,
+	WXK_F1,
+	WXK_F2,
+	WXK_F3,
+	WXK_F4,
+	WXK_F5,
+	WXK_F6,
+	WXK_F7,
+	WXK_F8,
+	WXK_F9,
+	WXK_F10,
+	WXK_F11,
+	WXK_F12,
+	WXK_F13,
+	WXK_F14,
+	WXK_F15,
+	WXK_F16,
+	WXK_F17,
+	WXK_F18,
+	WXK_F19,
+	WXK_F20,
+	WXK_F21,
+	WXK_F22,
+	WXK_F23,
+	WXK_F24,
+	WXK_NUMLOCK,
+	WXK_SCROLL,
+	WXK_PAGEUP,
+	WXK_PAGEDOWN,
+	WXK_NUMPAD_SPACE,
+	WXK_NUMPAD_TAB,
+	WXK_NUMPAD_ENTER,
+	WXK_NUMPAD_F1,
+	WXK_NUMPAD_F2,
+	WXK_NUMPAD_F3,
+	WXK_NUMPAD_F4,
+	WXK_NUMPAD_HOME,
+	WXK_NUMPAD_LEFT,
+	WXK_NUMPAD_UP,
+	WXK_NUMPAD_RIGHT,
+	WXK_NUMPAD_DOWN,
+	WXK_NUMPAD_PAGEUP,
+	WXK_NUMPAD_PAGEDOWN,
+	WXK_NUMPAD_END,
+	WXK_NUMPAD_BEGIN,
+	WXK_NUMPAD_INSERT,
+	WXK_NUMPAD_DELETE,
+	WXK_NUMPAD_EQUAL,
+	WXK_NUMPAD_MULTIPLY,
+	WXK_NUMPAD_ADD,
+	WXK_NUMPAD_SEPARATOR,
+	WXK_NUMPAD_SUBTRACT,
+	WXK_NUMPAD_DECIMAL,
+	WXK_NUMPAD_DIVIDE,
 
-    WXK_WINDOWS_LEFT,
-    WXK_WINDOWS_RIGHT,
-    WXK_WINDOWS_MENU ,
+	WXK_WINDOWS_LEFT,
+	WXK_WINDOWS_RIGHT,
+	WXK_WINDOWS_MENU,
 #ifdef __WXOSX__
-    WXK_RAW_CONTROL,
+	WXK_RAW_CONTROL,
 #else
-    WXK_RAW_CONTROL = WXK_CONTROL,
+	WXK_RAW_CONTROL = WXK_CONTROL,
 #endif
-    WXK_COMMAND = WXK_CONTROL,
+	WXK_COMMAND = WXK_CONTROL,
 
-    /* Hardware-specific buttons */
-    WXK_SPECIAL1 = WXK_WINDOWS_MENU + 2, /* Skip WXK_RAW_CONTROL if necessary */
-    WXK_SPECIAL2,
-    WXK_SPECIAL3,
-    WXK_SPECIAL4,
-    WXK_SPECIAL5,
-    WXK_SPECIAL6,
-    WXK_SPECIAL7,
-    WXK_SPECIAL8,
-    WXK_SPECIAL9,
-    WXK_SPECIAL10,
-    WXK_SPECIAL11,
-    WXK_SPECIAL12,
-    WXK_SPECIAL13,
-    WXK_SPECIAL14,
-    WXK_SPECIAL15,
-    WXK_SPECIAL16,
-    WXK_SPECIAL17,
-    WXK_SPECIAL18,
-    WXK_SPECIAL19,
-    WXK_SPECIAL20,
+	/* Hardware-specific buttons */
+	WXK_SPECIAL1 = WXK_WINDOWS_MENU + 2, /* Skip WXK_RAW_CONTROL if necessary */
+	WXK_SPECIAL2,
+	WXK_SPECIAL3,
+	WXK_SPECIAL4,
+	WXK_SPECIAL5,
+	WXK_SPECIAL6,
+	WXK_SPECIAL7,
+	WXK_SPECIAL8,
+	WXK_SPECIAL9,
+	WXK_SPECIAL10,
+	WXK_SPECIAL11,
+	WXK_SPECIAL12,
+	WXK_SPECIAL13,
+	WXK_SPECIAL14,
+	WXK_SPECIAL15,
+	WXK_SPECIAL16,
+	WXK_SPECIAL17,
+	WXK_SPECIAL18,
+	WXK_SPECIAL19,
+	WXK_SPECIAL20,
 
-    WXK_BROWSER_BACK,
-    WXK_BROWSER_FORWARD,
-    WXK_BROWSER_REFRESH,
-    WXK_BROWSER_STOP,
-    WXK_BROWSER_SEARCH,
-    WXK_BROWSER_FAVORITES,
-    WXK_BROWSER_HOME,
-    WXK_VOLUME_MUTE,
-    WXK_VOLUME_DOWN,
-    WXK_VOLUME_UP,
-    WXK_MEDIA_NEXT_TRACK,
-    WXK_MEDIA_PREV_TRACK,
-    WXK_MEDIA_STOP,
-    WXK_MEDIA_PLAY_PAUSE,
-    WXK_LAUNCH_MAIL,
-    WXK_LAUNCH_APP1,
-    WXK_LAUNCH_APP2
+	WXK_BROWSER_BACK,
+	WXK_BROWSER_FORWARD,
+	WXK_BROWSER_REFRESH,
+	WXK_BROWSER_STOP,
+	WXK_BROWSER_SEARCH,
+	WXK_BROWSER_FAVORITES,
+	WXK_BROWSER_HOME,
+	WXK_VOLUME_MUTE,
+	WXK_VOLUME_DOWN,
+	WXK_VOLUME_UP,
+	WXK_MEDIA_NEXT_TRACK,
+	WXK_MEDIA_PREV_TRACK,
+	WXK_MEDIA_STOP,
+	WXK_MEDIA_PLAY_PAUSE,
+	WXK_LAUNCH_MAIL,
+	WXK_LAUNCH_APP1,
+	WXK_LAUNCH_APP2
 };
 
 /* This enum contains bit mask constants used in wxKeyEvent */
 enum wxKeyModifier
 {
-    wxMOD_NONE      = 0x0000,
-    wxMOD_ALT       = 0x0001,
-    wxMOD_CONTROL   = 0x0002,
-    wxMOD_ALTGR     = wxMOD_ALT | wxMOD_CONTROL,
-    wxMOD_SHIFT     = 0x0004,
-    wxMOD_META      = 0x0008,
-    wxMOD_WIN       = wxMOD_META,
+	wxMOD_NONE      = 0x0000,
+	wxMOD_ALT       = 0x0001,
+	wxMOD_CONTROL   = 0x0002,
+	wxMOD_ALTGR     = wxMOD_ALT | wxMOD_CONTROL,
+	wxMOD_SHIFT     = 0x0004,
+	wxMOD_META      = 0x0008,
+	wxMOD_WIN       = wxMOD_META,
 #if defined(__WXMAC__)
-    wxMOD_RAW_CONTROL = 0x0010,
+	wxMOD_RAW_CONTROL = 0x0010,
 #else
-    wxMOD_RAW_CONTROL = wxMOD_CONTROL,
+	wxMOD_RAW_CONTROL = wxMOD_CONTROL,
 #endif
-    wxMOD_CMD       = wxMOD_CONTROL,
-    wxMOD_ALL       = 0xffff
+	wxMOD_CMD       = wxMOD_CONTROL,
+	wxMOD_ALL       = 0xffff
 };
 
 /* Shortcut for easier dialog-unit-to-pixel conversion */
@@ -2338,134 +2338,134 @@ enum wxKeyModifier
 /* Paper types */
 enum wxPaperSize
 {
-    wxPAPER_NONE,               /*  Use specific dimensions */
-    wxPAPER_LETTER,             /*  Letter, 8 1/2 by 11 inches */
-    wxPAPER_LEGAL,              /*  Legal, 8 1/2 by 14 inches */
-    wxPAPER_A4,                 /*  A4 Sheet, 210 by 297 millimeters */
-    wxPAPER_CSHEET,             /*  C Sheet, 17 by 22 inches */
-    wxPAPER_DSHEET,             /*  D Sheet, 22 by 34 inches */
-    wxPAPER_ESHEET,             /*  E Sheet, 34 by 44 inches */
-    wxPAPER_LETTERSMALL,        /*  Letter Small, 8 1/2 by 11 inches */
-    wxPAPER_TABLOID,            /*  Tabloid, 11 by 17 inches */
-    wxPAPER_LEDGER,             /*  Ledger, 17 by 11 inches */
-    wxPAPER_STATEMENT,          /*  Statement, 5 1/2 by 8 1/2 inches */
-    wxPAPER_EXECUTIVE,          /*  Executive, 7 1/4 by 10 1/2 inches */
-    wxPAPER_A3,                 /*  A3 sheet, 297 by 420 millimeters */
-    wxPAPER_A4SMALL,            /*  A4 small sheet, 210 by 297 millimeters */
-    wxPAPER_A5,                 /*  A5 sheet, 148 by 210 millimeters */
-    wxPAPER_B4,                 /*  B4 sheet, 250 by 354 millimeters */
-    wxPAPER_B5,                 /*  B5 sheet, 182-by-257-millimeter paper */
-    wxPAPER_FOLIO,              /*  Folio, 8-1/2-by-13-inch paper */
-    wxPAPER_QUARTO,             /*  Quarto, 215-by-275-millimeter paper */
-    wxPAPER_10X14,              /*  10-by-14-inch sheet */
-    wxPAPER_11X17,              /*  11-by-17-inch sheet */
-    wxPAPER_NOTE,               /*  Note, 8 1/2 by 11 inches */
-    wxPAPER_ENV_9,              /*  #9 Envelope, 3 7/8 by 8 7/8 inches */
-    wxPAPER_ENV_10,             /*  #10 Envelope, 4 1/8 by 9 1/2 inches */
-    wxPAPER_ENV_11,             /*  #11 Envelope, 4 1/2 by 10 3/8 inches */
-    wxPAPER_ENV_12,             /*  #12 Envelope, 4 3/4 by 11 inches */
-    wxPAPER_ENV_14,             /*  #14 Envelope, 5 by 11 1/2 inches */
-    wxPAPER_ENV_DL,             /*  DL Envelope, 110 by 220 millimeters */
-    wxPAPER_ENV_C5,             /*  C5 Envelope, 162 by 229 millimeters */
-    wxPAPER_ENV_C3,             /*  C3 Envelope, 324 by 458 millimeters */
-    wxPAPER_ENV_C4,             /*  C4 Envelope, 229 by 324 millimeters */
-    wxPAPER_ENV_C6,             /*  C6 Envelope, 114 by 162 millimeters */
-    wxPAPER_ENV_C65,            /*  C65 Envelope, 114 by 229 millimeters */
-    wxPAPER_ENV_B4,             /*  B4 Envelope, 250 by 353 millimeters */
-    wxPAPER_ENV_B5,             /*  B5 Envelope, 176 by 250 millimeters */
-    wxPAPER_ENV_B6,             /*  B6 Envelope, 176 by 125 millimeters */
-    wxPAPER_ENV_ITALY,          /*  Italy Envelope, 110 by 230 millimeters */
-    wxPAPER_ENV_MONARCH,        /*  Monarch Envelope, 3 7/8 by 7 1/2 inches */
-    wxPAPER_ENV_PERSONAL,       /*  6 3/4 Envelope, 3 5/8 by 6 1/2 inches */
-    wxPAPER_FANFOLD_US,         /*  US Std Fanfold, 14 7/8 by 11 inches */
-    wxPAPER_FANFOLD_STD_GERMAN, /*  German Std Fanfold, 8 1/2 by 12 inches */
-    wxPAPER_FANFOLD_LGL_GERMAN, /*  German Legal Fanfold, 8 1/2 by 13 inches */
+	wxPAPER_NONE,               /*  Use specific dimensions */
+	wxPAPER_LETTER,             /*  Letter, 8 1/2 by 11 inches */
+	wxPAPER_LEGAL,              /*  Legal, 8 1/2 by 14 inches */
+	wxPAPER_A4,                 /*  A4 Sheet, 210 by 297 millimeters */
+	wxPAPER_CSHEET,             /*  C Sheet, 17 by 22 inches */
+	wxPAPER_DSHEET,             /*  D Sheet, 22 by 34 inches */
+	wxPAPER_ESHEET,             /*  E Sheet, 34 by 44 inches */
+	wxPAPER_LETTERSMALL,        /*  Letter Small, 8 1/2 by 11 inches */
+	wxPAPER_TABLOID,            /*  Tabloid, 11 by 17 inches */
+	wxPAPER_LEDGER,             /*  Ledger, 17 by 11 inches */
+	wxPAPER_STATEMENT,          /*  Statement, 5 1/2 by 8 1/2 inches */
+	wxPAPER_EXECUTIVE,          /*  Executive, 7 1/4 by 10 1/2 inches */
+	wxPAPER_A3,                 /*  A3 sheet, 297 by 420 millimeters */
+	wxPAPER_A4SMALL,            /*  A4 small sheet, 210 by 297 millimeters */
+	wxPAPER_A5,                 /*  A5 sheet, 148 by 210 millimeters */
+	wxPAPER_B4,                 /*  B4 sheet, 250 by 354 millimeters */
+	wxPAPER_B5,                 /*  B5 sheet, 182-by-257-millimeter paper */
+	wxPAPER_FOLIO,              /*  Folio, 8-1/2-by-13-inch paper */
+	wxPAPER_QUARTO,             /*  Quarto, 215-by-275-millimeter paper */
+	wxPAPER_10X14,              /*  10-by-14-inch sheet */
+	wxPAPER_11X17,              /*  11-by-17-inch sheet */
+	wxPAPER_NOTE,               /*  Note, 8 1/2 by 11 inches */
+	wxPAPER_ENV_9,              /*  #9 Envelope, 3 7/8 by 8 7/8 inches */
+	wxPAPER_ENV_10,             /*  #10 Envelope, 4 1/8 by 9 1/2 inches */
+	wxPAPER_ENV_11,             /*  #11 Envelope, 4 1/2 by 10 3/8 inches */
+	wxPAPER_ENV_12,             /*  #12 Envelope, 4 3/4 by 11 inches */
+	wxPAPER_ENV_14,             /*  #14 Envelope, 5 by 11 1/2 inches */
+	wxPAPER_ENV_DL,             /*  DL Envelope, 110 by 220 millimeters */
+	wxPAPER_ENV_C5,             /*  C5 Envelope, 162 by 229 millimeters */
+	wxPAPER_ENV_C3,             /*  C3 Envelope, 324 by 458 millimeters */
+	wxPAPER_ENV_C4,             /*  C4 Envelope, 229 by 324 millimeters */
+	wxPAPER_ENV_C6,             /*  C6 Envelope, 114 by 162 millimeters */
+	wxPAPER_ENV_C65,            /*  C65 Envelope, 114 by 229 millimeters */
+	wxPAPER_ENV_B4,             /*  B4 Envelope, 250 by 353 millimeters */
+	wxPAPER_ENV_B5,             /*  B5 Envelope, 176 by 250 millimeters */
+	wxPAPER_ENV_B6,             /*  B6 Envelope, 176 by 125 millimeters */
+	wxPAPER_ENV_ITALY,          /*  Italy Envelope, 110 by 230 millimeters */
+	wxPAPER_ENV_MONARCH,        /*  Monarch Envelope, 3 7/8 by 7 1/2 inches */
+	wxPAPER_ENV_PERSONAL,       /*  6 3/4 Envelope, 3 5/8 by 6 1/2 inches */
+	wxPAPER_FANFOLD_US,         /*  US Std Fanfold, 14 7/8 by 11 inches */
+	wxPAPER_FANFOLD_STD_GERMAN, /*  German Std Fanfold, 8 1/2 by 12 inches */
+	wxPAPER_FANFOLD_LGL_GERMAN, /*  German Legal Fanfold, 8 1/2 by 13 inches */
 
-    wxPAPER_ISO_B4,             /*  B4 (ISO) 250 x 353 mm */
-    wxPAPER_JAPANESE_POSTCARD,  /*  Japanese Postcard 100 x 148 mm */
-    wxPAPER_9X11,               /*  9 x 11 in */
-    wxPAPER_10X11,              /*  10 x 11 in */
-    wxPAPER_15X11,              /*  15 x 11 in */
-    wxPAPER_ENV_INVITE,         /*  Envelope Invite 220 x 220 mm */
-    wxPAPER_LETTER_EXTRA,       /*  Letter Extra 9 \275 x 12 in */
-    wxPAPER_LEGAL_EXTRA,        /*  Legal Extra 9 \275 x 15 in */
-    wxPAPER_TABLOID_EXTRA,      /*  Tabloid Extra 11.69 x 18 in */
-    wxPAPER_A4_EXTRA,           /*  A4 Extra 9.27 x 12.69 in */
-    wxPAPER_LETTER_TRANSVERSE,  /*  Letter Transverse 8 \275 x 11 in */
-    wxPAPER_A4_TRANSVERSE,      /*  A4 Transverse 210 x 297 mm */
-    wxPAPER_LETTER_EXTRA_TRANSVERSE, /*  Letter Extra Transverse 9\275 x 12 in */
-    wxPAPER_A_PLUS,             /*  SuperA/SuperA/A4 227 x 356 mm */
-    wxPAPER_B_PLUS,             /*  SuperB/SuperB/A3 305 x 487 mm */
-    wxPAPER_LETTER_PLUS,        /*  Letter Plus 8.5 x 12.69 in */
-    wxPAPER_A4_PLUS,            /*  A4 Plus 210 x 330 mm */
-    wxPAPER_A5_TRANSVERSE,      /*  A5 Transverse 148 x 210 mm */
-    wxPAPER_B5_TRANSVERSE,      /*  B5 (JIS) Transverse 182 x 257 mm */
-    wxPAPER_A3_EXTRA,           /*  A3 Extra 322 x 445 mm */
-    wxPAPER_A5_EXTRA,           /*  A5 Extra 174 x 235 mm */
-    wxPAPER_B5_EXTRA,           /*  B5 (ISO) Extra 201 x 276 mm */
-    wxPAPER_A2,                 /*  A2 420 x 594 mm */
-    wxPAPER_A3_TRANSVERSE,      /*  A3 Transverse 297 x 420 mm */
-    wxPAPER_A3_EXTRA_TRANSVERSE, /*  A3 Extra Transverse 322 x 445 mm */
+	wxPAPER_ISO_B4,             /*  B4 (ISO) 250 x 353 mm */
+	wxPAPER_JAPANESE_POSTCARD,  /*  Japanese Postcard 100 x 148 mm */
+	wxPAPER_9X11,               /*  9 x 11 in */
+	wxPAPER_10X11,              /*  10 x 11 in */
+	wxPAPER_15X11,              /*  15 x 11 in */
+	wxPAPER_ENV_INVITE,         /*  Envelope Invite 220 x 220 mm */
+	wxPAPER_LETTER_EXTRA,       /*  Letter Extra 9 \275 x 12 in */
+	wxPAPER_LEGAL_EXTRA,        /*  Legal Extra 9 \275 x 15 in */
+	wxPAPER_TABLOID_EXTRA,      /*  Tabloid Extra 11.69 x 18 in */
+	wxPAPER_A4_EXTRA,           /*  A4 Extra 9.27 x 12.69 in */
+	wxPAPER_LETTER_TRANSVERSE,  /*  Letter Transverse 8 \275 x 11 in */
+	wxPAPER_A4_TRANSVERSE,      /*  A4 Transverse 210 x 297 mm */
+	wxPAPER_LETTER_EXTRA_TRANSVERSE, /*  Letter Extra Transverse 9\275 x 12 in */
+	wxPAPER_A_PLUS,             /*  SuperA/SuperA/A4 227 x 356 mm */
+	wxPAPER_B_PLUS,             /*  SuperB/SuperB/A3 305 x 487 mm */
+	wxPAPER_LETTER_PLUS,        /*  Letter Plus 8.5 x 12.69 in */
+	wxPAPER_A4_PLUS,            /*  A4 Plus 210 x 330 mm */
+	wxPAPER_A5_TRANSVERSE,      /*  A5 Transverse 148 x 210 mm */
+	wxPAPER_B5_TRANSVERSE,      /*  B5 (JIS) Transverse 182 x 257 mm */
+	wxPAPER_A3_EXTRA,           /*  A3 Extra 322 x 445 mm */
+	wxPAPER_A5_EXTRA,           /*  A5 Extra 174 x 235 mm */
+	wxPAPER_B5_EXTRA,           /*  B5 (ISO) Extra 201 x 276 mm */
+	wxPAPER_A2,                 /*  A2 420 x 594 mm */
+	wxPAPER_A3_TRANSVERSE,      /*  A3 Transverse 297 x 420 mm */
+	wxPAPER_A3_EXTRA_TRANSVERSE, /*  A3 Extra Transverse 322 x 445 mm */
 
-    wxPAPER_DBL_JAPANESE_POSTCARD,/* Japanese Double Postcard 200 x 148 mm */
-    wxPAPER_A6,                 /* A6 105 x 148 mm */
-    wxPAPER_JENV_KAKU2,         /* Japanese Envelope Kaku #2 */
-    wxPAPER_JENV_KAKU3,         /* Japanese Envelope Kaku #3 */
-    wxPAPER_JENV_CHOU3,         /* Japanese Envelope Chou #3 */
-    wxPAPER_JENV_CHOU4,         /* Japanese Envelope Chou #4 */
-    wxPAPER_LETTER_ROTATED,     /* Letter Rotated 11 x 8 1/2 in */
-    wxPAPER_A3_ROTATED,         /* A3 Rotated 420 x 297 mm */
-    wxPAPER_A4_ROTATED,         /* A4 Rotated 297 x 210 mm */
-    wxPAPER_A5_ROTATED,         /* A5 Rotated 210 x 148 mm */
-    wxPAPER_B4_JIS_ROTATED,     /* B4 (JIS) Rotated 364 x 257 mm */
-    wxPAPER_B5_JIS_ROTATED,     /* B5 (JIS) Rotated 257 x 182 mm */
-    wxPAPER_JAPANESE_POSTCARD_ROTATED,/* Japanese Postcard Rotated 148 x 100 mm */
-    wxPAPER_DBL_JAPANESE_POSTCARD_ROTATED,/* Double Japanese Postcard Rotated 148 x 200 mm */
-    wxPAPER_A6_ROTATED,         /* A6 Rotated 148 x 105 mm */
-    wxPAPER_JENV_KAKU2_ROTATED, /* Japanese Envelope Kaku #2 Rotated */
-    wxPAPER_JENV_KAKU3_ROTATED, /* Japanese Envelope Kaku #3 Rotated */
-    wxPAPER_JENV_CHOU3_ROTATED, /* Japanese Envelope Chou #3 Rotated */
-    wxPAPER_JENV_CHOU4_ROTATED, /* Japanese Envelope Chou #4 Rotated */
-    wxPAPER_B6_JIS,             /* B6 (JIS) 128 x 182 mm */
-    wxPAPER_B6_JIS_ROTATED,     /* B6 (JIS) Rotated 182 x 128 mm */
-    wxPAPER_12X11,              /* 12 x 11 in */
-    wxPAPER_JENV_YOU4,          /* Japanese Envelope You #4 */
-    wxPAPER_JENV_YOU4_ROTATED,  /* Japanese Envelope You #4 Rotated */
-    wxPAPER_P16K,               /* PRC 16K 146 x 215 mm */
-    wxPAPER_P32K,               /* PRC 32K 97 x 151 mm */
-    wxPAPER_P32KBIG,            /* PRC 32K(Big) 97 x 151 mm */
-    wxPAPER_PENV_1,             /* PRC Envelope #1 102 x 165 mm */
-    wxPAPER_PENV_2,             /* PRC Envelope #2 102 x 176 mm */
-    wxPAPER_PENV_3,             /* PRC Envelope #3 125 x 176 mm */
-    wxPAPER_PENV_4,             /* PRC Envelope #4 110 x 208 mm */
-    wxPAPER_PENV_5,             /* PRC Envelope #5 110 x 220 mm */
-    wxPAPER_PENV_6,             /* PRC Envelope #6 120 x 230 mm */
-    wxPAPER_PENV_7,             /* PRC Envelope #7 160 x 230 mm */
-    wxPAPER_PENV_8,             /* PRC Envelope #8 120 x 309 mm */
-    wxPAPER_PENV_9,             /* PRC Envelope #9 229 x 324 mm */
-    wxPAPER_PENV_10,            /* PRC Envelope #10 324 x 458 mm */
-    wxPAPER_P16K_ROTATED,       /* PRC 16K Rotated */
-    wxPAPER_P32K_ROTATED,       /* PRC 32K Rotated */
-    wxPAPER_P32KBIG_ROTATED,    /* PRC 32K(Big) Rotated */
-    wxPAPER_PENV_1_ROTATED,     /* PRC Envelope #1 Rotated 165 x 102 mm */
-    wxPAPER_PENV_2_ROTATED,     /* PRC Envelope #2 Rotated 176 x 102 mm */
-    wxPAPER_PENV_3_ROTATED,     /* PRC Envelope #3 Rotated 176 x 125 mm */
-    wxPAPER_PENV_4_ROTATED,     /* PRC Envelope #4 Rotated 208 x 110 mm */
-    wxPAPER_PENV_5_ROTATED,     /* PRC Envelope #5 Rotated 220 x 110 mm */
-    wxPAPER_PENV_6_ROTATED,     /* PRC Envelope #6 Rotated 230 x 120 mm */
-    wxPAPER_PENV_7_ROTATED,     /* PRC Envelope #7 Rotated 230 x 160 mm */
-    wxPAPER_PENV_8_ROTATED,     /* PRC Envelope #8 Rotated 309 x 120 mm */
-    wxPAPER_PENV_9_ROTATED,     /* PRC Envelope #9 Rotated 324 x 229 mm */
-    wxPAPER_PENV_10_ROTATED,    /* PRC Envelope #10 Rotated 458 x 324 m */
-    wxPAPER_A0,                 /* A0 Sheet 841 x 1189 mm */
-    wxPAPER_A1                  /* A1 Sheet 594 x 841 mm */
+	wxPAPER_DBL_JAPANESE_POSTCARD,/* Japanese Double Postcard 200 x 148 mm */
+	wxPAPER_A6,                 /* A6 105 x 148 mm */
+	wxPAPER_JENV_KAKU2,         /* Japanese Envelope Kaku #2 */
+	wxPAPER_JENV_KAKU3,         /* Japanese Envelope Kaku #3 */
+	wxPAPER_JENV_CHOU3,         /* Japanese Envelope Chou #3 */
+	wxPAPER_JENV_CHOU4,         /* Japanese Envelope Chou #4 */
+	wxPAPER_LETTER_ROTATED,     /* Letter Rotated 11 x 8 1/2 in */
+	wxPAPER_A3_ROTATED,         /* A3 Rotated 420 x 297 mm */
+	wxPAPER_A4_ROTATED,         /* A4 Rotated 297 x 210 mm */
+	wxPAPER_A5_ROTATED,         /* A5 Rotated 210 x 148 mm */
+	wxPAPER_B4_JIS_ROTATED,     /* B4 (JIS) Rotated 364 x 257 mm */
+	wxPAPER_B5_JIS_ROTATED,     /* B5 (JIS) Rotated 257 x 182 mm */
+	wxPAPER_JAPANESE_POSTCARD_ROTATED,/* Japanese Postcard Rotated 148 x 100 mm */
+	wxPAPER_DBL_JAPANESE_POSTCARD_ROTATED,/* Double Japanese Postcard Rotated 148 x 200 mm */
+	wxPAPER_A6_ROTATED,         /* A6 Rotated 148 x 105 mm */
+	wxPAPER_JENV_KAKU2_ROTATED, /* Japanese Envelope Kaku #2 Rotated */
+	wxPAPER_JENV_KAKU3_ROTATED, /* Japanese Envelope Kaku #3 Rotated */
+	wxPAPER_JENV_CHOU3_ROTATED, /* Japanese Envelope Chou #3 Rotated */
+	wxPAPER_JENV_CHOU4_ROTATED, /* Japanese Envelope Chou #4 Rotated */
+	wxPAPER_B6_JIS,             /* B6 (JIS) 128 x 182 mm */
+	wxPAPER_B6_JIS_ROTATED,     /* B6 (JIS) Rotated 182 x 128 mm */
+	wxPAPER_12X11,              /* 12 x 11 in */
+	wxPAPER_JENV_YOU4,          /* Japanese Envelope You #4 */
+	wxPAPER_JENV_YOU4_ROTATED,  /* Japanese Envelope You #4 Rotated */
+	wxPAPER_P16K,               /* PRC 16K 146 x 215 mm */
+	wxPAPER_P32K,               /* PRC 32K 97 x 151 mm */
+	wxPAPER_P32KBIG,            /* PRC 32K(Big) 97 x 151 mm */
+	wxPAPER_PENV_1,             /* PRC Envelope #1 102 x 165 mm */
+	wxPAPER_PENV_2,             /* PRC Envelope #2 102 x 176 mm */
+	wxPAPER_PENV_3,             /* PRC Envelope #3 125 x 176 mm */
+	wxPAPER_PENV_4,             /* PRC Envelope #4 110 x 208 mm */
+	wxPAPER_PENV_5,             /* PRC Envelope #5 110 x 220 mm */
+	wxPAPER_PENV_6,             /* PRC Envelope #6 120 x 230 mm */
+	wxPAPER_PENV_7,             /* PRC Envelope #7 160 x 230 mm */
+	wxPAPER_PENV_8,             /* PRC Envelope #8 120 x 309 mm */
+	wxPAPER_PENV_9,             /* PRC Envelope #9 229 x 324 mm */
+	wxPAPER_PENV_10,            /* PRC Envelope #10 324 x 458 mm */
+	wxPAPER_P16K_ROTATED,       /* PRC 16K Rotated */
+	wxPAPER_P32K_ROTATED,       /* PRC 32K Rotated */
+	wxPAPER_P32KBIG_ROTATED,    /* PRC 32K(Big) Rotated */
+	wxPAPER_PENV_1_ROTATED,     /* PRC Envelope #1 Rotated 165 x 102 mm */
+	wxPAPER_PENV_2_ROTATED,     /* PRC Envelope #2 Rotated 176 x 102 mm */
+	wxPAPER_PENV_3_ROTATED,     /* PRC Envelope #3 Rotated 176 x 125 mm */
+	wxPAPER_PENV_4_ROTATED,     /* PRC Envelope #4 Rotated 208 x 110 mm */
+	wxPAPER_PENV_5_ROTATED,     /* PRC Envelope #5 Rotated 220 x 110 mm */
+	wxPAPER_PENV_6_ROTATED,     /* PRC Envelope #6 Rotated 230 x 120 mm */
+	wxPAPER_PENV_7_ROTATED,     /* PRC Envelope #7 Rotated 230 x 160 mm */
+	wxPAPER_PENV_8_ROTATED,     /* PRC Envelope #8 Rotated 309 x 120 mm */
+	wxPAPER_PENV_9_ROTATED,     /* PRC Envelope #9 Rotated 324 x 229 mm */
+	wxPAPER_PENV_10_ROTATED,    /* PRC Envelope #10 Rotated 458 x 324 m */
+	wxPAPER_A0,                 /* A0 Sheet 841 x 1189 mm */
+	wxPAPER_A1                  /* A1 Sheet 594 x 841 mm */
 };
 
 /* Printing orientation */
 enum wxPrintOrientation
 {
-   wxPORTRAIT = 1,
-   wxLANDSCAPE
+	wxPORTRAIT = 1,
+	wxLANDSCAPE
 };
 
 /* Duplex printing modes
@@ -2473,9 +2473,9 @@ enum wxPrintOrientation
 
 enum wxDuplexMode
 {
-    wxDUPLEX_SIMPLEX, /*  Non-duplex */
-    wxDUPLEX_HORIZONTAL,
-    wxDUPLEX_VERTICAL
+	wxDUPLEX_SIMPLEX, /*  Non-duplex */
+	wxDUPLEX_HORIZONTAL,
+	wxDUPLEX_VERTICAL
 };
 
 /* Print quality.
@@ -2493,11 +2493,11 @@ typedef int wxPrintQuality;
 
 enum wxPrintMode
 {
-    wxPRINT_MODE_NONE =    0,
-    wxPRINT_MODE_PREVIEW = 1,   /*  Preview in external application */
-    wxPRINT_MODE_FILE =    2,   /*  Print to file */
-    wxPRINT_MODE_PRINTER = 3,   /*  Send to printer */
-    wxPRINT_MODE_STREAM =  4    /*  Send postscript data into a stream */
+	wxPRINT_MODE_NONE =    0,
+	wxPRINT_MODE_PREVIEW = 1,   /*  Preview in external application */
+	wxPRINT_MODE_FILE =    2,   /*  Print to file */
+	wxPRINT_MODE_PRINTER = 3,   /*  Send to printer */
+	wxPRINT_MODE_STREAM =  4    /*  Send postscript data into a stream */
 };
 
 /*  ---------------------------------------------------------------------------- */
@@ -2506,9 +2506,9 @@ enum wxPrintMode
 
 enum wxUpdateUI
 {
-    wxUPDATE_UI_NONE          = 0x0000,
-    wxUPDATE_UI_RECURSE       = 0x0001,
-    wxUPDATE_UI_FROMIDLE      = 0x0002 /*  Invoked from On(Internal)Idle */
+	wxUPDATE_UI_NONE          = 0x0000,
+	wxUPDATE_UI_RECURSE       = 0x0001,
+	wxUPDATE_UI_FROMIDLE      = 0x0002 /*  Invoked from On(Internal)Idle */
 };
 
 
@@ -2532,7 +2532,7 @@ typedef int (* LINKAGEMODE wxListIterateFunction)(void *current);
 
 /*  define this macro if font handling is done using the X font names */
 #if (defined(__WXGTK__) && !defined(__WXGTK20__)) || defined(__X__)
-    #define _WX_X_FONTLIKE
+#define _WX_X_FONTLIKE
 #endif
 
 /*  macro to specify "All Files" on different platforms */
@@ -2546,12 +2546,12 @@ typedef int (* LINKAGEMODE wxListIterateFunction)(void *current);
 
 #if defined(__CYGWIN__) && defined(__WXMSW__)
 #   if wxUSE_STD_CONTAINERS || defined(wxUSE_STD_STRING)
-         /*
-            NASTY HACK because the gethostname in sys/unistd.h which the gnu
-            stl includes and wx builds with by default clash with each other
-            (windows version 2nd param is int, sys/unistd.h version is unsigned
-            int).
-          */
+/*
+   NASTY HACK because the gethostname in sys/unistd.h which the gnu
+   stl includes and wx builds with by default clash with each other
+   (windows version 2nd param is int, sys/unistd.h version is unsigned
+   int).
+ */
 #        define gethostname gethostnameHACK
 #        include <unistd.h>
 #        undef gethostname
@@ -2650,9 +2650,9 @@ typedef HIShapeRef WXHRGN;
  * since they are unlikely to be needed in a public header.
  */
 #if defined(__LP64__) && __LP64__
-    typedef double CGFloat;
+typedef double CGFloat;
 #else
-    typedef float CGFloat;
+typedef float CGFloat;
 #endif
 
 #if (defined(__LP64__) && __LP64__) || (defined(NS_BUILD_32_LIKE_64) && NS_BUILD_32_LIKE_64)
@@ -2790,9 +2790,9 @@ typedef WX_WebView OSXWebViewPtr;
 /*  Stand-ins for Windows types to avoid #including all of windows.h */
 
 #ifndef NO_STRICT
-    #define WX_MSW_DECLARE_HANDLE(type) typedef struct type##__ * WX##type
+#define WX_MSW_DECLARE_HANDLE(type) typedef struct type##__ * WX##type
 #else
-    #define WX_MSW_DECLARE_HANDLE(type) typedef void * WX##type
+#define WX_MSW_DECLARE_HANDLE(type) typedef void * WX##type
 #endif
 
 typedef void* WXHANDLE;
@@ -2892,28 +2892,28 @@ typedef struct _GdkCursor       GdkCursor;
 typedef struct _GdkDragContext  GdkDragContext;
 
 #if defined(__WXGTK20__)
-    typedef struct _GdkAtom* GdkAtom;
+typedef struct _GdkAtom* GdkAtom;
 #else
-    typedef unsigned long GdkAtom;
+typedef unsigned long GdkAtom;
 #endif
 
 #if !defined(__WXGTK3__)
-    typedef struct _GdkColormap GdkColormap;
-    typedef struct _GdkFont GdkFont;
-    typedef struct _GdkGC GdkGC;
-    typedef struct _GdkRegion GdkRegion;
+typedef struct _GdkColormap GdkColormap;
+typedef struct _GdkFont GdkFont;
+typedef struct _GdkGC GdkGC;
+typedef struct _GdkRegion GdkRegion;
 #endif
 
 #if defined(__WXGTK3__)
-    typedef struct _GdkWindow GdkWindow;
-    typedef struct _GdkEventSequence GdkEventSequence;
+typedef struct _GdkWindow GdkWindow;
+typedef struct _GdkEventSequence GdkEventSequence;
 #elif defined(__WXGTK20__)
-    typedef struct _GdkDrawable GdkWindow;
-    typedef struct _GdkDrawable GdkPixmap;
+typedef struct _GdkDrawable GdkWindow;
+typedef struct _GdkDrawable GdkPixmap;
 #else
-    typedef struct _GdkWindow GdkWindow;
-    typedef struct _GdkWindow GdkBitmap;
-    typedef struct _GdkWindow GdkPixmap;
+typedef struct _GdkWindow GdkWindow;
+typedef struct _GdkWindow GdkBitmap;
+typedef struct _GdkWindow GdkPixmap;
 #endif
 
 /* Stand-ins for GTK types */
@@ -3012,13 +3012,13 @@ typedef const void* WXWidget;
      language='*'\""
 
 #if defined _M_IX86
-    #pragma comment(linker, WX_CC_MANIFEST("x86"))
+#pragma comment(linker, WX_CC_MANIFEST("x86"))
 #elif defined _M_X64
-    #pragma comment(linker, WX_CC_MANIFEST("amd64"))
+#pragma comment(linker, WX_CC_MANIFEST("amd64"))
 #elif defined _M_IA64
-    #pragma comment(linker, WX_CC_MANIFEST("ia64"))
+#pragma comment(linker, WX_CC_MANIFEST("ia64"))
 #else
-    #pragma comment(linker, WX_CC_MANIFEST("*"))
+#pragma comment(linker, WX_CC_MANIFEST("*"))
 #endif
 
 #endif /* !wxUSE_NO_MANIFEST && _MSC_FULL_VER >= 140040130 */
@@ -3026,10 +3026,10 @@ typedef const void* WXWidget;
 /* wxThread and wxProcess priorities */
 enum
 {
-    wxPRIORITY_MIN     = 0u,   /* lowest possible priority */
-    wxPRIORITY_DEFAULT = 50u,  /* normal priority */
-    wxPRIORITY_MAX     = 100u  /* highest possible priority */
+	wxPRIORITY_MIN     = 0u,   /* lowest possible priority */
+	wxPRIORITY_DEFAULT = 50u,  /* normal priority */
+	wxPRIORITY_MAX     = 100u  /* highest possible priority */
 };
 
 #endif
-    /*  _WX_DEFS_H_ */
+/*  _WX_DEFS_H_ */

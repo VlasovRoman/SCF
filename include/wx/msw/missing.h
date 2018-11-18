@@ -11,92 +11,92 @@
 #define _WX_MISSING_H_
 
 #ifndef WM_CHANGEUISTATE
-    #define WM_CHANGEUISTATE    0x0127
+#define WM_CHANGEUISTATE    0x0127
 #endif
 
 #ifndef WM_UPDATEUISTATE
-    #define WM_UPDATEUISTATE    0x0128
+#define WM_UPDATEUISTATE    0x0128
 #endif
 
 #ifndef WM_QUERYUISTATE
-    #define WM_QUERYUISTATE     0x0129
+#define WM_QUERYUISTATE     0x0129
 #endif
 
 #ifndef WM_PRINTCLIENT
-    #define WM_PRINTCLIENT 0x318
+#define WM_PRINTCLIENT 0x318
 #endif
 
 #ifndef DT_HIDEPREFIX
-    #define DT_HIDEPREFIX 0x00100000
+#define DT_HIDEPREFIX 0x00100000
 #endif
 
 #ifndef DSS_HIDEPREFIX
-    #define DSS_HIDEPREFIX  0x0200
+#define DSS_HIDEPREFIX  0x0200
 #endif
 
 // Needed by toplevel.cpp
 #ifndef UIS_SET
-    #define UIS_SET         1
-    #define UIS_CLEAR       2
-    #define UIS_INITIALIZE  3
+#define UIS_SET         1
+#define UIS_CLEAR       2
+#define UIS_INITIALIZE  3
 #endif
 
 #ifndef UISF_HIDEFOCUS
-    #define UISF_HIDEFOCUS  1
+#define UISF_HIDEFOCUS  1
 #endif
 
 #ifndef UISF_HIDEACCEL
-    #define UISF_HIDEACCEL 2
+#define UISF_HIDEACCEL 2
 #endif
 
 #ifndef OFN_EXPLORER
-    #define OFN_EXPLORER 0x00080000
+#define OFN_EXPLORER 0x00080000
 #endif
 
 #ifndef OFN_ENABLESIZING
-    #define OFN_ENABLESIZING 0x00800000
+#define OFN_ENABLESIZING 0x00800000
 #endif
 
 // Needed by window.cpp
 #if wxUSE_MOUSEWHEEL
-    #ifndef WM_MOUSEWHEEL
-        #define WM_MOUSEWHEEL           0x020A
-    #endif
-    #ifndef WM_MOUSEHWHEEL
-        #define WM_MOUSEHWHEEL          0x020E
-    #endif
-    #ifndef WHEEL_DELTA
-        #define WHEEL_DELTA             120
-    #endif
-    #ifndef SPI_GETWHEELSCROLLLINES
-        #define SPI_GETWHEELSCROLLLINES 104
-    #endif
-    #ifndef SPI_GETWHEELSCROLLCHARS
-        #define SPI_GETWHEELSCROLLCHARS 108
-    #endif
+#ifndef WM_MOUSEWHEEL
+#define WM_MOUSEWHEEL           0x020A
+#endif
+#ifndef WM_MOUSEHWHEEL
+#define WM_MOUSEHWHEEL          0x020E
+#endif
+#ifndef WHEEL_DELTA
+#define WHEEL_DELTA             120
+#endif
+#ifndef SPI_GETWHEELSCROLLLINES
+#define SPI_GETWHEELSCROLLLINES 104
+#endif
+#ifndef SPI_GETWHEELSCROLLCHARS
+#define SPI_GETWHEELSCROLLCHARS 108
+#endif
 #endif // wxUSE_MOUSEWHEEL
 
 // Needed by window.cpp
 #ifndef VK_OEM_1
-    #define VK_OEM_1        0xBA
-    #define VK_OEM_2        0xBF
-    #define VK_OEM_3        0xC0
-    #define VK_OEM_4        0xDB
-    #define VK_OEM_5        0xDC
-    #define VK_OEM_6        0xDD
-    #define VK_OEM_7        0xDE
-    #define VK_OEM_102      0xE2
+#define VK_OEM_1        0xBA
+#define VK_OEM_2        0xBF
+#define VK_OEM_3        0xC0
+#define VK_OEM_4        0xDB
+#define VK_OEM_5        0xDC
+#define VK_OEM_6        0xDD
+#define VK_OEM_7        0xDE
+#define VK_OEM_102      0xE2
 #endif
 
 #ifndef VK_OEM_COMMA
-    #define VK_OEM_PLUS     0xBB
-    #define VK_OEM_COMMA    0xBC
-    #define VK_OEM_MINUS    0xBD
-    #define VK_OEM_PERIOD   0xBE
+#define VK_OEM_PLUS     0xBB
+#define VK_OEM_COMMA    0xBC
+#define VK_OEM_MINUS    0xBD
+#define VK_OEM_PERIOD   0xBE
 #endif
 
 #ifndef SM_TABLETPC
-    #define SM_TABLETPC 86
+#define SM_TABLETPC 86
 #endif
 
 #ifndef INKEDIT_CLASS
@@ -151,21 +151,21 @@
 // ----------------------------------------------------------------------------
 
 #ifndef MIIM_BITMAP
-    #define MIIM_STRING      0x00000040
-    #define MIIM_BITMAP      0x00000080
-    #define MIIM_FTYPE       0x00000100
-    #define HBMMENU_CALLBACK            ((HBITMAP) -1)
+#define MIIM_STRING      0x00000040
+#define MIIM_BITMAP      0x00000080
+#define MIIM_FTYPE       0x00000100
+#define HBMMENU_CALLBACK            ((HBITMAP) -1)
 
-    typedef struct tagMENUINFO
-    {
-        DWORD   cbSize;
-        DWORD   fMask;
-        DWORD   dwStyle;
-        UINT    cyMax;
-        HBRUSH  hbrBack;
-        DWORD   dwContextHelpID;
-        DWORD   dwMenuData;
-    }   MENUINFO, FAR *LPMENUINFO;
+typedef struct tagMENUINFO
+{
+	DWORD   cbSize;
+	DWORD   fMask;
+	DWORD   dwStyle;
+	UINT    cyMax;
+	HBRUSH  hbrBack;
+	DWORD   dwContextHelpID;
+	DWORD   dwMenuData;
+}   MENUINFO, FAR *LPMENUINFO;
 #endif // MIIM_BITMAP &c
 
 // ----------------------------------------------------------------------------
@@ -174,47 +174,47 @@
 // ----------------------------------------------------------------------------
 
 #ifndef I_IMAGENONE
-    #define I_IMAGENONE (-2)
+#define I_IMAGENONE (-2)
 #endif
 
 #ifndef LVS_EX_FULLROWSELECT
-    #define LVS_EX_FULLROWSELECT 0x00000020
+#define LVS_EX_FULLROWSELECT 0x00000020
 #endif
 
 #if !defined(LVS_EX_LABELTIP)
-    #define LVS_EX_LABELTIP 0x00004000
+#define LVS_EX_LABELTIP 0x00004000
 #endif
 
 #ifndef LVS_EX_SUBITEMIMAGES
-    #define LVS_EX_SUBITEMIMAGES 0x00000002
+#define LVS_EX_SUBITEMIMAGES 0x00000002
 #endif
 
 #ifndef LVS_EX_DOUBLEBUFFER
-    #define LVS_EX_DOUBLEBUFFER 0x00010000
+#define LVS_EX_DOUBLEBUFFER 0x00010000
 #endif
 
 #ifndef HDN_GETDISPINFOW
-    #define HDN_GETDISPINFOW (HDN_FIRST-29)
+#define HDN_GETDISPINFOW (HDN_FIRST-29)
 #endif
 
 #ifndef HDS_HOTTRACK
-    #define HDS_HOTTRACK 4
+#define HDS_HOTTRACK 4
 #endif
 #ifndef HDS_FLAT
-    #define HDS_FLAT 0x0200
+#define HDS_FLAT 0x0200
 #endif
 #ifndef HDS_NOSIZING
-    #define HDS_NOSIZING 0x0800
+#define HDS_NOSIZING 0x0800
 #endif
 
 #ifndef HDF_SORTUP
-    #define HDF_SORTUP   0x0400
-    #define HDF_SORTDOWN 0x0200
+#define HDF_SORTUP   0x0400
+#define HDF_SORTDOWN 0x0200
 #endif
 
- /*
-  * In addition to the above, the following are required for several compilers.
-  */
+/*
+ * In addition to the above, the following are required for several compilers.
+ */
 
 #if !defined(CCS_VERT)
 #define CCS_VERT                0x00000080L
@@ -225,15 +225,15 @@
 #endif
 
 #if !defined(TB_SETDISABLEDIMAGELIST)
-    #define TB_SETDISABLEDIMAGELIST (WM_USER + 54)
+#define TB_SETDISABLEDIMAGELIST (WM_USER + 54)
 #endif // !defined(TB_SETDISABLEDIMAGELIST)
 
 #ifndef HANGUL_CHARSET
-    #define HANGUL_CHARSET 129
+#define HANGUL_CHARSET 129
 #endif
 
 #ifndef CCM_SETUNICODEFORMAT
-    #define CCM_SETUNICODEFORMAT 8197
+#define CCM_SETUNICODEFORMAT 8197
 #endif
 
 // ----------------------------------------------------------------------------
@@ -241,28 +241,28 @@
 // ----------------------------------------------------------------------------
 
 #ifndef TV_FIRST
-    #define TV_FIRST                0x1100
+#define TV_FIRST                0x1100
 #endif
 
 #ifndef TVS_EX_DOUBLEBUFFER
-    #define TVS_EX_DOUBLEBUFFER     0x0004
+#define TVS_EX_DOUBLEBUFFER     0x0004
 #endif
 
 #ifndef TVS_FULLROWSELECT
-    #define TVS_FULLROWSELECT       0x1000
+#define TVS_FULLROWSELECT       0x1000
 #endif
 
 #ifndef TVM_SETBKCOLOR
-    #define TVM_SETBKCOLOR          (TV_FIRST + 29)
-    #define TVM_SETTEXTCOLOR        (TV_FIRST + 30)
+#define TVM_SETBKCOLOR          (TV_FIRST + 29)
+#define TVM_SETTEXTCOLOR        (TV_FIRST + 30)
 #endif
 
 #ifndef TVM_SETEXTENDEDSTYLE
-    #define TVM_SETEXTENDEDSTYLE    (TV_FIRST + 44)
-    #define TVM_GETEXTENDEDSTYLE    (TV_FIRST + 45)
+#define TVM_SETEXTENDEDSTYLE    (TV_FIRST + 44)
+#define TVM_GETEXTENDEDSTYLE    (TV_FIRST + 45)
 #endif
 
-// Various defines used by the webview library that are needed by mingw 
+// Various defines used by the webview library that are needed by mingw
 
 #ifndef DISPID_COMMANDSTATECHANGE
 #define DISPID_COMMANDSTATECHANGE 105
@@ -396,22 +396,22 @@
 #define MUI_LANGUAGE_NAME 0x8
 #endif
 
- /*
-  * The following are specifically required for Wine
-  */
+/*
+ * The following are specifically required for Wine
+ */
 
 #ifdef __WINE__
-    #ifndef ENUM_CURRENT_SETTINGS
-        #define ENUM_CURRENT_SETTINGS   ((DWORD)-1)
-    #endif
-    #ifndef BROADCAST_QUERY_DENY
-        #define BROADCAST_QUERY_DENY    1112363332
-    #endif
+#ifndef ENUM_CURRENT_SETTINGS
+#define ENUM_CURRENT_SETTINGS   ((DWORD)-1)
+#endif
+#ifndef BROADCAST_QUERY_DENY
+#define BROADCAST_QUERY_DENY    1112363332
+#endif
 #endif  // defined __WINE__
 
 #ifndef INVALID_FILE_ATTRIBUTES
-    #define INVALID_FILE_ATTRIBUTES ((DWORD)-1)
+#define INVALID_FILE_ATTRIBUTES ((DWORD)-1)
 #endif
 
 #endif
-    // _WX_MISSING_H_
+// _WX_MISSING_H_

@@ -16,62 +16,65 @@
 
 class WXDLLIMPEXP_CORE wxStaticBitmap : public wxStaticBitmapBase
 {
-    wxDECLARE_DYNAMIC_CLASS(wxStaticBitmap);
+	wxDECLARE_DYNAMIC_CLASS(wxStaticBitmap);
 
 public:
-    wxStaticBitmap() { }
-    virtual ~wxStaticBitmap();
+	wxStaticBitmap() { }
+	virtual ~wxStaticBitmap();
 
-    wxStaticBitmap(wxWindow *parent, wxWindowID id,
-        const wxBitmap& label,
-        const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize,
-        long style = 0,
-        const wxString& name = wxStaticBitmapNameStr)
-    {
-        Create(parent, id, label, pos, size, style, name);
-    }
+	wxStaticBitmap(wxWindow *parent, wxWindowID id,
+	               const wxBitmap& label,
+	               const wxPoint& pos = wxDefaultPosition,
+	               const wxSize& size = wxDefaultSize,
+	               long style = 0,
+	               const wxString& name = wxStaticBitmapNameStr)
+	{
+		Create(parent, id, label, pos, size, style, name);
+	}
 
-    bool Create(wxWindow *parent, wxWindowID id,
-        const wxBitmap& label,
-        const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize,
-        long style = 0,
-        const wxString& name = wxStaticBitmapNameStr);
+	bool Create(wxWindow *parent, wxWindowID id,
+	            const wxBitmap& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxStaticBitmapNameStr);
 
-    virtual void SetBitmap(const wxBitmap& bitmap);
+	virtual void SetBitmap(const wxBitmap& bitmap);
 
-    virtual bool ProcessCommand(wxCommandEvent& WXUNUSED(event))
-    {
-        return false;
-    }
+	virtual bool ProcessCommand(wxCommandEvent& WXUNUSED(event))
+	{
+		return false;
+	}
 
-    wxBitmap GetBitmap() const { return m_messageBitmap; }
+	wxBitmap GetBitmap() const
+	{
+		return m_messageBitmap;
+	}
 
-    // for compatibility with wxMSW
-    wxIcon GetIcon() const
-    {
-        // don't use wxDynamicCast, icons and bitmaps are really the same thing
-        return *(wxIcon*)&m_messageBitmap;
-    }
+	// for compatibility with wxMSW
+	wxIcon GetIcon() const
+	{
+		// don't use wxDynamicCast, icons and bitmaps are really the same thing
+		return *(wxIcon*)&m_messageBitmap;
+	}
 
-    // for compatibility with wxMSW
-    void  SetIcon(const wxIcon& icon)
-    {
-        SetBitmap( icon );
-    }
+	// for compatibility with wxMSW
+	void  SetIcon(const wxIcon& icon)
+	{
+		SetBitmap( icon );
+	}
 
-    // Implementation
-    virtual void ChangeBackgroundColour();
-    virtual void ChangeForegroundColour();
+	// Implementation
+	virtual void ChangeBackgroundColour();
+	virtual void ChangeForegroundColour();
 
 protected:
-    void DoSetBitmap();
+	void DoSetBitmap();
 
 protected:
-    wxBitmap m_messageBitmap;
-    wxBitmap m_messageBitmapOriginal;
-    wxBitmapCache m_bitmapCache;
+	wxBitmap m_messageBitmap;
+	wxBitmap m_messageBitmapOriginal;
+	wxBitmapCache m_bitmapCache;
 };
 
 #endif

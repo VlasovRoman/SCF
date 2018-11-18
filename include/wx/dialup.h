@@ -45,106 +45,106 @@ class WXDLLIMPEXP_FWD_BASE wxArrayString;
 class WXDLLIMPEXP_CORE wxDialUpManager
 {
 public:
-    // this function should create and return the object of the
-    // platform-specific class derived from wxDialUpManager. It's implemented
-    // in the platform-specific source files.
-    static wxDialUpManager *Create();
+	// this function should create and return the object of the
+	// platform-specific class derived from wxDialUpManager. It's implemented
+	// in the platform-specific source files.
+	static wxDialUpManager *Create();
 
-    // could the dialup manager be initialized correctly? If this function
-    // returns false, no other functions will work neither, so it's a good idea
-    // to call this function and check its result before calling any other
-    // wxDialUpManager methods
-    virtual bool IsOk() const = 0;
+	// could the dialup manager be initialized correctly? If this function
+	// returns false, no other functions will work neither, so it's a good idea
+	// to call this function and check its result before calling any other
+	// wxDialUpManager methods
+	virtual bool IsOk() const = 0;
 
-    // virtual dtor for any base class
-    virtual ~wxDialUpManager() { }
+	// virtual dtor for any base class
+	virtual ~wxDialUpManager() { }
 
-    // operations
-    // ----------
+	// operations
+	// ----------
 
-    // fills the array with the names of all possible values for the first
-    // parameter to Dial() on this machine and returns their number (may be 0)
-    virtual size_t GetISPNames(wxArrayString& names) const = 0;
+	// fills the array with the names of all possible values for the first
+	// parameter to Dial() on this machine and returns their number (may be 0)
+	virtual size_t GetISPNames(wxArrayString& names) const = 0;
 
-    // dial the given ISP, use username and password to authentificate
-    //
-    // if no nameOfISP is given, the function will select the default one
-    //
-    // if no username/password are given, the function will try to do without
-    // them, but will ask the user if really needed
-    //
-    // if async parameter is false, the function waits until the end of dialing
-    // and returns true upon successful completion.
-    // if async is true, the function only initiates the connection and returns
-    // immediately - the result is reported via events (an event is sent
-    // anyhow, but if dialing failed it will be a DISCONNECTED one)
-    virtual bool Dial(const wxString& nameOfISP = wxEmptyString,
-                      const wxString& username = wxEmptyString,
-                      const wxString& password = wxEmptyString,
-                      bool async = true) = 0;
+	// dial the given ISP, use username and password to authentificate
+	//
+	// if no nameOfISP is given, the function will select the default one
+	//
+	// if no username/password are given, the function will try to do without
+	// them, but will ask the user if really needed
+	//
+	// if async parameter is false, the function waits until the end of dialing
+	// and returns true upon successful completion.
+	// if async is true, the function only initiates the connection and returns
+	// immediately - the result is reported via events (an event is sent
+	// anyhow, but if dialing failed it will be a DISCONNECTED one)
+	virtual bool Dial(const wxString& nameOfISP = wxEmptyString,
+	                  const wxString& username = wxEmptyString,
+	                  const wxString& password = wxEmptyString,
+	                  bool async = true) = 0;
 
-    // returns true if (async) dialing is in progress
-    virtual bool IsDialing() const = 0;
+	// returns true if (async) dialing is in progress
+	virtual bool IsDialing() const = 0;
 
-    // cancel dialing the number initiated with Dial(async = true)
-    // NB: this won't result in DISCONNECTED event being sent
-    virtual bool CancelDialing() = 0;
+	// cancel dialing the number initiated with Dial(async = true)
+	// NB: this won't result in DISCONNECTED event being sent
+	virtual bool CancelDialing() = 0;
 
-    // hang up the currently active dial up connection
-    virtual bool HangUp() = 0;
+	// hang up the currently active dial up connection
+	virtual bool HangUp() = 0;
 
-    // online status
-    // -------------
+	// online status
+	// -------------
 
-    // returns true if the computer has a permanent network connection (i.e. is
-    // on a LAN) and so there is no need to use Dial() function to go online
-    //
-    // NB: this functions tries to guess the result and it is not always
-    //     guaranteed to be correct, so it's better to ask user for
-    //     confirmation or give him a possibility to override it
-    virtual bool IsAlwaysOnline() const = 0;
+	// returns true if the computer has a permanent network connection (i.e. is
+	// on a LAN) and so there is no need to use Dial() function to go online
+	//
+	// NB: this functions tries to guess the result and it is not always
+	//     guaranteed to be correct, so it's better to ask user for
+	//     confirmation or give him a possibility to override it
+	virtual bool IsAlwaysOnline() const = 0;
 
-    // returns true if the computer is connected to the network: under Windows,
-    // this just means that a RAS connection exists, under Unix we check that
-    // the "well-known host" (as specified by SetWellKnownHost) is reachable
-    virtual bool IsOnline() const = 0;
+	// returns true if the computer is connected to the network: under Windows,
+	// this just means that a RAS connection exists, under Unix we check that
+	// the "well-known host" (as specified by SetWellKnownHost) is reachable
+	virtual bool IsOnline() const = 0;
 
-    // sometimes the built-in logic for determining the online status may fail,
-    // so, in general, the user should be allowed to override it. This function
-    // allows to forcefully set the online status - whatever our internal
-    // algorithm may think about it.
-    virtual void SetOnlineStatus(bool isOnline = true) = 0;
+	// sometimes the built-in logic for determining the online status may fail,
+	// so, in general, the user should be allowed to override it. This function
+	// allows to forcefully set the online status - whatever our internal
+	// algorithm may think about it.
+	virtual void SetOnlineStatus(bool isOnline = true) = 0;
 
-    // set misc wxDialUpManager options
-    // --------------------------------
+	// set misc wxDialUpManager options
+	// --------------------------------
 
-    // enable automatical checks for the connection status and sending of
-    // wxEVT_DIALUP_CONNECTED/wxEVT_DIALUP_DISCONNECTED events. The interval
-    // parameter is only for Unix where we do the check manually: under
-    // Windows, the notification about the change of connection status is
-    // instantenous.
-    //
-    // Returns false if couldn't set up automatic check for online status.
-    virtual bool EnableAutoCheckOnlineStatus(size_t nSeconds = 60) = 0;
+	// enable automatical checks for the connection status and sending of
+	// wxEVT_DIALUP_CONNECTED/wxEVT_DIALUP_DISCONNECTED events. The interval
+	// parameter is only for Unix where we do the check manually: under
+	// Windows, the notification about the change of connection status is
+	// instantenous.
+	//
+	// Returns false if couldn't set up automatic check for online status.
+	virtual bool EnableAutoCheckOnlineStatus(size_t nSeconds = 60) = 0;
 
-    // disable automatic check for connection status change - notice that the
-    // wxEVT_DIALUP_XXX events won't be sent any more neither.
-    virtual void DisableAutoCheckOnlineStatus() = 0;
+	// disable automatic check for connection status change - notice that the
+	// wxEVT_DIALUP_XXX events won't be sent any more neither.
+	virtual void DisableAutoCheckOnlineStatus() = 0;
 
-    // additional Unix-only configuration
-    // ----------------------------------
+	// additional Unix-only configuration
+	// ----------------------------------
 
-    // under Unix, the value of well-known host is used to check whether we're
-    // connected to the internet. It's unused under Windows, but this function
-    // is always safe to call. The default value is www.yahoo.com.
-    virtual void SetWellKnownHost(const wxString& hostname,
-                                  int portno = 80) = 0;
+	// under Unix, the value of well-known host is used to check whether we're
+	// connected to the internet. It's unused under Windows, but this function
+	// is always safe to call. The default value is www.yahoo.com.
+	virtual void SetWellKnownHost(const wxString& hostname,
+	                              int portno = 80) = 0;
 
-    // Sets the commands to start up the network and to hang up again. Used by
-    // the Unix implementations only.
-    virtual void
-    SetConnectCommand(const wxString& commandDial = wxT("/usr/bin/pon"),
-                      const wxString& commandHangup = wxT("/usr/bin/poff")) = 0;
+	// Sets the commands to start up the network and to hang up again. Used by
+	// the Unix implementations only.
+	virtual void
+	SetConnectCommand(const wxString& commandDial = wxT("/usr/bin/pon"),
+	                  const wxString& commandHangup = wxT("/usr/bin/poff")) = 0;
 };
 
 // ----------------------------------------------------------------------------
@@ -160,26 +160,34 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_DIALUP_DISCONNECTED, wxDialUpE
 class WXDLLIMPEXP_CORE wxDialUpEvent : public wxEvent
 {
 public:
-    wxDialUpEvent(bool isConnected, bool isOwnEvent) : wxEvent(isOwnEvent)
-    {
-        SetEventType(isConnected ? wxEVT_DIALUP_CONNECTED
-                                 : wxEVT_DIALUP_DISCONNECTED);
-    }
+	wxDialUpEvent(bool isConnected, bool isOwnEvent) : wxEvent(isOwnEvent)
+	{
+		SetEventType(isConnected ? wxEVT_DIALUP_CONNECTED
+		             : wxEVT_DIALUP_DISCONNECTED);
+	}
 
-    // is this a CONNECTED or DISCONNECTED event?
-    bool IsConnectedEvent() const
-        { return GetEventType() == wxEVT_DIALUP_CONNECTED; }
+	// is this a CONNECTED or DISCONNECTED event?
+	bool IsConnectedEvent() const
+	{
+		return GetEventType() == wxEVT_DIALUP_CONNECTED;
+	}
 
-    // does this event come from wxDialUpManager::Dial() or from some external
-    // process (i.e. does it result from our own attempt to establish the
-    // connection)?
-    bool IsOwnEvent() const { return m_id != 0; }
+	// does this event come from wxDialUpManager::Dial() or from some external
+	// process (i.e. does it result from our own attempt to establish the
+	// connection)?
+	bool IsOwnEvent() const
+	{
+		return m_id != 0;
+	}
 
-    // implement the base class pure virtual
-    virtual wxEvent *Clone() const wxOVERRIDE { return new wxDialUpEvent(*this); }
+	// implement the base class pure virtual
+	virtual wxEvent *Clone() const wxOVERRIDE
+	{
+		return new wxDialUpEvent(*this);
+	}
 
 private:
-    wxDECLARE_NO_ASSIGN_CLASS(wxDialUpEvent);
+	wxDECLARE_NO_ASSIGN_CLASS(wxDialUpEvent);
 };
 
 // the type of dialup event handler function

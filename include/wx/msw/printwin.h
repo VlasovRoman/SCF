@@ -19,20 +19,20 @@
 
 class WXDLLIMPEXP_CORE wxWindowsPrinter : public wxPrinterBase
 {
-    wxDECLARE_DYNAMIC_CLASS(wxWindowsPrinter);
+	wxDECLARE_DYNAMIC_CLASS(wxWindowsPrinter);
 
 public:
-    wxWindowsPrinter(wxPrintDialogData *data = NULL);
+	wxWindowsPrinter(wxPrintDialogData *data = NULL);
 
-    virtual bool Print(wxWindow *parent,
-                       wxPrintout *printout,
-                       bool prompt = true) wxOVERRIDE;
+	virtual bool Print(wxWindow *parent,
+	                   wxPrintout *printout,
+	                   bool prompt = true) wxOVERRIDE;
 
-    virtual wxDC *PrintDialog(wxWindow *parent) wxOVERRIDE;
-    virtual bool Setup(wxWindow *parent) wxOVERRIDE;
+	virtual wxDC *PrintDialog(wxWindow *parent) wxOVERRIDE;
+	virtual bool Setup(wxWindow *parent) wxOVERRIDE;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxWindowsPrinter);
+	wxDECLARE_NO_COPY_CLASS(wxWindowsPrinter);
 };
 
 // ---------------------------------------------------------------------------
@@ -43,23 +43,23 @@ private:
 class WXDLLIMPEXP_CORE wxWindowsPrintPreview : public wxPrintPreviewBase
 {
 public:
-    wxWindowsPrintPreview(wxPrintout *printout,
-                          wxPrintout *printoutForPrinting = NULL,
-                          wxPrintDialogData *data = NULL);
-    wxWindowsPrintPreview(wxPrintout *printout,
-                          wxPrintout *printoutForPrinting,
-                          wxPrintData *data);
-    virtual ~wxWindowsPrintPreview();
+	wxWindowsPrintPreview(wxPrintout *printout,
+	                      wxPrintout *printoutForPrinting = NULL,
+	                      wxPrintDialogData *data = NULL);
+	wxWindowsPrintPreview(wxPrintout *printout,
+	                      wxPrintout *printoutForPrinting,
+	                      wxPrintData *data);
+	virtual ~wxWindowsPrintPreview();
 
-    virtual bool Print(bool interactive) wxOVERRIDE;
-    virtual void DetermineScaling() wxOVERRIDE;
+	virtual bool Print(bool interactive) wxOVERRIDE;
+	virtual void DetermineScaling() wxOVERRIDE;
 
 protected:
 #if wxUSE_ENH_METAFILE
-    virtual bool RenderPageIntoBitmap(wxBitmap& bmp, int pageNum) wxOVERRIDE;
+	virtual bool RenderPageIntoBitmap(wxBitmap& bmp, int pageNum) wxOVERRIDE;
 #endif
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxWindowsPrintPreview);
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxWindowsPrintPreview);
 };
 
 #endif

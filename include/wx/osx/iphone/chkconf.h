@@ -373,10 +373,10 @@
 #endif
 
 #if wxUSE_SECRETSTORE
-    #undef wxUSE_SECRETSTORE
-    #define wxUSE_SECRETSTORE 0
+#undef wxUSE_SECRETSTORE
+#define wxUSE_SECRETSTORE 0
 #endif
 
 #endif
-    /* _WX_OSX_IPHONE_CHKCONF_H_ */
+/* _WX_OSX_IPHONE_CHKCONF_H_ */
 

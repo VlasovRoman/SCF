@@ -40,56 +40,80 @@ class WXDLLIMPEXP_BASE wxEvtHandler;
 class WXDLLIMPEXP_BASE wxPropertySetter
 {
 public:
-    wxPropertySetter( const wxString name ) { m_name = name; }
-    virtual ~wxPropertySetter() {}
+	wxPropertySetter( const wxString name )
+	{
+		m_name = name;
+	}
+	virtual ~wxPropertySetter() {}
 
-    virtual void Set( wxObject *object, const wxAny &variantValue ) const = 0;
-    const wxString& GetName() const { return m_name; }
+	virtual void Set( wxObject *object, const wxAny &variantValue ) const = 0;
+	const wxString& GetName() const
+	{
+		return m_name;
+	}
 
 private:
-    wxString m_name;
+	wxString m_name;
 };
 
 class WXDLLIMPEXP_BASE wxPropertyGetter
 {
 public:
-    wxPropertyGetter( const wxString name ) { m_name = name; }
-    virtual ~wxPropertyGetter() {}
+	wxPropertyGetter( const wxString name )
+	{
+		m_name = name;
+	}
+	virtual ~wxPropertyGetter() {}
 
-    virtual void Get( const wxObject *object, wxAny& result) const = 0;
-    const wxString& GetName() const { return m_name; }
+	virtual void Get( const wxObject *object, wxAny& result) const = 0;
+	const wxString& GetName() const
+	{
+		return m_name;
+	}
 
 private:
-    wxString m_name;
+	wxString m_name;
 };
 
 class WXDLLIMPEXP_BASE wxPropertyCollectionGetter
 {
 public:
-    wxPropertyCollectionGetter( const wxString name ) { m_name = name; }
-    virtual ~wxPropertyCollectionGetter() {}
+	wxPropertyCollectionGetter( const wxString name )
+	{
+		m_name = name;
+	}
+	virtual ~wxPropertyCollectionGetter() {}
 
-    virtual void Get( const wxObject *object, wxAnyList& result) const = 0;
-    const wxString& GetName() const { return m_name; }
+	virtual void Get( const wxObject *object, wxAnyList& result) const = 0;
+	const wxString& GetName() const
+	{
+		return m_name;
+	}
 
 private:
-    wxString m_name;
+	wxString m_name;
 };
 
 template<typename coll_t> void WXDLLIMPEXP_BASE \
-    wxCollectionToVariantArray( const coll_t& coll, wxAnyList& result );
+wxCollectionToVariantArray( const coll_t& coll, wxAnyList& result );
 
 class WXDLLIMPEXP_BASE wxPropertyCollectionAdder
 {
 public:
-    wxPropertyCollectionAdder( const wxString name ) { m_name = name; }
-    virtual ~wxPropertyCollectionAdder() {}
+	wxPropertyCollectionAdder( const wxString name )
+	{
+		m_name = name;
+	}
+	virtual ~wxPropertyCollectionAdder() {}
 
-    virtual void Add( wxObject *object, const wxAny &variantValue ) const= 0;
-    const wxString& GetName() const { return m_name; }
+	virtual void Add( wxObject *object, const wxAny &variantValue ) const= 0;
+	const wxString& GetName() const
+	{
+		return m_name;
+	}
 
 private:
-    wxString m_name;
+	wxString m_name;
 };
 
 #define wxPROPERTY_SETTER( property, Klass, valueType, setterMethod )   \
@@ -159,133 +183,174 @@ public:                                                                     \
 class WXDLLIMPEXP_BASE wxPropertyAccessor
 {
 public:
-    wxPropertyAccessor( wxPropertySetter *setter, wxPropertyGetter *getter, 
-                        wxPropertyCollectionAdder *adder, wxPropertyCollectionGetter *collectionGetter )
-    { m_setter = setter; m_getter = getter; m_adder = adder; 
-      m_collectionGetter = collectionGetter; }
+	wxPropertyAccessor( wxPropertySetter *setter, wxPropertyGetter *getter,
+	                    wxPropertyCollectionAdder *adder, wxPropertyCollectionGetter *collectionGetter )
+	{
+		m_setter = setter;
+		m_getter = getter;
+		m_adder = adder;
+		m_collectionGetter = collectionGetter;
+	}
 
-    virtual ~wxPropertyAccessor() {}
+	virtual ~wxPropertyAccessor() {}
 
-    // Setting a simple property (non-collection)
-    virtual void SetProperty(wxObject *object, const wxAny &value) const
-    { 
-        if ( m_setter ) 
-            m_setter->Set( object, value ); 
-        else 
-            wxLogError( wxGetTranslation("SetProperty called w/o valid setter") ); 
-    }
+	// Setting a simple property (non-collection)
+	virtual void SetProperty(wxObject *object, const wxAny &value) const
+	{
+		if ( m_setter )
+			m_setter->Set( object, value );
+		else
+			wxLogError( wxGetTranslation("SetProperty called w/o valid setter") );
+	}
 
-    // Getting a simple property (non-collection)
-    virtual void GetProperty(const wxObject *object, wxAny &result) const
-    { 
-        if ( m_getter ) 
-            m_getter->Get( object, result ); 
-        else 
-            wxLogError( wxGetTranslation("GetProperty called w/o valid getter") ); 
-    }
+	// Getting a simple property (non-collection)
+	virtual void GetProperty(const wxObject *object, wxAny &result) const
+	{
+		if ( m_getter )
+			m_getter->Get( object, result );
+		else
+			wxLogError( wxGetTranslation("GetProperty called w/o valid getter") );
+	}
 
-    // Adding an element to a collection property
-    virtual void AddToPropertyCollection(wxObject *object, const wxAny &value) const
-    { 
-        if ( m_adder ) 
-            m_adder->Add( object, value ); 
-        else 
-            wxLogError( wxGetTranslation("AddToPropertyCollection called w/o valid adder") ); 
-    }
+	// Adding an element to a collection property
+	virtual void AddToPropertyCollection(wxObject *object, const wxAny &value) const
+	{
+		if ( m_adder )
+			m_adder->Add( object, value );
+		else
+			wxLogError( wxGetTranslation("AddToPropertyCollection called w/o valid adder") );
+	}
 
-    // Getting a collection property
-    virtual void GetPropertyCollection( const wxObject *obj, wxAnyList &result) const
-    { 
-        if ( m_collectionGetter ) 
-            m_collectionGetter->Get( obj, result); 
-        else 
-            wxLogError( wxGetTranslation("GetPropertyCollection called w/o valid collection getter") ); 
-    }
+	// Getting a collection property
+	virtual void GetPropertyCollection( const wxObject *obj, wxAnyList &result) const
+	{
+		if ( m_collectionGetter )
+			m_collectionGetter->Get( obj, result);
+		else
+			wxLogError( wxGetTranslation("GetPropertyCollection called w/o valid collection getter") );
+	}
 
-    virtual bool HasSetter() const { return m_setter != NULL; }
-    virtual bool HasCollectionGetter() const { return m_collectionGetter != NULL; }
-    virtual bool HasGetter() const { return m_getter != NULL; }
-    virtual bool HasAdder() const { return m_adder != NULL; }
+	virtual bool HasSetter() const
+	{
+		return m_setter != NULL;
+	}
+	virtual bool HasCollectionGetter() const
+	{
+		return m_collectionGetter != NULL;
+	}
+	virtual bool HasGetter() const
+	{
+		return m_getter != NULL;
+	}
+	virtual bool HasAdder() const
+	{
+		return m_adder != NULL;
+	}
 
-    virtual const wxString& GetCollectionGetterName() const
-        { return m_collectionGetter->GetName(); }
-    virtual const wxString&  GetGetterName() const
-        { return m_getter->GetName(); }
-    virtual const wxString& GetSetterName() const
-        { return m_setter->GetName(); }
-    virtual const wxString& GetAdderName() const
-        { return m_adder->GetName(); }
+	virtual const wxString& GetCollectionGetterName() const
+	{
+		return m_collectionGetter->GetName();
+	}
+	virtual const wxString&  GetGetterName() const
+	{
+		return m_getter->GetName();
+	}
+	virtual const wxString& GetSetterName() const
+	{
+		return m_setter->GetName();
+	}
+	virtual const wxString& GetAdderName() const
+	{
+		return m_adder->GetName();
+	}
 
 protected:
-    wxPropertySetter *m_setter;
-    wxPropertyCollectionAdder *m_adder;
-    wxPropertyGetter *m_getter;
-    wxPropertyCollectionGetter* m_collectionGetter;
+	wxPropertySetter *m_setter;
+	wxPropertyCollectionAdder *m_adder;
+	wxPropertyGetter *m_getter;
+	wxPropertyCollectionGetter* m_collectionGetter;
 };
 
 class WXDLLIMPEXP_BASE wxGenericPropertyAccessor : public wxPropertyAccessor
 {
 public:
-    wxGenericPropertyAccessor( const wxString &propName );
-    virtual ~wxGenericPropertyAccessor();
+	wxGenericPropertyAccessor( const wxString &propName );
+	virtual ~wxGenericPropertyAccessor();
 
-    void RenameProperty( const wxString& WXUNUSED_UNLESS_DEBUG(oldName),
-        const wxString& newName )
-    {
-        wxASSERT( oldName == m_propertyName ); m_propertyName = newName;
-    }
+	void RenameProperty( const wxString& WXUNUSED_UNLESS_DEBUG(oldName),
+	                     const wxString& newName )
+	{
+		wxASSERT( oldName == m_propertyName );
+		m_propertyName = newName;
+	}
 
-    virtual bool HasSetter() const { return true; }
-    virtual bool HasGetter() const { return true; }
-    virtual bool HasAdder() const { return false; }
-    virtual bool HasCollectionGetter() const { return false; }
+	virtual bool HasSetter() const
+	{
+		return true;
+	}
+	virtual bool HasGetter() const
+	{
+		return true;
+	}
+	virtual bool HasAdder() const
+	{
+		return false;
+	}
+	virtual bool HasCollectionGetter() const
+	{
+		return false;
+	}
 
-    virtual const wxString&  GetGetterName() const
-        { return m_getterName; }
-    virtual const wxString& GetSetterName() const
-        { return m_setterName; }
+	virtual const wxString&  GetGetterName() const
+	{
+		return m_getterName;
+	}
+	virtual const wxString& GetSetterName() const
+	{
+		return m_setterName;
+	}
 
-    virtual void SetProperty(wxObject *object, const wxAny &value) const;
-    virtual void GetProperty(const wxObject *object, wxAny &value) const;
+	virtual void SetProperty(wxObject *object, const wxAny &value) const;
+	virtual void GetProperty(const wxObject *object, wxAny &value) const;
 
-    // Adding an element to a collection property
-    virtual void AddToPropertyCollection(wxObject *WXUNUSED(object), 
-                                         const wxAny &WXUNUSED(value)) const
-    { 
-        wxLogError( wxGetTranslation("AddToPropertyCollection called on a generic accessor") ); 
-    }
+	// Adding an element to a collection property
+	virtual void AddToPropertyCollection(wxObject *WXUNUSED(object),
+	                                     const wxAny &WXUNUSED(value)) const
+	{
+		wxLogError( wxGetTranslation("AddToPropertyCollection called on a generic accessor") );
+	}
 
-    // Getting a collection property
-    virtual void GetPropertyCollection( const wxObject *WXUNUSED(obj), 
-                                        wxAnyList &WXUNUSED(result)) const
-    { 
-        wxLogError ( wxGetTranslation("GetPropertyCollection called on a generic accessor") ); 
-    }
+	// Getting a collection property
+	virtual void GetPropertyCollection( const wxObject *WXUNUSED(obj),
+	                                    wxAnyList &WXUNUSED(result)) const
+	{
+		wxLogError ( wxGetTranslation("GetPropertyCollection called on a generic accessor") );
+	}
 
 private:
-    struct wxGenericPropertyAccessorInternal;
-    wxGenericPropertyAccessorInternal* m_data;
-    wxString m_propertyName;
-    wxString m_setterName;
-    wxString m_getterName;
+	struct wxGenericPropertyAccessorInternal;
+	wxGenericPropertyAccessorInternal* m_data;
+	wxString m_propertyName;
+	wxString m_setterName;
+	wxString m_getterName;
 };
 
 typedef long wxPropertyInfoFlags;
-enum 
+enum
 {
-    // will be removed in future releases
-    wxPROP_DEPRECATED       = 0x00000001,
+	// will be removed in future releases
+	wxPROP_DEPRECATED       = 0x00000001,
 
-    // object graph property, will be streamed with priority (after constructor properties)
-    wxPROP_OBJECT_GRAPH     = 0x00000002,
+	// object graph property, will be streamed with priority (after constructor properties)
+	wxPROP_OBJECT_GRAPH     = 0x00000002,
 
-    // this will only be streamed out and in as enum/set, the internal representation 
-    // is still a long
-    wxPROP_ENUM_STORE_LONG  = 0x00000004,
+	// this will only be streamed out and in as enum/set, the internal representation
+	// is still a long
+	wxPROP_ENUM_STORE_LONG  = 0x00000004,
 
-    // don't stream out this property, needed eg to avoid streaming out children 
-    // that are always created by their parents
-    wxPROP_DONT_STREAM      = 0x00000008
+	// don't stream out this property, needed eg to avoid streaming out children
+	// that are always created by their parents
+	wxPROP_DONT_STREAM      = 0x00000008
 };
 
 
@@ -299,159 +364,187 @@ enum
 
 class WXDLLIMPEXP_BASE wxPropertyInfo
 {
-    friend class /* WXDLLIMPEXP_BASE */ wxDynamicClassInfo;
+	friend class /* WXDLLIMPEXP_BASE */ wxDynamicClassInfo;
 
 public:
-    wxPropertyInfo(wxPropertyInfo* &iter,
-                   wxClassInfo* itsClass,
-                   const wxString& name,
-                   const wxString& typeName,
-                   wxPropertyAccessor *accessor,
-                   wxAny dv,
-                   wxPropertyInfoFlags flags = 0,
-                   const wxString& helpString = wxEmptyString,
-                   const wxString& groupString = wxEmptyString) :
-                   m_itsClass(itsClass),
-           m_name(name),
-           m_typeInfo(NULL),
-           m_typeName(typeName),
-           m_collectionElementTypeInfo(NULL),
-           m_accessor(accessor),
-           m_defaultValue(dv),
-           m_flags(flags),
-           m_helpString(helpString),
-           m_groupString(groupString)
-       {
-           Insert(iter);
-       }
+	wxPropertyInfo(wxPropertyInfo* &iter,
+	               wxClassInfo* itsClass,
+	               const wxString& name,
+	               const wxString& typeName,
+	               wxPropertyAccessor *accessor,
+	               wxAny dv,
+	               wxPropertyInfoFlags flags = 0,
+	               const wxString& helpString = wxEmptyString,
+	               const wxString& groupString = wxEmptyString) :
+		m_itsClass(itsClass),
+		m_name(name),
+		m_typeInfo(NULL),
+		m_typeName(typeName),
+		m_collectionElementTypeInfo(NULL),
+		m_accessor(accessor),
+		m_defaultValue(dv),
+		m_flags(flags),
+		m_helpString(helpString),
+		m_groupString(groupString)
+	{
+		Insert(iter);
+	}
 
-    wxPropertyInfo(wxPropertyInfo* &iter,
-                   wxClassInfo* itsClass,
-                   const wxString& name,
-                   wxEventSourceTypeInfo* type,
-                   wxPropertyAccessor *accessor,
-                   wxAny dv,
-                   wxPropertyInfoFlags flags = 0,
-                   const wxString& helpString = wxEmptyString,
-                   const wxString& groupString = wxEmptyString) :
-           m_itsClass(itsClass),
-           m_name(name),
-           m_typeInfo(type),
-           m_collectionElementTypeInfo(NULL),
-           m_accessor(accessor),
-           m_defaultValue(dv),
-           m_flags(flags),
-           m_helpString(helpString),
-           m_groupString(groupString)
-       {
-           Insert(iter);
-       }
+	wxPropertyInfo(wxPropertyInfo* &iter,
+	               wxClassInfo* itsClass,
+	               const wxString& name,
+	               wxEventSourceTypeInfo* type,
+	               wxPropertyAccessor *accessor,
+	               wxAny dv,
+	               wxPropertyInfoFlags flags = 0,
+	               const wxString& helpString = wxEmptyString,
+	               const wxString& groupString = wxEmptyString) :
+		m_itsClass(itsClass),
+		m_name(name),
+		m_typeInfo(type),
+		m_collectionElementTypeInfo(NULL),
+		m_accessor(accessor),
+		m_defaultValue(dv),
+		m_flags(flags),
+		m_helpString(helpString),
+		m_groupString(groupString)
+	{
+		Insert(iter);
+	}
 
-    wxPropertyInfo(wxPropertyInfo* &iter,
-                    wxClassInfo* itsClass, const wxString& name,
-                    const wxString& collectionTypeName,
-                    const wxString& elementTypeName,
-                    wxPropertyAccessor *accessor,
-                    wxPropertyInfoFlags flags = 0,
-                    const wxString& helpString = wxEmptyString,
-                    const wxString& groupString = wxEmptyString) :
-        m_itsClass(itsClass),
-        m_name(name),
-        m_typeInfo(NULL),
-        m_typeName(collectionTypeName),
-        m_collectionElementTypeInfo(NULL),
-        m_collectionElementTypeName(elementTypeName),
-        m_accessor(accessor),
-        m_flags(flags),
-        m_helpString(helpString),
-        m_groupString(groupString)
-    {
-        Insert(iter);
-    }
+	wxPropertyInfo(wxPropertyInfo* &iter,
+	               wxClassInfo* itsClass, const wxString& name,
+	               const wxString& collectionTypeName,
+	               const wxString& elementTypeName,
+	               wxPropertyAccessor *accessor,
+	               wxPropertyInfoFlags flags = 0,
+	               const wxString& helpString = wxEmptyString,
+	               const wxString& groupString = wxEmptyString) :
+		m_itsClass(itsClass),
+		m_name(name),
+		m_typeInfo(NULL),
+		m_typeName(collectionTypeName),
+		m_collectionElementTypeInfo(NULL),
+		m_collectionElementTypeName(elementTypeName),
+		m_accessor(accessor),
+		m_flags(flags),
+		m_helpString(helpString),
+		m_groupString(groupString)
+	{
+		Insert(iter);
+	}
 
-    ~wxPropertyInfo()
-        { Remove(); }
+	~wxPropertyInfo()
+	{
+		Remove();
+	}
 
-    // return the class this property is declared in
-    const wxClassInfo*  GetDeclaringClass() const { return m_itsClass; }
+	// return the class this property is declared in
+	const wxClassInfo*  GetDeclaringClass() const
+	{
+		return m_itsClass;
+	}
 
-    // return the name of this property
-    const wxString&     GetName() const { return m_name; }
+	// return the name of this property
+	const wxString&     GetName() const
+	{
+		return m_name;
+	}
 
-    // returns the flags of this property
-    wxPropertyInfoFlags GetFlags() const { return m_flags; }
+	// returns the flags of this property
+	wxPropertyInfoFlags GetFlags() const
+	{
+		return m_flags;
+	}
 
-    // returns the short help string of this property
-    const wxString&     GetHelpString() const { return m_helpString; }
+	// returns the short help string of this property
+	const wxString&     GetHelpString() const
+	{
+		return m_helpString;
+	}
 
-    // returns the group string of this property
-    const wxString&     GetGroupString() const { return m_groupString; }
+	// returns the group string of this property
+	const wxString&     GetGroupString() const
+	{
+		return m_groupString;
+	}
 
-    // return the element type info of this property (for collections, otherwise NULL)
-    const wxTypeInfo *  GetCollectionElementTypeInfo() const
-    {
-        if ( m_collectionElementTypeInfo == NULL )
-            m_collectionElementTypeInfo = wxTypeInfo::FindType(m_collectionElementTypeName);
-        return m_collectionElementTypeInfo;
-    }
+	// return the element type info of this property (for collections, otherwise NULL)
+	const wxTypeInfo *  GetCollectionElementTypeInfo() const
+	{
+		if ( m_collectionElementTypeInfo == NULL )
+			m_collectionElementTypeInfo = wxTypeInfo::FindType(m_collectionElementTypeName);
+		return m_collectionElementTypeInfo;
+	}
 
-    // return the type info of this property
-    const wxTypeInfo *  GetTypeInfo() const
-    {
-        if ( m_typeInfo == NULL )
-            m_typeInfo = wxTypeInfo::FindType(m_typeName);
-        return m_typeInfo;
-    }
+	// return the type info of this property
+	const wxTypeInfo *  GetTypeInfo() const
+	{
+		if ( m_typeInfo == NULL )
+			m_typeInfo = wxTypeInfo::FindType(m_typeName);
+		return m_typeInfo;
+	}
 
-    // return the accessor for this property
-    wxPropertyAccessor* GetAccessor() const { return m_accessor; }
+	// return the accessor for this property
+	wxPropertyAccessor* GetAccessor() const
+	{
+		return m_accessor;
+	}
 
-    // returns NULL if this is the last property of this class
-    wxPropertyInfo*     GetNext() const { return m_next; }
+	// returns NULL if this is the last property of this class
+	wxPropertyInfo*     GetNext() const
+	{
+		return m_next;
+	}
 
-    // returns the default value of this property, its kind may be wxT_VOID if it is not valid
-    wxAny          GetDefaultValue() const { return m_defaultValue; }
+	// returns the default value of this property, its kind may be wxT_VOID if it is not valid
+	wxAny          GetDefaultValue() const
+	{
+		return m_defaultValue;
+	}
 
 private:
 
-    // inserts this property at the end of the linked chain which begins
-    // with "iter" property.
-    void Insert(wxPropertyInfo* &iter);
+	// inserts this property at the end of the linked chain which begins
+	// with "iter" property.
+	void Insert(wxPropertyInfo* &iter);
 
-    // removes this property from the linked chain of the m_itsClass properties.
-    void Remove();
+	// removes this property from the linked chain of the m_itsClass properties.
+	void Remove();
 
-    wxClassInfo*        m_itsClass;
-    wxString            m_name;
-    mutable wxTypeInfo* m_typeInfo;
-    wxString            m_typeName;
-    mutable wxTypeInfo* m_collectionElementTypeInfo;
-    wxString            m_collectionElementTypeName;
-    wxPropertyAccessor* m_accessor;
-    wxAny          m_defaultValue;
-    wxPropertyInfoFlags m_flags;
-    wxString            m_helpString;
-    wxString            m_groupString;
-    wxPropertyInfo*     m_next;
+	wxClassInfo*        m_itsClass;
+	wxString            m_name;
+	mutable wxTypeInfo* m_typeInfo;
+	wxString            m_typeName;
+	mutable wxTypeInfo* m_collectionElementTypeInfo;
+	wxString            m_collectionElementTypeName;
+	wxPropertyAccessor* m_accessor;
+	wxAny          m_defaultValue;
+	wxPropertyInfoFlags m_flags;
+	wxString            m_helpString;
+	wxString            m_groupString;
+	wxPropertyInfo*     m_next;
 
-    // FIXME: what's this comment about??
-    // string representation of the default value
-    // to be assigned by the designer to the property
-    // when the component is dropped on the container.
+	// FIXME: what's this comment about??
+	// string representation of the default value
+	// to be assigned by the designer to the property
+	// when the component is dropped on the container.
 };
 
 // stl is giving problems when forwarding declarations, therefore we define it as a subclass
 
-WX_DECLARE_STRING_HASH_MAP_WITH_DECL( wxPropertyInfo*, wxPropertyInfoMapBase, 
+WX_DECLARE_STRING_HASH_MAP_WITH_DECL( wxPropertyInfo*, wxPropertyInfoMapBase,
                                       class WXDLLIMPEXP_BASE );
 
-class WXDLLIMPEXP_BASE wxPropertyInfoMap : public wxPropertyInfoMapBase {
+class WXDLLIMPEXP_BASE wxPropertyInfoMap : public wxPropertyInfoMapBase
+{
 };
 
 WX_DECLARE_STRING_HASH_MAP_WITH_DECL( wxAny, wxStringToAnyHashMapBase,
-                                     class WXDLLIMPEXP_BASE );
+                                      class WXDLLIMPEXP_BASE );
 
-class WXDLLIMPEXP_FWD_BASE wxStringToAnyHashMap : public wxStringToAnyHashMapBase {
+class WXDLLIMPEXP_FWD_BASE wxStringToAnyHashMap : public wxStringToAnyHashMapBase
+{
 };
 
 #define wxBEGIN_PROPERTIES_TABLE(theClass)                      \

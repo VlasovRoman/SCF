@@ -110,53 +110,53 @@ int (wxCALLBACK *wxListCtrlCompare)(wxIntPtr item1, wxIntPtr item2, wxIntPtr sor
 // Flags for GetNextItem (MSW only except wxLIST_NEXT_ALL)
 enum
 {
-    wxLIST_NEXT_ABOVE,          // Searches for an item above the specified item
-    wxLIST_NEXT_ALL,            // Searches for subsequent item by index
-    wxLIST_NEXT_BELOW,          // Searches for an item below the specified item
-    wxLIST_NEXT_LEFT,           // Searches for an item to the left of the specified item
-    wxLIST_NEXT_RIGHT           // Searches for an item to the right of the specified item
+	wxLIST_NEXT_ABOVE,          // Searches for an item above the specified item
+	wxLIST_NEXT_ALL,            // Searches for subsequent item by index
+	wxLIST_NEXT_BELOW,          // Searches for an item below the specified item
+	wxLIST_NEXT_LEFT,           // Searches for an item to the left of the specified item
+	wxLIST_NEXT_RIGHT           // Searches for an item to the right of the specified item
 };
 
 // Alignment flags for Arrange (MSW only except wxLIST_ALIGN_LEFT)
 enum
 {
-    wxLIST_ALIGN_DEFAULT,
-    wxLIST_ALIGN_LEFT,
-    wxLIST_ALIGN_TOP,
-    wxLIST_ALIGN_SNAP_TO_GRID
+	wxLIST_ALIGN_DEFAULT,
+	wxLIST_ALIGN_LEFT,
+	wxLIST_ALIGN_TOP,
+	wxLIST_ALIGN_SNAP_TO_GRID
 };
 
 // Column format (MSW only except wxLIST_FORMAT_LEFT)
 enum wxListColumnFormat
 {
-    wxLIST_FORMAT_LEFT,
-    wxLIST_FORMAT_RIGHT,
-    wxLIST_FORMAT_CENTRE,
-    wxLIST_FORMAT_CENTER = wxLIST_FORMAT_CENTRE
+	wxLIST_FORMAT_LEFT,
+	wxLIST_FORMAT_RIGHT,
+	wxLIST_FORMAT_CENTRE,
+	wxLIST_FORMAT_CENTER = wxLIST_FORMAT_CENTRE
 };
 
 // Autosize values for SetColumnWidth
 enum
 {
-    wxLIST_AUTOSIZE = -1,
-    wxLIST_AUTOSIZE_USEHEADER = -2      // partly supported by generic version
+	wxLIST_AUTOSIZE = -1,
+	wxLIST_AUTOSIZE_USEHEADER = -2      // partly supported by generic version
 };
 
 // Flag values for GetItemRect
 enum
 {
-    wxLIST_RECT_BOUNDS,
-    wxLIST_RECT_ICON,
-    wxLIST_RECT_LABEL
+	wxLIST_RECT_BOUNDS,
+	wxLIST_RECT_ICON,
+	wxLIST_RECT_LABEL
 };
 
 // Flag values for FindItem (MSW only)
 enum
 {
-    wxLIST_FIND_UP,
-    wxLIST_FIND_DOWN,
-    wxLIST_FIND_LEFT,
-    wxLIST_FIND_RIGHT
+	wxLIST_FIND_UP,
+	wxLIST_FIND_DOWN,
+	wxLIST_FIND_LEFT,
+	wxLIST_FIND_RIGHT
 };
 
 // For compatibility, define the old name for this class. There is no need to
@@ -171,154 +171,251 @@ typedef wxItemAttr wxListItemAttr;
 class WXDLLIMPEXP_CORE wxListItem : public wxObject
 {
 public:
-    wxListItem() { Init(); m_attr = NULL; }
-    wxListItem(const wxListItem& item)
-        : wxObject(),
-          m_mask(item.m_mask),
-          m_itemId(item.m_itemId),
-          m_col(item.m_col),
-          m_state(item.m_state),
-          m_stateMask(item.m_stateMask),
-          m_text(item.m_text),
-          m_image(item.m_image),
-          m_data(item.m_data),
-          m_format(item.m_format),
-          m_width(item.m_width),
-          m_attr(NULL)
-    {
-        // copy list item attributes
-        if ( item.HasAttributes() )
-            m_attr = new wxItemAttr(*item.GetAttributes());
-    }
+	wxListItem()
+	{
+		Init();
+		m_attr = NULL;
+	}
+	wxListItem(const wxListItem& item)
+		: wxObject(),
+		  m_mask(item.m_mask),
+		  m_itemId(item.m_itemId),
+		  m_col(item.m_col),
+		  m_state(item.m_state),
+		  m_stateMask(item.m_stateMask),
+		  m_text(item.m_text),
+		  m_image(item.m_image),
+		  m_data(item.m_data),
+		  m_format(item.m_format),
+		  m_width(item.m_width),
+		  m_attr(NULL)
+	{
+		// copy list item attributes
+		if ( item.HasAttributes() )
+			m_attr = new wxItemAttr(*item.GetAttributes());
+	}
 
-    wxListItem& operator=(const wxListItem& item)
-    {
-        if ( &item != this )
-        {
-            m_mask = item.m_mask;
-            m_itemId = item.m_itemId;
-            m_col = item.m_col;
-            m_state = item.m_state;
-            m_stateMask = item.m_stateMask;
-            m_text = item.m_text;
-            m_image = item.m_image;
-            m_data = item.m_data;
-            m_format = item.m_format;
-            m_width = item.m_width;
-            m_attr = item.m_attr ? new wxItemAttr(*item.m_attr) : NULL;
-        }
+	wxListItem& operator=(const wxListItem& item)
+	{
+		if ( &item != this )
+		{
+			m_mask = item.m_mask;
+			m_itemId = item.m_itemId;
+			m_col = item.m_col;
+			m_state = item.m_state;
+			m_stateMask = item.m_stateMask;
+			m_text = item.m_text;
+			m_image = item.m_image;
+			m_data = item.m_data;
+			m_format = item.m_format;
+			m_width = item.m_width;
+			m_attr = item.m_attr ? new wxItemAttr(*item.m_attr) : NULL;
+		}
 
-        return *this;
-    }
+		return *this;
+	}
 
-    virtual ~wxListItem() { delete m_attr; }
+	virtual ~wxListItem()
+	{
+		delete m_attr;
+	}
 
-    // resetting
-    void Clear() { Init(); m_text.clear(); ClearAttributes(); }
-    void ClearAttributes() { if ( m_attr ) { delete m_attr; m_attr = NULL; } }
+	// resetting
+	void Clear()
+	{
+		Init();
+		m_text.clear();
+		ClearAttributes();
+	}
+	void ClearAttributes()
+	{
+		if ( m_attr )
+		{
+			delete m_attr;
+			m_attr = NULL;
+		}
+	}
 
-    // setters
-    void SetMask(long mask)
-        { m_mask = mask; }
-    void SetId(long id)
-        { m_itemId = id; }
-    void SetColumn(int col)
-        { m_col = col; }
-    void SetState(long state)
-        { m_mask |= wxLIST_MASK_STATE; m_state = state; m_stateMask |= state; }
-    void SetStateMask(long stateMask)
-        { m_stateMask = stateMask; }
-    void SetText(const wxString& text)
-        { m_mask |= wxLIST_MASK_TEXT; m_text = text; }
-    void SetImage(int image)
-        { m_mask |= wxLIST_MASK_IMAGE; m_image = image; }
-    void SetData(long data)
-        { m_mask |= wxLIST_MASK_DATA; m_data = data; }
-    void SetData(void *data)
-        { m_mask |= wxLIST_MASK_DATA; m_data = wxPtrToUInt(data); }
+	// setters
+	void SetMask(long mask)
+	{
+		m_mask = mask;
+	}
+	void SetId(long id)
+	{
+		m_itemId = id;
+	}
+	void SetColumn(int col)
+	{
+		m_col = col;
+	}
+	void SetState(long state)
+	{
+		m_mask |= wxLIST_MASK_STATE;
+		m_state = state;
+		m_stateMask |= state;
+	}
+	void SetStateMask(long stateMask)
+	{
+		m_stateMask = stateMask;
+	}
+	void SetText(const wxString& text)
+	{
+		m_mask |= wxLIST_MASK_TEXT;
+		m_text = text;
+	}
+	void SetImage(int image)
+	{
+		m_mask |= wxLIST_MASK_IMAGE;
+		m_image = image;
+	}
+	void SetData(long data)
+	{
+		m_mask |= wxLIST_MASK_DATA;
+		m_data = data;
+	}
+	void SetData(void *data)
+	{
+		m_mask |= wxLIST_MASK_DATA;
+		m_data = wxPtrToUInt(data);
+	}
 
-    void SetWidth(int width)
-        { m_mask |= wxLIST_MASK_WIDTH; m_width = width; }
-    void SetAlign(wxListColumnFormat align)
-        { m_mask |= wxLIST_MASK_FORMAT; m_format = align; }
+	void SetWidth(int width)
+	{
+		m_mask |= wxLIST_MASK_WIDTH;
+		m_width = width;
+	}
+	void SetAlign(wxListColumnFormat align)
+	{
+		m_mask |= wxLIST_MASK_FORMAT;
+		m_format = align;
+	}
 
-    void SetTextColour(const wxColour& colText)
-        { Attributes().SetTextColour(colText); }
-    void SetBackgroundColour(const wxColour& colBack)
-        { Attributes().SetBackgroundColour(colBack); }
-    void SetFont(const wxFont& font)
-        { Attributes().SetFont(font); }
+	void SetTextColour(const wxColour& colText)
+	{
+		Attributes().SetTextColour(colText);
+	}
+	void SetBackgroundColour(const wxColour& colBack)
+	{
+		Attributes().SetBackgroundColour(colBack);
+	}
+	void SetFont(const wxFont& font)
+	{
+		Attributes().SetFont(font);
+	}
 
-    // accessors
-    long GetMask() const { return m_mask; }
-    long GetId() const { return m_itemId; }
-    int GetColumn() const { return m_col; }
-    long GetState() const { return m_state & m_stateMask; }
-    const wxString& GetText() const { return m_text; }
-    int GetImage() const { return m_image; }
-    wxUIntPtr GetData() const { return m_data; }
+	// accessors
+	long GetMask() const
+	{
+		return m_mask;
+	}
+	long GetId() const
+	{
+		return m_itemId;
+	}
+	int GetColumn() const
+	{
+		return m_col;
+	}
+	long GetState() const
+	{
+		return m_state & m_stateMask;
+	}
+	const wxString& GetText() const
+	{
+		return m_text;
+	}
+	int GetImage() const
+	{
+		return m_image;
+	}
+	wxUIntPtr GetData() const
+	{
+		return m_data;
+	}
 
-    int GetWidth() const { return m_width; }
-    wxListColumnFormat GetAlign() const { return (wxListColumnFormat)m_format; }
+	int GetWidth() const
+	{
+		return m_width;
+	}
+	wxListColumnFormat GetAlign() const
+	{
+		return (wxListColumnFormat)m_format;
+	}
 
-    wxItemAttr *GetAttributes() const { return m_attr; }
-    bool HasAttributes() const { return m_attr != NULL; }
+	wxItemAttr *GetAttributes() const
+	{
+		return m_attr;
+	}
+	bool HasAttributes() const
+	{
+		return m_attr != NULL;
+	}
 
-    wxColour GetTextColour() const
-        { return HasAttributes() ? m_attr->GetTextColour() : wxNullColour; }
-    wxColour GetBackgroundColour() const
-        { return HasAttributes() ? m_attr->GetBackgroundColour()
-                                 : wxNullColour; }
-    wxFont GetFont() const
-        { return HasAttributes() ? m_attr->GetFont() : wxNullFont; }
+	wxColour GetTextColour() const
+	{
+		return HasAttributes() ? m_attr->GetTextColour() : wxNullColour;
+	}
+	wxColour GetBackgroundColour() const
+	{
+		return HasAttributes() ? m_attr->GetBackgroundColour()
+		       : wxNullColour;
+	}
+	wxFont GetFont() const
+	{
+		return HasAttributes() ? m_attr->GetFont() : wxNullFont;
+	}
 
-    // this conversion is necessary to make old code using GetItem() to
-    // compile
-    operator long() const { return m_itemId; }
+	// this conversion is necessary to make old code using GetItem() to
+	// compile
+	operator long() const
+	{
+		return m_itemId;
+	}
 
-    // these members are public for compatibility
+	// these members are public for compatibility
 
-    long            m_mask;     // Indicates what fields are valid
-    long            m_itemId;   // The zero-based item position
-    int             m_col;      // Zero-based column, if in report mode
-    long            m_state;    // The state of the item
-    long            m_stateMask;// Which flags of m_state are valid (uses same flags)
-    wxString        m_text;     // The label/header text
-    int             m_image;    // The zero-based index into an image list
-    wxUIntPtr       m_data;     // App-defined data
+	long            m_mask;     // Indicates what fields are valid
+	long            m_itemId;   // The zero-based item position
+	int             m_col;      // Zero-based column, if in report mode
+	long            m_state;    // The state of the item
+	long            m_stateMask;// Which flags of m_state are valid (uses same flags)
+	wxString        m_text;     // The label/header text
+	int             m_image;    // The zero-based index into an image list
+	wxUIntPtr       m_data;     // App-defined data
 
-    // For columns only
-    int             m_format;   // left, right, centre
-    int             m_width;    // width of column
+	// For columns only
+	int             m_format;   // left, right, centre
+	int             m_width;    // width of column
 
 protected:
-    // creates m_attr if we don't have it yet
-    wxItemAttr& Attributes()
-    {
-        if ( !m_attr )
-            m_attr = new wxItemAttr;
+	// creates m_attr if we don't have it yet
+	wxItemAttr& Attributes()
+	{
+		if ( !m_attr )
+			m_attr = new wxItemAttr;
 
-        return *m_attr;
-    }
+		return *m_attr;
+	}
 
-    void Init()
-    {
-        m_mask = 0;
-        m_itemId = -1;
-        m_col = 0;
-        m_state = 0;
-        m_stateMask = 0;
-        m_image = -1;
-        m_data = 0;
+	void Init()
+	{
+		m_mask = 0;
+		m_itemId = -1;
+		m_col = 0;
+		m_state = 0;
+		m_stateMask = 0;
+		m_image = -1;
+		m_data = 0;
 
-        m_format = wxLIST_FORMAT_CENTRE;
-        m_width = 0;
-    }
+		m_format = wxLIST_FORMAT_CENTRE;
+		m_width = 0;
+	}
 
-    wxItemAttr *m_attr;     // optional pointer to the items style
+	wxItemAttr *m_attr;     // optional pointer to the items style
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxListItem);
+	wxDECLARE_DYNAMIC_CLASS(wxListItem);
 };
 
 // ----------------------------------------------------------------------------
@@ -332,104 +429,125 @@ private:
 class WXDLLIMPEXP_CORE wxListCtrlBase : public wxSystemThemedControl<wxControl>
 {
 public:
-    wxListCtrlBase() { }
+	wxListCtrlBase() { }
 
-    // Image list methods.
-    // -------------------
+	// Image list methods.
+	// -------------------
 
-    // Associate the given (possibly NULL to indicate that no images will be
-    // used) image list with the control. The ownership of the image list
-    // passes to the control, i.e. it will be deleted when the control itself
-    // is destroyed.
-    //
-    // The value of "which" must be one of wxIMAGE_LIST_{NORMAL,SMALL,STATE}.
-    virtual void AssignImageList(wxImageList* imageList, int which) = 0;
+	// Associate the given (possibly NULL to indicate that no images will be
+	// used) image list with the control. The ownership of the image list
+	// passes to the control, i.e. it will be deleted when the control itself
+	// is destroyed.
+	//
+	// The value of "which" must be one of wxIMAGE_LIST_{NORMAL,SMALL,STATE}.
+	virtual void AssignImageList(wxImageList* imageList, int which) = 0;
 
-    // Same as AssignImageList() but the control does not delete the image list
-    // so it can be shared among several controls.
-    virtual void SetImageList(wxImageList* imageList, int which) = 0;
+	// Same as AssignImageList() but the control does not delete the image list
+	// so it can be shared among several controls.
+	virtual void SetImageList(wxImageList* imageList, int which) = 0;
 
-    // Return the currently used image list, may be NULL.
-    virtual wxImageList* GetImageList(int which) const = 0;
+	// Return the currently used image list, may be NULL.
+	virtual wxImageList* GetImageList(int which) const = 0;
 
 
-    // Column-related methods.
-    // -----------------------
+	// Column-related methods.
+	// -----------------------
 
-    // All these methods can only be used in report view mode.
+	// All these methods can only be used in report view mode.
 
-    // Appends a new column.
-    //
-    // Returns the index of the newly inserted column or -1 on error.
-    long AppendColumn(const wxString& heading,
-                      wxListColumnFormat format = wxLIST_FORMAT_LEFT,
-                      int width = -1);
+	// Appends a new column.
+	//
+	// Returns the index of the newly inserted column or -1 on error.
+	long AppendColumn(const wxString& heading,
+	                  wxListColumnFormat format = wxLIST_FORMAT_LEFT,
+	                  int width = -1);
 
-    // Add a new column to the control at the position "col".
-    //
-    // Returns the index of the newly inserted column or -1 on error.
-    long InsertColumn(long col, const wxListItem& info);
-    long InsertColumn(long col,
-                      const wxString& heading,
-                      int format = wxLIST_FORMAT_LEFT,
-                      int width = wxLIST_AUTOSIZE);
+	// Add a new column to the control at the position "col".
+	//
+	// Returns the index of the newly inserted column or -1 on error.
+	long InsertColumn(long col, const wxListItem& info);
+	long InsertColumn(long col,
+	                  const wxString& heading,
+	                  int format = wxLIST_FORMAT_LEFT,
+	                  int width = wxLIST_AUTOSIZE);
 
-    // Delete the given or all columns.
-    virtual bool DeleteColumn(int col) = 0;
-    virtual bool DeleteAllColumns() = 0;
+	// Delete the given or all columns.
+	virtual bool DeleteColumn(int col) = 0;
+	virtual bool DeleteAllColumns() = 0;
 
-    // Return the current number of columns.
-    virtual int GetColumnCount() const = 0;
+	// Return the current number of columns.
+	virtual int GetColumnCount() const = 0;
 
-    // Get or update information about the given column. Set item mask to
-    // indicate the fields to retrieve or change.
-    //
-    // Returns false on error, e.g. if the column index is invalid.
-    virtual bool GetColumn(int col, wxListItem& item) const = 0;
-    virtual bool SetColumn(int col, const wxListItem& item) = 0;
+	// Get or update information about the given column. Set item mask to
+	// indicate the fields to retrieve or change.
+	//
+	// Returns false on error, e.g. if the column index is invalid.
+	virtual bool GetColumn(int col, wxListItem& item) const = 0;
+	virtual bool SetColumn(int col, const wxListItem& item) = 0;
 
-    // Convenient wrappers for the above methods which get or update just the
-    // column width.
-    virtual int GetColumnWidth(int col) const = 0;
-    virtual bool SetColumnWidth(int col, int width) = 0;
+	// Convenient wrappers for the above methods which get or update just the
+	// column width.
+	virtual int GetColumnWidth(int col) const = 0;
+	virtual bool SetColumnWidth(int col, int width) = 0;
 
-    // return the attribute for the item (may return NULL if none)
-    virtual wxItemAttr *OnGetItemAttr(long item) const;
+	// return the attribute for the item (may return NULL if none)
+	virtual wxItemAttr *OnGetItemAttr(long item) const;
 
-    // Other miscellaneous accessors.
-    // ------------------------------
+	// Other miscellaneous accessors.
+	// ------------------------------
 
-    // Convenient functions for testing the list control mode:
-    bool InReportView() const { return HasFlag(wxLC_REPORT); }
-    bool IsVirtual() const { return HasFlag(wxLC_VIRTUAL); }
+	// Convenient functions for testing the list control mode:
+	bool InReportView() const
+	{
+		return HasFlag(wxLC_REPORT);
+	}
+	bool IsVirtual() const
+	{
+		return HasFlag(wxLC_VIRTUAL);
+	}
 
-    // Enable or disable beep when incremental match doesn't find any item.
-    // Only implemented in the generic version currently.
-    virtual void EnableBellOnNoMatch(bool WXUNUSED(on) = true) { }
+	// Enable or disable beep when incremental match doesn't find any item.
+	// Only implemented in the generic version currently.
+	virtual void EnableBellOnNoMatch(bool WXUNUSED(on) = true) { }
 
-    void EnableAlternateRowColours(bool enable = true);
-    void SetAlternateRowColour(const wxColour& colour);
-    wxColour GetAlternateRowColour() const { return m_alternateRowColour.GetBackgroundColour(); }
+	void EnableAlternateRowColours(bool enable = true);
+	void SetAlternateRowColour(const wxColour& colour);
+	wxColour GetAlternateRowColour() const
+	{
+		return m_alternateRowColour.GetBackgroundColour();
+	}
 
-    // Header attributes support: only implemented in wxMSW currently.
-    virtual bool SetHeaderAttr(const wxItemAttr& WXUNUSED(attr)) { return false; }
+	// Header attributes support: only implemented in wxMSW currently.
+	virtual bool SetHeaderAttr(const wxItemAttr& WXUNUSED(attr))
+	{
+		return false;
+	}
 
-    // Checkboxes support.
-    virtual bool HasCheckBoxes() const { return false; }
-    virtual bool EnableCheckBoxes(bool WXUNUSED(enable) = true) { return false; }
-    virtual bool IsItemChecked(long WXUNUSED(item)) const { return false; }
-    virtual void CheckItem(long WXUNUSED(item), bool WXUNUSED(check)) { }
+	// Checkboxes support.
+	virtual bool HasCheckBoxes() const
+	{
+		return false;
+	}
+	virtual bool EnableCheckBoxes(bool WXUNUSED(enable) = true)
+	{
+		return false;
+	}
+	virtual bool IsItemChecked(long WXUNUSED(item)) const
+	{
+		return false;
+	}
+	virtual void CheckItem(long WXUNUSED(item), bool WXUNUSED(check)) { }
 
 protected:
-    // Real implementations methods to which our public forwards.
-    virtual long DoInsertColumn(long col, const wxListItem& info) = 0;
+	// Real implementations methods to which our public forwards.
+	virtual long DoInsertColumn(long col, const wxListItem& info) = 0;
 
-    // Overridden methods of the base class.
-    virtual wxSize DoGetBestClientSize() const wxOVERRIDE;
+	// Overridden methods of the base class.
+	virtual wxSize DoGetBestClientSize() const wxOVERRIDE;
 
 private:
-    // user defined color to draw row lines, may be invalid
-    wxItemAttr m_alternateRowColour;
+	// user defined color to draw row lines, may be invalid
+	wxItemAttr m_alternateRowColour;
 };
 
 // ----------------------------------------------------------------------------
@@ -439,71 +557,137 @@ private:
 class WXDLLIMPEXP_CORE wxListEvent : public wxNotifyEvent
 {
 public:
-    wxListEvent(wxEventType commandType = wxEVT_NULL, int winid = 0)
-        : wxNotifyEvent(commandType, winid)
-        , m_code(-1)
-        , m_oldItemIndex(-1)
-        , m_itemIndex(-1)
-        , m_col(-1)
-        , m_pointDrag()
-        , m_item()
-        , m_editCancelled(false)
-        { }
+	wxListEvent(wxEventType commandType = wxEVT_NULL, int winid = 0)
+		: wxNotifyEvent(commandType, winid)
+		, m_code(-1)
+		, m_oldItemIndex(-1)
+		, m_itemIndex(-1)
+		, m_col(-1)
+		, m_pointDrag()
+		, m_item()
+		, m_editCancelled(false)
+	{ }
 
-    wxListEvent(const wxListEvent& event)
-        : wxNotifyEvent(event)
-        , m_code(event.m_code)
-        , m_oldItemIndex(event.m_oldItemIndex)
-        , m_itemIndex(event.m_itemIndex)
-        , m_col(event.m_col)
-        , m_pointDrag(event.m_pointDrag)
-        , m_item(event.m_item)
-        , m_editCancelled(event.m_editCancelled)
-        { }
+	wxListEvent(const wxListEvent& event)
+		: wxNotifyEvent(event)
+		, m_code(event.m_code)
+		, m_oldItemIndex(event.m_oldItemIndex)
+		, m_itemIndex(event.m_itemIndex)
+		, m_col(event.m_col)
+		, m_pointDrag(event.m_pointDrag)
+		, m_item(event.m_item)
+		, m_editCancelled(event.m_editCancelled)
+	{ }
 
-    int GetKeyCode() const { return m_code; }
-    long GetIndex() const { return m_itemIndex; }
-    int GetColumn() const { return m_col; }
-    wxPoint GetPoint() const { return m_pointDrag; }
-    const wxString& GetLabel() const { return m_item.m_text; }
-    const wxString& GetText() const { return m_item.m_text; }
-    int GetImage() const { return m_item.m_image; }
-    wxUIntPtr GetData() const { return m_item.m_data; }
-    long GetMask() const { return m_item.m_mask; }
-    const wxListItem& GetItem() const { return m_item; }
+	int GetKeyCode() const
+	{
+		return m_code;
+	}
+	long GetIndex() const
+	{
+		return m_itemIndex;
+	}
+	int GetColumn() const
+	{
+		return m_col;
+	}
+	wxPoint GetPoint() const
+	{
+		return m_pointDrag;
+	}
+	const wxString& GetLabel() const
+	{
+		return m_item.m_text;
+	}
+	const wxString& GetText() const
+	{
+		return m_item.m_text;
+	}
+	int GetImage() const
+	{
+		return m_item.m_image;
+	}
+	wxUIntPtr GetData() const
+	{
+		return m_item.m_data;
+	}
+	long GetMask() const
+	{
+		return m_item.m_mask;
+	}
+	const wxListItem& GetItem() const
+	{
+		return m_item;
+	}
 
-    void SetKeyCode(int code) { m_code = code; }
-    void SetIndex(long index) { m_itemIndex = index; }
-    void SetColumn(int col) { m_col = col; }
-    void SetPoint(const wxPoint& point) { m_pointDrag = point; }
-    void SetItem(const wxListItem& item) { m_item = item; }
+	void SetKeyCode(int code)
+	{
+		m_code = code;
+	}
+	void SetIndex(long index)
+	{
+		m_itemIndex = index;
+	}
+	void SetColumn(int col)
+	{
+		m_col = col;
+	}
+	void SetPoint(const wxPoint& point)
+	{
+		m_pointDrag = point;
+	}
+	void SetItem(const wxListItem& item)
+	{
+		m_item = item;
+	}
 
-    // for wxEVT_LIST_CACHE_HINT only
-    long GetCacheFrom() const { return m_oldItemIndex; }
-    long GetCacheTo() const { return m_itemIndex; }
-    void SetCacheFrom(long cacheFrom) { m_oldItemIndex = cacheFrom; }
-    void SetCacheTo(long cacheTo) { m_itemIndex = cacheTo; }
+	// for wxEVT_LIST_CACHE_HINT only
+	long GetCacheFrom() const
+	{
+		return m_oldItemIndex;
+	}
+	long GetCacheTo() const
+	{
+		return m_itemIndex;
+	}
+	void SetCacheFrom(long cacheFrom)
+	{
+		m_oldItemIndex = cacheFrom;
+	}
+	void SetCacheTo(long cacheTo)
+	{
+		m_itemIndex = cacheTo;
+	}
 
-    // was label editing canceled? (for wxEVT_LIST_END_LABEL_EDIT only)
-    bool IsEditCancelled() const { return m_editCancelled; }
-    void SetEditCanceled(bool editCancelled) { m_editCancelled = editCancelled; }
+	// was label editing canceled? (for wxEVT_LIST_END_LABEL_EDIT only)
+	bool IsEditCancelled() const
+	{
+		return m_editCancelled;
+	}
+	void SetEditCanceled(bool editCancelled)
+	{
+		m_editCancelled = editCancelled;
+	}
 
-    virtual wxEvent *Clone() const wxOVERRIDE { return new wxListEvent(*this); }
+	virtual wxEvent *Clone() const wxOVERRIDE
+	{
+		return new wxListEvent(*this);
+	}
 
 //protected: -- not for backwards compatibility
-    int           m_code;
-    long          m_oldItemIndex; // only for wxEVT_LIST_CACHE_HINT
-    long          m_itemIndex;
-    int           m_col;
-    wxPoint       m_pointDrag;
+	int           m_code;
+	long          m_oldItemIndex; // only for wxEVT_LIST_CACHE_HINT
+	long          m_itemIndex;
+	int           m_col;
+	wxPoint       m_pointDrag;
 
-    wxListItem    m_item;
+	wxListItem    m_item;
 
 protected:
-    bool          m_editCancelled;
+	bool          m_editCancelled;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxListEvent);
+	wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxListEvent);
 };
 
 // ----------------------------------------------------------------------------
@@ -592,4 +776,4 @@ typedef void (wxEvtHandler::*wxListEventFunction)(wxListEvent&);
 
 
 #endif
-    // _WX_LISTCTRL_H_BASE_
+// _WX_LISTCTRL_H_BASE_

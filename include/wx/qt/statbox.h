@@ -13,32 +13,32 @@ class QGroupBox;
 class WXDLLIMPEXP_CORE wxStaticBox : public wxStaticBoxBase
 {
 public:
-    wxStaticBox();
-    
-    wxStaticBox(wxWindow *parent, wxWindowID id,
-                const wxString& label,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = 0,
-                const wxString& name = wxStaticBoxNameStr);
+	wxStaticBox();
 
-    bool Create(wxWindow *parent, wxWindowID id,
-                const wxString& label,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = 0,
-                const wxString& name = wxStaticBoxNameStr);
+	wxStaticBox(wxWindow *parent, wxWindowID id,
+	            const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxStaticBoxNameStr);
 
-    virtual void GetBordersForSizer(int *borderTop, int *borderOther) const;
+	bool Create(wxWindow *parent, wxWindowID id,
+	            const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxStaticBoxNameStr);
 
-    virtual QWidget *GetHandle() const;
+	virtual void GetBordersForSizer(int *borderTop, int *borderOther) const;
+
+	virtual QWidget *GetHandle() const;
 
 protected:
 
 private:
-    QGroupBox *m_qtGroupBox;
+	QGroupBox *m_qtGroupBox;
 
-    wxDECLARE_DYNAMIC_CLASS( wxStaticBox );
+	wxDECLARE_DYNAMIC_CLASS( wxStaticBox );
 };
 
 #endif // _WX_QT_STATBOX_H_

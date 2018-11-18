@@ -24,14 +24,14 @@
 class wxGnomeVFSMimeTypesManagerImpl: public wxMimeTypesManagerImpl
 {
 public:
-    wxGnomeVFSMimeTypesManagerImpl() { }
+	wxGnomeVFSMimeTypesManagerImpl() { }
 
 protected:
-    virtual bool DoAssociation(const wxString& strType,
-                       const wxString& strIcon,
-                       wxMimeTypeCommands *entry,
-                       const wxArrayString& strExtensions,
-                       const wxString& strDesc);
+	virtual bool DoAssociation(const wxString& strType,
+	                           const wxString& strIcon,
+	                           wxMimeTypeCommands *entry,
+	                           const wxArrayString& strExtensions,
+	                           const wxString& strDesc);
 };
 
 //----------------------------------------------------------------------------
@@ -41,12 +41,12 @@ protected:
 class wxGnomeVFSMimeTypesManagerFactory: public wxMimeTypesManagerFactory
 {
 public:
-    wxGnomeVFSMimeTypesManagerFactory() {}
+	wxGnomeVFSMimeTypesManagerFactory() {}
 
-    virtual wxMimeTypesManagerImpl *CreateMimeTypesManagerImpl();
+	virtual wxMimeTypesManagerImpl *CreateMimeTypesManagerImpl();
 };
 
 #endif
-  // wxUSE_MIMETYPE
+// wxUSE_MIMETYPE
 
 #endif

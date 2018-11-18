@@ -29,11 +29,11 @@
 // if wxUSE_NOTEBOOK is disabled
 enum
 {
-    wxNB_HITTEST_NOWHERE = wxBK_HITTEST_NOWHERE,
-    wxNB_HITTEST_ONICON  = wxBK_HITTEST_ONICON,
-    wxNB_HITTEST_ONLABEL = wxBK_HITTEST_ONLABEL,
-    wxNB_HITTEST_ONITEM  = wxBK_HITTEST_ONITEM,
-    wxNB_HITTEST_ONPAGE  = wxBK_HITTEST_ONPAGE
+	wxNB_HITTEST_NOWHERE = wxBK_HITTEST_NOWHERE,
+	wxNB_HITTEST_ONICON  = wxBK_HITTEST_ONICON,
+	wxNB_HITTEST_ONLABEL = wxBK_HITTEST_ONLABEL,
+	wxNB_HITTEST_ONITEM  = wxBK_HITTEST_ONITEM,
+	wxNB_HITTEST_ONPAGE  = wxBK_HITTEST_ONPAGE
 };
 
 // wxNotebook flags
@@ -63,33 +63,50 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxNotebookNameStr[];
 class WXDLLEXPORT wxNotebookPageInfo : public wxObject
 {
 public:
-    wxNotebookPageInfo() { m_page = NULL; m_imageId = -1; m_selected = false; }
-    virtual ~wxNotebookPageInfo() { }
-    
-    bool Create(wxNotebookPage *page,
-                const wxString& text,
-                bool selected,
-                int imageId)
-    {
-        m_page = page;
-        m_text = text;
-        m_selected = selected;
-        m_imageId = imageId;
-        return true;
-    }
-    
-    wxNotebookPage* GetPage() const { return m_page; }
-    wxString GetText() const { return m_text; }
-    bool GetSelected() const { return m_selected; }
-    int GetImageId() const { return m_imageId; }
-    
+	wxNotebookPageInfo()
+	{
+		m_page = NULL;
+		m_imageId = -1;
+		m_selected = false;
+	}
+	virtual ~wxNotebookPageInfo() { }
+
+	bool Create(wxNotebookPage *page,
+	            const wxString& text,
+	            bool selected,
+	            int imageId)
+	{
+		m_page = page;
+		m_text = text;
+		m_selected = selected;
+		m_imageId = imageId;
+		return true;
+	}
+
+	wxNotebookPage* GetPage() const
+	{
+		return m_page;
+	}
+	wxString GetText() const
+	{
+		return m_text;
+	}
+	bool GetSelected() const
+	{
+		return m_selected;
+	}
+	int GetImageId() const
+	{
+		return m_imageId;
+	}
+
 private:
-    wxNotebookPage *m_page;
-    wxString m_text;
-    bool m_selected;
-    int m_imageId;
-    
-    wxDECLARE_DYNAMIC_CLASS(wxNotebookPageInfo);
+	wxNotebookPage *m_page;
+	wxString m_text;
+	bool m_selected;
+	int m_imageId;
+
+	wxDECLARE_DYNAMIC_CLASS(wxNotebookPageInfo);
 };
 
 WX_DECLARE_EXPORTED_LIST(wxNotebookPageInfo, wxNotebookPageInfoList );
@@ -103,53 +120,59 @@ WX_DECLARE_EXPORTED_LIST(wxNotebookPageInfo, wxNotebookPageInfoList );
 class WXDLLIMPEXP_CORE wxNotebookBase : public wxBookCtrlBase
 {
 public:
-    // ctors
-    // -----
+	// ctors
+	// -----
 
-    wxNotebookBase() { }
+	wxNotebookBase() { }
 
-    // wxNotebook-specific additions to wxBookCtrlBase interface
-    // ---------------------------------------------------------
+	// wxNotebook-specific additions to wxBookCtrlBase interface
+	// ---------------------------------------------------------
 
-    // get the number of rows for a control with wxNB_MULTILINE style (not all
-    // versions support it - they will always return 1 then)
-    virtual int GetRowCount() const { return 1; }
+	// get the number of rows for a control with wxNB_MULTILINE style (not all
+	// versions support it - they will always return 1 then)
+	virtual int GetRowCount() const
+	{
+		return 1;
+	}
 
-    // set the padding between tabs (in pixels)
-    virtual void SetPadding(const wxSize& padding) = 0;
+	// set the padding between tabs (in pixels)
+	virtual void SetPadding(const wxSize& padding) = 0;
 
-    // set the size of the tabs for wxNB_FIXEDWIDTH controls
-    virtual void SetTabSize(const wxSize& sz) = 0;
-
-
-
-    // implement some base class functions
-    virtual wxSize CalcSizeFromPage(const wxSize& sizePage) const wxOVERRIDE;
-
-    // On platforms that support it, get the theme page background colour, else invalid colour
-    virtual wxColour GetThemeBackgroundColour() const { return wxNullColour; }
+	// set the size of the tabs for wxNB_FIXEDWIDTH controls
+	virtual void SetTabSize(const wxSize& sz) = 0;
 
 
-    // send wxEVT_NOTEBOOK_PAGE_CHANGING/ED events
 
-    // returns false if the change to nPage is vetoed by the program
-    bool SendPageChangingEvent(int nPage);
+	// implement some base class functions
+	virtual wxSize CalcSizeFromPage(const wxSize& sizePage) const wxOVERRIDE;
 
-    // sends the event about page change from old to new (or GetSelection() if
-    // new is wxNOT_FOUND)
-    void SendPageChangedEvent(int nPageOld, int nPageNew = wxNOT_FOUND);
+	// On platforms that support it, get the theme page background colour, else invalid colour
+	virtual wxColour GetThemeBackgroundColour() const
+	{
+		return wxNullColour;
+	}
 
-#if wxUSE_EXTENDED_RTTI    
-    // XTI accessors
-    virtual void AddPageInfo( wxNotebookPageInfo* info );
-    virtual const wxNotebookPageInfoList& GetPageInfos() const;
+
+	// send wxEVT_NOTEBOOK_PAGE_CHANGING/ED events
+
+	// returns false if the change to nPage is vetoed by the program
+	bool SendPageChangingEvent(int nPage);
+
+	// sends the event about page change from old to new (or GetSelection() if
+	// new is wxNOT_FOUND)
+	void SendPageChangedEvent(int nPageOld, int nPageNew = wxNOT_FOUND);
+
+#if wxUSE_EXTENDED_RTTI
+	// XTI accessors
+	virtual void AddPageInfo( wxNotebookPageInfo* info );
+	virtual const wxNotebookPageInfoList& GetPageInfos() const;
 #endif
-        
+
 protected:
-#if wxUSE_EXTENDED_RTTI    
-    wxNotebookPageInfoList m_pageInfos;
-#endif    
-    wxDECLARE_NO_COPY_CLASS(wxNotebookBase);
+#if wxUSE_EXTENDED_RTTI
+	wxNotebookPageInfoList m_pageInfos;
+#endif
+	wxDECLARE_NO_COPY_CLASS(wxNotebookBase);
 };
 
 // ----------------------------------------------------------------------------
@@ -177,19 +200,19 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_NOTEBOOK_PAGE_CHANGING, wxBook
 // ----------------------------------------------------------------------------
 
 #if defined(__WXUNIVERSAL__)
-    #include "wx/univ/notebook.h"
+#include "wx/univ/notebook.h"
 #elif defined(__WXMSW__)
-    #include  "wx/msw/notebook.h"
+#include  "wx/msw/notebook.h"
 #elif defined(__WXMOTIF__)
-    #include  "wx/generic/notebook.h"
+#include  "wx/generic/notebook.h"
 #elif defined(__WXGTK20__)
-    #include  "wx/gtk/notebook.h"
+#include  "wx/gtk/notebook.h"
 #elif defined(__WXGTK__)
-    #include  "wx/gtk1/notebook.h"
+#include  "wx/gtk1/notebook.h"
 #elif defined(__WXMAC__)
-    #include  "wx/osx/notebook.h"
+#include  "wx/osx/notebook.h"
 #elif defined(__WXQT__)
-    #include "wx/qt/notebook.h"
+#include "wx/qt/notebook.h"
 #endif
 
 // old wxEVT_COMMAND_* constants
@@ -199,4 +222,4 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_NOTEBOOK_PAGE_CHANGING, wxBook
 #endif // wxUSE_NOTEBOOK
 
 #endif
-    // _WX_NOTEBOOK_H_BASE_
+// _WX_NOTEBOOK_H_BASE_

@@ -15,40 +15,40 @@
 class WXDLLIMPEXP_CORE wxMessageDialog : public wxMessageDialogBase
 {
 public:
-    wxMessageDialog(wxWindow *parent,
-                    const wxString& message,
-                    const wxString& caption = wxMessageBoxCaptionStr,
-                    long style = wxOK|wxCENTRE,
-                    const wxPoint& pos = wxDefaultPosition);
+	wxMessageDialog(wxWindow *parent,
+	                const wxString& message,
+	                const wxString& caption = wxMessageBoxCaptionStr,
+	                long style = wxOK|wxCENTRE,
+	                const wxPoint& pos = wxDefaultPosition);
 
 #if wxOSX_USE_COCOA
-    ~wxMessageDialog();
+	~wxMessageDialog();
 #endif
-    
-    virtual int ShowModal();
+
+	virtual int ShowModal();
 
 #if wxOSX_USE_COCOA
-    virtual void ShowWindowModal();
-    virtual void ModalFinishedCallback(void* panel, int resultCode);
+	virtual void ShowWindowModal();
+	virtual void ModalFinishedCallback(void* panel, int resultCode);
 #endif
 
 protected:
-    // not supported for message dialog
-    virtual void DoSetSize(int WXUNUSED(x), int WXUNUSED(y),
-                           int WXUNUSED(width), int WXUNUSED(height),
-                           int WXUNUSED(sizeFlags) = wxSIZE_AUTO) {}
+	// not supported for message dialog
+	virtual void DoSetSize(int WXUNUSED(x), int WXUNUSED(y),
+	                       int WXUNUSED(width), int WXUNUSED(height),
+	                       int WXUNUSED(sizeFlags) = wxSIZE_AUTO) {}
 
 #if wxOSX_USE_COCOA
-    void* ConstructNSAlert();
+	void* ConstructNSAlert();
 #endif
 
-    int m_buttonId[4];
-    int m_buttonCount;
+	int m_buttonId[4];
+	int m_buttonCount;
 
 #if wxOSX_USE_COCOA
-    WX_NSObject m_sheetDelegate;
+	WX_NSObject m_sheetDelegate;
 #endif
-    wxDECLARE_DYNAMIC_CLASS(wxMessageDialog);
+	wxDECLARE_DYNAMIC_CLASS(wxMessageDialog);
 };
 
 #endif // _WX_MSGBOXDLG_H_

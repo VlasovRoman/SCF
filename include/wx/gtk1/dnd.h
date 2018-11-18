@@ -47,30 +47,42 @@ class WXDLLIMPEXP_FWD_CORE wxDropSource;
 class WXDLLIMPEXP_CORE wxDropTarget: public wxDropTargetBase
 {
 public:
-    wxDropTarget(wxDataObject *dataObject = NULL );
+	wxDropTarget(wxDataObject *dataObject = NULL );
 
-    virtual wxDragResult OnDragOver(wxCoord x, wxCoord y, wxDragResult def);
-    virtual bool OnDrop(wxCoord x, wxCoord y);
-    virtual wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def);
-    virtual bool GetData();
+	virtual wxDragResult OnDragOver(wxCoord x, wxCoord y, wxDragResult def);
+	virtual bool OnDrop(wxCoord x, wxCoord y);
+	virtual wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def);
+	virtual bool GetData();
 
-  // implementation
+	// implementation
 
-    GdkAtom GetMatchingPair(bool quiet = false);
+	GdkAtom GetMatchingPair(bool quiet = false);
 
-    void RegisterWidget( GtkWidget *widget );
-    void UnregisterWidget( GtkWidget *widget );
+	void RegisterWidget( GtkWidget *widget );
+	void UnregisterWidget( GtkWidget *widget );
 
-    GdkDragContext     *m_dragContext;
-    GtkWidget          *m_dragWidget;
-    GtkSelectionData   *m_dragData;
-    unsigned            m_dragTime;
-    bool                m_firstMotion;     // gdk has no "gdk_drag_enter" event
+	GdkDragContext     *m_dragContext;
+	GtkWidget          *m_dragWidget;
+	GtkSelectionData   *m_dragData;
+	unsigned            m_dragTime;
+	bool                m_firstMotion;     // gdk has no "gdk_drag_enter" event
 
-    void SetDragContext( GdkDragContext *dc ) { m_dragContext = dc; }
-    void SetDragWidget( GtkWidget *w ) { m_dragWidget = w; }
-    void SetDragData( GtkSelectionData *sd ) { m_dragData = sd; }
-    void SetDragTime(unsigned time) { m_dragTime = time; }
+	void SetDragContext( GdkDragContext *dc )
+	{
+		m_dragContext = dc;
+	}
+	void SetDragWidget( GtkWidget *w )
+	{
+		m_dragWidget = w;
+	}
+	void SetDragData( GtkSelectionData *sd )
+	{
+		m_dragData = sd;
+	}
+	void SetDragTime(unsigned time)
+	{
+		m_dragTime = time;
+	}
 };
 
 //-------------------------------------------------------------------------
@@ -80,47 +92,47 @@ public:
 class WXDLLIMPEXP_CORE wxDropSource: public wxDropSourceBase
 {
 public:
-    // constructor. set data later with SetData()
-    wxDropSource( wxWindow *win = NULL,
-                  const wxIcon &copy = wxNullIcon,
-                  const wxIcon &move = wxNullIcon,
-                  const wxIcon &none = wxNullIcon);
+	// constructor. set data later with SetData()
+	wxDropSource( wxWindow *win = NULL,
+	              const wxIcon &copy = wxNullIcon,
+	              const wxIcon &move = wxNullIcon,
+	              const wxIcon &none = wxNullIcon);
 
-    // constructor for setting one data object
-    wxDropSource( wxDataObject& data,
-                  wxWindow *win,
-                  const wxIcon &copy = wxNullIcon,
-                  const wxIcon &move = wxNullIcon,
-                  const wxIcon &none = wxNullIcon);
+	// constructor for setting one data object
+	wxDropSource( wxDataObject& data,
+	              wxWindow *win,
+	              const wxIcon &copy = wxNullIcon,
+	              const wxIcon &move = wxNullIcon,
+	              const wxIcon &none = wxNullIcon);
 
-    virtual ~wxDropSource();
+	virtual ~wxDropSource();
 
-    // start drag action
-    virtual wxDragResult DoDragDrop(int flags = wxDrag_CopyOnly);
+	// start drag action
+	virtual wxDragResult DoDragDrop(int flags = wxDrag_CopyOnly);
 
-    // GTK implementation
-    void RegisterWindow();
-    void UnregisterWindow();
+	// GTK implementation
+	void RegisterWindow();
+	void UnregisterWindow();
 
-    void PrepareIcon( int action, GdkDragContext *context );
+	void PrepareIcon( int action, GdkDragContext *context );
 
-    GtkWidget       *m_widget;
-    GtkWidget       *m_iconWindow;
-    GdkDragContext  *m_dragContext;
-    wxWindow        *m_window;
+	GtkWidget       *m_widget;
+	GtkWidget       *m_iconWindow;
+	GdkDragContext  *m_dragContext;
+	wxWindow        *m_window;
 
-    wxDragResult     m_retValue;
-    wxIcon           m_iconCopy,
-                     m_iconMove,
-                     m_iconNone;
+	wxDragResult     m_retValue;
+	wxIcon           m_iconCopy,
+	                 m_iconMove,
+	                 m_iconNone;
 
-    bool             m_waiting;
+	bool             m_waiting;
 
 private:
-    // common part of both ctors
-    void SetIcons(const wxIcon& copy,
-                  const wxIcon& move,
-                  const wxIcon& none);
+	// common part of both ctors
+	void SetIcons(const wxIcon& copy,
+	              const wxIcon& move,
+	              const wxIcon& none);
 };
 
 #endif // wxUSE_DRAG_AND_DROP

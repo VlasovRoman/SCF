@@ -17,34 +17,40 @@
 class WXDLLIMPEXP_CORE wxCursor : public wxCursorBase
 {
 public:
-    wxCursor();
+	wxCursor();
 
-    wxCursor(const wxImage & image) ;
-    wxCursor(const wxString& name,
-             wxBitmapType type = wxCURSOR_DEFAULT_TYPE,
-             int hotSpotX = 0, int hotSpotY = 0);
+	wxCursor(const wxImage & image) ;
+	wxCursor(const wxString& name,
+	         wxBitmapType type = wxCURSOR_DEFAULT_TYPE,
+	         int hotSpotX = 0, int hotSpotY = 0);
 
-    wxCursor(wxStockCursor id) { InitFromStock(id); }
+	wxCursor(wxStockCursor id)
+	{
+		InitFromStock(id);
+	}
 #if WXWIN_COMPATIBILITY_2_8
-    wxCursor(int id) { InitFromStock((wxStockCursor)id); }
+	wxCursor(int id)
+	{
+		InitFromStock((wxStockCursor)id);
+	}
 #endif
-    virtual ~wxCursor();
+	virtual ~wxCursor();
 
-    void MacInstall() const ;
+	void MacInstall() const ;
 
-    void SetHCURSOR(WXHCURSOR cursor);
-    WXHCURSOR GetHCURSOR() const;
+	void SetHCURSOR(WXHCURSOR cursor);
+	WXHCURSOR GetHCURSOR() const;
 
 protected:
-    virtual wxGDIRefData *CreateGDIRefData() const;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
+	virtual wxGDIRefData *CreateGDIRefData() const;
+	virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
 
 private:
-    void InitFromStock(wxStockCursor);
+	void InitFromStock(wxStockCursor);
 
-    void CreateFromImage(const wxImage & image) ;
+	void CreateFromImage(const wxImage & image) ;
 
-    wxDECLARE_DYNAMIC_CLASS(wxCursor);
+	wxDECLARE_DYNAMIC_CLASS(wxCursor);
 };
 
 extern WXDLLIMPEXP_CORE void wxSetCursor(const wxCursor& cursor);

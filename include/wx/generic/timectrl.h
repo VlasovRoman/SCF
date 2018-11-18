@@ -14,56 +14,59 @@
 #include "wx/compositewin.h"
 
 class WXDLLIMPEXP_ADV wxTimePickerCtrlGeneric
-    : public wxCompositeWindow< wxNavigationEnabled<wxTimePickerCtrlBase> >
+	: public wxCompositeWindow< wxNavigationEnabled<wxTimePickerCtrlBase> >
 {
 public:
-    typedef wxCompositeWindow< wxNavigationEnabled<wxTimePickerCtrlBase> > Base;
+	typedef wxCompositeWindow< wxNavigationEnabled<wxTimePickerCtrlBase> > Base;
 
-    // Creating the control.
-    wxTimePickerCtrlGeneric() { Init(); }
-    virtual ~wxTimePickerCtrlGeneric();
-    wxTimePickerCtrlGeneric(wxWindow *parent,
-                            wxWindowID id,
-                            const wxDateTime& date = wxDefaultDateTime,
-                            const wxPoint& pos = wxDefaultPosition,
-                            const wxSize& size = wxDefaultSize,
-                            long style = wxTP_DEFAULT,
-                            const wxValidator& validator = wxDefaultValidator,
-                            const wxString& name = wxTimePickerCtrlNameStr)
-    {
-        Init();
+	// Creating the control.
+	wxTimePickerCtrlGeneric()
+	{
+		Init();
+	}
+	virtual ~wxTimePickerCtrlGeneric();
+	wxTimePickerCtrlGeneric(wxWindow *parent,
+	                        wxWindowID id,
+	                        const wxDateTime& date = wxDefaultDateTime,
+	                        const wxPoint& pos = wxDefaultPosition,
+	                        const wxSize& size = wxDefaultSize,
+	                        long style = wxTP_DEFAULT,
+	                        const wxValidator& validator = wxDefaultValidator,
+	                        const wxString& name = wxTimePickerCtrlNameStr)
+	{
+		Init();
 
-        (void)Create(parent, id, date, pos, size, style, validator, name);
-    }
+		(void)Create(parent, id, date, pos, size, style, validator, name);
+	}
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxDateTime& date = wxDefaultDateTime,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxTP_DEFAULT,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxTimePickerCtrlNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxDateTime& date = wxDefaultDateTime,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxTP_DEFAULT,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxTimePickerCtrlNameStr);
 
-    // Implement pure virtual wxTimePickerCtrlBase methods.
-    virtual void SetValue(const wxDateTime& date) wxOVERRIDE;
-    virtual wxDateTime GetValue() const wxOVERRIDE;
+	// Implement pure virtual wxTimePickerCtrlBase methods.
+	virtual void SetValue(const wxDateTime& date) wxOVERRIDE;
+	virtual wxDateTime GetValue() const wxOVERRIDE;
 
 protected:
-    virtual wxSize DoGetBestSize() const wxOVERRIDE;
+	virtual wxSize DoGetBestSize() const wxOVERRIDE;
 
-    virtual void DoMoveWindow(int x, int y, int width, int height) wxOVERRIDE;
+	virtual void DoMoveWindow(int x, int y, int width, int height) wxOVERRIDE;
 
 private:
-    void Init();
+	void Init();
 
-    // Return the list of the windows composing this one.
-    virtual wxWindowList GetCompositeWindowParts() const wxOVERRIDE;
+	// Return the list of the windows composing this one.
+	virtual wxWindowList GetCompositeWindowParts() const wxOVERRIDE;
 
-    // Implementation data.
-    class wxTimePickerGenericImpl* m_impl;
+	// Implementation data.
+	class wxTimePickerGenericImpl* m_impl;
 
-    wxDECLARE_NO_COPY_CLASS(wxTimePickerCtrlGeneric);
+	wxDECLARE_NO_COPY_CLASS(wxTimePickerCtrlGeneric);
 };
 
 #endif // _WX_GENERIC_TIMECTRL_H_

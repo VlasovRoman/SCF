@@ -19,48 +19,54 @@ class WXDLLIMPEXP_FWD_CORE wxImage;
 class WXDLLIMPEXP_CORE wxCursor : public wxCursorBase
 {
 public:
-    wxCursor();
+	wxCursor();
 
-    wxCursor(const char bits[], int width, int height,
-             int hotSpotX = -1, int hotSpotY = -1,
-             const char maskBits[] = NULL,
-             const wxColour* fg = NULL, const wxColour* bg = NULL);
+	wxCursor(const char bits[], int width, int height,
+	         int hotSpotX = -1, int hotSpotY = -1,
+	         const char maskBits[] = NULL,
+	         const wxColour* fg = NULL, const wxColour* bg = NULL);
 
-    wxCursor(const wxString& name,
-             wxBitmapType type = wxCURSOR_DEFAULT_TYPE,
-             int hotSpotX = 0, int hotSpotY = 0);
+	wxCursor(const wxString& name,
+	         wxBitmapType type = wxCURSOR_DEFAULT_TYPE,
+	         int hotSpotX = 0, int hotSpotY = 0);
 
 #if wxUSE_IMAGE
-    wxCursor(const wxImage& image);
+	wxCursor(const wxImage& image);
 #endif
 
-    wxCursor(wxStockCursor id) { InitFromStock(id); }
+	wxCursor(wxStockCursor id)
+	{
+		InitFromStock(id);
+	}
 #if WXWIN_COMPATIBILITY_2_8
-    wxCursor(int id) { InitFromStock((wxStockCursor)id); }
+	wxCursor(int id)
+	{
+		InitFromStock((wxStockCursor)id);
+	}
 #endif
 
-    virtual ~wxCursor();
+	virtual ~wxCursor();
 
-    // Motif-specific.
-    // Create/get a cursor for the current display
-    WXCursor GetXCursor(WXDisplay* display) const;
+	// Motif-specific.
+	// Create/get a cursor for the current display
+	WXCursor GetXCursor(WXDisplay* display) const;
 
 protected:
-    virtual wxGDIRefData *CreateGDIRefData() const;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
+	virtual wxGDIRefData *CreateGDIRefData() const;
+	virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
 
 private:
-    void InitFromStock(wxStockCursor);
+	void InitFromStock(wxStockCursor);
 
-    void Create(const char bits[], int width, int height,
-                int hotSpotX = -1, int hotSpotY = -1,
-                const char maskBits[] = NULL);
-    void Create(WXPixmap cursor, WXPixmap mask, int hotSpotX, int hotSpotY);
+	void Create(const char bits[], int width, int height,
+	            int hotSpotX = -1, int hotSpotY = -1,
+	            const char maskBits[] = NULL);
+	void Create(WXPixmap cursor, WXPixmap mask, int hotSpotX, int hotSpotY);
 
-    // Make a cursor from standard id
-    WXCursor MakeCursor(WXDisplay* display, wxStockCursor id) const;
+	// Make a cursor from standard id
+	WXCursor MakeCursor(WXDisplay* display, wxStockCursor id) const;
 
-    wxDECLARE_DYNAMIC_CLASS(wxCursor);
+	wxDECLARE_DYNAMIC_CLASS(wxCursor);
 };
 
 extern WXDLLIMPEXP_CORE void wxSetCursor(const wxCursor& cursor);

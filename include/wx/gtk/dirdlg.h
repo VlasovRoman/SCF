@@ -16,48 +16,48 @@
 class WXDLLIMPEXP_CORE wxDirDialog : public wxDirDialogBase
 {
 public:
-    wxDirDialog() { }
+	wxDirDialog() { }
 
-    wxDirDialog(wxWindow *parent,
-                const wxString& message = wxDirSelectorPromptStr,
-                const wxString& defaultPath = wxEmptyString,
-                long style = wxDD_DEFAULT_STYLE,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                const wxString& name = wxDirDialogNameStr);
-    bool Create(wxWindow *parent,
-                const wxString& message = wxDirSelectorPromptStr,
-                const wxString& defaultPath = wxEmptyString,
-                long style = wxDD_DEFAULT_STYLE,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                const wxString& name = wxDirDialogNameStr);
-    virtual ~wxDirDialog() { }
+	wxDirDialog(wxWindow *parent,
+	            const wxString& message = wxDirSelectorPromptStr,
+	            const wxString& defaultPath = wxEmptyString,
+	            long style = wxDD_DEFAULT_STYLE,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            const wxString& name = wxDirDialogNameStr);
+	bool Create(wxWindow *parent,
+	            const wxString& message = wxDirSelectorPromptStr,
+	            const wxString& defaultPath = wxEmptyString,
+	            long style = wxDD_DEFAULT_STYLE,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            const wxString& name = wxDirDialogNameStr);
+	virtual ~wxDirDialog() { }
 
 
 public:     // overrides from wxGenericDirDialog
 
-    wxString GetPath() const wxOVERRIDE;
-    void SetPath(const wxString& path) wxOVERRIDE;
+	wxString GetPath() const wxOVERRIDE;
+	void SetPath(const wxString& path) wxOVERRIDE;
 
 
-    // Implementation only.
+	// Implementation only.
 
-    void GTKOnAccept();
-    void GTKOnCancel();
+	void GTKOnAccept();
+	void GTKOnCancel();
 
 protected:
-    // override this from wxTLW since the native
-    // form doesn't have any m_wxwindow
-    virtual void DoSetSize(int x, int y,
-                           int width, int height,
-                           int sizeFlags = wxSIZE_AUTO) wxOVERRIDE;
+	// override this from wxTLW since the native
+	// form doesn't have any m_wxwindow
+	virtual void DoSetSize(int x, int y,
+	                       int width, int height,
+	                       int sizeFlags = wxSIZE_AUTO) wxOVERRIDE;
 
 
 private:
-    wxString m_selectedDirectory;
+	wxString m_selectedDirectory;
 
-    wxDECLARE_DYNAMIC_CLASS(wxDirDialog);
+	wxDECLARE_DYNAMIC_CLASS(wxDirDialog);
 };
 
 #endif // __GTKDIRDLGH__

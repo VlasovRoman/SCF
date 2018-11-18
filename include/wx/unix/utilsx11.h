@@ -42,14 +42,14 @@ void wxSetIconsX11( WXDisplay* display, WXWindow window,
 
 enum wxX11FullScreenMethod
 {
-    wxX11_FS_AUTODETECT = 0,
-    wxX11_FS_WMSPEC,
-    wxX11_FS_KDE,
-    wxX11_FS_GENERIC
+	wxX11_FS_AUTODETECT = 0,
+	wxX11_FS_WMSPEC,
+	wxX11_FS_KDE,
+	wxX11_FS_GENERIC
 };
 
 wxX11FullScreenMethod wxGetFullScreenMethodX11(WXDisplay* display,
-                                               WXWindow rootWindow);
+        WXWindow rootWindow);
 
 void wxSetFullScreenStateX11(WXDisplay* display, WXWindow rootWindow,
                              WXWindow window, bool show, wxRect *origSize,
@@ -60,27 +60,39 @@ void wxSetFullScreenStateX11(WXDisplay* display, WXWindow rootWindow,
 class wxX11Display
 {
 public:
-    wxX11Display() { m_dpy = XOpenDisplay(NULL); }
-    ~wxX11Display() { if ( m_dpy ) XCloseDisplay(m_dpy); }
+	wxX11Display()
+	{
+		m_dpy = XOpenDisplay(NULL);
+	}
+	~wxX11Display()
+	{
+		if ( m_dpy ) XCloseDisplay(m_dpy);
+	}
 
-    // Pseudo move ctor: steals the open display from the other object.
-    explicit wxX11Display(wxX11Display& display)
-    {
-        m_dpy = display.m_dpy;
-        display.m_dpy = NULL;
-    }
+	// Pseudo move ctor: steals the open display from the other object.
+	explicit wxX11Display(wxX11Display& display)
+	{
+		m_dpy = display.m_dpy;
+		display.m_dpy = NULL;
+	}
 
-    operator Display *() const { return m_dpy; }
+	operator Display *() const
+	{
+		return m_dpy;
+	}
 
-    // Using DefaultRootWindow() with an object of wxX11Display class doesn't
-    // compile because it is a macro which tries to cast wxX11Display so
-    // provide a convenient helper.
-    Window DefaultRoot() const { return DefaultRootWindow(m_dpy); }
+	// Using DefaultRootWindow() with an object of wxX11Display class doesn't
+	// compile because it is a macro which tries to cast wxX11Display so
+	// provide a convenient helper.
+	Window DefaultRoot() const
+	{
+		return DefaultRootWindow(m_dpy);
+	}
 
 private:
-    Display *m_dpy;
+	Display *m_dpy;
 
-    wxDECLARE_NO_COPY_CLASS(wxX11Display);
+	wxDECLARE_NO_COPY_CLASS(wxX11Display);
 };
 
 #endif // __WXMOTIF__, __WXGTK__, __WXX11__

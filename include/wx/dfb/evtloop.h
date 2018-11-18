@@ -22,24 +22,24 @@ wxDFB_DECLARE_INTERFACE(IDirectFBEventBuffer);
 class WXDLLIMPEXP_CORE wxGUIEventLoop : public wxConsoleEventLoop
 {
 public:
-    wxGUIEventLoop();
+	wxGUIEventLoop();
 
-    virtual bool YieldFor(long eventsToProcess);
+	virtual bool YieldFor(long eventsToProcess);
 
-    // returns DirectFB event buffer used by wx
-    static wxIDirectFBEventBufferPtr GetDirectFBEventBuffer();
-
-private:
-    static void InitBuffer();
-    static void CleanUp();
-
-    friend class wxApp; // calls CleanUp()
+	// returns DirectFB event buffer used by wx
+	static wxIDirectFBEventBufferPtr GetDirectFBEventBuffer();
 
 private:
-    static wxIDirectFBEventBufferPtr ms_buffer;
-    static int ms_bufferFd;
+	static void InitBuffer();
+	static void CleanUp();
 
-    wxDECLARE_NO_COPY_CLASS(wxGUIEventLoop);
+	friend class wxApp; // calls CleanUp()
+
+private:
+	static wxIDirectFBEventBufferPtr ms_buffer;
+	static int ms_bufferFd;
+
+	wxDECLARE_NO_COPY_CLASS(wxGUIEventLoop);
 };
 
 #endif // _WX_DFB_EVTLOOP_H_

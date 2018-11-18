@@ -25,12 +25,12 @@
 class wxSecretValueImpl : public wxRefCounter
 {
 public:
-    wxSecretValueImpl()
-    {
-    }
+	wxSecretValueImpl()
+	{
+	}
 
-    virtual size_t GetSize() const = 0;
-    virtual const void *GetData() const = 0;
+	virtual size_t GetSize() const = 0;
+	virtual const void *GetData() const = 0;
 };
 
 // Trivial common implementation of wxSecretValueImpl used under MSW and OS X.
@@ -39,28 +39,34 @@ public:
 class wxSecretValueGenericImpl : public wxSecretValueImpl
 {
 public:
-    wxSecretValueGenericImpl(size_t size, const void *data)
-        : m_size(size),
-          m_data(new char[size])
-    {
-        memcpy(m_data, data, size);
-    }
+	wxSecretValueGenericImpl(size_t size, const void *data)
+		: m_size(size),
+		  m_data(new char[size])
+	{
+		memcpy(m_data, data, size);
+	}
 
-    virtual ~wxSecretValueGenericImpl()
-    {
-        if ( m_data )
-        {
-            wxSecretValue::Wipe(m_size, m_data);
-            delete [] m_data;
-        }
-    }
+	virtual ~wxSecretValueGenericImpl()
+	{
+		if ( m_data )
+		{
+			wxSecretValue::Wipe(m_size, m_data);
+			delete [] m_data;
+		}
+	}
 
-    virtual size_t GetSize() const wxOVERRIDE { return m_size; }
-    virtual const void *GetData() const wxOVERRIDE { return m_data; }
+	virtual size_t GetSize() const wxOVERRIDE
+	{
+		return m_size;
+	}
+	virtual const void *GetData() const wxOVERRIDE
+	{
+		return m_data;
+	}
 
 private:
-    const size_t m_size;
-    char* const m_data;
+	const size_t m_size;
+	char* const m_data;
 };
 
 #endif // MSW or OSX
@@ -78,16 +84,16 @@ private:
 class wxSecretStoreImpl : public wxRefCounter
 {
 public:
-    virtual bool Save(const wxString& service,
-                      const wxString& username,
-                      const wxSecretValueImpl& password,
-                      wxString& errmsg) = 0;
-    virtual bool Load(const wxString& service,
-                      wxString* username,
-                      wxSecretValueImpl** password,
-                      wxString& errmsg) const = 0;
-    virtual bool Delete(const wxString& service,
-                        wxString& errmsg) = 0;
+	virtual bool Save(const wxString& service,
+	                  const wxString& username,
+	                  const wxSecretValueImpl& password,
+	                  wxString& errmsg) = 0;
+	virtual bool Load(const wxString& service,
+	                  wxString* username,
+	                  wxSecretValueImpl** password,
+	                  wxString& errmsg) const = 0;
+	virtual bool Delete(const wxString& service,
+	                    wxString& errmsg) = 0;
 };
 
 #endif // _WX_PRIVATE_SECRETSTORE_H_

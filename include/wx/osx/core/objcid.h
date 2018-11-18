@@ -15,9 +15,9 @@
 // ----------------------------------------------------------------------------
 
 #ifdef __OBJC__
-    #define wxObjCID id
+#define wxObjCID id
 #else
-    typedef struct objc_object* wxObjCID;
+typedef struct objc_object* wxObjCID;
 #endif
 
 #endif // _WX_OSX_CORE_OBJCID_H_

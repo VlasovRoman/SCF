@@ -17,28 +17,30 @@
 class WXDLLIMPEXP_CORE wxMemoryDCImpl: public wxMSWDCImpl
 {
 public:
-    wxMemoryDCImpl( wxMemoryDC *owner );
-    wxMemoryDCImpl( wxMemoryDC *owner, wxBitmap& bitmap );
-    wxMemoryDCImpl( wxMemoryDC *owner, wxDC *dc ); // Create compatible DC
+	wxMemoryDCImpl( wxMemoryDC *owner );
+	wxMemoryDCImpl( wxMemoryDC *owner, wxBitmap& bitmap );
+	wxMemoryDCImpl( wxMemoryDC *owner, wxDC *dc ); // Create compatible DC
 
-    // override some base class virtuals
-    virtual void DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord height) wxOVERRIDE;
-    virtual void DoGetSize(int* width, int* height) const wxOVERRIDE;
-    virtual void DoSelect(const wxBitmap& bitmap) wxOVERRIDE;
+	// override some base class virtuals
+	virtual void DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord height) wxOVERRIDE;
+	virtual void DoGetSize(int* width, int* height) const wxOVERRIDE;
+	virtual void DoSelect(const wxBitmap& bitmap) wxOVERRIDE;
 
-    virtual wxBitmap DoGetAsBitmap(const wxRect* subrect) const wxOVERRIDE
-    { return subrect == NULL ? GetSelectedBitmap() : GetSelectedBitmap().GetSubBitmapOfHDC(*subrect, GetHDC() );}
+	virtual wxBitmap DoGetAsBitmap(const wxRect* subrect) const wxOVERRIDE
+	{
+		return subrect == NULL ? GetSelectedBitmap() : GetSelectedBitmap().GetSubBitmapOfHDC(*subrect, GetHDC() );
+	}
 
 protected:
-    // create DC compatible with the given one or screen if dc == NULL
-    bool CreateCompatible(wxDC *dc);
+	// create DC compatible with the given one or screen if dc == NULL
+	bool CreateCompatible(wxDC *dc);
 
-    // initialize the newly created DC
-    void Init();
+	// initialize the newly created DC
+	void Init();
 
-    wxDECLARE_CLASS(wxMemoryDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxMemoryDCImpl);
+	wxDECLARE_CLASS(wxMemoryDCImpl);
+	wxDECLARE_NO_COPY_CLASS(wxMemoryDCImpl);
 };
 
 #endif
-    // _WX_DCMEMORY_H_
+// _WX_DCMEMORY_H_

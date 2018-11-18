@@ -18,60 +18,65 @@
 //-----------------------------------------------------------------------------
 
 class WXDLLIMPEXP_CORE wxFontButton : public wxButton,
-                                      public wxFontPickerWidgetBase
+	public wxFontPickerWidgetBase
 {
 public:
-    wxFontButton() { Init(); }
-    wxFontButton(wxWindow *parent,
-                 wxWindowID id,
-                 const wxFont& initial = wxNullFont,
-                 const wxPoint& pos = wxDefaultPosition,
-                 const wxSize& size = wxDefaultSize,
-                 long style = wxFONTBTN_DEFAULT_STYLE,
-                 const wxValidator& validator = wxDefaultValidator,
-                 const wxString& name = wxFontPickerWidgetNameStr)
-    {
-        Init();
+	wxFontButton()
+	{
+		Init();
+	}
+	wxFontButton(wxWindow *parent,
+	             wxWindowID id,
+	             const wxFont& initial = wxNullFont,
+	             const wxPoint& pos = wxDefaultPosition,
+	             const wxSize& size = wxDefaultSize,
+	             long style = wxFONTBTN_DEFAULT_STYLE,
+	             const wxValidator& validator = wxDefaultValidator,
+	             const wxString& name = wxFontPickerWidgetNameStr)
+	{
+		Init();
 
-        Create(parent, id, initial, pos, size, style, validator, name);
-    }
+		Create(parent, id, initial, pos, size, style, validator, name);
+	}
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxFont& initial = wxNullFont,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxFONTBTN_DEFAULT_STYLE,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxFontPickerWidgetNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxFont& initial = wxNullFont,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxFONTBTN_DEFAULT_STYLE,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxFontPickerWidgetNameStr);
 
-    virtual wxColour GetSelectedColour() const wxOVERRIDE
-        { return m_selectedColour; }
+	virtual wxColour GetSelectedColour() const wxOVERRIDE
+	{
+		return m_selectedColour;
+	}
 
-    void SetSelectedColour(const wxColour &colour) wxOVERRIDE
-        { m_selectedColour = colour; }
+	void SetSelectedColour(const wxColour &colour) wxOVERRIDE
+	{ m_selectedColour = colour; }
 
-    virtual ~wxFontButton();
+	virtual ~wxFontButton();
 
 protected:
-    void UpdateFont() wxOVERRIDE;
+	void UpdateFont() wxOVERRIDE;
 
 
 public:     // used by the GTK callback only
-    void SetNativeFontInfo(const char* gtkdescription);
+	void SetNativeFontInfo(const char* gtkdescription);
 
 private:
-    // Common part of both ctors.
-    void Init()
-    {
-        m_selectedColour = *wxBLACK;
-    }
+	// Common part of both ctors.
+	void Init()
+	{
+		m_selectedColour = *wxBLACK;
+	}
 
-    // This can't be changed by the user, but is provided to
-    // satisfy the wxFontPickerWidgetBase interface.
-    wxColour m_selectedColour;
+	// This can't be changed by the user, but is provided to
+	// satisfy the wxFontPickerWidgetBase interface.
+	wxColour m_selectedColour;
 
-    wxDECLARE_DYNAMIC_CLASS(wxFontButton);
+	wxDECLARE_DYNAMIC_CLASS(wxFontButton);
 };
 
 #endif // _WX_GTK_FONTPICKER_H_

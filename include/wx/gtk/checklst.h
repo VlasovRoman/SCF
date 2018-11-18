@@ -17,32 +17,32 @@
 class WXDLLIMPEXP_CORE wxCheckListBox : public wxCheckListBoxBase
 {
 public:
-    wxCheckListBox();
-    wxCheckListBox(wxWindow *parent, wxWindowID id,
-            const wxPoint& pos = wxDefaultPosition,
-            const wxSize& size = wxDefaultSize,
-            int nStrings = 0,
-            const wxString *choices = NULL,
-            long style = 0,
-            const wxValidator& validator = wxDefaultValidator,
-            const wxString& name = wxListBoxNameStr);
-    wxCheckListBox(wxWindow *parent, wxWindowID id,
-            const wxPoint& pos,
-            const wxSize& size,
-            const wxArrayString& choices,
-            long style = 0,
-            const wxValidator& validator = wxDefaultValidator,
-            const wxString& name = wxListBoxNameStr);
+	wxCheckListBox();
+	wxCheckListBox(wxWindow *parent, wxWindowID id,
+	               const wxPoint& pos = wxDefaultPosition,
+	               const wxSize& size = wxDefaultSize,
+	               int nStrings = 0,
+	               const wxString *choices = NULL,
+	               long style = 0,
+	               const wxValidator& validator = wxDefaultValidator,
+	               const wxString& name = wxListBoxNameStr);
+	wxCheckListBox(wxWindow *parent, wxWindowID id,
+	               const wxPoint& pos,
+	               const wxSize& size,
+	               const wxArrayString& choices,
+	               long style = 0,
+	               const wxValidator& validator = wxDefaultValidator,
+	               const wxString& name = wxListBoxNameStr);
 
-    virtual bool IsChecked(unsigned int index) const wxOVERRIDE;
-    virtual void Check(unsigned int index, bool check = true) wxOVERRIDE;
+	virtual bool IsChecked(unsigned int index) const wxOVERRIDE;
+	virtual void Check(unsigned int index, bool check = true) wxOVERRIDE;
 
-    int GetItemHeight() const;
+	int GetItemHeight() const;
 
-    void DoCreateCheckList();
+	void DoCreateCheckList();
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxCheckListBox);
+	wxDECLARE_DYNAMIC_CLASS(wxCheckListBox);
 };
 
 #endif   // _WX_GTKCHECKLIST_H_

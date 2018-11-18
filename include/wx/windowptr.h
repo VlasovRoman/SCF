@@ -21,10 +21,10 @@ namespace wxPrivate
 
 struct wxWindowDeleter
 {
-    void operator()(wxWindow *win)
-    {
-        win->Destroy();
-    }
+	void operator()(wxWindow *win)
+	{
+		win->Destroy();
+	}
 };
 
 } // namespace wxPrivate
@@ -33,31 +33,31 @@ template<typename T>
 class wxWindowPtr : public wxSharedPtr<T>
 {
 public:
-    typedef T element_type;
+	typedef T element_type;
 
-    explicit wxWindowPtr(element_type* win)
-        : wxSharedPtr<T>(win, wxPrivate::wxWindowDeleter())
-    {
-    }
+	explicit wxWindowPtr(element_type* win)
+		: wxSharedPtr<T>(win, wxPrivate::wxWindowDeleter())
+	{
+	}
 
-    wxWindowPtr() {}
-    wxWindowPtr(const wxWindowPtr& tocopy) : wxSharedPtr<T>(tocopy) {}
+	wxWindowPtr() {}
+	wxWindowPtr(const wxWindowPtr& tocopy) : wxSharedPtr<T>(tocopy) {}
 
-    wxWindowPtr& operator=(const wxWindowPtr& tocopy)
-    {
-        wxSharedPtr<T>::operator=(tocopy);
-        return *this;
-    }
+	wxWindowPtr& operator=(const wxWindowPtr& tocopy)
+	{
+		wxSharedPtr<T>::operator=(tocopy);
+		return *this;
+	}
 
-    wxWindowPtr& operator=(element_type* win)
-    {
-        return operator=(wxWindowPtr(win));
-    }
+	wxWindowPtr& operator=(element_type* win)
+	{
+		return operator=(wxWindowPtr(win));
+	}
 
-    void reset(T* ptr = NULL)
-    {
-        wxSharedPtr<T>::reset(ptr, wxPrivate::wxWindowDeleter());
-    }
+	void reset(T* ptr = NULL)
+	{
+		wxSharedPtr<T>::reset(ptr, wxPrivate::wxWindowDeleter());
+	}
 };
 
 #endif // _WX_WINDOWPTR_H_

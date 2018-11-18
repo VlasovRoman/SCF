@@ -15,30 +15,30 @@ class QtClipBoardSignalHandler;
 class WXDLLIMPEXP_CORE wxClipboard : public wxClipboardBase
 {
 public:
-    wxClipboard();
-    ~wxClipboard();
+	wxClipboard();
+	~wxClipboard();
 
-    virtual bool Open();
-    virtual void Close();
-    virtual bool IsOpened() const;
+	virtual bool Open();
+	virtual void Close();
+	virtual bool IsOpened() const;
 
-    virtual bool AddData( wxDataObject *data );
-    virtual bool SetData( wxDataObject *data );
-    virtual bool GetData( wxDataObject& data );
-    virtual void Clear();
-    virtual bool IsSupported( const wxDataFormat& format );
-    virtual bool IsSupportedAsync(wxEvtHandler *sink);
+	virtual bool AddData( wxDataObject *data );
+	virtual bool SetData( wxDataObject *data );
+	virtual bool GetData( wxDataObject& data );
+	virtual void Clear();
+	virtual bool IsSupported( const wxDataFormat& format );
+	virtual bool IsSupportedAsync(wxEvtHandler *sink);
 
 private:
-    friend class QtClipBoardSignalHandler;
-    int Mode();
+	friend class QtClipBoardSignalHandler;
+	int Mode();
 
-    QtClipBoardSignalHandler *m_SignalHandler;
-    wxEvtHandlerRef    m_sink;
+	QtClipBoardSignalHandler *m_SignalHandler;
+	wxEvtHandlerRef    m_sink;
 
-    bool m_open;
+	bool m_open;
 
-    wxDECLARE_DYNAMIC_CLASS(wxClipboard);
+	wxDECLARE_DYNAMIC_CLASS(wxClipboard);
 };
 
 #endif // _WX_QT_CLIPBRD_H_

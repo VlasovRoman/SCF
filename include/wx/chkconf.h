@@ -796,7 +796,7 @@
 
 #ifndef wxUSE_LIBMSPACK
 #   if !defined(__UNIX__)
-        /* set to 0 on platforms that don't have libmspack */
+/* set to 0 on platforms that don't have libmspack */
 #       define wxUSE_LIBMSPACK 0
 #   else
 #       ifdef wxABORT_ON_CONFIG_ERROR
@@ -1742,7 +1742,7 @@
 /* generic controls dependencies */
 #if !defined(__WXMSW__) || defined(__WXUNIVERSAL__)
 #   if wxUSE_FONTDLG || wxUSE_FILEDLG || wxUSE_CHOICEDLG
-        /* all common controls are needed by these dialogs */
+/* all common controls are needed by these dialogs */
 #       if !defined(wxUSE_CHOICE) || \
            !defined(wxUSE_TEXTCTRL) || \
            !defined(wxUSE_BUTTON) || \
@@ -1812,8 +1812,8 @@
 #endif /* wxUSE_CALENDARCTRL */
 
 #if wxUSE_DATEPICKCTRL
-    /* Only the generic implementation, not used under MSW and OSX, needs
-     * wxComboCtrl. */
+/* Only the generic implementation, not used under MSW and OSX, needs
+ * wxComboCtrl. */
 #   if !wxUSE_COMBOCTRL && (defined(__WXUNIVERSAL__) || \
             !(defined(__WXMSW__) || defined(__WXOSX_COCOA__)))
 #       ifdef wxABORT_ON_CONFIG_ERROR
@@ -1890,11 +1890,11 @@
 #endif /* wxUSE_HELP */
 
 #if wxUSE_MS_HTML_HELP
-    /*
-        this doesn't make sense for platforms other than MSW but we still
-        define it in wx/setup_inc.h so don't complain if it happens to be
-        defined under another platform but just silently fix it.
-     */
+/*
+    this doesn't make sense for platforms other than MSW but we still
+    define it in wx/setup_inc.h so don't complain if it happens to be
+    defined under another platform but just silently fix it.
+ */
 #   ifndef __WXMSW__
 #       undef wxUSE_MS_HTML_HELP
 #       define wxUSE_MS_HTML_HELP 0
@@ -2287,11 +2287,11 @@
 #endif /* wxUSE_WEBVIEW && !any web view backend */
 
 #if wxUSE_PREFERENCES_EDITOR
-    /*
-        We can use either a generic implementation, using wxNotebook, or a
-        native one under wxOSX/Cocoa but then we must be using the native
-        toolbar.
-    */
+/*
+    We can use either a generic implementation, using wxNotebook, or a
+    native one under wxOSX/Cocoa but then we must be using the native
+    toolbar.
+*/
 #   if !wxUSE_NOTEBOOK
 #       ifdef __WXOSX_COCOA__
 #           if !wxUSE_TOOLBAR || !wxOSX_USE_NATIVE_TOOLBAR

@@ -19,16 +19,16 @@ class WXDLLIMPEXP_FWD_CORE wxToolbook;
 class WXDLLIMPEXP_XRC wxToolbookXmlHandler : public wxXmlResourceHandler
 {
 public:
-    wxToolbookXmlHandler();
+	wxToolbookXmlHandler();
 
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
 private:
-    bool m_isInside;
-    wxToolbook *m_toolbook;
+	bool m_isInside;
+	wxToolbook *m_toolbook;
 
-    wxDECLARE_DYNAMIC_CLASS(wxToolbookXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxToolbookXmlHandler);
 };
 
 #endif // wxUSE_XRC && wxUSE_TOOLBOOK

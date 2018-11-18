@@ -16,38 +16,38 @@
 // Group box
 class WXDLLIMPEXP_CORE wxGauge: public wxGaugeBase
 {
- public:
-  wxGauge() { }
+public:
+	wxGauge() { }
 
-  wxGauge(wxWindow *parent, wxWindowID id,
-           int range,
-           const wxPoint& pos = wxDefaultPosition,
-           const wxSize& size = wxDefaultSize,
-           long style = wxGA_HORIZONTAL,
-           const wxValidator& validator = wxDefaultValidator,
-           const wxString& name = wxGaugeNameStr)
-  {
-    Create(parent, id, range, pos, size, style, validator, name);
-  }
+	wxGauge(wxWindow *parent, wxWindowID id,
+	        int range,
+	        const wxPoint& pos = wxDefaultPosition,
+	        const wxSize& size = wxDefaultSize,
+	        long style = wxGA_HORIZONTAL,
+	        const wxValidator& validator = wxDefaultValidator,
+	        const wxString& name = wxGaugeNameStr)
+	{
+		Create(parent, id, range, pos, size, style, validator, name);
+	}
 
-  bool Create(wxWindow *parent, wxWindowID id,
-           int range,
-           const wxPoint& pos = wxDefaultPosition,
-           const wxSize& size = wxDefaultSize,
-           long style = wxGA_HORIZONTAL,
-           const wxValidator& validator = wxDefaultValidator,
-           const wxString& name = wxGaugeNameStr);
+	bool Create(wxWindow *parent, wxWindowID id,
+	            int range,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxGA_HORIZONTAL,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxGaugeNameStr);
 
-    // set gauge range/value
-    virtual void SetRange(int range);
-    virtual void SetValue(int pos);
-    virtual int  GetValue() const ;
+	// set gauge range/value
+	virtual void SetRange(int range);
+	virtual void SetValue(int pos);
+	virtual int  GetValue() const ;
 
-    void Pulse();
+	void Pulse();
 
- protected:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxGauge);
+protected:
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxGauge);
 };
 
 #endif
-    // _WX_GAUGE_H_
+// _WX_GAUGE_H_

@@ -16,33 +16,39 @@
 class WXDLLIMPEXP_ADV wxSound : public wxSoundBase
 {
 public:
-    wxSound();
-    wxSound(const wxString& fileName, bool isResource = false);
-    wxSound(size_t size, const void* data);
-    virtual ~wxSound();
+	wxSound();
+	wxSound(const wxString& fileName, bool isResource = false);
+	wxSound(size_t size, const void* data);
+	virtual ~wxSound();
 
-    // Create from resource or file
-    bool Create(const wxString& fileName, bool isResource = false);
+	// Create from resource or file
+	bool Create(const wxString& fileName, bool isResource = false);
 
-    // Create from data
-    bool Create(size_t size, const void* data);
+	// Create from data
+	bool Create(size_t size, const void* data);
 
-    bool IsOk() const { return m_data != NULL; }
+	bool IsOk() const
+	{
+		return m_data != NULL;
+	}
 
-    static void Stop();
+	static void Stop();
 
 protected:
-    void Init() { m_data = NULL; }
-    bool CheckCreatedOk();
-    void Free();
+	void Init()
+	{
+		m_data = NULL;
+	}
+	bool CheckCreatedOk();
+	void Free();
 
-    virtual bool DoPlay(unsigned flags) const wxOVERRIDE;
+	virtual bool DoPlay(unsigned flags) const wxOVERRIDE;
 
 private:
-    // data of this object
-    class wxSoundData *m_data;
+	// data of this object
+	class wxSoundData *m_data;
 
-    wxDECLARE_NO_COPY_CLASS(wxSound);
+	wxDECLARE_NO_COPY_CLASS(wxSound);
 };
 
 #endif // wxUSE_SOUND

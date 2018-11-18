@@ -28,76 +28,76 @@
 class WXDLLIMPEXP_ADV wxExtHelpController : public wxHelpControllerBase
 {
 public:
-    wxExtHelpController(wxWindow* parentWindow = NULL);
-    virtual ~wxExtHelpController();
+	wxExtHelpController(wxWindow* parentWindow = NULL);
+	virtual ~wxExtHelpController();
 
 #if WXWIN_COMPATIBILITY_2_8
-    wxDEPRECATED(void SetBrowser(const wxString& browsername = wxEmptyString, bool isNetscape = false) );
+	wxDEPRECATED(void SetBrowser(const wxString& browsername = wxEmptyString, bool isNetscape = false) );
 #endif
 
-    // Set viewer: new name for SetBrowser
-    virtual void SetViewer(const wxString& viewer = wxEmptyString,
-                            long flags = wxHELP_NETSCAPE) wxOVERRIDE;
+	// Set viewer: new name for SetBrowser
+	virtual void SetViewer(const wxString& viewer = wxEmptyString,
+	                       long flags = wxHELP_NETSCAPE) wxOVERRIDE;
 
-    virtual bool Initialize(const wxString& dir, int WXUNUSED(server)) wxOVERRIDE
-        { return Initialize(dir); }
+	virtual bool Initialize(const wxString& dir, int WXUNUSED(server)) wxOVERRIDE
+	{ return Initialize(dir); }
 
-    virtual bool Initialize(const wxString& dir) wxOVERRIDE;
-    virtual bool LoadFile(const wxString& file = wxEmptyString) wxOVERRIDE;
-    virtual bool DisplayContents(void) wxOVERRIDE;
-    virtual bool DisplaySection(int sectionNo) wxOVERRIDE;
-    virtual bool DisplaySection(const wxString& section) wxOVERRIDE;
-    virtual bool DisplayBlock(long blockNo) wxOVERRIDE;
-    virtual bool KeywordSearch(const wxString& k,
-                                wxHelpSearchMode mode = wxHELP_SEARCH_ALL) wxOVERRIDE;
+	virtual bool Initialize(const wxString& dir) wxOVERRIDE;
+	virtual bool LoadFile(const wxString& file = wxEmptyString) wxOVERRIDE;
+	virtual bool DisplayContents(void) wxOVERRIDE;
+	virtual bool DisplaySection(int sectionNo) wxOVERRIDE;
+	virtual bool DisplaySection(const wxString& section) wxOVERRIDE;
+	virtual bool DisplayBlock(long blockNo) wxOVERRIDE;
+	virtual bool KeywordSearch(const wxString& k,
+	                           wxHelpSearchMode mode = wxHELP_SEARCH_ALL) wxOVERRIDE;
 
-    virtual bool Quit(void) wxOVERRIDE;
-    virtual void OnQuit(void) wxOVERRIDE;
+	virtual bool Quit(void) wxOVERRIDE;
+	virtual void OnQuit(void) wxOVERRIDE;
 
-    virtual bool DisplayHelp(const wxString &) ;
+	virtual bool DisplayHelp(const wxString &) ;
 
-    virtual void SetFrameParameters(const wxString& WXUNUSED(title),
-                                    const wxSize& WXUNUSED(size),
-                                    const wxPoint& WXUNUSED(pos) = wxDefaultPosition,
-                                    bool WXUNUSED(newFrameEachTime) = false) wxOVERRIDE
-        {
-            // does nothing by default
-        }
+	virtual void SetFrameParameters(const wxString& WXUNUSED(title),
+	                                const wxSize& WXUNUSED(size),
+	                                const wxPoint& WXUNUSED(pos) = wxDefaultPosition,
+	                                bool WXUNUSED(newFrameEachTime) = false) wxOVERRIDE
+	{
+		// does nothing by default
+	}
 
-    virtual wxFrame *GetFrameParameters(wxSize *WXUNUSED(size) = NULL,
-                                    wxPoint *WXUNUSED(pos) = NULL,
-                                    bool *WXUNUSED(newFrameEachTime) = NULL) wxOVERRIDE
-        {
-            return NULL; // does nothing by default
-        }
+	virtual wxFrame *GetFrameParameters(wxSize *WXUNUSED(size) = NULL,
+	                                    wxPoint *WXUNUSED(pos) = NULL,
+	                                    bool *WXUNUSED(newFrameEachTime) = NULL) wxOVERRIDE
+	{
+		return NULL; // does nothing by default
+	}
 
 protected:
-    // Filename of currently active map file.
-    wxString         m_helpDir;
+	// Filename of currently active map file.
+	wxString         m_helpDir;
 
-    // How many entries do we have in the map file?
-    int              m_NumOfEntries;
+	// How many entries do we have in the map file?
+	int              m_NumOfEntries;
 
-    // A list containing all id,url,documentation triples.
-    wxList          *m_MapList;
+	// A list containing all id,url,documentation triples.
+	wxList          *m_MapList;
 
 private:
-    // parse a single line of the map file (called by LoadFile())
-    //
-    // return true if the line was valid or false otherwise
-    bool ParseMapFileLine(const wxString& line);
+	// parse a single line of the map file (called by LoadFile())
+	//
+	// return true if the line was valid or false otherwise
+	bool ParseMapFileLine(const wxString& line);
 
-    // Deletes the list and all objects.
-    void DeleteList(void);
+	// Deletes the list and all objects.
+	void DeleteList(void);
 
 
-    // How to call the html viewer.
-    wxString         m_BrowserName;
+	// How to call the html viewer.
+	wxString         m_BrowserName;
 
-    // Is the viewer a variant of netscape?
-    bool             m_BrowserIsNetscape;
+	// Is the viewer a variant of netscape?
+	bool             m_BrowserIsNetscape;
 
-    wxDECLARE_CLASS(wxExtHelpController);
+	wxDECLARE_CLASS(wxExtHelpController);
 };
 
 #endif // wxUSE_HELP

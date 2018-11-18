@@ -19,15 +19,15 @@
 
 class WXDLLIMPEXP_CORE wxPrinter: public wxPrinterBase
 {
-    wxDECLARE_DYNAMIC_CLASS(wxPrinter);
+	wxDECLARE_DYNAMIC_CLASS(wxPrinter);
 
 public:
-    wxPrinter(wxPrintData *data = NULL);
-    virtual ~wxPrinter();
+	wxPrinter(wxPrintData *data = NULL);
+	virtual ~wxPrinter();
 
-    virtual bool Print(wxWindow *parent, wxPrintout *printout, bool prompt = TRUE);
-    virtual bool PrintDialog(wxWindow *parent);
-    virtual bool Setup(wxWindow *parent);
+	virtual bool Print(wxWindow *parent, wxPrintout *printout, bool prompt = TRUE);
+	virtual bool PrintDialog(wxWindow *parent);
+	virtual bool Setup(wxWindow *parent);
 };
 
 /*
@@ -37,15 +37,15 @@ public:
 
 class WXDLLIMPEXP_CORE wxPrintPreview: public wxPrintPreviewBase
 {
-    wxDECLARE_CLASS(wxPrintPreview);
+	wxDECLARE_CLASS(wxPrintPreview);
 
 public:
-    wxPrintPreview(wxPrintout *printout, wxPrintout *printoutForPrinting = NULL, wxPrintData *data = NULL);
-    virtual ~wxPrintPreview();
+	wxPrintPreview(wxPrintout *printout, wxPrintout *printoutForPrinting = NULL, wxPrintData *data = NULL);
+	virtual ~wxPrintPreview();
 
-    virtual bool Print(bool interactive);
-    virtual void DetermineScaling();
+	virtual bool Print(bool interactive);
+	virtual void DetermineScaling();
 };
 
 #endif
-    // _WX_PRINT_H_
+// _WX_PRINT_H_

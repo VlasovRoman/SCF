@@ -22,30 +22,32 @@
 class WXDLLIMPEXP_BASE wxMemoryText : public wxTextBuffer
 {
 public:
-    // Constructors.
-    wxMemoryText() { }
-    wxMemoryText(const wxString& name) : wxTextBuffer(name) { }
+	// Constructors.
+	wxMemoryText() { }
+	wxMemoryText(const wxString& name) : wxTextBuffer(name) { }
 
 protected:
-    virtual bool OnExists() const wxOVERRIDE
-        { return false; }
+	virtual bool OnExists() const wxOVERRIDE
+	{
+		return false;
+	}
 
-    virtual bool OnOpen(const wxString & WXUNUSED(strBufferName),
-                        wxTextBufferOpenMode WXUNUSED(OpenMode)) wxOVERRIDE
-        { return true; }
+	virtual bool OnOpen(const wxString & WXUNUSED(strBufferName),
+	                    wxTextBufferOpenMode WXUNUSED(OpenMode)) wxOVERRIDE
+	{ return true; }
 
-    virtual bool OnClose() wxOVERRIDE
-        { return true; }
+	virtual bool OnClose() wxOVERRIDE
+	{ return true; }
 
-    virtual bool OnRead(const wxMBConv& WXUNUSED(conv)) wxOVERRIDE
-        { return true; }
+	virtual bool OnRead(const wxMBConv& WXUNUSED(conv)) wxOVERRIDE
+	{ return true; }
 
-    virtual bool OnWrite(wxTextFileType WXUNUSED(typeNew),
-                         const wxMBConv& WXUNUSED(conv) = wxMBConvUTF8()) wxOVERRIDE
-        { return true; }
+	virtual bool OnWrite(wxTextFileType WXUNUSED(typeNew),
+	                     const wxMBConv& WXUNUSED(conv) = wxMBConvUTF8()) wxOVERRIDE
+	{ return true; }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxMemoryText);
+	wxDECLARE_NO_COPY_CLASS(wxMemoryText);
 };
 
 #endif // wxUSE_TEXTBUFFER

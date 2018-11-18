@@ -13,51 +13,57 @@ class QTabWidget;
 class WXDLLIMPEXP_CORE wxNotebook : public wxNotebookBase
 {
 public:
-    wxNotebook();
-    wxNotebook(wxWindow *parent,
-             wxWindowID id,
-             const wxPoint& pos = wxDefaultPosition,
-             const wxSize& size = wxDefaultSize,
-             long style = 0,
-             const wxString& name = wxNotebookNameStr);
-    
-    bool Create(wxWindow *parent,
-              wxWindowID id,
-              const wxPoint& pos = wxDefaultPosition,
-              const wxSize& size = wxDefaultSize,
-              long style = 0,
-              const wxString& name = wxNotebookNameStr);
+	wxNotebook();
+	wxNotebook(wxWindow *parent,
+	           wxWindowID id,
+	           const wxPoint& pos = wxDefaultPosition,
+	           const wxSize& size = wxDefaultSize,
+	           long style = 0,
+	           const wxString& name = wxNotebookNameStr);
 
-    virtual void SetPadding(const wxSize& padding);
-    virtual void SetTabSize(const wxSize& sz);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxNotebookNameStr);
 
-    virtual bool SetPageText(size_t n, const wxString& strText);
-    virtual wxString GetPageText(size_t n) const;
+	virtual void SetPadding(const wxSize& padding);
+	virtual void SetTabSize(const wxSize& sz);
 
-    virtual int GetPageImage(size_t n) const;
-    virtual bool SetPageImage(size_t n, int imageId);
+	virtual bool SetPageText(size_t n, const wxString& strText);
+	virtual wxString GetPageText(size_t n) const;
 
-    virtual bool InsertPage(size_t n, wxWindow *page, const wxString& text,
-        bool bSelect = false, int imageId = -1);
+	virtual int GetPageImage(size_t n) const;
+	virtual bool SetPageImage(size_t n, int imageId);
 
-    virtual wxSize CalcSizeFromPage(const wxSize& sizePage) const;
+	virtual bool InsertPage(size_t n, wxWindow *page, const wxString& text,
+	                        bool bSelect = false, int imageId = -1);
 
-    int SetSelection(size_t nPage) { return DoSetSelection(nPage, SetSelection_SendEvent); }
-    int ChangeSelection(size_t nPage) { return DoSetSelection(nPage); }
+	virtual wxSize CalcSizeFromPage(const wxSize& sizePage) const;
 
-    virtual QWidget *GetHandle() const;
+	int SetSelection(size_t nPage)
+	{
+		return DoSetSelection(nPage, SetSelection_SendEvent);
+	}
+	int ChangeSelection(size_t nPage)
+	{
+		return DoSetSelection(nPage);
+	}
+
+	virtual QWidget *GetHandle() const;
 
 protected:
-    virtual wxWindow *DoRemovePage(size_t page);
-    int DoSetSelection(size_t nPage, int flags = 0);
+	virtual wxWindow *DoRemovePage(size_t page);
+	int DoSetSelection(size_t nPage, int flags = 0);
 
 private:
-    QTabWidget *m_qtTabWidget;
+	QTabWidget *m_qtTabWidget;
 
-    // internal array to store imageId for each page:
-    wxVector<int> m_images;
+	// internal array to store imageId for each page:
+	wxVector<int> m_images;
 
-    wxDECLARE_DYNAMIC_CLASS( wxNotebook );
+	wxDECLARE_DYNAMIC_CLASS( wxNotebook );
 };
 
 

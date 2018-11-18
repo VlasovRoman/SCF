@@ -13,64 +13,64 @@
 class wxNotificationMessageImpl
 {
 public:
-    wxNotificationMessageImpl(wxNotificationMessageBase* notification):
-        m_notification(notification),
-        m_active(false)
-    {
+	wxNotificationMessageImpl(wxNotificationMessageBase* notification):
+		m_notification(notification),
+		m_active(false)
+	{
 
-    }
+	}
 
-    virtual ~wxNotificationMessageImpl() { }
+	virtual ~wxNotificationMessageImpl() { }
 
-    virtual bool Show(int timeout) = 0;
+	virtual bool Show(int timeout) = 0;
 
-    virtual bool Close() = 0;
+	virtual bool Close() = 0;
 
-    virtual void SetTitle(const wxString& title) = 0;
+	virtual void SetTitle(const wxString& title) = 0;
 
-    virtual void SetMessage(const wxString& message) = 0;
+	virtual void SetMessage(const wxString& message) = 0;
 
-    virtual void SetParent(wxWindow *parent) = 0;
+	virtual void SetParent(wxWindow *parent) = 0;
 
-    virtual void SetFlags(int flags) = 0;
+	virtual void SetFlags(int flags) = 0;
 
-    virtual void SetIcon(const wxIcon& icon) = 0;
+	virtual void SetIcon(const wxIcon& icon) = 0;
 
-    virtual bool AddAction(wxWindowID actionid, const wxString &label) = 0;
+	virtual bool AddAction(wxWindowID actionid, const wxString &label) = 0;
 
-    virtual void Detach()
-    {
-        if (m_active)
-            m_notification = NULL;
-        else
-            delete this;
-    }
+	virtual void Detach()
+	{
+		if (m_active)
+			m_notification = NULL;
+		else
+			delete this;
+	}
 
-    bool ProcessNotificationEvent(wxEvent& event)
-    {
-        if (m_notification)
-            return m_notification->ProcessEvent(event);
-        else
-            return false;
-    }
+	bool ProcessNotificationEvent(wxEvent& event)
+	{
+		if (m_notification)
+			return m_notification->ProcessEvent(event);
+		else
+			return false;
+	}
 
-    wxNotificationMessageBase* GetNotification() const
-    {
-        return m_notification;
-    }
+	wxNotificationMessageBase* GetNotification() const
+	{
+		return m_notification;
+	}
 
 protected:
-    wxNotificationMessageBase* m_notification;
-    bool m_active;
+	wxNotificationMessageBase* m_notification;
+	bool m_active;
 
-    void SetActive(bool active)
-    {
-        m_active = active;
-        
-        // Delete the implementation if the notification is detached
-        if (!m_notification && !active)
-            delete this;
-    }
+	void SetActive(bool active)
+	{
+		m_active = active;
+
+		// Delete the implementation if the notification is detached
+		if (!m_notification && !active)
+			delete this;
+	}
 };
 
 #endif // _WX_PRIVATE_NOTIFMSG_H_

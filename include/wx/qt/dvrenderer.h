@@ -15,18 +15,18 @@
 class WXDLLIMPEXP_ADV wxDataViewRenderer: public wxDataViewRendererBase
 {
 public:
-    wxDataViewRenderer( const wxString &varianttype,
-                        wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-                        int align = wxDVR_DEFAULT_ALIGNMENT );
+	wxDataViewRenderer( const wxString &varianttype,
+	                    wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
+	                    int align = wxDVR_DEFAULT_ALIGNMENT );
 
-    virtual void SetMode( wxDataViewCellMode mode );
-    virtual wxDataViewCellMode GetMode() const;
+	virtual void SetMode( wxDataViewCellMode mode );
+	virtual wxDataViewCellMode GetMode() const;
 
-    virtual void SetAlignment( int align );
-    virtual int GetAlignment() const;
+	virtual void SetAlignment( int align );
+	virtual int GetAlignment() const;
 
-    virtual void EnableEllipsize(wxEllipsizeMode mode = wxELLIPSIZE_MIDDLE);
-    virtual wxEllipsizeMode GetEllipsizeMode() const;
+	virtual void EnableEllipsize(wxEllipsizeMode mode = wxELLIPSIZE_MIDDLE);
+	virtual wxEllipsizeMode GetEllipsizeMode() const;
 };
 
 #endif // _WX_QT_DVRENDERER_H_

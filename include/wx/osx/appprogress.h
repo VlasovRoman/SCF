@@ -13,24 +13,24 @@
 #include "wx/window.h"
 
 class WXDLLIMPEXP_CORE wxAppProgressIndicator
-    : public wxAppProgressIndicatorBase
+	: public wxAppProgressIndicatorBase
 {
 public:
-    wxAppProgressIndicator(wxWindow* parent = NULL, int maxValue = 100);
-    virtual ~wxAppProgressIndicator();
+	wxAppProgressIndicator(wxWindow* parent = NULL, int maxValue = 100);
+	virtual ~wxAppProgressIndicator();
 
-    virtual bool IsAvailable() const wxOVERRIDE;
+	virtual bool IsAvailable() const wxOVERRIDE;
 
-    virtual void SetValue(int value) wxOVERRIDE;
-    virtual void SetRange(int range) wxOVERRIDE;
-    virtual void Pulse() wxOVERRIDE;
-    virtual void Reset() wxOVERRIDE;
+	virtual void SetValue(int value) wxOVERRIDE;
+	virtual void SetRange(int range) wxOVERRIDE;
+	virtual void Pulse() wxOVERRIDE;
+	virtual void Reset() wxOVERRIDE;
 
 private:
-    int m_maxValue;
-    void *m_dockIcon;
+	int m_maxValue;
+	void *m_dockIcon;
 
-    wxDECLARE_NO_COPY_CLASS(wxAppProgressIndicator);
+	wxDECLARE_NO_COPY_CLASS(wxAppProgressIndicator);
 };
 
 #endif  // _WX_OSX_APPPROG_H_

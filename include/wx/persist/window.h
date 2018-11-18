@@ -24,52 +24,58 @@
 class wxPersistentWindowBase : public wxPersistentObject
 {
 public:
-    wxPersistentWindowBase(wxWindow *win)
-        : wxPersistentObject(win)
-    {
-        win->Bind(wxEVT_DESTROY, &wxPersistentWindowBase::HandleDestroy, this);
-    }
+	wxPersistentWindowBase(wxWindow *win)
+		: wxPersistentObject(win)
+	{
+		win->Bind(wxEVT_DESTROY, &wxPersistentWindowBase::HandleDestroy, this);
+	}
 
-    virtual wxString GetName() const wxOVERRIDE
-    {
-        const wxString name = GetWindow()->GetName();
-        wxASSERT_MSG( !name.empty(), "persistent windows should be named!" );
+	virtual wxString GetName() const wxOVERRIDE
+	{
+		const wxString name = GetWindow()->GetName();
+		wxASSERT_MSG( !name.empty(), "persistent windows should be named!" );
 
-        return name;
-    }
+		return name;
+	}
 
 protected:
-    wxWindow *GetWindow() const { return static_cast<wxWindow *>(GetObject()); }
+	wxWindow *GetWindow() const
+	{
+		return static_cast<wxWindow *>(GetObject());
+	}
 
 private:
-    void HandleDestroy(wxWindowDestroyEvent& event)
-    {
-        event.Skip();
+	void HandleDestroy(wxWindowDestroyEvent& event)
+	{
+		event.Skip();
 
-        // only react to the destruction of this object itself, not of any of
-        // its children
-        if ( event.GetEventObject() == GetObject() )
-        {
-            // this will delete this object itself
-            wxPersistenceManager::Get().SaveAndUnregister(GetWindow());
-        }
-    }
+		// only react to the destruction of this object itself, not of any of
+		// its children
+		if ( event.GetEventObject() == GetObject() )
+		{
+			// this will delete this object itself
+			wxPersistenceManager::Get().SaveAndUnregister(GetWindow());
+		}
+	}
 
-    wxDECLARE_NO_COPY_CLASS(wxPersistentWindowBase);
+	wxDECLARE_NO_COPY_CLASS(wxPersistentWindowBase);
 };
 
 template <class T>
 class wxPersistentWindow : public wxPersistentWindowBase
 {
 public:
-    typedef T WindowType;
+	typedef T WindowType;
 
-    wxPersistentWindow(WindowType *win)
-        : wxPersistentWindowBase(win)
-    {
-    }
+	wxPersistentWindow(WindowType *win)
+		: wxPersistentWindowBase(win)
+	{
+	}
 
-    WindowType *Get() const { return static_cast<WindowType *>(GetWindow()); }
+	WindowType *Get() const
+	{
+		return static_cast<WindowType *>(GetWindow());
+	}
 };
 
 #endif // _WX_PERSIST_WINDOW_H_

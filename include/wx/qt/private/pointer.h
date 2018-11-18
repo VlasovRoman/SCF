@@ -18,26 +18,26 @@ template < typename T >
 class wxQtPointer : public QPointer< T >
 {
 public:
-    inline wxQtPointer()
-        : QPointer< T >()
-    {
-    }
+	inline wxQtPointer()
+		: QPointer< T >()
+	{
+	}
 
-    inline wxQtPointer( T *p )
-        : QPointer< T >( p )
-    {
-    }
+	inline wxQtPointer( T *p )
+		: QPointer< T >( p )
+	{
+	}
 
-    inline wxQtPointer< T > &operator = ( T *p )
-    {
-        QPointer< T >::operator = ( p );
-        return *this;
-    }
+	inline wxQtPointer< T > &operator = ( T *p )
+	{
+		QPointer< T >::operator = ( p );
+		return *this;
+	}
 
-    inline ~wxQtPointer()
-    {
-        delete QPointer< T >::data();
-    }
+	inline ~wxQtPointer()
+	{
+		delete QPointer< T >::data();
+	}
 };
 
 #endif // _WX_QT_POINTER_H_

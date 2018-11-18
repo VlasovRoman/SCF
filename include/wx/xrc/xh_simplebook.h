@@ -19,16 +19,16 @@ class wxSimplebook;
 class WXDLLIMPEXP_XRC wxSimplebookXmlHandler : public wxXmlResourceHandler
 {
 public:
-    wxSimplebookXmlHandler();
+	wxSimplebookXmlHandler();
 
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
 private:
-    bool m_isInside;
-    wxSimplebook *m_simplebook;
+	bool m_isInside;
+	wxSimplebook *m_simplebook;
 
-    wxDECLARE_DYNAMIC_CLASS(wxSimplebookXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxSimplebookXmlHandler);
 };
 
 #endif // wxUSE_XRC && wxUSE_BOOKCTRL

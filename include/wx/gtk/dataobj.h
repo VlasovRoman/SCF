@@ -16,10 +16,10 @@
 class WXDLLIMPEXP_CORE wxDataObject : public wxDataObjectBase
 {
 public:
-    wxDataObject();
-    virtual ~wxDataObject();
+	wxDataObject();
+	virtual ~wxDataObject();
 
-    virtual bool IsSupportedFormat( const wxDataFormat& format, Direction dir = Get ) const;
+	virtual bool IsSupportedFormat( const wxDataFormat& format, Direction dir = Get ) const;
 };
 
 #endif // _WX_GTK_DATAOBJ_H_

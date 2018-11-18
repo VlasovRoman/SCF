@@ -23,8 +23,8 @@
 #include "wx/meta/implicitconversion.h"
 
 #if wxUSE_GUI
-    #include "wx/gdicmn.h"
-    #include "wx/mousestate.h"
+#include "wx/gdicmn.h"
+#include "wx/mousestate.h"
 #endif
 
 class WXDLLIMPEXP_FWD_BASE wxArrayString;
@@ -38,8 +38,8 @@ class WXDLLIMPEXP_FWD_BASE wxArrayInt;
 #include "wx/platinfo.h"
 
 #if defined(__X__)
-    #include <dirent.h>
-    #include <unistd.h>
+#include <dirent.h>
+#include <unistd.h>
 #endif
 
 #include <stdio.h>
@@ -62,35 +62,35 @@ template<typename T1, typename T2>
 inline typename wxImplicitConversionType<T1,T2>::value
 wxMax(T1 a, T2 b)
 {
-    typedef typename wxImplicitConversionType<T1,T2>::value ResultType;
+	typedef typename wxImplicitConversionType<T1,T2>::value ResultType;
 
-    // Cast both operands to the same type before comparing them to avoid
-    // warnings about signed/unsigned comparisons from some compilers:
-    return static_cast<ResultType>(a) > static_cast<ResultType>(b) ? a : b;
+	// Cast both operands to the same type before comparing them to avoid
+	// warnings about signed/unsigned comparisons from some compilers:
+	return static_cast<ResultType>(a) > static_cast<ResultType>(b) ? a : b;
 }
 
 template<typename T1, typename T2>
 inline typename wxImplicitConversionType<T1,T2>::value
 wxMin(T1 a, T2 b)
 {
-    typedef typename wxImplicitConversionType<T1,T2>::value ResultType;
+	typedef typename wxImplicitConversionType<T1,T2>::value ResultType;
 
-    return static_cast<ResultType>(a) < static_cast<ResultType>(b) ? a : b;
+	return static_cast<ResultType>(a) < static_cast<ResultType>(b) ? a : b;
 }
 
 template<typename T1, typename T2, typename T3>
 inline typename wxImplicitConversionType3<T1,T2,T3>::value
 wxClip(T1 a, T2 b, T3 c)
 {
-    typedef typename wxImplicitConversionType3<T1,T2,T3>::value ResultType;
+	typedef typename wxImplicitConversionType3<T1,T2,T3>::value ResultType;
 
-    if ( static_cast<ResultType>(a) < static_cast<ResultType>(b) )
-        return b;
+	if ( static_cast<ResultType>(a) < static_cast<ResultType>(b) )
+		return b;
 
-    if ( static_cast<ResultType>(a) > static_cast<ResultType>(c) )
-        return c;
+	if ( static_cast<ResultType>(a) > static_cast<ResultType>(c) )
+		return c;
 
-    return a;
+	return a;
 }
 
 // ----------------------------------------------------------------------------
@@ -101,9 +101,9 @@ wxClip(T1 a, T2 b, T3 c)
 // so to always use long long for its result type on all platforms which
 // support it
 #if wxUSE_LONGLONG
-    typedef wxLongLong wxMemorySize;
+typedef wxLongLong wxMemorySize;
 #else
-    typedef long wxMemorySize;
+typedef long wxMemorySize;
 #endif
 
 // ----------------------------------------------------------------------------
@@ -113,11 +113,11 @@ wxClip(T1 a, T2 b, T3 c)
 #if WXWIN_COMPATIBILITY_2_8
 // A shorter way of using strcmp
 wxDEPRECATED_INLINE(inline bool wxStringEq(const char *s1, const char *s2),
-    return wxCRT_StrcmpA(s1, s2) == 0; )
+                    return wxCRT_StrcmpA(s1, s2) == 0; )
 
 #if wxUSE_UNICODE
 wxDEPRECATED_INLINE(inline bool wxStringEq(const wchar_t *s1, const wchar_t *s2),
-    return wxCRT_StrcmpW(s1, s2) == 0; )
+                    return wxCRT_StrcmpW(s1, s2) == 0; )
 #endif // wxUSE_UNICODE
 
 #endif // WXWIN_COMPATIBILITY_2_8
@@ -141,8 +141,8 @@ WXDLLIMPEXP_BASE wxString wxGetOsDescription();
 
 // Get OS version
 WXDLLIMPEXP_BASE wxOperatingSystemId wxGetOsVersion(int *verMaj = NULL,
-                                                    int *verMin = NULL,
-                                                    int *verMicro = NULL);
+        int *verMin = NULL,
+        int *verMicro = NULL);
 
 // Check is OS version is at least the specified major and minor version
 WXDLLIMPEXP_BASE bool wxCheckOsVersion(int majorVsn, int minorVsn = 0, int microVsn = 0);
@@ -208,66 +208,134 @@ WXDLLIMPEXP_CORE wxMouseState wxGetMouseState();
 class WXDLLIMPEXP_BASE wxPlatform
 {
 public:
-    wxPlatform() { Init(); }
-    wxPlatform(const wxPlatform& platform) { Copy(platform); }
-    void operator = (const wxPlatform& platform) { if (&platform != this) Copy(platform); }
-    void Copy(const wxPlatform& platform);
+	wxPlatform()
+	{
+		Init();
+	}
+	wxPlatform(const wxPlatform& platform)
+	{
+		Copy(platform);
+	}
+	void operator = (const wxPlatform& platform)
+	{
+		if (&platform != this) Copy(platform);
+	}
+	void Copy(const wxPlatform& platform);
 
-    // Specify an optional default value
-    wxPlatform(int defValue) { Init(); m_longValue = (long)defValue; }
-    wxPlatform(long defValue) { Init(); m_longValue = defValue; }
-    wxPlatform(const wxString& defValue) { Init(); m_stringValue = defValue; }
-    wxPlatform(double defValue) { Init(); m_doubleValue = defValue; }
+	// Specify an optional default value
+	wxPlatform(int defValue)
+	{
+		Init();
+		m_longValue = (long)defValue;
+	}
+	wxPlatform(long defValue)
+	{
+		Init();
+		m_longValue = defValue;
+	}
+	wxPlatform(const wxString& defValue)
+	{
+		Init();
+		m_stringValue = defValue;
+	}
+	wxPlatform(double defValue)
+	{
+		Init();
+		m_doubleValue = defValue;
+	}
 
-    static wxPlatform If(int platform, long value);
-    static wxPlatform IfNot(int platform, long value);
-    wxPlatform& ElseIf(int platform, long value);
-    wxPlatform& ElseIfNot(int platform, long value);
-    wxPlatform& Else(long value);
+	static wxPlatform If(int platform, long value);
+	static wxPlatform IfNot(int platform, long value);
+	wxPlatform& ElseIf(int platform, long value);
+	wxPlatform& ElseIfNot(int platform, long value);
+	wxPlatform& Else(long value);
 
-    static wxPlatform If(int platform, int value) { return If(platform, (long)value); }
-    static wxPlatform IfNot(int platform, int value) { return IfNot(platform, (long)value); }
-    wxPlatform& ElseIf(int platform, int value) { return ElseIf(platform, (long) value); }
-    wxPlatform& ElseIfNot(int platform, int value) { return ElseIfNot(platform, (long) value); }
-    wxPlatform& Else(int value) { return Else((long) value); }
+	static wxPlatform If(int platform, int value)
+	{
+		return If(platform, (long)value);
+	}
+	static wxPlatform IfNot(int platform, int value)
+	{
+		return IfNot(platform, (long)value);
+	}
+	wxPlatform& ElseIf(int platform, int value)
+	{
+		return ElseIf(platform, (long) value);
+	}
+	wxPlatform& ElseIfNot(int platform, int value)
+	{
+		return ElseIfNot(platform, (long) value);
+	}
+	wxPlatform& Else(int value)
+	{
+		return Else((long) value);
+	}
 
-    static wxPlatform If(int platform, double value);
-    static wxPlatform IfNot(int platform, double value);
-    wxPlatform& ElseIf(int platform, double value);
-    wxPlatform& ElseIfNot(int platform, double value);
-    wxPlatform& Else(double value);
+	static wxPlatform If(int platform, double value);
+	static wxPlatform IfNot(int platform, double value);
+	wxPlatform& ElseIf(int platform, double value);
+	wxPlatform& ElseIfNot(int platform, double value);
+	wxPlatform& Else(double value);
 
-    static wxPlatform If(int platform, const wxString& value);
-    static wxPlatform IfNot(int platform, const wxString& value);
-    wxPlatform& ElseIf(int platform, const wxString& value);
-    wxPlatform& ElseIfNot(int platform, const wxString& value);
-    wxPlatform& Else(const wxString& value);
+	static wxPlatform If(int platform, const wxString& value);
+	static wxPlatform IfNot(int platform, const wxString& value);
+	wxPlatform& ElseIf(int platform, const wxString& value);
+	wxPlatform& ElseIfNot(int platform, const wxString& value);
+	wxPlatform& Else(const wxString& value);
 
-    long GetInteger() const { return m_longValue; }
-    const wxString& GetString() const { return m_stringValue; }
-    double GetDouble() const { return m_doubleValue; }
+	long GetInteger() const
+	{
+		return m_longValue;
+	}
+	const wxString& GetString() const
+	{
+		return m_stringValue;
+	}
+	double GetDouble() const
+	{
+		return m_doubleValue;
+	}
 
-    operator int() const { return (int) GetInteger(); }
-    operator long() const { return GetInteger(); }
-    operator double() const { return GetDouble(); }
-    operator const wxString&() const { return GetString(); }
+	operator int() const
+	{
+		return (int) GetInteger();
+	}
+	operator long() const
+	{
+		return GetInteger();
+	}
+	operator double() const
+	{
+		return GetDouble();
+	}
+	operator const wxString&() const
+	{
+		return GetString();
+	}
 
-    static void AddPlatform(int platform);
-    static bool Is(int platform);
-    static void ClearPlatforms();
+	static void AddPlatform(int platform);
+	static bool Is(int platform);
+	static void ClearPlatforms();
 
 private:
 
-    void Init() { m_longValue = 0; m_doubleValue = 0.0; }
+	void Init()
+	{
+		m_longValue = 0;
+		m_doubleValue = 0.0;
+	}
 
-    long                m_longValue;
-    double              m_doubleValue;
-    wxString            m_stringValue;
-    static wxArrayInt*  sm_customPlatforms;
+	long                m_longValue;
+	double              m_doubleValue;
+	wxString            m_stringValue;
+	static wxArrayInt*  sm_customPlatforms;
 };
 
 /// Function for testing current platform
-inline bool wxPlatformIs(int platform) { return wxPlatform::Is(platform); }
+inline bool wxPlatformIs(int platform)
+{
+	return wxPlatform::Is(platform);
+}
 
 // ----------------------------------------------------------------------------
 // Window ID management
@@ -292,27 +360,27 @@ WXDLLIMPEXP_BASE int wxHexToDec(const wxString& buf);
 // Convert 2-digit hex number to decimal
 inline int wxHexToDec(const char* buf)
 {
-    int firstDigit, secondDigit;
+	int firstDigit, secondDigit;
 
-    if (buf[0] >= 'A')
-        firstDigit = buf[0] - 'A' + 10;
-    else if (buf[0] >= '0')
-        firstDigit = buf[0] - '0';
-    else
-        firstDigit = -1;
+	if (buf[0] >= 'A')
+		firstDigit = buf[0] - 'A' + 10;
+	else if (buf[0] >= '0')
+		firstDigit = buf[0] - '0';
+	else
+		firstDigit = -1;
 
-    wxCHECK_MSG( firstDigit >= 0 && firstDigit <= 15, -1, wxS("Invalid argument") );
+	wxCHECK_MSG( firstDigit >= 0 && firstDigit <= 15, -1, wxS("Invalid argument") );
 
-    if (buf[1] >= 'A')
-        secondDigit = buf[1] - 'A' + 10;
-    else if (buf[1] >= '0')
-        secondDigit = buf[1] - '0';
-    else
-        secondDigit = -1;
+	if (buf[1] >= 'A')
+		secondDigit = buf[1] - 'A' + 10;
+	else if (buf[1] >= '0')
+		secondDigit = buf[1] - '0';
+	else
+		secondDigit = -1;
 
-    wxCHECK_MSG( secondDigit >= 0 && secondDigit <= 15, -1, wxS("Invalid argument") );
+	wxCHECK_MSG( secondDigit >= 0 && secondDigit <= 15, -1, wxS("Invalid argument") );
 
-    return firstDigit * 16 + secondDigit;
+	return firstDigit * 16 + secondDigit;
 }
 
 
@@ -330,43 +398,43 @@ WXDLLIMPEXP_BASE wxString wxDecToHex(unsigned char dec);
 
 enum
 {
-    // execute the process asynchronously
-    wxEXEC_ASYNC    = 0,
+	// execute the process asynchronously
+	wxEXEC_ASYNC    = 0,
 
-    // execute it synchronously, i.e. wait until it finishes
-    wxEXEC_SYNC     = 1,
+	// execute it synchronously, i.e. wait until it finishes
+	wxEXEC_SYNC     = 1,
 
-    // under Windows, don't hide the child even if it's IO is redirected (this
-    // is done by default)
-    wxEXEC_SHOW_CONSOLE   = 2,
+	// under Windows, don't hide the child even if it's IO is redirected (this
+	// is done by default)
+	wxEXEC_SHOW_CONSOLE   = 2,
 
-    // deprecated synonym for wxEXEC_SHOW_CONSOLE, use the new name as it's
-    // more clear
-    wxEXEC_NOHIDE = wxEXEC_SHOW_CONSOLE,
+	// deprecated synonym for wxEXEC_SHOW_CONSOLE, use the new name as it's
+	// more clear
+	wxEXEC_NOHIDE = wxEXEC_SHOW_CONSOLE,
 
-    // under Unix, if the process is the group leader then passing wxKILL_CHILDREN to wxKill
-    // kills all children as well as pid
-    // under Windows (NT family only), sets the CREATE_NEW_PROCESS_GROUP flag,
-    // which allows to target Ctrl-Break signal to the spawned process.
-    // applies to console processes only.
-    wxEXEC_MAKE_GROUP_LEADER = 4,
+	// under Unix, if the process is the group leader then passing wxKILL_CHILDREN to wxKill
+	// kills all children as well as pid
+	// under Windows (NT family only), sets the CREATE_NEW_PROCESS_GROUP flag,
+	// which allows to target Ctrl-Break signal to the spawned process.
+	// applies to console processes only.
+	wxEXEC_MAKE_GROUP_LEADER = 4,
 
-    // by default synchronous execution disables all program windows to avoid
-    // that the user interacts with the program while the child process is
-    // running, you can use this flag to prevent this from happening
-    wxEXEC_NODISABLE = 8,
+	// by default synchronous execution disables all program windows to avoid
+	// that the user interacts with the program while the child process is
+	// running, you can use this flag to prevent this from happening
+	wxEXEC_NODISABLE = 8,
 
-    // by default, the event loop is run while waiting for synchronous execution
-    // to complete and this flag can be used to simply block the main process
-    // until the child process finishes
-    wxEXEC_NOEVENTS = 16,
+	// by default, the event loop is run while waiting for synchronous execution
+	// to complete and this flag can be used to simply block the main process
+	// until the child process finishes
+	wxEXEC_NOEVENTS = 16,
 
-    // under Windows, hide the console of the child process if it has one, even
-    // if its IO is not redirected
-    wxEXEC_HIDE_CONSOLE = 32,
+	// under Windows, hide the console of the child process if it has one, even
+	// if its IO is not redirected
+	wxEXEC_HIDE_CONSOLE = 32,
 
-    // convenient synonym for flags given system()-like behaviour
-    wxEXEC_BLOCK = wxEXEC_SYNC | wxEXEC_NOEVENTS
+	// convenient synonym for flags given system()-like behaviour
+	wxEXEC_BLOCK = wxEXEC_SYNC | wxEXEC_NOEVENTS
 };
 
 // Map storing environment variables.
@@ -376,8 +444,8 @@ typedef wxStringToStringHashMap wxEnvVariableHashMap;
 // be extended with other fields later.
 struct wxExecuteEnv
 {
-    wxString cwd;               // If empty, CWD is not changed.
-    wxEnvVariableHashMap env;   // If empty, environment is unchanged.
+	wxString cwd;               // If empty, CWD is not changed.
+	wxEnvVariableHashMap env;   // If empty, environment is unchanged.
 };
 
 // Execute another program.
@@ -423,48 +491,48 @@ WXDLLIMPEXP_BASE bool wxExecuteDDE(const wxString& ddeServer,
 
 enum wxSignal
 {
-    wxSIGNONE = 0,  // verify if the process exists under Unix
-    wxSIGHUP,
-    wxSIGINT,
-    wxSIGQUIT,
-    wxSIGILL,
-    wxSIGTRAP,
-    wxSIGABRT,
-    wxSIGIOT = wxSIGABRT,   // another name
-    wxSIGEMT,
-    wxSIGFPE,
-    wxSIGKILL,
-    wxSIGBUS,
-    wxSIGSEGV,
-    wxSIGSYS,
-    wxSIGPIPE,
-    wxSIGALRM,
-    wxSIGTERM
+	wxSIGNONE = 0,  // verify if the process exists under Unix
+	wxSIGHUP,
+	wxSIGINT,
+	wxSIGQUIT,
+	wxSIGILL,
+	wxSIGTRAP,
+	wxSIGABRT,
+	wxSIGIOT = wxSIGABRT,   // another name
+	wxSIGEMT,
+	wxSIGFPE,
+	wxSIGKILL,
+	wxSIGBUS,
+	wxSIGSEGV,
+	wxSIGSYS,
+	wxSIGPIPE,
+	wxSIGALRM,
+	wxSIGTERM
 
-    // further signals are different in meaning between different Unix systems
+	// further signals are different in meaning between different Unix systems
 };
 
 enum wxKillError
 {
-    wxKILL_OK,              // no error
-    wxKILL_BAD_SIGNAL,      // no such signal
-    wxKILL_ACCESS_DENIED,   // permission denied
-    wxKILL_NO_PROCESS,      // no such process
-    wxKILL_ERROR            // another, unspecified error
+	wxKILL_OK,              // no error
+	wxKILL_BAD_SIGNAL,      // no such signal
+	wxKILL_ACCESS_DENIED,   // permission denied
+	wxKILL_NO_PROCESS,      // no such process
+	wxKILL_ERROR            // another, unspecified error
 };
 
 enum wxKillFlags
 {
-    wxKILL_NOCHILDREN = 0,  // don't kill children
-    wxKILL_CHILDREN = 1     // kill children
+	wxKILL_NOCHILDREN = 0,  // don't kill children
+	wxKILL_CHILDREN = 1     // kill children
 };
 
 enum wxShutdownFlags
 {
-    wxSHUTDOWN_FORCE    = 1,// can be combined with other flags (MSW-only)
-    wxSHUTDOWN_POWEROFF = 2,// power off the computer
-    wxSHUTDOWN_REBOOT   = 4,// shutdown and reboot
-    wxSHUTDOWN_LOGOFF   = 8 // close session (currently MSW-only)
+	wxSHUTDOWN_FORCE    = 1,// can be combined with other flags (MSW-only)
+	wxSHUTDOWN_POWEROFF = 2,// power off the computer
+	wxSHUTDOWN_REBOOT   = 4,// shutdown and reboot
+	wxSHUTDOWN_LOGOFF   = 8 // close session (currently MSW-only)
 };
 
 // Shutdown or reboot the PC
@@ -475,9 +543,9 @@ WXDLLIMPEXP_BASE bool wxShutdown(int flags = wxSHUTDOWN_POWEROFF);
 //
 // return detailed error in rc if not NULL
 WXDLLIMPEXP_BASE int wxKill(long pid,
-                       wxSignal sig = wxSIGTERM,
-                       wxKillError *rc = NULL,
-                       int flags = wxKILL_NOCHILDREN);
+                            wxSignal sig = wxSIGTERM,
+                            wxKillError *rc = NULL,
+                            int flags = wxKILL_NOCHILDREN);
 
 // Execute a command in an interactive shell window (always synchronously)
 // If no command then just the shell
@@ -530,24 +598,32 @@ WXDLLIMPEXP_BASE bool wxUnsetEnv(const wxString& var);
 
 #if WXWIN_COMPATIBILITY_2_8
 inline bool wxSetEnv(const wxString& var, const char *value)
-    { return wxSetEnv(var, wxString(value)); }
+{
+	return wxSetEnv(var, wxString(value));
+}
 inline bool wxSetEnv(const wxString& var, const wchar_t *value)
-    { return wxSetEnv(var, wxString(value)); }
+{
+	return wxSetEnv(var, wxString(value));
+}
 template<typename T>
 inline bool wxSetEnv(const wxString& var, const wxScopedCharTypeBuffer<T>& value)
-    { return wxSetEnv(var, wxString(value)); }
+{
+	return wxSetEnv(var, wxString(value));
+}
 inline bool wxSetEnv(const wxString& var, const wxCStrData& value)
-    { return wxSetEnv(var, wxString(value)); }
+{
+	return wxSetEnv(var, wxString(value));
+}
 
 // this one is for passing NULL directly - don't use it, use wxUnsetEnv instead
 wxDEPRECATED( inline bool wxSetEnv(const wxString& var, int value) );
 inline bool wxSetEnv(const wxString& var, int value)
 {
-    wxASSERT_MSG( value == 0, "using non-NULL integer as string?" );
+	wxASSERT_MSG( value == 0, "using non-NULL integer as string?" );
 
-    wxUnusedVar(value); // fix unused parameter warning in release build
+	wxUnusedVar(value); // fix unused parameter warning in release build
 
-    return wxUnsetEnv(var);
+	return wxUnsetEnv(var);
 }
 #endif // WXWIN_COMPATIBILITY_2_8
 
@@ -591,9 +667,9 @@ WXDLLIMPEXP_BASE wxString wxGetUserHome(const wxString& user = wxEmptyString);
 
 
 #if wxUSE_LONGLONG
-    typedef wxLongLong wxDiskspaceSize_t;
+typedef wxLongLong wxDiskspaceSize_t;
 #else
-    typedef long wxDiskspaceSize_t;
+typedef long wxDiskspaceSize_t;
 #endif
 
 // get number of total/free bytes on the disk where path belongs
@@ -622,8 +698,8 @@ WXDLLIMPEXP_BASE void wxQsort(void* pbase, size_t total_elems,
 // flags for wxLaunchDefaultBrowser
 enum
 {
-    wxBROWSER_NEW_WINDOW   = 0x01,
-    wxBROWSER_NOBUSYCURSOR = 0x02
+	wxBROWSER_NEW_WINDOW   = 0x01,
+	wxBROWSER_NOBUSYCURSOR = 0x02
 };
 
 // Launch url in the user's default internet browser
@@ -639,14 +715,14 @@ WXDLLIMPEXP_CORE bool wxLaunchDefaultApplication(const wxString& path, int flags
 // flags for wxStripMenuCodes
 enum
 {
-    // strip '&' characters
-    wxStrip_Mnemonics = 1,
+	// strip '&' characters
+	wxStrip_Mnemonics = 1,
 
-    // strip everything after '\t'
-    wxStrip_Accel = 2,
+	// strip everything after '\t'
+	wxStrip_Accel = 2,
 
-    // strip everything (this is the default)
-    wxStrip_All = wxStrip_Mnemonics | wxStrip_Accel
+	// strip everything (this is the default)
+	wxStrip_All = wxStrip_Mnemonics | wxStrip_Accel
 };
 
 // strip mnemonics and/or accelerators from the label
@@ -699,27 +775,27 @@ WXDLLIMPEXP_CORE void wxFlushEvents();
 class WXDLLIMPEXP_CORE wxWindowDisabler
 {
 public:
-    // this ctor conditionally disables all windows: if the argument is false,
-    // it doesn't do anything
-    wxWindowDisabler(bool disable = true);
+	// this ctor conditionally disables all windows: if the argument is false,
+	// it doesn't do anything
+	wxWindowDisabler(bool disable = true);
 
-    // ctor disables all windows except winToSkip
-    wxWindowDisabler(wxWindow *winToSkip);
+	// ctor disables all windows except winToSkip
+	wxWindowDisabler(wxWindow *winToSkip);
 
-    // dtor enables back all windows disabled by the ctor
-    ~wxWindowDisabler();
+	// dtor enables back all windows disabled by the ctor
+	~wxWindowDisabler();
 
 private:
-    // disable all windows except the given one (used by both ctors)
-    void DoDisable(wxWindow *winToSkip = NULL);
+	// disable all windows except the given one (used by both ctors)
+	void DoDisable(wxWindow *winToSkip = NULL);
 
 #if defined(__WXOSX__) && wxOSX_USE_COCOA
-    wxEventLoop* m_modalEventLoop;
+	wxEventLoop* m_modalEventLoop;
 #endif
-    wxWindowList *m_winDisabled;
-    bool m_disabled;
+	wxWindowList *m_winDisabled;
+	bool m_disabled;
 
-    wxDECLARE_NO_COPY_CLASS(wxWindowDisabler);
+	wxDECLARE_NO_COPY_CLASS(wxWindowDisabler);
 };
 
 // ----------------------------------------------------------------------------
@@ -739,18 +815,22 @@ WXDLLIMPEXP_CORE bool wxIsBusy();
 class WXDLLIMPEXP_CORE wxBusyCursor
 {
 public:
-    wxBusyCursor(const wxCursor* cursor = wxHOURGLASS_CURSOR)
-        { wxBeginBusyCursor(cursor); }
-    ~wxBusyCursor()
-        { wxEndBusyCursor(); }
+	wxBusyCursor(const wxCursor* cursor = wxHOURGLASS_CURSOR)
+	{
+		wxBeginBusyCursor(cursor);
+	}
+	~wxBusyCursor()
+	{
+		wxEndBusyCursor();
+	}
 
-    // FIXME: These two methods are currently only implemented (and needed?)
-    //        in wxGTK.  BusyCursor handling should probably be moved to
-    //        common code since the wxGTK and wxMSW implementations are very
-    //        similar except for wxMSW using HCURSOR directly instead of
-    //        wxCursor..  -- RL.
-    static const wxCursor &GetStoredCursor();
-    static const wxCursor GetBusyCursor();
+	// FIXME: These two methods are currently only implemented (and needed?)
+	//        in wxGTK.  BusyCursor handling should probably be moved to
+	//        common code since the wxGTK and wxMSW implementations are very
+	//        similar except for wxMSW using HCURSOR directly instead of
+	//        wxCursor..  -- RL.
+	static const wxCursor &GetStoredCursor();
+	static const wxCursor GetBusyCursor();
 };
 
 void WXDLLIMPEXP_CORE wxGetMousePosition( int* x, int* y );
@@ -762,19 +842,19 @@ void WXDLLIMPEXP_CORE wxGetMousePosition( int* x, int* y );
 #if defined(__X__) || defined(__WXGTK__)
 
 #ifdef __WXGTK__
-    WXDLLIMPEXP_CORE void *wxGetDisplay();
+WXDLLIMPEXP_CORE void *wxGetDisplay();
 #endif
 
 #ifdef __X__
-    WXDLLIMPEXP_CORE WXDisplay *wxGetDisplay();
-    WXDLLIMPEXP_CORE bool wxSetDisplay(const wxString& display_name);
-    WXDLLIMPEXP_CORE wxString wxGetDisplayName();
+WXDLLIMPEXP_CORE WXDisplay *wxGetDisplay();
+WXDLLIMPEXP_CORE bool wxSetDisplay(const wxString& display_name);
+WXDLLIMPEXP_CORE wxString wxGetDisplayName();
 #endif // X or GTK+
 
 // use this function instead of the functions above in implementation code
 inline struct _XDisplay *wxGetX11Display()
 {
-    return (_XDisplay *)wxGetDisplay();
+	return (_XDisplay *)wxGetDisplay();
 }
 
 #endif // X11 || wxGTK
@@ -804,37 +884,37 @@ WXDLLIMPEXP_CORE bool wxYieldIfNeeded();
 
 // Windows only: get user-defined resource from the .res file.
 #ifdef __WINDOWS__
-    // default resource type for wxLoadUserResource()
-    extern WXDLLIMPEXP_DATA_BASE(const wxChar*) wxUserResourceStr;
+// default resource type for wxLoadUserResource()
+extern WXDLLIMPEXP_DATA_BASE(const wxChar*) wxUserResourceStr;
 
-    // Return the pointer to the resource data. This pointer is read-only, use
-    // the overload below if you need to modify the data.
-    //
-    // Notice that the resource type can be either a real string or an integer
-    // produced by MAKEINTRESOURCE(). In particular, any standard resource type,
-    // i.e any RT_XXX constant, could be passed here.
-    //
-    // Returns true on success, false on failure. Doesn't log an error message
-    // if the resource is not found (because this could be expected) but does
-    // log one if any other error occurs.
-    WXDLLIMPEXP_BASE bool
-    wxLoadUserResource(const void **outData,
-                       size_t *outLen,
-                       const wxString& resourceName,
-                       const wxChar* resourceType = wxUserResourceStr,
-                       WXHINSTANCE module = 0);
+// Return the pointer to the resource data. This pointer is read-only, use
+// the overload below if you need to modify the data.
+//
+// Notice that the resource type can be either a real string or an integer
+// produced by MAKEINTRESOURCE(). In particular, any standard resource type,
+// i.e any RT_XXX constant, could be passed here.
+//
+// Returns true on success, false on failure. Doesn't log an error message
+// if the resource is not found (because this could be expected) but does
+// log one if any other error occurs.
+WXDLLIMPEXP_BASE bool
+wxLoadUserResource(const void **outData,
+                   size_t *outLen,
+                   const wxString& resourceName,
+                   const wxChar* resourceType = wxUserResourceStr,
+                   WXHINSTANCE module = 0);
 
-    // This function allocates a new buffer and makes a copy of the resource
-    // data, remember to delete[] the buffer. And avoid using it entirely if
-    // the overload above can be used.
-    //
-    // Returns NULL on failure.
-    WXDLLIMPEXP_BASE char*
-    wxLoadUserResource(const wxString& resourceName,
-                       const wxChar* resourceType = wxUserResourceStr,
-                       int* pLen = NULL,
-                       WXHINSTANCE module = 0);
+// This function allocates a new buffer and makes a copy of the resource
+// data, remember to delete[] the buffer. And avoid using it entirely if
+// the overload above can be used.
+//
+// Returns NULL on failure.
+WXDLLIMPEXP_BASE char*
+wxLoadUserResource(const wxString& resourceName,
+                   const wxChar* resourceType = wxUserResourceStr,
+                   int* pLen = NULL,
+                   WXHINSTANCE module = 0);
 #endif // __WINDOWS__
 
 #endif
-    // _WX_UTILSH__
+// _WX_UTILSH__

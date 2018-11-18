@@ -34,20 +34,20 @@
 class WXDLLIMPEXP_ADV wxSoundBase : public wxObject
 {
 public:
-    // Play the sound:
-    bool Play(unsigned flags = wxSOUND_ASYNC) const
-    {
-        wxASSERT_MSG( (flags & wxSOUND_LOOP) == 0 ||
-                      (flags & wxSOUND_ASYNC) != 0,
-                     wxT("sound can only be looped asynchronously") );
-        return DoPlay(flags);
-    }
+	// Play the sound:
+	bool Play(unsigned flags = wxSOUND_ASYNC) const
+	{
+		wxASSERT_MSG( (flags & wxSOUND_LOOP) == 0 ||
+		              (flags & wxSOUND_ASYNC) != 0,
+		              wxT("sound can only be looped asynchronously") );
+		return DoPlay(flags);
+	}
 
-    // Plays sound from filename:
-    static bool Play(const wxString& filename, unsigned flags = wxSOUND_ASYNC);
+	// Plays sound from filename:
+	static bool Play(const wxString& filename, unsigned flags = wxSOUND_ASYNC);
 
 protected:
-    virtual bool DoPlay(unsigned flags) const = 0;
+	virtual bool DoPlay(unsigned flags) const = 0;
 };
 
 // ----------------------------------------------------------------------------
@@ -55,11 +55,11 @@ protected:
 // ----------------------------------------------------------------------------
 
 #if defined(__WINDOWS__)
-    #include "wx/msw/sound.h"
+#include "wx/msw/sound.h"
 #elif defined(__WXMAC__)
-    #include "wx/osx/sound.h"
+#include "wx/osx/sound.h"
 #elif defined(__UNIX__)
-    #include "wx/unix/sound.h"
+#include "wx/unix/sound.h"
 #endif
 
 // ----------------------------------------------------------------------------
@@ -68,8 +68,8 @@ protected:
 
 inline bool wxSoundBase::Play(const wxString& filename, unsigned flags)
 {
-    wxSound snd(filename);
-    return snd.IsOk() ? snd.Play(flags) : false;
+	wxSound snd(filename);
+	return snd.IsOk() ? snd.Play(flags) : false;
 }
 
 #endif // wxUSE_SOUND

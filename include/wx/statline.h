@@ -36,46 +36,58 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxStaticLineNameStr[];
 class WXDLLIMPEXP_CORE wxStaticLineBase : public wxControl
 {
 public:
-    // constructor
-    wxStaticLineBase() { }
+	// constructor
+	wxStaticLineBase() { }
 
-    // is the line vertical?
-    bool IsVertical() const { return (GetWindowStyle() & wxLI_VERTICAL) != 0; }
+	// is the line vertical?
+	bool IsVertical() const
+	{
+		return (GetWindowStyle() & wxLI_VERTICAL) != 0;
+	}
 
-    // get the default size for the "lesser" dimension of the static line
-    static int GetDefaultSize() { return 2; }
+	// get the default size for the "lesser" dimension of the static line
+	static int GetDefaultSize()
+	{
+		return 2;
+	}
 
-    // overridden base class virtuals
-    virtual bool AcceptsFocus() const wxOVERRIDE { return false; }
+	// overridden base class virtuals
+	virtual bool AcceptsFocus() const wxOVERRIDE
+	{
+		return false;
+	}
 
 protected:
-    // choose the default border for this window
-    virtual wxBorder GetDefaultBorder() const wxOVERRIDE { return wxBORDER_NONE; }
+	// choose the default border for this window
+	virtual wxBorder GetDefaultBorder() const wxOVERRIDE
+	{
+		return wxBORDER_NONE;
+	}
 
-    // set the right size for the right dimension
-    wxSize AdjustSize(const wxSize& size) const
-    {
-        wxSize sizeReal(size);
-        if ( IsVertical() )
-        {
-            if ( size.x == wxDefaultCoord )
-                sizeReal.x = GetDefaultSize();
-        }
-        else
-        {
-            if ( size.y == wxDefaultCoord )
-                sizeReal.y = GetDefaultSize();
-        }
+	// set the right size for the right dimension
+	wxSize AdjustSize(const wxSize& size) const
+	{
+		wxSize sizeReal(size);
+		if ( IsVertical() )
+		{
+			if ( size.x == wxDefaultCoord )
+				sizeReal.x = GetDefaultSize();
+		}
+		else
+		{
+			if ( size.y == wxDefaultCoord )
+				sizeReal.y = GetDefaultSize();
+		}
 
-        return sizeReal;
-    }
+		return sizeReal;
+	}
 
-    virtual wxSize DoGetBestSize() const wxOVERRIDE
-    {
-        return AdjustSize(wxDefaultSize);
-    }
+	virtual wxSize DoGetBestSize() const wxOVERRIDE
+	{
+		return AdjustSize(wxDefaultSize);
+	}
 
-    wxDECLARE_NO_COPY_CLASS(wxStaticLineBase);
+	wxDECLARE_NO_COPY_CLASS(wxStaticLineBase);
 };
 
 // ----------------------------------------------------------------------------
@@ -83,19 +95,19 @@ protected:
 // ----------------------------------------------------------------------------
 
 #if defined(__WXUNIVERSAL__)
-    #include "wx/univ/statline.h"
+#include "wx/univ/statline.h"
 #elif defined(__WXMSW__)
-    #include "wx/msw/statline.h"
+#include "wx/msw/statline.h"
 #elif defined(__WXGTK20__)
-    #include "wx/gtk/statline.h"
+#include "wx/gtk/statline.h"
 #elif defined(__WXGTK__)
-    #include "wx/gtk1/statline.h"
+#include "wx/gtk1/statline.h"
 #elif defined(__WXMAC__)
-    #include "wx/osx/statline.h"
+#include "wx/osx/statline.h"
 #elif defined(__WXQT__)
-    #include "wx/qt/statline.h"
+#include "wx/qt/statline.h"
 #else // use generic implementation for all other platforms
-    #include "wx/generic/statline.h"
+#include "wx/generic/statline.h"
 #endif
 
 #endif // wxUSE_STATLINE

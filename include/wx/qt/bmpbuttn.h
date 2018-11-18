@@ -11,30 +11,30 @@
 class WXDLLIMPEXP_CORE wxBitmapButton : public wxBitmapButtonBase
 {
 public:
-    wxBitmapButton();
+	wxBitmapButton();
 
-    wxBitmapButton(wxWindow *parent,
-                   wxWindowID id,
-                   const wxBitmap& bitmap,
-                   const wxPoint& pos = wxDefaultPosition,
-                   const wxSize& size = wxDefaultSize,
-                   long style = 0,
-                   const wxValidator& validator = wxDefaultValidator,
-                   const wxString& name = wxButtonNameStr);
+	wxBitmapButton(wxWindow *parent,
+	               wxWindowID id,
+	               const wxBitmap& bitmap,
+	               const wxPoint& pos = wxDefaultPosition,
+	               const wxSize& size = wxDefaultSize,
+	               long style = 0,
+	               const wxValidator& validator = wxDefaultValidator,
+	               const wxString& name = wxButtonNameStr);
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxBitmap& bitmap,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = 0,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxButtonNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxBitmap& bitmap,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxButtonNameStr);
 protected:
-    wxDECLARE_DYNAMIC_CLASS(wxBitmapButton);
+	wxDECLARE_DYNAMIC_CLASS(wxBitmapButton);
 
 private:
-    // We re-use wxButton
+	// We re-use wxButton
 };
 
 #endif // _WX_QT_BMPBUTTN_H_

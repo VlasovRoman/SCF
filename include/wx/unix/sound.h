@@ -29,27 +29,27 @@ class WXDLLIMPEXP_FWD_BASE wxDynamicLibrary;
 class WXDLLIMPEXP_ADV wxSoundData
 {
 public:
-    wxSoundData() : m_refCnt(1) {}
-    void IncRef();
-    void DecRef();
+	wxSoundData() : m_refCnt(1) {}
+	void IncRef();
+	void DecRef();
 
-    // .wav header information:
-    unsigned m_channels;       // num of channels (mono:1, stereo:2)
-    unsigned m_samplingRate;
-    unsigned m_bitsPerSample;  // if 8, then m_data contains unsigned 8bit
-                               // samples (wxUint8), if 16 then signed 16bit
-                               // (wxInt16)
-    unsigned m_samples;        // length in samples:
+	// .wav header information:
+	unsigned m_channels;       // num of channels (mono:1, stereo:2)
+	unsigned m_samplingRate;
+	unsigned m_bitsPerSample;  // if 8, then m_data contains unsigned 8bit
+	// samples (wxUint8), if 16 then signed 16bit
+	// (wxInt16)
+	unsigned m_samples;        // length in samples:
 
-    // wave data:
-    size_t   m_dataBytes;
-    wxUint8 *m_data;           // m_dataBytes bytes of data
+	// wave data:
+	size_t   m_dataBytes;
+	wxUint8 *m_data;           // m_dataBytes bytes of data
 
 private:
-    ~wxSoundData();
-    unsigned m_refCnt;
-    wxUint8 *m_dataWithHeader; // ditto, but prefixed with .wav header
-    friend class wxSound;
+	~wxSoundData();
+	unsigned m_refCnt;
+	wxUint8 *m_dataWithHeader; // ditto, but prefixed with .wav header
+	friend class wxSound;
 };
 
 
@@ -57,42 +57,45 @@ private:
 class WXDLLIMPEXP_ADV wxSound : public wxSoundBase
 {
 public:
-    wxSound();
-    wxSound(const wxString& fileName, bool isResource = false);
-    wxSound(size_t size, const void* data);
-    virtual ~wxSound();
+	wxSound();
+	wxSound(const wxString& fileName, bool isResource = false);
+	wxSound(size_t size, const void* data);
+	virtual ~wxSound();
 
-    // Create from resource or file
-    bool Create(const wxString& fileName, bool isResource = false);
-    // Create from data
-    bool Create(size_t size, const void* data);
+	// Create from resource or file
+	bool Create(const wxString& fileName, bool isResource = false);
+	// Create from data
+	bool Create(size_t size, const void* data);
 
-    bool IsOk() const { return m_data != NULL; }
+	bool IsOk() const
+	{
+		return m_data != NULL;
+	}
 
-    // Stop playing any sound
-    static void Stop();
+	// Stop playing any sound
+	static void Stop();
 
-    // Returns true if a sound is being played
-    static bool IsPlaying();
+	// Returns true if a sound is being played
+	static bool IsPlaying();
 
-    // for internal use
-    static void UnloadBackend();
+	// for internal use
+	static void UnloadBackend();
 
 protected:
-    bool DoPlay(unsigned flags) const wxOVERRIDE;
+	bool DoPlay(unsigned flags) const wxOVERRIDE;
 
-    static void EnsureBackend();
-    void Free();
-    bool LoadWAV(const void* data, size_t length, bool copyData);
+	static void EnsureBackend();
+	void Free();
+	bool LoadWAV(const void* data, size_t length, bool copyData);
 
-    static wxSoundBackend *ms_backend;
+	static wxSoundBackend *ms_backend;
 #if wxUSE_LIBSDL && wxUSE_PLUGINS
-    // FIXME - temporary, until we have plugins architecture
-    static wxDynamicLibrary *ms_backendSDL;
+	// FIXME - temporary, until we have plugins architecture
+	static wxDynamicLibrary *ms_backendSDL;
 #endif
 
 private:
-    wxSoundData *m_data;
+	wxSoundData *m_data;
 };
 
 
@@ -109,48 +112,48 @@ private:
 // Structure that holds playback status information
 struct wxSoundPlaybackStatus
 {
-    // playback is in progress
-    bool m_playing;
-    // main thread called wxSound::Stop()
-    bool m_stopRequested;
+	// playback is in progress
+	bool m_playing;
+	// main thread called wxSound::Stop()
+	bool m_stopRequested;
 };
 
 // Audio backend interface
 class WXDLLIMPEXP_ADV wxSoundBackend
 {
 public:
-    virtual ~wxSoundBackend() {}
+	virtual ~wxSoundBackend() {}
 
-    // Returns the name of the backend (e.g. "Open Sound System")
-    virtual wxString GetName() const = 0;
+	// Returns the name of the backend (e.g. "Open Sound System")
+	virtual wxString GetName() const = 0;
 
-    // Returns priority (higher priority backends are tried first)
-    virtual int GetPriority() const = 0;
+	// Returns priority (higher priority backends are tried first)
+	virtual int GetPriority() const = 0;
 
-    // Checks if the backend's audio system is available and the backend can
-    // be used for playback
-    virtual bool IsAvailable() const = 0;
+	// Checks if the backend's audio system is available and the backend can
+	// be used for playback
+	virtual bool IsAvailable() const = 0;
 
-    // Returns true if the backend is capable of playing sound asynchronously.
-    // If false, then wxWidgets creates a playback thread and handles async
-    // playback, otherwise it is left up to the backend (will usually be more
-    // effective).
-    virtual bool HasNativeAsyncPlayback() const = 0;
+	// Returns true if the backend is capable of playing sound asynchronously.
+	// If false, then wxWidgets creates a playback thread and handles async
+	// playback, otherwise it is left up to the backend (will usually be more
+	// effective).
+	virtual bool HasNativeAsyncPlayback() const = 0;
 
-    // Plays the sound. flags are same flags as those passed to wxSound::Play.
-    // The function should periodically check the value of
-    // status->m_stopRequested and terminate if it is set to true (it may
-    // be modified by another thread)
-    virtual bool Play(wxSoundData *data, unsigned flags,
-                      volatile wxSoundPlaybackStatus *status) = 0;
+	// Plays the sound. flags are same flags as those passed to wxSound::Play.
+	// The function should periodically check the value of
+	// status->m_stopRequested and terminate if it is set to true (it may
+	// be modified by another thread)
+	virtual bool Play(wxSoundData *data, unsigned flags,
+	                  volatile wxSoundPlaybackStatus *status) = 0;
 
-    // Stops playback (if something is played).
-    virtual void Stop() = 0;
+	// Stops playback (if something is played).
+	virtual void Stop() = 0;
 
-    // Returns true if the backend is playing anything at the moment.
-    // (This method is never called for backends that don't support async
-    // playback.)
-    virtual bool IsPlaying() const = 0;
+	// Returns true if the backend is playing anything at the moment.
+	// (This method is never called for backends that don't support async
+	// playback.)
+	virtual bool IsPlaying() const = 0;
 };
 
 

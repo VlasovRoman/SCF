@@ -29,18 +29,18 @@ WXDLLIMPEXP_CORE bool wxIsStockLabel(wxWindowID id, const wxString& label);
 
 enum wxStockLabelQueryFlag
 {
-    wxSTOCK_NOFLAGS = 0,
+	wxSTOCK_NOFLAGS = 0,
 
-    wxSTOCK_WITH_MNEMONIC = 1,
-    wxSTOCK_WITH_ACCELERATOR = 2,
+	wxSTOCK_WITH_MNEMONIC = 1,
+	wxSTOCK_WITH_ACCELERATOR = 2,
 
-    // by default, stock items text is returned with ellipsis, if appropriate,
-    // this flag allows to avoid having it
-    wxSTOCK_WITHOUT_ELLIPSIS = 4,
+	// by default, stock items text is returned with ellipsis, if appropriate,
+	// this flag allows to avoid having it
+	wxSTOCK_WITHOUT_ELLIPSIS = 4,
 
-    // return label for button, not menu item: buttons should always use
-    // mnemonics and never use ellipsis
-    wxSTOCK_FOR_BUTTON = wxSTOCK_WITHOUT_ELLIPSIS | wxSTOCK_WITH_MNEMONIC
+	// return label for button, not menu item: buttons should always use
+	// mnemonics and never use ellipsis
+	wxSTOCK_FOR_BUTTON = wxSTOCK_WITHOUT_ELLIPSIS | wxSTOCK_WITH_MNEMONIC
 };
 
 // Returns label that should be used for given stock UI element (e.g. "&OK"
@@ -48,13 +48,13 @@ enum wxStockLabelQueryFlag
 // is included; if wxSTOCK_WITH_ACCELERATOR is given, the stock accelerator
 // for given ID is concatenated to the label using \t as separator
 WXDLLIMPEXP_CORE wxString wxGetStockLabel(wxWindowID id,
-                                     long flags = wxSTOCK_WITH_MNEMONIC);
+        long flags = wxSTOCK_WITH_MNEMONIC);
 
 #if wxUSE_ACCEL
 
-    // Returns the accelerator that should be used for given stock UI element
-    // (e.g. "Ctrl+x" for wxSTOCK_EXIT)
-    WXDLLIMPEXP_CORE wxAcceleratorEntry wxGetStockAccelerator(wxWindowID id);
+// Returns the accelerator that should be used for given stock UI element
+// (e.g. "Ctrl+x" for wxSTOCK_EXIT)
+WXDLLIMPEXP_CORE wxAcceleratorEntry wxGetStockAccelerator(wxWindowID id);
 
 #endif
 
@@ -62,12 +62,12 @@ WXDLLIMPEXP_CORE wxString wxGetStockLabel(wxWindowID id,
 // wxGetStockHelpString() about the context where the help string is to be used
 enum wxStockHelpStringClient
 {
-    wxSTOCK_MENU        // help string to use for menu items
+	wxSTOCK_MENU        // help string to use for menu items
 };
 
 // Returns an help string for the given stock UI element and for the given "context".
 WXDLLIMPEXP_CORE wxString wxGetStockHelpString(wxWindowID id,
-                                          wxStockHelpStringClient client = wxSTOCK_MENU);
+        wxStockHelpStringClient client = wxSTOCK_MENU);
 
 
 #ifdef __WXGTK20__

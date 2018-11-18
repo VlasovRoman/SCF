@@ -14,4 +14,4 @@
 #include "wx/generic/laywin.h"
 
 #endif
-    // _WX_LAYWIN_H_BASE_
+// _WX_LAYWIN_H_BASE_

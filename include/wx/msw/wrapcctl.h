@@ -21,7 +21,7 @@
 // Set Unicode format for a common control
 inline void wxSetCCUnicodeFormat(HWND hwnd)
 {
-    ::SendMessage(hwnd, CCM_SETUNICODEFORMAT, wxUSE_UNICODE, 0);
+	::SendMessage(hwnd, CCM_SETUNICODEFORMAT, wxUSE_UNICODE, 0);
 }
 
 #if wxUSE_GUI
@@ -35,10 +35,10 @@ extern wxFont wxGetCCDefaultFont();
 // because we don't want to include commctrl.h (and hence windows.h) from there
 struct wxHDITEM : public HDITEM
 {
-    wxHDITEM()
-    {
-        ::ZeroMemory(this, sizeof(*this));
-    }
+	wxHDITEM()
+	{
+		::ZeroMemory(this, sizeof(*this));
+	}
 };
 
 #endif // wxUSE_GUI

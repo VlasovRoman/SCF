@@ -23,22 +23,22 @@ wxDFB_DECLARE_INTERFACE(IDirectFB);
 class WXDLLIMPEXP_CORE wxApp: public wxAppBase
 {
 public:
-    wxApp();
-    ~wxApp();
+	wxApp();
+	~wxApp();
 
-    // override base class (pure) virtuals
-    virtual bool Initialize(int& argc, wxChar **argv);
-    virtual void CleanUp();
+	// override base class (pure) virtuals
+	virtual bool Initialize(int& argc, wxChar **argv);
+	virtual void CleanUp();
 
-    virtual void WakeUpIdle();
+	virtual void WakeUpIdle();
 
-    virtual wxVideoMode GetDisplayMode() const;
-    virtual bool SetDisplayMode(const wxVideoMode& mode);
+	virtual wxVideoMode GetDisplayMode() const;
+	virtual bool SetDisplayMode(const wxVideoMode& mode);
 
 private:
-    wxVideoMode m_videoMode;
+	wxVideoMode m_videoMode;
 
-    wxDECLARE_DYNAMIC_CLASS(wxApp);
+	wxDECLARE_DYNAMIC_CLASS(wxApp);
 };
 
 #endif // _WX_DFB_APP_H_

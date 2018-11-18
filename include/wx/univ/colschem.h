@@ -23,64 +23,64 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 class WXDLLIMPEXP_CORE wxColourScheme
 {
 public:
-    // the standard colours
-    enum StdColour
-    {
-        // the background colour for a window
-        WINDOW,
+	// the standard colours
+	enum StdColour
+	{
+		// the background colour for a window
+		WINDOW,
 
-        // the different background and text colours for the control
-        CONTROL,
-        CONTROL_PRESSED,
-        CONTROL_CURRENT,
+		// the different background and text colours for the control
+		CONTROL,
+		CONTROL_PRESSED,
+		CONTROL_CURRENT,
 
-        // the label text for the normal and the disabled state
-        CONTROL_TEXT,
-        CONTROL_TEXT_DISABLED,
-        CONTROL_TEXT_DISABLED_SHADOW,
+		// the label text for the normal and the disabled state
+		CONTROL_TEXT,
+		CONTROL_TEXT_DISABLED,
+		CONTROL_TEXT_DISABLED_SHADOW,
 
-        // the scrollbar background colour for the normal and pressed states
-        SCROLLBAR,
-        SCROLLBAR_PRESSED,
+		// the scrollbar background colour for the normal and pressed states
+		SCROLLBAR,
+		SCROLLBAR_PRESSED,
 
-        // the background and text colour for the highlighted item
-        HIGHLIGHT,
-        HIGHLIGHT_TEXT,
+		// the background and text colour for the highlighted item
+		HIGHLIGHT,
+		HIGHLIGHT_TEXT,
 
-        // these colours are used for drawing the shadows of 3D objects
-        SHADOW_DARK,
-        SHADOW_HIGHLIGHT,
-        SHADOW_IN,
-        SHADOW_OUT,
+		// these colours are used for drawing the shadows of 3D objects
+		SHADOW_DARK,
+		SHADOW_HIGHLIGHT,
+		SHADOW_IN,
+		SHADOW_OUT,
 
-        // the titlebar background colours for the normal and focused states
-        TITLEBAR,
-        TITLEBAR_ACTIVE,
+		// the titlebar background colours for the normal and focused states
+		TITLEBAR,
+		TITLEBAR_ACTIVE,
 
-        // the titlebar text colours
-        TITLEBAR_TEXT,
-        TITLEBAR_ACTIVE_TEXT,
+		// the titlebar text colours
+		TITLEBAR_TEXT,
+		TITLEBAR_ACTIVE_TEXT,
 
-        // the default gauge fill colour
-        GAUGE,
+		// the default gauge fill colour
+		GAUGE,
 
-        // desktop background colour (only used by framebuffer ports)
-        DESKTOP,
+		// desktop background colour (only used by framebuffer ports)
+		DESKTOP,
 
-        // wxFrame's background colour
-        FRAME,
+		// wxFrame's background colour
+		FRAME,
 
-        MAX
-    };
+		MAX
+	};
 
-    // get a standard colour
-    virtual wxColour Get(StdColour col) const = 0;
+	// get a standard colour
+	virtual wxColour Get(StdColour col) const = 0;
 
-    // get the background colour for the given window
-    virtual wxColour GetBackground(wxWindow *win) const = 0;
+	// get the background colour for the given window
+	virtual wxColour GetBackground(wxWindow *win) const = 0;
 
-    // virtual dtor for any base class
-    virtual ~wxColourScheme() {}
+	// virtual dtor for any base class
+	virtual ~wxColourScheme() {}
 };
 
 // some people just can't spell it correctly :-)

@@ -50,4 +50,4 @@ class WXDLLIMPEXP_FWD_CORE wxDC;
 #endif // wxUSE_DRAGIMAGE
 
 #endif
-    // _WX_DRAGIMAG_H_BASE_
+// _WX_DRAGIMAG_H_BASE_

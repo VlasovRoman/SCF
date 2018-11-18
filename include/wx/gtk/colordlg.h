@@ -16,33 +16,36 @@
 class WXDLLIMPEXP_CORE wxColourDialog : public wxDialog
 {
 public:
-    wxColourDialog() {}
-    wxColourDialog(wxWindow *parent,
-                   wxColourData *data = NULL);
-    virtual ~wxColourDialog() {}
+	wxColourDialog() {}
+	wxColourDialog(wxWindow *parent,
+	               wxColourData *data = NULL);
+	virtual ~wxColourDialog() {}
 
-    bool Create(wxWindow *parent, wxColourData *data = NULL);
+	bool Create(wxWindow *parent, wxColourData *data = NULL);
 
-    wxColourData &GetColourData() { return m_data; }
+	wxColourData &GetColourData()
+	{
+		return m_data;
+	}
 
-    virtual int ShowModal() wxOVERRIDE;
+	virtual int ShowModal() wxOVERRIDE;
 
 protected:
-    // implement some base class methods to do nothing to avoid asserts and
-    // GTK warnings, since this is not a real wxDialog.
-    virtual void DoSetSize(int WXUNUSED(x), int WXUNUSED(y),
-                           int WXUNUSED(width), int WXUNUSED(height),
-                           int WXUNUSED(sizeFlags) = wxSIZE_AUTO) wxOVERRIDE {}
-    virtual void DoMoveWindow(int WXUNUSED(x), int WXUNUSED(y),
-                              int WXUNUSED(width), int WXUNUSED(height)) wxOVERRIDE {}
+	// implement some base class methods to do nothing to avoid asserts and
+	// GTK warnings, since this is not a real wxDialog.
+	virtual void DoSetSize(int WXUNUSED(x), int WXUNUSED(y),
+	                       int WXUNUSED(width), int WXUNUSED(height),
+	                       int WXUNUSED(sizeFlags) = wxSIZE_AUTO) wxOVERRIDE {}
+	virtual void DoMoveWindow(int WXUNUSED(x), int WXUNUSED(y),
+	                          int WXUNUSED(width), int WXUNUSED(height)) wxOVERRIDE {}
 
-    // copy data between the dialog and m_colourData:
-    void ColourDataToDialog();
-    void DialogToColourData();
+	// copy data between the dialog and m_colourData:
+	void ColourDataToDialog();
+	void DialogToColourData();
 
-    wxColourData m_data;
+	wxColourData m_data;
 
-    wxDECLARE_DYNAMIC_CLASS(wxColourDialog);
+	wxDECLARE_DYNAMIC_CLASS(wxColourDialog);
 };
 
 #endif

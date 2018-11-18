@@ -16,13 +16,13 @@
 class WXDLLIMPEXP_CORE wxDataObject : public wxDataObjectBase
 {
 public:
-    wxDataObject();
+	wxDataObject();
 
 #ifdef __DARWIN__
-    virtual ~wxDataObject() { }
+	virtual ~wxDataObject() { }
 #endif
 
-    virtual bool IsSupportedFormat( const wxDataFormat& format, Direction dir = Get ) const;
+	virtual bool IsSupportedFormat( const wxDataFormat& format, Direction dir = Get ) const;
 };
 
 #endif //_WX_X11_DATAOBJ_H_

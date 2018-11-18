@@ -56,49 +56,49 @@
 // Define conversions to strings for some common wxWidgets types.
 namespace Catch
 {
-    template <>
-    struct StringMaker<wxUniChar>
-    {
-        static std::string convert(wxUniChar uc)
-        {
-            return wxString(uc).ToStdString(wxConvUTF8);
-        }
-    };
+template <>
+struct StringMaker<wxUniChar>
+{
+	static std::string convert(wxUniChar uc)
+	{
+		return wxString(uc).ToStdString(wxConvUTF8);
+	}
+};
 
-    template <>
-    struct StringMaker<wxUniCharRef>
-    {
-        static std::string convert(wxUniCharRef ucr)
-        {
-            return wxString(ucr).ToStdString(wxConvUTF8);
-        }
-    };
+template <>
+struct StringMaker<wxUniCharRef>
+{
+	static std::string convert(wxUniCharRef ucr)
+	{
+		return wxString(ucr).ToStdString(wxConvUTF8);
+	}
+};
 
-    // While this conversion already works due to the existence of the stream
-    // insertion operator for wxString, define a custom one making it more
-    // obvious when strings containing non-printable characters differ.
-    template <>
-    struct StringMaker<wxString>
-    {
-        static std::string convert(const wxString& wxs)
-        {
-            std::string s;
-            s.reserve(wxs.length());
-            for ( wxString::const_iterator i = wxs.begin();
-                  i != wxs.end();
-                  ++i )
-            {
+// While this conversion already works due to the existence of the stream
+// insertion operator for wxString, define a custom one making it more
+// obvious when strings containing non-printable characters differ.
+template <>
+struct StringMaker<wxString>
+{
+	static std::string convert(const wxString& wxs)
+	{
+		std::string s;
+		s.reserve(wxs.length());
+		for ( wxString::const_iterator i = wxs.begin();
+		        i != wxs.end();
+		        ++i )
+		{
 #if wxUSE_UNICODE
-                if ( !iswprint(*i) )
-                    s += wxString::Format("\\u%04X", *i).ToStdString();
-                else
+			if ( !iswprint(*i) )
+				s += wxString::Format("\\u%04X", *i).ToStdString();
+			else
 #endif // wxUSE_UNICODE
-                    s += *i;
-            }
+				s += *i;
+		}
 
-            return s;
-        }
-    };
+		return s;
+	}
+};
 }
 
 // Use a different namespace for our mock ups of the real declarations in
@@ -118,57 +118,66 @@ namespace CppUnit
 class Test
 {
 public:
-    // Name argument exists only for compatibility with the real CppUnit but is
-    // not used here.
-    explicit Test(const std::string& name = std::string()) : m_name(name) { }
+	// Name argument exists only for compatibility with the real CppUnit but is
+	// not used here.
+	explicit Test(const std::string& name = std::string()) : m_name(name) { }
 
-    virtual ~Test() { }
+	virtual ~Test() { }
 
-    virtual void runTest() = 0;
+	virtual void runTest() = 0;
 
-    const std::string& getName() const { return m_name; }
+	const std::string& getName() const
+	{
+		return m_name;
+	}
 
 private:
-    std::string m_name;
+	std::string m_name;
 };
 
 class TestCase : public Test
 {
 public:
-    explicit TestCase(const std::string& name = std::string()) : Test(name) { }
+	explicit TestCase(const std::string& name = std::string()) : Test(name) { }
 
-    virtual void setUp() {}
-    virtual void tearDown() {}
+	virtual void setUp() {}
+	virtual void tearDown() {}
 };
 
 class TestSuite : public Test
 {
 public:
-    explicit TestSuite(const std::string& name = std::string()) : Test(name) { }
+	explicit TestSuite(const std::string& name = std::string()) : Test(name) { }
 
-    ~TestSuite()
-    {
-        for ( size_t n = 0; n < m_tests.size(); ++n )
-        {
-            delete m_tests[n];
-        }
-    }
+	~TestSuite()
+	{
+		for ( size_t n = 0; n < m_tests.size(); ++n )
+		{
+			delete m_tests[n];
+		}
+	}
 
-    void addTest(Test* test) { m_tests.push_back(test); }
-    size_t getChildTestCount() const { return m_tests.size(); }
+	void addTest(Test* test)
+	{
+		m_tests.push_back(test);
+	}
+	size_t getChildTestCount() const
+	{
+		return m_tests.size();
+	}
 
-    void runTest() wxOVERRIDE
-    {
-        for ( size_t n = 0; n < m_tests.size(); ++n )
-        {
-            m_tests[n]->runTest();
-        }
-    }
+	void runTest() wxOVERRIDE
+	{
+		for ( size_t n = 0; n < m_tests.size(); ++n )
+		{
+			m_tests[n]->runTest();
+		}
+	}
 
 private:
-    std::vector<Test*> m_tests;
+	std::vector<Test*> m_tests;
 
-    wxDECLARE_NO_COPY_CLASS(TestSuite);
+	wxDECLARE_NO_COPY_CLASS(TestSuite);
 };
 
 } // namespace CppUnit
@@ -185,23 +194,23 @@ namespace wxPrivate
 class TempStringAssign
 {
 public:
-    explicit TempStringAssign(std::string& str, const char* value)
-        : m_str(str),
-          m_orig(str)
-    {
-        str = value;
-    }
+	explicit TempStringAssign(std::string& str, const char* value)
+		: m_str(str),
+		  m_orig(str)
+	{
+		str = value;
+	}
 
-    ~TempStringAssign()
-    {
-        m_str = m_orig;
-    }
+	~TempStringAssign()
+	{
+		m_str = m_orig;
+	}
 
 private:
-    std::string& m_str;
-    const std::string m_orig;
+	std::string& m_str;
+	const std::string m_orig;
 
-    wxDECLARE_NO_COPY_CLASS(TempStringAssign);
+	wxDECLARE_NO_COPY_CLASS(TempStringAssign);
 };
 
 // These two strings are used to implement wxGetCurrentTestName() and must be
@@ -212,12 +221,12 @@ extern std::string wxTheCurrentTestClass, wxTheCurrentTestMethod;
 
 inline std::string wxGetCurrentTestName()
 {
-    std::string s = wxPrivate::wxTheCurrentTestClass;
-    if ( !s.empty() && !wxPrivate::wxTheCurrentTestMethod.empty() )
-        s += "::";
-    s += wxPrivate::wxTheCurrentTestMethod;
+	std::string s = wxPrivate::wxTheCurrentTestClass;
+	if ( !s.empty() && !wxPrivate::wxTheCurrentTestMethod.empty() )
+		s += "::";
+	s += wxPrivate::wxTheCurrentTestMethod;
 
-    return s;
+	return s;
 }
 
 // Notice that the use of this macro unconditionally changes the protection for

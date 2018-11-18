@@ -55,7 +55,7 @@ extern int WXDLLIMPEXP_BASE wxEntry(int& argc, char **argv);
 // Under Windows we define additional wxEntry() overloads with signature
 // compatible with WinMain() and not the traditional main().
 #ifdef __WINDOWS__
-    #include "wx/msw/init.h"
+#include "wx/msw/init.h"
 #endif
 
 // ----------------------------------------------------------------------------
@@ -81,35 +81,44 @@ extern void WXDLLIMPEXP_BASE wxUninitialize();
 class WXDLLIMPEXP_BASE wxInitializer
 {
 public:
-    // initialize the library
-    wxInitializer()
-    {
-        m_ok = wxInitialize();
-    }
+	// initialize the library
+	wxInitializer()
+	{
+		m_ok = wxInitialize();
+	}
 
-    wxInitializer(int& argc, wxChar **argv)
-    {
-        m_ok = wxInitialize(argc, argv);
-    }
+	wxInitializer(int& argc, wxChar **argv)
+	{
+		m_ok = wxInitialize(argc, argv);
+	}
 
 #if wxUSE_UNICODE
-    wxInitializer(int& argc, char **argv)
-    {
-        m_ok = wxInitialize(argc, argv);
-    }
+	wxInitializer(int& argc, char **argv)
+	{
+		m_ok = wxInitialize(argc, argv);
+	}
 #endif // wxUSE_UNICODE
 
-    // has the initialization been successful? (explicit test)
-    bool IsOk() const { return m_ok; }
+	// has the initialization been successful? (explicit test)
+	bool IsOk() const
+	{
+		return m_ok;
+	}
 
-    // has the initialization been successful? (implicit test)
-    operator bool() const { return m_ok; }
+	// has the initialization been successful? (implicit test)
+	operator bool() const
+	{
+		return m_ok;
+	}
 
-    // dtor only does clean up if we initialized the library properly
-    ~wxInitializer() { if ( m_ok ) wxUninitialize(); }
+	// dtor only does clean up if we initialized the library properly
+	~wxInitializer()
+	{
+		if ( m_ok ) wxUninitialize();
+	}
 
 private:
-    bool m_ok;
+	bool m_ok;
 };
 
 #endif // _WX_INIT_H_

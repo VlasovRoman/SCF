@@ -27,7 +27,7 @@ extern int WXDLLIMPEXP_BASE wxEntry();
 #include "wx/msw/wrapwin.h"
 
 #ifndef SW_SHOWNORMAL
-    #define SW_SHOWNORMAL 1
+#define SW_SHOWNORMAL 1
 #endif
 
 // WinMain() is always ANSI, even in Unicode build.
@@ -36,27 +36,27 @@ typedef char *wxCmdLineArgType;
 // Windows-only overloads of wxEntry() and wxEntryStart() which take the
 // parameters passed to WinMain() instead of those passed to main()
 extern WXDLLIMPEXP_CORE bool
-    wxEntryStart(HINSTANCE hInstance,
-                HINSTANCE hPrevInstance = NULL,
-                wxCmdLineArgType pCmdLine = NULL,
-                int nCmdShow = SW_SHOWNORMAL);
+wxEntryStart(HINSTANCE hInstance,
+             HINSTANCE hPrevInstance = NULL,
+             wxCmdLineArgType pCmdLine = NULL,
+             int nCmdShow = SW_SHOWNORMAL);
 
 extern WXDLLIMPEXP_CORE int
-    wxEntry(HINSTANCE hInstance,
-            HINSTANCE hPrevInstance = NULL,
-            wxCmdLineArgType pCmdLine = NULL,
-            int nCmdShow = SW_SHOWNORMAL);
+wxEntry(HINSTANCE hInstance,
+        HINSTANCE hPrevInstance = NULL,
+        wxCmdLineArgType pCmdLine = NULL,
+        int nCmdShow = SW_SHOWNORMAL);
 
 #if defined(__BORLANDC__) && wxUSE_UNICODE
-    // Borland C++ has the following nonstandard behaviour: when the -WU
-    // command line flag is used, the linker expects to find wWinMain instead
-    // of WinMain. This flag causes the compiler to define _UNICODE and
-    // UNICODE symbols and there's no way to detect its use, so we have to
-    // define both WinMain and wWinMain so that wxIMPLEMENT_WXWIN_MAIN works
-    // for both code compiled with and without -WU.
-    // See http://sourceforge.net/tracker/?func=detail&atid=309863&aid=1935997&group_id=9863
-    // for more details.
-    #define wxIMPLEMENT_WXWIN_MAIN_BORLAND_NONSTANDARD                      \
+// Borland C++ has the following nonstandard behaviour: when the -WU
+// command line flag is used, the linker expects to find wWinMain instead
+// of WinMain. This flag causes the compiler to define _UNICODE and
+// UNICODE symbols and there's no way to detect its use, so we have to
+// define both WinMain and wWinMain so that wxIMPLEMENT_WXWIN_MAIN works
+// for both code compiled with and without -WU.
+// See http://sourceforge.net/tracker/?func=detail&atid=309863&aid=1935997&group_id=9863
+// for more details.
+#define wxIMPLEMENT_WXWIN_MAIN_BORLAND_NONSTANDARD                      \
         extern "C" int WINAPI wWinMain(HINSTANCE hInstance,                 \
                                       HINSTANCE hPrevInstance,              \
                                       wchar_t * WXUNUSED(lpCmdLine),        \
@@ -70,7 +70,7 @@ extern WXDLLIMPEXP_CORE int
             return wxEntry(hInstance, hPrevInstance, NULL, nCmdShow);       \
         }
 #else
-    #define wxIMPLEMENT_WXWIN_MAIN_BORLAND_NONSTANDARD
+#define wxIMPLEMENT_WXWIN_MAIN_BORLAND_NONSTANDARD
 #endif // defined(__BORLANDC__) && wxUSE_UNICODE
 
 #define wxIMPLEMENT_WXWIN_MAIN                                              \

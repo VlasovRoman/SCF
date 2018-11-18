@@ -30,124 +30,157 @@
 class WXDLLIMPEXP_BASE wxFileInputStream : public wxInputStream
 {
 public:
-    wxFileInputStream(const wxString& ifileName);
-    wxFileInputStream(wxFile& file);
-    wxFileInputStream(int fd);
-    virtual ~wxFileInputStream();
+	wxFileInputStream(const wxString& ifileName);
+	wxFileInputStream(wxFile& file);
+	wxFileInputStream(int fd);
+	virtual ~wxFileInputStream();
 
-    virtual wxFileOffset GetLength() const wxOVERRIDE;
+	virtual wxFileOffset GetLength() const wxOVERRIDE;
 
-    bool Ok() const { return IsOk(); }
-    virtual bool IsOk() const wxOVERRIDE;
-    virtual bool IsSeekable() const wxOVERRIDE { return m_file->GetKind() == wxFILE_KIND_DISK; }
+	bool Ok() const
+	{
+		return IsOk();
+	}
+	virtual bool IsOk() const wxOVERRIDE;
+	virtual bool IsSeekable() const wxOVERRIDE
+	{
+		return m_file->GetKind() == wxFILE_KIND_DISK;
+	}
 
-    wxFile* GetFile() const { return m_file; }
+	wxFile* GetFile() const
+	{
+		return m_file;
+	}
 
 protected:
-    wxFileInputStream();
+	wxFileInputStream();
 
-    virtual size_t OnSysRead(void *buffer, size_t size) wxOVERRIDE;
-    virtual wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) wxOVERRIDE;
-    virtual wxFileOffset OnSysTell() const wxOVERRIDE;
+	virtual size_t OnSysRead(void *buffer, size_t size) wxOVERRIDE;
+	virtual wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) wxOVERRIDE;
+	virtual wxFileOffset OnSysTell() const wxOVERRIDE;
 
 protected:
-    wxFile *m_file;
-    bool m_file_destroy;
+	wxFile *m_file;
+	bool m_file_destroy;
 
-    wxDECLARE_NO_COPY_CLASS(wxFileInputStream);
+	wxDECLARE_NO_COPY_CLASS(wxFileInputStream);
 };
 
 class WXDLLIMPEXP_BASE wxFileOutputStream : public wxOutputStream
 {
 public:
-    wxFileOutputStream(const wxString& fileName);
-    wxFileOutputStream(wxFile& file);
-    wxFileOutputStream(int fd);
-    virtual ~wxFileOutputStream();
+	wxFileOutputStream(const wxString& fileName);
+	wxFileOutputStream(wxFile& file);
+	wxFileOutputStream(int fd);
+	virtual ~wxFileOutputStream();
 
-    void Sync() wxOVERRIDE;
-    bool Close() wxOVERRIDE { return m_file_destroy ? m_file->Close() : true; }
-    virtual wxFileOffset GetLength() const wxOVERRIDE;
+	void Sync() wxOVERRIDE;
+	bool Close() wxOVERRIDE { return m_file_destroy ? m_file->Close() : true; }
+	virtual wxFileOffset GetLength() const wxOVERRIDE;
 
-    bool Ok() const { return IsOk(); }
-    virtual bool IsOk() const wxOVERRIDE;
-    virtual bool IsSeekable() const wxOVERRIDE { return m_file->GetKind() == wxFILE_KIND_DISK; }
+	bool Ok() const
+	{
+		return IsOk();
+	}
+	virtual bool IsOk() const wxOVERRIDE;
+	virtual bool IsSeekable() const wxOVERRIDE
+	{
+		return m_file->GetKind() == wxFILE_KIND_DISK;
+	}
 
-    wxFile* GetFile() const { return m_file; }
+	wxFile* GetFile() const
+	{
+		return m_file;
+	}
 
 protected:
-    wxFileOutputStream();
+	wxFileOutputStream();
 
-    virtual size_t OnSysWrite(const void *buffer, size_t size) wxOVERRIDE;
-    virtual wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) wxOVERRIDE;
-    virtual wxFileOffset OnSysTell() const wxOVERRIDE;
+	virtual size_t OnSysWrite(const void *buffer, size_t size) wxOVERRIDE;
+	virtual wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) wxOVERRIDE;
+	virtual wxFileOffset OnSysTell() const wxOVERRIDE;
 
 protected:
-    wxFile *m_file;
-    bool m_file_destroy;
+	wxFile *m_file;
+	bool m_file_destroy;
 
-    wxDECLARE_NO_COPY_CLASS(wxFileOutputStream);
+	wxDECLARE_NO_COPY_CLASS(wxFileOutputStream);
 };
 
 class WXDLLIMPEXP_BASE wxTempFileOutputStream : public wxOutputStream
 {
 public:
-    wxTempFileOutputStream(const wxString& fileName);
-    virtual ~wxTempFileOutputStream();
+	wxTempFileOutputStream(const wxString& fileName);
+	virtual ~wxTempFileOutputStream();
 
-    bool Close() wxOVERRIDE { return Commit(); }
-    WXDLLIMPEXP_INLINE_BASE virtual bool Commit() { return m_file->Commit(); }
-    WXDLLIMPEXP_INLINE_BASE virtual void Discard() { m_file->Discard(); }
+	bool Close() wxOVERRIDE { return Commit(); }
+	WXDLLIMPEXP_INLINE_BASE virtual bool Commit()
+	{
+		return m_file->Commit();
+	}
+	WXDLLIMPEXP_INLINE_BASE virtual void Discard()
+	{
+		m_file->Discard();
+	}
 
-    virtual wxFileOffset GetLength() const wxOVERRIDE { return m_file->Length(); }
-    virtual bool IsSeekable() const wxOVERRIDE { return true; }
+	virtual wxFileOffset GetLength() const wxOVERRIDE
+	{
+		return m_file->Length();
+	}
+	virtual bool IsSeekable() const wxOVERRIDE
+	{
+		return true;
+	}
 
 protected:
-    virtual size_t OnSysWrite(const void *buffer, size_t size) wxOVERRIDE;
-    virtual wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) wxOVERRIDE
-        { return m_file->Seek(pos, mode); }
-    virtual wxFileOffset OnSysTell() const wxOVERRIDE { return m_file->Tell(); }
+	virtual size_t OnSysWrite(const void *buffer, size_t size) wxOVERRIDE;
+	virtual wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) wxOVERRIDE
+	{ return m_file->Seek(pos, mode); }
+	virtual wxFileOffset OnSysTell() const wxOVERRIDE
+	{
+		return m_file->Tell();
+	}
 
 private:
-    wxTempFile *m_file;
+	wxTempFile *m_file;
 
-    wxDECLARE_NO_COPY_CLASS(wxTempFileOutputStream);
+	wxDECLARE_NO_COPY_CLASS(wxTempFileOutputStream);
 };
 
 class WXDLLIMPEXP_BASE wxFileStream : public wxFileInputStream,
-                                      public wxFileOutputStream
+	public wxFileOutputStream
 {
 public:
-    wxFileStream(const wxString& fileName);
-    virtual bool IsOk() const wxOVERRIDE;
+	wxFileStream(const wxString& fileName);
+	virtual bool IsOk() const wxOVERRIDE;
 
-    // override (some) virtual functions inherited from both classes to resolve
-    // ambiguities (this wouldn't be necessary if wxStreamBase were a virtual
-    // base class but it isn't)
+	// override (some) virtual functions inherited from both classes to resolve
+	// ambiguities (this wouldn't be necessary if wxStreamBase were a virtual
+	// base class but it isn't)
 
-    virtual bool IsSeekable() const wxOVERRIDE
-    {
-        return wxFileInputStream::IsSeekable();
-    }
+	virtual bool IsSeekable() const wxOVERRIDE
+	{
+		return wxFileInputStream::IsSeekable();
+	}
 
-    virtual wxFileOffset GetLength() const wxOVERRIDE
-    {
-        return wxFileInputStream::GetLength();
-    }
+	virtual wxFileOffset GetLength() const wxOVERRIDE
+	{
+		return wxFileInputStream::GetLength();
+	}
 
 protected:
-    virtual wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) wxOVERRIDE
-    {
-        return wxFileInputStream::OnSysSeek(pos, mode);
-    }
+	virtual wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) wxOVERRIDE
+	{
+		return wxFileInputStream::OnSysSeek(pos, mode);
+	}
 
-    virtual wxFileOffset OnSysTell() const wxOVERRIDE
-    {
-        return wxFileInputStream::OnSysTell();
-    }
+	virtual wxFileOffset OnSysTell() const wxOVERRIDE
+	{
+		return wxFileInputStream::OnSysTell();
+	}
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxFileStream);
+	wxDECLARE_NO_COPY_CLASS(wxFileStream);
 };
 
 #endif //wxUSE_FILE
@@ -161,99 +194,117 @@ private:
 class WXDLLIMPEXP_BASE wxFFileInputStream : public wxInputStream
 {
 public:
-    wxFFileInputStream(const wxString& fileName, const wxString& mode = "rb");
-    wxFFileInputStream(wxFFile& file);
-    wxFFileInputStream(FILE *file);
-    virtual ~wxFFileInputStream();
+	wxFFileInputStream(const wxString& fileName, const wxString& mode = "rb");
+	wxFFileInputStream(wxFFile& file);
+	wxFFileInputStream(FILE *file);
+	virtual ~wxFFileInputStream();
 
-    virtual wxFileOffset GetLength() const wxOVERRIDE;
+	virtual wxFileOffset GetLength() const wxOVERRIDE;
 
-    bool Ok() const { return IsOk(); }
-    virtual bool IsOk() const wxOVERRIDE;
-    virtual bool IsSeekable() const wxOVERRIDE { return m_file->GetKind() == wxFILE_KIND_DISK; }
+	bool Ok() const
+	{
+		return IsOk();
+	}
+	virtual bool IsOk() const wxOVERRIDE;
+	virtual bool IsSeekable() const wxOVERRIDE
+	{
+		return m_file->GetKind() == wxFILE_KIND_DISK;
+	}
 
-    wxFFile* GetFile() const { return m_file; }
+	wxFFile* GetFile() const
+	{
+		return m_file;
+	}
 
 protected:
-    wxFFileInputStream();
+	wxFFileInputStream();
 
-    virtual size_t OnSysRead(void *buffer, size_t size) wxOVERRIDE;
-    virtual wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) wxOVERRIDE;
-    virtual wxFileOffset OnSysTell() const wxOVERRIDE;
+	virtual size_t OnSysRead(void *buffer, size_t size) wxOVERRIDE;
+	virtual wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) wxOVERRIDE;
+	virtual wxFileOffset OnSysTell() const wxOVERRIDE;
 
 protected:
-    wxFFile *m_file;
-    bool m_file_destroy;
+	wxFFile *m_file;
+	bool m_file_destroy;
 
-    wxDECLARE_NO_COPY_CLASS(wxFFileInputStream);
+	wxDECLARE_NO_COPY_CLASS(wxFFileInputStream);
 };
 
 class WXDLLIMPEXP_BASE wxFFileOutputStream : public wxOutputStream
 {
 public:
-    wxFFileOutputStream(const wxString& fileName, const wxString& mode = "wb");
-    wxFFileOutputStream(wxFFile& file);
-    wxFFileOutputStream(FILE *file);
-    virtual ~wxFFileOutputStream();
+	wxFFileOutputStream(const wxString& fileName, const wxString& mode = "wb");
+	wxFFileOutputStream(wxFFile& file);
+	wxFFileOutputStream(FILE *file);
+	virtual ~wxFFileOutputStream();
 
-    void Sync() wxOVERRIDE;
-    bool Close() wxOVERRIDE { return m_file_destroy ? m_file->Close() : true; }
-    virtual wxFileOffset GetLength() const wxOVERRIDE;
+	void Sync() wxOVERRIDE;
+	bool Close() wxOVERRIDE { return m_file_destroy ? m_file->Close() : true; }
+	virtual wxFileOffset GetLength() const wxOVERRIDE;
 
-    bool Ok() const { return IsOk(); }
-    virtual bool IsOk() const wxOVERRIDE;
-    virtual bool IsSeekable() const wxOVERRIDE { return m_file->GetKind() == wxFILE_KIND_DISK; }
+	bool Ok() const
+	{
+		return IsOk();
+	}
+	virtual bool IsOk() const wxOVERRIDE;
+	virtual bool IsSeekable() const wxOVERRIDE
+	{
+		return m_file->GetKind() == wxFILE_KIND_DISK;
+	}
 
-    wxFFile* GetFile() const { return m_file; }
+	wxFFile* GetFile() const
+	{
+		return m_file;
+	}
 
 protected:
-    wxFFileOutputStream();
+	wxFFileOutputStream();
 
-    virtual size_t OnSysWrite(const void *buffer, size_t size) wxOVERRIDE;
-    virtual wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) wxOVERRIDE;
-    virtual wxFileOffset OnSysTell() const wxOVERRIDE;
+	virtual size_t OnSysWrite(const void *buffer, size_t size) wxOVERRIDE;
+	virtual wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) wxOVERRIDE;
+	virtual wxFileOffset OnSysTell() const wxOVERRIDE;
 
 protected:
-    wxFFile *m_file;
-    bool m_file_destroy;
+	wxFFile *m_file;
+	bool m_file_destroy;
 
-    wxDECLARE_NO_COPY_CLASS(wxFFileOutputStream);
+	wxDECLARE_NO_COPY_CLASS(wxFFileOutputStream);
 };
 
 class WXDLLIMPEXP_BASE wxFFileStream : public wxFFileInputStream,
-                                       public wxFFileOutputStream
+	public wxFFileOutputStream
 {
 public:
-    wxFFileStream(const wxString& fileName, const wxString& mode = "w+b");
+	wxFFileStream(const wxString& fileName, const wxString& mode = "w+b");
 
-    // override some virtual functions to resolve ambiguities, just as in
-    // wxFileStream
+	// override some virtual functions to resolve ambiguities, just as in
+	// wxFileStream
 
-    virtual bool IsOk() const wxOVERRIDE;
+	virtual bool IsOk() const wxOVERRIDE;
 
-    virtual bool IsSeekable() const wxOVERRIDE
-    {
-        return wxFFileInputStream::IsSeekable();
-    }
+	virtual bool IsSeekable() const wxOVERRIDE
+	{
+		return wxFFileInputStream::IsSeekable();
+	}
 
-    virtual wxFileOffset GetLength() const wxOVERRIDE
-    {
-        return wxFFileInputStream::GetLength();
-    }
+	virtual wxFileOffset GetLength() const wxOVERRIDE
+	{
+		return wxFFileInputStream::GetLength();
+	}
 
 protected:
-    virtual wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) wxOVERRIDE
-    {
-        return wxFFileInputStream::OnSysSeek(pos, mode);
-    }
+	virtual wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) wxOVERRIDE
+	{
+		return wxFFileInputStream::OnSysSeek(pos, mode);
+	}
 
-    virtual wxFileOffset OnSysTell() const wxOVERRIDE
-    {
-        return wxFFileInputStream::OnSysTell();
-    }
+	virtual wxFileOffset OnSysTell() const wxOVERRIDE
+	{
+		return wxFFileInputStream::OnSysTell();
+	}
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxFFileStream);
+	wxDECLARE_NO_COPY_CLASS(wxFFileStream);
 };
 
 #endif //wxUSE_FFILE

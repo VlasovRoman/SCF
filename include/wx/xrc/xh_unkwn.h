@@ -16,12 +16,12 @@
 
 class WXDLLIMPEXP_XRC wxUnknownWidgetXmlHandler : public wxXmlResourceHandler
 {
-    wxDECLARE_DYNAMIC_CLASS(wxUnknownWidgetXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxUnknownWidgetXmlHandler);
 
 public:
-    wxUnknownWidgetXmlHandler();
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	wxUnknownWidgetXmlHandler();
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 };
 
 #endif // wxUSE_XRC

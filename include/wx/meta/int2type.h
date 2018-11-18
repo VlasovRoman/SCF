@@ -11,6 +11,9 @@
 #define _WX_META_INT2TYPE_H_
 
 template <int N>
-struct wxInt2Type { enum { value=N }; };
+struct wxInt2Type
+{
+	enum { value=N };
+};
 
 #endif // _WX_META_INT2TYPE_H_

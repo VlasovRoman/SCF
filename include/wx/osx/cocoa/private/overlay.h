@@ -18,38 +18,38 @@
 class wxOverlayImpl
 {
 public:
-    wxOverlayImpl() ;
-    ~wxOverlayImpl() ;
+	wxOverlayImpl() ;
+	~wxOverlayImpl() ;
 
 
-    // clears the overlay without restoring the former state
-    // to be done eg when the window content has been changed and repainted
-    void Reset();
+	// clears the overlay without restoring the former state
+	// to be done eg when the window content has been changed and repainted
+	void Reset();
 
-    // returns true if it has been setup
-    bool IsOk();
+	// returns true if it has been setup
+	bool IsOk();
 
-    void Init( wxDC* dc, int x , int y , int width , int height );
+	void Init( wxDC* dc, int x, int y, int width, int height );
 
-    void BeginDrawing( wxDC* dc);
+	void BeginDrawing( wxDC* dc);
 
-    void EndDrawing( wxDC* dc);
+	void EndDrawing( wxDC* dc);
 
-    void Clear( wxDC* dc);
+	void Clear( wxDC* dc);
 
 private:
-    void CreateOverlayWindow( wxDC* dc );
+	void CreateOverlayWindow( wxDC* dc );
 
-    WXWindow m_overlayWindow;
-    WXWindow m_overlayParentWindow;
-    CGContextRef m_overlayContext ;
-    // we store the window in case we would have to issue a Refresh()
-    wxWindow* m_window ;
+	WXWindow m_overlayWindow;
+	WXWindow m_overlayParentWindow;
+	CGContextRef m_overlayContext ;
+	// we store the window in case we would have to issue a Refresh()
+	wxWindow* m_window ;
 
-    int m_x ;
-    int m_y ;
-    int m_width ;
-    int m_height ;
+	int m_x ;
+	int m_y ;
+	int m_width ;
+	int m_height ;
 } ;
 
 #endif // _WX_MAC_CARBON_PRIVATE_OVERLAY_H_

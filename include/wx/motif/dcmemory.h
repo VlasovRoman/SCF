@@ -16,28 +16,31 @@
 class WXDLLIMPEXP_CORE wxMemoryDCImpl : public wxWindowDCImpl
 {
 public:
-    wxMemoryDCImpl(wxMemoryDC *owner) : wxWindowDCImpl(owner) { Init(); }
-    wxMemoryDCImpl(wxMemoryDC *owner, wxBitmap& bitmap)
-        : wxWindowDCImpl(owner)
-    {
-        Init();
-        DoSelect(bitmap);
-    }
+	wxMemoryDCImpl(wxMemoryDC *owner) : wxWindowDCImpl(owner)
+	{
+		Init();
+	}
+	wxMemoryDCImpl(wxMemoryDC *owner, wxBitmap& bitmap)
+		: wxWindowDCImpl(owner)
+	{
+		Init();
+		DoSelect(bitmap);
+	}
 
-    wxMemoryDCImpl(wxMemoryDC *owner, wxDC *dc);
-    virtual ~wxMemoryDCImpl();
+	wxMemoryDCImpl(wxMemoryDC *owner, wxDC *dc);
+	virtual ~wxMemoryDCImpl();
 
-    virtual void DoGetSize( int *width, int *height ) const;
-    virtual void DoSelect(const wxBitmap& bitmap);
+	virtual void DoGetSize( int *width, int *height ) const;
+	virtual void DoSelect(const wxBitmap& bitmap);
 
 private:
-    friend class wxPaintDC;
+	friend class wxPaintDC;
 
-    void Init();
+	void Init();
 
-    wxBitmap m_bitmap;
+	wxBitmap m_bitmap;
 
-    wxDECLARE_DYNAMIC_CLASS(wxMemoryDCImpl);
+	wxDECLARE_DYNAMIC_CLASS(wxMemoryDCImpl);
 };
 
 #endif

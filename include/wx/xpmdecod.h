@@ -23,26 +23,28 @@ class WXDLLIMPEXP_FWD_BASE wxInputStream;
 class WXDLLIMPEXP_CORE wxXPMDecoder
 {
 public:
-    // constructor, destructor, etc.
-    wxXPMDecoder() {}
-    ~wxXPMDecoder() {}
+	// constructor, destructor, etc.
+	wxXPMDecoder() {}
+	~wxXPMDecoder() {}
 
 #if wxUSE_STREAMS
-    // Is the stream XPM file?
-    // NOTE: this function modifies the current stream position
-    bool CanRead(wxInputStream& stream);
+	// Is the stream XPM file?
+	// NOTE: this function modifies the current stream position
+	bool CanRead(wxInputStream& stream);
 
-    // Read XPM file from the stream, parse it and create image from it
-    wxImage ReadFile(wxInputStream& stream);
+	// Read XPM file from the stream, parse it and create image from it
+	wxImage ReadFile(wxInputStream& stream);
 #endif
 
-    // Read directly from XPM data (as passed to wxBitmap ctor):
-    wxImage ReadData(const char* const* xpm_data);
+	// Read directly from XPM data (as passed to wxBitmap ctor):
+	wxImage ReadData(const char* const* xpm_data);
 
 #ifdef __BORLANDC__
-    // needed for Borland 5.5
-    wxImage ReadData(char** xpm_data)
-        { return ReadData(const_cast<const char* const*>(xpm_data)); }
+	// needed for Borland 5.5
+	wxImage ReadData(char** xpm_data)
+	{
+		return ReadData(const_cast<const char* const*>(xpm_data));
+	}
 #endif
 };
 

@@ -31,69 +31,76 @@
 
 class WXDLLIMPEXP_RICHTEXT wxRichTextStylePage: public wxRichTextDialogPage
 {
-    wxDECLARE_DYNAMIC_CLASS(wxRichTextStylePage);
-    wxDECLARE_EVENT_TABLE();
-    DECLARE_HELP_PROVISION()
+	wxDECLARE_DYNAMIC_CLASS(wxRichTextStylePage);
+	wxDECLARE_EVENT_TABLE();
+	DECLARE_HELP_PROVISION()
 
 public:
-    /// Constructors
-    wxRichTextStylePage( );
-    wxRichTextStylePage( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTSTYLEPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTSTYLEPAGE_SIZE, long style = SYMBOL_WXRICHTEXTSTYLEPAGE_STYLE );
+	/// Constructors
+	wxRichTextStylePage( );
+	wxRichTextStylePage( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTSTYLEPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTSTYLEPAGE_SIZE, long style = SYMBOL_WXRICHTEXTSTYLEPAGE_STYLE );
 
-    /// Creation
-    bool Create( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTSTYLEPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTSTYLEPAGE_SIZE, long style = SYMBOL_WXRICHTEXTSTYLEPAGE_STYLE );
+	/// Creation
+	bool Create( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTSTYLEPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTSTYLEPAGE_SIZE, long style = SYMBOL_WXRICHTEXTSTYLEPAGE_STYLE );
 
-    /// Initialise members
-    void Init();
+	/// Initialise members
+	void Init();
 
-    /// Creates the controls and sizers
-    void CreateControls();
+	/// Creates the controls and sizers
+	void CreateControls();
 
-    /// Transfer data from/to window
-    virtual bool TransferDataFromWindow() wxOVERRIDE;
-    virtual bool TransferDataToWindow() wxOVERRIDE;
+	/// Transfer data from/to window
+	virtual bool TransferDataFromWindow() wxOVERRIDE;
+	virtual bool TransferDataToWindow() wxOVERRIDE;
 
-    /// Gets the attributes associated with the main formatting dialog
-    wxRichTextAttr* GetAttributes();
+	/// Gets the attributes associated with the main formatting dialog
+	wxRichTextAttr* GetAttributes();
 
-    /// Determines whether the style name can be edited
-    bool GetNameIsEditable() const { return m_nameIsEditable; }
-    void SetNameIsEditable(bool editable) { m_nameIsEditable = editable; }
+	/// Determines whether the style name can be edited
+	bool GetNameIsEditable() const
+	{
+		return m_nameIsEditable;
+	}
+	void SetNameIsEditable(bool editable)
+	{
+		m_nameIsEditable = editable;
+	}
 
 ////@begin wxRichTextStylePage event handler declarations
 
-    /// wxEVT_UPDATE_UI event handler for ID_RICHTEXTSTYLEPAGE_NEXT_STYLE
-    void OnNextStyleUpdate( wxUpdateUIEvent& event );
+	/// wxEVT_UPDATE_UI event handler for ID_RICHTEXTSTYLEPAGE_NEXT_STYLE
+	void OnNextStyleUpdate( wxUpdateUIEvent& event );
 
 ////@end wxRichTextStylePage event handler declarations
 
 ////@begin wxRichTextStylePage member function declarations
 
-    /// Retrieves bitmap resources
-    wxBitmap GetBitmapResource( const wxString& name );
+	/// Retrieves bitmap resources
+	wxBitmap GetBitmapResource( const wxString& name );
 
-    /// Retrieves icon resources
-    wxIcon GetIconResource( const wxString& name );
+	/// Retrieves icon resources
+	wxIcon GetIconResource( const wxString& name );
 ////@end wxRichTextStylePage member function declarations
 
-    /// Should we show tooltips?
-    static bool ShowToolTips();
+	/// Should we show tooltips?
+	static bool ShowToolTips();
 
 ////@begin wxRichTextStylePage member variables
-    wxTextCtrl* m_styleName;
-    wxComboBox* m_basedOn;
-    wxComboBox* m_nextStyle;
-    /// Control identifiers
-    enum {
-        ID_RICHTEXTSTYLEPAGE = 10403,
-        ID_RICHTEXTSTYLEPAGE_STYLE_NAME = 10404,
-        ID_RICHTEXTSTYLEPAGE_BASED_ON = 10405,
-        ID_RICHTEXTSTYLEPAGE_NEXT_STYLE = 10406
-    };
+	wxTextCtrl* m_styleName;
+	wxComboBox* m_basedOn;
+	wxComboBox* m_nextStyle;
+	/// Control identifiers
+	enum
+	{
+		ID_RICHTEXTSTYLEPAGE = 10403,
+		ID_RICHTEXTSTYLEPAGE_STYLE_NAME = 10404,
+		ID_RICHTEXTSTYLEPAGE_BASED_ON = 10405,
+		ID_RICHTEXTSTYLEPAGE_NEXT_STYLE = 10406
+	};
 ////@end wxRichTextStylePage member variables
 
-    bool m_nameIsEditable;
+	bool m_nameIsEditable;
 };
 
 #endif
-    // _RICHTEXTSTYLEPAGE_H_
+// _RICHTEXTSTYLEPAGE_H_

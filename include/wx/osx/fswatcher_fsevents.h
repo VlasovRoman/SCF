@@ -37,49 +37,49 @@ WX_DECLARE_STRING_HASH_MAP(FSEventStreamRef, FSEventStreamRefMap);
  https://developer.apple.com/library/mac/documentation/Darwin/Reference/FSEvents_Ref/index.html
 */
 class WXDLLIMPEXP_BASE wxFsEventsFileSystemWatcher :
-        public wxKqueueFileSystemWatcher
+	public wxKqueueFileSystemWatcher
 {
 public:
-    wxFsEventsFileSystemWatcher();
+	wxFsEventsFileSystemWatcher();
 
-    wxFsEventsFileSystemWatcher(const wxFileName& path,
-                              int events = wxFSW_EVENT_ALL);
+	wxFsEventsFileSystemWatcher(const wxFileName& path,
+	                            int events = wxFSW_EVENT_ALL);
 
-    ~wxFsEventsFileSystemWatcher();
+	~wxFsEventsFileSystemWatcher();
 
-    // reimplement adding a tree so that it does not use
-    // kqueue at all
-    bool AddTree(const wxFileName& path, int events = wxFSW_EVENT_ALL,
-                const wxString& filespec = wxEmptyString) wxOVERRIDE;
+	// reimplement adding a tree so that it does not use
+	// kqueue at all
+	bool AddTree(const wxFileName& path, int events = wxFSW_EVENT_ALL,
+	             const wxString& filespec = wxEmptyString) wxOVERRIDE;
 
-    // reimplement removing a tree so that we
-    // cleanup the opened fs streams
-    bool RemoveTree(const wxFileName& path) wxOVERRIDE;
+	// reimplement removing a tree so that we
+	// cleanup the opened fs streams
+	bool RemoveTree(const wxFileName& path) wxOVERRIDE;
 
-    // reimplement remove all so that we cleanup
-    // watches from kqeueue and from FSEvents
-    bool RemoveAll() wxOVERRIDE;
+	// reimplement remove all so that we cleanup
+	// watches from kqeueue and from FSEvents
+	bool RemoveAll() wxOVERRIDE;
 
-    // post an file change event to the owner
-    void PostChange(const wxFileName& oldFileName,
-      const wxFileName& newFileName, int event);
+	// post an file change event to the owner
+	void PostChange(const wxFileName& oldFileName,
+	                const wxFileName& newFileName, int event);
 
-    // post a warning event to the owner
-    void PostWarning(wxFSWWarningType warning, const wxString& msg);
+	// post a warning event to the owner
+	void PostWarning(wxFSWWarningType warning, const wxString& msg);
 
-    // post an error event to the owner
-    void PostError(const wxString& msg);
+	// post an error event to the owner
+	void PostError(const wxString& msg);
 
-    // reimplement count to include the FS stream watches
-    int GetWatchedPathsCount() const;
+	// reimplement count to include the FS stream watches
+	int GetWatchedPathsCount() const;
 
-    // reimplement to include paths from FS stream watches
-    int GetWatchedPaths(wxArrayString* paths) const;
+	// reimplement to include paths from FS stream watches
+	int GetWatchedPaths(wxArrayString* paths) const;
 
 private:
 
-    // map of path => FSEventStreamRef
-    FSEventStreamRefMap m_streams;
+	// map of path => FSEventStreamRef
+	FSEventStreamRefMap m_streams;
 
 };
 

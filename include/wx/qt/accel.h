@@ -39,22 +39,25 @@ template < class T > class QList;
 class WXDLLIMPEXP_CORE wxAcceleratorTable : public wxObject
 {
 public:
-    wxAcceleratorTable();
-    wxAcceleratorTable(int n, const wxAcceleratorEntry entries[]);
+	wxAcceleratorTable();
+	wxAcceleratorTable(int n, const wxAcceleratorEntry entries[]);
 
-    // Implementation
-    QList < QShortcut* > *ConvertShortcutTable( QWidget *parent ) const;
+	// Implementation
+	QList < QShortcut* > *ConvertShortcutTable( QWidget *parent ) const;
 
-    bool Ok() const { return IsOk(); }
-    bool IsOk() const;
+	bool Ok() const
+	{
+		return IsOk();
+	}
+	bool IsOk() const;
 
 protected:
-    // ref counting code
-    virtual wxObjectRefData *CreateRefData() const;
-    virtual wxObjectRefData *CloneRefData(const wxObjectRefData *data) const;
-    
-private:  
-    wxDECLARE_DYNAMIC_CLASS(wxAcceleratorTable);
+	// ref counting code
+	virtual wxObjectRefData *CreateRefData() const;
+	virtual wxObjectRefData *CloneRefData(const wxObjectRefData *data) const;
+
+private:
+	wxDECLARE_DYNAMIC_CLASS(wxAcceleratorTable);
 };
 
 #endif // _WX_QT_ACCEL_H_

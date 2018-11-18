@@ -34,40 +34,52 @@ class WXDLLIMPEXP_FWD_ADV wxSplashScreenWindow;
  */
 
 class WXDLLIMPEXP_ADV wxSplashScreen: public wxFrame,
-                                      public wxEventFilter
+	public wxEventFilter
 {
 public:
-    // for RTTI macros only
-    wxSplashScreen() { Init(); }
-    wxSplashScreen(const wxBitmap& bitmap, long splashStyle, int milliseconds,
-                   wxWindow* parent, wxWindowID id,
-                   const wxPoint& pos = wxDefaultPosition,
-                   const wxSize& size = wxDefaultSize,
-                   long style = wxSIMPLE_BORDER|wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
-    virtual ~wxSplashScreen();
+	// for RTTI macros only
+	wxSplashScreen()
+	{
+		Init();
+	}
+	wxSplashScreen(const wxBitmap& bitmap, long splashStyle, int milliseconds,
+	               wxWindow* parent, wxWindowID id,
+	               const wxPoint& pos = wxDefaultPosition,
+	               const wxSize& size = wxDefaultSize,
+	               long style = wxSIMPLE_BORDER|wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
+	virtual ~wxSplashScreen();
 
-    void OnCloseWindow(wxCloseEvent& event);
-    void OnNotify(wxTimerEvent& event);
+	void OnCloseWindow(wxCloseEvent& event);
+	void OnNotify(wxTimerEvent& event);
 
-    long GetSplashStyle() const { return m_splashStyle; }
-    wxSplashScreenWindow* GetSplashWindow() const { return m_window; }
-    int GetTimeout() const { return m_milliseconds; }
+	long GetSplashStyle() const
+	{
+		return m_splashStyle;
+	}
+	wxSplashScreenWindow* GetSplashWindow() const
+	{
+		return m_window;
+	}
+	int GetTimeout() const
+	{
+		return m_milliseconds;
+	}
 
-    // Override wxEventFilter method to hide splash screen on any user input.
-    virtual int FilterEvent(wxEvent& event) wxOVERRIDE;
+	// Override wxEventFilter method to hide splash screen on any user input.
+	virtual int FilterEvent(wxEvent& event) wxOVERRIDE;
 
 protected:
-    // Common part of all ctors.
-    void Init();
+	// Common part of all ctors.
+	void Init();
 
-    wxSplashScreenWindow*   m_window;
-    long                    m_splashStyle;
-    int                     m_milliseconds;
-    wxTimer                 m_timer;
+	wxSplashScreenWindow*   m_window;
+	long                    m_splashStyle;
+	int                     m_milliseconds;
+	wxTimer                 m_timer;
 
-    wxDECLARE_DYNAMIC_CLASS(wxSplashScreen);
-    wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxSplashScreen);
+	wxDECLARE_DYNAMIC_CLASS(wxSplashScreen);
+	wxDECLARE_EVENT_TABLE();
+	wxDECLARE_NO_COPY_CLASS(wxSplashScreen);
 };
 
 /*
@@ -77,21 +89,27 @@ protected:
 class WXDLLIMPEXP_ADV wxSplashScreenWindow: public wxWindow
 {
 public:
-    wxSplashScreenWindow(const wxBitmap& bitmap, wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxNO_BORDER);
+	wxSplashScreenWindow(const wxBitmap& bitmap, wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxNO_BORDER);
 
-    void OnPaint(wxPaintEvent& event);
-    void OnEraseBackground(wxEraseEvent& event);
+	void OnPaint(wxPaintEvent& event);
+	void OnEraseBackground(wxEraseEvent& event);
 
-    void SetBitmap(const wxBitmap& bitmap) { m_bitmap = bitmap; }
-    wxBitmap& GetBitmap() { return m_bitmap; }
+	void SetBitmap(const wxBitmap& bitmap)
+	{
+		m_bitmap = bitmap;
+	}
+	wxBitmap& GetBitmap()
+	{
+		return m_bitmap;
+	}
 
 protected:
-    wxBitmap    m_bitmap;
+	wxBitmap    m_bitmap;
 
-    wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxSplashScreenWindow);
+	wxDECLARE_EVENT_TABLE();
+	wxDECLARE_NO_COPY_CLASS(wxSplashScreenWindow);
 };
 
 
 #endif
-    // _WX_SPLASH_H_
+// _WX_SPLASH_H_

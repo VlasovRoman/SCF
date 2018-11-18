@@ -24,100 +24,103 @@ class WXDLLIMPEXP_FWD_CORE wxButtonToolBarTool;
 class WXDLLIMPEXP_CORE wxButtonToolBar : public wxToolBarBase
 {
 public:
-    // construction/destruction
-    wxButtonToolBar() { Init(); }
-    wxButtonToolBar(wxWindow *parent,
-              wxWindowID id,
-              const wxPoint& pos = wxDefaultPosition,
-              const wxSize& size = wxDefaultSize,
-              long style = 0,
-              const wxString& name = wxToolBarNameStr)
-    {
-        Init();
+	// construction/destruction
+	wxButtonToolBar()
+	{
+		Init();
+	}
+	wxButtonToolBar(wxWindow *parent,
+	                wxWindowID id,
+	                const wxPoint& pos = wxDefaultPosition,
+	                const wxSize& size = wxDefaultSize,
+	                long style = 0,
+	                const wxString& name = wxToolBarNameStr)
+	{
+		Init();
 
-        Create(parent, id, pos, size, style, name);
-    }
+		Create(parent, id, pos, size, style, name);
+	}
 
-    bool Create( wxWindow *parent,
-                 wxWindowID id,
-                 const wxPoint& pos = wxDefaultPosition,
-                 const wxSize& size = wxDefaultSize,
-                 long style = 0,
-                 const wxString& name = wxToolBarNameStr );
+	bool Create( wxWindow *parent,
+	             wxWindowID id,
+	             const wxPoint& pos = wxDefaultPosition,
+	             const wxSize& size = wxDefaultSize,
+	             long style = 0,
+	             const wxString& name = wxToolBarNameStr );
 
-    virtual ~wxButtonToolBar();
+	virtual ~wxButtonToolBar();
 
-    virtual bool Realize() wxOVERRIDE;
+	virtual bool Realize() wxOVERRIDE;
 
-    virtual void SetToolShortHelp(int id, const wxString& helpString) wxOVERRIDE;
-    virtual wxToolBarToolBase *FindToolForPosition(wxCoord x, wxCoord y) const wxOVERRIDE;
+	virtual void SetToolShortHelp(int id, const wxString& helpString) wxOVERRIDE;
+	virtual wxToolBarToolBase *FindToolForPosition(wxCoord x, wxCoord y) const wxOVERRIDE;
 
 protected:
-    // common part of all ctors
-    void Init();
+	// common part of all ctors
+	void Init();
 
-    // implement base class pure virtuals
-    virtual bool DoInsertTool(size_t pos, wxToolBarToolBase *tool) wxOVERRIDE;
-    virtual bool DoDeleteTool(size_t pos, wxToolBarToolBase *tool) wxOVERRIDE;
+	// implement base class pure virtuals
+	virtual bool DoInsertTool(size_t pos, wxToolBarToolBase *tool) wxOVERRIDE;
+	virtual bool DoDeleteTool(size_t pos, wxToolBarToolBase *tool) wxOVERRIDE;
 
-    virtual void DoEnableTool(wxToolBarToolBase *tool, bool enable) wxOVERRIDE;
-    virtual void DoToggleTool(wxToolBarToolBase *tool, bool toggle) wxOVERRIDE;
-    virtual void DoSetToggle(wxToolBarToolBase *tool, bool toggle) wxOVERRIDE;
+	virtual void DoEnableTool(wxToolBarToolBase *tool, bool enable) wxOVERRIDE;
+	virtual void DoToggleTool(wxToolBarToolBase *tool, bool toggle) wxOVERRIDE;
+	virtual void DoSetToggle(wxToolBarToolBase *tool, bool toggle) wxOVERRIDE;
 
-    virtual wxToolBarToolBase *CreateTool(int id,
-                                          const wxString& label,
-                                          const wxBitmap& bmpNormal,
-                                          const wxBitmap& bmpDisabled,
-                                          wxItemKind kind,
-                                          wxObject *clientData,
-                                          const wxString& shortHelp,
-                                          const wxString& longHelp) wxOVERRIDE;
-    virtual wxToolBarToolBase *CreateTool(wxControl *control,
-                                          const wxString& label) wxOVERRIDE;
+	virtual wxToolBarToolBase *CreateTool(int id,
+	                                      const wxString& label,
+	                                      const wxBitmap& bmpNormal,
+	                                      const wxBitmap& bmpDisabled,
+	                                      wxItemKind kind,
+	                                      wxObject *clientData,
+	                                      const wxString& shortHelp,
+	                                      const wxString& longHelp) wxOVERRIDE;
+	virtual wxToolBarToolBase *CreateTool(wxControl *control,
+	                                      const wxString& label) wxOVERRIDE;
 
-    virtual wxSize DoGetBestClientSize() const wxOVERRIDE;
+	virtual wxSize DoGetBestClientSize() const wxOVERRIDE;
 
-    // calculate layout
-    void DoLayout();
+	// calculate layout
+	void DoLayout();
 
-    // get the bounding rect for the given tool
-    wxRect GetToolRect(wxToolBarToolBase *tool) const;
+	// get the bounding rect for the given tool
+	wxRect GetToolRect(wxToolBarToolBase *tool) const;
 
-    // get the rect limits depending on the orientation: top/bottom for a
-    // vertical toolbar, left/right for a horizontal one
-    void GetRectLimits(const wxRect& rect, wxCoord *start, wxCoord *end) const;
+	// get the rect limits depending on the orientation: top/bottom for a
+	// vertical toolbar, left/right for a horizontal one
+	void GetRectLimits(const wxRect& rect, wxCoord *start, wxCoord *end) const;
 
-    // receives button commands
-    void OnCommand(wxCommandEvent& event);
+	// receives button commands
+	void OnCommand(wxCommandEvent& event);
 
-    // paints a border
-    void OnPaint(wxPaintEvent& event);
+	// paints a border
+	void OnPaint(wxPaintEvent& event);
 
-    // detects mouse clicks outside buttons
-    void OnLeftUp(wxMouseEvent& event);
-
-private:
-    // have we calculated the positions of our tools?
-    bool m_needsLayout;
-
-    // the width of a separator
-    wxCoord m_widthSeparator;
-
-    // the total size of all toolbar elements
-    wxCoord m_maxWidth,
-            m_maxHeight;
-
-    // the height of a label
-    int m_labelHeight;
-
-    // the space above the label
-    int m_labelMargin;
+	// detects mouse clicks outside buttons
+	void OnLeftUp(wxMouseEvent& event);
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxButtonToolBar);
-    wxDECLARE_EVENT_TABLE();
+	// have we calculated the positions of our tools?
+	bool m_needsLayout;
+
+	// the width of a separator
+	wxCoord m_widthSeparator;
+
+	// the total size of all toolbar elements
+	wxCoord m_maxWidth,
+	        m_maxHeight;
+
+	// the height of a label
+	int m_labelHeight;
+
+	// the space above the label
+	int m_labelMargin;
+
+private:
+	wxDECLARE_DYNAMIC_CLASS(wxButtonToolBar);
+	wxDECLARE_EVENT_TABLE();
 };
 
 #endif
- // _WX_BUTTONBAR_H_
+// _WX_BUTTONBAR_H_
 

@@ -16,13 +16,19 @@
 class wxRange
 {
 public :
-    wxRange(): m_minVal(0), m_maxVal(0) {}
-    wxRange( int minVal, int maxVal) : m_minVal(minVal), m_maxVal(maxVal) {}
-    int GetMin() const { return m_minVal; }
-    int GetMax() const { return m_maxVal; }
+	wxRange(): m_minVal(0), m_maxVal(0) {}
+	wxRange( int minVal, int maxVal) : m_minVal(minVal), m_maxVal(maxVal) {}
+	int GetMin() const
+	{
+		return m_minVal;
+	}
+	int GetMax() const
+	{
+		return m_maxVal;
+	}
 private :
-    int m_minVal;
-    int m_maxVal;
+	int m_minVal;
+	int m_maxVal;
 };
 
 #endif // _WX_RANGE_H_

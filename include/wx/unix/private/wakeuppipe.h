@@ -23,39 +23,42 @@
 class wxWakeUpPipe : public wxEventLoopSourceHandler
 {
 public:
-    // Create and initialize the pipe.
-    //
-    // It's the callers responsibility to add the read end of this pipe,
-    // returned by GetReadFd(), to the code blocking on input.
-    wxWakeUpPipe();
+	// Create and initialize the pipe.
+	//
+	// It's the callers responsibility to add the read end of this pipe,
+	// returned by GetReadFd(), to the code blocking on input.
+	wxWakeUpPipe();
 
-    // Wake up the blocking operation involving this pipe.
-    //
-    // It simply writes to the write end of the pipe.
-    //
-    // As indicated by its name, this method does no locking and so can be
-    // called only from the main thread.
-    void WakeUpNoLock();
+	// Wake up the blocking operation involving this pipe.
+	//
+	// It simply writes to the write end of the pipe.
+	//
+	// As indicated by its name, this method does no locking and so can be
+	// called only from the main thread.
+	void WakeUpNoLock();
 
-    // Same as WakeUp() but without locking.
+	// Same as WakeUp() but without locking.
 
-    // Return the read end of the pipe.
-    int GetReadFd() { return m_pipe[wxPipe::Read]; }
+	// Return the read end of the pipe.
+	int GetReadFd()
+	{
+		return m_pipe[wxPipe::Read];
+	}
 
 
-    // Implement wxEventLoopSourceHandler pure virtual methods
-    virtual void OnReadWaiting() wxOVERRIDE;
-    virtual void OnWriteWaiting() wxOVERRIDE { }
-    virtual void OnExceptionWaiting() wxOVERRIDE { }
+	// Implement wxEventLoopSourceHandler pure virtual methods
+	virtual void OnReadWaiting() wxOVERRIDE;
+	virtual void OnWriteWaiting() wxOVERRIDE { }
+	virtual void OnExceptionWaiting() wxOVERRIDE { }
 
 private:
-    wxPipe m_pipe;
+	wxPipe m_pipe;
 
-    // This flag is set to true after writing to the pipe and reset to false
-    // after reading from it in the main thread. Having it allows us to avoid
-    // overflowing the pipe with too many writes if the main thread can't keep
-    // up with reading from it.
-    bool m_pipeIsEmpty;
+	// This flag is set to true after writing to the pipe and reset to false
+	// after reading from it in the main thread. Having it allows us to avoid
+	// overflowing the pipe with too many writes if the main thread can't keep
+	// up with reading from it.
+	bool m_pipeIsEmpty;
 };
 
 // ----------------------------------------------------------------------------
@@ -69,27 +72,27 @@ class wxWakeUpPipeMT : public wxWakeUpPipe
 {
 #if wxUSE_THREADS
 public:
-    wxWakeUpPipeMT() { }
+	wxWakeUpPipeMT() { }
 
-    // Thread-safe wrapper around WakeUpNoLock(): can be called from another
-    // thread to wake up the main one.
-    void WakeUp()
-    {
-        wxCriticalSectionLocker lock(m_pipeLock);
+	// Thread-safe wrapper around WakeUpNoLock(): can be called from another
+	// thread to wake up the main one.
+	void WakeUp()
+	{
+		wxCriticalSectionLocker lock(m_pipeLock);
 
-        WakeUpNoLock();
-    }
+		WakeUpNoLock();
+	}
 
-    virtual void OnReadWaiting() wxOVERRIDE
-    {
-        wxCriticalSectionLocker lock(m_pipeLock);
+	virtual void OnReadWaiting() wxOVERRIDE
+	{
+		wxCriticalSectionLocker lock(m_pipeLock);
 
-        wxWakeUpPipe::OnReadWaiting();
-    }
+		wxWakeUpPipe::OnReadWaiting();
+	}
 
 private:
-    // Protects access to m_pipeIsEmpty.
-    wxCriticalSection m_pipeLock;
+	// Protects access to m_pipeIsEmpty.
+	wxCriticalSection m_pipeLock;
 
 #endif // wxUSE_THREADS
 };

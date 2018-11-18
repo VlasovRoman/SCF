@@ -19,7 +19,7 @@ wxGCC_WARNING_SUPPRESS(deprecated-declarations)
 
 static inline gboolean wx_gtk_text_iter_starts_tag(const GtkTextIter* iter, GtkTextTag* tag)
 {
-    return gtk_text_iter_begins_tag(iter, tag);
+	return gtk_text_iter_begins_tag(iter, tag);
 }
 #define gtk_text_iter_starts_tag wx_gtk_text_iter_starts_tag
 
@@ -30,13 +30,13 @@ static inline gboolean wx_gtk_text_iter_starts_tag(const GtkTextIter* iter, GtkT
 
 static inline void wx_gtk_widget_set_margin_start(GtkWidget* widget, gint margin)
 {
-    gtk_widget_set_margin_left(widget, margin);
+	gtk_widget_set_margin_left(widget, margin);
 }
 #define gtk_widget_set_margin_start wx_gtk_widget_set_margin_start
 
 static inline void wx_gtk_widget_set_margin_end(GtkWidget* widget, gint margin)
 {
-    gtk_widget_set_margin_right(widget, margin);
+	gtk_widget_set_margin_right(widget, margin);
 }
 #define gtk_widget_set_margin_end wx_gtk_widget_set_margin_end
 
@@ -49,15 +49,15 @@ wxGCC_WARNING_RESTORE()
 static inline bool wx_is_at_least_gtk3(int /* minor */)
 {
 #ifdef __WXGTK4__
-    return true;
+	return true;
 #else
-    return false;
+	return false;
 #endif
 }
 #else
 static inline bool wx_is_at_least_gtk3(int minor)
 {
-    return gtk_check_version(3, minor, 0) == NULL;
+	return gtk_check_version(3, minor, 0) == NULL;
 }
 #endif
 

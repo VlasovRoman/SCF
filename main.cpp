@@ -73,14 +73,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	SystemParametersInfoW(SPI_GETFILTERKEYS, sizeof(FILTERKEYS), &filterKeys, 0);
 
 	//checkSystemInfo(0); //more system info checks and sets the values
-	CScApp__vftable vft;
+	CScApp vft;
 	Moho obj(vft); //strings as the name of the game, pobably an entry into engine's class constructor.
 
 	if (lstrcmp(lpCmdLine, "/purgecache") == 0)
 	{
 		obj.USER_PurgeAppCacheDir(); //delete the cache files if those are present, maybe logs too
 	}
-	
+
 	obj.WIN_AppExecute(&vft);
 
 	//LOBYTE(v19) = 2;

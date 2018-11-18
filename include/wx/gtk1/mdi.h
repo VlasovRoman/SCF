@@ -25,51 +25,57 @@ typedef struct _GtkNotebook GtkNotebook;
 class WXDLLIMPEXP_CORE wxMDIParentFrame : public wxMDIParentFrameBase
 {
 public:
-    wxMDIParentFrame() { Init(); }
-    wxMDIParentFrame(wxWindow *parent,
-                     wxWindowID id,
-                     const wxString& title,
-                     const wxPoint& pos = wxDefaultPosition,
-                     const wxSize& size = wxDefaultSize,
-                     long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
-                     const wxString& name = wxFrameNameStr)
-    {
-        Init();
+	wxMDIParentFrame()
+	{
+		Init();
+	}
+	wxMDIParentFrame(wxWindow *parent,
+	                 wxWindowID id,
+	                 const wxString& title,
+	                 const wxPoint& pos = wxDefaultPosition,
+	                 const wxSize& size = wxDefaultSize,
+	                 long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
+	                 const wxString& name = wxFrameNameStr)
+	{
+		Init();
 
-        (void)Create(parent, id, title, pos, size, style, name);
-    }
+		(void)Create(parent, id, title, pos, size, style, name);
+	}
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxString& title,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
-                const wxString& name = wxFrameNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxString& title,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
+	            const wxString& name = wxFrameNameStr);
 
-    // we don't store the active child in m_currentChild unlike the base class
-    // version so override this method to find it dynamically
-    virtual wxMDIChildFrame *GetActiveChild() const;
+	// we don't store the active child in m_currentChild unlike the base class
+	// version so override this method to find it dynamically
+	virtual wxMDIChildFrame *GetActiveChild() const;
 
-    // implement base class pure virtuals
-    // ----------------------------------
+	// implement base class pure virtuals
+	// ----------------------------------
 
-    virtual void ActivateNext();
-    virtual void ActivatePrevious();
+	virtual void ActivateNext();
+	virtual void ActivatePrevious();
 
-    static bool IsTDI() { return true; }
+	static bool IsTDI()
+	{
+		return true;
+	}
 
-    // implementation
+	// implementation
 
-    bool                m_justInserted;
+	bool                m_justInserted;
 
-    virtual void GtkOnSize( int x, int y, int width, int height );
-    virtual void OnInternalIdle();
+	virtual void GtkOnSize( int x, int y, int width, int height );
+	virtual void OnInternalIdle();
 
 private:
-    void Init();
+	void Init();
 
-    wxDECLARE_DYNAMIC_CLASS(wxMDIParentFrame);
+	wxDECLARE_DYNAMIC_CLASS(wxMDIParentFrame);
 };
 
 //-----------------------------------------------------------------------------
@@ -79,53 +85,56 @@ private:
 class WXDLLIMPEXP_CORE wxMDIChildFrame : public wxTDIChildFrame
 {
 public:
-    wxMDIChildFrame() { Init(); }
-    wxMDIChildFrame(wxMDIParentFrame *parent,
-                    wxWindowID id,
-                    const wxString& title,
-                    const wxPoint& pos = wxDefaultPosition,
-                    const wxSize& size = wxDefaultSize,
-                    long style = wxDEFAULT_FRAME_STYLE,
-                    const wxString& name = wxFrameNameStr)
-    {
-        Init();
+	wxMDIChildFrame()
+	{
+		Init();
+	}
+	wxMDIChildFrame(wxMDIParentFrame *parent,
+	                wxWindowID id,
+	                const wxString& title,
+	                const wxPoint& pos = wxDefaultPosition,
+	                const wxSize& size = wxDefaultSize,
+	                long style = wxDEFAULT_FRAME_STYLE,
+	                const wxString& name = wxFrameNameStr)
+	{
+		Init();
 
-        Create(parent, id, title, pos, size, style, name);
-    }
+		Create(parent, id, title, pos, size, style, name);
+	}
 
-    bool Create(wxMDIParentFrame *parent,
-                wxWindowID id,
-                const wxString& title,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE,
-                const wxString& name = wxFrameNameStr);
+	bool Create(wxMDIParentFrame *parent,
+	            wxWindowID id,
+	            const wxString& title,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxDEFAULT_FRAME_STYLE,
+	            const wxString& name = wxFrameNameStr);
 
-    virtual ~wxMDIChildFrame();
+	virtual ~wxMDIChildFrame();
 
-    virtual void SetMenuBar( wxMenuBar *menu_bar );
-    virtual wxMenuBar *GetMenuBar() const;
+	virtual void SetMenuBar( wxMenuBar *menu_bar );
+	virtual wxMenuBar *GetMenuBar() const;
 
-    virtual void Activate();
+	virtual void Activate();
 
-    virtual void SetTitle(const wxString& title);
+	virtual void SetTitle(const wxString& title);
 
-    // implementation
+	// implementation
 
-    void OnActivate( wxActivateEvent& event );
-    void OnMenuHighlight( wxMenuEvent& event );
+	void OnActivate( wxActivateEvent& event );
+	void OnMenuHighlight( wxMenuEvent& event );
 
-    wxMenuBar         *m_menuBar;
-    GtkNotebookPage   *m_page;
-    bool               m_justInserted;
+	wxMenuBar         *m_menuBar;
+	GtkNotebookPage   *m_page;
+	bool               m_justInserted;
 
 private:
-    void Init();
+	void Init();
 
-    GtkNotebook *GTKGetNotebook() const;
+	GtkNotebook *GTKGetNotebook() const;
 
-    wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS(wxMDIChildFrame);
+	wxDECLARE_EVENT_TABLE();
+	wxDECLARE_DYNAMIC_CLASS(wxMDIChildFrame);
 };
 
 //-----------------------------------------------------------------------------
@@ -135,13 +144,13 @@ private:
 class WXDLLIMPEXP_CORE wxMDIClientWindow : public wxMDIClientWindowBase
 {
 public:
-    wxMDIClientWindow() { }
+	wxMDIClientWindow() { }
 
-    virtual bool CreateClient(wxMDIParentFrame *parent,
-                              long style = wxVSCROLL | wxHSCROLL);
+	virtual bool CreateClient(wxMDIParentFrame *parent,
+	                          long style = wxVSCROLL | wxHSCROLL);
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxMDIClientWindow);
+	wxDECLARE_DYNAMIC_CLASS(wxMDIClientWindow);
 };
 
 #endif // _WX_GTK1_MDI_H_

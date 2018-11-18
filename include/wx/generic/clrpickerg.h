@@ -20,62 +20,65 @@
 //-----------------------------------------------------------------------------
 
 class WXDLLIMPEXP_CORE wxGenericColourButton : public wxBitmapButton,
-                                               public wxColourPickerWidgetBase
+	public wxColourPickerWidgetBase
 {
 public:
-    wxGenericColourButton() {}
-    wxGenericColourButton(wxWindow *parent,
-                          wxWindowID id,
-                          const wxColour& col = *wxBLACK,
-                          const wxPoint& pos = wxDefaultPosition,
-                          const wxSize& size = wxDefaultSize,
-                          long style = wxCLRBTN_DEFAULT_STYLE,
-                          const wxValidator& validator = wxDefaultValidator,
-                          const wxString& name = wxColourPickerWidgetNameStr)
-    {
-        Create(parent, id, col, pos, size, style, validator, name);
-    }
+	wxGenericColourButton() {}
+	wxGenericColourButton(wxWindow *parent,
+	                      wxWindowID id,
+	                      const wxColour& col = *wxBLACK,
+	                      const wxPoint& pos = wxDefaultPosition,
+	                      const wxSize& size = wxDefaultSize,
+	                      long style = wxCLRBTN_DEFAULT_STYLE,
+	                      const wxValidator& validator = wxDefaultValidator,
+	                      const wxString& name = wxColourPickerWidgetNameStr)
+	{
+		Create(parent, id, col, pos, size, style, validator, name);
+	}
 
-    virtual ~wxGenericColourButton() {}
+	virtual ~wxGenericColourButton() {}
 
 
 public:     // API extensions specific for wxGenericColourButton
 
-    // user can override this to init colour data in a different way
-    virtual void InitColourData();
+	// user can override this to init colour data in a different way
+	virtual void InitColourData();
 
-    // returns the colour data shown in wxColourDialog
-    wxColourData *GetColourData() { return &ms_data; }
+	// returns the colour data shown in wxColourDialog
+	wxColourData *GetColourData()
+	{
+		return &ms_data;
+	}
 
 
 public:
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxColour& col = *wxBLACK,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxCLRBTN_DEFAULT_STYLE,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxColourPickerWidgetNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxColour& col = *wxBLACK,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxCLRBTN_DEFAULT_STYLE,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxColourPickerWidgetNameStr);
 
-    void OnButtonClick(wxCommandEvent &);
+	void OnButtonClick(wxCommandEvent &);
 
 
 protected:
-    wxBitmap    m_bitmap;
+	wxBitmap    m_bitmap;
 
-    wxSize DoGetBestSize() const wxOVERRIDE;
+	wxSize DoGetBestSize() const wxOVERRIDE;
 
-    void UpdateColour() wxOVERRIDE;
+	void UpdateColour() wxOVERRIDE;
 
-    // the colour data shown in wxColourPickerCtrlGeneric
-    // controls. This member is static so that all colour pickers
-    // in the program share the same set of custom colours.
-    static wxColourData ms_data;
+	// the colour data shown in wxColourPickerCtrlGeneric
+	// controls. This member is static so that all colour pickers
+	// in the program share the same set of custom colours.
+	static wxColourData ms_data;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxGenericColourButton);
+	wxDECLARE_DYNAMIC_CLASS(wxGenericColourButton);
 };
 
 

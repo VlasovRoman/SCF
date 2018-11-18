@@ -13,36 +13,36 @@ class QRadioButton;
 class WXDLLIMPEXP_CORE wxRadioButton : public wxControl
 {
 public:
-    wxRadioButton();
-    wxRadioButton( wxWindow *parent,
-                   wxWindowID id,
-                   const wxString& label,
-                   const wxPoint& pos = wxDefaultPosition,
-                   const wxSize& size = wxDefaultSize,
-                   long style = 0,
-                   const wxValidator& validator = wxDefaultValidator,
-                   const wxString& name = wxRadioButtonNameStr );
+	wxRadioButton();
+	wxRadioButton( wxWindow *parent,
+	               wxWindowID id,
+	               const wxString& label,
+	               const wxPoint& pos = wxDefaultPosition,
+	               const wxSize& size = wxDefaultSize,
+	               long style = 0,
+	               const wxValidator& validator = wxDefaultValidator,
+	               const wxString& name = wxRadioButtonNameStr );
 
-    bool Create( wxWindow *parent,
-                 wxWindowID id,
-                 const wxString& label,
-                 const wxPoint& pos = wxDefaultPosition,
-                 const wxSize& size = wxDefaultSize,
-                 long style = 0,
-                 const wxValidator& validator = wxDefaultValidator,
-                 const wxString& name = wxRadioButtonNameStr );
+	bool Create( wxWindow *parent,
+	             wxWindowID id,
+	             const wxString& label,
+	             const wxPoint& pos = wxDefaultPosition,
+	             const wxSize& size = wxDefaultSize,
+	             long style = 0,
+	             const wxValidator& validator = wxDefaultValidator,
+	             const wxString& name = wxRadioButtonNameStr );
 
-    virtual void SetValue(bool value);
-    virtual bool GetValue() const;
+	virtual void SetValue(bool value);
+	virtual bool GetValue() const;
 
-    virtual QWidget *GetHandle() const;
+	virtual QWidget *GetHandle() const;
 
 protected:
 
 private:
-    QRadioButton *m_qtRadioButton;
+	QRadioButton *m_qtRadioButton;
 
-    wxDECLARE_DYNAMIC_CLASS( wxRadioButton );
+	wxDECLARE_DYNAMIC_CLASS( wxRadioButton );
 };
 
 #endif // _WX_QT_RADIOBUT_H_

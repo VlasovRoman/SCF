@@ -25,34 +25,40 @@
 class WXDLLIMPEXP_ADV wxActivityIndicatorBase : public wxControl
 {
 public:
-    // Start or stop the activity animation (it is stopped initially).
-    virtual void Start() = 0;
-    virtual void Stop() = 0;
+	// Start or stop the activity animation (it is stopped initially).
+	virtual void Start() = 0;
+	virtual void Stop() = 0;
 
-    // Return true if the control is currently showing activity.
-    virtual bool IsRunning() const = 0;
+	// Return true if the control is currently showing activity.
+	virtual bool IsRunning() const = 0;
 
-    // Override some base class virtual methods.
-    virtual bool AcceptsFocus() const wxOVERRIDE { return false; }
-    virtual bool HasTransparentBackground() wxOVERRIDE { return true; }
+	// Override some base class virtual methods.
+	virtual bool AcceptsFocus() const wxOVERRIDE
+	{
+		return false;
+	}
+	virtual bool HasTransparentBackground() wxOVERRIDE { return true; }
 
 protected:
-    // choose the default border for this window
-    virtual wxBorder GetDefaultBorder() const wxOVERRIDE { return wxBORDER_NONE; }
+	// choose the default border for this window
+	virtual wxBorder GetDefaultBorder() const wxOVERRIDE
+	{
+		return wxBORDER_NONE;
+	}
 };
 
 #ifndef __WXUNIVERSAL__
 #if defined(__WXGTK220__)
-    #define wxHAS_NATIVE_ACTIVITYINDICATOR
-    #include "wx/gtk/activityindicator.h"
+#define wxHAS_NATIVE_ACTIVITYINDICATOR
+#include "wx/gtk/activityindicator.h"
 #elif defined(__WXOSX_COCOA__)
-    #define wxHAS_NATIVE_ACTIVITYINDICATOR
-    #include "wx/osx/activityindicator.h"
+#define wxHAS_NATIVE_ACTIVITYINDICATOR
+#include "wx/osx/activityindicator.h"
 #endif
 #endif // !__WXUNIVERSAL__
 
 #ifndef wxHAS_NATIVE_ACTIVITYINDICATOR
-    #include "wx/generic/activityindicator.h"
+#include "wx/generic/activityindicator.h"
 #endif
 
 #endif // wxUSE_ACTIVITYINDICATOR

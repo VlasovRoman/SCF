@@ -17,12 +17,12 @@
 class WXDLLIMPEXP_XRC wxFileCtrlXmlHandler : public wxXmlResourceHandler
 {
 public:
-    wxFileCtrlXmlHandler();
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	wxFileCtrlXmlHandler();
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxFileCtrlXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxFileCtrlXmlHandler);
 };
 
 #endif // wxUSE_XRC && wxUSE_FILECTRL

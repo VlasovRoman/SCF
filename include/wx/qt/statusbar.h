@@ -18,36 +18,39 @@ template < class T > class QList;
 class WXDLLIMPEXP_CORE wxStatusBar : public wxStatusBarBase
 {
 public:
-    wxStatusBar();
-    wxStatusBar(wxWindow *parent, wxWindowID winid = wxID_ANY,
-                long style = wxSTB_DEFAULT_STYLE,
-                const wxString& name = wxStatusBarNameStr);
+	wxStatusBar();
+	wxStatusBar(wxWindow *parent, wxWindowID winid = wxID_ANY,
+	            long style = wxSTB_DEFAULT_STYLE,
+	            const wxString& name = wxStatusBarNameStr);
 
-    bool Create(wxWindow *parent, wxWindowID winid = wxID_ANY,
-                long style = wxSTB_DEFAULT_STYLE,
-                const wxString& name = wxStatusBarNameStr);
+	bool Create(wxWindow *parent, wxWindowID winid = wxID_ANY,
+	            long style = wxSTB_DEFAULT_STYLE,
+	            const wxString& name = wxStatusBarNameStr);
 
-    virtual bool GetFieldRect(int i, wxRect& rect) const;
-    virtual void SetMinHeight(int height);
-    virtual int GetBorderX() const;
-    virtual int GetBorderY() const;
-    virtual void Refresh( bool eraseBackground = true,
-                          const wxRect *rect = (const wxRect *) NULL );
+	virtual bool GetFieldRect(int i, wxRect& rect) const;
+	virtual void SetMinHeight(int height);
+	virtual int GetBorderX() const;
+	virtual int GetBorderY() const;
+	virtual void Refresh( bool eraseBackground = true,
+	                      const wxRect *rect = (const wxRect *) NULL );
 
-    QStatusBar *GetQStatusBar() const { return m_qtStatusBar; }
-    QWidget *GetHandle() const;
-    
+	QStatusBar *GetQStatusBar() const
+	{
+		return m_qtStatusBar;
+	}
+	QWidget *GetHandle() const;
+
 protected:
-    virtual void DoUpdateStatusText(int number);
+	virtual void DoUpdateStatusText(int number);
 
 private:
-    void Init();
-    void UpdateFields();
+	void Init();
+	void UpdateFields();
 
-    QStatusBar *m_qtStatusBar;
-    QList< QLabel* > *m_qtPanes;
+	QStatusBar *m_qtStatusBar;
+	QList< QLabel* > *m_qtPanes;
 
-    wxDECLARE_DYNAMIC_CLASS(wxStatusBar);
+	wxDECLARE_DYNAMIC_CLASS(wxStatusBar);
 };
 
 

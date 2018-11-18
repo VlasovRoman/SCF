@@ -17,59 +17,62 @@
 // Under most ports, wxCursor derives directly from wxGDIObject, but in wxMSW
 // there is an intermediate wxGDIImage class.
 #ifdef __WXMSW__
-    #include "wx/msw/gdiimage.h"
+#include "wx/msw/gdiimage.h"
 #else
-    typedef wxGDIObject wxGDIImage;
+typedef wxGDIObject wxGDIImage;
 #endif
 
 class WXDLLIMPEXP_CORE wxCursorBase : public wxGDIImage
 {
 public:
-/*
-    wxCursor classes should provide the following ctors:
+	/*
+	    wxCursor classes should provide the following ctors:
 
-    wxCursor();
-    wxCursor(const wxImage& image);
-    wxCursor(const wxString& name,
-             wxBitmapType type = wxCURSOR_DEFAULT_TYPE,
-             int hotSpotX = 0, int hotSpotY = 0);
-    wxCursor(wxStockCursor id) { InitFromStock(id); }
-#if WXWIN_COMPATIBILITY_2_8
-    wxCursor(int id) { InitFromStock((wxStockCursor)id); }
-#endif
-*/
+	    wxCursor();
+	    wxCursor(const wxImage& image);
+	    wxCursor(const wxString& name,
+	             wxBitmapType type = wxCURSOR_DEFAULT_TYPE,
+	             int hotSpotX = 0, int hotSpotY = 0);
+	    wxCursor(wxStockCursor id) { InitFromStock(id); }
+	#if WXWIN_COMPATIBILITY_2_8
+	    wxCursor(int id) { InitFromStock((wxStockCursor)id); }
+	#endif
+	*/
 
-    virtual wxPoint GetHotSpot() const { return wxDefaultPosition; }
+	virtual wxPoint GetHotSpot() const
+	{
+		return wxDefaultPosition;
+	}
 };
 
 #if defined(__WXMSW__)
-    #define wxCURSOR_DEFAULT_TYPE   wxBITMAP_TYPE_CUR_RESOURCE
-    #include "wx/msw/cursor.h"
+#define wxCURSOR_DEFAULT_TYPE   wxBITMAP_TYPE_CUR_RESOURCE
+#include "wx/msw/cursor.h"
 #elif defined(__WXMOTIF__)
-    #define wxCURSOR_DEFAULT_TYPE   wxBITMAP_TYPE_XBM
-    #include "wx/motif/cursor.h"
+#define wxCURSOR_DEFAULT_TYPE   wxBITMAP_TYPE_XBM
+#include "wx/motif/cursor.h"
 #elif defined(__WXGTK20__)
-    #ifdef __WINDOWS__
-        #define wxCURSOR_DEFAULT_TYPE   wxBITMAP_TYPE_CUR_RESOURCE
-    #else
-        #define wxCURSOR_DEFAULT_TYPE   wxBITMAP_TYPE_XPM
-    #endif
-    #include "wx/gtk/cursor.h"
+#ifdef __WINDOWS__
+#define wxCURSOR_DEFAULT_TYPE   wxBITMAP_TYPE_CUR_RESOURCE
+#else
+#define wxCURSOR_DEFAULT_TYPE   wxBITMAP_TYPE_XPM
+#endif
+#include "wx/gtk/cursor.h"
 #elif defined(__WXGTK__)
-    #define wxCURSOR_DEFAULT_TYPE   wxBITMAP_TYPE_XPM
-    #include "wx/gtk1/cursor.h"
+#define wxCURSOR_DEFAULT_TYPE   wxBITMAP_TYPE_XPM
+#include "wx/gtk1/cursor.h"
 #elif defined(__WXX11__)
-    #define wxCURSOR_DEFAULT_TYPE   wxBITMAP_TYPE_XPM
-    #include "wx/x11/cursor.h"
+#define wxCURSOR_DEFAULT_TYPE   wxBITMAP_TYPE_XPM
+#include "wx/x11/cursor.h"
 #elif defined(__WXDFB__)
-    #define wxCURSOR_DEFAULT_TYPE   wxBITMAP_TYPE_CUR_RESOURCE
-    #include "wx/dfb/cursor.h"
+#define wxCURSOR_DEFAULT_TYPE   wxBITMAP_TYPE_CUR_RESOURCE
+#include "wx/dfb/cursor.h"
 #elif defined(__WXMAC__)
-    #define wxCURSOR_DEFAULT_TYPE   wxBITMAP_TYPE_MACCURSOR_RESOURCE
-    #include "wx/osx/cursor.h"
+#define wxCURSOR_DEFAULT_TYPE   wxBITMAP_TYPE_MACCURSOR_RESOURCE
+#include "wx/osx/cursor.h"
 #elif defined(__WXQT__)
-    #define wxCURSOR_DEFAULT_TYPE   wxBITMAP_TYPE_CUR
-    #include "wx/qt/cursor.h"
+#define wxCURSOR_DEFAULT_TYPE   wxBITMAP_TYPE_CUR
+#include "wx/qt/cursor.h"
 #endif
 
 #include "wx/utils.h"
@@ -94,20 +97,20 @@ public:
 class wxBusyCursorSuspender
 {
 public:
-    wxBusyCursorSuspender()
-    {
-        if( wxIsBusy() )
-        {
-            wxSetCursor( wxBusyCursor::GetStoredCursor() );
-        }
-    }
-    ~wxBusyCursorSuspender()
-    {
-        if( wxIsBusy() )
-        {
-            wxSetCursor( wxBusyCursor::GetBusyCursor() );
-        }
-    }
+	wxBusyCursorSuspender()
+	{
+		if( wxIsBusy() )
+		{
+			wxSetCursor( wxBusyCursor::GetStoredCursor() );
+		}
+	}
+	~wxBusyCursorSuspender()
+	{
+		if( wxIsBusy() )
+		{
+			wxSetCursor( wxBusyCursor::GetBusyCursor() );
+		}
+	}
 };
 #endif
-    // _WX_CURSOR_H_BASE_
+// _WX_CURSOR_H_BASE_

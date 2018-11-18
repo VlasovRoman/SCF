@@ -15,20 +15,20 @@
 #if wxUSE_FSWATCHER
 
 class WXDLLIMPEXP_BASE wxInotifyFileSystemWatcher :
-        public wxFileSystemWatcherBase
+	public wxFileSystemWatcherBase
 {
 public:
-    wxInotifyFileSystemWatcher();
+	wxInotifyFileSystemWatcher();
 
-    wxInotifyFileSystemWatcher(const wxFileName& path,
-                               int events = wxFSW_EVENT_ALL);
+	wxInotifyFileSystemWatcher(const wxFileName& path,
+	                           int events = wxFSW_EVENT_ALL);
 
-    virtual ~wxInotifyFileSystemWatcher();
+	virtual ~wxInotifyFileSystemWatcher();
 
-    void OnDirDeleted(const wxString& path);
+	void OnDirDeleted(const wxString& path);
 
 protected:
-    bool Init();
+	bool Init();
 };
 
 #endif

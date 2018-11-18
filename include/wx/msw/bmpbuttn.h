@@ -18,32 +18,32 @@
 class WXDLLIMPEXP_CORE wxBitmapButton : public wxBitmapButtonBase
 {
 public:
-    wxBitmapButton() {}
+	wxBitmapButton() {}
 
-    wxBitmapButton(wxWindow *parent,
-                   wxWindowID id,
-                   const wxBitmap& bitmap,
-                   const wxPoint& pos = wxDefaultPosition,
-                   const wxSize& size = wxDefaultSize,
-                   long style = wxBU_AUTODRAW,
-                   const wxValidator& validator = wxDefaultValidator,
-                   const wxString& name = wxButtonNameStr)
-    {
-        Create(parent, id, bitmap, pos, size, style, validator, name);
-    }
+	wxBitmapButton(wxWindow *parent,
+	               wxWindowID id,
+	               const wxBitmap& bitmap,
+	               const wxPoint& pos = wxDefaultPosition,
+	               const wxSize& size = wxDefaultSize,
+	               long style = wxBU_AUTODRAW,
+	               const wxValidator& validator = wxDefaultValidator,
+	               const wxString& name = wxButtonNameStr)
+	{
+		Create(parent, id, bitmap, pos, size, style, validator, name);
+	}
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxBitmap& bitmap,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxBU_AUTODRAW,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxButtonNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxBitmap& bitmap,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxBU_AUTODRAW,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxButtonNameStr);
 
 protected:
-    wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxBitmapButton);
+	wxDECLARE_EVENT_TABLE();
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxBitmapButton);
 };
 
 #endif // _WX_BMPBUTTN_H_

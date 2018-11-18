@@ -21,83 +21,92 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxStaticBitmapNameStr[];
 class WXDLLIMPEXP_CORE wxStaticBitmap : public wxStaticBitmapBase
 {
 public:
-    wxStaticBitmap() { Init(); }
+	wxStaticBitmap()
+	{
+		Init();
+	}
 
-    wxStaticBitmap(wxWindow *parent,
-                   wxWindowID id,
-                   const wxGDIImage& label,
-                   const wxPoint& pos = wxDefaultPosition,
-                   const wxSize& size = wxDefaultSize,
-                   long style = 0,
-                   const wxString& name = wxStaticBitmapNameStr)
-    {
-        Init();
+	wxStaticBitmap(wxWindow *parent,
+	               wxWindowID id,
+	               const wxGDIImage& label,
+	               const wxPoint& pos = wxDefaultPosition,
+	               const wxSize& size = wxDefaultSize,
+	               long style = 0,
+	               const wxString& name = wxStaticBitmapNameStr)
+	{
+		Init();
 
-        Create(parent, id, label, pos, size, style, name);
-    }
+		Create(parent, id, label, pos, size, style, name);
+	}
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxGDIImage& label,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = 0,
-                const wxString& name = wxStaticBitmapNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxGDIImage& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxStaticBitmapNameStr);
 
-    virtual ~wxStaticBitmap() { Free(); }
+	virtual ~wxStaticBitmap()
+	{
+		Free();
+	}
 
-    virtual void SetIcon(const wxIcon& icon) wxOVERRIDE { SetImage(&icon); }
-    virtual void SetBitmap(const wxBitmap& bitmap) wxOVERRIDE { SetImage(&bitmap); }
-    virtual wxBitmap GetBitmap() const wxOVERRIDE;
-    virtual wxIcon GetIcon() const wxOVERRIDE;
+	virtual void SetIcon(const wxIcon& icon) wxOVERRIDE { SetImage(&icon); }
+	virtual void SetBitmap(const wxBitmap& bitmap) wxOVERRIDE { SetImage(&bitmap); }
+	virtual wxBitmap GetBitmap() const wxOVERRIDE;
+	virtual wxIcon GetIcon() const wxOVERRIDE;
 
-    virtual WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const wxOVERRIDE;
+	virtual WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const wxOVERRIDE;
 
-    // returns true if the platform should explicitly apply a theme border
-    virtual bool CanApplyThemeBorder() const wxOVERRIDE { return false; }
+	// returns true if the platform should explicitly apply a theme border
+	virtual bool CanApplyThemeBorder() const wxOVERRIDE
+	{
+		return false;
+	}
 
 protected:
-    virtual wxSize DoGetBestClientSize() const wxOVERRIDE;
+	virtual wxSize DoGetBestClientSize() const wxOVERRIDE;
 
-    // ctor/dtor helpers
-    void Init();
-    void Free();
+	// ctor/dtor helpers
+	void Init();
+	void Free();
 
-    // true if icon/bitmap is valid
-    bool ImageIsOk() const;
+	// true if icon/bitmap is valid
+	bool ImageIsOk() const;
 
-    void SetImage(const wxGDIImage* image);
-    void SetImageNoCopy( wxGDIImage* image );
+	void SetImage(const wxGDIImage* image);
+	void SetImageNoCopy( wxGDIImage* image );
 
-    // draw the bitmap ourselves here if the OS can't do it correctly (if it
-    // can we leave it to it)
-    void DoPaintManually(wxPaintEvent& event);
+	// draw the bitmap ourselves here if the OS can't do it correctly (if it
+	// can we leave it to it)
+	void DoPaintManually(wxPaintEvent& event);
 
-    void WXHandleSize(wxSizeEvent& event);
+	void WXHandleSize(wxSizeEvent& event);
 
-    // we can have either an icon or a bitmap
-    bool m_isIcon;
-    wxGDIImage *m_image;
+	// we can have either an icon or a bitmap
+	bool m_isIcon;
+	wxGDIImage *m_image;
 
-    // handle used in last call to STM_SETIMAGE
-    WXHANDLE m_currentHandle;
+	// handle used in last call to STM_SETIMAGE
+	WXHANDLE m_currentHandle;
 
 private:
-    // Flag indicating whether we own m_currentHandle, i.e. should delete it.
-    bool m_ownsCurrentHandle;
+	// Flag indicating whether we own m_currentHandle, i.e. should delete it.
+	bool m_ownsCurrentHandle;
 
-    // Replace the image at the native control level with the given HBITMAP or
-    // HICON (which can be 0) and destroy the previous image if necessary.
-    void MSWReplaceImageHandle(WXLPARAM handle);
+	// Replace the image at the native control level with the given HBITMAP or
+	// HICON (which can be 0) and destroy the previous image if necessary.
+	void MSWReplaceImageHandle(WXLPARAM handle);
 
-    // Delete the current handle only if we own it.
-    void DeleteCurrentHandleIfNeeded();
+	// Delete the current handle only if we own it.
+	void DeleteCurrentHandleIfNeeded();
 
 
-    wxDECLARE_DYNAMIC_CLASS(wxStaticBitmap);
-    wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxStaticBitmap);
+	wxDECLARE_DYNAMIC_CLASS(wxStaticBitmap);
+	wxDECLARE_EVENT_TABLE();
+	wxDECLARE_NO_COPY_CLASS(wxStaticBitmap);
 };
 
 #endif
-    // _WX_STATBMP_H_
+// _WX_STATBMP_H_

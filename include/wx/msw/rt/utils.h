@@ -34,26 +34,26 @@ bool WXDLLIMPEXP_CORE GetActivationFactory(const wxString& activatableClassId, R
 class WXDLLIMPEXP_CORE Initializer
 {
 public:
-    Initializer()
-        : m_ok(Initialize())
-    {
-    }
+	Initializer()
+		: m_ok(Initialize())
+	{
+	}
 
-    bool IsOk() const
-    {
-        return m_ok;
-    }
+	bool IsOk() const
+	{
+		return m_ok;
+	}
 
-    ~Initializer()
-    {
-        if (m_ok)
-            Uninitialize();
-    }
+	~Initializer()
+	{
+		if (m_ok)
+			Uninitialize();
+	}
 
 private:
-    const bool m_ok;
+	const bool m_ok;
 
-    wxDECLARE_NO_COPY_CLASS(Initializer);
+	wxDECLARE_NO_COPY_CLASS(Initializer);
 };
 
 // Simple class to convert wxString to HSTRING
@@ -62,19 +62,25 @@ private:
 class WXDLLIMPEXP_CORE TempStringRef
 {
 public:
-    HSTRING Get() const { return m_hstring; }
+	HSTRING Get() const
+	{
+		return m_hstring;
+	}
 
-    operator HSTRING() const { return m_hstring; };
+	operator HSTRING() const
+	{
+		return m_hstring;
+	};
 
-    static const TempStringRef Make(const wxString &str);
+	static const TempStringRef Make(const wxString &str);
 
 private:
-    TempStringRef(const wxString &str);
+	TempStringRef(const wxString &str);
 
-    HSTRING             m_hstring;
-    HSTRING_HEADER      m_header;
+	HSTRING             m_hstring;
+	HSTRING_HEADER      m_header;
 
-    wxDECLARE_NO_COPY_CLASS(TempStringRef);
+	wxDECLARE_NO_COPY_CLASS(TempStringRef);
 };
 
 } // namespace wxWinRT

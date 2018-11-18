@@ -19,62 +19,62 @@
 
 class WXDLLIMPEXP_XRC wxSizerXmlHandler : public wxXmlResourceHandler
 {
-    wxDECLARE_DYNAMIC_CLASS(wxSizerXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxSizerXmlHandler);
 
 public:
-    wxSizerXmlHandler();
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	wxSizerXmlHandler();
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
 protected:
-    virtual wxSizer* DoCreateSizer(const wxString& name);
-    virtual bool IsSizerNode(wxXmlNode *node) const;
+	virtual wxSizer* DoCreateSizer(const wxString& name);
+	virtual bool IsSizerNode(wxXmlNode *node) const;
 
 private:
-    bool m_isInside;
-    bool m_isGBS;
+	bool m_isInside;
+	bool m_isGBS;
 
-    wxSizer *m_parentSizer;
+	wxSizer *m_parentSizer;
 
 
-    wxObject* Handle_sizeritem();
-    wxObject* Handle_spacer();
-    wxObject* Handle_sizer();
-    wxSizer*  Handle_wxBoxSizer();
+	wxObject* Handle_sizeritem();
+	wxObject* Handle_spacer();
+	wxObject* Handle_sizer();
+	wxSizer*  Handle_wxBoxSizer();
 #if wxUSE_STATBOX
-    wxSizer*  Handle_wxStaticBoxSizer();
+	wxSizer*  Handle_wxStaticBoxSizer();
 #endif
-    wxSizer*  Handle_wxGridSizer();
-    wxFlexGridSizer* Handle_wxFlexGridSizer();
-    wxGridBagSizer* Handle_wxGridBagSizer();
-    wxSizer*  Handle_wxWrapSizer();
+	wxSizer*  Handle_wxGridSizer();
+	wxFlexGridSizer* Handle_wxFlexGridSizer();
+	wxGridBagSizer* Handle_wxGridBagSizer();
+	wxSizer*  Handle_wxWrapSizer();
 
-    bool ValidateGridSizerChildren();
-    void SetFlexibleMode(wxFlexGridSizer* fsizer);
-    void SetGrowables(wxFlexGridSizer* fsizer, const wxChar* param, bool rows);
-    wxGBPosition GetGBPos();
-    wxGBSpan GetGBSpan();
-    wxSizerItem* MakeSizerItem();
-    void SetSizerItemAttributes(wxSizerItem* sitem);
-    void AddSizerItem(wxSizerItem* sitem);
-    int GetSizerFlags();
+	bool ValidateGridSizerChildren();
+	void SetFlexibleMode(wxFlexGridSizer* fsizer);
+	void SetGrowables(wxFlexGridSizer* fsizer, const wxChar* param, bool rows);
+	wxGBPosition GetGBPos();
+	wxGBSpan GetGBSpan();
+	wxSizerItem* MakeSizerItem();
+	void SetSizerItemAttributes(wxSizerItem* sitem);
+	void AddSizerItem(wxSizerItem* sitem);
+	int GetSizerFlags();
 };
 
 #if wxUSE_BUTTON
 
 class WXDLLIMPEXP_XRC wxStdDialogButtonSizerXmlHandler
-    : public wxXmlResourceHandler
+	: public wxXmlResourceHandler
 {
-    wxDECLARE_DYNAMIC_CLASS(wxStdDialogButtonSizerXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxStdDialogButtonSizerXmlHandler);
 
 public:
-    wxStdDialogButtonSizerXmlHandler();
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	wxStdDialogButtonSizerXmlHandler();
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
 private:
-    bool m_isInside;
-    wxStdDialogButtonSizer *m_parentSizer;
+	bool m_isInside;
+	wxStdDialogButtonSizer *m_parentSizer;
 };
 
 #endif // wxUSE_BUTTON

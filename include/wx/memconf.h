@@ -36,16 +36,16 @@
 class wxMemoryConfig : public wxFileConfig
 {
 public:
-    // default (and only) ctor
-    wxMemoryConfig() : wxFileConfig(wxEmptyString,  // default app name
-                                    wxEmptyString,  // default vendor name
-                                    wxEmptyString,  // no local config file
-                                    wxEmptyString,  // no system config file
-                                    0)              // don't use any files
-    {
-    }
+	// default (and only) ctor
+	wxMemoryConfig() : wxFileConfig(wxEmptyString,  // default app name
+		                                wxEmptyString,  // default vendor name
+		                                wxEmptyString,  // no local config file
+		                                wxEmptyString,  // no system config file
+		                                0)              // don't use any files
+	{
+	}
 
-    wxDECLARE_NO_COPY_CLASS(wxMemoryConfig);
+	wxDECLARE_NO_COPY_CLASS(wxMemoryConfig);
 };
 
 #endif // wxUSE_CONFIG

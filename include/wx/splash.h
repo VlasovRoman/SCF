@@ -14,4 +14,4 @@
 #include "wx/generic/splash.h"
 
 #endif
-    // _WX_SPLASH_H_BASE_
+// _WX_SPLASH_H_BASE_

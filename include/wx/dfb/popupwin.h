@@ -17,27 +17,29 @@
 class WXDLLIMPEXP_CORE wxPopupWindow : public wxPopupWindowBase
 {
 public:
-    wxPopupWindow() {}
+	wxPopupWindow() {}
 
-    wxPopupWindow(wxWindow *parent, int flags = wxBORDER_NONE)
-        { Create(parent, flags); }
+	wxPopupWindow(wxWindow *parent, int flags = wxBORDER_NONE)
+	{
+		Create(parent, flags);
+	}
 
-    bool Create(wxWindow *parent, int flags = wxBORDER_NONE)
-    {
-        if ( !wxPopupWindowBase::Create(parent) )
-            return false;
+	bool Create(wxWindow *parent, int flags = wxBORDER_NONE)
+	{
+		if ( !wxPopupWindowBase::Create(parent) )
+			return false;
 
-        return wxNonOwnedWindow::Create
-               (
-                 parent,
-                 -1,
-                 // DFB windows must have valid pos & size:
-                 wxPoint(0, 0), wxSize(1, 1),
-                 (flags & wxBORDER_MASK) | wxPOPUP_WINDOW
-               );
-    }
+		return wxNonOwnedWindow::Create
+		       (
+		           parent,
+		           -1,
+		           // DFB windows must have valid pos & size:
+		           wxPoint(0, 0), wxSize(1, 1),
+		           (flags & wxBORDER_MASK) | wxPOPUP_WINDOW
+		       );
+	}
 
-    wxDECLARE_DYNAMIC_CLASS(wxPopupWindow);
+	wxDECLARE_DYNAMIC_CLASS(wxPopupWindow);
 };
 
 #endif // _WX_DFB_POPUPWIN_H_

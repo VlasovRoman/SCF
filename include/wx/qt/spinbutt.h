@@ -14,30 +14,30 @@ class QSpinBox;
 class WXDLLIMPEXP_CORE wxSpinButton : public wxSpinButtonBase
 {
 public:
-    wxSpinButton();
-    wxSpinButton(wxWindow *parent,
-                 wxWindowID id = -1,
-                 const wxPoint& pos = wxDefaultPosition,
-                 const wxSize& size = wxDefaultSize,
-                 long style = wxSP_VERTICAL,
-                 const wxString& name = wxSPIN_BUTTON_NAME);
+	wxSpinButton();
+	wxSpinButton(wxWindow *parent,
+	             wxWindowID id = -1,
+	             const wxPoint& pos = wxDefaultPosition,
+	             const wxSize& size = wxDefaultSize,
+	             long style = wxSP_VERTICAL,
+	             const wxString& name = wxSPIN_BUTTON_NAME);
 
-    bool Create(wxWindow *parent,
-                wxWindowID id = -1,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxSP_VERTICAL,
-                const wxString& name = wxSPIN_BUTTON_NAME);
+	bool Create(wxWindow *parent,
+	            wxWindowID id = -1,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxSP_VERTICAL,
+	            const wxString& name = wxSPIN_BUTTON_NAME);
 
-    virtual int GetValue() const;
-    virtual void SetValue(int val);
+	virtual int GetValue() const;
+	virtual void SetValue(int val);
 
-    virtual QWidget *GetHandle() const;
+	virtual QWidget *GetHandle() const;
 
 private:
-    QSpinBox *m_qtSpinBox;
+	QSpinBox *m_qtSpinBox;
 
-    wxDECLARE_DYNAMIC_CLASS( wxSpinButton );
+	wxDECLARE_DYNAMIC_CLASS( wxSpinButton );
 };
 
 #endif // _WX_QT_SPINBUTT_H_

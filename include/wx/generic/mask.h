@@ -17,36 +17,39 @@
 class WXDLLIMPEXP_CORE wxMask : public wxMaskBase
 {
 public:
-    wxMask() { }
-    wxMask(const wxBitmap& bitmap, const wxColour& colour)
-    {
-        InitFromColour(bitmap, colour);
-    }
+	wxMask() { }
+	wxMask(const wxBitmap& bitmap, const wxColour& colour)
+	{
+		InitFromColour(bitmap, colour);
+	}
 
 #if wxUSE_PALETTE
-    wxMask(const wxBitmap& bitmap, int paletteIndex)
-    {
-        Create(bitmap, paletteIndex);
-    }
+	wxMask(const wxBitmap& bitmap, int paletteIndex)
+	{
+		Create(bitmap, paletteIndex);
+	}
 #endif // wxUSE_PALETTE
 
-    wxMask(const wxBitmap& bitmap)
-    {
-        InitFromMonoBitmap(bitmap);
-    }
+	wxMask(const wxBitmap& bitmap)
+	{
+		InitFromMonoBitmap(bitmap);
+	}
 
-    // implementation-only from now on
-    wxBitmap GetBitmap() const { return m_bitmap; }
+	// implementation-only from now on
+	wxBitmap GetBitmap() const
+	{
+		return m_bitmap;
+	}
 
 private:
-    // implement wxMaskBase pure virtuals
-    virtual void FreeData();
-    virtual bool InitFromColour(const wxBitmap& bitmap, const wxColour& colour);
-    virtual bool InitFromMonoBitmap(const wxBitmap& bitmap);
+	// implement wxMaskBase pure virtuals
+	virtual void FreeData();
+	virtual bool InitFromColour(const wxBitmap& bitmap, const wxColour& colour);
+	virtual bool InitFromMonoBitmap(const wxBitmap& bitmap);
 
-    wxBitmap m_bitmap;
+	wxBitmap m_bitmap;
 
-    wxDECLARE_DYNAMIC_CLASS(wxMask);
+	wxDECLARE_DYNAMIC_CLASS(wxMask);
 };
 
 #endif // _WX_GENERIC_MASKG_H_

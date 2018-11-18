@@ -20,26 +20,29 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 class WXDLLIMPEXP_CORE wxAcceleratorTable : public wxObject
 {
 public:
-    // default ctor
-    wxAcceleratorTable() { }
+	// default ctor
+	wxAcceleratorTable() { }
 
-    // load from .rc resource (Windows specific)
-    wxAcceleratorTable(const wxString& resource);
+	// load from .rc resource (Windows specific)
+	wxAcceleratorTable(const wxString& resource);
 
-    // initialize from array
-    wxAcceleratorTable(int n, const wxAcceleratorEntry entries[]);
+	// initialize from array
+	wxAcceleratorTable(int n, const wxAcceleratorEntry entries[]);
 
-    bool Ok() const { return IsOk(); }
-    bool IsOk() const;
-    void SetHACCEL(WXHACCEL hAccel);
-    WXHACCEL GetHACCEL() const;
+	bool Ok() const
+	{
+		return IsOk();
+	}
+	bool IsOk() const;
+	void SetHACCEL(WXHACCEL hAccel);
+	WXHACCEL GetHACCEL() const;
 
-    // translate the accelerator, return true if done
-    bool Translate(wxWindow *window, WXMSG *msg) const;
+	// translate the accelerator, return true if done
+	bool Translate(wxWindow *window, WXMSG *msg) const;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxAcceleratorTable);
+	wxDECLARE_DYNAMIC_CLASS(wxAcceleratorTable);
 };
 
 #endif
-    // _WX_ACCEL_H_
+// _WX_ACCEL_H_

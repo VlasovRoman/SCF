@@ -22,28 +22,28 @@ class WXDLLIMPEXP_FWD_AUI wxAuiToolBar;
 class WXDLLIMPEXP_AUI wxAuiToolBarXmlHandler : public wxXmlResourceHandler
 {
 public:
-    wxAuiToolBarXmlHandler();
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	wxAuiToolBarXmlHandler();
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
 private:
-    bool m_isInside;
-    wxAuiToolBar *m_toolbar;
-    wxSize m_toolSize;
+	bool m_isInside;
+	wxAuiToolBar *m_toolbar;
+	wxSize m_toolSize;
 
-    class MenuHandler : public wxEvtHandler
-    {
-    public:
-        void OnDropDown(wxAuiToolBarEvent& event);
-        unsigned RegisterMenu(wxAuiToolBar *toobar, int id, wxMenu *menu);
+	class MenuHandler : public wxEvtHandler
+	{
+	public:
+		void OnDropDown(wxAuiToolBarEvent& event);
+		unsigned RegisterMenu(wxAuiToolBar *toobar, int id, wxMenu *menu);
 
-    private:
-        wxVector<wxMenu*> m_menus;
-    };
+	private:
+		wxVector<wxMenu*> m_menus;
+	};
 
-    MenuHandler m_menuHandler;
+	MenuHandler m_menuHandler;
 
-    wxDECLARE_DYNAMIC_CLASS(wxAuiToolBarXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxAuiToolBarXmlHandler);
 };
 
 #endif // wxUSE_XRC && wxUSE_AUI

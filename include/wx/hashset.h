@@ -20,21 +20,21 @@
     (defined(HAVE_STD_UNORDERED_SET) || defined(HAVE_TR1_UNORDERED_SET))
 
 #if defined(HAVE_STD_UNORDERED_SET)
-    #include <unordered_set>
-    #define WX_HASH_SET_BASE_TEMPLATE std::unordered_set
+#include <unordered_set>
+#define WX_HASH_SET_BASE_TEMPLATE std::unordered_set
 #elif defined(HAVE_TR1_UNORDERED_SET)
-    #include <tr1/unordered_set>
-    #define WX_HASH_SET_BASE_TEMPLATE std::tr1::unordered_set
+#include <tr1/unordered_set>
+#define WX_HASH_SET_BASE_TEMPLATE std::tr1::unordered_set
 #else
-    #error Update this code: unordered_set is available, but I do not know where.
+#error Update this code: unordered_set is available, but I do not know where.
 #endif
 
 #elif wxUSE_STD_CONTAINERS && defined(HAVE_STL_HASH_MAP)
 
 #if defined(HAVE_EXT_HASH_MAP)
-    #include <ext/hash_set>
+#include <ext/hash_set>
 #elif defined(HAVE_HASH_MAP)
-    #include <hash_set>
+#include <hash_set>
 #endif
 
 #define WX_HASH_SET_BASE_TEMPLATE WX_HASH_MAP_NAMESPACE::hash_set

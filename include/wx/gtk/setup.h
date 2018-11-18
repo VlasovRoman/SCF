@@ -19,7 +19,7 @@
 // define this to 0 when building wxBase library - this can also be done from
 // makefile/project file overriding the value here
 #ifndef wxUSE_GUI
-    #define wxUSE_GUI            1
+#define wxUSE_GUI            1
 #endif // wxUSE_GUI
 
 // ----------------------------------------------------------------------------
@@ -189,7 +189,7 @@
 // absolutely necessary -- updating it is strongly recommended as the ANSI mode
 // will disappear completely in future wxWidgets releases.
 #ifndef wxUSE_UNICODE
-    #define wxUSE_UNICODE 1
+#define wxUSE_UNICODE 1
 #endif
 
 // wxUSE_WCHAR_T is required by wxWidgets now, don't change.
@@ -1428,9 +1428,9 @@
 #define wxUSE_DRAGIMAGE 1
 
 #define wxUSE_IPC         1
-                                // 0 for no interprocess comms
+// 0 for no interprocess comms
 #define wxUSE_HELP        1
-                                // 0 for no help facility
+// 0 for no help facility
 
 // Should we use MS HTML help for wxHelpController? If disabled, neither
 // wxCHMHelpController nor wxBestHelpController are available.
@@ -1446,13 +1446,13 @@
 #define wxUSE_WXHTML_HELP 1
 
 #define wxUSE_CONSTRAINTS 1
-                                // 0 for no window layout constraint system
+// 0 for no window layout constraint system
 
 #define wxUSE_SPLINES     1
-                                // 0 for no splines
+// 0 for no splines
 
 #define wxUSE_MOUSEWHEEL        1
-                                // Include mouse wheel support
+// Include mouse wheel support
 
 // Compile wxUIActionSimulator class?
 #define wxUSE_UIACTIONSIMULATOR 1
@@ -1572,9 +1572,9 @@
 // 7 and later systems (if wxUSE_GRAPHICS_GDIPLUS is also enabled, earlier
 // systems will fall back on using GDI+).
 #if defined(_MSC_VER) && _MSC_VER >= 1600
-    #define wxUSE_GRAPHICS_DIRECT2D wxUSE_GRAPHICS_CONTEXT
+#define wxUSE_GRAPHICS_DIRECT2D wxUSE_GRAPHICS_CONTEXT
 #else
-    #define wxUSE_GRAPHICS_DIRECT2D 0
+#define wxUSE_GRAPHICS_DIRECT2D 0
 #endif
 
 // ----------------------------------------------------------------------------
@@ -1614,9 +1614,9 @@
 //
 // Recommended setting: 1
 #if defined(_MSC_VER) && _MSC_VER >= 1700 && !defined(_USING_V110_SDK71_)
-    #define wxUSE_WINRT 1
+#define wxUSE_WINRT 1
 #else
-    #define wxUSE_WINRT 0
+#define wxUSE_WINRT 0
 #endif
 
 // wxDC caching implementation
@@ -1728,9 +1728,9 @@
 //
 // Recommended setting: 1, there is not much gain in disabling this
 #if defined(__VISUALC__) || defined(__MINGW64_TOOLCHAIN__)
-    #define wxUSE_DBGHELP 1
+#define wxUSE_DBGHELP 1
 #else
-    #define wxUSE_DBGHELP 0
+#define wxUSE_DBGHELP 0
 #endif
 
 // Set this to 1 to be able to use wxCrashReport::Generate() to create mini

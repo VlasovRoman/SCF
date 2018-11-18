@@ -17,25 +17,25 @@
 
 class WXDLLIMPEXP_CORE wxFileDialog: public wxFileDialogBase
 {
-    wxDECLARE_DYNAMIC_CLASS(wxFileDialog);
+	wxDECLARE_DYNAMIC_CLASS(wxFileDialog);
 public:
 
-    // For Motif
-    static wxString m_fileSelectorAnswer;
-    static bool m_fileSelectorReturned;
+	// For Motif
+	static wxString m_fileSelectorAnswer;
+	static bool m_fileSelectorReturned;
 
 public:
-    wxFileDialog(wxWindow *parent,
-                 const wxString& message = wxFileSelectorPromptStr,
-                 const wxString& defaultDir = wxEmptyString,
-                 const wxString& defaultFile = wxEmptyString,
-                 const wxString& wildCard = wxFileSelectorDefaultWildcardStr,
-                 long style = wxFD_DEFAULT_STYLE,
-                 const wxPoint& pos = wxDefaultPosition,
-                 const wxSize& sz = wxDefaultSize,
-                 const wxString& name = wxFileDialogNameStr);
+	wxFileDialog(wxWindow *parent,
+	             const wxString& message = wxFileSelectorPromptStr,
+	             const wxString& defaultDir = wxEmptyString,
+	             const wxString& defaultFile = wxEmptyString,
+	             const wxString& wildCard = wxFileSelectorDefaultWildcardStr,
+	             long style = wxFD_DEFAULT_STYLE,
+	             const wxPoint& pos = wxDefaultPosition,
+	             const wxSize& sz = wxDefaultSize,
+	             const wxString& name = wxFileDialogNameStr);
 
-    virtual int ShowModal();
+	virtual int ShowModal();
 };
 
 #endif // _WX_FILEDLG_H_

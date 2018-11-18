@@ -22,39 +22,45 @@ class WXDLLIMPEXP_FWD_CORE wxColour;
 class WXDLLIMPEXP_CORE wxImageList: public wxObject
 {
 public:
-    wxImageList() { m_width = m_height = 0; }
-    wxImageList( int width, int height, bool mask = true, int initialCount = 1 );
-    virtual ~wxImageList();
-    bool Create( int width, int height, bool mask = true, int initialCount = 1 );
-    bool Create();
+	wxImageList()
+	{
+		m_width = m_height = 0;
+	}
+	wxImageList( int width, int height, bool mask = true, int initialCount = 1 );
+	virtual ~wxImageList();
+	bool Create( int width, int height, bool mask = true, int initialCount = 1 );
+	bool Create();
 
-    virtual int GetImageCount() const;
-    virtual bool GetSize( int index, int &width, int &height ) const;
-    virtual wxSize GetSize() const { return wxSize(m_width, m_height); }
+	virtual int GetImageCount() const;
+	virtual bool GetSize( int index, int &width, int &height ) const;
+	virtual wxSize GetSize() const
+	{
+		return wxSize(m_width, m_height);
+	}
 
-    int Add( const wxIcon& bitmap );
-    int Add( const wxBitmap& bitmap );
-    int Add( const wxBitmap& bitmap, const wxBitmap& mask );
-    int Add( const wxBitmap& bitmap, const wxColour& maskColour );
-    wxBitmap GetBitmap(int index) const;
-    wxIcon GetIcon(int index) const;
-    bool Replace( int index, const wxIcon &bitmap );
-    bool Replace( int index, const wxBitmap &bitmap );
-    bool Replace( int index, const wxBitmap &bitmap, const wxBitmap &mask );
-    bool Remove( int index );
-    bool RemoveAll();
+	int Add( const wxIcon& bitmap );
+	int Add( const wxBitmap& bitmap );
+	int Add( const wxBitmap& bitmap, const wxBitmap& mask );
+	int Add( const wxBitmap& bitmap, const wxColour& maskColour );
+	wxBitmap GetBitmap(int index) const;
+	wxIcon GetIcon(int index) const;
+	bool Replace( int index, const wxIcon &bitmap );
+	bool Replace( int index, const wxBitmap &bitmap );
+	bool Replace( int index, const wxBitmap &bitmap, const wxBitmap &mask );
+	bool Remove( int index );
+	bool RemoveAll();
 
-    virtual bool Draw(int index, wxDC& dc, int x, int y,
-                      int flags = wxIMAGELIST_DRAW_NORMAL,
-                      bool solidBackground = false);
+	virtual bool Draw(int index, wxDC& dc, int x, int y,
+	                  int flags = wxIMAGELIST_DRAW_NORMAL,
+	                  bool solidBackground = false);
 
 private:
-    wxList  m_images;
+	wxList  m_images;
 
-    int     m_width;
-    int     m_height;
+	int     m_width;
+	int     m_height;
 
-    wxDECLARE_DYNAMIC_CLASS(wxImageList);
+	wxDECLARE_DYNAMIC_CLASS(wxImageList);
 };
 
 #endif  // _WX_IMAGLIST_H_

@@ -29,30 +29,30 @@ class WXDLLIMPEXP_FWD_CORE wxFindReplaceDialogImpl;
 // flages used by wxFindDialogEvent::GetFlags()
 enum wxFindReplaceFlags
 {
-    // downward search/replace selected (otherwise - upwards)
-    wxFR_DOWN       = 1,
+	// downward search/replace selected (otherwise - upwards)
+	wxFR_DOWN       = 1,
 
-    // whole word search/replace selected
-    wxFR_WHOLEWORD  = 2,
+	// whole word search/replace selected
+	wxFR_WHOLEWORD  = 2,
 
-    // case sensitive search/replace selected (otherwise - case insensitive)
-    wxFR_MATCHCASE  = 4
+	// case sensitive search/replace selected (otherwise - case insensitive)
+	wxFR_MATCHCASE  = 4
 };
 
 // these flags can be specified in wxFindReplaceDialog ctor or Create()
 enum wxFindReplaceDialogStyles
 {
-    // replace dialog (otherwise find dialog)
-    wxFR_REPLACEDIALOG = 1,
+	// replace dialog (otherwise find dialog)
+	wxFR_REPLACEDIALOG = 1,
 
-    // don't allow changing the search direction
-    wxFR_NOUPDOWN      = 2,
+	// don't allow changing the search direction
+	wxFR_NOUPDOWN      = 2,
 
-    // don't allow case sensitive searching
-    wxFR_NOMATCHCASE   = 4,
+	// don't allow case sensitive searching
+	wxFR_NOMATCHCASE   = 4,
 
-    // don't allow whole word searching
-    wxFR_NOWHOLEWORD   = 8
+	// don't allow whole word searching
+	wxFR_NOWHOLEWORD   = 8
 };
 
 // ----------------------------------------------------------------------------
@@ -62,30 +62,55 @@ enum wxFindReplaceDialogStyles
 class WXDLLIMPEXP_CORE wxFindReplaceData : public wxObject
 {
 public:
-    wxFindReplaceData() { Init(); }
-    wxFindReplaceData(wxUint32 flags) { Init(); SetFlags(flags); }
+	wxFindReplaceData()
+	{
+		Init();
+	}
+	wxFindReplaceData(wxUint32 flags)
+	{
+		Init();
+		SetFlags(flags);
+	}
 
-    // accessors
-    const wxString& GetFindString() const { return m_FindWhat; }
-    const wxString& GetReplaceString() const { return m_ReplaceWith; }
+	// accessors
+	const wxString& GetFindString() const
+	{
+		return m_FindWhat;
+	}
+	const wxString& GetReplaceString() const
+	{
+		return m_ReplaceWith;
+	}
 
-    int GetFlags() const { return m_Flags; }
+	int GetFlags() const
+	{
+		return m_Flags;
+	}
 
-    // setters: may only be called before showing the dialog, no effect later
-    void SetFlags(wxUint32 flags) { m_Flags = flags; }
+	// setters: may only be called before showing the dialog, no effect later
+	void SetFlags(wxUint32 flags)
+	{
+		m_Flags = flags;
+	}
 
-    void SetFindString(const wxString& str) { m_FindWhat = str; }
-    void SetReplaceString(const wxString& str) { m_ReplaceWith = str; }
+	void SetFindString(const wxString& str)
+	{
+		m_FindWhat = str;
+	}
+	void SetReplaceString(const wxString& str)
+	{
+		m_ReplaceWith = str;
+	}
 
 protected:
-    void Init();
+	void Init();
 
 private:
-    wxUint32 m_Flags;
-    wxString m_FindWhat,
-             m_ReplaceWith;
+	wxUint32 m_Flags;
+	wxString m_FindWhat,
+	         m_ReplaceWith;
 
-    friend class wxFindReplaceDialogBase;
+	friend class wxFindReplaceDialogBase;
 };
 
 // ----------------------------------------------------------------------------
@@ -95,41 +120,50 @@ private:
 class WXDLLIMPEXP_CORE wxFindReplaceDialogBase : public wxDialog
 {
 public:
-    // ctors and such
-    wxFindReplaceDialogBase() { m_FindReplaceData = NULL; }
-    wxFindReplaceDialogBase(wxWindow * WXUNUSED(parent),
-                            wxFindReplaceData *data,
-                            const wxString& WXUNUSED(title),
-                            int WXUNUSED(style) = 0)
-    {
-        m_FindReplaceData = data;
-    }
+	// ctors and such
+	wxFindReplaceDialogBase()
+	{
+		m_FindReplaceData = NULL;
+	}
+	wxFindReplaceDialogBase(wxWindow * WXUNUSED(parent),
+	                        wxFindReplaceData *data,
+	                        const wxString& WXUNUSED(title),
+	                        int WXUNUSED(style) = 0)
+	{
+		m_FindReplaceData = data;
+	}
 
-    virtual ~wxFindReplaceDialogBase();
+	virtual ~wxFindReplaceDialogBase();
 
-    // find dialog data access
-    const wxFindReplaceData *GetData() const { return m_FindReplaceData; }
-    void SetData(wxFindReplaceData *data) { m_FindReplaceData = data; }
+	// find dialog data access
+	const wxFindReplaceData *GetData() const
+	{
+		return m_FindReplaceData;
+	}
+	void SetData(wxFindReplaceData *data)
+	{
+		m_FindReplaceData = data;
+	}
 
-    // implementation only, don't use
-    void Send(wxFindDialogEvent& event);
+	// implementation only, don't use
+	void Send(wxFindDialogEvent& event);
 
 protected:
-    wxFindReplaceData *m_FindReplaceData;
+	wxFindReplaceData *m_FindReplaceData;
 
-    // the last string we searched for
-    wxString m_lastSearch;
+	// the last string we searched for
+	wxString m_lastSearch;
 
-    wxDECLARE_NO_COPY_CLASS(wxFindReplaceDialogBase);
+	wxDECLARE_NO_COPY_CLASS(wxFindReplaceDialogBase);
 };
 
 // include wxFindReplaceDialog declaration
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)
-    #include "wx/msw/fdrepdlg.h"
+#include "wx/msw/fdrepdlg.h"
 #else
-    #define wxGenericFindReplaceDialog wxFindReplaceDialog
+#define wxGenericFindReplaceDialog wxFindReplaceDialog
 
-    #include "wx/generic/fdrepdlg.h"
+#include "wx/generic/fdrepdlg.h"
 #endif
 
 // ----------------------------------------------------------------------------
@@ -139,29 +173,52 @@ protected:
 class WXDLLIMPEXP_CORE wxFindDialogEvent : public wxCommandEvent
 {
 public:
-    wxFindDialogEvent(wxEventType commandType = wxEVT_NULL, int id = 0)
-        : wxCommandEvent(commandType, id) { }
-    wxFindDialogEvent(const wxFindDialogEvent& event)
-        : wxCommandEvent(event), m_strReplace(event.m_strReplace) { }
+	wxFindDialogEvent(wxEventType commandType = wxEVT_NULL, int id = 0)
+		: wxCommandEvent(commandType, id) { }
+	wxFindDialogEvent(const wxFindDialogEvent& event)
+		: wxCommandEvent(event), m_strReplace(event.m_strReplace) { }
 
-    int GetFlags() const { return GetInt(); }
-    wxString GetFindString() const { return GetString(); }
-    const wxString& GetReplaceString() const { return m_strReplace; }
+	int GetFlags() const
+	{
+		return GetInt();
+	}
+	wxString GetFindString() const
+	{
+		return GetString();
+	}
+	const wxString& GetReplaceString() const
+	{
+		return m_strReplace;
+	}
 
-    wxFindReplaceDialog *GetDialog() const
-        { return wxStaticCast(GetEventObject(), wxFindReplaceDialog); }
+	wxFindReplaceDialog *GetDialog() const
+	{
+		return wxStaticCast(GetEventObject(), wxFindReplaceDialog);
+	}
 
-    // implementation only
-    void SetFlags(int flags) { SetInt(flags); }
-    void SetFindString(const wxString& str) { SetString(str); }
-    void SetReplaceString(const wxString& str) { m_strReplace = str; }
+	// implementation only
+	void SetFlags(int flags)
+	{
+		SetInt(flags);
+	}
+	void SetFindString(const wxString& str)
+	{
+		SetString(str);
+	}
+	void SetReplaceString(const wxString& str)
+	{
+		m_strReplace = str;
+	}
 
-    virtual wxEvent *Clone() const wxOVERRIDE { return new wxFindDialogEvent(*this); }
+	virtual wxEvent *Clone() const wxOVERRIDE
+	{
+		return new wxFindDialogEvent(*this);
+	}
 
 private:
-    wxString m_strReplace;
+	wxString m_strReplace;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxFindDialogEvent);
+	wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxFindDialogEvent);
 };
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_FIND, wxFindDialogEvent );
@@ -200,4 +257,4 @@ typedef void (wxEvtHandler::*wxFindDialogEventFunction)(wxFindDialogEvent&);
 #endif // wxUSE_FINDREPLDLG
 
 #endif
-    // _WX_FDREPDLG_H
+// _WX_FDREPDLG_H

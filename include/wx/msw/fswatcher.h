@@ -17,19 +17,19 @@
 class WXDLLIMPEXP_BASE wxMSWFileSystemWatcher : public wxFileSystemWatcherBase
 {
 public:
-    wxMSWFileSystemWatcher();
+	wxMSWFileSystemWatcher();
 
-    wxMSWFileSystemWatcher(const wxFileName& path,
-                           int events = wxFSW_EVENT_ALL);
+	wxMSWFileSystemWatcher(const wxFileName& path,
+	                       int events = wxFSW_EVENT_ALL);
 
-    // Override the base class function to provide a much more efficient
-    // implementation for it using the platform native support for watching the
-    // entire directory trees.
-    virtual bool AddTree(const wxFileName& path, int events = wxFSW_EVENT_ALL,
-                         const wxString& filter = wxEmptyString) wxOVERRIDE;
+	// Override the base class function to provide a much more efficient
+	// implementation for it using the platform native support for watching the
+	// entire directory trees.
+	virtual bool AddTree(const wxFileName& path, int events = wxFSW_EVENT_ALL,
+	                     const wxString& filter = wxEmptyString) wxOVERRIDE;
 
 protected:
-    bool Init();
+	bool Init();
 };
 
 #endif // wxUSE_FSWATCHER

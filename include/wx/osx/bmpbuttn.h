@@ -18,31 +18,31 @@
 class WXDLLIMPEXP_CORE wxBitmapButton : public wxBitmapButtonBase
 {
 public:
-    wxBitmapButton()
-        {
-            SetMargins(wxDEFAULT_BUTTON_MARGIN, wxDEFAULT_BUTTON_MARGIN);
-        }
+	wxBitmapButton()
+	{
+		SetMargins(wxDEFAULT_BUTTON_MARGIN, wxDEFAULT_BUTTON_MARGIN);
+	}
 
-    wxBitmapButton(wxWindow *parent, wxWindowID id, const wxBitmap& bitmap,
-                   const wxPoint& pos = wxDefaultPosition,
-                   const wxSize& size = wxDefaultSize, long style = wxBU_AUTODRAW,
-                   const wxValidator& validator = wxDefaultValidator,
-                   const wxString& name = wxButtonNameStr)
-        {
-            Create(parent, id, bitmap, pos, size, style, validator, name);
-        }
+	wxBitmapButton(wxWindow *parent, wxWindowID id, const wxBitmap& bitmap,
+	               const wxPoint& pos = wxDefaultPosition,
+	               const wxSize& size = wxDefaultSize, long style = wxBU_AUTODRAW,
+	               const wxValidator& validator = wxDefaultValidator,
+	               const wxString& name = wxButtonNameStr)
+	{
+		Create(parent, id, bitmap, pos, size, style, validator, name);
+	}
 
-    bool Create(wxWindow *parent, wxWindowID id, const wxBitmap& bitmap,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize, long style = wxBU_AUTODRAW,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxButtonNameStr);
+	bool Create(wxWindow *parent, wxWindowID id, const wxBitmap& bitmap,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize, long style = wxBU_AUTODRAW,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxButtonNameStr);
 
 protected:
 
-    virtual wxSize DoGetBestSize() const;
+	virtual wxSize DoGetBestSize() const;
 
-    wxDECLARE_DYNAMIC_CLASS(wxBitmapButton);
+	wxDECLARE_DYNAMIC_CLASS(wxBitmapButton);
 };
 
 #endif // _WX_OSX_BMPBUTTN_H_

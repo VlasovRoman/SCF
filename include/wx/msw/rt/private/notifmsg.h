@@ -15,12 +15,12 @@
 class wxToastNotificationHelper
 {
 public:
-    static bool UseToasts(const wxString& shortcutPath,
-        const wxString& appId);
+	static bool UseToasts(const wxString& shortcutPath,
+	                      const wxString& appId);
 
-    static bool IsEnabled();
+	static bool IsEnabled();
 
-    static wxNotificationMessageImpl* CreateInstance(wxNotificationMessageBase* notification);
+	static wxNotificationMessageImpl* CreateInstance(wxNotificationMessageBase* notification);
 };
 
 #endif // _WX_MSW_RT_PRIVATE_NOTIFMSG_H_

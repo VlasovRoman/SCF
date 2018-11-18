@@ -26,18 +26,18 @@
 
 class WXDLLIMPEXP_HTML wxHtmlFilter : public wxObject
 {
-    wxDECLARE_ABSTRACT_CLASS(wxHtmlFilter);
+	wxDECLARE_ABSTRACT_CLASS(wxHtmlFilter);
 
 public:
-    wxHtmlFilter() : wxObject() {}
-    virtual ~wxHtmlFilter() {}
+	wxHtmlFilter() : wxObject() {}
+	virtual ~wxHtmlFilter() {}
 
-    // returns true if this filter is able to open&read given file
-    virtual bool CanRead(const wxFSFile& file) const = 0;
+	// returns true if this filter is able to open&read given file
+	virtual bool CanRead(const wxFSFile& file) const = 0;
 
-    // Reads given file and returns HTML document.
-    // Returns empty string if opening failed
-    virtual wxString ReadFile(const wxFSFile& file) const = 0;
+	// Reads given file and returns HTML document.
+	// Returns empty string if opening failed
+	virtual wxString ReadFile(const wxFSFile& file) const = 0;
 };
 
 
@@ -52,11 +52,11 @@ public:
 
 class WXDLLIMPEXP_HTML wxHtmlFilterPlainText : public wxHtmlFilter
 {
-    wxDECLARE_DYNAMIC_CLASS(wxHtmlFilterPlainText);
+	wxDECLARE_DYNAMIC_CLASS(wxHtmlFilterPlainText);
 
 public:
-    virtual bool CanRead(const wxFSFile& file) const wxOVERRIDE;
-    virtual wxString ReadFile(const wxFSFile& file) const wxOVERRIDE;
+	virtual bool CanRead(const wxFSFile& file) const wxOVERRIDE;
+	virtual wxString ReadFile(const wxFSFile& file) const wxOVERRIDE;
 };
 
 //--------------------------------------------------------------------------------
@@ -66,11 +66,11 @@ public:
 
 class wxHtmlFilterHTML : public wxHtmlFilter
 {
-    wxDECLARE_DYNAMIC_CLASS(wxHtmlFilterHTML);
+	wxDECLARE_DYNAMIC_CLASS(wxHtmlFilterHTML);
 
-    public:
-        virtual bool CanRead(const wxFSFile& file) const wxOVERRIDE;
-        virtual wxString ReadFile(const wxFSFile& file) const wxOVERRIDE;
+public:
+	virtual bool CanRead(const wxFSFile& file) const wxOVERRIDE;
+	virtual wxString ReadFile(const wxFSFile& file) const wxOVERRIDE;
 };
 
 

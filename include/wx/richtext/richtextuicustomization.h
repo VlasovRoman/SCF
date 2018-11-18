@@ -26,7 +26,7 @@
     wxRichTextFormattingDialog::GetHelpInfo().SetHelpId(ID_HELP_FORMATTINGDIALOG);
     wxRichTextFormattingDialog::GetHelpInfo().SetUICustomization(& wxGetApp().GetRichTextUICustomization());
     wxRichTextBordersPage::GetHelpInfo().SetHelpId(ID_HELP_BORDERSPAGE);
-    
+
     Only the wxRichTextFormattingDialog class needs to have its customization object and help id set,
     though the application set them for individual pages if it wants.
  **/
@@ -34,11 +34,11 @@
 class WXDLLIMPEXP_RICHTEXT wxRichTextUICustomization
 {
 public:
-    wxRichTextUICustomization() {}
-    virtual ~wxRichTextUICustomization() {}
+	wxRichTextUICustomization() {}
+	virtual ~wxRichTextUICustomization() {}
 
-    /// Show the help given the current active window, and a help topic id.
-    virtual bool ShowHelp(wxWindow* win, long id) = 0;
+	/// Show the help given the current active window, and a help topic id.
+	virtual bool ShowHelp(wxWindow* win, long id) = 0;
 };
 
 /**
@@ -46,46 +46,64 @@ public:
     This class is used as a static member of dialogs, to store the help topic for the dialog
     and also the customization object that will allow help to be shown appropriately for the application.
  **/
-  
+
 class WXDLLIMPEXP_RICHTEXT wxRichTextHelpInfo
 {
 public:
-    wxRichTextHelpInfo()
-    {
-        m_helpTopic = -1;
-        m_uiCustomization = NULL;        
-    }
-    virtual ~wxRichTextHelpInfo() {}
-        
-    virtual bool ShowHelp(wxWindow* win)
-    {
-        if ( !m_uiCustomization || m_helpTopic == -1 )
-            return false;
+	wxRichTextHelpInfo()
+	{
+		m_helpTopic = -1;
+		m_uiCustomization = NULL;
+	}
+	virtual ~wxRichTextHelpInfo() {}
 
-        return m_uiCustomization->ShowHelp(win, m_helpTopic);
-    }
+	virtual bool ShowHelp(wxWindow* win)
+	{
+		if ( !m_uiCustomization || m_helpTopic == -1 )
+			return false;
 
-    /// Get the help topic identifier.
-    long GetHelpId() const { return m_helpTopic; }
+		return m_uiCustomization->ShowHelp(win, m_helpTopic);
+	}
 
-    /// Set the help topic identifier.
-    void SetHelpId(long id) { m_helpTopic = id; }
+	/// Get the help topic identifier.
+	long GetHelpId() const
+	{
+		return m_helpTopic;
+	}
 
-    /// Get the UI customization object.
-    wxRichTextUICustomization* GetUICustomization() const { return m_uiCustomization; }
+	/// Set the help topic identifier.
+	void SetHelpId(long id)
+	{
+		m_helpTopic = id;
+	}
 
-    /// Set the UI customization object.
-    void SetUICustomization(wxRichTextUICustomization* customization) { m_uiCustomization = customization; }
+	/// Get the UI customization object.
+	wxRichTextUICustomization* GetUICustomization() const
+	{
+		return m_uiCustomization;
+	}
 
-    /// Is there a valid help topic id?
-    bool HasHelpId() const { return m_helpTopic != -1; }
+	/// Set the UI customization object.
+	void SetUICustomization(wxRichTextUICustomization* customization)
+	{
+		m_uiCustomization = customization;
+	}
 
-    /// Is there a valid customization object?
-    bool HasUICustomization() const { return m_uiCustomization != NULL; }
+	/// Is there a valid help topic id?
+	bool HasHelpId() const
+	{
+		return m_helpTopic != -1;
+	}
+
+	/// Is there a valid customization object?
+	bool HasUICustomization() const
+	{
+		return m_uiCustomization != NULL;
+	}
 
 protected:
-    wxRichTextUICustomization*  m_uiCustomization;
-    long                        m_helpTopic;
+	wxRichTextUICustomization*  m_uiCustomization;
+	long                        m_helpTopic;
 };
 
 /// Add this to the base class of dialogs
@@ -122,7 +140,7 @@ public:
     wxRichTextHelpInfo theClass::sm_helpInfo;
 
 #endif
-    // wxUSE_RICHTEXT
+// wxUSE_RICHTEXT
 
 #endif
-    // _WX_RICHTEXTUICUSTOMIZATION_H_
+// _WX_RICHTEXTUICUSTOMIZATION_H_

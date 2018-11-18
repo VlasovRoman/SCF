@@ -42,62 +42,62 @@
 class WXDLLIMPEXP_CORE wxIniConfig : public wxConfigBase
 {
 public:
-  // ctor & dtor
-    // if strAppName doesn't contain the extension and is not an absolute path,
-    // ".ini" is appended to it. if strVendor is empty, it's taken to be the
-    // same as strAppName.
-  wxIniConfig(const wxString& strAppName = wxEmptyString, const wxString& strVendor = wxEmptyString,
-    const wxString& localFilename = wxEmptyString, const wxString& globalFilename = wxEmptyString, long style = wxCONFIG_USE_LOCAL_FILE);
-  virtual ~wxIniConfig();
+	// ctor & dtor
+	// if strAppName doesn't contain the extension and is not an absolute path,
+	// ".ini" is appended to it. if strVendor is empty, it's taken to be the
+	// same as strAppName.
+	wxIniConfig(const wxString& strAppName = wxEmptyString, const wxString& strVendor = wxEmptyString,
+	            const wxString& localFilename = wxEmptyString, const wxString& globalFilename = wxEmptyString, long style = wxCONFIG_USE_LOCAL_FILE);
+	virtual ~wxIniConfig();
 
-  // implement inherited pure virtual functions
-  virtual void SetPath(const wxString& strPath) wxOVERRIDE;
-  virtual const wxString& GetPath() const wxOVERRIDE;
+	// implement inherited pure virtual functions
+	virtual void SetPath(const wxString& strPath) wxOVERRIDE;
+	virtual const wxString& GetPath() const wxOVERRIDE;
 
-  virtual bool GetFirstGroup(wxString& str, long& lIndex) const wxOVERRIDE;
-  virtual bool GetNextGroup (wxString& str, long& lIndex) const wxOVERRIDE;
-  virtual bool GetFirstEntry(wxString& str, long& lIndex) const wxOVERRIDE;
-  virtual bool GetNextEntry (wxString& str, long& lIndex) const wxOVERRIDE;
+	virtual bool GetFirstGroup(wxString& str, long& lIndex) const wxOVERRIDE;
+	virtual bool GetNextGroup (wxString& str, long& lIndex) const wxOVERRIDE;
+	virtual bool GetFirstEntry(wxString& str, long& lIndex) const wxOVERRIDE;
+	virtual bool GetNextEntry (wxString& str, long& lIndex) const wxOVERRIDE;
 
-  virtual size_t GetNumberOfEntries(bool bRecursive = false) const wxOVERRIDE;
-  virtual size_t GetNumberOfGroups(bool bRecursive = false) const wxOVERRIDE;
+	virtual size_t GetNumberOfEntries(bool bRecursive = false) const wxOVERRIDE;
+	virtual size_t GetNumberOfGroups(bool bRecursive = false) const wxOVERRIDE;
 
-  virtual bool HasGroup(const wxString& strName) const wxOVERRIDE;
-  virtual bool HasEntry(const wxString& strName) const wxOVERRIDE;
+	virtual bool HasGroup(const wxString& strName) const wxOVERRIDE;
+	virtual bool HasEntry(const wxString& strName) const wxOVERRIDE;
 
-  // return true if the current group is empty
-  bool IsEmpty() const;
+	// return true if the current group is empty
+	bool IsEmpty() const;
 
-  virtual bool Flush(bool bCurrentOnly = false) wxOVERRIDE;
+	virtual bool Flush(bool bCurrentOnly = false) wxOVERRIDE;
 
-  virtual bool RenameEntry(const wxString& oldName, const wxString& newName) wxOVERRIDE;
-  virtual bool RenameGroup(const wxString& oldName, const wxString& newName) wxOVERRIDE;
+	virtual bool RenameEntry(const wxString& oldName, const wxString& newName) wxOVERRIDE;
+	virtual bool RenameGroup(const wxString& oldName, const wxString& newName) wxOVERRIDE;
 
-  virtual bool DeleteEntry(const wxString& Key, bool bGroupIfEmptyAlso = true) wxOVERRIDE;
-  virtual bool DeleteGroup(const wxString& szKey) wxOVERRIDE;
-  virtual bool DeleteAll() wxOVERRIDE;
+	virtual bool DeleteEntry(const wxString& Key, bool bGroupIfEmptyAlso = true) wxOVERRIDE;
+	virtual bool DeleteGroup(const wxString& szKey) wxOVERRIDE;
+	virtual bool DeleteAll() wxOVERRIDE;
 
 protected:
-  // read/write
-  bool DoReadString(const wxString& key, wxString *pStr) const wxOVERRIDE;
-  bool DoReadLong(const wxString& key, long *plResult) const wxOVERRIDE;
-  bool DoReadBinary(const wxString& key, wxMemoryBuffer *buf) const wxOVERRIDE;
+	// read/write
+	bool DoReadString(const wxString& key, wxString *pStr) const wxOVERRIDE;
+	bool DoReadLong(const wxString& key, long *plResult) const wxOVERRIDE;
+	bool DoReadBinary(const wxString& key, wxMemoryBuffer *buf) const wxOVERRIDE;
 
-  bool DoWriteString(const wxString& key, const wxString& szValue) wxOVERRIDE;
-  bool DoWriteLong(const wxString& key, long lValue) wxOVERRIDE;
-  bool DoWriteBinary(const wxString& key, const wxMemoryBuffer& buf) wxOVERRIDE;
+	bool DoWriteString(const wxString& key, const wxString& szValue) wxOVERRIDE;
+	bool DoWriteLong(const wxString& key, long lValue) wxOVERRIDE;
+	bool DoWriteBinary(const wxString& key, const wxMemoryBuffer& buf) wxOVERRIDE;
 
 private:
-  // helpers
-  wxString GetPrivateKeyName(const wxString& szKey) const;
-  wxString GetKeyName(const wxString& szKey) const;
+	// helpers
+	wxString GetPrivateKeyName(const wxString& szKey) const;
+	wxString GetKeyName(const wxString& szKey) const;
 
-  wxString m_strLocalFilename;  // name of the private INI file
-  wxString m_strGroup,    // current group in appname.ini file
-           m_strPath;     // the rest of the path (no trailing '_'!)
+	wxString m_strLocalFilename;  // name of the private INI file
+	wxString m_strGroup,    // current group in appname.ini file
+	         m_strPath;     // the rest of the path (no trailing '_'!)
 
-  wxDECLARE_NO_COPY_CLASS(wxIniConfig);
-  wxDECLARE_ABSTRACT_CLASS(wxIniConfig);
+	wxDECLARE_NO_COPY_CLASS(wxIniConfig);
+	wxDECLARE_ABSTRACT_CLASS(wxIniConfig);
 };
 
 #endif // wxUSE_CONFIG && wxUSE_INICONF

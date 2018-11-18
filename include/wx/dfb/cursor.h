@@ -19,26 +19,32 @@ class WXDLLIMPEXP_FWD_CORE wxBitmap;
 class WXDLLIMPEXP_CORE wxCursor : public wxCursorBase
 {
 public:
-    wxCursor() {}
-    wxCursor(wxStockCursor id) { InitFromStock(id); }
+	wxCursor() {}
+	wxCursor(wxStockCursor id)
+	{
+		InitFromStock(id);
+	}
 #if WXWIN_COMPATIBILITY_2_8
-    wxCursor(int id) { InitFromStock((wxStockCursor)id); }
+	wxCursor(int id)
+	{
+		InitFromStock((wxStockCursor)id);
+	}
 #endif
-    wxCursor(const wxString& name,
-             wxBitmapType type = wxCURSOR_DEFAULT_TYPE,
-             int hotSpotX = 0, int hotSpotY = 0);
+	wxCursor(const wxString& name,
+	         wxBitmapType type = wxCURSOR_DEFAULT_TYPE,
+	         int hotSpotX = 0, int hotSpotY = 0);
 
-    // implementation
-    wxBitmap GetBitmap() const;
+	// implementation
+	wxBitmap GetBitmap() const;
 
 protected:
-    void InitFromStock(wxStockCursor);
+	void InitFromStock(wxStockCursor);
 
-    // ref counting code
-    virtual wxGDIRefData *CreateGDIRefData() const;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
+	// ref counting code
+	virtual wxGDIRefData *CreateGDIRefData() const;
+	virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
 
-    wxDECLARE_DYNAMIC_CLASS(wxCursor);
+	wxDECLARE_DYNAMIC_CLASS(wxCursor);
 };
 
 #endif // _WX_DFB_CURSOR_H_

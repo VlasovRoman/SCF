@@ -21,69 +21,75 @@
 class WXDLLIMPEXP_CORE wxGenericStaticText : public wxStaticTextBase
 {
 public:
-    wxGenericStaticText() { Init(); }
+	wxGenericStaticText()
+	{
+		Init();
+	}
 
-    wxGenericStaticText(wxWindow *parent,
-                 wxWindowID id,
-                 const wxString& label,
-                 const wxPoint& pos = wxDefaultPosition,
-                 const wxSize& size = wxDefaultSize,
-                 long style = 0,
-                 const wxString& name = wxStaticTextNameStr)
-    {
-        Init();
+	wxGenericStaticText(wxWindow *parent,
+	                    wxWindowID id,
+	                    const wxString& label,
+	                    const wxPoint& pos = wxDefaultPosition,
+	                    const wxSize& size = wxDefaultSize,
+	                    long style = 0,
+	                    const wxString& name = wxStaticTextNameStr)
+	{
+		Init();
 
-        Create(parent, id, label, pos, size, style, name);
-    }
+		Create(parent, id, label, pos, size, style, name);
+	}
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxString& label,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = 0,
-                const wxString& name = wxStaticTextNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxStaticTextNameStr);
 
-    virtual ~wxGenericStaticText();
+	virtual ~wxGenericStaticText();
 
 
-    // overridden base class virtual methods
-    virtual void SetLabel(const wxString& label) wxOVERRIDE;
-    virtual bool SetFont(const wxFont &font) wxOVERRIDE;
+	// overridden base class virtual methods
+	virtual void SetLabel(const wxString& label) wxOVERRIDE;
+	virtual bool SetFont(const wxFont &font) wxOVERRIDE;
 
 protected:
-    virtual wxSize DoGetBestClientSize() const wxOVERRIDE;
+	virtual wxSize DoGetBestClientSize() const wxOVERRIDE;
 
-    virtual wxString DoGetLabel() const wxOVERRIDE { return m_label; }
-    virtual void DoSetLabel(const wxString& label) wxOVERRIDE;
+	virtual wxString DoGetLabel() const wxOVERRIDE
+	{
+		return m_label;
+	}
+	virtual void DoSetLabel(const wxString& label) wxOVERRIDE;
 
-    void DoSetSize(int x, int y, int width, int height, int sizeFlags) wxOVERRIDE;
+	void DoSetSize(int x, int y, int width, int height, int sizeFlags) wxOVERRIDE;
 
 #if wxUSE_MARKUP
-    virtual bool DoSetLabelMarkup(const wxString& markup) wxOVERRIDE;
+	virtual bool DoSetLabelMarkup(const wxString& markup) wxOVERRIDE;
 #endif // wxUSE_MARKUP
 
 private:
-    void Init()
-    {
+	void Init()
+	{
 #if wxUSE_MARKUP
-        m_markupText = NULL;
+		m_markupText = NULL;
 #endif // wxUSE_MARKUP
-    }
+	}
 
-    void OnPaint(wxPaintEvent& event);
+	void OnPaint(wxPaintEvent& event);
 
-    void DoDrawLabel(wxDC& dc, const wxRect& rect);
+	void DoDrawLabel(wxDC& dc, const wxRect& rect);
 
-    // These fields are only used if m_markupText == NULL.
-    wxString m_label;
-    int m_mnemonic;
+	// These fields are only used if m_markupText == NULL.
+	wxString m_label;
+	int m_mnemonic;
 
 #if wxUSE_MARKUP
-    class wxMarkupText *m_markupText;
+	class wxMarkupText *m_markupText;
 #endif // wxUSE_MARKUP
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxGenericStaticText);
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxGenericStaticText);
 };
 
 #endif // _WX_GENERIC_STATTEXTG_H_

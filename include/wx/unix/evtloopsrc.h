@@ -20,28 +20,28 @@ class wxFDIOHandler;
 class wxUnixEventLoopSource : public wxEventLoopSource
 {
 public:
-    // dispatcher and fdioHandler are only used here to allow us to unregister
-    // from the event loop when we're destroyed
-    wxUnixEventLoopSource(wxFDIODispatcher *dispatcher,
-                          wxFDIOHandler *fdioHandler,
-                          int fd,
-                          wxEventLoopSourceHandler *handler,
-                          int flags)
-        : wxEventLoopSource(handler, flags),
-          m_dispatcher(dispatcher),
-          m_fdioHandler(fdioHandler),
-          m_fd(fd)
-    {
-    }
+	// dispatcher and fdioHandler are only used here to allow us to unregister
+	// from the event loop when we're destroyed
+	wxUnixEventLoopSource(wxFDIODispatcher *dispatcher,
+	                      wxFDIOHandler *fdioHandler,
+	                      int fd,
+	                      wxEventLoopSourceHandler *handler,
+	                      int flags)
+		: wxEventLoopSource(handler, flags),
+		  m_dispatcher(dispatcher),
+		  m_fdioHandler(fdioHandler),
+		  m_fd(fd)
+	{
+	}
 
-    virtual ~wxUnixEventLoopSource();
+	virtual ~wxUnixEventLoopSource();
 
 private:
-    wxFDIODispatcher * const m_dispatcher;
-    wxFDIOHandler * const m_fdioHandler;
-    const int m_fd;
+	wxFDIODispatcher * const m_dispatcher;
+	wxFDIOHandler * const m_fdioHandler;
+	const int m_fd;
 
-    wxDECLARE_NO_COPY_CLASS(wxUnixEventLoopSource);
+	wxDECLARE_NO_COPY_CLASS(wxUnixEventLoopSource);
 };
 
 #endif // _WX_UNIX_EVTLOOPSRC_H_

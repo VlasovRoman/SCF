@@ -35,66 +35,91 @@ class WXDLLIMPEXP_FWD_CORE wxWindowBase;
 class WXDLLIMPEXP_CORE wxValidator : public wxEvtHandler
 {
 public:
-    wxValidator();
-    wxValidator(const wxValidator& other)
-        : wxEvtHandler()
-        , m_validatorWindow(other.m_validatorWindow)
-    {
-    }
-    virtual ~wxValidator();
+	wxValidator();
+	wxValidator(const wxValidator& other)
+		: wxEvtHandler()
+		, m_validatorWindow(other.m_validatorWindow)
+	{
+	}
+	virtual ~wxValidator();
 
-    // Make a clone of this validator (or return NULL) - currently necessary
-    // if you're passing a reference to a validator.
-    // Another possibility is to always pass a pointer to a new validator
-    // (so the calling code can use a copy constructor of the relevant class).
-    virtual wxObject *Clone() const
-        { return NULL; }
-    bool Copy(const wxValidator& val)
-        { m_validatorWindow = val.m_validatorWindow; return true; }
+	// Make a clone of this validator (or return NULL) - currently necessary
+	// if you're passing a reference to a validator.
+	// Another possibility is to always pass a pointer to a new validator
+	// (so the calling code can use a copy constructor of the relevant class).
+	virtual wxObject *Clone() const
+	{
+		return NULL;
+	}
+	bool Copy(const wxValidator& val)
+	{
+		m_validatorWindow = val.m_validatorWindow;
+		return true;
+	}
 
-    // Called when the value in the window must be validated.
-    // This function can pop up an error message.
-    virtual bool Validate(wxWindow *WXUNUSED(parent)) { return false; }
+	// Called when the value in the window must be validated.
+	// This function can pop up an error message.
+	virtual bool Validate(wxWindow *WXUNUSED(parent))
+	{
+		return false;
+	}
 
-    // Called to transfer data to the window
-    virtual bool TransferToWindow() { return false; }
+	// Called to transfer data to the window
+	virtual bool TransferToWindow()
+	{
+		return false;
+	}
 
-    // Called to transfer data from the window
-    virtual bool TransferFromWindow() { return false; }
+	// Called to transfer data from the window
+	virtual bool TransferFromWindow()
+	{
+		return false;
+	}
 
-    // Called when the validator is associated with a window, may be useful to
-    // override if it needs to somehow initialize the window.
-    virtual void SetWindow(wxWindow *win) { m_validatorWindow = win; }
+	// Called when the validator is associated with a window, may be useful to
+	// override if it needs to somehow initialize the window.
+	virtual void SetWindow(wxWindow *win)
+	{
+		m_validatorWindow = win;
+	}
 
-    // accessors
-    wxWindow *GetWindow() const { return m_validatorWindow; }
+	// accessors
+	wxWindow *GetWindow() const
+	{
+		return m_validatorWindow;
+	}
 
-    // validators beep by default if invalid key is pressed, this function
-    // allows to change this
-    static void SuppressBellOnError(bool suppress = true)
-        { ms_isSilent = suppress; }
+	// validators beep by default if invalid key is pressed, this function
+	// allows to change this
+	static void SuppressBellOnError(bool suppress = true)
+	{
+		ms_isSilent = suppress;
+	}
 
-    // test if beep is currently disabled
-    static bool IsSilent() { return ms_isSilent; }
+	// test if beep is currently disabled
+	static bool IsSilent()
+	{
+		return ms_isSilent;
+	}
 
-    // this function is deprecated because it handled its parameter
-    // unnaturally: it disabled the bell when it was true, not false as could
-    // be expected; use SuppressBellOnError() instead
+	// this function is deprecated because it handled its parameter
+	// unnaturally: it disabled the bell when it was true, not false as could
+	// be expected; use SuppressBellOnError() instead
 #if WXWIN_COMPATIBILITY_2_8
-    static wxDEPRECATED_INLINE(
-        void SetBellOnError(bool doIt = true),
-        ms_isSilent = doIt;
-    )
+	static wxDEPRECATED_INLINE(
+	    void SetBellOnError(bool doIt = true),
+	    ms_isSilent = doIt;
+	)
 #endif
 
 protected:
-    wxWindow *m_validatorWindow;
+	wxWindow *m_validatorWindow;
 
 private:
-    static bool ms_isSilent;
+	static bool ms_isSilent;
 
-    wxDECLARE_DYNAMIC_CLASS(wxValidator);
-    wxDECLARE_NO_ASSIGN_CLASS(wxValidator);
+	wxDECLARE_DYNAMIC_CLASS(wxValidator);
+	wxDECLARE_NO_ASSIGN_CLASS(wxValidator);
 };
 
 extern WXDLLIMPEXP_DATA_CORE(const wxValidator) wxDefaultValidator;
@@ -102,17 +127,17 @@ extern WXDLLIMPEXP_DATA_CORE(const wxValidator) wxDefaultValidator;
 #define wxVALIDATOR_PARAM(val) val
 
 #else // !wxUSE_VALIDATORS
-    // wxWidgets is compiled without support for wxValidator, but we still
-    // want to be able to pass wxDefaultValidator to the functions which take
-    // a wxValidator parameter to avoid using "#if wxUSE_VALIDATORS"
-    // everywhere
-    class WXDLLIMPEXP_FWD_CORE wxValidator;
-    static const wxValidator* const wxDefaultValidatorPtr = NULL;
-    #define wxDefaultValidator (*wxDefaultValidatorPtr)
+// wxWidgets is compiled without support for wxValidator, but we still
+// want to be able to pass wxDefaultValidator to the functions which take
+// a wxValidator parameter to avoid using "#if wxUSE_VALIDATORS"
+// everywhere
+class WXDLLIMPEXP_FWD_CORE wxValidator;
+static const wxValidator* const wxDefaultValidatorPtr = NULL;
+#define wxDefaultValidator (*wxDefaultValidatorPtr)
 
-    // this macro allows to avoid warnings about unused parameters when
-    // wxUSE_VALIDATORS == 0
-    #define wxVALIDATOR_PARAM(val)
+// this macro allows to avoid warnings about unused parameters when
+// wxUSE_VALIDATORS == 0
+#define wxVALIDATOR_PARAM(val)
 #endif // wxUSE_VALIDATORS/!wxUSE_VALIDATORS
 
 #endif // _WX_VALIDATE_H_

@@ -74,14 +74,14 @@
 //--------------------------------------------------------------------------------
 
 #define wxHTML_COND_ISANCHOR              1
-        // Finds the anchor of 'param' name (pointer to wxString).
+// Finds the anchor of 'param' name (pointer to wxString).
 
 #define wxHTML_COND_ISIMAGEMAP            2
-        // Finds imagemap of 'param' name (pointer to wxString).
-    // (used exclusively by m_image.cpp)
+// Finds imagemap of 'param' name (pointer to wxString).
+// (used exclusively by m_image.cpp)
 
 #define wxHTML_COND_USER              10000
-        // User-defined conditions should start from this number
+// User-defined conditions should start from this number
 
 
 //--------------------------------------------------------------------------------
@@ -89,10 +89,10 @@
 //                  wxHTML internal constants
 //--------------------------------------------------------------------------------
 
-    /* size of one scroll step of wxHtmlWindow in pixels */
+/* size of one scroll step of wxHtmlWindow in pixels */
 #define wxHTML_SCROLL_STEP               16
 
-    /* size of temporary buffer used during parsing */
+/* size of temporary buffer used during parsing */
 #define wxHTML_BUFLEN                  1024
 
 #endif // wxUSE_HTML

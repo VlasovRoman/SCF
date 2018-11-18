@@ -24,48 +24,48 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 class WXDLLIMPEXP_CORE wxWindowDCImpl: public wxGCDCImpl
 {
 public:
-    wxWindowDCImpl( wxDC *owner );
-    wxWindowDCImpl( wxDC *owner, wxWindow *window );
-    virtual ~wxWindowDCImpl();
+	wxWindowDCImpl( wxDC *owner );
+	wxWindowDCImpl( wxDC *owner, wxWindow *window );
+	virtual ~wxWindowDCImpl();
 
-    virtual void DoGetSize( int *width, int *height ) const;
-    virtual wxBitmap DoGetAsBitmap(const wxRect *subrect) const;
+	virtual void DoGetSize( int *width, int *height ) const;
+	virtual wxBitmap DoGetAsBitmap(const wxRect *subrect) const;
 
 protected:
-    bool m_release;
-    int m_width;
-    int m_height;
+	bool m_release;
+	int m_width;
+	int m_height;
 
-    wxDECLARE_CLASS(wxWindowDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxWindowDCImpl);
+	wxDECLARE_CLASS(wxWindowDCImpl);
+	wxDECLARE_NO_COPY_CLASS(wxWindowDCImpl);
 };
 
 
 class WXDLLIMPEXP_CORE wxClientDCImpl: public wxWindowDCImpl
 {
 public:
-    wxClientDCImpl( wxDC *owner );
-    wxClientDCImpl( wxDC *owner, wxWindow *window );
-    virtual ~wxClientDCImpl();
+	wxClientDCImpl( wxDC *owner );
+	wxClientDCImpl( wxDC *owner, wxWindow *window );
+	virtual ~wxClientDCImpl();
 
 private:
-    wxDECLARE_CLASS(wxClientDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxClientDCImpl);
+	wxDECLARE_CLASS(wxClientDCImpl);
+	wxDECLARE_NO_COPY_CLASS(wxClientDCImpl);
 };
 
 
 class WXDLLIMPEXP_CORE wxPaintDCImpl: public wxWindowDCImpl
 {
 public:
-    wxPaintDCImpl( wxDC *owner );
-    wxPaintDCImpl( wxDC *owner, wxWindow *win );
-    virtual ~wxPaintDCImpl();
+	wxPaintDCImpl( wxDC *owner );
+	wxPaintDCImpl( wxDC *owner, wxWindow *win );
+	virtual ~wxPaintDCImpl();
 
 protected:
-    wxDECLARE_CLASS(wxPaintDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxPaintDCImpl);
+	wxDECLARE_CLASS(wxPaintDCImpl);
+	wxDECLARE_NO_COPY_CLASS(wxPaintDCImpl);
 };
 
 
 #endif
-    // _WX_DCCLIENT_H_
+// _WX_DCCLIENT_H_

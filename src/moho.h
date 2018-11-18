@@ -2,60 +2,40 @@
 #include "startup.h"
 #include "gpg.h"
 
-using namespace std;
-
-//@@virtual table from constructor
-struct CScApp__vftable
-{
-	int unk1;// (a2 + 68)
-	int unk2;//(a2 + 72)
-	bool unk3;//(a2 + 73)
-	int unk4;//(a2 + 76)
-	int unk5;//
-	int unk6;//
-	int unk7;//
-	int unk8;//(a2 + 136)
-	int unk9;//(a2 + 140)
-
-	_DWORD unk_perf_counter;
-
-	int unk10;
-	int unk11;
-	int unk12;
-	int unk13;
-	int unk14;
-	int unk15;
-	int unk16;
-	string unk_str1;
-	string unk_str2;
-};
+class CScApp;
 
 class Moho
 {
 public:
 
-	Moho(){};
-	Moho(CScApp__vftable &vft);
-	void WIN_AppExecute(CScApp__vftable *vft);
-	int init_unk_sv(CScApp__vftable &vft, string s1, string s2);
+	Moho() {};
+	Moho(CScApp &vft);
+	void WIN_AppExecute(CScApp *vft);
+	int init_unk_sv(CScApp &vft, std::string s1, std::string s2);
 	LRESULT fn(int code, WPARAM wParam, LPARAM lParam);
+	void THREAD_SetAffinity(int a1);
+	void PLAT_Init();
 
-	__attribute__((cdecl)) string USER_GetAppCacheDir();
+	__attribute__((cdecl)) std::string USER_GetAppCacheDir();
 	void USER_PurgeAppCacheDir();
-	__attribute__((cdecl)) string USER_GetAppDataDir();
-	string replaceAll( const string& s, const string& f, const string& r );
+	__attribute__((cdecl)) std::string USER_GetAppDataDir();
+	std::string replaceAll( const std::string& s, const std::string& f, const std::string& r );
 
 private:
 	LPTSTR Path;
-	string game_name;
-	string dev_company;
-	string SCFA;
-	string leftslash = "\\";
-	string rightslash = "/";
-	string double_left_slash = "\\\\";
+	std::string game_name;
+	std::string dev_company;
+	std::string SCFA;
+	std::string leftslash = "\\";
+	std::string rightslash = "/";
+	std::string double_left_slash = "\\\\";
 	DWORD dword_10A647C;
 	DWORD dword_10A6488;
 	DWORD dword_10A6480;
 	DWORD dword_10A6484;
 	DWORD dword_10A63BC;
+	int PLAT_control_var = 0;
+	unsigned long dword_109BA774;
+	char byte_109BA76A;
+	char byte_109BA76B;
 };

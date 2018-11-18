@@ -15,25 +15,25 @@
 class WXDLLIMPEXP_FWD_CORE wxTaskBarButton;
 
 class WXDLLIMPEXP_CORE wxAppProgressIndicator
-    : public wxAppProgressIndicatorBase
+	: public wxAppProgressIndicatorBase
 {
 public:
-    wxAppProgressIndicator(wxWindow* parent = NULL, int maxValue = 100);
-    virtual ~wxAppProgressIndicator();
+	wxAppProgressIndicator(wxWindow* parent = NULL, int maxValue = 100);
+	virtual ~wxAppProgressIndicator();
 
-    virtual bool IsAvailable() const wxOVERRIDE;
+	virtual bool IsAvailable() const wxOVERRIDE;
 
-    virtual void SetValue(int value) wxOVERRIDE;
-    virtual void SetRange(int range) wxOVERRIDE;
-    virtual void Pulse() wxOVERRIDE;
-    virtual void Reset() wxOVERRIDE;
+	virtual void SetValue(int value) wxOVERRIDE;
+	virtual void SetRange(int range) wxOVERRIDE;
+	virtual void Pulse() wxOVERRIDE;
+	virtual void Reset() wxOVERRIDE;
 
 private:
-    int m_maxValue;
+	int m_maxValue;
 
-    wxVector<wxTaskBarButton*> m_taskBarButtons;
+	wxVector<wxTaskBarButton*> m_taskBarButtons;
 
-    wxDECLARE_NO_COPY_CLASS(wxAppProgressIndicator);
+	wxDECLARE_NO_COPY_CLASS(wxAppProgressIndicator);
 };
 
 #endif  // _WX_MSW_APPPROG_H_

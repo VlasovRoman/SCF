@@ -19,39 +19,45 @@
 
 template <class W>
 class wxCustomBackgroundWindow : public W,
-                                 public wxCustomBackgroundWindowBase
+	public wxCustomBackgroundWindowBase
 {
 public:
-    typedef W BaseWindowClass;
+	typedef W BaseWindowClass;
 
-    wxCustomBackgroundWindow() { m_backgroundBrush = NULL; }
+	wxCustomBackgroundWindow()
+	{
+		m_backgroundBrush = NULL;
+	}
 
-    virtual ~wxCustomBackgroundWindow() { delete m_backgroundBrush; }
+	virtual ~wxCustomBackgroundWindow()
+	{
+		delete m_backgroundBrush;
+	}
 
 protected:
-    virtual void DoSetBackgroundBitmap(const wxBitmap& bmp) wxOVERRIDE
-    {
-        delete m_backgroundBrush;
-        m_backgroundBrush = bmp.IsOk() ? new wxBrush(bmp) : NULL;
+	virtual void DoSetBackgroundBitmap(const wxBitmap& bmp) wxOVERRIDE
+	{
+		delete m_backgroundBrush;
+		m_backgroundBrush = bmp.IsOk() ? new wxBrush(bmp) : NULL;
 
-        // Our transparent children should use our background if we have it,
-        // otherwise try to restore m_inheritBgCol to some reasonable value: true
-        // if we also have non-default background colour or false otherwise.
-        BaseWindowClass::m_inheritBgCol = bmp.IsOk()
-                                            || BaseWindowClass::UseBgCol();
-    }
+		// Our transparent children should use our background if we have it,
+		// otherwise try to restore m_inheritBgCol to some reasonable value: true
+		// if we also have non-default background colour or false otherwise.
+		BaseWindowClass::m_inheritBgCol = bmp.IsOk()
+		|| BaseWindowClass::UseBgCol();
+	}
 
-    virtual WXHBRUSH MSWGetCustomBgBrush() wxOVERRIDE
-    {
-        if ( m_backgroundBrush )
-            return (WXHBRUSH)m_backgroundBrush->GetResourceHandle();
+	virtual WXHBRUSH MSWGetCustomBgBrush() wxOVERRIDE
+	{
+		if ( m_backgroundBrush )
+			return (WXHBRUSH)m_backgroundBrush->GetResourceHandle();
 
-        return BaseWindowClass::MSWGetCustomBgBrush();
-    }
+		return BaseWindowClass::MSWGetCustomBgBrush();
+	}
 
-    wxBrush *m_backgroundBrush;
+	wxBrush *m_backgroundBrush;
 
-    wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxCustomBackgroundWindow, W);
+	wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxCustomBackgroundWindow, W);
 };
 
 #endif // _WX_MSW_CUSTOMBGWIN_H_

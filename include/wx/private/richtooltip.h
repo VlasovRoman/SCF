@@ -19,26 +19,26 @@
 class wxRichToolTipImpl
 {
 public:
-    // This is implemented in a platform-specific way.
-    static wxRichToolTipImpl* Create(const wxString& title,
-                                     const wxString& message);
+	// This is implemented in a platform-specific way.
+	static wxRichToolTipImpl* Create(const wxString& title,
+	                                 const wxString& message);
 
-    // These methods simply mirror the public wxRichToolTip ones.
-    virtual void SetBackgroundColour(const wxColour& col,
-                                     const wxColour& colEnd) = 0;
-    virtual void SetCustomIcon(const wxIcon& icon) = 0;
-    virtual void SetStandardIcon(int icon) = 0;
-    virtual void SetTimeout(unsigned milliseconds,
-                            unsigned millisecondsShowdelay = 0) = 0;
-    virtual void SetTipKind(wxTipKind tipKind) = 0;
-    virtual void SetTitleFont(const wxFont& font) = 0;
+	// These methods simply mirror the public wxRichToolTip ones.
+	virtual void SetBackgroundColour(const wxColour& col,
+	                                 const wxColour& colEnd) = 0;
+	virtual void SetCustomIcon(const wxIcon& icon) = 0;
+	virtual void SetStandardIcon(int icon) = 0;
+	virtual void SetTimeout(unsigned milliseconds,
+	                        unsigned millisecondsShowdelay = 0) = 0;
+	virtual void SetTipKind(wxTipKind tipKind) = 0;
+	virtual void SetTitleFont(const wxFont& font) = 0;
 
-    virtual void ShowFor(wxWindow* win, const wxRect* rect = NULL) = 0;
+	virtual void ShowFor(wxWindow* win, const wxRect* rect = NULL) = 0;
 
-    virtual ~wxRichToolTipImpl() { }
+	virtual ~wxRichToolTipImpl() { }
 
 protected:
-    wxRichToolTipImpl() { }
+	wxRichToolTipImpl() { }
 };
 
 #endif // _WX_PRIVATE_RICHTOOLTIP_H_

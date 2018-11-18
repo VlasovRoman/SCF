@@ -21,20 +21,23 @@ class WXDLLIMPEXP_FWD_CORE wxNonOwnedWindow;
 class WXDLLIMPEXP_CORE wxModalEventLoop : public wxGUIEventLoop
 {
 public:
-    wxModalEventLoop(wxWindow *modalWindow);
-    wxModalEventLoop(WXWindow modalNativeWindow);
-    
+	wxModalEventLoop(wxWindow *modalWindow);
+	wxModalEventLoop(WXWindow modalNativeWindow);
+
 #ifdef __WXOSX_COCOA__
-    // skip wxGUIEventLoop to avoid missing Enter/Exit notifications
-    virtual int Run() { return wxCFEventLoop::Run(); }
+	// skip wxGUIEventLoop to avoid missing Enter/Exit notifications
+	virtual int Run()
+	{
+		return wxCFEventLoop::Run();
+	}
 #endif
 protected:
-    virtual void OSXDoRun();
-    virtual void OSXDoStop();
+	virtual void OSXDoRun();
+	virtual void OSXDoStop();
 
-    // (in case) the modal window for this event loop
-    wxNonOwnedWindow* m_modalWindow;
-    WXWindow m_modalNativeWindow;
+	// (in case) the modal window for this event loop
+	wxNonOwnedWindow* m_modalWindow;
+	WXWindow m_modalNativeWindow;
 };
 
 #endif // _WX_OSX_EVTLOOP_H_

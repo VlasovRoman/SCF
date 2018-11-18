@@ -23,7 +23,7 @@
 #include "wx/longlong.h"
 
 #if wxUSE_DATETIME
-    #include "wx/datetime.h"
+#include "wx/datetime.h"
 #endif // wxUSE_DATETIME
 
 #include "wx/iosfwrap.h"
@@ -55,40 +55,61 @@ class wxAny;
 
 class WXDLLIMPEXP_BASE wxVariantData : public wxObjectRefData
 {
-    friend class wxVariant;
+	friend class wxVariant;
 public:
-    wxVariantData() { }
+	wxVariantData() { }
 
-    // Override these to provide common functionality
-    virtual bool Eq(wxVariantData& data) const = 0;
+	// Override these to provide common functionality
+	virtual bool Eq(wxVariantData& data) const = 0;
 
 #if wxUSE_STD_IOSTREAM
-    virtual bool Write(wxSTD ostream& WXUNUSED(str)) const { return false; }
+	virtual bool Write(wxSTD ostream& WXUNUSED(str)) const
+	{
+		return false;
+	}
 #endif
-    virtual bool Write(wxString& WXUNUSED(str)) const { return false; }
+	virtual bool Write(wxString& WXUNUSED(str)) const
+	{
+		return false;
+	}
 #if wxUSE_STD_IOSTREAM
-    virtual bool Read(wxSTD istream& WXUNUSED(str)) { return false; }
+	virtual bool Read(wxSTD istream& WXUNUSED(str))
+	{
+		return false;
+	}
 #endif
-    virtual bool Read(wxString& WXUNUSED(str)) { return false; }
-    // What type is it? Return a string name.
-    virtual wxString GetType() const = 0;
-    // If it based on wxObject return the ClassInfo.
-    virtual wxClassInfo* GetValueClassInfo() { return NULL; }
+	virtual bool Read(wxString& WXUNUSED(str))
+	{
+		return false;
+	}
+	// What type is it? Return a string name.
+	virtual wxString GetType() const = 0;
+	// If it based on wxObject return the ClassInfo.
+	virtual wxClassInfo* GetValueClassInfo()
+	{
+		return NULL;
+	}
 
-    // Implement this to make wxVariant::UnShare work. Returns
-    // a copy of the data.
-    virtual wxVariantData* Clone() const { return NULL; }
+	// Implement this to make wxVariant::UnShare work. Returns
+	// a copy of the data.
+	virtual wxVariantData* Clone() const
+	{
+		return NULL;
+	}
 
 #if wxUSE_ANY
-    // Converts value to wxAny, if possible. Return true if successful.
-    virtual bool GetAsAny(wxAny* WXUNUSED(any)) const { return false; }
+	// Converts value to wxAny, if possible. Return true if successful.
+	virtual bool GetAsAny(wxAny* WXUNUSED(any)) const
+	{
+		return false;
+	}
 #endif
 
 protected:
-    // Protected dtor should make some incompatible code
-    // break more louder. That is, they should do data->DecRef()
-    // instead of delete data.
-    virtual ~wxVariantData() { }
+	// Protected dtor should make some incompatible code
+	// break more louder. That is, they should do data->DecRef()
+	// instead of delete data.
+	virtual ~wxVariantData() { }
 };
 
 /*
@@ -103,293 +124,400 @@ WX_DECLARE_LIST_WITH_DECL(wxVariant, wxVariantList, class WXDLLIMPEXP_BASE);
 class WXDLLIMPEXP_BASE wxVariant: public wxObject
 {
 public:
-    wxVariant();
+	wxVariant();
 
-    wxVariant(const wxVariant& variant);
-    wxVariant(wxVariantData* data, const wxString& name = wxEmptyString);
+	wxVariant(const wxVariant& variant);
+	wxVariant(wxVariantData* data, const wxString& name = wxEmptyString);
 #if wxUSE_ANY
-    wxVariant(const wxAny& any);
+	wxVariant(const wxAny& any);
 #endif
-    virtual ~wxVariant();
+	virtual ~wxVariant();
 
-    // generic assignment
-    void operator= (const wxVariant& variant);
+	// generic assignment
+	void operator= (const wxVariant& variant);
 
-    // Assignment using data, e.g.
-    // myVariant = new wxStringVariantData("hello");
-    void operator= (wxVariantData* variantData);
+	// Assignment using data, e.g.
+	// myVariant = new wxStringVariantData("hello");
+	void operator= (wxVariantData* variantData);
 
-    bool operator== (const wxVariant& variant) const;
-    bool operator!= (const wxVariant& variant) const;
+	bool operator== (const wxVariant& variant) const;
+	bool operator!= (const wxVariant& variant) const;
 
-    // Sets/gets name
-    inline void SetName(const wxString& name) { m_name = name; }
-    inline const wxString& GetName() const { return m_name; }
+	// Sets/gets name
+	inline void SetName(const wxString& name)
+	{
+		m_name = name;
+	}
+	inline const wxString& GetName() const
+	{
+		return m_name;
+	}
 
-    // Tests whether there is data
-    bool IsNull() const;
+	// Tests whether there is data
+	bool IsNull() const;
 
-    // For compatibility with wxWidgets <= 2.6, this doesn't increase
-    // reference count.
-    wxVariantData* GetData() const
-    {
-        return (wxVariantData*) m_refData;
-    }
-    void SetData(wxVariantData* data) ;
+	// For compatibility with wxWidgets <= 2.6, this doesn't increase
+	// reference count.
+	wxVariantData* GetData() const
+	{
+		return (wxVariantData*) m_refData;
+	}
+	void SetData(wxVariantData* data) ;
 
-    // make a 'clone' of the object
-    void Ref(const wxVariant& clone) { wxObject::Ref(clone); }
+	// make a 'clone' of the object
+	void Ref(const wxVariant& clone)
+	{
+		wxObject::Ref(clone);
+	}
 
-    // ensure that the data is exclusive to this variant, and not shared
-    bool Unshare();
+	// ensure that the data is exclusive to this variant, and not shared
+	bool Unshare();
 
-    // Make NULL (i.e. delete the data)
-    void MakeNull();
+	// Make NULL (i.e. delete the data)
+	void MakeNull();
 
-    // Delete data and name
-    void Clear();
+	// Delete data and name
+	void Clear();
 
-    // Returns a string representing the type of the variant,
-    // e.g. "string", "bool", "stringlist", "list", "double", "long"
-    wxString GetType() const;
+	// Returns a string representing the type of the variant,
+	// e.g. "string", "bool", "stringlist", "list", "double", "long"
+	wxString GetType() const;
 
-    bool IsType(const wxString& type) const;
-    bool IsValueKindOf(const wxClassInfo* type) const;
+	bool IsType(const wxString& type) const;
+	bool IsValueKindOf(const wxClassInfo* type) const;
 
-    // write contents to a string (e.g. for debugging)
-    wxString MakeString() const;
+	// write contents to a string (e.g. for debugging)
+	wxString MakeString() const;
 
 #if wxUSE_ANY
-    wxAny GetAny() const;
+	wxAny GetAny() const;
 #endif
 
-    // double
-    wxVariant(double val, const wxString& name = wxEmptyString);
-    bool operator== (double value) const;
-    bool operator!= (double value) const;
-    void operator= (double value) ;
-    inline operator double () const {  return GetDouble(); }
-    inline double GetReal() const { return GetDouble(); }
-    double GetDouble() const;
+	// double
+	wxVariant(double val, const wxString& name = wxEmptyString);
+	bool operator== (double value) const;
+	bool operator!= (double value) const;
+	void operator= (double value) ;
+	inline operator double () const
+	{
+		return GetDouble();
+	}
+	inline double GetReal() const
+	{
+		return GetDouble();
+	}
+	double GetDouble() const;
 
-    // long
-    wxVariant(long val, const wxString& name = wxEmptyString);
-    wxVariant(int val, const wxString& name = wxEmptyString);
-    wxVariant(short val, const wxString& name = wxEmptyString);
-    bool operator== (long value) const;
-    bool operator!= (long value) const;
-    void operator= (long value) ;
-    inline operator long () const {  return GetLong(); }
-    inline long GetInteger() const { return GetLong(); }
-    long GetLong() const;
+	// long
+	wxVariant(long val, const wxString& name = wxEmptyString);
+	wxVariant(int val, const wxString& name = wxEmptyString);
+	wxVariant(short val, const wxString& name = wxEmptyString);
+	bool operator== (long value) const;
+	bool operator!= (long value) const;
+	void operator= (long value) ;
+	inline operator long () const
+	{
+		return GetLong();
+	}
+	inline long GetInteger() const
+	{
+		return GetLong();
+	}
+	long GetLong() const;
 
-    // bool
-    wxVariant(bool val, const wxString& name = wxEmptyString);
-    bool operator== (bool value) const;
-    bool operator!= (bool value) const;
-    void operator= (bool value) ;
-    inline operator bool () const {  return GetBool(); }
-    bool GetBool() const ;
+	// bool
+	wxVariant(bool val, const wxString& name = wxEmptyString);
+	bool operator== (bool value) const;
+	bool operator!= (bool value) const;
+	void operator= (bool value) ;
+	inline operator bool () const
+	{
+		return GetBool();
+	}
+	bool GetBool() const ;
 
-    // wxDateTime
+	// wxDateTime
 #if wxUSE_DATETIME
-    wxVariant(const wxDateTime& val, const wxString& name = wxEmptyString);
-    bool operator== (const wxDateTime& value) const;
-    bool operator!= (const wxDateTime& value) const;
-    void operator= (const wxDateTime& value) ;
-    inline operator wxDateTime () const { return GetDateTime(); }
-    wxDateTime GetDateTime() const;
+	wxVariant(const wxDateTime& val, const wxString& name = wxEmptyString);
+	bool operator== (const wxDateTime& value) const;
+	bool operator!= (const wxDateTime& value) const;
+	void operator= (const wxDateTime& value) ;
+	inline operator wxDateTime () const
+	{
+		return GetDateTime();
+	}
+	wxDateTime GetDateTime() const;
 #endif
 
-    // wxString
-    wxVariant(const wxString& val, const wxString& name = wxEmptyString);
-    // these overloads are necessary to prevent the compiler from using bool
-    // version instead of wxString one:
-    wxVariant(const char* val, const wxString& name = wxEmptyString);
-    wxVariant(const wchar_t* val, const wxString& name = wxEmptyString);
-    wxVariant(const wxCStrData& val, const wxString& name = wxEmptyString);
-    wxVariant(const wxScopedCharBuffer& val, const wxString& name = wxEmptyString);
-    wxVariant(const wxScopedWCharBuffer& val, const wxString& name = wxEmptyString);
+	// wxString
+	wxVariant(const wxString& val, const wxString& name = wxEmptyString);
+	// these overloads are necessary to prevent the compiler from using bool
+	// version instead of wxString one:
+	wxVariant(const char* val, const wxString& name = wxEmptyString);
+	wxVariant(const wchar_t* val, const wxString& name = wxEmptyString);
+	wxVariant(const wxCStrData& val, const wxString& name = wxEmptyString);
+	wxVariant(const wxScopedCharBuffer& val, const wxString& name = wxEmptyString);
+	wxVariant(const wxScopedWCharBuffer& val, const wxString& name = wxEmptyString);
 
-    bool operator== (const wxString& value) const;
-    bool operator!= (const wxString& value) const;
-    wxVariant& operator=(const wxString& value);
-    // these overloads are necessary to prevent the compiler from using bool
-    // version instead of wxString one:
-    wxVariant& operator=(const char* value)
-        { return *this = wxString(value); }
-    wxVariant& operator=(const wchar_t* value)
-        { return *this = wxString(value); }
-    wxVariant& operator=(const wxCStrData& value)
-        { return *this = value.AsString(); }
-    template<typename T>
-    wxVariant& operator=(const wxScopedCharTypeBuffer<T>& value)
-        { return *this = value.data(); }
+	bool operator== (const wxString& value) const;
+	bool operator!= (const wxString& value) const;
+	wxVariant& operator=(const wxString& value);
+	// these overloads are necessary to prevent the compiler from using bool
+	// version instead of wxString one:
+	wxVariant& operator=(const char* value)
+	{
+		return *this = wxString(value);
+	}
+	wxVariant& operator=(const wchar_t* value)
+	{
+		return *this = wxString(value);
+	}
+	wxVariant& operator=(const wxCStrData& value)
+	{
+		return *this = value.AsString();
+	}
+	template<typename T>
+	wxVariant& operator=(const wxScopedCharTypeBuffer<T>& value)
+	{
+		return *this = value.data();
+	}
 
-    inline operator wxString () const {  return MakeString(); }
-    wxString GetString() const;
+	inline operator wxString () const
+	{
+		return MakeString();
+	}
+	wxString GetString() const;
 
 #if wxUSE_STD_STRING
-    wxVariant(const std::string& val, const wxString& name = wxEmptyString);
-    bool operator==(const std::string& value) const
-        { return operator==(wxString(value)); }
-    bool operator!=(const std::string& value) const
-        { return operator!=(wxString(value)); }
-    wxVariant& operator=(const std::string& value)
-        { return operator=(wxString(value)); }
-    operator std::string() const { return (operator wxString()).ToStdString(); }
+	wxVariant(const std::string& val, const wxString& name = wxEmptyString);
+	bool operator==(const std::string& value) const
+	{
+		return operator==(wxString(value));
+	}
+	bool operator!=(const std::string& value) const
+	{
+		return operator!=(wxString(value));
+	}
+	wxVariant& operator=(const std::string& value)
+	{
+		return operator=(wxString(value));
+	}
+	operator std::string() const
+	{
+		return (operator wxString()).ToStdString();
+	}
 
-    wxVariant(const wxStdWideString& val, const wxString& name = wxEmptyString);
-    bool operator==(const wxStdWideString& value) const
-        { return operator==(wxString(value)); }
-    bool operator!=(const wxStdWideString& value) const
-        { return operator!=(wxString(value)); }
-    wxVariant& operator=(const wxStdWideString& value)
-        { return operator=(wxString(value)); }
-    operator wxStdWideString() const { return (operator wxString()).ToStdWstring(); }
+	wxVariant(const wxStdWideString& val, const wxString& name = wxEmptyString);
+	bool operator==(const wxStdWideString& value) const
+	{
+		return operator==(wxString(value));
+	}
+	bool operator!=(const wxStdWideString& value) const
+	{
+		return operator!=(wxString(value));
+	}
+	wxVariant& operator=(const wxStdWideString& value)
+	{
+		return operator=(wxString(value));
+	}
+	operator wxStdWideString() const
+	{
+		return (operator wxString()).ToStdWstring();
+	}
 #endif // wxUSE_STD_STRING
 
-    // wxUniChar
-    wxVariant(const wxUniChar& val, const wxString& name = wxEmptyString);
-    wxVariant(const wxUniCharRef& val, const wxString& name = wxEmptyString);
-    wxVariant(char val, const wxString& name = wxEmptyString);
-    wxVariant(wchar_t val, const wxString& name = wxEmptyString);
-    bool operator==(const wxUniChar& value) const;
-    bool operator==(const wxUniCharRef& value) const { return *this == wxUniChar(value); }
-    bool operator==(char value) const { return *this == wxUniChar(value); }
-    bool operator==(wchar_t value) const { return *this == wxUniChar(value); }
-    bool operator!=(const wxUniChar& value) const { return !(*this == value); }
-    bool operator!=(const wxUniCharRef& value) const { return !(*this == value); }
-    bool operator!=(char value) const { return !(*this == value); }
-    bool operator!=(wchar_t value) const { return !(*this == value); }
-    wxVariant& operator=(const wxUniChar& value);
-    wxVariant& operator=(const wxUniCharRef& value) { return *this = wxUniChar(value); }
-    wxVariant& operator=(char value) { return *this = wxUniChar(value); }
-    wxVariant& operator=(wchar_t value) { return *this = wxUniChar(value); }
-    operator wxUniChar() const { return GetChar(); }
-    operator char() const { return GetChar(); }
-    operator wchar_t() const { return GetChar(); }
-    wxUniChar GetChar() const;
+	// wxUniChar
+	wxVariant(const wxUniChar& val, const wxString& name = wxEmptyString);
+	wxVariant(const wxUniCharRef& val, const wxString& name = wxEmptyString);
+	wxVariant(char val, const wxString& name = wxEmptyString);
+	wxVariant(wchar_t val, const wxString& name = wxEmptyString);
+	bool operator==(const wxUniChar& value) const;
+	bool operator==(const wxUniCharRef& value) const
+	{
+		return *this == wxUniChar(value);
+	}
+	bool operator==(char value) const
+	{
+		return *this == wxUniChar(value);
+	}
+	bool operator==(wchar_t value) const
+	{
+		return *this == wxUniChar(value);
+	}
+	bool operator!=(const wxUniChar& value) const
+	{
+		return !(*this == value);
+	}
+	bool operator!=(const wxUniCharRef& value) const
+	{
+		return !(*this == value);
+	}
+	bool operator!=(char value) const
+	{
+		return !(*this == value);
+	}
+	bool operator!=(wchar_t value) const
+	{
+		return !(*this == value);
+	}
+	wxVariant& operator=(const wxUniChar& value);
+	wxVariant& operator=(const wxUniCharRef& value)
+	{
+		return *this = wxUniChar(value);
+	}
+	wxVariant& operator=(char value)
+	{
+		return *this = wxUniChar(value);
+	}
+	wxVariant& operator=(wchar_t value)
+	{
+		return *this = wxUniChar(value);
+	}
+	operator wxUniChar() const
+	{
+		return GetChar();
+	}
+	operator char() const
+	{
+		return GetChar();
+	}
+	operator wchar_t() const
+	{
+		return GetChar();
+	}
+	wxUniChar GetChar() const;
 
-    // wxArrayString
-    wxVariant(const wxArrayString& val, const wxString& name = wxEmptyString);
-    bool operator== (const wxArrayString& value) const;
-    bool operator!= (const wxArrayString& value) const;
-    void operator= (const wxArrayString& value);
-    operator wxArrayString () const { return GetArrayString(); }
-    wxArrayString GetArrayString() const;
+	// wxArrayString
+	wxVariant(const wxArrayString& val, const wxString& name = wxEmptyString);
+	bool operator== (const wxArrayString& value) const;
+	bool operator!= (const wxArrayString& value) const;
+	void operator= (const wxArrayString& value);
+	operator wxArrayString () const
+	{
+		return GetArrayString();
+	}
+	wxArrayString GetArrayString() const;
 
-    // void*
-    wxVariant(void* ptr, const wxString& name = wxEmptyString);
-    bool operator== (void* value) const;
-    bool operator!= (void* value) const;
-    void operator= (void* value);
-    operator void* () const {  return GetVoidPtr(); }
-    void* GetVoidPtr() const;
+	// void*
+	wxVariant(void* ptr, const wxString& name = wxEmptyString);
+	bool operator== (void* value) const;
+	bool operator!= (void* value) const;
+	void operator= (void* value);
+	operator void* () const
+	{
+		return GetVoidPtr();
+	}
+	void* GetVoidPtr() const;
 
-    // wxObject*
-    wxVariant(wxObject* ptr, const wxString& name = wxEmptyString);
-    bool operator== (wxObject* value) const;
-    bool operator!= (wxObject* value) const;
-    void operator= (wxObject* value);
-    wxObject* GetWxObjectPtr() const;
+	// wxObject*
+	wxVariant(wxObject* ptr, const wxString& name = wxEmptyString);
+	bool operator== (wxObject* value) const;
+	bool operator!= (wxObject* value) const;
+	void operator= (wxObject* value);
+	wxObject* GetWxObjectPtr() const;
 
 #if wxUSE_LONGLONG
-    // wxLongLong
-    wxVariant(wxLongLong, const wxString& name = wxEmptyString);
-    bool operator==(wxLongLong value) const;
-    bool operator!=(wxLongLong value) const;
-    void operator=(wxLongLong value);
-    operator wxLongLong() const { return GetLongLong(); }
-    wxLongLong GetLongLong() const;
+	// wxLongLong
+	wxVariant(wxLongLong, const wxString& name = wxEmptyString);
+	bool operator==(wxLongLong value) const;
+	bool operator!=(wxLongLong value) const;
+	void operator=(wxLongLong value);
+	operator wxLongLong() const
+	{
+		return GetLongLong();
+	}
+	wxLongLong GetLongLong() const;
 
-    // wxULongLong
-    wxVariant(wxULongLong, const wxString& name = wxEmptyString);
-    bool operator==(wxULongLong value) const;
-    bool operator!=(wxULongLong value) const;
-    void operator=(wxULongLong value);
-    operator wxULongLong() const { return GetULongLong(); }
-    wxULongLong GetULongLong() const;
+	// wxULongLong
+	wxVariant(wxULongLong, const wxString& name = wxEmptyString);
+	bool operator==(wxULongLong value) const;
+	bool operator!=(wxULongLong value) const;
+	void operator=(wxULongLong value);
+	operator wxULongLong() const
+	{
+		return GetULongLong();
+	}
+	wxULongLong GetULongLong() const;
 #endif
 
-    // ------------------------------
-    // list operations
-    // ------------------------------
+	// ------------------------------
+	// list operations
+	// ------------------------------
 
-    wxVariant(const wxVariantList& val, const wxString& name = wxEmptyString); // List of variants
-    bool operator== (const wxVariantList& value) const;
-    bool operator!= (const wxVariantList& value) const;
-    void operator= (const wxVariantList& value) ;
-    // Treat a list variant as an array
-    wxVariant operator[] (size_t idx) const;
-    wxVariant& operator[] (size_t idx) ;
-    wxVariantList& GetList() const ;
+	wxVariant(const wxVariantList& val, const wxString& name = wxEmptyString); // List of variants
+	bool operator== (const wxVariantList& value) const;
+	bool operator!= (const wxVariantList& value) const;
+	void operator= (const wxVariantList& value) ;
+	// Treat a list variant as an array
+	wxVariant operator[] (size_t idx) const;
+	wxVariant& operator[] (size_t idx) ;
+	wxVariantList& GetList() const ;
 
-    // Return the number of elements in a list
-    size_t GetCount() const;
+	// Return the number of elements in a list
+	size_t GetCount() const;
 
-    // Make empty list
-    void NullList();
+	// Make empty list
+	void NullList();
 
-    // Append to list
-    void Append(const wxVariant& value);
+	// Append to list
+	void Append(const wxVariant& value);
 
-    // Insert at front of list
-    void Insert(const wxVariant& value);
+	// Insert at front of list
+	void Insert(const wxVariant& value);
 
-    // Returns true if the variant is a member of the list
-    bool Member(const wxVariant& value) const;
+	// Returns true if the variant is a member of the list
+	bool Member(const wxVariant& value) const;
 
-    // Deletes the nth element of the list
-    bool Delete(size_t item);
+	// Deletes the nth element of the list
+	bool Delete(size_t item);
 
-    // Clear list
-    void ClearList();
+	// Clear list
+	void ClearList();
 
 public:
-    // Type conversion
-    bool Convert(long* value) const;
-    bool Convert(bool* value) const;
-    bool Convert(double* value) const;
-    bool Convert(wxString* value) const;
-    bool Convert(wxUniChar* value) const;
-    bool Convert(char* value) const;
-    bool Convert(wchar_t* value) const;
+	// Type conversion
+	bool Convert(long* value) const;
+	bool Convert(bool* value) const;
+	bool Convert(double* value) const;
+	bool Convert(wxString* value) const;
+	bool Convert(wxUniChar* value) const;
+	bool Convert(char* value) const;
+	bool Convert(wchar_t* value) const;
 #if wxUSE_DATETIME
-    bool Convert(wxDateTime* value) const;
+	bool Convert(wxDateTime* value) const;
 #endif // wxUSE_DATETIME
 #if wxUSE_LONGLONG
-    bool Convert(wxLongLong* value) const;
-    bool Convert(wxULongLong* value) const;
-  #ifdef wxLongLong_t
-    bool Convert(wxLongLong_t* value) const
-    {
-        wxLongLong temp;
-        if ( !Convert(&temp) )
-            return false;
-        *value = temp.GetValue();
-        return true;
-    }
-    bool Convert(wxULongLong_t* value) const
-    {
-        wxULongLong temp;
-        if ( !Convert(&temp) )
-            return false;
-        *value = temp.GetValue();
-        return true;
-    }
-  #endif // wxLongLong_t
+	bool Convert(wxLongLong* value) const;
+	bool Convert(wxULongLong* value) const;
+#ifdef wxLongLong_t
+	bool Convert(wxLongLong_t* value) const
+	{
+		wxLongLong temp;
+		if ( !Convert(&temp) )
+			return false;
+		*value = temp.GetValue();
+		return true;
+	}
+	bool Convert(wxULongLong_t* value) const
+	{
+		wxULongLong temp;
+		if ( !Convert(&temp) )
+			return false;
+		*value = temp.GetValue();
+		return true;
+	}
+#endif // wxLongLong_t
 #endif // wxUSE_LONGLONG
 
 // Attributes
 protected:
-    virtual wxObjectRefData *CreateRefData() const wxOVERRIDE;
-    virtual wxObjectRefData *CloneRefData(const wxObjectRefData *data) const wxOVERRIDE;
+	virtual wxObjectRefData *CreateRefData() const wxOVERRIDE;
+	virtual wxObjectRefData *CloneRefData(const wxObjectRefData *data) const wxOVERRIDE;
 
-    wxString        m_name;
+	wxString        m_name;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxVariant);
+	wxDECLARE_DYNAMIC_CLASS(wxVariant);
 };
 
 
@@ -412,28 +540,31 @@ typedef wxVariantData* (*wxVariantDataFactory)(const wxAny& any);
 class WXDLLIMPEXP_BASE wxAnyToVariantRegistration
 {
 public:
-    wxAnyToVariantRegistration(wxVariantDataFactory factory);
-    virtual ~wxAnyToVariantRegistration();
+	wxAnyToVariantRegistration(wxVariantDataFactory factory);
+	virtual ~wxAnyToVariantRegistration();
 
-    virtual wxAnyValueType* GetAssociatedType() = 0;
-    wxVariantDataFactory GetFactory() const { return m_factory; }
+	virtual wxAnyValueType* GetAssociatedType() = 0;
+	wxVariantDataFactory GetFactory() const
+	{
+		return m_factory;
+	}
 private:
-    wxVariantDataFactory    m_factory;
+	wxVariantDataFactory    m_factory;
 };
 
 template<typename T>
 class wxAnyToVariantRegistrationImpl : public wxAnyToVariantRegistration
 {
 public:
-    wxAnyToVariantRegistrationImpl(wxVariantDataFactory factory)
-        : wxAnyToVariantRegistration(factory)
-    {
-    }
+	wxAnyToVariantRegistrationImpl(wxVariantDataFactory factory)
+		: wxAnyToVariantRegistration(factory)
+	{
+	}
 
-    virtual wxAnyValueType* GetAssociatedType() wxOVERRIDE
-    {
-        return wxAnyValueTypeImpl<T>::GetInstance();
-    }
+	virtual wxAnyValueType* GetAssociatedType() wxOVERRIDE
+	{
+		return wxAnyValueTypeImpl<T>::GetInstance();
+	}
 private:
 };
 
@@ -570,7 +701,7 @@ bool classname##VariantData::Eq(wxVariantData& data) const \
 
 // Replacement for using wxDynamicCast on a wxVariantData object
 #ifndef wxNO_RTTI
-    #define wxDynamicCastVariantData(data, classname) dynamic_cast<classname*>(data)
+#define wxDynamicCastVariantData(data, classname) dynamic_cast<classname*>(data)
 #endif
 
 #define wxStaticCastVariantData(data, classname) static_cast<classname*>(data)

@@ -38,77 +38,80 @@ class WXDLLIMPEXP_FWD_AUI wxAuiMDIChildFrame;
 class WXDLLIMPEXP_AUI wxAuiMDIParentFrame : public wxFrame
 {
 public:
-    wxAuiMDIParentFrame();
-    wxAuiMDIParentFrame(wxWindow *parent,
-                        wxWindowID winid,
-                        const wxString& title,
-                        const wxPoint& pos = wxDefaultPosition,
-                        const wxSize& size = wxDefaultSize,
-                        long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
-                        const wxString& name = wxFrameNameStr);
+	wxAuiMDIParentFrame();
+	wxAuiMDIParentFrame(wxWindow *parent,
+	                    wxWindowID winid,
+	                    const wxString& title,
+	                    const wxPoint& pos = wxDefaultPosition,
+	                    const wxSize& size = wxDefaultSize,
+	                    long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
+	                    const wxString& name = wxFrameNameStr);
 
-    ~wxAuiMDIParentFrame();
+	~wxAuiMDIParentFrame();
 
-    bool Create(wxWindow *parent,
-                wxWindowID winid,
-                const wxString& title,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
-                const wxString& name = wxFrameNameStr );
+	bool Create(wxWindow *parent,
+	            wxWindowID winid,
+	            const wxString& title,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
+	            const wxString& name = wxFrameNameStr );
 
-    void SetArtProvider(wxAuiTabArt* provider);
-    wxAuiTabArt* GetArtProvider();
-    wxAuiNotebook* GetNotebook() const;
+	void SetArtProvider(wxAuiTabArt* provider);
+	wxAuiTabArt* GetArtProvider();
+	wxAuiNotebook* GetNotebook() const;
 
 #if wxUSE_MENUS
-    wxMenu* GetWindowMenu() const { return m_pWindowMenu; }
-    void SetWindowMenu(wxMenu* pMenu);
+	wxMenu* GetWindowMenu() const
+	{
+		return m_pWindowMenu;
+	}
+	void SetWindowMenu(wxMenu* pMenu);
 
-    virtual void SetMenuBar(wxMenuBar *pMenuBar) wxOVERRIDE;
+	virtual void SetMenuBar(wxMenuBar *pMenuBar) wxOVERRIDE;
 #endif // wxUSE_MENUS
 
-    void SetChildMenuBar(wxAuiMDIChildFrame *pChild);
+	void SetChildMenuBar(wxAuiMDIChildFrame *pChild);
 
-    wxAuiMDIChildFrame *GetActiveChild() const;
-    void SetActiveChild(wxAuiMDIChildFrame* pChildFrame);
+	wxAuiMDIChildFrame *GetActiveChild() const;
+	void SetActiveChild(wxAuiMDIChildFrame* pChildFrame);
 
-    wxAuiMDIClientWindow *GetClientWindow() const;
-    virtual wxAuiMDIClientWindow *OnCreateClient();
+	wxAuiMDIClientWindow *GetClientWindow() const;
+	virtual wxAuiMDIClientWindow *OnCreateClient();
 
-    virtual void Cascade() { /* Has no effect */ }
-    virtual void Tile(wxOrientation orient = wxHORIZONTAL);
-    virtual void ArrangeIcons() { /* Has no effect */ }
-    virtual void ActivateNext();
-    virtual void ActivatePrevious();
+	virtual void Cascade() { /* Has no effect */ }
+	virtual void Tile(wxOrientation orient = wxHORIZONTAL);
+	virtual void ArrangeIcons() { /* Has no effect */ }
+	virtual void ActivateNext();
+	virtual void ActivatePrevious();
 
 protected:
-    wxAuiMDIClientWindow*   m_pClientWindow;
-    wxEvent*                m_pLastEvt;
+	wxAuiMDIClientWindow*   m_pClientWindow;
+	wxEvent*                m_pLastEvt;
 
 #if wxUSE_MENUS
-    wxMenu              *m_pWindowMenu;
-    wxMenuBar           *m_pMyMenuBar;
+	wxMenu              *m_pWindowMenu;
+	wxMenuBar           *m_pMyMenuBar;
 #endif // wxUSE_MENUS
 
 protected:
-    void Init();
+	void Init();
 
 #if wxUSE_MENUS
-    void RemoveWindowMenu(wxMenuBar *pMenuBar);
-    void AddWindowMenu(wxMenuBar *pMenuBar);
+	void RemoveWindowMenu(wxMenuBar *pMenuBar);
+	void AddWindowMenu(wxMenuBar *pMenuBar);
 
-    void DoHandleMenu(wxCommandEvent &event);
-    void DoHandleUpdateUI(wxUpdateUIEvent &event);
+	void DoHandleMenu(wxCommandEvent &event);
+	void DoHandleUpdateUI(wxUpdateUIEvent &event);
 #endif // wxUSE_MENUS
 
-    virtual bool ProcessEvent(wxEvent& event) wxOVERRIDE;
+	virtual bool ProcessEvent(wxEvent& event) wxOVERRIDE;
 
-    virtual void DoGetClientSize(int *width, int *height) const wxOVERRIDE;
+	virtual void DoGetClientSize(int *width, int *height) const wxOVERRIDE;
 
 private:
-    wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS(wxAuiMDIParentFrame);
+	wxDECLARE_EVENT_TABLE();
+	wxDECLARE_DYNAMIC_CLASS(wxAuiMDIParentFrame);
 };
 
 //-----------------------------------------------------------------------------
@@ -118,120 +121,145 @@ private:
 class WXDLLIMPEXP_AUI wxAuiMDIChildFrame : public wxPanel
 {
 public:
-    wxAuiMDIChildFrame();
-    wxAuiMDIChildFrame(wxAuiMDIParentFrame *parent,
-                       wxWindowID winid,
-                       const wxString& title,
-                       const wxPoint& pos = wxDefaultPosition,
-                       const wxSize& size = wxDefaultSize,
-                       long style = wxDEFAULT_FRAME_STYLE,
-                       const wxString& name = wxFrameNameStr);
+	wxAuiMDIChildFrame();
+	wxAuiMDIChildFrame(wxAuiMDIParentFrame *parent,
+	                   wxWindowID winid,
+	                   const wxString& title,
+	                   const wxPoint& pos = wxDefaultPosition,
+	                   const wxSize& size = wxDefaultSize,
+	                   long style = wxDEFAULT_FRAME_STYLE,
+	                   const wxString& name = wxFrameNameStr);
 
-    virtual ~wxAuiMDIChildFrame();
-    bool Create(wxAuiMDIParentFrame *parent,
-                wxWindowID winid,
-                const wxString& title,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE,
-                const wxString& name = wxFrameNameStr);
+	virtual ~wxAuiMDIChildFrame();
+	bool Create(wxAuiMDIParentFrame *parent,
+	            wxWindowID winid,
+	            const wxString& title,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxDEFAULT_FRAME_STYLE,
+	            const wxString& name = wxFrameNameStr);
 
 #if wxUSE_MENUS
-    virtual void SetMenuBar(wxMenuBar *menuBar);
-    virtual wxMenuBar *GetMenuBar() const;
+	virtual void SetMenuBar(wxMenuBar *menuBar);
+	virtual wxMenuBar *GetMenuBar() const;
 #endif // wxUSE_MENUS
 
-    virtual void SetTitle(const wxString& title);
-    virtual wxString GetTitle() const;
+	virtual void SetTitle(const wxString& title);
+	virtual wxString GetTitle() const;
 
-    virtual void SetIcons(const wxIconBundle& icons);
-    virtual const wxIconBundle& GetIcons() const;
+	virtual void SetIcons(const wxIconBundle& icons);
+	virtual const wxIconBundle& GetIcons() const;
 
-    virtual void SetIcon(const wxIcon& icon);
-    virtual const wxIcon& GetIcon() const;
+	virtual void SetIcon(const wxIcon& icon);
+	virtual const wxIcon& GetIcon() const;
 
-    virtual void Activate();
-    virtual bool Destroy() wxOVERRIDE;
+	virtual void Activate();
+	virtual bool Destroy() wxOVERRIDE;
 
-    virtual bool Show(bool show = true) wxOVERRIDE;
+	virtual bool Show(bool show = true) wxOVERRIDE;
 
 #if wxUSE_STATUSBAR
-    // no status bars
-    virtual wxStatusBar* CreateStatusBar(int WXUNUSED(number) = 1,
-                                         long WXUNUSED(style) = 1,
-                                         wxWindowID WXUNUSED(winid) = 1,
-                                         const wxString& WXUNUSED(name) = wxEmptyString)
-      { return NULL; }
+	// no status bars
+	virtual wxStatusBar* CreateStatusBar(int WXUNUSED(number) = 1,
+	                                     long WXUNUSED(style) = 1,
+	                                     wxWindowID WXUNUSED(winid) = 1,
+	                                     const wxString& WXUNUSED(name) = wxEmptyString)
+	{
+		return NULL;
+	}
 
-    virtual wxStatusBar *GetStatusBar() const { return NULL; }
-    virtual void SetStatusText( const wxString &WXUNUSED(text), int WXUNUSED(number)=0 ) {}
-    virtual void SetStatusWidths( int WXUNUSED(n), const int WXUNUSED(widths_field)[] ) {}
+	virtual wxStatusBar *GetStatusBar() const
+	{
+		return NULL;
+	}
+	virtual void SetStatusText( const wxString &WXUNUSED(text), int WXUNUSED(number)=0 ) {}
+	virtual void SetStatusWidths( int WXUNUSED(n), const int WXUNUSED(widths_field)[] ) {}
 #endif
 
 #if wxUSE_TOOLBAR
-    // no toolbar bars
-    virtual wxToolBar* CreateToolBar(long WXUNUSED(style),
-                                     wxWindowID WXUNUSED(winid),
-                                     const wxString& WXUNUSED(name))
-        { return NULL; }
-    virtual wxToolBar *GetToolBar() const { return NULL; }
+	// no toolbar bars
+	virtual wxToolBar* CreateToolBar(long WXUNUSED(style),
+	                                 wxWindowID WXUNUSED(winid),
+	                                 const wxString& WXUNUSED(name))
+	{
+		return NULL;
+	}
+	virtual wxToolBar *GetToolBar() const
+	{
+		return NULL;
+	}
 #endif
 
 
-    // no maximize etc
-    virtual void Maximize(bool WXUNUSED(maximize) = true) { /* Has no effect */ }
-    virtual void Restore() { /* Has no effect */ }
-    virtual void Iconize(bool WXUNUSED(iconize)  = true) { /* Has no effect */ }
-    virtual bool IsMaximized() const { return true; }
-    virtual bool IsIconized() const { return false; }
-    virtual bool ShowFullScreen(bool WXUNUSED(show), long WXUNUSED(style)) { return false; }
-    virtual bool IsFullScreen() const { return false; }
+	// no maximize etc
+	virtual void Maximize(bool WXUNUSED(maximize) = true) { /* Has no effect */ }
+	virtual void Restore() { /* Has no effect */ }
+	virtual void Iconize(bool WXUNUSED(iconize)  = true) { /* Has no effect */ }
+	virtual bool IsMaximized() const
+	{
+		return true;
+	}
+	virtual bool IsIconized() const
+	{
+		return false;
+	}
+	virtual bool ShowFullScreen(bool WXUNUSED(show), long WXUNUSED(style))
+	{
+		return false;
+	}
+	virtual bool IsFullScreen() const
+	{
+		return false;
+	}
 
-    virtual bool IsTopLevel() const wxOVERRIDE { return false; }
+	virtual bool IsTopLevel() const wxOVERRIDE
+	{
+		return false;
+	}
 
-    void OnMenuHighlight(wxMenuEvent& evt);
-    void OnActivate(wxActivateEvent& evt);
-    void OnCloseWindow(wxCloseEvent& evt);
+	void OnMenuHighlight(wxMenuEvent& evt);
+	void OnActivate(wxActivateEvent& evt);
+	void OnCloseWindow(wxCloseEvent& evt);
 
-    void SetMDIParentFrame(wxAuiMDIParentFrame* parent);
-    wxAuiMDIParentFrame* GetMDIParentFrame() const;
+	void SetMDIParentFrame(wxAuiMDIParentFrame* parent);
+	wxAuiMDIParentFrame* GetMDIParentFrame() const;
 
 protected:
-    void Init();
-    virtual void DoSetSize(int x, int y, int width, int height, int sizeFlags) wxOVERRIDE;
-    virtual void DoMoveWindow(int x, int y, int width, int height) wxOVERRIDE;
+	void Init();
+	virtual void DoSetSize(int x, int y, int width, int height, int sizeFlags) wxOVERRIDE;
+	virtual void DoMoveWindow(int x, int y, int width, int height) wxOVERRIDE;
 
-    // no size hints
-    virtual void DoSetSizeHints(int WXUNUSED(minW), int WXUNUSED(minH),
-                                int WXUNUSED(maxW), int WXUNUSED(maxH),
-                                int WXUNUSED(incW), int WXUNUSED(incH)) wxOVERRIDE {}
+	// no size hints
+	virtual void DoSetSizeHints(int WXUNUSED(minW), int WXUNUSED(minH),
+	                            int WXUNUSED(maxW), int WXUNUSED(maxH),
+	                            int WXUNUSED(incW), int WXUNUSED(incH)) wxOVERRIDE {}
 public:
-    // This function needs to be called when a size change is confirmed,
-    // we needed this function to prevent anybody from the outside
-    // changing the panel... it messes the UI layout when we would allow it.
-    void ApplyMDIChildFrameRect();
-    void DoShow(bool show);
+	// This function needs to be called when a size change is confirmed,
+	// we needed this function to prevent anybody from the outside
+	// changing the panel... it messes the UI layout when we would allow it.
+	void ApplyMDIChildFrameRect();
+	void DoShow(bool show);
 
 protected:
-    wxAuiMDIParentFrame* m_pMDIParentFrame;
-    wxRect m_mdiNewRect;
-    wxRect m_mdiCurRect;
-    wxString m_title;
-    wxIcon m_icon;
-    wxIconBundle m_iconBundle;
-    bool m_activateOnCreate;
+	wxAuiMDIParentFrame* m_pMDIParentFrame;
+	wxRect m_mdiNewRect;
+	wxRect m_mdiCurRect;
+	wxString m_title;
+	wxIcon m_icon;
+	wxIconBundle m_iconBundle;
+	bool m_activateOnCreate;
 
 #if wxUSE_MENUS
-    wxMenuBar* m_pMenuBar;
+	wxMenuBar* m_pMenuBar;
 #endif // wxUSE_MENUS
 
 
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxAuiMDIChildFrame);
-    wxDECLARE_EVENT_TABLE();
+	wxDECLARE_DYNAMIC_CLASS(wxAuiMDIChildFrame);
+	wxDECLARE_EVENT_TABLE();
 
-    friend class wxAuiMDIClientWindow;
+	friend class wxAuiMDIClientWindow;
 };
 
 //-----------------------------------------------------------------------------
@@ -241,29 +269,29 @@ private:
 class WXDLLIMPEXP_AUI wxAuiMDIClientWindow : public wxAuiNotebook
 {
 public:
-    wxAuiMDIClientWindow();
-    wxAuiMDIClientWindow(wxAuiMDIParentFrame *parent, long style = 0);
+	wxAuiMDIClientWindow();
+	wxAuiMDIClientWindow(wxAuiMDIParentFrame *parent, long style = 0);
 
-    virtual bool CreateClient(wxAuiMDIParentFrame *parent,
-                              long style = wxVSCROLL | wxHSCROLL);
+	virtual bool CreateClient(wxAuiMDIParentFrame *parent,
+	                          long style = wxVSCROLL | wxHSCROLL);
 
-    virtual int SetSelection(size_t page) wxOVERRIDE;
-    virtual wxAuiMDIChildFrame* GetActiveChild();
-    virtual void SetActiveChild(wxAuiMDIChildFrame* pChildFrame)
-    {
-        SetSelection(GetPageIndex(pChildFrame));
-    }
+	virtual int SetSelection(size_t page) wxOVERRIDE;
+	virtual wxAuiMDIChildFrame* GetActiveChild();
+	virtual void SetActiveChild(wxAuiMDIChildFrame* pChildFrame)
+	{
+		SetSelection(GetPageIndex(pChildFrame));
+	}
 
 protected:
 
-    void PageChanged(int oldSelection, int newSelection);
-    void OnPageClose(wxAuiNotebookEvent& evt);
-    void OnPageChanged(wxAuiNotebookEvent& evt);
-    void OnSize(wxSizeEvent& evt);
+	void PageChanged(int oldSelection, int newSelection);
+	void OnPageClose(wxAuiNotebookEvent& evt);
+	void OnPageChanged(wxAuiNotebookEvent& evt);
+	void OnSize(wxSizeEvent& evt);
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxAuiMDIClientWindow);
-    wxDECLARE_EVENT_TABLE();
+	wxDECLARE_DYNAMIC_CLASS(wxAuiMDIClientWindow);
+	wxDECLARE_EVENT_TABLE();
 };
 #endif // wxUSE_AUI
 

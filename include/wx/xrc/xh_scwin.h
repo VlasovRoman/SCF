@@ -16,12 +16,12 @@
 
 class WXDLLIMPEXP_XRC wxScrolledWindowXmlHandler : public wxXmlResourceHandler
 {
-    wxDECLARE_DYNAMIC_CLASS(wxScrolledWindowXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxScrolledWindowXmlHandler);
 
 public:
-    wxScrolledWindowXmlHandler();
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	wxScrolledWindowXmlHandler();
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 };
 
 #endif // wxUSE_XRC

@@ -13,48 +13,57 @@
 
 class WXDLLIMPEXP_CORE wxRadioButton: public wxControl
 {
-    wxDECLARE_DYNAMIC_CLASS(wxRadioButton);
+	wxDECLARE_DYNAMIC_CLASS(wxRadioButton);
 public:
-    wxRadioButton();
-    virtual ~wxRadioButton() { RemoveFromCycle(); }
+	wxRadioButton();
+	virtual ~wxRadioButton()
+	{
+		RemoveFromCycle();
+	}
 
-    inline wxRadioButton(wxWindow *parent, wxWindowID id,
-        const wxString& label,
-        const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize, long style = 0,
-        const wxValidator& validator = wxDefaultValidator,
-        const wxString& name = wxRadioButtonNameStr)
-    {
-        Create(parent, id, label, pos, size, style, validator, name);
-    }
+	inline wxRadioButton(wxWindow *parent, wxWindowID id,
+	                     const wxString& label,
+	                     const wxPoint& pos = wxDefaultPosition,
+	                     const wxSize& size = wxDefaultSize, long style = 0,
+	                     const wxValidator& validator = wxDefaultValidator,
+	                     const wxString& name = wxRadioButtonNameStr)
+	{
+		Create(parent, id, label, pos, size, style, validator, name);
+	}
 
-    bool Create(wxWindow *parent, wxWindowID id,
-        const wxString& label,
-        const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize, long style = 0,
-        const wxValidator& validator = wxDefaultValidator,
-        const wxString& name = wxRadioButtonNameStr);
+	bool Create(wxWindow *parent, wxWindowID id,
+	            const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize, long style = 0,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxRadioButtonNameStr);
 
-    virtual void SetValue(bool val);
-    virtual bool GetValue() const ;
+	virtual void SetValue(bool val);
+	virtual bool GetValue() const ;
 
-    void Command(wxCommandEvent& event);
+	void Command(wxCommandEvent& event);
 
-    // Implementation
-    virtual void ChangeBackgroundColour();
+	// Implementation
+	virtual void ChangeBackgroundColour();
 
-    // *this function is an implementation detail*
-    // clears the selection in the radiobuttons in the cycle
-    // and returns the old selection (if any)
-    wxRadioButton* ClearSelections();
+	// *this function is an implementation detail*
+	// clears the selection in the radiobuttons in the cycle
+	// and returns the old selection (if any)
+	wxRadioButton* ClearSelections();
 protected:
-    virtual wxBorder GetDefaultBorder() const { return wxBORDER_NONE; }
+	virtual wxBorder GetDefaultBorder() const
+	{
+		return wxBORDER_NONE;
+	}
 private:
-    wxRadioButton* AddInCycle(wxRadioButton* cycle);
-    void RemoveFromCycle();
-    wxRadioButton* NextInCycle() { return m_cycle; }
+	wxRadioButton* AddInCycle(wxRadioButton* cycle);
+	void RemoveFromCycle();
+	wxRadioButton* NextInCycle()
+	{
+		return m_cycle;
+	}
 
-    wxRadioButton *m_cycle;
+	wxRadioButton *m_cycle;
 };
 
 #endif

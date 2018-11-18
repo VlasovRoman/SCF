@@ -25,31 +25,37 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 class WXDLLIMPEXP_CORE wxToolTip : public wxObject
 {
 public:
-    wxToolTip( const wxString &tip );
+	wxToolTip( const wxString &tip );
 
-    // globally change the tooltip parameters
-    static void Enable( bool flag );
-    static void SetDelay( long msecs );
-        // set the delay after which the tooltip disappears or how long the tooltip remains visible
-    static void SetAutoPop(long msecs);
-        // set the delay between subsequent tooltips to appear
-    static void SetReshow(long msecs);
+	// globally change the tooltip parameters
+	static void Enable( bool flag );
+	static void SetDelay( long msecs );
+	// set the delay after which the tooltip disappears or how long the tooltip remains visible
+	static void SetAutoPop(long msecs);
+	// set the delay between subsequent tooltips to appear
+	static void SetReshow(long msecs);
 
-    // get/set the tooltip text
-    void SetTip( const wxString &tip );
-    wxString GetTip() const { return m_text; }
+	// get/set the tooltip text
+	void SetTip( const wxString &tip );
+	wxString GetTip() const
+	{
+		return m_text;
+	}
 
-    wxWindow *GetWindow() const { return m_window; }
+	wxWindow *GetWindow() const
+	{
+		return m_window;
+	}
 
-    // Implementation
-    void GTKSetWindow(wxWindow* win);
-    static void GTKApply(GtkWidget* widget, const char* tip);
+	// Implementation
+	void GTKSetWindow(wxWindow* win);
+	static void GTKApply(GtkWidget* widget, const char* tip);
 
 private:
-    wxString     m_text;
-    wxWindow    *m_window;
+	wxString     m_text;
+	wxWindow    *m_window;
 
-    wxDECLARE_ABSTRACT_CLASS(wxToolTip);
+	wxDECLARE_ABSTRACT_CLASS(wxToolTip);
 };
 
 #endif // _WX_GTKTOOLTIP_H_

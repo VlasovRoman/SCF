@@ -12,11 +12,11 @@
 #define _WX_UNIX_FONTUTIL_H_
 
 #ifdef __X__
-    typedef WXFontStructPtr wxNativeFont;
+typedef WXFontStructPtr wxNativeFont;
 #elif defined(__WXGTK__)
-    typedef GdkFont *wxNativeFont;
+typedef GdkFont *wxNativeFont;
 #else
-    #error "Unsupported toolkit"
+#error "Unsupported toolkit"
 #endif
 
 // returns the handle of the nearest available font or 0

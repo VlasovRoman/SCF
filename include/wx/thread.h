@@ -27,70 +27,70 @@
 
 enum wxMutexError
 {
-    wxMUTEX_NO_ERROR = 0,   // operation completed successfully
-    wxMUTEX_INVALID,        // mutex hasn't been initialized
-    wxMUTEX_DEAD_LOCK,      // mutex is already locked by the calling thread
-    wxMUTEX_BUSY,           // mutex is already locked by another thread
-    wxMUTEX_UNLOCKED,       // attempt to unlock a mutex which is not locked
-    wxMUTEX_TIMEOUT,        // LockTimeout() has timed out
-    wxMUTEX_MISC_ERROR      // any other error
+	wxMUTEX_NO_ERROR = 0,   // operation completed successfully
+	wxMUTEX_INVALID,        // mutex hasn't been initialized
+	wxMUTEX_DEAD_LOCK,      // mutex is already locked by the calling thread
+	wxMUTEX_BUSY,           // mutex is already locked by another thread
+	wxMUTEX_UNLOCKED,       // attempt to unlock a mutex which is not locked
+	wxMUTEX_TIMEOUT,        // LockTimeout() has timed out
+	wxMUTEX_MISC_ERROR      // any other error
 };
 
 enum wxCondError
 {
-    wxCOND_NO_ERROR = 0,
-    wxCOND_INVALID,
-    wxCOND_TIMEOUT,         // WaitTimeout() has timed out
-    wxCOND_MISC_ERROR
+	wxCOND_NO_ERROR = 0,
+	wxCOND_INVALID,
+	wxCOND_TIMEOUT,         // WaitTimeout() has timed out
+	wxCOND_MISC_ERROR
 };
 
 enum wxSemaError
 {
-    wxSEMA_NO_ERROR = 0,
-    wxSEMA_INVALID,         // semaphore hasn't been initialized successfully
-    wxSEMA_BUSY,            // returned by TryWait() if Wait() would block
-    wxSEMA_TIMEOUT,         // returned by WaitTimeout()
-    wxSEMA_OVERFLOW,        // Post() would increase counter past the max
-    wxSEMA_MISC_ERROR
+	wxSEMA_NO_ERROR = 0,
+	wxSEMA_INVALID,         // semaphore hasn't been initialized successfully
+	wxSEMA_BUSY,            // returned by TryWait() if Wait() would block
+	wxSEMA_TIMEOUT,         // returned by WaitTimeout()
+	wxSEMA_OVERFLOW,        // Post() would increase counter past the max
+	wxSEMA_MISC_ERROR
 };
 
 enum wxThreadError
 {
-    wxTHREAD_NO_ERROR = 0,      // No error
-    wxTHREAD_NO_RESOURCE,       // No resource left to create a new thread
-    wxTHREAD_RUNNING,           // The thread is already running
-    wxTHREAD_NOT_RUNNING,       // The thread isn't running
-    wxTHREAD_KILLED,            // Thread we waited for had to be killed
-    wxTHREAD_MISC_ERROR         // Some other error
+	wxTHREAD_NO_ERROR = 0,      // No error
+	wxTHREAD_NO_RESOURCE,       // No resource left to create a new thread
+	wxTHREAD_RUNNING,           // The thread is already running
+	wxTHREAD_NOT_RUNNING,       // The thread isn't running
+	wxTHREAD_KILLED,            // Thread we waited for had to be killed
+	wxTHREAD_MISC_ERROR         // Some other error
 };
 
 enum wxThreadKind
 {
-    wxTHREAD_DETACHED,
-    wxTHREAD_JOINABLE
+	wxTHREAD_DETACHED,
+	wxTHREAD_JOINABLE
 };
 
 enum wxThreadWait
 {
-    wxTHREAD_WAIT_BLOCK,
-    wxTHREAD_WAIT_YIELD,       // process events while waiting; MSW only
+	wxTHREAD_WAIT_BLOCK,
+	wxTHREAD_WAIT_YIELD,       // process events while waiting; MSW only
 
-    // For compatibility reasons we use wxTHREAD_WAIT_YIELD by default as this
-    // was the default behaviour of wxMSW 2.8 but it should be avoided as it's
-    // dangerous and not portable.
+	// For compatibility reasons we use wxTHREAD_WAIT_YIELD by default as this
+	// was the default behaviour of wxMSW 2.8 but it should be avoided as it's
+	// dangerous and not portable.
 #if WXWIN_COMPATIBILITY_2_8
-    wxTHREAD_WAIT_DEFAULT = wxTHREAD_WAIT_YIELD
+	wxTHREAD_WAIT_DEFAULT = wxTHREAD_WAIT_YIELD
 #else
-    wxTHREAD_WAIT_DEFAULT = wxTHREAD_WAIT_BLOCK
+	wxTHREAD_WAIT_DEFAULT = wxTHREAD_WAIT_BLOCK
 #endif
 };
 
 // Obsolete synonyms for wxPRIORITY_XXX for backwards compatibility-only
 enum
 {
-    WXTHREAD_MIN_PRIORITY      = wxPRIORITY_MIN,
-    WXTHREAD_DEFAULT_PRIORITY  = wxPRIORITY_DEFAULT,
-    WXTHREAD_MAX_PRIORITY      = wxPRIORITY_MAX
+	WXTHREAD_MIN_PRIORITY      = wxPRIORITY_MIN,
+	WXTHREAD_DEFAULT_PRIORITY  = wxPRIORITY_DEFAULT,
+	WXTHREAD_MAX_PRIORITY      = wxPRIORITY_MAX
 };
 
 // There are 2 types of mutexes: normal mutexes and recursive ones. The attempt
@@ -111,11 +111,11 @@ enum
 // results in a configure warning when building and a deadlock when using them.
 enum wxMutexType
 {
-    // normal mutex: try to always use this one
-    wxMUTEX_DEFAULT,
+	// normal mutex: try to always use this one
+	wxMUTEX_DEFAULT,
 
-    // recursive mutex: don't use these ones with wxCondition
-    wxMUTEX_RECURSIVE
+	// recursive mutex: don't use these ones with wxCondition
+	wxMUTEX_RECURSIVE
 };
 
 // forward declarations
@@ -137,45 +137,45 @@ class WXDLLIMPEXP_FWD_BASE wxThreadInternal;
 class WXDLLIMPEXP_BASE wxMutex
 {
 public:
-    // constructor & destructor
-    // ------------------------
+	// constructor & destructor
+	// ------------------------
 
-    // create either default (always safe) or recursive mutex
-    wxMutex(wxMutexType mutexType = wxMUTEX_DEFAULT);
+	// create either default (always safe) or recursive mutex
+	wxMutex(wxMutexType mutexType = wxMUTEX_DEFAULT);
 
-    // destroys the mutex kernel object
-    ~wxMutex();
+	// destroys the mutex kernel object
+	~wxMutex();
 
-    // test if the mutex has been created successfully
-    bool IsOk() const;
+	// test if the mutex has been created successfully
+	bool IsOk() const;
 
-    // mutex operations
-    // ----------------
+	// mutex operations
+	// ----------------
 
-    // Lock the mutex, blocking on it until it is unlocked by the other thread.
-    // The result of locking a mutex already locked by the current thread
-    // depend on the mutex type.
-    //
-    // The caller must call Unlock() later if Lock() returned wxMUTEX_NO_ERROR.
-    wxMutexError Lock();
+	// Lock the mutex, blocking on it until it is unlocked by the other thread.
+	// The result of locking a mutex already locked by the current thread
+	// depend on the mutex type.
+	//
+	// The caller must call Unlock() later if Lock() returned wxMUTEX_NO_ERROR.
+	wxMutexError Lock();
 
-    // Same as Lock() but return wxMUTEX_TIMEOUT if the mutex can't be locked
-    // during the given number of milliseconds
-    wxMutexError LockTimeout(unsigned long ms);
+	// Same as Lock() but return wxMUTEX_TIMEOUT if the mutex can't be locked
+	// during the given number of milliseconds
+	wxMutexError LockTimeout(unsigned long ms);
 
-    // Try to lock the mutex: if it is currently locked, return immediately
-    // with an error. Otherwise the caller must call Unlock().
-    wxMutexError TryLock();
+	// Try to lock the mutex: if it is currently locked, return immediately
+	// with an error. Otherwise the caller must call Unlock().
+	wxMutexError TryLock();
 
-    // Unlock the mutex. It is an error to unlock an already unlocked mutex
-    wxMutexError Unlock();
+	// Unlock the mutex. It is an error to unlock an already unlocked mutex
+	wxMutexError Unlock();
 
 protected:
-    wxMutexInternal *m_internal;
+	wxMutexInternal *m_internal;
 
-    friend class wxConditionInternal;
+	friend class wxConditionInternal;
 
-    wxDECLARE_NO_COPY_CLASS(wxMutex);
+	wxDECLARE_NO_COPY_CLASS(wxMutex);
 };
 
 // a helper class which locks the mutex in the ctor and unlocks it in the dtor:
@@ -184,26 +184,32 @@ protected:
 class WXDLLIMPEXP_BASE wxMutexLocker
 {
 public:
-    // lock the mutex in the ctor
-    wxMutexLocker(wxMutex& mutex)
-        : m_isOk(false), m_mutex(mutex)
-        { m_isOk = ( m_mutex.Lock() == wxMUTEX_NO_ERROR ); }
+	// lock the mutex in the ctor
+	wxMutexLocker(wxMutex& mutex)
+		: m_isOk(false), m_mutex(mutex)
+	{
+		m_isOk = ( m_mutex.Lock() == wxMUTEX_NO_ERROR );
+	}
 
-    // returns true if mutex was successfully locked in ctor
-    bool IsOk() const
-        { return m_isOk; }
+	// returns true if mutex was successfully locked in ctor
+	bool IsOk() const
+	{
+		return m_isOk;
+	}
 
-    // unlock the mutex in dtor
-    ~wxMutexLocker()
-        { if ( IsOk() ) m_mutex.Unlock(); }
+	// unlock the mutex in dtor
+	~wxMutexLocker()
+	{
+		if ( IsOk() ) m_mutex.Unlock();
+	}
 
 private:
-    // no assignment operator nor copy ctor
-    wxMutexLocker(const wxMutexLocker&);
-    wxMutexLocker& operator=(const wxMutexLocker&);
+	// no assignment operator nor copy ctor
+	wxMutexLocker(const wxMutexLocker&);
+	wxMutexLocker& operator=(const wxMutexLocker&);
 
-    bool     m_isOk;
-    wxMutex& m_mutex;
+	bool     m_isOk;
+	wxMutex& m_mutex;
 };
 
 // ----------------------------------------------------------------------------
@@ -219,22 +225,22 @@ private:
 // in order to avoid any overhead under platforms where critical sections are
 // just mutexes make all wxCriticalSection class functions inline
 #if !defined(__WINDOWS__)
-    #define wxCRITSECT_IS_MUTEX 1
+#define wxCRITSECT_IS_MUTEX 1
 
-    #define wxCRITSECT_INLINE WXEXPORT inline
+#define wxCRITSECT_INLINE WXEXPORT inline
 #else // MSW
-    #define wxCRITSECT_IS_MUTEX 0
+#define wxCRITSECT_IS_MUTEX 0
 
-    #define wxCRITSECT_INLINE
+#define wxCRITSECT_INLINE
 #endif // MSW/!MSW
 
 enum wxCriticalSectionType
 {
-    // recursive critical section
-    wxCRITSEC_DEFAULT,
+	// recursive critical section
+	wxCRITSEC_DEFAULT,
 
-    // non-recursive critical section
-    wxCRITSEC_NON_RECURSIVE
+	// non-recursive critical section
+	wxCRITSEC_NON_RECURSIVE
 };
 
 // you should consider wxCriticalSectionLocker whenever possible instead of
@@ -242,55 +248,64 @@ enum wxCriticalSectionType
 class WXDLLIMPEXP_BASE wxCriticalSection
 {
 public:
-    // ctor & dtor
-    wxCRITSECT_INLINE wxCriticalSection( wxCriticalSectionType critSecType = wxCRITSEC_DEFAULT );
-    wxCRITSECT_INLINE ~wxCriticalSection();
-    // enter the section (the same as locking a mutex)
-    wxCRITSECT_INLINE void Enter();
+	// ctor & dtor
+	wxCRITSECT_INLINE wxCriticalSection( wxCriticalSectionType critSecType = wxCRITSEC_DEFAULT );
+	wxCRITSECT_INLINE ~wxCriticalSection();
+	// enter the section (the same as locking a mutex)
+	wxCRITSECT_INLINE void Enter();
 
-    // try to enter the section (the same as trying to lock a mutex)
-    wxCRITSECT_INLINE bool TryEnter();
+	// try to enter the section (the same as trying to lock a mutex)
+	wxCRITSECT_INLINE bool TryEnter();
 
-    // leave the critical section (same as unlocking a mutex)
-    wxCRITSECT_INLINE void Leave();
+	// leave the critical section (same as unlocking a mutex)
+	wxCRITSECT_INLINE void Leave();
 
 private:
 #if wxCRITSECT_IS_MUTEX
-    wxMutex m_mutex;
+	wxMutex m_mutex;
 #elif defined(__WINDOWS__)
-    // we can't allocate any memory in the ctor, so use placement new -
-    // unfortunately, we have to hardcode the sizeof() here because we can't
-    // include windows.h from this public header and we also have to use the
-    // union to force the correct (i.e. maximal) alignment
-    //
-    // if CRITICAL_SECTION size changes in Windows, you'll get an assert from
-    // thread.cpp and will need to increase the buffer size
+	// we can't allocate any memory in the ctor, so use placement new -
+	// unfortunately, we have to hardcode the sizeof() here because we can't
+	// include windows.h from this public header and we also have to use the
+	// union to force the correct (i.e. maximal) alignment
+	//
+	// if CRITICAL_SECTION size changes in Windows, you'll get an assert from
+	// thread.cpp and will need to increase the buffer size
 #ifdef __WIN64__
-    typedef char wxCritSectBuffer[40];
+	typedef char wxCritSectBuffer[40];
 #else // __WIN32__
-    typedef char wxCritSectBuffer[24];
+	typedef char wxCritSectBuffer[24];
 #endif
-    union
-    {
-        unsigned long m_dummy1;
-        void *m_dummy2;
+	union
+	{
+		unsigned long m_dummy1;
+		void *m_dummy2;
 
-        wxCritSectBuffer m_buffer;
-    };
+		wxCritSectBuffer m_buffer;
+	};
 #endif // Unix/Win32
 
-    wxDECLARE_NO_COPY_CLASS(wxCriticalSection);
+	wxDECLARE_NO_COPY_CLASS(wxCriticalSection);
 };
 
 #if wxCRITSECT_IS_MUTEX
-    // implement wxCriticalSection using mutexes
-    inline wxCriticalSection::wxCriticalSection( wxCriticalSectionType critSecType )
-       : m_mutex( critSecType == wxCRITSEC_DEFAULT ? wxMUTEX_RECURSIVE : wxMUTEX_DEFAULT )  { }
-    inline wxCriticalSection::~wxCriticalSection() { }
+// implement wxCriticalSection using mutexes
+inline wxCriticalSection::wxCriticalSection( wxCriticalSectionType critSecType )
+	: m_mutex( critSecType == wxCRITSEC_DEFAULT ? wxMUTEX_RECURSIVE : wxMUTEX_DEFAULT )  { }
+inline wxCriticalSection::~wxCriticalSection() { }
 
-    inline void wxCriticalSection::Enter() { (void)m_mutex.Lock(); }
-    inline bool wxCriticalSection::TryEnter() { return m_mutex.TryLock() == wxMUTEX_NO_ERROR; }
-    inline void wxCriticalSection::Leave() { (void)m_mutex.Unlock(); }
+inline void wxCriticalSection::Enter()
+{
+	(void)m_mutex.Lock();
+}
+inline bool wxCriticalSection::TryEnter()
+{
+	return m_mutex.TryLock() == wxMUTEX_NO_ERROR;
+}
+inline void wxCriticalSection::Leave()
+{
+	(void)m_mutex.Unlock();
+}
 #endif // wxCRITSECT_IS_MUTEX
 
 #undef wxCRITSECT_INLINE
@@ -301,21 +316,21 @@ private:
 class WXDLLIMPEXP_BASE wxCriticalSectionLocker
 {
 public:
-    wxCriticalSectionLocker(wxCriticalSection& cs)
-        : m_critsect(cs)
-    {
-        m_critsect.Enter();
-    }
+	wxCriticalSectionLocker(wxCriticalSection& cs)
+		: m_critsect(cs)
+	{
+		m_critsect.Enter();
+	}
 
-    ~wxCriticalSectionLocker()
-    {
-        m_critsect.Leave();
-    }
+	~wxCriticalSectionLocker()
+	{
+		m_critsect.Leave();
+	}
 
 private:
-    wxCriticalSection& m_critsect;
+	wxCriticalSection& m_critsect;
 
-    wxDECLARE_NO_COPY_CLASS(wxCriticalSectionLocker);
+	wxDECLARE_NO_COPY_CLASS(wxCriticalSectionLocker);
 };
 
 // ----------------------------------------------------------------------------
@@ -326,66 +341,66 @@ private:
 class WXDLLIMPEXP_BASE wxCondition
 {
 public:
-    // Each wxCondition object is associated with a (single) wxMutex object.
-    // The mutex object MUST be locked before calling Wait()
-    wxCondition(wxMutex& mutex);
+	// Each wxCondition object is associated with a (single) wxMutex object.
+	// The mutex object MUST be locked before calling Wait()
+	wxCondition(wxMutex& mutex);
 
-    // dtor is not virtual, don't use this class polymorphically
-    ~wxCondition();
+	// dtor is not virtual, don't use this class polymorphically
+	~wxCondition();
 
-    // return true if the condition has been created successfully
-    bool IsOk() const;
+	// return true if the condition has been created successfully
+	bool IsOk() const;
 
-    // NB: the associated mutex MUST be locked beforehand by the calling thread
-    //
-    // it atomically releases the lock on the associated mutex
-    // and starts waiting to be woken up by a Signal()/Broadcast()
-    // once its signaled, then it will wait until it can reacquire
-    // the lock on the associated mutex object, before returning.
-    wxCondError Wait();
+	// NB: the associated mutex MUST be locked beforehand by the calling thread
+	//
+	// it atomically releases the lock on the associated mutex
+	// and starts waiting to be woken up by a Signal()/Broadcast()
+	// once its signaled, then it will wait until it can reacquire
+	// the lock on the associated mutex object, before returning.
+	wxCondError Wait();
 
-    // std::condition_variable-like variant that evaluates the associated condition
-    template<typename Functor>
-    wxCondError Wait(const Functor& predicate)
-    {
-        while ( !predicate() )
-        {
-            wxCondError e = Wait();
-            if ( e != wxCOND_NO_ERROR )
-                return e;
-        }
-        return wxCOND_NO_ERROR;
-    }
+	// std::condition_variable-like variant that evaluates the associated condition
+	template<typename Functor>
+	wxCondError Wait(const Functor& predicate)
+	{
+		while ( !predicate() )
+		{
+			wxCondError e = Wait();
+			if ( e != wxCOND_NO_ERROR )
+				return e;
+		}
+		return wxCOND_NO_ERROR;
+	}
 
-    // exactly as Wait() except that it may also return if the specified
-    // timeout elapses even if the condition hasn't been signalled: in this
-    // case, the return value is wxCOND_TIMEOUT, otherwise (i.e. in case of a
-    // normal return) it is wxCOND_NO_ERROR.
-    //
-    // the timeout parameter specifies an interval that needs to be waited for
-    // in milliseconds
-    wxCondError WaitTimeout(unsigned long milliseconds);
+	// exactly as Wait() except that it may also return if the specified
+	// timeout elapses even if the condition hasn't been signalled: in this
+	// case, the return value is wxCOND_TIMEOUT, otherwise (i.e. in case of a
+	// normal return) it is wxCOND_NO_ERROR.
+	//
+	// the timeout parameter specifies an interval that needs to be waited for
+	// in milliseconds
+	wxCondError WaitTimeout(unsigned long milliseconds);
 
-    // NB: the associated mutex may or may not be locked by the calling thread
-    //
-    // this method unblocks one thread if any are blocking on the condition.
-    // if no thread is blocking in Wait(), then the signal is NOT remembered
-    // The thread which was blocking on Wait() will then reacquire the lock
-    // on the associated mutex object before returning
-    wxCondError Signal();
+	// NB: the associated mutex may or may not be locked by the calling thread
+	//
+	// this method unblocks one thread if any are blocking on the condition.
+	// if no thread is blocking in Wait(), then the signal is NOT remembered
+	// The thread which was blocking on Wait() will then reacquire the lock
+	// on the associated mutex object before returning
+	wxCondError Signal();
 
-    // NB: the associated mutex may or may not be locked by the calling thread
-    //
-    // this method unblocks all threads if any are blocking on the condition.
-    // if no thread is blocking in Wait(), then the signal is NOT remembered
-    // The threads which were blocking on Wait() will then reacquire the lock
-    // on the associated mutex object before returning.
-    wxCondError Broadcast();
+	// NB: the associated mutex may or may not be locked by the calling thread
+	//
+	// this method unblocks all threads if any are blocking on the condition.
+	// if no thread is blocking in Wait(), then the signal is NOT remembered
+	// The threads which were blocking on Wait() will then reacquire the lock
+	// on the associated mutex object before returning.
+	wxCondError Broadcast();
 
 private:
-    wxConditionInternal *m_internal;
+	wxConditionInternal *m_internal;
 
-    wxDECLARE_NO_COPY_CLASS(wxCondition);
+	wxDECLARE_NO_COPY_CLASS(wxCondition);
 };
 
 // ----------------------------------------------------------------------------
@@ -396,36 +411,36 @@ private:
 class WXDLLIMPEXP_BASE wxSemaphore
 {
 public:
-    // specifying a maxcount of 0 actually makes wxSemaphore behave as if there
-    // is no upper limit, if maxcount is 1 the semaphore behaves as a mutex
-    wxSemaphore( int initialcount = 0, int maxcount = 0 );
+	// specifying a maxcount of 0 actually makes wxSemaphore behave as if there
+	// is no upper limit, if maxcount is 1 the semaphore behaves as a mutex
+	wxSemaphore( int initialcount = 0, int maxcount = 0 );
 
-    // dtor is not virtual, don't use this class polymorphically
-    ~wxSemaphore();
+	// dtor is not virtual, don't use this class polymorphically
+	~wxSemaphore();
 
-    // return true if the semaphore has been created successfully
-    bool IsOk() const;
+	// return true if the semaphore has been created successfully
+	bool IsOk() const;
 
-    // wait indefinitely, until the semaphore count goes beyond 0
-    // and then decrement it and return (this method might have been called
-    // Acquire())
-    wxSemaError Wait();
+	// wait indefinitely, until the semaphore count goes beyond 0
+	// and then decrement it and return (this method might have been called
+	// Acquire())
+	wxSemaError Wait();
 
-    // same as Wait(), but does not block, returns wxSEMA_NO_ERROR if
-    // successful and wxSEMA_BUSY if the count is currently zero
-    wxSemaError TryWait();
+	// same as Wait(), but does not block, returns wxSEMA_NO_ERROR if
+	// successful and wxSEMA_BUSY if the count is currently zero
+	wxSemaError TryWait();
 
-    // same as Wait(), but as a timeout limit, returns wxSEMA_NO_ERROR if the
-    // semaphore was acquired and wxSEMA_TIMEOUT if the timeout has elapsed
-    wxSemaError WaitTimeout(unsigned long milliseconds);
+	// same as Wait(), but as a timeout limit, returns wxSEMA_NO_ERROR if the
+	// semaphore was acquired and wxSEMA_TIMEOUT if the timeout has elapsed
+	wxSemaError WaitTimeout(unsigned long milliseconds);
 
-    // increments the semaphore count and signals one of the waiting threads
-    wxSemaError Post();
+	// increments the semaphore count and signals one of the waiting threads
+	wxSemaError Post();
 
 private:
-    wxSemaphoreInternal *m_internal;
+	wxSemaphoreInternal *m_internal;
 
-    wxDECLARE_NO_COPY_CLASS(wxSemaphore);
+	wxDECLARE_NO_COPY_CLASS(wxSemaphore);
 };
 
 // ----------------------------------------------------------------------------
@@ -443,210 +458,218 @@ private:
 
 // On VMS thread pointers are 64 bits (also needed for other systems???
 #ifdef __VMS
-   typedef unsigned long long wxThreadIdType;
+typedef unsigned long long wxThreadIdType;
 #else
-   typedef unsigned long wxThreadIdType;
+typedef unsigned long wxThreadIdType;
 #endif
 
 class WXDLLIMPEXP_BASE wxThread
 {
 public:
-    // the return type for the thread function
-    typedef void *ExitCode;
+	// the return type for the thread function
+	typedef void *ExitCode;
 
-    // static functions
-        // Returns the wxThread object for the calling thread. NULL is returned
-        // if the caller is the main thread (but it's recommended to use
-        // IsMain() and only call This() for threads other than the main one
-        // because NULL is also returned on error). If the thread wasn't
-        // created with wxThread class, the returned value is undefined.
-    static wxThread *This();
+	// static functions
+	// Returns the wxThread object for the calling thread. NULL is returned
+	// if the caller is the main thread (but it's recommended to use
+	// IsMain() and only call This() for threads other than the main one
+	// because NULL is also returned on error). If the thread wasn't
+	// created with wxThread class, the returned value is undefined.
+	static wxThread *This();
 
-        // Returns true if current thread is the main thread.
-        //
-        // Notice that it also returns true if main thread id hadn't been
-        // initialized yet on the assumption that it's too early in wx startup
-        // process for any other threads to have been created in this case.
-    static bool IsMain()
-    {
-        return !ms_idMainThread || GetCurrentId() == ms_idMainThread;
-    }
+	// Returns true if current thread is the main thread.
+	//
+	// Notice that it also returns true if main thread id hadn't been
+	// initialized yet on the assumption that it's too early in wx startup
+	// process for any other threads to have been created in this case.
+	static bool IsMain()
+	{
+		return !ms_idMainThread || GetCurrentId() == ms_idMainThread;
+	}
 
-        // Return the main thread id
-    static wxThreadIdType GetMainId() { return ms_idMainThread; }
+	// Return the main thread id
+	static wxThreadIdType GetMainId()
+	{
+		return ms_idMainThread;
+	}
 
-        // Release the rest of our time slice letting the other threads run
-    static void Yield();
+	// Release the rest of our time slice letting the other threads run
+	static void Yield();
 
-        // Sleep during the specified period of time in milliseconds
-        //
-        // This is the same as wxMilliSleep().
-    static void Sleep(unsigned long milliseconds);
+	// Sleep during the specified period of time in milliseconds
+	//
+	// This is the same as wxMilliSleep().
+	static void Sleep(unsigned long milliseconds);
 
-        // get the number of system CPUs - useful with SetConcurrency()
-        // (the "best" value for it is usually number of CPUs + 1)
-        //
-        // Returns -1 if unknown, number of CPUs otherwise
-    static int GetCPUCount();
+	// get the number of system CPUs - useful with SetConcurrency()
+	// (the "best" value for it is usually number of CPUs + 1)
+	//
+	// Returns -1 if unknown, number of CPUs otherwise
+	static int GetCPUCount();
 
-        // Get the platform specific thread ID and return as a long.  This
-        // can be used to uniquely identify threads, even if they are not
-        // wxThreads.  This is used by wxPython.
-    static wxThreadIdType GetCurrentId();
+	// Get the platform specific thread ID and return as a long.  This
+	// can be used to uniquely identify threads, even if they are not
+	// wxThreads.  This is used by wxPython.
+	static wxThreadIdType GetCurrentId();
 
-        // sets the concurrency level: this is, roughly, the number of threads
-        // the system tries to schedule to run in parallel. 0 means the
-        // default value (usually acceptable, but may not yield the best
-        // performance for this process)
-        //
-        // Returns true on success, false otherwise (if not implemented, for
-        // example)
-    static bool SetConcurrency(size_t level);
+	// sets the concurrency level: this is, roughly, the number of threads
+	// the system tries to schedule to run in parallel. 0 means the
+	// default value (usually acceptable, but may not yield the best
+	// performance for this process)
+	//
+	// Returns true on success, false otherwise (if not implemented, for
+	// example)
+	static bool SetConcurrency(size_t level);
 
-    // constructor only creates the C++ thread object and doesn't create (or
-    // start) the real thread
-    wxThread(wxThreadKind kind = wxTHREAD_DETACHED);
+	// constructor only creates the C++ thread object and doesn't create (or
+	// start) the real thread
+	wxThread(wxThreadKind kind = wxTHREAD_DETACHED);
 
-    // functions that change the thread state: all these can only be called
-    // from _another_ thread (typically the thread that created this one, e.g.
-    // the main thread), not from the thread itself
+	// functions that change the thread state: all these can only be called
+	// from _another_ thread (typically the thread that created this one, e.g.
+	// the main thread), not from the thread itself
 
-        // create a new thread and optionally set the stack size on
-        // platforms that support that - call Run() to start it
-    wxThreadError Create(unsigned int stackSize = 0);
+	// create a new thread and optionally set the stack size on
+	// platforms that support that - call Run() to start it
+	wxThreadError Create(unsigned int stackSize = 0);
 
-        // starts execution of the thread - from the moment Run() is called
-        // the execution of wxThread::Entry() may start at any moment, caller
-        // shouldn't suppose that it starts after (or before) Run() returns.
-    wxThreadError Run();
+	// starts execution of the thread - from the moment Run() is called
+	// the execution of wxThread::Entry() may start at any moment, caller
+	// shouldn't suppose that it starts after (or before) Run() returns.
+	wxThreadError Run();
 
-        // stops the thread if it's running and deletes the wxThread object if
-        // this is a detached thread freeing its memory - otherwise (for
-        // joinable threads) you still need to delete wxThread object
-        // yourself.
-        //
-        // this function only works if the thread calls TestDestroy()
-        // periodically - the thread will only be deleted the next time it
-        // does it!
-        //
-        // will fill the rc pointer with the thread exit code if it's !NULL
-    wxThreadError Delete(ExitCode *rc = NULL,
-                         wxThreadWait waitMode = wxTHREAD_WAIT_DEFAULT);
+	// stops the thread if it's running and deletes the wxThread object if
+	// this is a detached thread freeing its memory - otherwise (for
+	// joinable threads) you still need to delete wxThread object
+	// yourself.
+	//
+	// this function only works if the thread calls TestDestroy()
+	// periodically - the thread will only be deleted the next time it
+	// does it!
+	//
+	// will fill the rc pointer with the thread exit code if it's !NULL
+	wxThreadError Delete(ExitCode *rc = NULL,
+	                     wxThreadWait waitMode = wxTHREAD_WAIT_DEFAULT);
 
-        // waits for a joinable thread to finish and returns its exit code
-        //
-        // Returns (ExitCode)-1 on error (for example, if the thread is not
-        // joinable)
-    ExitCode Wait(wxThreadWait waitMode = wxTHREAD_WAIT_DEFAULT);
+	// waits for a joinable thread to finish and returns its exit code
+	//
+	// Returns (ExitCode)-1 on error (for example, if the thread is not
+	// joinable)
+	ExitCode Wait(wxThreadWait waitMode = wxTHREAD_WAIT_DEFAULT);
 
-        // kills the thread without giving it any chance to clean up - should
-        // not be used under normal circumstances, use Delete() instead.
-        // It is a dangerous function that should only be used in the most
-        // extreme cases!
-        //
-        // The wxThread object is deleted by Kill() if the thread is
-        // detachable, but you still have to delete it manually for joinable
-        // threads.
-    wxThreadError Kill();
+	// kills the thread without giving it any chance to clean up - should
+	// not be used under normal circumstances, use Delete() instead.
+	// It is a dangerous function that should only be used in the most
+	// extreme cases!
+	//
+	// The wxThread object is deleted by Kill() if the thread is
+	// detachable, but you still have to delete it manually for joinable
+	// threads.
+	wxThreadError Kill();
 
-        // pause a running thread: as Delete(), this only works if the thread
-        // calls TestDestroy() regularly
-    wxThreadError Pause();
+	// pause a running thread: as Delete(), this only works if the thread
+	// calls TestDestroy() regularly
+	wxThreadError Pause();
 
-        // resume a paused thread
-    wxThreadError Resume();
+	// resume a paused thread
+	wxThreadError Resume();
 
-    // priority
-        // Sets the priority to "prio" which must be in 0..100 range (see
-        // also wxPRIORITY_XXX constants).
-        //
-        // NB: under MSW the priority can only be set after the thread is
-        //     created (but possibly before it is launched)
-    void SetPriority(unsigned int prio);
+	// priority
+	// Sets the priority to "prio" which must be in 0..100 range (see
+	// also wxPRIORITY_XXX constants).
+	//
+	// NB: under MSW the priority can only be set after the thread is
+	//     created (but possibly before it is launched)
+	void SetPriority(unsigned int prio);
 
-        // Get the current priority.
-    unsigned int GetPriority() const;
+	// Get the current priority.
+	unsigned int GetPriority() const;
 
-    // thread status inquiries
-        // Returns true if the thread is alive: i.e. running or suspended
-    bool IsAlive() const;
-        // Returns true if the thread is running (not paused, not killed).
-    bool IsRunning() const;
-        // Returns true if the thread is suspended
-    bool IsPaused() const;
+	// thread status inquiries
+	// Returns true if the thread is alive: i.e. running or suspended
+	bool IsAlive() const;
+	// Returns true if the thread is running (not paused, not killed).
+	bool IsRunning() const;
+	// Returns true if the thread is suspended
+	bool IsPaused() const;
 
-        // is the thread of detached kind?
-    bool IsDetached() const { return m_isDetached; }
+	// is the thread of detached kind?
+	bool IsDetached() const
+	{
+		return m_isDetached;
+	}
 
-    // Get the thread ID - a platform dependent number which uniquely
-    // identifies a thread inside a process
-    wxThreadIdType GetId() const;
+	// Get the thread ID - a platform dependent number which uniquely
+	// identifies a thread inside a process
+	wxThreadIdType GetId() const;
 
 #ifdef __WINDOWS__
-    // Get the internal OS handle
-    WXHANDLE MSWGetHandle() const;
+	// Get the internal OS handle
+	WXHANDLE MSWGetHandle() const;
 #endif // __WINDOWS__
 
-    wxThreadKind GetKind() const
-        { return m_isDetached ? wxTHREAD_DETACHED : wxTHREAD_JOINABLE; }
+	wxThreadKind GetKind() const
+	{
+		return m_isDetached ? wxTHREAD_DETACHED : wxTHREAD_JOINABLE;
+	}
 
-    // Returns true if the thread was asked to terminate: this function should
-    // be called by the thread from time to time, otherwise the main thread
-    // will be left forever in Delete()!
-    virtual bool TestDestroy();
+	// Returns true if the thread was asked to terminate: this function should
+	// be called by the thread from time to time, otherwise the main thread
+	// will be left forever in Delete()!
+	virtual bool TestDestroy();
 
-    // dtor is public, but the detached threads should never be deleted - use
-    // Delete() instead (or leave the thread terminate by itself)
-    virtual ~wxThread();
+	// dtor is public, but the detached threads should never be deleted - use
+	// Delete() instead (or leave the thread terminate by itself)
+	virtual ~wxThread();
 
 protected:
-    // exits from the current thread - can be called only from this thread
-    void Exit(ExitCode exitcode = 0);
+	// exits from the current thread - can be called only from this thread
+	void Exit(ExitCode exitcode = 0);
 
-    // entry point for the thread - called by Run() and executes in the context
-    // of this thread.
-    virtual void *Entry() = 0;
+	// entry point for the thread - called by Run() and executes in the context
+	// of this thread.
+	virtual void *Entry() = 0;
 
-    // use this to call the Entry() virtual method
-    void *CallEntry();
+	// use this to call the Entry() virtual method
+	void *CallEntry();
 
-    // Callbacks which may be overridden by the derived class to perform some
-    // specific actions when the thread is deleted or killed. By default they
-    // do nothing.
+	// Callbacks which may be overridden by the derived class to perform some
+	// specific actions when the thread is deleted or killed. By default they
+	// do nothing.
 
-    // This one is called by Delete() before actually deleting the thread and
-    // is executed in the context of the thread that called Delete().
-    virtual void OnDelete() {}
+	// This one is called by Delete() before actually deleting the thread and
+	// is executed in the context of the thread that called Delete().
+	virtual void OnDelete() {}
 
-    // This one is called by Kill() before killing the thread and is executed
-    // in the context of the thread that called Kill().
-    virtual void OnKill() {}
+	// This one is called by Kill() before killing the thread and is executed
+	// in the context of the thread that called Kill().
+	virtual void OnKill() {}
 
 private:
-    // no copy ctor/assignment operator
-    wxThread(const wxThread&);
-    wxThread& operator=(const wxThread&);
+	// no copy ctor/assignment operator
+	wxThread(const wxThread&);
+	wxThread& operator=(const wxThread&);
 
-    // called when the thread exits - in the context of this thread
-    //
-    // NB: this function will not be called if the thread is Kill()ed
-    virtual void OnExit() { }
+	// called when the thread exits - in the context of this thread
+	//
+	// NB: this function will not be called if the thread is Kill()ed
+	virtual void OnExit() { }
 
-    friend class wxThreadInternal;
-    friend class wxThreadModule;
+	friend class wxThreadInternal;
+	friend class wxThreadModule;
 
 
-    // the main thread identifier, should be set on startup
-    static wxThreadIdType ms_idMainThread;
+	// the main thread identifier, should be set on startup
+	static wxThreadIdType ms_idMainThread;
 
-    // the (platform-dependent) thread class implementation
-    wxThreadInternal *m_internal;
+	// the (platform-dependent) thread class implementation
+	wxThreadInternal *m_internal;
 
-    // protects access to any methods of wxThreadInternal object
-    wxCriticalSection m_critsect;
+	// protects access to any methods of wxThreadInternal object
+	wxCriticalSection m_critsect;
 
-    // true if the thread is detached, false if it is joinable
-    bool m_isDetached;
+	// true if the thread is detached, false if it is joinable
+	bool m_isDetached;
 };
 
 // wxThreadHelperThread class
@@ -655,23 +678,23 @@ private:
 class WXDLLIMPEXP_BASE wxThreadHelperThread : public wxThread
 {
 public:
-    // constructor only creates the C++ thread object and doesn't create (or
-    // start) the real thread
-    wxThreadHelperThread(wxThreadHelper& owner, wxThreadKind kind)
-        : wxThread(kind), m_owner(owner)
-        { }
+	// constructor only creates the C++ thread object and doesn't create (or
+	// start) the real thread
+	wxThreadHelperThread(wxThreadHelper& owner, wxThreadKind kind)
+		: wxThread(kind), m_owner(owner)
+	{ }
 
 protected:
-    // entry point for the thread -- calls Entry() in owner.
-    virtual void *Entry() wxOVERRIDE;
+	// entry point for the thread -- calls Entry() in owner.
+	virtual void *Entry() wxOVERRIDE;
 
 private:
-    // the owner of the thread
-    wxThreadHelper& m_owner;
+	// the owner of the thread
+	wxThreadHelper& m_owner;
 
-    // no copy ctor/assignment operator
-    wxThreadHelperThread(const wxThreadHelperThread&);
-    wxThreadHelperThread& operator=(const wxThreadHelperThread&);
+	// no copy ctor/assignment operator
+	wxThreadHelperThread(const wxThreadHelperThread&);
+	wxThreadHelperThread& operator=(const wxThreadHelperThread&);
 };
 
 // ----------------------------------------------------------------------------
@@ -683,92 +706,97 @@ private:
 class WXDLLIMPEXP_BASE wxThreadHelper
 {
 private:
-    void KillThread()
-    {
-        // If wxThreadHelperThread is detached and is about to finish, it will
-        // set m_thread to NULL so don't delete it then.
-        // But if KillThread is called before wxThreadHelperThread (in detached mode)
-        // sets it to NULL, then the thread object still exists and can be killed
-        wxCriticalSectionLocker locker(m_critSection);
+	void KillThread()
+	{
+		// If wxThreadHelperThread is detached and is about to finish, it will
+		// set m_thread to NULL so don't delete it then.
+		// But if KillThread is called before wxThreadHelperThread (in detached mode)
+		// sets it to NULL, then the thread object still exists and can be killed
+		wxCriticalSectionLocker locker(m_critSection);
 
-        if ( m_thread )
-        {
-            m_thread->Kill();
+		if ( m_thread )
+		{
+			m_thread->Kill();
 
-            if ( m_kind == wxTHREAD_JOINABLE )
-              delete m_thread;
+			if ( m_kind == wxTHREAD_JOINABLE )
+				delete m_thread;
 
-            m_thread = NULL;
-        }
-    }
+			m_thread = NULL;
+		}
+	}
 
 public:
-    // constructor only initializes m_thread to NULL
-    wxThreadHelper(wxThreadKind kind = wxTHREAD_JOINABLE)
-        : m_thread(NULL), m_kind(kind) { }
+	// constructor only initializes m_thread to NULL
+	wxThreadHelper(wxThreadKind kind = wxTHREAD_JOINABLE)
+		: m_thread(NULL), m_kind(kind) { }
 
-    // destructor deletes m_thread
-    virtual ~wxThreadHelper() { KillThread(); }
+	// destructor deletes m_thread
+	virtual ~wxThreadHelper()
+	{
+		KillThread();
+	}
 
 #if WXWIN_COMPATIBILITY_2_8
-    wxDEPRECATED( wxThreadError Create(unsigned int stackSize = 0) );
+	wxDEPRECATED( wxThreadError Create(unsigned int stackSize = 0) );
 #endif
 
-    // create a new thread (and optionally set the stack size on platforms that
-    // support/need that), call Run() to start it
-    wxThreadError CreateThread(wxThreadKind kind = wxTHREAD_JOINABLE,
-                               unsigned int stackSize = 0)
-    {
-        KillThread();
+	// create a new thread (and optionally set the stack size on platforms that
+	// support/need that), call Run() to start it
+	wxThreadError CreateThread(wxThreadKind kind = wxTHREAD_JOINABLE,
+	                           unsigned int stackSize = 0)
+	{
+		KillThread();
 
-        m_kind = kind;
-        m_thread = new wxThreadHelperThread(*this, m_kind);
+		m_kind = kind;
+		m_thread = new wxThreadHelperThread(*this, m_kind);
 
-        return m_thread->Create(stackSize);
-    }
+		return m_thread->Create(stackSize);
+	}
 
-    // entry point for the thread - called by Run() and executes in the context
-    // of this thread.
-    virtual void *Entry() = 0;
+	// entry point for the thread - called by Run() and executes in the context
+	// of this thread.
+	virtual void *Entry() = 0;
 
-    // returns a pointer to the thread which can be used to call Run()
-    wxThread *GetThread() const
-    {
-        wxCriticalSectionLocker locker((wxCriticalSection&)m_critSection);
+	// returns a pointer to the thread which can be used to call Run()
+	wxThread *GetThread() const
+	{
+		wxCriticalSectionLocker locker((wxCriticalSection&)m_critSection);
 
-        wxThread* thread = m_thread;
+		wxThread* thread = m_thread;
 
-        return thread;
-    }
+		return thread;
+	}
 
 protected:
-    wxThread *m_thread;
-    wxThreadKind m_kind;
-    wxCriticalSection m_critSection; // To guard the m_thread variable
+	wxThread *m_thread;
+	wxThreadKind m_kind;
+	wxCriticalSection m_critSection; // To guard the m_thread variable
 
-    friend class wxThreadHelperThread;
+	friend class wxThreadHelperThread;
 };
 
 #if WXWIN_COMPATIBILITY_2_8
 inline wxThreadError wxThreadHelper::Create(unsigned int stackSize)
-{ return CreateThread(m_kind, stackSize); }
+{
+	return CreateThread(m_kind, stackSize);
+}
 #endif
 
 // call Entry() in owner, put it down here to avoid circular declarations
 inline void *wxThreadHelperThread::Entry()
 {
-    void * const result = m_owner.Entry();
+	void * const result = m_owner.Entry();
 
-    wxCriticalSectionLocker locker(m_owner.m_critSection);
+	wxCriticalSectionLocker locker(m_owner.m_critSection);
 
-    // Detached thread will be deleted after returning, so make sure
-    // wxThreadHelper::GetThread will not return an invalid pointer.
-    // And that wxThreadHelper::KillThread will not try to kill
-    // an already deleted thread
-    if ( m_owner.m_kind == wxTHREAD_DETACHED )
-        m_owner.m_thread = NULL;
+	// Detached thread will be deleted after returning, so make sure
+	// wxThreadHelper::GetThread will not return an invalid pointer.
+	// And that wxThreadHelper::KillThread will not try to kill
+	// an already deleted thread
+	if ( m_owner.m_kind == wxTHREAD_DETACHED )
+		m_owner.m_thread = NULL;
 
-    return result;
+	return result;
 }
 
 // ----------------------------------------------------------------------------
@@ -789,7 +817,10 @@ void WXDLLIMPEXP_BASE wxMutexGuiLeave();
 
 // function for checking if we're in the main thread which may be used whether
 // wxUSE_THREADS is 0 or 1
-inline bool wxIsMainThread() { return wxThread::IsMain(); }
+inline bool wxIsMainThread()
+{
+	return wxThread::IsMain();
+}
 
 #else // !wxUSE_THREADS
 
@@ -807,7 +838,10 @@ inline void wxMutexGuiLeave() { }
 #define wxCRIT_SECT_LOCKER(name, cs)     struct wxDummyCSLocker##name
 
 // if there is only one thread, it is always the main one
-inline bool wxIsMainThread() { return true; }
+inline bool wxIsMainThread()
+{
+	return true;
+}
 
 #endif // wxUSE_THREADS/!wxUSE_THREADS
 
@@ -836,8 +870,14 @@ inline bool wxIsMainThread() { return true; }
 class WXDLLIMPEXP_BASE wxMutexGuiLocker
 {
 public:
-    wxMutexGuiLocker() { wxMutexGuiEnter(); }
-   ~wxMutexGuiLocker() { wxMutexGuiLeave(); }
+	wxMutexGuiLocker()
+	{
+		wxMutexGuiEnter();
+	}
+	~wxMutexGuiLocker()
+	{
+		wxMutexGuiLeave();
+	}
 };
 
 // -----------------------------------------------------------------------------
@@ -847,21 +887,21 @@ public:
 #if wxUSE_THREADS
 
 #if defined(__WINDOWS__) || defined(__DARWIN__)
-    // unlock GUI if there are threads waiting for and lock it back when
-    // there are no more of them - should be called periodically by the main
-    // thread
-    extern void WXDLLIMPEXP_BASE wxMutexGuiLeaveOrEnter();
+// unlock GUI if there are threads waiting for and lock it back when
+// there are no more of them - should be called periodically by the main
+// thread
+extern void WXDLLIMPEXP_BASE wxMutexGuiLeaveOrEnter();
 
-    // returns true if the main thread has GUI lock
-    extern bool WXDLLIMPEXP_BASE wxGuiOwnedByMainThread();
+// returns true if the main thread has GUI lock
+extern bool WXDLLIMPEXP_BASE wxGuiOwnedByMainThread();
 
-    // wakes up the main thread if it's sleeping inside ::GetMessage()
-    extern void WXDLLIMPEXP_BASE wxWakeUpMainThread();
+// wakes up the main thread if it's sleeping inside ::GetMessage()
+extern void WXDLLIMPEXP_BASE wxWakeUpMainThread();
 
 #ifndef __DARWIN__
-    // return true if the main thread is waiting for some other to terminate:
-    // wxApp then should block all "dangerous" messages
-    extern bool WXDLLIMPEXP_BASE wxIsWaitingForThread();
+// return true if the main thread is waiting for some other to terminate:
+// wxApp then should block all "dangerous" messages
+extern bool WXDLLIMPEXP_BASE wxIsWaitingForThread();
 #endif
 #endif // MSW, OSX
 

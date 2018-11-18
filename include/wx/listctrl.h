@@ -28,11 +28,11 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxListCtrlNameStr[];
 // ----------------------------------------------------------------------------
 
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)
-    #include "wx/msw/listctrl.h"
+#include "wx/msw/listctrl.h"
 #elif defined(__WXQT__) && !defined(__WXUNIVERSAL__)
-    #include "wx/qt/listctrl.h"
+#include "wx/qt/listctrl.h"
 #else
-    #include "wx/generic/listctrl.h"
+#include "wx/generic/listctrl.h"
 #endif
 
 // ----------------------------------------------------------------------------
@@ -42,68 +42,77 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxListCtrlNameStr[];
 class WXDLLIMPEXP_CORE wxListView : public wxListCtrl
 {
 public:
-    wxListView() { }
-    wxListView( wxWindow *parent,
-                wxWindowID winid = wxID_ANY,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxLC_REPORT,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString &name = wxListCtrlNameStr)
-    {
-        Create(parent, winid, pos, size, style, validator, name);
-    }
+	wxListView() { }
+	wxListView( wxWindow *parent,
+	            wxWindowID winid = wxID_ANY,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxLC_REPORT,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString &name = wxListCtrlNameStr)
+	{
+		Create(parent, winid, pos, size, style, validator, name);
+	}
 
-    // focus/selection stuff
-    // ---------------------
+	// focus/selection stuff
+	// ---------------------
 
-    // [de]select an item
-    void Select(long n, bool on = true)
-    {
-        SetItemState(n, on ? wxLIST_STATE_SELECTED : 0, wxLIST_STATE_SELECTED);
-    }
+	// [de]select an item
+	void Select(long n, bool on = true)
+	{
+		SetItemState(n, on ? wxLIST_STATE_SELECTED : 0, wxLIST_STATE_SELECTED);
+	}
 
-    // focus and show the given item
-    void Focus(long index)
-    {
-        SetItemState(index, wxLIST_STATE_FOCUSED, wxLIST_STATE_FOCUSED);
-        EnsureVisible(index);
-    }
+	// focus and show the given item
+	void Focus(long index)
+	{
+		SetItemState(index, wxLIST_STATE_FOCUSED, wxLIST_STATE_FOCUSED);
+		EnsureVisible(index);
+	}
 
-    // get the currently focused item or -1 if none
-    long GetFocusedItem() const
-    {
-        return GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_FOCUSED);
-    }
+	// get the currently focused item or -1 if none
+	long GetFocusedItem() const
+	{
+		return GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_FOCUSED);
+	}
 
-    // get first and subsequent selected items, return -1 when no more
-    long GetNextSelected(long item) const
-        { return GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED); }
-    long GetFirstSelected() const
-        { return GetNextSelected(-1); }
+	// get first and subsequent selected items, return -1 when no more
+	long GetNextSelected(long item) const
+	{
+		return GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+	}
+	long GetFirstSelected() const
+	{
+		return GetNextSelected(-1);
+	}
 
-    // return true if the item is selected
-    bool IsSelected(long index) const
-        { return GetItemState(index, wxLIST_STATE_SELECTED) != 0; }
+	// return true if the item is selected
+	bool IsSelected(long index) const
+	{
+		return GetItemState(index, wxLIST_STATE_SELECTED) != 0;
+	}
 
-    // columns
-    // -------
+	// columns
+	// -------
 
-    void SetColumnImage(int col, int image)
-    {
-        wxListItem item;
-        item.SetMask(wxLIST_MASK_IMAGE);
-        item.SetImage(image);
-        SetColumn(col, item);
-    }
+	void SetColumnImage(int col, int image)
+	{
+		wxListItem item;
+		item.SetMask(wxLIST_MASK_IMAGE);
+		item.SetImage(image);
+		SetColumn(col, item);
+	}
 
-    void ClearColumnImage(int col) { SetColumnImage(col, -1); }
+	void ClearColumnImage(int col)
+	{
+		SetColumnImage(col, -1);
+	}
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxListView);
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxListView);
 };
 
 #endif // wxUSE_LISTCTRL
 
 #endif
-    // _WX_LISTCTRL_H_BASE_
+// _WX_LISTCTRL_H_BASE_

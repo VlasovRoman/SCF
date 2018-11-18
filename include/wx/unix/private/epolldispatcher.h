@@ -21,31 +21,31 @@ struct epoll_event;
 class WXDLLIMPEXP_BASE wxEpollDispatcher : public wxFDIODispatcher
 {
 public:
-    // create a new instance of this class, can return NULL if
-    // epoll() is not supported on this system
-    //
-    // the caller should delete the returned pointer
-    static wxEpollDispatcher *Create();
+	// create a new instance of this class, can return NULL if
+	// epoll() is not supported on this system
+	//
+	// the caller should delete the returned pointer
+	static wxEpollDispatcher *Create();
 
-    virtual ~wxEpollDispatcher();
+	virtual ~wxEpollDispatcher();
 
-    // implement base class pure virtual methods
-    virtual bool RegisterFD(int fd, wxFDIOHandler* handler, int flags = wxFDIO_ALL) wxOVERRIDE;
-    virtual bool ModifyFD(int fd, wxFDIOHandler* handler, int flags = wxFDIO_ALL) wxOVERRIDE;
-    virtual bool UnregisterFD(int fd) wxOVERRIDE;
-    virtual bool HasPending() const wxOVERRIDE;
-    virtual int Dispatch(int timeout = TIMEOUT_INFINITE) wxOVERRIDE;
+	// implement base class pure virtual methods
+	virtual bool RegisterFD(int fd, wxFDIOHandler* handler, int flags = wxFDIO_ALL) wxOVERRIDE;
+	virtual bool ModifyFD(int fd, wxFDIOHandler* handler, int flags = wxFDIO_ALL) wxOVERRIDE;
+	virtual bool UnregisterFD(int fd) wxOVERRIDE;
+	virtual bool HasPending() const wxOVERRIDE;
+	virtual int Dispatch(int timeout = TIMEOUT_INFINITE) wxOVERRIDE;
 
 private:
-    // ctor is private, use Create()
-    wxEpollDispatcher(int epollDescriptor);
+	// ctor is private, use Create()
+	wxEpollDispatcher(int epollDescriptor);
 
-    // common part of HasPending() and Dispatch(): calls epoll_wait() with the
-    // given timeout
-    int DoPoll(epoll_event *events, int numEvents, int timeout) const;
+	// common part of HasPending() and Dispatch(): calls epoll_wait() with the
+	// given timeout
+	int DoPoll(epoll_event *events, int numEvents, int timeout) const;
 
 
-    int m_epollDescriptor;
+	int m_epollDescriptor;
 };
 
 #endif // wxUSE_EPOLL_DISPATCHER

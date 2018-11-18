@@ -16,14 +16,14 @@
  */
 
 #ifndef wxOSX_USE_NATIVE_TOOLBAR
-    #define wxOSX_USE_NATIVE_TOOLBAR 1
+#define wxOSX_USE_NATIVE_TOOLBAR 1
 #endif
 
 /*
  * leave is isFlipped and don't override
  */
-#ifndef wxOSX_USE_NATIVE_FLIPPED 
-    #define wxOSX_USE_NATIVE_FLIPPED 1
+#ifndef wxOSX_USE_NATIVE_FLIPPED
+#define wxOSX_USE_NATIVE_FLIPPED 1
 #endif
 
 /*
@@ -45,5 +45,5 @@
  */
 
 #endif
-    /* _WX_MAC_CHKCONF_H_ */
+/* _WX_MAC_CHKCONF_H_ */
 

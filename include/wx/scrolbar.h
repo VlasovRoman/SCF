@@ -26,59 +26,65 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxScrollBarNameStr[];
 class WXDLLIMPEXP_CORE wxScrollBarBase : public wxControl
 {
 public:
-    wxScrollBarBase() { }
+	wxScrollBarBase() { }
 
-    /*
-        Derived classes should provide the following method and ctor with the
-        same parameters:
+	/*
+	    Derived classes should provide the following method and ctor with the
+	    same parameters:
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxSB_HORIZONTAL,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxScrollBarNameStr);
-    */
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxSB_HORIZONTAL,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxScrollBarNameStr);
+	*/
 
-    // accessors
-    virtual int GetThumbPosition() const = 0;
-    virtual int GetThumbSize() const = 0;
-    virtual int GetPageSize() const = 0;
-    virtual int GetRange() const = 0;
+	// accessors
+	virtual int GetThumbPosition() const = 0;
+	virtual int GetThumbSize() const = 0;
+	virtual int GetPageSize() const = 0;
+	virtual int GetRange() const = 0;
 
-    bool IsVertical() const { return (m_windowStyle & wxVERTICAL) != 0; }
+	bool IsVertical() const
+	{
+		return (m_windowStyle & wxVERTICAL) != 0;
+	}
 
-    // operations
-    virtual void SetThumbPosition(int viewStart) = 0;
-    virtual void SetScrollbar(int position, int thumbSize,
-                              int range, int pageSize,
-                              bool refresh = true) wxOVERRIDE = 0;
+	// operations
+	virtual void SetThumbPosition(int viewStart) = 0;
+	virtual void SetScrollbar(int position, int thumbSize,
+	                          int range, int pageSize,
+	                          bool refresh = true) wxOVERRIDE = 0;
 
-    // implementation-only
-    bool IsNeeded() const { return GetRange() > GetThumbSize(); }
+	// implementation-only
+	bool IsNeeded() const
+	{
+		return GetRange() > GetThumbSize();
+	}
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxScrollBarBase);
+	wxDECLARE_NO_COPY_CLASS(wxScrollBarBase);
 };
 
 #if defined(__WXUNIVERSAL__)
-    #include "wx/univ/scrolbar.h"
+#include "wx/univ/scrolbar.h"
 #elif defined(__WXMSW__)
-    #include "wx/msw/scrolbar.h"
+#include "wx/msw/scrolbar.h"
 #elif defined(__WXMOTIF__)
-    #include "wx/motif/scrolbar.h"
+#include "wx/motif/scrolbar.h"
 #elif defined(__WXGTK20__)
-    #include "wx/gtk/scrolbar.h"
+#include "wx/gtk/scrolbar.h"
 #elif defined(__WXGTK__)
-    #include "wx/gtk1/scrolbar.h"
+#include "wx/gtk1/scrolbar.h"
 #elif defined(__WXMAC__)
-    #include "wx/osx/scrolbar.h"
+#include "wx/osx/scrolbar.h"
 #elif defined(__WXQT__)
-    #include "wx/qt/scrolbar.h"
+#include "wx/qt/scrolbar.h"
 #endif
 
 #endif // wxUSE_SCROLLBAR
 
 #endif
-    // _WX_SCROLBAR_H_BASE_
+// _WX_SCROLBAR_H_BASE_

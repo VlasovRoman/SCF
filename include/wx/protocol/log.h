@@ -19,35 +19,35 @@
 class WXDLLIMPEXP_NET wxProtocolLog
 {
 public:
-    // Create object doing the logging using wxLogTrace() with the specified
-    // trace mask.
-    wxProtocolLog(const wxString& traceMask)
-        : m_traceMask(traceMask)
-    {
-    }
+	// Create object doing the logging using wxLogTrace() with the specified
+	// trace mask.
+	wxProtocolLog(const wxString& traceMask)
+		: m_traceMask(traceMask)
+	{
+	}
 
-    // Virtual dtor for the base class
-    virtual ~wxProtocolLog() { }
+	// Virtual dtor for the base class
+	virtual ~wxProtocolLog() { }
 
-    // Called by wxProtocol-derived classes to actually log something
-    virtual void LogRequest(const wxString& str)
-    {
-        DoLogString("==> " + str);
-    }
+	// Called by wxProtocol-derived classes to actually log something
+	virtual void LogRequest(const wxString& str)
+	{
+		DoLogString("==> " + str);
+	}
 
-    virtual void LogResponse(const wxString& str)
-    {
-        DoLogString("<== " + str);
-    }
+	virtual void LogResponse(const wxString& str)
+	{
+		DoLogString("<== " + str);
+	}
 
 protected:
-    // Can be overridden by the derived classes.
-    virtual void DoLogString(const wxString& str);
+	// Can be overridden by the derived classes.
+	virtual void DoLogString(const wxString& str);
 
 private:
-    const wxString m_traceMask;
+	const wxString m_traceMask;
 
-    wxDECLARE_NO_COPY_CLASS(wxProtocolLog);
+	wxDECLARE_NO_COPY_CLASS(wxProtocolLog);
 };
 
 #endif // _WX_PROTOCOL_LOG_H_

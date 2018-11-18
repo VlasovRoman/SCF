@@ -17,38 +17,41 @@ class WXDLLIMPEXP_FWD_CORE wxQtScrollBar;
 class WXDLLIMPEXP_CORE wxScrollBar : public wxScrollBarBase
 {
 public:
-    wxScrollBar();
-    wxScrollBar( wxWindow *parent, wxWindowID id,
-           const wxPoint& pos = wxDefaultPosition,
-           const wxSize& size = wxDefaultSize,
-           long style = wxSB_HORIZONTAL,
-           const wxValidator& validator = wxDefaultValidator,
-           const wxString& name = wxScrollBarNameStr );
+	wxScrollBar();
+	wxScrollBar( wxWindow *parent, wxWindowID id,
+	             const wxPoint& pos = wxDefaultPosition,
+	             const wxSize& size = wxDefaultSize,
+	             long style = wxSB_HORIZONTAL,
+	             const wxValidator& validator = wxDefaultValidator,
+	             const wxString& name = wxScrollBarNameStr );
 
-    bool Create( wxWindow *parent, wxWindowID id,
-           const wxPoint& pos = wxDefaultPosition,
-           const wxSize& size = wxDefaultSize,
-           long style = wxSB_HORIZONTAL,
-           const wxValidator& validator = wxDefaultValidator,
-           const wxString& name = wxScrollBarNameStr );
+	bool Create( wxWindow *parent, wxWindowID id,
+	             const wxPoint& pos = wxDefaultPosition,
+	             const wxSize& size = wxDefaultSize,
+	             long style = wxSB_HORIZONTAL,
+	             const wxValidator& validator = wxDefaultValidator,
+	             const wxString& name = wxScrollBarNameStr );
 
-    virtual int GetThumbPosition() const;
-    virtual int GetThumbSize() const;
-    virtual int GetPageSize() const;
-    virtual int GetRange() const;
+	virtual int GetThumbPosition() const;
+	virtual int GetThumbSize() const;
+	virtual int GetPageSize() const;
+	virtual int GetRange() const;
 
-    virtual void SetThumbPosition(int viewStart);
-    virtual void SetScrollbar(int position, int thumbSize,
-                              int range, int pageSize,
-                              bool refresh = true);
+	virtual void SetThumbPosition(int viewStart);
+	virtual void SetScrollbar(int position, int thumbSize,
+	                          int range, int pageSize,
+	                          bool refresh = true);
 
-    QScrollBar *GetQScrollBar() const { return m_qtScrollBar; }
-    QWidget *GetHandle() const;
+	QScrollBar *GetQScrollBar() const
+	{
+		return m_qtScrollBar;
+	}
+	QWidget *GetHandle() const;
 
 private:
-    QScrollBar *m_qtScrollBar;
+	QScrollBar *m_qtScrollBar;
 
-    wxDECLARE_DYNAMIC_CLASS(wxScrollBar);
+	wxDECLARE_DYNAMIC_CLASS(wxScrollBar);
 };
 
 

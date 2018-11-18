@@ -19,27 +19,27 @@ class WXDLLIMPEXP_FWD_RIBBON wxRibbonControl;
 class WXDLLIMPEXP_RIBBON wxRibbonXmlHandler : public wxXmlResourceHandler
 {
 public:
-    wxRibbonXmlHandler();
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	wxRibbonXmlHandler();
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
 private:
-    const wxClassInfo *m_isInside;
+	const wxClassInfo *m_isInside;
 
-    bool IsRibbonControl (wxXmlNode *node);
+	bool IsRibbonControl (wxXmlNode *node);
 
-    wxObject* Handle_buttonbar();
-    wxObject* Handle_button();
-    wxObject* Handle_control();
-    wxObject* Handle_page();
-    wxObject* Handle_gallery();
-    wxObject* Handle_galleryitem();
-    wxObject* Handle_panel();
-    wxObject* Handle_bar();
+	wxObject* Handle_buttonbar();
+	wxObject* Handle_button();
+	wxObject* Handle_control();
+	wxObject* Handle_page();
+	wxObject* Handle_gallery();
+	wxObject* Handle_galleryitem();
+	wxObject* Handle_panel();
+	wxObject* Handle_bar();
 
-    void Handle_RibbonArtProvider(wxRibbonControl *control);
+	void Handle_RibbonArtProvider(wxRibbonControl *control);
 
-    wxDECLARE_DYNAMIC_CLASS(wxRibbonXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxRibbonXmlHandler);
 };
 
 #endif // wxUSE_XRC && wxUSE_RIBBON

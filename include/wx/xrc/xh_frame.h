@@ -16,12 +16,12 @@
 
 class WXDLLIMPEXP_XRC wxFrameXmlHandler : public wxXmlResourceHandler
 {
-    wxDECLARE_DYNAMIC_CLASS(wxFrameXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxFrameXmlHandler);
 
 public:
-    wxFrameXmlHandler();
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	wxFrameXmlHandler();
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 };
 
 #endif // wxUSE_XRC

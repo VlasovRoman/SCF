@@ -12,10 +12,10 @@
 #define _WX_MENU_H_
 
 #if wxUSE_ACCEL
-    #include "wx/accel.h"
-    #include "wx/dynarray.h"
+#include "wx/accel.h"
+#include "wx/dynarray.h"
 
-    WX_DEFINE_EXPORTED_ARRAY_PTR(wxAcceleratorEntry *, wxAcceleratorArray);
+WX_DEFINE_EXPORTED_ARRAY_PTR(wxAcceleratorEntry *, wxAcceleratorArray);
 #endif // wxUSE_ACCEL
 
 class WXDLLIMPEXP_FWD_CORE wxFrame;
@@ -32,133 +32,156 @@ class wxMenuRadioItemsData;
 class WXDLLIMPEXP_CORE wxMenu : public wxMenuBase
 {
 public:
-    // ctors & dtor
-    wxMenu(const wxString& title, long style = 0)
-        : wxMenuBase(title, style) { Init(); }
+	// ctors & dtor
+	wxMenu(const wxString& title, long style = 0)
+		: wxMenuBase(title, style)
+	{
+		Init();
+	}
 
-    wxMenu(long style = 0) : wxMenuBase(style) { Init(); }
+	wxMenu(long style = 0) : wxMenuBase(style)
+	{
+		Init();
+	}
 
-    virtual ~wxMenu();
+	virtual ~wxMenu();
 
-    virtual void Break() wxOVERRIDE;
+	virtual void Break() wxOVERRIDE;
 
-    virtual void SetTitle(const wxString& title) wxOVERRIDE;
+	virtual void SetTitle(const wxString& title) wxOVERRIDE;
 
-    // MSW-only methods
-    // ----------------
+	// MSW-only methods
+	// ----------------
 
-    // Create a new menu from the given native HMENU. Takes ownership of the
-    // menu handle and will delete it when this object is destroyed.
-    static wxMenu *MSWNewFromHMENU(WXHMENU hMenu) { return new wxMenu(hMenu); }
+	// Create a new menu from the given native HMENU. Takes ownership of the
+	// menu handle and will delete it when this object is destroyed.
+	static wxMenu *MSWNewFromHMENU(WXHMENU hMenu)
+	{
+		return new wxMenu(hMenu);
+	}
 
-    // Detaches HMENU so that it isn't deleted when this object is destroyed.
-    // Don't use this object after calling this method.
-    WXHMENU MSWDetachHMENU() { WXHMENU m = m_hMenu; m_hMenu = NULL; return m; }
+	// Detaches HMENU so that it isn't deleted when this object is destroyed.
+	// Don't use this object after calling this method.
+	WXHMENU MSWDetachHMENU()
+	{
+		WXHMENU m = m_hMenu;
+		m_hMenu = NULL;
+		return m;
+	}
 
-    // implementation only from now on
-    // -------------------------------
+	// implementation only from now on
+	// -------------------------------
 
-    bool MSWCommand(WXUINT param, WXWORD id);
+	bool MSWCommand(WXUINT param, WXWORD id);
 
-    // get the native menu handle
-    WXHMENU GetHMenu() const { return m_hMenu; }
+	// get the native menu handle
+	WXHMENU GetHMenu() const
+	{
+		return m_hMenu;
+	}
 
-    // Return the start and end position of the radio group to which the item
-    // at the given position belongs. Returns false if there is no radio group
-    // containing this position.
-    bool MSWGetRadioGroupRange(int pos, int *start, int *end) const;
+	// Return the start and end position of the radio group to which the item
+	// at the given position belongs. Returns false if there is no radio group
+	// containing this position.
+	bool MSWGetRadioGroupRange(int pos, int *start, int *end) const;
 
 #if wxUSE_ACCEL
-    // called by wxMenuBar to build its accel table from the accels of all menus
-    bool HasAccels() const { return !m_accels.empty(); }
-    size_t GetAccelCount() const { return m_accels.size(); }
-    size_t CopyAccels(wxAcceleratorEntry *accels) const;
+	// called by wxMenuBar to build its accel table from the accels of all menus
+	bool HasAccels() const
+	{
+		return !m_accels.empty();
+	}
+	size_t GetAccelCount() const
+	{
+		return m_accels.size();
+	}
+	size_t CopyAccels(wxAcceleratorEntry *accels) const;
 
-    // called by wxMenuItem when its accels changes
-    void UpdateAccel(wxMenuItem *item);
-    void RemoveAccel(wxMenuItem *item);
+	// called by wxMenuItem when its accels changes
+	void UpdateAccel(wxMenuItem *item);
+	void RemoveAccel(wxMenuItem *item);
 
-    // helper used by wxMenu itself (returns the index in m_accels)
-    int FindAccel(int id) const;
+	// helper used by wxMenu itself (returns the index in m_accels)
+	int FindAccel(int id) const;
 
-    // used only by wxMDIParentFrame currently but could be useful elsewhere:
-    // returns a new accelerator table with accelerators for just this menu
-    // (shouldn't be called if we don't have any accelerators)
-    wxAcceleratorTable *CreateAccelTable() const;
+	// used only by wxMDIParentFrame currently but could be useful elsewhere:
+	// returns a new accelerator table with accelerators for just this menu
+	// (shouldn't be called if we don't have any accelerators)
+	wxAcceleratorTable *CreateAccelTable() const;
 #endif // wxUSE_ACCEL
 
-    // get the menu with given handle (recursively)
-    wxMenu* MSWGetMenu(WXHMENU hMenu);
+	// get the menu with given handle (recursively)
+	wxMenu* MSWGetMenu(WXHMENU hMenu);
 
 #if wxUSE_OWNER_DRAWN
 
-    int GetMaxAccelWidth()
-    {
-        if (m_maxAccelWidth == -1)
-            CalculateMaxAccelWidth();
-        return m_maxAccelWidth;
-    }
+	int GetMaxAccelWidth()
+	{
+		if (m_maxAccelWidth == -1)
+			CalculateMaxAccelWidth();
+		return m_maxAccelWidth;
+	}
 
-    void ResetMaxAccelWidth()
-    {
-        m_maxAccelWidth = -1;
-    }
+	void ResetMaxAccelWidth()
+	{
+		m_maxAccelWidth = -1;
+	}
 
 private:
-    void CalculateMaxAccelWidth();
+	void CalculateMaxAccelWidth();
 
 #endif // wxUSE_OWNER_DRAWN
 
 protected:
-    virtual wxMenuItem* DoAppend(wxMenuItem *item) wxOVERRIDE;
-    virtual wxMenuItem* DoInsert(size_t pos, wxMenuItem *item) wxOVERRIDE;
-    virtual wxMenuItem* DoRemove(wxMenuItem *item) wxOVERRIDE;
+	virtual wxMenuItem* DoAppend(wxMenuItem *item) wxOVERRIDE;
+	virtual wxMenuItem* DoInsert(size_t pos, wxMenuItem *item) wxOVERRIDE;
+	virtual wxMenuItem* DoRemove(wxMenuItem *item) wxOVERRIDE;
 
 private:
-    // This constructor is private, use MSWNewFromHMENU() to use it.
-    wxMenu(WXHMENU hMenu);
+	// This constructor is private, use MSWNewFromHMENU() to use it.
+	wxMenu(WXHMENU hMenu);
 
-    // Common part of all ctors, it doesn't create a new HMENU.
-    void InitNoCreate();
+	// Common part of all ctors, it doesn't create a new HMENU.
+	void InitNoCreate();
 
-    // Common part of all ctors except of the one above taking a native menu
-    // handler: calls InitNoCreate() and also creates a new menu.
-    void Init();
+	// Common part of all ctors except of the one above taking a native menu
+	// handler: calls InitNoCreate() and also creates a new menu.
+	void Init();
 
-    // common part of Append/Insert (behaves as Append is pos == (size_t)-1)
-    bool DoInsertOrAppend(wxMenuItem *item, size_t pos = (size_t)-1);
+	// common part of Append/Insert (behaves as Append is pos == (size_t)-1)
+	bool DoInsertOrAppend(wxMenuItem *item, size_t pos = (size_t)-1);
 
 
-    // This variable contains the description of the radio item groups and
-    // allows to find whether an item at the given position is part of the
-    // group and also where its group starts and ends.
-    //
-    // It is initially NULL and only allocated if we have any radio items.
-    wxMenuRadioItemsData *m_radioData;
+	// This variable contains the description of the radio item groups and
+	// allows to find whether an item at the given position is part of the
+	// group and also where its group starts and ends.
+	//
+	// It is initially NULL and only allocated if we have any radio items.
+	wxMenuRadioItemsData *m_radioData;
 
-    // if true, insert a breal before appending the next item
-    bool m_doBreak;
+	// if true, insert a breal before appending the next item
+	bool m_doBreak;
 
-    // the menu handle of this menu
-    WXHMENU m_hMenu;
+	// the menu handle of this menu
+	WXHMENU m_hMenu;
 
 #if wxUSE_ACCEL
-    // the accelerators for our menu items
-    wxAcceleratorArray m_accels;
+	// the accelerators for our menu items
+	wxAcceleratorArray m_accels;
 #endif // wxUSE_ACCEL
 
 #if wxUSE_OWNER_DRAWN
-    // true if the menu has any ownerdrawn items
-    bool m_ownerDrawn;
+	// true if the menu has any ownerdrawn items
+	bool m_ownerDrawn;
 
-    // the max width of menu items bitmaps
-    int m_maxBitmapWidth;
+	// the max width of menu items bitmaps
+	int m_maxBitmapWidth;
 
-    // the max width of menu items accels
-    int m_maxAccelWidth;
+	// the max width of menu items accels
+	int m_maxAccelWidth;
 #endif // wxUSE_OWNER_DRAWN
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMenu);
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMenu);
 };
 
 // ----------------------------------------------------------------------------
@@ -168,65 +191,68 @@ private:
 class WXDLLIMPEXP_CORE wxMenuBar : public wxMenuBarBase
 {
 public:
-    // ctors & dtor
-        // default constructor
-    wxMenuBar();
-        // unused under MSW
-    wxMenuBar(long style);
-        // menubar takes ownership of the menus arrays but copies the titles
-    wxMenuBar(size_t n, wxMenu *menus[], const wxString titles[], long style = 0);
-    virtual ~wxMenuBar();
+	// ctors & dtor
+	// default constructor
+	wxMenuBar();
+	// unused under MSW
+	wxMenuBar(long style);
+	// menubar takes ownership of the menus arrays but copies the titles
+	wxMenuBar(size_t n, wxMenu *menus[], const wxString titles[], long style = 0);
+	virtual ~wxMenuBar();
 
-    // menubar construction
-    virtual bool Append( wxMenu *menu, const wxString &title ) wxOVERRIDE;
-    virtual bool Insert(size_t pos, wxMenu *menu, const wxString& title) wxOVERRIDE;
-    virtual wxMenu *Replace(size_t pos, wxMenu *menu, const wxString& title) wxOVERRIDE;
-    virtual wxMenu *Remove(size_t pos) wxOVERRIDE;
+	// menubar construction
+	virtual bool Append( wxMenu *menu, const wxString &title ) wxOVERRIDE;
+	virtual bool Insert(size_t pos, wxMenu *menu, const wxString& title) wxOVERRIDE;
+	virtual wxMenu *Replace(size_t pos, wxMenu *menu, const wxString& title) wxOVERRIDE;
+	virtual wxMenu *Remove(size_t pos) wxOVERRIDE;
 
-    virtual void EnableTop( size_t pos, bool flag ) wxOVERRIDE;
-    virtual bool IsEnabledTop(size_t pos) const wxOVERRIDE;
-    virtual void SetMenuLabel( size_t pos, const wxString& label ) wxOVERRIDE;
-    virtual wxString GetMenuLabel( size_t pos ) const wxOVERRIDE;
+	virtual void EnableTop( size_t pos, bool flag ) wxOVERRIDE;
+	virtual bool IsEnabledTop(size_t pos) const wxOVERRIDE;
+	virtual void SetMenuLabel( size_t pos, const wxString& label ) wxOVERRIDE;
+	virtual wxString GetMenuLabel( size_t pos ) const wxOVERRIDE;
 
-    // implementation from now on
-    WXHMENU Create();
-    virtual void Detach() wxOVERRIDE;
-    virtual void Attach(wxFrame *frame) wxOVERRIDE;
+	// implementation from now on
+	WXHMENU Create();
+	virtual void Detach() wxOVERRIDE;
+	virtual void Attach(wxFrame *frame) wxOVERRIDE;
 
 #if wxUSE_ACCEL
-    // update the accel table (must be called after adding/deleting a menu)
-    void RebuildAccelTable();
+	// update the accel table (must be called after adding/deleting a menu)
+	void RebuildAccelTable();
 #endif // wxUSE_ACCEL
 
-        // get the menu handle
-    WXHMENU GetHMenu() const { return m_hMenu; }
+	// get the menu handle
+	WXHMENU GetHMenu() const
+	{
+		return m_hMenu;
+	}
 
-    // if the menubar is modified, the display is not updated automatically,
-    // call this function to update it (m_menuBarFrame should be !NULL)
-    void Refresh();
+	// if the menubar is modified, the display is not updated automatically,
+	// call this function to update it (m_menuBarFrame should be !NULL)
+	void Refresh();
 
-    // To avoid compile warning
-    void Refresh( bool eraseBackground,
-                          const wxRect *rect = (const wxRect *) NULL ) wxOVERRIDE { wxWindow::Refresh(eraseBackground, rect); }
+	// To avoid compile warning
+	void Refresh( bool eraseBackground,
+	              const wxRect *rect = (const wxRect *) NULL ) wxOVERRIDE { wxWindow::Refresh(eraseBackground, rect); }
 
-    // Get a top level menu position or wxNOT_FOUND from its handle.
-    int MSWGetTopMenuPos(WXHMENU hMenu) const;
+	// Get a top level menu position or wxNOT_FOUND from its handle.
+	int MSWGetTopMenuPos(WXHMENU hMenu) const;
 
-    // Get a top level or sub menu with given handle (recursively).
-    wxMenu* MSWGetMenu(WXHMENU hMenu) const;
+	// Get a top level or sub menu with given handle (recursively).
+	wxMenu* MSWGetMenu(WXHMENU hMenu) const;
 
 protected:
-    // common part of all ctors
-    void Init();
+	// common part of all ctors
+	void Init();
 
-    WXHMENU       m_hMenu;
+	WXHMENU       m_hMenu;
 
-    // Return the MSW position for a wxMenu which is sometimes different from
-    // the wxWidgets position.
-    int MSWPositionForWxMenu(wxMenu *menu, int wxpos);
+	// Return the MSW position for a wxMenu which is sometimes different from
+	// the wxWidgets position.
+	int MSWPositionForWxMenu(wxMenu *menu, int wxpos);
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMenuBar);
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMenuBar);
 };
 
 #endif // _WX_MENU_H_

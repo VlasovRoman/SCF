@@ -31,76 +31,109 @@
 class WXDLLIMPEXP_BASE wxFFile
 {
 public:
-  // ctors
-  // -----
-    // def ctor
-  wxFFile() { m_fp = NULL; }
-    // open specified file (may fail, use IsOpened())
-  wxFFile(const wxString& filename, const wxString& mode = wxT("r"));
-    // attach to (already opened) file
-  wxFFile(FILE *lfp) { m_fp = lfp; }
+	// ctors
+	// -----
+	// def ctor
+	wxFFile()
+	{
+		m_fp = NULL;
+	}
+	// open specified file (may fail, use IsOpened())
+	wxFFile(const wxString& filename, const wxString& mode = wxT("r"));
+	// attach to (already opened) file
+	wxFFile(FILE *lfp)
+	{
+		m_fp = lfp;
+	}
 
-  // open/close
-    // open a file (existing or not - the mode controls what happens)
-  bool Open(const wxString& filename, const wxString& mode = wxT("r"));
-    // closes the opened file (this is a NOP if not opened)
-  bool Close();
+	// open/close
+	// open a file (existing or not - the mode controls what happens)
+	bool Open(const wxString& filename, const wxString& mode = wxT("r"));
+	// closes the opened file (this is a NOP if not opened)
+	bool Close();
 
-  // assign an existing file descriptor and get it back from wxFFile object
-  void Attach(FILE *lfp, const wxString& name = wxEmptyString)
-    { Close(); m_fp = lfp; m_name = name; }
-  FILE* Detach() { FILE* fpOld = m_fp; m_fp = NULL; return fpOld; }
-  FILE *fp() const { return m_fp; }
+	// assign an existing file descriptor and get it back from wxFFile object
+	void Attach(FILE *lfp, const wxString& name = wxEmptyString)
+	{
+		Close();
+		m_fp = lfp;
+		m_name = name;
+	}
+	FILE* Detach()
+	{
+		FILE* fpOld = m_fp;
+		m_fp = NULL;
+		return fpOld;
+	}
+	FILE *fp() const
+	{
+		return m_fp;
+	}
 
-  // read/write (unbuffered)
-    // read all data from the file into a string (useful for text files)
-  bool ReadAll(wxString *str, const wxMBConv& conv = wxConvAuto());
-    // returns number of bytes read - use Eof() and Error() to see if an error
-    // occurred or not
-  size_t Read(void *pBuf, size_t nCount);
-    // returns the number of bytes written
-  size_t Write(const void *pBuf, size_t nCount);
-    // returns true on success
-  bool Write(const wxString& s, const wxMBConv& conv = wxConvAuto());
-    // flush data not yet written
-  bool Flush();
+	// read/write (unbuffered)
+	// read all data from the file into a string (useful for text files)
+	bool ReadAll(wxString *str, const wxMBConv& conv = wxConvAuto());
+	// returns number of bytes read - use Eof() and Error() to see if an error
+	// occurred or not
+	size_t Read(void *pBuf, size_t nCount);
+	// returns the number of bytes written
+	size_t Write(const void *pBuf, size_t nCount);
+	// returns true on success
+	bool Write(const wxString& s, const wxMBConv& conv = wxConvAuto());
+	// flush data not yet written
+	bool Flush();
 
-  // file pointer operations (return ofsInvalid on failure)
-    // move ptr ofs bytes related to start/current pos/end of file
-  bool Seek(wxFileOffset ofs, wxSeekMode mode = wxFromStart);
-    // move ptr to ofs bytes before the end
-  bool SeekEnd(wxFileOffset ofs = 0) { return Seek(ofs, wxFromEnd); }
-    // get current position in the file
-  wxFileOffset Tell() const;
-    // get current file length
-  wxFileOffset Length() const;
+	// file pointer operations (return ofsInvalid on failure)
+	// move ptr ofs bytes related to start/current pos/end of file
+	bool Seek(wxFileOffset ofs, wxSeekMode mode = wxFromStart);
+	// move ptr to ofs bytes before the end
+	bool SeekEnd(wxFileOffset ofs = 0)
+	{
+		return Seek(ofs, wxFromEnd);
+	}
+	// get current position in the file
+	wxFileOffset Tell() const;
+	// get current file length
+	wxFileOffset Length() const;
 
-  // simple accessors: note that Eof() and Error() may only be called if
-  // IsOpened(). Otherwise they assert and return false.
-    // is file opened?
-  bool IsOpened() const { return m_fp != NULL; }
-    // is end of file reached?
-  bool Eof() const;
-    // has an error occurred?
-  bool Error() const;
-    // get the file name
-  const wxString& GetName() const { return m_name; }
-    // type such as disk or pipe
-  wxFileKind GetKind() const { return wxGetFileKind(m_fp); }
+	// simple accessors: note that Eof() and Error() may only be called if
+	// IsOpened(). Otherwise they assert and return false.
+	// is file opened?
+	bool IsOpened() const
+	{
+		return m_fp != NULL;
+	}
+	// is end of file reached?
+	bool Eof() const;
+	// has an error occurred?
+	bool Error() const;
+	// get the file name
+	const wxString& GetName() const
+	{
+		return m_name;
+	}
+	// type such as disk or pipe
+	wxFileKind GetKind() const
+	{
+		return wxGetFileKind(m_fp);
+	}
 
-  // dtor closes the file if opened
-  ~wxFFile() { Close(); }
+	// dtor closes the file if opened
+	~wxFFile()
+	{
+		Close();
+	}
 
 private:
-  // copy ctor and assignment operator are private because it doesn't make
-  // sense to copy files this way: attempt to do it will provoke a compile-time
-  // error.
-  wxFFile(const wxFFile&);
-  wxFFile& operator=(const wxFFile&);
+	// copy ctor and assignment operator are private because it doesn't make
+	// sense to copy files this way: attempt to do it will provoke a compile-time
+	// error.
+	wxFFile(const wxFFile&);
+	wxFFile& operator=(const wxFFile&);
 
-  FILE *m_fp;       // IO stream or NULL if not opened
+	FILE *m_fp;       // IO stream or NULL if not opened
 
-  wxString m_name;  // the name of the file (for diagnostic messages)
+	wxString m_name;  // the name of the file (for diagnostic messages)
 };
 
 #endif // wxUSE_FFILE

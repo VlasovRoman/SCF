@@ -17,13 +17,13 @@
 class WXDLLIMPEXP_XRC wxActivityIndicatorXmlHandler : public wxXmlResourceHandler
 {
 public:
-    wxActivityIndicatorXmlHandler();
+	wxActivityIndicatorXmlHandler();
 
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxActivityIndicatorXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxActivityIndicatorXmlHandler);
 };
 
 #endif // wxUSE_XRC && wxUSE_ACTIVITYINDICATOR

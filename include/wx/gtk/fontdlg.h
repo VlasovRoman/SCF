@@ -17,19 +17,25 @@
 class WXDLLIMPEXP_CORE wxFontDialog : public wxFontDialogBase
 {
 public:
-    wxFontDialog() : wxFontDialogBase() { /* must be Create()d later */ }
-    wxFontDialog(wxWindow *parent)
-        : wxFontDialogBase(parent) { Create(parent); }
-    wxFontDialog(wxWindow *parent, const wxFontData& data)
-        : wxFontDialogBase(parent, data) { Create(parent, data); }
+	wxFontDialog() : wxFontDialogBase() { /* must be Create()d later */ }
+	wxFontDialog(wxWindow *parent)
+		: wxFontDialogBase(parent)
+	{
+		Create(parent);
+	}
+	wxFontDialog(wxWindow *parent, const wxFontData& data)
+		: wxFontDialogBase(parent, data)
+	{
+		Create(parent, data);
+	}
 
-    virtual ~wxFontDialog();
+	virtual ~wxFontDialog();
 
 protected:
-    // create the GTK dialog
-    virtual bool DoCreate(wxWindow *parent) wxOVERRIDE;
+	// create the GTK dialog
+	virtual bool DoCreate(wxWindow *parent) wxOVERRIDE;
 
-    wxDECLARE_DYNAMIC_CLASS(wxFontDialog);
+	wxDECLARE_DYNAMIC_CLASS(wxFontDialog);
 };
 
 #endif

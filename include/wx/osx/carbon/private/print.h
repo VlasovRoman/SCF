@@ -20,42 +20,51 @@
 class WXDLLIMPEXP_CORE wxOSXPrintData : public wxPrintNativeDataBase
 {
 public:
-                            wxOSXPrintData();
-    virtual                 ~wxOSXPrintData();
+	wxOSXPrintData();
+	virtual                 ~wxOSXPrintData();
 
-    virtual bool            TransferTo( wxPrintData &data );
-    virtual bool            TransferFrom( const wxPrintData &data );
+	virtual bool            TransferTo( wxPrintData &data );
+	virtual bool            TransferFrom( const wxPrintData &data );
 
-    virtual bool            IsOk() const ;
+	virtual bool            IsOk() const ;
 
-    virtual void            TransferFrom( const wxPageSetupDialogData * );
-    virtual void            TransferTo( wxPageSetupDialogData * );
+	virtual void            TransferFrom( const wxPageSetupDialogData * );
+	virtual void            TransferTo( wxPageSetupDialogData * );
 
-    virtual void            TransferFrom( const wxPrintDialogData * );
-    virtual void            TransferTo( wxPrintDialogData * );
+	virtual void            TransferFrom( const wxPrintDialogData * );
+	virtual void            TransferTo( wxPrintDialogData * );
 
-    PMPrintSession          GetPrintSession() { return m_macPrintSession; }
-    PMPageFormat            GetPageFormat() { return m_macPageFormat; }
-    PMPrintSettings         GetPrintSettings() { return m_macPrintSettings; }
+	PMPrintSession          GetPrintSession()
+	{
+		return m_macPrintSession;
+	}
+	PMPageFormat            GetPageFormat()
+	{
+		return m_macPageFormat;
+	}
+	PMPrintSettings         GetPrintSettings()
+	{
+		return m_macPrintSettings;
+	}
 protected :
-    virtual void            TransferPrinterNameFrom( const wxPrintData &data );
-    virtual void            TransferPaperInfoFrom( const wxPrintData &data );
-    virtual void            TransferResolutionFrom( const wxPrintData &data );
+	virtual void            TransferPrinterNameFrom( const wxPrintData &data );
+	virtual void            TransferPaperInfoFrom( const wxPrintData &data );
+	virtual void            TransferResolutionFrom( const wxPrintData &data );
 
-    virtual void            TransferPrinterNameTo( wxPrintData &data );
-    virtual void            TransferPaperInfoTo( wxPrintData &data );
-    virtual void            TransferResolutionTo( wxPrintData &data );
+	virtual void            TransferPrinterNameTo( wxPrintData &data );
+	virtual void            TransferPaperInfoTo( wxPrintData &data );
+	virtual void            TransferResolutionTo( wxPrintData &data );
 
 
-    virtual void            UpdateFromPMState();
-    virtual void            UpdateToPMState();
+	virtual void            UpdateFromPMState();
+	virtual void            UpdateToPMState();
 
-    PMPrintSession          m_macPrintSession ;
-    PMPageFormat            m_macPageFormat ;
-    PMPrintSettings         m_macPrintSettings ;
-    PMPaper                 m_macPaper;
+	PMPrintSession          m_macPrintSession ;
+	PMPageFormat            m_macPageFormat ;
+	PMPrintSettings         m_macPrintSettings ;
+	PMPaper                 m_macPaper;
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxOSXPrintData);
+	wxDECLARE_DYNAMIC_CLASS(wxOSXPrintData);
 } ;
 
 WXDLLIMPEXP_CORE wxPrintNativeDataBase* wxOSXCreatePrintData();
@@ -64,17 +73,20 @@ WXDLLIMPEXP_CORE wxPrintNativeDataBase* wxOSXCreatePrintData();
 class WXDLLIMPEXP_CORE wxOSXCocoaPrintData : public wxOSXPrintData
 {
 public:
-                            wxOSXCocoaPrintData();
-    virtual                 ~wxOSXCocoaPrintData();
+	wxOSXCocoaPrintData();
+	virtual                 ~wxOSXCocoaPrintData();
 
-    WX_NSPrintInfo          GetNSPrintInfo() { return m_macPrintInfo; }
+	WX_NSPrintInfo          GetNSPrintInfo()
+	{
+		return m_macPrintInfo;
+	}
 protected:
-    virtual void            UpdateFromPMState();
-    virtual void            UpdateToPMState();
+	virtual void            UpdateFromPMState();
+	virtual void            UpdateToPMState();
 
-    WX_NSPrintInfo          m_macPrintInfo;
+	WX_NSPrintInfo          m_macPrintInfo;
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxOSXCocoaPrintData);
+	wxDECLARE_DYNAMIC_CLASS(wxOSXCocoaPrintData);
 } ;
 #endif
 

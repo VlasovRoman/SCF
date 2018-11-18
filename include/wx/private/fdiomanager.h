@@ -21,21 +21,21 @@
 class wxFDIOManager
 {
 public:
-    // identifies either input or output direction
-    //
-    // NB: the values of this enum shouldn't change
-    enum Direction
-    {
-        INPUT,
-        OUTPUT
-    };
+	// identifies either input or output direction
+	//
+	// NB: the values of this enum shouldn't change
+	enum Direction
+	{
+		INPUT,
+		OUTPUT
+	};
 
-    // start or stop monitoring the events on the given file descriptor
-    virtual int AddInput(wxFDIOHandler *handler, int fd, Direction d) = 0;
-    virtual void RemoveInput(wxFDIOHandler *handler, int fd, Direction d) = 0;
+	// start or stop monitoring the events on the given file descriptor
+	virtual int AddInput(wxFDIOHandler *handler, int fd, Direction d) = 0;
+	virtual void RemoveInput(wxFDIOHandler *handler, int fd, Direction d) = 0;
 
-    // empty but virtual dtor for the base class
-    virtual ~wxFDIOManager() { }
+	// empty but virtual dtor for the base class
+	virtual ~wxFDIOManager() { }
 };
 
 #endif // _WX_PRIVATE_FDIOMANAGER_H_

@@ -13,26 +13,26 @@ class QTimer;
 class WXDLLIMPEXP_BASE wxQtEventLoopBase : public wxEventLoopBase
 {
 public:
-    wxQtEventLoopBase();
-    ~wxQtEventLoopBase();
+	wxQtEventLoopBase();
+	~wxQtEventLoopBase();
 
-    virtual int DoRun();
-    virtual void ScheduleExit(int rc = 0);
-    virtual bool Pending() const;
-    virtual bool Dispatch();
-    virtual int DispatchTimeout(unsigned long timeout);
-    virtual void WakeUp();
-    virtual void DoYieldFor(long eventsToProcess);
+	virtual int DoRun();
+	virtual void ScheduleExit(int rc = 0);
+	virtual bool Pending() const;
+	virtual bool Dispatch();
+	virtual int DispatchTimeout(unsigned long timeout);
+	virtual void WakeUp();
+	virtual void DoYieldFor(long eventsToProcess);
 
 #if wxUSE_EVENTLOOP_SOURCE
-    virtual wxEventLoopSource *AddSourceForFD(int fd, wxEventLoopSourceHandler *handler, int flags);
+	virtual wxEventLoopSource *AddSourceForFD(int fd, wxEventLoopSourceHandler *handler, int flags);
 #endif // wxUSE_EVENTLOOP_SOURCE
 protected:
 
 private:
-    QTimer *m_qtIdleTimer;
-    
-    wxDECLARE_NO_COPY_CLASS(wxQtEventLoopBase);
+	QTimer *m_qtIdleTimer;
+
+	wxDECLARE_NO_COPY_CLASS(wxQtEventLoopBase);
 };
 
 
@@ -41,7 +41,7 @@ private:
 class WXDLLIMPEXP_CORE wxGUIEventLoop : public wxQtEventLoopBase
 {
 public:
-    wxGUIEventLoop();
+	wxGUIEventLoop();
 };
 
 #else // !wxUSE_GUI
@@ -51,7 +51,7 @@ public:
 class WXDLLIMPEXP_BASE wxConsoleEventLoop : public wxQtEventLoopBase
 {
 public:
-    wxConsoleEventLoop();
+	wxConsoleEventLoop();
 };
 
 #endif // wxUSE_CONSOLE_EVENTLOOP

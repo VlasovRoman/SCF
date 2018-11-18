@@ -11,8 +11,8 @@
 class WXDLLIMPEXP_CORE wxBitmapDataObject : public wxBitmapDataObjectBase
 {
 public:
-    wxBitmapDataObject();
-    wxBitmapDataObject(const wxBitmap& bitmap);
+	wxBitmapDataObject();
+	wxBitmapDataObject(const wxBitmap& bitmap);
 
 protected:
 
@@ -24,9 +24,9 @@ private:
 class WXDLLIMPEXP_CORE wxFileDataObject : public wxFileDataObjectBase
 {
 public:
-    wxFileDataObject();
+	wxFileDataObject();
 
-    void AddFile( const wxString &filename );
+	void AddFile( const wxString &filename );
 };
 
 #endif // _WX_QT_DATAOBJ2_H_

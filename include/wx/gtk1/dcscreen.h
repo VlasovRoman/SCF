@@ -18,20 +18,20 @@
 class WXDLLIMPEXP_CORE wxScreenDCImpl : public wxPaintDCImpl
 {
 public:
-    wxScreenDCImpl(wxScreenDC *owner);
-    virtual ~wxScreenDCImpl();
+	wxScreenDCImpl(wxScreenDC *owner);
+	virtual ~wxScreenDCImpl();
 
-    // implementation
+	// implementation
 
-    static GdkWindow  *sm_overlayWindow;
-    static int         sm_overlayWindowX;
-    static int         sm_overlayWindowY;
+	static GdkWindow  *sm_overlayWindow;
+	static int         sm_overlayWindowX;
+	static int         sm_overlayWindowY;
 
 protected:
-    virtual void DoGetSize(int *width, int *height) const;
+	virtual void DoGetSize(int *width, int *height) const;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxScreenDCImpl);
+	wxDECLARE_DYNAMIC_CLASS(wxScreenDCImpl);
 };
 
 #endif // __GTKDCSCREENH__

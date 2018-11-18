@@ -22,30 +22,33 @@ class WXDLLIMPEXP_CORE wxPrinterDCImpl: public wxGCDCImpl
 public:
 #if wxUSE_PRINTING_ARCHITECTURE
 
-    wxPrinterDCImpl( wxPrinterDC *owner, const wxPrintData& printdata );
-    virtual ~wxPrinterDCImpl();
+	wxPrinterDCImpl( wxPrinterDC *owner, const wxPrintData& printdata );
+	virtual ~wxPrinterDCImpl();
 
-    virtual bool StartDoc( const wxString& WXUNUSED(message) ) ;
-    virtual void EndDoc(void) ;
-    virtual void StartPage(void) ;
-    virtual void EndPage(void) ;
+	virtual bool StartDoc( const wxString& WXUNUSED(message) ) ;
+	virtual void EndDoc(void) ;
+	virtual void StartPage(void) ;
+	virtual void EndPage(void) ;
 
-    wxRect GetPaperRect() const;
+	wxRect GetPaperRect() const;
 
-    wxPrintData& GetPrintData() { return m_printData; }
-    virtual wxSize GetPPI() const;
+	wxPrintData& GetPrintData()
+	{
+		return m_printData;
+	}
+	virtual wxSize GetPPI() const;
 
 protected:
-    virtual void DoGetSize( int *width, int *height ) const;
+	virtual void DoGetSize( int *width, int *height ) const;
 
-    wxPrintData        m_printData ;
-    wxNativePrinterDC* m_nativePrinterDC ;
+	wxPrintData        m_printData ;
+	wxNativePrinterDC* m_nativePrinterDC ;
 
 private:
-    wxDECLARE_CLASS(wxPrinterDC);
+	wxDECLARE_CLASS(wxPrinterDC);
 #endif // wxUSE_PRINTING_ARCHITECTURE
 };
 
 #endif
-    // _WX_DCPRINT_H_
+// _WX_DCPRINT_H_
 

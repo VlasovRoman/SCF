@@ -40,95 +40,101 @@
 class wxStreamTempInputBuffer
 {
 public:
-    wxStreamTempInputBuffer()
-    {
-        m_stream = NULL;
-        m_buffer = NULL;
-        m_size = 0;
-    }
+	wxStreamTempInputBuffer()
+	{
+		m_stream = NULL;
+		m_buffer = NULL;
+		m_size = 0;
+	}
 
-    // call to associate a stream with this buffer, otherwise nothing happens
-    // at all
-    void Init(wxPipeInputStream *stream)
-    {
-        wxASSERT_MSG( !m_stream, wxS("Can only initialize once") );
+	// call to associate a stream with this buffer, otherwise nothing happens
+	// at all
+	void Init(wxPipeInputStream *stream)
+	{
+		wxASSERT_MSG( !m_stream, wxS("Can only initialize once") );
 
-        m_stream = stream;
-    }
+		m_stream = stream;
+	}
 
-    // check for input on our stream and cache it in our buffer if any
-    //
-    // return true if anything was done
-    bool Update()
-    {
-        if ( !m_stream || !m_stream->CanRead() )
-            return false;
+	// check for input on our stream and cache it in our buffer if any
+	//
+	// return true if anything was done
+	bool Update()
+	{
+		if ( !m_stream || !m_stream->CanRead() )
+			return false;
 
-        // realloc in blocks of 4Kb: this is the default (and minimal) buffer
-        // size of the Unix pipes so it should be the optimal step
-        //
-        // NB: don't use "static int" in this inline function, some compilers
-        //     (e.g. IBM xlC) don't like it
-        enum { incSize = 4096 };
+		// realloc in blocks of 4Kb: this is the default (and minimal) buffer
+		// size of the Unix pipes so it should be the optimal step
+		//
+		// NB: don't use "static int" in this inline function, some compilers
+		//     (e.g. IBM xlC) don't like it
+		enum { incSize = 4096 };
 
-        void *buf = realloc(m_buffer, m_size + incSize);
-        if ( !buf )
-            return false;
+		void *buf = realloc(m_buffer, m_size + incSize);
+		if ( !buf )
+			return false;
 
-        m_buffer = buf;
-        m_stream->Read((char *)m_buffer + m_size, incSize);
-        m_size += m_stream->LastRead();
+		m_buffer = buf;
+		m_stream->Read((char *)m_buffer + m_size, incSize);
+		m_size += m_stream->LastRead();
 
-        return true;
-    }
+		return true;
+	}
 
-    // check if can continue reading from the stream, this is used to disable
-    // the callback once we can't read anything more
-    bool Eof() const
-    {
-        // If we have no stream, always return true as we can't read any more.
-        return !m_stream || m_stream->Eof();
-    }
+	// check if can continue reading from the stream, this is used to disable
+	// the callback once we can't read anything more
+	bool Eof() const
+	{
+		// If we have no stream, always return true as we can't read any more.
+		return !m_stream || m_stream->Eof();
+	}
 
-    // read everything remaining until the EOF, this should only be called once
-    // the child process terminates and we know that no more data is coming
-    bool ReadAll()
-    {
-        while ( !Eof() )
-        {
-            if ( !Update() )
-                return false;
-        }
+	// read everything remaining until the EOF, this should only be called once
+	// the child process terminates and we know that no more data is coming
+	bool ReadAll()
+	{
+		while ( !Eof() )
+		{
+			if ( !Update() )
+				return false;
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    // dtor puts the data buffered during this object lifetime into the
-    // associated stream
-    ~wxStreamTempInputBuffer()
-    {
-        if ( m_buffer )
-        {
-            m_stream->Ungetch(m_buffer, m_size);
-            free(m_buffer);
-        }
-    }
+	// dtor puts the data buffered during this object lifetime into the
+	// associated stream
+	~wxStreamTempInputBuffer()
+	{
+		if ( m_buffer )
+		{
+			m_stream->Ungetch(m_buffer, m_size);
+			free(m_buffer);
+		}
+	}
 
-    const void *GetBuffer() const { return m_buffer; }
+	const void *GetBuffer() const
+	{
+		return m_buffer;
+	}
 
-    size_t GetSize() const { return m_size; }
+	size_t GetSize() const
+	{
+		return m_size;
+	}
 
 private:
-    // the stream we're buffering, if NULL we don't do anything at all
-    wxPipeInputStream *m_stream;
+	// the stream we're buffering, if NULL we don't do anything at all
+	wxPipeInputStream *m_stream;
 
-    // the buffer of size m_size (NULL if m_size == 0)
-    void *m_buffer;
+	// the buffer of size m_size (NULL if m_size == 0)
+	void *m_buffer;
 
-    // the size of the buffer
-    size_t m_size;
+	// the size of the buffer
+	size_t m_size;
 
-    wxDECLARE_NO_COPY_CLASS(wxStreamTempInputBuffer);
+	wxDECLARE_NO_COPY_CLASS(wxStreamTempInputBuffer);
 };
 
 #endif // _WX_PRIVATE_STREAMTEMPINPUT_H

@@ -16,7 +16,7 @@
 class WXDLLIMPEXP_CORE wxDataObject : public wxDataObjectBase
 {
 public:
-    virtual ~wxDataObject();
+	virtual ~wxDataObject();
 };
 
 #endif //_WX_MOTIF_DATAOBJ_H_

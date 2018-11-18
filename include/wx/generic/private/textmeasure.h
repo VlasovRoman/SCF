@@ -17,23 +17,23 @@
 class wxTextMeasure : public wxTextMeasureBase
 {
 public:
-    explicit wxTextMeasure(const wxDC *dc, const wxFont *font = NULL)
-        : wxTextMeasureBase(dc, font) {}
-    explicit wxTextMeasure(const wxWindow *win, const wxFont *font = NULL)
-        : wxTextMeasureBase(win, font) {}
+	explicit wxTextMeasure(const wxDC *dc, const wxFont *font = NULL)
+		: wxTextMeasureBase(dc, font) {}
+	explicit wxTextMeasure(const wxWindow *win, const wxFont *font = NULL)
+		: wxTextMeasureBase(win, font) {}
 
 protected:
-    virtual void DoGetTextExtent(const wxString& string,
-                               wxCoord *width,
-                               wxCoord *height,
-                               wxCoord *descent = NULL,
-                               wxCoord *externalLeading = NULL);
+	virtual void DoGetTextExtent(const wxString& string,
+	                             wxCoord *width,
+	                             wxCoord *height,
+	                             wxCoord *descent = NULL,
+	                             wxCoord *externalLeading = NULL);
 
-    virtual bool DoGetPartialTextExtents(const wxString& text,
-                                         wxArrayInt& widths,
-                                         double scaleX);
+	virtual bool DoGetPartialTextExtents(const wxString& text,
+	                                     wxArrayInt& widths,
+	                                     double scaleX);
 
-    wxDECLARE_NO_COPY_CLASS(wxTextMeasure);
+	wxDECLARE_NO_COPY_CLASS(wxTextMeasure);
 };
 
 #endif // _WX_GENERIC_PRIVATE_TEXTMEASURE_H_

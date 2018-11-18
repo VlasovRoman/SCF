@@ -17,32 +17,32 @@ class WXDLLIMPEXP_FWD_CORE wxMenu;
 class WXDLLIMPEXP_CORE wxMenuItem : public wxMenuItemBase
 {
 public:
-    wxMenuItem(wxMenu *parentMenu = NULL,
-               int id = wxID_SEPARATOR,
-               const wxString& text = wxEmptyString,
-               const wxString& help = wxEmptyString,
-               wxItemKind kind = wxITEM_NORMAL,
-               wxMenu *subMenu = NULL);
+	wxMenuItem(wxMenu *parentMenu = NULL,
+	           int id = wxID_SEPARATOR,
+	           const wxString& text = wxEmptyString,
+	           const wxString& help = wxEmptyString,
+	           wxItemKind kind = wxITEM_NORMAL,
+	           wxMenu *subMenu = NULL);
 
-    virtual void SetItemLabel(const wxString& str);
-    virtual void SetCheckable(bool checkable);
+	virtual void SetItemLabel(const wxString& str);
+	virtual void SetCheckable(bool checkable);
 
-    virtual void Enable(bool enable = true);
-    virtual bool IsEnabled() const;
+	virtual void Enable(bool enable = true);
+	virtual bool IsEnabled() const;
 
-    virtual void Check(bool check = true);
-    virtual bool IsChecked() const;
+	virtual void Check(bool check = true);
+	virtual bool IsChecked() const;
 
-    void SetBitmap(const wxBitmap& bitmap);
-    const wxBitmap& GetBitmap() const;
+	void SetBitmap(const wxBitmap& bitmap);
+	const wxBitmap& GetBitmap() const;
 
-    virtual QAction *GetHandle() const;
+	virtual QAction *GetHandle() const;
 
 private:
-    // Qt is using an action instead of a menu item.
-    QAction *m_qtAction;
+	// Qt is using an action instead of a menu item.
+	QAction *m_qtAction;
 
-    wxDECLARE_DYNAMIC_CLASS( wxMenuItem );
+	wxDECLARE_DYNAMIC_CLASS( wxMenuItem );
 };
 
 

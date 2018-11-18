@@ -18,17 +18,23 @@ template <typename T>
 class wxGtkObject
 {
 public:
-    explicit wxGtkObject(T *p) : m_ptr(p) { }
-    ~wxGtkObject() { if ( m_ptr ) g_object_unref(m_ptr); }
+	explicit wxGtkObject(T *p) : m_ptr(p) { }
+	~wxGtkObject()
+	{
+		if ( m_ptr ) g_object_unref(m_ptr);
+	}
 
-    operator T *() const { return m_ptr; }
+	operator T *() const
+	{
+		return m_ptr;
+	}
 
 private:
-    T * const m_ptr;
+	T * const m_ptr;
 
-    // copying could be implemented by using g_object_ref() but for now there
-    // is no need for it so don't implement it
-    wxDECLARE_NO_COPY_CLASS(wxGtkObject);
+	// copying could be implemented by using g_object_ref() but for now there
+	// is no need for it so don't implement it
+	wxDECLARE_NO_COPY_CLASS(wxGtkObject);
 };
 
 #endif // _WX_GTK_PRIVATE_OBJECT_H_

@@ -19,15 +19,15 @@
 class WXDLLIMPEXP_CORE wxScreenDCImpl : public wxWindowDCImpl
 {
 public:
-    wxScreenDCImpl( wxScreenDC *owner );
-    ~wxScreenDCImpl();
+	wxScreenDCImpl( wxScreenDC *owner );
+	~wxScreenDCImpl();
 
-    virtual void DoGetSize(int *width, int *height) const wxOVERRIDE;
+	virtual void DoGetSize(int *width, int *height) const wxOVERRIDE;
 
 private:
-    void Init();
+	void Init();
 
-    wxDECLARE_ABSTRACT_CLASS(wxScreenDCImpl);
+	wxDECLARE_ABSTRACT_CLASS(wxScreenDCImpl);
 };
 
 #endif // _WX_GTKDCSCREEN_H_

@@ -23,34 +23,34 @@ struct _EXCEPTION_POINTERS;
 
 enum
 {
-    // we always report where the crash occurred
-    wxCRASH_REPORT_LOCATION = 0,
+	// we always report where the crash occurred
+	wxCRASH_REPORT_LOCATION = 0,
 
-    // if this flag is given, the call stack is dumped
-    //
-    // this results in dump/crash report as small as possible, this is the
-    // default flag
-    wxCRASH_REPORT_STACK = 1,
+	// if this flag is given, the call stack is dumped
+	//
+	// this results in dump/crash report as small as possible, this is the
+	// default flag
+	wxCRASH_REPORT_STACK = 1,
 
-    // if this flag is given, the values of the local variables are dumped
-    //
-    // note that with the current implementation it requires dumping the full
-    // process address space and so this will result in huge dump file and will
-    // take some time to generate
-    //
-    // it's probably not a good idea to use this by default, start with default
-    // mini dump and ask your users to set WX_CRASH_FLAGS environment variable
-    // to 2 or 4 if you need more information in the dump
-    wxCRASH_REPORT_LOCALS = 2,
+	// if this flag is given, the values of the local variables are dumped
+	//
+	// note that with the current implementation it requires dumping the full
+	// process address space and so this will result in huge dump file and will
+	// take some time to generate
+	//
+	// it's probably not a good idea to use this by default, start with default
+	// mini dump and ask your users to set WX_CRASH_FLAGS environment variable
+	// to 2 or 4 if you need more information in the dump
+	wxCRASH_REPORT_LOCALS = 2,
 
-    // if this flag is given, the values of all global variables are dumped
-    //
-    // this creates a much larger mini dump than just wxCRASH_REPORT_STACK but
-    // still much smaller than wxCRASH_REPORT_LOCALS one
-    wxCRASH_REPORT_GLOBALS = 4,
+	// if this flag is given, the values of all global variables are dumped
+	//
+	// this creates a much larger mini dump than just wxCRASH_REPORT_STACK but
+	// still much smaller than wxCRASH_REPORT_LOCALS one
+	wxCRASH_REPORT_GLOBALS = 4,
 
-    // default is to create the smallest possible crash report
-    wxCRASH_REPORT_DEFAULT = wxCRASH_REPORT_LOCATION | wxCRASH_REPORT_STACK
+	// default is to create the smallest possible crash report
+	wxCRASH_REPORT_DEFAULT = wxCRASH_REPORT_LOCATION | wxCRASH_REPORT_STACK
 };
 
 // ----------------------------------------------------------------------------
@@ -59,30 +59,30 @@ enum
 
 struct WXDLLIMPEXP_BASE wxCrashContext
 {
-    // initialize this object with the given information or from the current
-    // global exception info which is only valid inside wxApp::OnFatalException
-    wxCrashContext(_EXCEPTION_POINTERS *ep = NULL);
+	// initialize this object with the given information or from the current
+	// global exception info which is only valid inside wxApp::OnFatalException
+	wxCrashContext(_EXCEPTION_POINTERS *ep = NULL);
 
-    // get the name for this exception code
-    wxString GetExceptionString() const;
+	// get the name for this exception code
+	wxString GetExceptionString() const;
 
 
-    // exception code
-    size_t code;
+	// exception code
+	size_t code;
 
-    // exception address
-    void *addr;
+	// exception address
+	void *addr;
 
-    // machine-specific registers vaues
-    struct
-    {
+	// machine-specific registers vaues
+	struct
+	{
 #ifdef __INTEL__
-        wxInt32 eax, ebx, ecx, edx, esi, edi,
-                ebp, esp, eip,
-                cs, ds, es, fs, gs, ss,
-                flags;
+		wxInt32 eax, ebx, ecx, edx, esi, edi,
+		        ebp, esp, eip,
+		        cs, ds, es, fs, gs, ss,
+		        flags;
 #endif // __INTEL__
-    } regs;
+	} regs;
 };
 
 // ----------------------------------------------------------------------------
@@ -91,26 +91,26 @@ struct WXDLLIMPEXP_BASE wxCrashContext
 
 struct WXDLLIMPEXP_BASE wxCrashReport
 {
-    // set the name of the file to which the report is written, it is
-    // constructed from the .exe name by default
-    static void SetFileName(const wxString& filename);
+	// set the name of the file to which the report is written, it is
+	// constructed from the .exe name by default
+	static void SetFileName(const wxString& filename);
 
-    // return the current file name
-    static wxString GetFileName();
+	// return the current file name
+	static wxString GetFileName();
 
-    // write the exception report to the file, return true if it could be done
-    // or false otherwise
-    //
-    // if ep pointer is NULL, the global exception info which is valid only
-    // inside wxApp::OnFatalException() is used
-    static bool Generate(int flags = wxCRASH_REPORT_DEFAULT,
-                         _EXCEPTION_POINTERS *ep = NULL);
+	// write the exception report to the file, return true if it could be done
+	// or false otherwise
+	//
+	// if ep pointer is NULL, the global exception info which is valid only
+	// inside wxApp::OnFatalException() is used
+	static bool Generate(int flags = wxCRASH_REPORT_DEFAULT,
+	                     _EXCEPTION_POINTERS *ep = NULL);
 
 
-    // generate a crash report from outside of wxApp::OnFatalException(), this
-    // can be used to take "snapshots" of the program in wxApp::OnAssert() for
-    // example
-    static bool GenerateNow(int flags = wxCRASH_REPORT_DEFAULT);
+	// generate a crash report from outside of wxApp::OnFatalException(), this
+	// can be used to take "snapshots" of the program in wxApp::OnAssert() for
+	// example
+	static bool GenerateNow(int flags = wxCRASH_REPORT_DEFAULT);
 };
 
 #endif // wxUSE_CRASHREPORT

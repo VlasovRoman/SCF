@@ -14,44 +14,47 @@
 class WXDLLIMPEXP_CORE wxStaticText: public wxStaticTextBase
 {
 public:
-    wxStaticText() { }
+	wxStaticText() { }
 
-    wxStaticText(wxWindow *parent, wxWindowID id,
-           const wxString& label,
-           const wxPoint& pos = wxDefaultPosition,
-           const wxSize& size = wxDefaultSize,
-           long style = 0,
-           const wxString& name = wxStaticTextNameStr)
-  {
-    Create(parent, id, label, pos, size, style, name);
-  }
+	wxStaticText(wxWindow *parent, wxWindowID id,
+	             const wxString& label,
+	             const wxPoint& pos = wxDefaultPosition,
+	             const wxSize& size = wxDefaultSize,
+	             long style = 0,
+	             const wxString& name = wxStaticTextNameStr)
+	{
+		Create(parent, id, label, pos, size, style, name);
+	}
 
-  bool Create(wxWindow *parent, wxWindowID id,
-           const wxString& label,
-           const wxPoint& pos = wxDefaultPosition,
-           const wxSize& size = wxDefaultSize,
-           long style = 0,
-           const wxString& name = wxStaticTextNameStr);
+	bool Create(wxWindow *parent, wxWindowID id,
+	            const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxStaticTextNameStr);
 
-  // accessors
-  void SetLabel( const wxString &str ) ;
-  bool SetFont( const wxFont &font );
+	// accessors
+	void SetLabel( const wxString &str ) ;
+	bool SetFont( const wxFont &font );
 
-    virtual bool AcceptsFocus() const { return false; }
+	virtual bool AcceptsFocus() const
+	{
+		return false;
+	}
 
 protected :
 
-    virtual wxString DoGetLabel() const;
-    virtual void DoSetLabel(const wxString& str);
+	virtual wxString DoGetLabel() const;
+	virtual void DoSetLabel(const wxString& str);
 
-  virtual wxSize DoGetBestSize() const ;
+	virtual wxSize DoGetBestSize() const ;
 
 #if wxUSE_MARKUP && wxOSX_USE_COCOA
-    virtual bool DoSetLabelMarkup(const wxString& markup);
+	virtual bool DoSetLabelMarkup(const wxString& markup);
 #endif // wxUSE_MARKUP && wxOSX_USE_COCOA
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxStaticText);
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxStaticText);
 };
 
 #endif
-    // _WX_STATTEXT_H_
+// _WX_STATTEXT_H_

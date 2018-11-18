@@ -33,32 +33,32 @@
 
 struct WXDLLIMPEXP_CORE wxNativeEncodingInfo
 {
-    wxString facename;          // may be empty meaning "any"
-    wxFontEncoding encoding;    // so that we know what this struct represents
+	wxString facename;          // may be empty meaning "any"
+	wxFontEncoding encoding;    // so that we know what this struct represents
 
 #if defined(__WXMSW__) || \
     defined(__WXMAC__) || \
     defined(__WXQT__)
 
-    wxNativeEncodingInfo()
-        : facename()
-        , encoding(wxFONTENCODING_SYSTEM)
-        , charset(0) /* ANSI_CHARSET */
-    { }
+	wxNativeEncodingInfo()
+		: facename()
+		, encoding(wxFONTENCODING_SYSTEM)
+		, charset(0) /* ANSI_CHARSET */
+	{ }
 
-    int      charset;
+	int      charset;
 #elif defined(_WX_X_FONTLIKE)
-    wxString xregistry,
-             xencoding;
+	wxString xregistry,
+	         xencoding;
 #elif defined(wxHAS_UTF8_FONTS)
-    // ports using UTF-8 for text don't need encoding information for fonts
+	// ports using UTF-8 for text don't need encoding information for fonts
 #else
-    #error "Unsupported toolkit"
+#error "Unsupported toolkit"
 #endif
-    // this struct is saved in config by wxFontMapper, so it should know to
-    // serialise itself (implemented in platform-specific code)
-    bool FromString(const wxString& s);
-    wxString ToString() const;
+	// this struct is saved in config by wxFontMapper, so it should know to
+	// serialise itself (implemented in platform-specific code)
+	bool FromString(const wxString& s);
+	wxString ToString() const;
 };
 
 #endif // _WX_ENCINFO_H_

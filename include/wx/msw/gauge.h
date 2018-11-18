@@ -19,59 +19,62 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxGaugeNameStr[];
 class WXDLLIMPEXP_CORE wxGauge : public wxGaugeBase
 {
 public:
-    wxGauge() { }
+	wxGauge() { }
 
-    wxGauge(wxWindow *parent,
-            wxWindowID id,
-            int range,
-            const wxPoint& pos = wxDefaultPosition,
-            const wxSize& size = wxDefaultSize,
-            long style = wxGA_HORIZONTAL,
-            const wxValidator& validator = wxDefaultValidator,
-            const wxString& name = wxGaugeNameStr)
-    {
-        (void)Create(parent, id, range, pos, size, style, validator, name);
-    }
+	wxGauge(wxWindow *parent,
+	        wxWindowID id,
+	        int range,
+	        const wxPoint& pos = wxDefaultPosition,
+	        const wxSize& size = wxDefaultSize,
+	        long style = wxGA_HORIZONTAL,
+	        const wxValidator& validator = wxDefaultValidator,
+	        const wxString& name = wxGaugeNameStr)
+	{
+		(void)Create(parent, id, range, pos, size, style, validator, name);
+	}
 
-    virtual ~wxGauge();
+	virtual ~wxGauge();
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                int range,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxGA_HORIZONTAL,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxGaugeNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            int range,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxGA_HORIZONTAL,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxGaugeNameStr);
 
-    // set gauge range/value
-    virtual void SetRange(int range) wxOVERRIDE;
-    virtual void SetValue(int pos) wxOVERRIDE;
+	// set gauge range/value
+	virtual void SetRange(int range) wxOVERRIDE;
+	virtual void SetValue(int pos) wxOVERRIDE;
 
-    // overridden base class virtuals
-    virtual bool SetForegroundColour(const wxColour& col) wxOVERRIDE;
-    virtual bool SetBackgroundColour(const wxColour& col) wxOVERRIDE;
+	// overridden base class virtuals
+	virtual bool SetForegroundColour(const wxColour& col) wxOVERRIDE;
+	virtual bool SetBackgroundColour(const wxColour& col) wxOVERRIDE;
 
-    virtual void Pulse() wxOVERRIDE;
+	virtual void Pulse() wxOVERRIDE;
 
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const wxOVERRIDE;
+	WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const wxOVERRIDE;
 
-    // returns true if the platform should explicitly apply a theme border
-    virtual bool CanApplyThemeBorder() const wxOVERRIDE { return false; }
+	// returns true if the platform should explicitly apply a theme border
+	virtual bool CanApplyThemeBorder() const wxOVERRIDE
+	{
+		return false;
+	}
 
 protected:
-    virtual wxSize DoGetBestSize() const wxOVERRIDE;
+	virtual wxSize DoGetBestSize() const wxOVERRIDE;
 
 private:
-    // returns true if the control is currently in indeterminate (a.k.a.
-    // "marquee") mode
-    bool IsInIndeterminateMode() const;
+	// returns true if the control is currently in indeterminate (a.k.a.
+	// "marquee") mode
+	bool IsInIndeterminateMode() const;
 
-    // switch to/from indeterminate mode
-    void SetIndeterminateMode();
-    void SetDeterminateMode();
+	// switch to/from indeterminate mode
+	void SetIndeterminateMode();
+	void SetDeterminateMode();
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxGauge);
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxGauge);
 };
 
 #endif // wxUSE_GAUGE

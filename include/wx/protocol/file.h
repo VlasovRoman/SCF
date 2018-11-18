@@ -20,17 +20,20 @@
 class WXDLLIMPEXP_NET wxFileProto: public wxProtocol
 {
 public:
-    wxFileProto();
-    virtual ~wxFileProto();
+	wxFileProto();
+	virtual ~wxFileProto();
 
-    bool Abort() wxOVERRIDE { return true; }
-    wxString GetContentType() const wxOVERRIDE { return wxEmptyString; }
+	bool Abort() wxOVERRIDE { return true; }
+	wxString GetContentType() const wxOVERRIDE
+	{
+		return wxEmptyString;
+	}
 
-    wxInputStream *GetInputStream(const wxString& path) wxOVERRIDE;
+	wxInputStream *GetInputStream(const wxString& path) wxOVERRIDE;
 
 protected:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxFileProto);
-    DECLARE_PROTOCOL(wxFileProto)
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxFileProto);
+	DECLARE_PROTOCOL(wxFileProto)
 };
 
 #endif // wxUSE_PROTOCOL_FILE

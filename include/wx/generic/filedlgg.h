@@ -34,99 +34,119 @@ class WXDLLIMPEXP_FWD_CORE wxFileCtrlEvent;
 class WXDLLIMPEXP_CORE wxGenericFileDialog: public wxFileDialogBase
 {
 public:
-    wxGenericFileDialog() : wxFileDialogBase() { Init(); }
+	wxGenericFileDialog() : wxFileDialogBase()
+	{
+		Init();
+	}
 
-    wxGenericFileDialog(wxWindow *parent,
-                        const wxString& message = wxFileSelectorPromptStr,
-                        const wxString& defaultDir = wxEmptyString,
-                        const wxString& defaultFile = wxEmptyString,
-                        const wxString& wildCard = wxFileSelectorDefaultWildcardStr,
-                        long style = wxFD_DEFAULT_STYLE,
-                        const wxPoint& pos = wxDefaultPosition,
-                        const wxSize& sz = wxDefaultSize,
-                        const wxString& name = wxFileDialogNameStr,
-                        bool bypassGenericImpl = false );
+	wxGenericFileDialog(wxWindow *parent,
+	                    const wxString& message = wxFileSelectorPromptStr,
+	                    const wxString& defaultDir = wxEmptyString,
+	                    const wxString& defaultFile = wxEmptyString,
+	                    const wxString& wildCard = wxFileSelectorDefaultWildcardStr,
+	                    long style = wxFD_DEFAULT_STYLE,
+	                    const wxPoint& pos = wxDefaultPosition,
+	                    const wxSize& sz = wxDefaultSize,
+	                    const wxString& name = wxFileDialogNameStr,
+	                    bool bypassGenericImpl = false );
 
-    bool Create( wxWindow *parent,
-                 const wxString& message = wxFileSelectorPromptStr,
-                 const wxString& defaultDir = wxEmptyString,
-                 const wxString& defaultFile = wxEmptyString,
-                 const wxString& wildCard = wxFileSelectorDefaultWildcardStr,
-                 long style = wxFD_DEFAULT_STYLE,
-                 const wxPoint& pos = wxDefaultPosition,
-                 const wxSize& sz = wxDefaultSize,
-                 const wxString& name = wxFileDialogNameStr,
-                 bool bypassGenericImpl = false );
+	bool Create( wxWindow *parent,
+	             const wxString& message = wxFileSelectorPromptStr,
+	             const wxString& defaultDir = wxEmptyString,
+	             const wxString& defaultFile = wxEmptyString,
+	             const wxString& wildCard = wxFileSelectorDefaultWildcardStr,
+	             long style = wxFD_DEFAULT_STYLE,
+	             const wxPoint& pos = wxDefaultPosition,
+	             const wxSize& sz = wxDefaultSize,
+	             const wxString& name = wxFileDialogNameStr,
+	             bool bypassGenericImpl = false );
 
-    virtual ~wxGenericFileDialog();
+	virtual ~wxGenericFileDialog();
 
-    virtual void SetDirectory(const wxString& dir) wxOVERRIDE
-        { m_filectrl->SetDirectory(dir); }
-    virtual void SetFilename(const wxString& name) wxOVERRIDE
-        { m_filectrl->SetFilename(name); }
-    virtual void SetMessage(const wxString& message) wxOVERRIDE { SetTitle(message); }
-    virtual void SetPath(const wxString& path) wxOVERRIDE
-        { m_filectrl->SetPath(path); }
-    virtual void SetFilterIndex(int filterIndex) wxOVERRIDE
-        { m_filectrl->SetFilterIndex(filterIndex); }
-    virtual void SetWildcard(const wxString& wildCard) wxOVERRIDE
-        { m_filectrl->SetWildcard(wildCard); }
+	virtual void SetDirectory(const wxString& dir) wxOVERRIDE
+	{ m_filectrl->SetDirectory(dir); }
+	virtual void SetFilename(const wxString& name) wxOVERRIDE
+	{ m_filectrl->SetFilename(name); }
+	virtual void SetMessage(const wxString& message) wxOVERRIDE { SetTitle(message); }
+	virtual void SetPath(const wxString& path) wxOVERRIDE
+	{ m_filectrl->SetPath(path); }
+	virtual void SetFilterIndex(int filterIndex) wxOVERRIDE
+	{ m_filectrl->SetFilterIndex(filterIndex); }
+	virtual void SetWildcard(const wxString& wildCard) wxOVERRIDE
+	{ m_filectrl->SetWildcard(wildCard); }
 
-    virtual wxString GetPath() const wxOVERRIDE
-        { return m_filectrl->GetPath(); }
-    virtual void GetPaths(wxArrayString& paths) const wxOVERRIDE
-        { m_filectrl->GetPaths(paths); }
-    virtual wxString GetDirectory() const wxOVERRIDE
-        { return m_filectrl->GetDirectory(); }
-    virtual wxString GetFilename() const wxOVERRIDE
-        { return m_filectrl->GetFilename(); }
-    virtual void GetFilenames(wxArrayString& files) const wxOVERRIDE
-        { m_filectrl->GetFilenames(files); }
-    virtual wxString GetWildcard() const wxOVERRIDE
-        { return m_filectrl->GetWildcard(); }
-    virtual int GetFilterIndex() const wxOVERRIDE
-        { return m_filectrl->GetFilterIndex(); }
-    virtual bool SupportsExtraControl() const wxOVERRIDE { return true; }
+	virtual wxString GetPath() const wxOVERRIDE
+	{
+		return m_filectrl->GetPath();
+	}
+	virtual void GetPaths(wxArrayString& paths) const wxOVERRIDE
+	{
+		m_filectrl->GetPaths(paths);
+	}
+	virtual wxString GetDirectory() const wxOVERRIDE
+	{
+		return m_filectrl->GetDirectory();
+	}
+	virtual wxString GetFilename() const wxOVERRIDE
+	{
+		return m_filectrl->GetFilename();
+	}
+	virtual void GetFilenames(wxArrayString& files) const wxOVERRIDE
+	{
+		m_filectrl->GetFilenames(files);
+	}
+	virtual wxString GetWildcard() const wxOVERRIDE
+	{
+		return m_filectrl->GetWildcard();
+	}
+	virtual int GetFilterIndex() const wxOVERRIDE
+	{
+		return m_filectrl->GetFilterIndex();
+	}
+	virtual bool SupportsExtraControl() const wxOVERRIDE
+	{
+		return true;
+	}
 
-    // implementation only from now on
-    // -------------------------------
+	// implementation only from now on
+	// -------------------------------
 
-    virtual int ShowModal() wxOVERRIDE;
-    virtual bool Show( bool show = true ) wxOVERRIDE;
+	virtual int ShowModal() wxOVERRIDE;
+	virtual bool Show( bool show = true ) wxOVERRIDE;
 
-    void OnList( wxCommandEvent &event );
-    void OnReport( wxCommandEvent &event );
-    void OnUp( wxCommandEvent &event );
-    void OnHome( wxCommandEvent &event );
-    void OnOk( wxCommandEvent &event );
-    void OnNew( wxCommandEvent &event );
-    void OnFileActivated( wxFileCtrlEvent &event);
+	void OnList( wxCommandEvent &event );
+	void OnReport( wxCommandEvent &event );
+	void OnUp( wxCommandEvent &event );
+	void OnHome( wxCommandEvent &event );
+	void OnOk( wxCommandEvent &event );
+	void OnNew( wxCommandEvent &event );
+	void OnFileActivated( wxFileCtrlEvent &event);
 
 private:
-    // if true, don't use this implementation at all
-    bool m_bypassGenericImpl;
+	// if true, don't use this implementation at all
+	bool m_bypassGenericImpl;
 
 protected:
-    // update the state of m_upDirButton and m_newDirButton depending on the
-    // currently selected directory
-    void OnUpdateButtonsUI(wxUpdateUIEvent& event);
+	// update the state of m_upDirButton and m_newDirButton depending on the
+	// currently selected directory
+	void OnUpdateButtonsUI(wxUpdateUIEvent& event);
 
-    wxString               m_filterExtension;
-    wxGenericFileCtrl     *m_filectrl;
-    wxBitmapButton        *m_upDirButton;
-    wxBitmapButton        *m_newDirButton;
+	wxString               m_filterExtension;
+	wxGenericFileCtrl     *m_filectrl;
+	wxBitmapButton        *m_upDirButton;
+	wxBitmapButton        *m_newDirButton;
 
 private:
-    void Init();
-    wxBitmapButton* AddBitmapButton( wxWindowID winId, const wxArtID& artId,
-                                     const wxString& tip, wxSizer *sizer );
+	void Init();
+	wxBitmapButton* AddBitmapButton( wxWindowID winId, const wxArtID& artId,
+	                                 const wxString& tip, wxSizer *sizer );
 
-    wxDECLARE_DYNAMIC_CLASS(wxGenericFileDialog);
-    wxDECLARE_EVENT_TABLE();
+	wxDECLARE_DYNAMIC_CLASS(wxGenericFileDialog);
+	wxDECLARE_EVENT_TABLE();
 
-    // these variables are preserved between wxGenericFileDialog calls
-    static long ms_lastViewStyle;     // list or report?
-    static bool ms_lastShowHidden;    // did we show hidden files?
+	// these variables are preserved between wxGenericFileDialog calls
+	static long ms_lastViewStyle;     // list or report?
+	static bool ms_lastShowHidden;    // did we show hidden files?
 };
 
 #ifdef wxHAS_GENERIC_FILEDIALOG
@@ -134,25 +154,25 @@ private:
 class WXDLLIMPEXP_CORE wxFileDialog: public wxGenericFileDialog
 {
 public:
-    wxFileDialog() {}
+	wxFileDialog() {}
 
-    wxFileDialog(wxWindow *parent,
-                 const wxString& message = wxFileSelectorPromptStr,
-                 const wxString& defaultDir = wxEmptyString,
-                 const wxString& defaultFile = wxEmptyString,
-                 const wxString& wildCard = wxFileSelectorDefaultWildcardStr,
-                 long style = 0,
-                 const wxPoint& pos = wxDefaultPosition,
-                 const wxSize& size = wxDefaultSize)
-          :wxGenericFileDialog(parent, message,
-                               defaultDir, defaultFile, wildCard,
-                               style,
-                               pos, size)
-    {
-    }
+	wxFileDialog(wxWindow *parent,
+	             const wxString& message = wxFileSelectorPromptStr,
+	             const wxString& defaultDir = wxEmptyString,
+	             const wxString& defaultFile = wxEmptyString,
+	             const wxString& wildCard = wxFileSelectorDefaultWildcardStr,
+	             long style = 0,
+	             const wxPoint& pos = wxDefaultPosition,
+	             const wxSize& size = wxDefaultSize)
+		:wxGenericFileDialog(parent, message,
+		                     defaultDir, defaultFile, wildCard,
+		                     style,
+		                     pos, size)
+	{
+	}
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxFileDialog);
+	wxDECLARE_DYNAMIC_CLASS(wxFileDialog);
 };
 
 #endif // wxHAS_GENERIC_FILEDIALOG

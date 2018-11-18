@@ -15,23 +15,26 @@
 class wxPipeInputStream : public wxFileInputStream
 {
 public:
-    explicit wxPipeInputStream(int fd) : wxFileInputStream(fd) { }
+	explicit wxPipeInputStream(int fd) : wxFileInputStream(fd) { }
 
-    // return true if the pipe is still opened
-    bool IsOpened() const { return !Eof(); }
+	// return true if the pipe is still opened
+	bool IsOpened() const
+	{
+		return !Eof();
+	}
 
-    // return true if we have anything to read, don't block
-    virtual bool CanRead() const wxOVERRIDE;
+	// return true if we have anything to read, don't block
+	virtual bool CanRead() const wxOVERRIDE;
 };
 
 class wxPipeOutputStream : public wxFileOutputStream
 {
 public:
-    wxPipeOutputStream(int fd) : wxFileOutputStream(fd) { }
+	wxPipeOutputStream(int fd) : wxFileOutputStream(fd) { }
 
-    // Override the base class version to ignore "pipe full" errors: this is
-    // not an error for this class.
-    size_t OnSysWrite(const void *buffer, size_t size) wxOVERRIDE;
+	// Override the base class version to ignore "pipe full" errors: this is
+	// not an error for this class.
+	size_t OnSysWrite(const void *buffer, size_t size) wxOVERRIDE;
 };
 
 #endif // _WX_UNIX_PRIVATE_PIPESTREAM_H_

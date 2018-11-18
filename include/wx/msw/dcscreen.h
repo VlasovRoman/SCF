@@ -17,14 +17,14 @@
 class WXDLLIMPEXP_CORE wxScreenDCImpl : public wxMSWDCImpl
 {
 public:
-    // Create a DC representing the whole virtual screen (all monitors)
-    wxScreenDCImpl( wxScreenDC *owner );
+	// Create a DC representing the whole virtual screen (all monitors)
+	wxScreenDCImpl( wxScreenDC *owner );
 
-    // Return the size of the whole virtual screen (all monitors)
-    virtual void DoGetSize(int *w, int *h) const wxOVERRIDE;
+	// Return the size of the whole virtual screen (all monitors)
+	virtual void DoGetSize(int *w, int *h) const wxOVERRIDE;
 
-    wxDECLARE_CLASS(wxScreenDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxScreenDCImpl);
+	wxDECLARE_CLASS(wxScreenDCImpl);
+	wxDECLARE_NO_COPY_CLASS(wxScreenDCImpl);
 };
 
 #endif // _WX_MSW_DCSCREEN_H_

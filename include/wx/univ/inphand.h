@@ -42,36 +42,36 @@
 class WXDLLIMPEXP_CORE wxInputHandler : public wxObject
 {
 public:
-    // map a keyboard event to one or more actions (pressed == true if the key
-    // was pressed, false if released), returns true if something was done
-    virtual bool HandleKey(wxInputConsumer *consumer,
-                           const wxKeyEvent& event,
-                           bool pressed) = 0;
+	// map a keyboard event to one or more actions (pressed == true if the key
+	// was pressed, false if released), returns true if something was done
+	virtual bool HandleKey(wxInputConsumer *consumer,
+	                       const wxKeyEvent& event,
+	                       bool pressed) = 0;
 
-    // map a mouse (click) event to one or more actions
-    virtual bool HandleMouse(wxInputConsumer *consumer,
-                             const wxMouseEvent& event) = 0;
+	// map a mouse (click) event to one or more actions
+	virtual bool HandleMouse(wxInputConsumer *consumer,
+	                         const wxMouseEvent& event) = 0;
 
-    // handle mouse movement (or enter/leave) event: it is separated from
-    // HandleMouse() for convenience as many controls don't care about mouse
-    // movements at all
-    virtual bool HandleMouseMove(wxInputConsumer *consumer,
-                                 const wxMouseEvent& event);
+	// handle mouse movement (or enter/leave) event: it is separated from
+	// HandleMouse() for convenience as many controls don't care about mouse
+	// movements at all
+	virtual bool HandleMouseMove(wxInputConsumer *consumer,
+	                             const wxMouseEvent& event);
 
-    // do something with focus set/kill event: this is different from
-    // HandleMouseMove() as the mouse maybe over the control without it having
-    // focus
-    //
-    // return true to refresh the control, false otherwise
-    virtual bool HandleFocus(wxInputConsumer *consumer, const wxFocusEvent& event);
+	// do something with focus set/kill event: this is different from
+	// HandleMouseMove() as the mouse maybe over the control without it having
+	// focus
+	//
+	// return true to refresh the control, false otherwise
+	virtual bool HandleFocus(wxInputConsumer *consumer, const wxFocusEvent& event);
 
-    // react to the app getting/losing activation
-    //
-    // return true to refresh the control, false otherwise
-    virtual bool HandleActivation(wxInputConsumer *consumer, bool activated);
+	// react to the app getting/losing activation
+	//
+	// return true to refresh the control, false otherwise
+	virtual bool HandleActivation(wxInputConsumer *consumer, bool activated);
 
-    // virtual dtor for any base class
-    virtual ~wxInputHandler();
+	// virtual dtor for any base class
+	virtual ~wxInputHandler();
 };
 
 // ----------------------------------------------------------------------------
@@ -82,34 +82,34 @@ public:
 class WXDLLIMPEXP_CORE wxStdInputHandler : public wxInputHandler
 {
 public:
-    wxStdInputHandler(wxInputHandler *handler) : m_handler(handler) { }
+	wxStdInputHandler(wxInputHandler *handler) : m_handler(handler) { }
 
-    virtual bool HandleKey(wxInputConsumer *consumer,
-                           const wxKeyEvent& event,
-                           bool pressed) wxOVERRIDE
-    {
-        return m_handler ? m_handler->HandleKey(consumer, event, pressed)
-                         : false;
-    }
+	virtual bool HandleKey(wxInputConsumer *consumer,
+	                       const wxKeyEvent& event,
+	                       bool pressed) wxOVERRIDE
+	{
+		return m_handler ? m_handler->HandleKey(consumer, event, pressed)
+		: false;
+	}
 
-    virtual bool HandleMouse(wxInputConsumer *consumer,
-                             const wxMouseEvent& event) wxOVERRIDE
-    {
-        return m_handler ? m_handler->HandleMouse(consumer, event) : false;
-    }
+	virtual bool HandleMouse(wxInputConsumer *consumer,
+	                         const wxMouseEvent& event) wxOVERRIDE
+	{
+		return m_handler ? m_handler->HandleMouse(consumer, event) : false;
+	}
 
-    virtual bool HandleMouseMove(wxInputConsumer *consumer, const wxMouseEvent& event) wxOVERRIDE
-    {
-        return m_handler ? m_handler->HandleMouseMove(consumer, event) : false;
-    }
+	virtual bool HandleMouseMove(wxInputConsumer *consumer, const wxMouseEvent& event) wxOVERRIDE
+	{
+		return m_handler ? m_handler->HandleMouseMove(consumer, event) : false;
+	}
 
-    virtual bool HandleFocus(wxInputConsumer *consumer, const wxFocusEvent& event) wxOVERRIDE
-    {
-        return m_handler ? m_handler->HandleFocus(consumer, event) : false;
-    }
+	virtual bool HandleFocus(wxInputConsumer *consumer, const wxFocusEvent& event) wxOVERRIDE
+	{
+		return m_handler ? m_handler->HandleFocus(consumer, event) : false;
+	}
 
 private:
-    wxInputHandler *m_handler;
+	wxInputHandler *m_handler;
 };
 
 #endif // _WX_UNIV_INPHAND_H_

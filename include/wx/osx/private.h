@@ -4,11 +4,11 @@
 #include "wx/osx/core/private.h"
 
 #if wxOSX_USE_IPHONE
-    #include "wx/osx/iphone/private.h"
+#include "wx/osx/iphone/private.h"
 #elif wxOSX_USE_COCOA
-    #include "wx/osx/cocoa/private.h"
+#include "wx/osx/cocoa/private.h"
 #elif wxUSE_GUI
-    #error "Must include wx/defs.h first"
+#error "Must include wx/defs.h first"
 #endif
 
 #endif

@@ -57,38 +57,38 @@
 // include the header defining timeval: under Windows this struct is used only
 // with sockets so we need to include winsock.h which we do via windows.h
 #ifdef __WINDOWS__
-    #include "wx/msw/wrapwin.h"
+#include "wx/msw/wrapwin.h"
 #else
-    #include <sys/time.h>   // for timeval
+#include <sys/time.h>   // for timeval
 #endif
 
 // 64 bit Cygwin can't use the standard struct timeval because it has long
 // fields, which are supposed to be 32 bits in Win64 API, but long is 64 bits
 // in 64 bit Cygwin, so we need to use its special __ms_timeval instead.
 #if defined(__CYGWIN__) && defined(__LP64__)
-    typedef __ms_timeval wxTimeVal_t;
+typedef __ms_timeval wxTimeVal_t;
 #else
-    typedef timeval wxTimeVal_t;
+typedef timeval wxTimeVal_t;
 #endif
 
 // these definitions are for MSW when we don't use configure, otherwise these
 // symbols are defined by configure
 #ifndef WX_SOCKLEN_T
-    #define WX_SOCKLEN_T int
+#define WX_SOCKLEN_T int
 #endif
 
 #ifndef SOCKOPTLEN_T
-    #define SOCKOPTLEN_T int
+#define SOCKOPTLEN_T int
 #endif
 
 // define some symbols which winsock.h defines but traditional BSD headers
 // don't
 #ifndef INVALID_SOCKET
-    #define INVALID_SOCKET (-1)
+#define INVALID_SOCKET (-1)
 #endif
 
 #ifndef SOCKET_ERROR
-    #define SOCKET_ERROR (-1)
+#define SOCKET_ERROR (-1)
 #endif
 
 typedef int wxSocketEventFlags;
@@ -110,60 +110,60 @@ class wxSocketImpl;
 class wxSocketManager
 {
 public:
-    // set the manager to use, we don't take ownership of it
-    //
-    // this should be called before creating the first wxSocket object,
-    // otherwise the manager returned by wxAppTraits::GetSocketManager() will
-    // be used
-    static void Set(wxSocketManager *manager);
+	// set the manager to use, we don't take ownership of it
+	//
+	// this should be called before creating the first wxSocket object,
+	// otherwise the manager returned by wxAppTraits::GetSocketManager() will
+	// be used
+	static void Set(wxSocketManager *manager);
 
-    // return the manager to use
-    //
-    // this initializes the manager at first use
-    static wxSocketManager *Get()
-    {
-        if ( !ms_manager )
-            Init();
+	// return the manager to use
+	//
+	// this initializes the manager at first use
+	static wxSocketManager *Get()
+	{
+		if ( !ms_manager )
+			Init();
 
-        return ms_manager;
-    }
+		return ms_manager;
+	}
 
-    // called before the first wxSocket is created and should do the
-    // initializations needed in order to use the network
-    //
-    // return true if initialized successfully; if this returns false sockets
-    // can't be used at all
-    virtual bool OnInit() = 0;
+	// called before the first wxSocket is created and should do the
+	// initializations needed in order to use the network
+	//
+	// return true if initialized successfully; if this returns false sockets
+	// can't be used at all
+	virtual bool OnInit() = 0;
 
-    // undo the initializations of OnInit()
-    virtual void OnExit() = 0;
+	// undo the initializations of OnInit()
+	virtual void OnExit() = 0;
 
 
-    // create the socket implementation object matching this manager
-    virtual wxSocketImpl *CreateSocket(wxSocketBase& wxsocket) = 0;
+	// create the socket implementation object matching this manager
+	virtual wxSocketImpl *CreateSocket(wxSocketBase& wxsocket) = 0;
 
-    // these functions enable or disable monitoring of the given socket for the
-    // specified events inside the currently running event loop (but notice
-    // that both BSD and Winsock implementations actually use socket->m_server
-    // value to determine what exactly should be monitored so it needs to be
-    // set before calling these functions)
-    //
-    // the default event value is used just for the convenience of wxMSW
-    // implementation which doesn't use this parameter anyhow, it doesn't make
-    // sense to pass wxSOCKET_LOST for the Unix implementation which does use
-    // this parameter
-    virtual void Install_Callback(wxSocketImpl *socket,
-                                  wxSocketNotify event = wxSOCKET_LOST) = 0;
-    virtual void Uninstall_Callback(wxSocketImpl *socket,
-                                    wxSocketNotify event = wxSOCKET_LOST) = 0;
+	// these functions enable or disable monitoring of the given socket for the
+	// specified events inside the currently running event loop (but notice
+	// that both BSD and Winsock implementations actually use socket->m_server
+	// value to determine what exactly should be monitored so it needs to be
+	// set before calling these functions)
+	//
+	// the default event value is used just for the convenience of wxMSW
+	// implementation which doesn't use this parameter anyhow, it doesn't make
+	// sense to pass wxSOCKET_LOST for the Unix implementation which does use
+	// this parameter
+	virtual void Install_Callback(wxSocketImpl *socket,
+	                              wxSocketNotify event = wxSOCKET_LOST) = 0;
+	virtual void Uninstall_Callback(wxSocketImpl *socket,
+	                                wxSocketNotify event = wxSOCKET_LOST) = 0;
 
-    virtual ~wxSocketManager() { }
+	virtual ~wxSocketManager() { }
 
 private:
-    // get the manager to use if we don't have it yet
-    static void Init();
+	// get the manager to use if we don't have it yet
+	static void Init();
 
-    static wxSocketManager *ms_manager;
+	static wxSocketManager *ms_manager;
 };
 
 /*
@@ -176,204 +176,228 @@ private:
 class wxSocketImpl
 {
 public:
-    virtual ~wxSocketImpl();
+	virtual ~wxSocketImpl();
 
-    // set various socket properties: all of those can only be called before
-    // creating the socket
-    void SetTimeout(unsigned long millisec);
-    void SetReusable() { m_reusable = true; }
-    void SetBroadcast() { m_broadcast = true; }
-    void DontDoBind() { m_dobind = false; }
-    void SetInitialSocketBuffers(int recv, int send)
-    {
-        m_initialRecvBufferSize = recv;
-        m_initialSendBufferSize = send;
-    }
+	// set various socket properties: all of those can only be called before
+	// creating the socket
+	void SetTimeout(unsigned long millisec);
+	void SetReusable()
+	{
+		m_reusable = true;
+	}
+	void SetBroadcast()
+	{
+		m_broadcast = true;
+	}
+	void DontDoBind()
+	{
+		m_dobind = false;
+	}
+	void SetInitialSocketBuffers(int recv, int send)
+	{
+		m_initialRecvBufferSize = recv;
+		m_initialSendBufferSize = send;
+	}
 
-    wxSocketError SetLocal(const wxSockAddressImpl& address);
-    wxSocketError SetPeer(const wxSockAddressImpl& address);
+	wxSocketError SetLocal(const wxSockAddressImpl& address);
+	wxSocketError SetPeer(const wxSockAddressImpl& address);
 
-    // accessors
-    // ---------
+	// accessors
+	// ---------
 
-    bool IsServer() const { return m_server; }
+	bool IsServer() const
+	{
+		return m_server;
+	}
 
-    const wxSockAddressImpl& GetLocal(); // non const as may update m_local
-    const wxSockAddressImpl& GetPeer() const { return m_peer; }
+	const wxSockAddressImpl& GetLocal(); // non const as may update m_local
+	const wxSockAddressImpl& GetPeer() const
+	{
+		return m_peer;
+	}
 
-    wxSocketError GetError() const { return m_error; }
-    bool IsOk() const { return m_error == wxSOCKET_NOERROR; }
+	wxSocketError GetError() const
+	{
+		return m_error;
+	}
+	bool IsOk() const
+	{
+		return m_error == wxSOCKET_NOERROR;
+	}
 
-    // get the error code corresponding to the last operation
-    virtual wxSocketError GetLastError() const = 0;
-
-
-    // creating/closing the socket
-    // --------------------------
-
-    // notice that SetLocal() must be called before creating the socket using
-    // any of the functions below
-    //
-    // all of Create() functions return wxSOCKET_NOERROR if the operation
-    // completed successfully or one of:
-    //  wxSOCKET_INVSOCK - the socket is in use.
-    //  wxSOCKET_INVADDR - the local (server) or peer (client) address has not
-    //                     been set.
-    //  wxSOCKET_IOERR   - any other error.
-
-    // create a socket listening on the local address specified by SetLocal()
-    // (notice that DontDoBind() is ignored by this function)
-    wxSocketError CreateServer();
-
-    // create a socket connected to the peer address specified by SetPeer()
-    // (notice that DontDoBind() is ignored by this function)
-    //
-    // this function may return wxSOCKET_WOULDBLOCK in addition to the return
-    // values listed above if wait is false
-    wxSocketError CreateClient(bool wait);
-
-    // create (and bind unless DontDoBind() had been called) an UDP socket
-    // associated with the given local address
-    wxSocketError CreateUDP();
-
-    // may be called whether the socket was created or not, calls DoClose() if
-    // it was indeed created
-    void Close();
-
-    // shuts down the writing end of the socket and closes it, this is a more
-    // graceful way to close
-    //
-    // does nothing if the socket wasn't created
-    void Shutdown();
+	// get the error code corresponding to the last operation
+	virtual wxSocketError GetLastError() const = 0;
 
 
-    // IO operations
-    // -------------
+	// creating/closing the socket
+	// --------------------------
 
-    // basic IO, work for both TCP and UDP sockets
-    //
-    // return the number of bytes read/written (possibly 0) or -1 on error
-    int Read(void *buffer, int size);
-    int Write(const void *buffer, int size);
+	// notice that SetLocal() must be called before creating the socket using
+	// any of the functions below
+	//
+	// all of Create() functions return wxSOCKET_NOERROR if the operation
+	// completed successfully or one of:
+	//  wxSOCKET_INVSOCK - the socket is in use.
+	//  wxSOCKET_INVADDR - the local (server) or peer (client) address has not
+	//                     been set.
+	//  wxSOCKET_IOERR   - any other error.
 
-    // basically a wrapper for select(): returns the condition of the socket,
-    // blocking for not longer than timeout if it is specified (otherwise just
-    // poll without blocking at all)
-    //
-    // flags defines what kind of conditions we're interested in, the return
-    // value is composed of a (possibly empty) subset of the bits set in flags
-    wxSocketEventFlags Select(wxSocketEventFlags flags,
-                              wxTimeVal_t *timeout = NULL);
+	// create a socket listening on the local address specified by SetLocal()
+	// (notice that DontDoBind() is ignored by this function)
+	wxSocketError CreateServer();
 
-    // convenient wrapper calling Select() with our default timeout
-    wxSocketEventFlags SelectWithTimeout(wxSocketEventFlags flags)
-    {
-        return Select(flags, &m_timeout);
-    }
+	// create a socket connected to the peer address specified by SetPeer()
+	// (notice that DontDoBind() is ignored by this function)
+	//
+	// this function may return wxSOCKET_WOULDBLOCK in addition to the return
+	// values listed above if wait is false
+	wxSocketError CreateClient(bool wait);
 
-    // just a wrapper for accept(): it is called to create a new wxSocketImpl
-    // corresponding to a new server connection represented by the given
-    // wxSocketBase, returns NULL on error (including immediately if there are
-    // no pending connections as our sockets are non-blocking)
-    wxSocketImpl *Accept(wxSocketBase& wxsocket);
+	// create (and bind unless DontDoBind() had been called) an UDP socket
+	// associated with the given local address
+	wxSocketError CreateUDP();
+
+	// may be called whether the socket was created or not, calls DoClose() if
+	// it was indeed created
+	void Close();
+
+	// shuts down the writing end of the socket and closes it, this is a more
+	// graceful way to close
+	//
+	// does nothing if the socket wasn't created
+	void Shutdown();
 
 
-    // notifications
-    // -------------
+	// IO operations
+	// -------------
 
-    // notify m_wxsocket about the given socket event by calling its (inaptly
-    // named) OnRequest() method
-    void NotifyOnStateChange(wxSocketNotify event);
+	// basic IO, work for both TCP and UDP sockets
+	//
+	// return the number of bytes read/written (possibly 0) or -1 on error
+	int Read(void *buffer, int size);
+	int Write(const void *buffer, int size);
 
-    // called after reading/writing the data from/to the socket and should
-    // enable back the wxSOCKET_INPUT/OUTPUT_FLAG notifications if they were
-    // turned off when this data was first detected
-    virtual void ReenableEvents(wxSocketEventFlags flags) = 0;
+	// basically a wrapper for select(): returns the condition of the socket,
+	// blocking for not longer than timeout if it is specified (otherwise just
+	// poll without blocking at all)
+	//
+	// flags defines what kind of conditions we're interested in, the return
+	// value is composed of a (possibly empty) subset of the bits set in flags
+	wxSocketEventFlags Select(wxSocketEventFlags flags,
+	                          wxTimeVal_t *timeout = NULL);
 
-    // TODO: make these fields protected and provide accessors for those of
-    //       them that wxSocketBase really needs
+	// convenient wrapper calling Select() with our default timeout
+	wxSocketEventFlags SelectWithTimeout(wxSocketEventFlags flags)
+	{
+		return Select(flags, &m_timeout);
+	}
+
+	// just a wrapper for accept(): it is called to create a new wxSocketImpl
+	// corresponding to a new server connection represented by the given
+	// wxSocketBase, returns NULL on error (including immediately if there are
+	// no pending connections as our sockets are non-blocking)
+	wxSocketImpl *Accept(wxSocketBase& wxsocket);
+
+
+	// notifications
+	// -------------
+
+	// notify m_wxsocket about the given socket event by calling its (inaptly
+	// named) OnRequest() method
+	void NotifyOnStateChange(wxSocketNotify event);
+
+	// called after reading/writing the data from/to the socket and should
+	// enable back the wxSOCKET_INPUT/OUTPUT_FLAG notifications if they were
+	// turned off when this data was first detected
+	virtual void ReenableEvents(wxSocketEventFlags flags) = 0;
+
+	// TODO: make these fields protected and provide accessors for those of
+	//       them that wxSocketBase really needs
 //protected:
-    wxSOCKET_T m_fd;
+	wxSOCKET_T m_fd;
 
-    int m_initialRecvBufferSize;
-    int m_initialSendBufferSize;
+	int m_initialRecvBufferSize;
+	int m_initialSendBufferSize;
 
-    wxSockAddressImpl m_local,
-                      m_peer;
-    wxSocketError m_error;
+	wxSockAddressImpl m_local,
+	                  m_peer;
+	wxSocketError m_error;
 
-    bool m_stream;
-    bool m_establishing;
-    bool m_reusable;
-    bool m_broadcast;
-    bool m_dobind;
+	bool m_stream;
+	bool m_establishing;
+	bool m_reusable;
+	bool m_broadcast;
+	bool m_dobind;
 
-    wxTimeVal_t m_timeout;
+	wxTimeVal_t m_timeout;
 
 protected:
-    wxSocketImpl(wxSocketBase& wxsocket);
+	wxSocketImpl(wxSocketBase& wxsocket);
 
-    // get the associated socket flags
-    wxSocketFlags GetSocketFlags() const { return m_wxsocket->GetFlags(); }
+	// get the associated socket flags
+	wxSocketFlags GetSocketFlags() const
+	{
+		return m_wxsocket->GetFlags();
+	}
 
-    // true if we're a listening stream socket
-    bool m_server;
+	// true if we're a listening stream socket
+	bool m_server;
 
 private:
-    // called by Close() if we have a valid m_fd
-    virtual void DoClose() = 0;
+	// called by Close() if we have a valid m_fd
+	virtual void DoClose() = 0;
 
-    // put this socket into non-blocking mode and enable monitoring this socket
-    // as part of the event loop
-    virtual void UnblockAndRegisterWithEventLoop() = 0;
+	// put this socket into non-blocking mode and enable monitoring this socket
+	// as part of the event loop
+	virtual void UnblockAndRegisterWithEventLoop() = 0;
 
-    // check that the socket wasn't created yet and that the given address
-    // (either m_local or m_peer depending on the socket kind) is valid and
-    // set m_error and return false if this is not the case
-    bool PreCreateCheck(const wxSockAddressImpl& addr);
+	// check that the socket wasn't created yet and that the given address
+	// (either m_local or m_peer depending on the socket kind) is valid and
+	// set m_error and return false if this is not the case
+	bool PreCreateCheck(const wxSockAddressImpl& addr);
 
-    // set the given socket option: this just wraps setsockopt(SOL_SOCKET)
-    int SetSocketOption(int optname, int optval)
-    {
-        // although modern Unix systems use "const void *" for the 4th
-        // parameter here, old systems and Winsock still use "const char *"
-        return setsockopt(m_fd, SOL_SOCKET, optname,
-                          reinterpret_cast<const char *>(&optval),
-                          sizeof(optval));
-    }
+	// set the given socket option: this just wraps setsockopt(SOL_SOCKET)
+	int SetSocketOption(int optname, int optval)
+	{
+		// although modern Unix systems use "const void *" for the 4th
+		// parameter here, old systems and Winsock still use "const char *"
+		return setsockopt(m_fd, SOL_SOCKET, optname,
+		                  reinterpret_cast<const char *>(&optval),
+		                  sizeof(optval));
+	}
 
-    // set the given socket option to true value: this is an even simpler
-    // wrapper for setsockopt(SOL_SOCKET) for boolean options
-    int EnableSocketOption(int optname)
-    {
-        return SetSocketOption(optname, 1);
-    }
+	// set the given socket option to true value: this is an even simpler
+	// wrapper for setsockopt(SOL_SOCKET) for boolean options
+	int EnableSocketOption(int optname)
+	{
+		return SetSocketOption(optname, 1);
+	}
 
-    // apply the options to the (just created) socket and register it with the
-    // event loop by calling UnblockAndRegisterWithEventLoop()
-    void PostCreation();
+	// apply the options to the (just created) socket and register it with the
+	// event loop by calling UnblockAndRegisterWithEventLoop()
+	void PostCreation();
 
-    // update local address after binding/connecting
-    wxSocketError UpdateLocalAddress();
+	// update local address after binding/connecting
+	wxSocketError UpdateLocalAddress();
 
-    // functions used to implement Read/Write()
-    int RecvStream(void *buffer, int size);
-    int RecvDgram(void *buffer, int size);
-    int SendStream(const void *buffer, int size);
-    int SendDgram(const void *buffer, int size);
+	// functions used to implement Read/Write()
+	int RecvStream(void *buffer, int size);
+	int RecvDgram(void *buffer, int size);
+	int SendStream(const void *buffer, int size);
+	int SendDgram(const void *buffer, int size);
 
 
-    // set in ctor and never changed except that it's reset to NULL when the
-    // socket is shut down
-    wxSocketBase *m_wxsocket;
+	// set in ctor and never changed except that it's reset to NULL when the
+	// socket is shut down
+	wxSocketBase *m_wxsocket;
 
-    wxDECLARE_NO_COPY_CLASS(wxSocketImpl);
+	wxDECLARE_NO_COPY_CLASS(wxSocketImpl);
 };
 
 #if defined(__WINDOWS__)
-    #include "wx/msw/private/sockmsw.h"
+#include "wx/msw/private/sockmsw.h"
 #else
-    #include "wx/unix/private/sockunix.h"
+#include "wx/unix/private/sockunix.h"
 #endif
 
 #endif /* wxUSE_SOCKETS */

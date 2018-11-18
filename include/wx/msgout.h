@@ -27,34 +27,34 @@
 class WXDLLIMPEXP_BASE wxMessageOutput
 {
 public:
-    virtual ~wxMessageOutput() { }
+	virtual ~wxMessageOutput() { }
 
-    // gets the current wxMessageOutput object (may be NULL during
-    // initialization or shutdown)
-    static wxMessageOutput* Get();
+	// gets the current wxMessageOutput object (may be NULL during
+	// initialization or shutdown)
+	static wxMessageOutput* Get();
 
-    // sets the global wxMessageOutput instance; returns the previous one
-    static wxMessageOutput* Set(wxMessageOutput* msgout);
+	// sets the global wxMessageOutput instance; returns the previous one
+	static wxMessageOutput* Set(wxMessageOutput* msgout);
 
-    // show a message to the user
-    // void Printf(const wxString& format, ...) = 0;
-    WX_DEFINE_VARARG_FUNC_VOID(Printf, 1, (const wxFormatString&),
-                               DoPrintfWchar, DoPrintfUtf8)
+	// show a message to the user
+	// void Printf(const wxString& format, ...) = 0;
+	WX_DEFINE_VARARG_FUNC_VOID(Printf, 1, (const wxFormatString&),
+	                           DoPrintfWchar, DoPrintfUtf8)
 
-    // called by DoPrintf() to output formatted string but can also be called
-    // directly if no formatting is needed
-    virtual void Output(const wxString& str) = 0;
+	// called by DoPrintf() to output formatted string but can also be called
+	// directly if no formatting is needed
+	virtual void Output(const wxString& str) = 0;
 
 protected:
 #if !wxUSE_UTF8_LOCALE_ONLY
-    void DoPrintfWchar(const wxChar *format, ...);
+	void DoPrintfWchar(const wxChar *format, ...);
 #endif
 #if wxUSE_UNICODE_UTF8
-    void DoPrintfUtf8(const char *format, ...);
+	void DoPrintfUtf8(const char *format, ...);
 #endif
 
 private:
-    static wxMessageOutput* ms_msgOut;
+	static wxMessageOutput* ms_msgOut;
 };
 
 // ----------------------------------------------------------------------------
@@ -64,26 +64,26 @@ private:
 class WXDLLIMPEXP_BASE wxMessageOutputWithConv
 {
 protected:
-    explicit wxMessageOutputWithConv(const wxMBConv& conv)
-        : m_conv(conv.Clone())
-    {
-    }
+	explicit wxMessageOutputWithConv(const wxMBConv& conv)
+		: m_conv(conv.Clone())
+	{
+	}
 
-    ~wxMessageOutputWithConv()
-    {
-        delete m_conv;
-    }
+	~wxMessageOutputWithConv()
+	{
+		delete m_conv;
+	}
 
-    // return the string with "\n" appended if it doesn't already terminate
-    // with it (in which case it's returned unchanged)
-    wxString AppendLineFeedIfNeeded(const wxString& str);
+	// return the string with "\n" appended if it doesn't already terminate
+	// with it (in which case it's returned unchanged)
+	wxString AppendLineFeedIfNeeded(const wxString& str);
 
-    // Prepare the given string for output by appending a new line to it, if
-    // necessary, and converting it to a narrow string using our conversion
-    // object.
-    wxCharBuffer PrepareForOutput(const wxString& str);
+	// Prepare the given string for output by appending a new line to it, if
+	// necessary, and converting it to a narrow string using our conversion
+	// object.
+	wxCharBuffer PrepareForOutput(const wxString& str);
 
-    const wxMBConv* const m_conv;
+	const wxMBConv* const m_conv;
 };
 
 // ----------------------------------------------------------------------------
@@ -91,18 +91,18 @@ protected:
 // ----------------------------------------------------------------------------
 
 class WXDLLIMPEXP_BASE wxMessageOutputStderr : public wxMessageOutput,
-                                               protected wxMessageOutputWithConv
+	protected wxMessageOutputWithConv
 {
 public:
-    wxMessageOutputStderr(FILE *fp = stderr,
-                          const wxMBConv &conv = wxConvWhateverWorks);
+	wxMessageOutputStderr(FILE *fp = stderr,
+	                      const wxMBConv &conv = wxConvWhateverWorks);
 
-    virtual void Output(const wxString& str) wxOVERRIDE;
+	virtual void Output(const wxString& str) wxOVERRIDE;
 
 protected:
-    FILE *m_fp;
+	FILE *m_fp;
 
-    wxDECLARE_NO_COPY_CLASS(wxMessageOutputStderr);
+	wxDECLARE_NO_COPY_CLASS(wxMessageOutputStderr);
 };
 
 // ----------------------------------------------------------------------------
@@ -112,20 +112,20 @@ protected:
 
 enum wxMessageOutputFlags
 {
-    wxMSGOUT_PREFER_STDERR = 0, // use stderr if available (this is the default)
-    wxMSGOUT_PREFER_MSGBOX = 1  // always use message box if available
+	wxMSGOUT_PREFER_STDERR = 0, // use stderr if available (this is the default)
+	wxMSGOUT_PREFER_MSGBOX = 1  // always use message box if available
 };
 
 class WXDLLIMPEXP_BASE wxMessageOutputBest : public wxMessageOutputStderr
 {
 public:
-    wxMessageOutputBest(wxMessageOutputFlags flags = wxMSGOUT_PREFER_STDERR)
-        : m_flags(flags) { }
+	wxMessageOutputBest(wxMessageOutputFlags flags = wxMSGOUT_PREFER_STDERR)
+		: m_flags(flags) { }
 
-    virtual void Output(const wxString& str) wxOVERRIDE;
+	virtual void Output(const wxString& str) wxOVERRIDE;
 
 private:
-    wxMessageOutputFlags m_flags;
+	wxMessageOutputFlags m_flags;
 };
 
 // ----------------------------------------------------------------------------
@@ -137,9 +137,9 @@ private:
 class WXDLLIMPEXP_CORE wxMessageOutputMessageBox : public wxMessageOutput
 {
 public:
-    wxMessageOutputMessageBox() { }
+	wxMessageOutputMessageBox() { }
 
-    virtual void Output(const wxString& str) wxOVERRIDE;
+	virtual void Output(const wxString& str) wxOVERRIDE;
 };
 
 #endif // wxUSE_GUI && wxUSE_MSGDLG
@@ -151,9 +151,9 @@ public:
 class WXDLLIMPEXP_BASE wxMessageOutputDebug : public wxMessageOutputStderr
 {
 public:
-    wxMessageOutputDebug() { }
+	wxMessageOutputDebug() { }
 
-    virtual void Output(const wxString& str) wxOVERRIDE;
+	virtual void Output(const wxString& str) wxOVERRIDE;
 };
 
 // ----------------------------------------------------------------------------
@@ -163,9 +163,9 @@ public:
 class WXDLLIMPEXP_BASE wxMessageOutputLog : public wxMessageOutput
 {
 public:
-    wxMessageOutputLog() { }
+	wxMessageOutputLog() { }
 
-    virtual void Output(const wxString& str) wxOVERRIDE;
+	virtual void Output(const wxString& str) wxOVERRIDE;
 };
 
 #endif // _WX_MSGOUT_H_

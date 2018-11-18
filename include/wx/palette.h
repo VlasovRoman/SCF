@@ -22,21 +22,25 @@
 class WXDLLIMPEXP_CORE wxPaletteBase: public wxGDIObject
 {
 public:
-    virtual ~wxPaletteBase() { }
+	virtual ~wxPaletteBase() { }
 
-    virtual int GetColoursCount() const { wxFAIL_MSG( wxT("not implemented") ); return 0; }
+	virtual int GetColoursCount() const
+	{
+		wxFAIL_MSG( wxT("not implemented") );
+		return 0;
+	}
 };
 
 #if defined(__WXMSW__)
-    #include "wx/msw/palette.h"
+#include "wx/msw/palette.h"
 #elif defined(__WXX11__) || defined(__WXMOTIF__)
-    #include "wx/x11/palette.h"
+#include "wx/x11/palette.h"
 #elif defined(__WXGTK__)
-    #include "wx/generic/paletteg.h"
+#include "wx/generic/paletteg.h"
 #elif defined(__WXMAC__)
-    #include "wx/osx/palette.h"
+#include "wx/osx/palette.h"
 #elif defined(__WXQT__)
-    #include "wx/qt/palette.h"
+#include "wx/qt/palette.h"
 #endif
 
 #endif // wxUSE_PALETTE

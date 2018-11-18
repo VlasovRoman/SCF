@@ -29,46 +29,70 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 class wxBusyInfoFlags
 {
 public:
-    wxBusyInfoFlags()
-    {
-        m_parent = NULL;
-        m_alpha = wxALPHA_OPAQUE;
-    }
+	wxBusyInfoFlags()
+	{
+		m_parent = NULL;
+		m_alpha = wxALPHA_OPAQUE;
+	}
 
-    wxBusyInfoFlags& Parent(wxWindow* parent)
-        { m_parent = parent; return *this; }
+	wxBusyInfoFlags& Parent(wxWindow* parent)
+	{
+		m_parent = parent;
+		return *this;
+	}
 
-    wxBusyInfoFlags& Icon(const wxIcon& icon)
-        { m_icon = icon; return *this; }
-    wxBusyInfoFlags& Title(const wxString& title)
-        { m_title = title; return *this; }
-    wxBusyInfoFlags& Text(const wxString& text)
-        { m_text = text; return *this; }
-    wxBusyInfoFlags& Label(const wxString& label)
-        { m_label = label; return *this; }
+	wxBusyInfoFlags& Icon(const wxIcon& icon)
+	{
+		m_icon = icon;
+		return *this;
+	}
+	wxBusyInfoFlags& Title(const wxString& title)
+	{
+		m_title = title;
+		return *this;
+	}
+	wxBusyInfoFlags& Text(const wxString& text)
+	{
+		m_text = text;
+		return *this;
+	}
+	wxBusyInfoFlags& Label(const wxString& label)
+	{
+		m_label = label;
+		return *this;
+	}
 
-    wxBusyInfoFlags& Foreground(const wxColour& foreground)
-        { m_foreground = foreground; return *this; }
-    wxBusyInfoFlags& Background(const wxColour& background)
-        { m_background = background; return *this; }
+	wxBusyInfoFlags& Foreground(const wxColour& foreground)
+	{
+		m_foreground = foreground;
+		return *this;
+	}
+	wxBusyInfoFlags& Background(const wxColour& background)
+	{
+		m_background = background;
+		return *this;
+	}
 
-    wxBusyInfoFlags& Transparency(wxByte alpha)
-        { m_alpha = alpha; return *this; }
+	wxBusyInfoFlags& Transparency(wxByte alpha)
+	{
+		m_alpha = alpha;
+		return *this;
+	}
 
 private:
-    wxWindow* m_parent;
+	wxWindow* m_parent;
 
-    wxIcon m_icon;
-    wxString m_title,
-             m_text,
-             m_label;
+	wxIcon m_icon;
+	wxString m_title,
+	         m_text,
+	         m_label;
 
-    wxColour m_foreground,
-             m_background;
+	wxColour m_foreground,
+	         m_background;
 
-    wxByte m_alpha;
+	wxByte m_alpha;
 
-    friend class wxBusyInfo;
+	friend class wxBusyInfo;
 };
 
 #include "wx/generic/busyinfo.h"

@@ -46,6 +46,81 @@ void debug_pause()
 	exit(1);
 }
 
+void wait_thread_object(int _this)
+{
+	if ( *(_BYTE *)(_this + 4) )
+		EnterCriticalSection(*(LPCRITICAL_SECTION *)_this);
+	else
+		WaitForSingleObject(*(HANDLE *)_this, 0xFFFFFFFF);
+}
+
+void wait_thread_object_destruc(int _this)
+{
+	if ( *(_BYTE *)(_this + 4) )
+		EnterCriticalSection(*(LPCRITICAL_SECTION *)_this);
+	else
+		ReleaseMutex(*(HANDLE *)_this);
+}
+
+unsigned long swap_thread_objs(int a1, unsigned long *Destination)
+{
+	unsigned long result; // eax
+	DWORD v3; // ST0C_4
+	int v4; // eax
+	int v5; // eax
+	int v6; // eax
+	int v7; // eax
+	bool v8; // cf
+	const CHAR *v9; // eax
+	HANDLE v10; // esi
+	int v11; // [esp+0h] [ebp-C0h]
+	char v12; // [esp+10h] [ebp-B0h]
+	char v13; // [esp+90h] [ebp-30h]
+	HANDLE hMutex; // [esp+ACh] [ebp-14h]
+	int *v15; // [esp+B0h] [ebp-10h]
+	int v16; // [esp+BCh] [ebp-4h]
+
+	v15 = &v11;
+	result = InterlockedCompareExchange(Destination, 1, 1);
+	if ( !result )
+	{
+		/* 		std::basic_ostringstream<char,std::char_traits<char>,std::allocator<char>>::basic_ostringstream<char,std::char_traits<char>,std::allocator<char>>(
+				            &v12,
+				            2,
+				            1);
+				v16 = 0;
+				v3 = GetCurrentProcessId();
+				v4 = sub_100A8390((int)&v12, "2AC1A572DB6944B0A65C38C4140AF2F4");
+				v5 = std::basic_ostream<char,std::char_traits<char>>::operator<<(v4, sub_104DCC20);
+				v6 = std::basic_ostream<char,std::char_traits<char>>::operator<<(v5, v3);
+				std::basic_ostream<char,std::char_traits<char>>::operator<<(v6, Destination);
+				v7 = std::basic_ostringstream<char,std::char_traits<char>,std::allocator<char>>::str(&v12, &v13);
+				v8 = *(_DWORD *)(v7 + 24) < 0x10u;
+				LOBYTE(v16) = 1;
+				if ( v8 )
+					v9 = (const CHAR *)(v7 + 4);
+				else
+					v9 = *(const CHAR **)(v7 + 4);
+				v10 = CreateMutexA(0, 0, v9);
+				hMutex = v10;
+				LOBYTE(v16) = 0;
+				std::basic_string<char,std::char_traits<char>,std::allocator<char>>::~basic_string<char,std::char_traits<char>,std::allocator<char>>(&v13);
+				WaitForSingleObject(v10, 0xFFFFFFFF);
+				if ( !InterlockedCompareExchange(Destination, (PVOID)1, (PVOID)1) )
+				{
+					LOBYTE(v16) = 2;
+					((void (*)(void))a1)();
+					v16 = 0;
+					InterlockedExchange((LPLONG)Destination, 1);
+				}
+				ReleaseMutex(v10);
+				CloseHandle(v10);
+				v16 = -1;
+				result = (PVOID)std::basic_ostringstream<char,std::char_traits<char>,std::allocator<char>>::`vbase destructor(&v12); */
+	}
+	return result;
+}
+
 /* void __cdecl sub_8D1E50(char a1, char a2, char a3)
 {
   unsigned int v3; // eax

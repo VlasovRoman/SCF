@@ -17,12 +17,12 @@
 class WXDLLIMPEXP_XRC wxBannerWindowXmlHandler : public wxXmlResourceHandler
 {
 public:
-    wxBannerWindowXmlHandler();
+	wxBannerWindowXmlHandler();
 
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
-    wxDECLARE_DYNAMIC_CLASS(wxBannerWindowXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxBannerWindowXmlHandler);
 };
 
 #endif // wxUSE_XRC && wxUSE_BANNERWINDOW

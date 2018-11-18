@@ -27,26 +27,32 @@ class WXDLLIMPEXP_FWD_CORE wxDC;
 class WXDLLIMPEXP_CORE wxMacPrintDialog: public wxPrintDialogBase
 {
 public:
-    wxMacPrintDialog();
-    wxMacPrintDialog(wxWindow *parent, wxPrintDialogData* data = NULL);
-    wxMacPrintDialog(wxWindow *parent, wxPrintData* data );
-    virtual ~wxMacPrintDialog();
+	wxMacPrintDialog();
+	wxMacPrintDialog(wxWindow *parent, wxPrintDialogData* data = NULL);
+	wxMacPrintDialog(wxWindow *parent, wxPrintData* data );
+	virtual ~wxMacPrintDialog();
 
-    bool Create(wxWindow *parent, wxPrintDialogData* data = NULL);
-    virtual int ShowModal();
+	bool Create(wxWindow *parent, wxPrintDialogData* data = NULL);
+	virtual int ShowModal();
 
-    virtual wxPrintDialogData& GetPrintDialogData() { return m_printDialogData; }
-    virtual wxPrintData& GetPrintData() { return m_printDialogData.GetPrintData(); }
-    virtual wxDC *GetPrintDC();
+	virtual wxPrintDialogData& GetPrintDialogData()
+	{
+		return m_printDialogData;
+	}
+	virtual wxPrintData& GetPrintData()
+	{
+		return m_printDialogData.GetPrintData();
+	}
+	virtual wxDC *GetPrintDC();
 
 private:
-    wxPrintDialogData   m_printDialogData;
-    wxDC*               m_printerDC;
-    bool                m_destroyDC;
-    wxWindow*           m_dialogParent;
+	wxPrintDialogData   m_printDialogData;
+	wxDC*               m_printerDC;
+	bool                m_destroyDC;
+	wxWindow*           m_dialogParent;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxPrintDialog);
+	wxDECLARE_DYNAMIC_CLASS(wxPrintDialog);
 };
 
 /*
@@ -57,20 +63,20 @@ private:
 class WXDLLIMPEXP_CORE wxMacPageSetupDialog: public wxPageSetupDialogBase
 {
 public:
-    wxMacPageSetupDialog(wxWindow *parent, wxPageSetupDialogData *data = NULL);
-    virtual ~wxMacPageSetupDialog();
+	wxMacPageSetupDialog(wxWindow *parent, wxPageSetupDialogData *data = NULL);
+	virtual ~wxMacPageSetupDialog();
 
-    virtual wxPageSetupDialogData& GetPageSetupDialogData();
+	virtual wxPageSetupDialogData& GetPageSetupDialogData();
 
-    bool Create(wxWindow *parent, wxPageSetupDialogData *data = NULL);
-    virtual int ShowModal();
-
-private:
-    wxPageSetupDialogData   m_pageSetupData;
-    wxWindow*               m_dialogParent;
+	bool Create(wxWindow *parent, wxPageSetupDialogData *data = NULL);
+	virtual int ShowModal();
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMacPageSetupDialog);
+	wxPageSetupDialogData   m_pageSetupData;
+	wxWindow*               m_dialogParent;
+
+private:
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMacPageSetupDialog);
 };
 
 class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
@@ -84,27 +90,30 @@ class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 class WXDLLIMPEXP_CORE wxMacPageMarginsDialog : public wxDialog
 {
 public:
-    wxMacPageMarginsDialog(wxFrame* parent, wxPageSetupDialogData* data);
-    bool TransferToWindow();
-    bool TransferDataFromWindow();
+	wxMacPageMarginsDialog(wxFrame* parent, wxPageSetupDialogData* data);
+	bool TransferToWindow();
+	bool TransferDataFromWindow();
 
-    virtual wxPageSetupDialogData& GetPageSetupDialogData() { return *m_pageSetupDialogData; }
-
-private:
-    wxPageSetupDialogData* m_pageSetupDialogData;
-
-    wxPoint m_MinMarginTopLeft;
-    wxPoint m_MinMarginBottomRight;
-    wxTextCtrl *m_LeftMargin;
-    wxTextCtrl *m_TopMargin;
-    wxTextCtrl *m_RightMargin;
-    wxTextCtrl *m_BottomMargin;
-
-    void GetMinMargins();
-    bool CheckValue(wxTextCtrl* textCtrl, int *value, int minValue, const wxString& name);
+	virtual wxPageSetupDialogData& GetPageSetupDialogData()
+	{
+		return *m_pageSetupDialogData;
+	}
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMacPageMarginsDialog);
+	wxPageSetupDialogData* m_pageSetupDialogData;
+
+	wxPoint m_MinMarginTopLeft;
+	wxPoint m_MinMarginBottomRight;
+	wxTextCtrl *m_LeftMargin;
+	wxTextCtrl *m_TopMargin;
+	wxTextCtrl *m_RightMargin;
+	wxTextCtrl *m_BottomMargin;
+
+	void GetMinMargins();
+	bool CheckValue(wxTextCtrl* textCtrl, int *value, int minValue, const wxString& name);
+
+private:
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMacPageMarginsDialog);
 };
 
 

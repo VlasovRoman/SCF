@@ -21,13 +21,13 @@
 
 class WXDLLIMPEXP_NET wxInternetFSHandler : public wxFileSystemHandler
 {
-    public:
-        virtual bool CanOpen(const wxString& location) wxOVERRIDE;
-        virtual wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) wxOVERRIDE;
+public:
+	virtual bool CanOpen(const wxString& location) wxOVERRIDE;
+	virtual wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) wxOVERRIDE;
 };
 
 #endif
-  // wxUSE_FILESYSTEM && wxUSE_FS_INET && wxUSE_STREAMS && wxUSE_SOCKETS
+// wxUSE_FILESYSTEM && wxUSE_FS_INET && wxUSE_STREAMS && wxUSE_SOCKETS
 
 #endif // _WX_FS_INET_H_
 

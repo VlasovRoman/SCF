@@ -19,60 +19,66 @@
 class WXDLLIMPEXP_CORE wxPen : public wxPenBase
 {
 public:
-    wxPen();
-    wxPen(const wxColour& col, int width = 1, wxPenStyle style = wxPENSTYLE_SOLID);
+	wxPen();
+	wxPen(const wxColour& col, int width = 1, wxPenStyle style = wxPENSTYLE_SOLID);
 
-    wxPen(const wxBitmap& stipple, int width);
+	wxPen(const wxBitmap& stipple, int width);
 
-    wxPen(const wxPenInfo& info);
+	wxPen(const wxPenInfo& info);
 
-    virtual ~wxPen();
+	virtual ~wxPen();
 
-    bool operator==(const wxPen& pen) const;
-    bool operator!=(const wxPen& pen) const { return !(*this == pen); }
+	bool operator==(const wxPen& pen) const;
+	bool operator!=(const wxPen& pen) const
+	{
+		return !(*this == pen);
+	}
 
-    // Override in order to recreate the pen
-    void SetColour(const wxColour& col) ;
-    void SetColour(unsigned char r, unsigned char g, unsigned char b) ;
+	// Override in order to recreate the pen
+	void SetColour(const wxColour& col) ;
+	void SetColour(unsigned char r, unsigned char g, unsigned char b) ;
 
-    void SetWidth(int width)  ;
-    void SetStyle(wxPenStyle style)  ;
-    void SetStipple(const wxBitmap& stipple)  ;
-    void SetDashes(int nb_dashes, const wxDash *dash)  ;
-    void SetJoin(wxPenJoin join)  ;
-    void SetCap(wxPenCap cap)  ;
+	void SetWidth(int width)  ;
+	void SetStyle(wxPenStyle style)  ;
+	void SetStipple(const wxBitmap& stipple)  ;
+	void SetDashes(int nb_dashes, const wxDash *dash)  ;
+	void SetJoin(wxPenJoin join)  ;
+	void SetCap(wxPenCap cap)  ;
 
-    wxColour GetColour() const ;
-    int GetWidth() const;
-    wxPenStyle GetStyle() const;
-    wxPenJoin GetJoin() const;
-    wxPenCap GetCap() const;
-    int GetDashes(wxDash **ptr) const;
-    int GetDashCount() const;
+	wxColour GetColour() const ;
+	int GetWidth() const;
+	wxPenStyle GetStyle() const;
+	wxPenJoin GetJoin() const;
+	wxPenCap GetCap() const;
+	int GetDashes(wxDash **ptr) const;
+	int GetDashCount() const;
 
-    wxBitmap *GetStipple() const ;
+	wxBitmap *GetStipple() const ;
 
 
-    wxDEPRECATED_MSG("use wxPENSTYLE_XXX constants")
-    wxPen(const wxColour& col, int width, int style);
+	wxDEPRECATED_MSG("use wxPENSTYLE_XXX constants")
+	wxPen(const wxColour& col, int width, int style);
 
-    wxDEPRECATED_MSG("use wxPENSTYLE_XXX constants")
-    void SetStyle(int style) { SetStyle((wxPenStyle)style); }
+	wxDEPRECATED_MSG("use wxPENSTYLE_XXX constants")
+	void SetStyle(int style)
+	{
+		SetStyle((wxPenStyle)style);
+	}
 
-    // Implementation
+	// Implementation
 
-    // Useful helper: create the brush resource
-    bool RealizeResource();
+	// Useful helper: create the brush resource
+	bool RealizeResource();
 
 protected:
-    virtual wxGDIRefData *CreateGDIRefData() const;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
+	virtual wxGDIRefData *CreateGDIRefData() const;
+	virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
 
 private:
-    void Unshare();
+	void Unshare();
 
-    wxDECLARE_DYNAMIC_CLASS(wxPen);
+	wxDECLARE_DYNAMIC_CLASS(wxPen);
 };
 
 #endif
-    // _WX_PEN_H_
+// _WX_PEN_H_

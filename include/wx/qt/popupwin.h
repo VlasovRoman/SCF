@@ -11,13 +11,13 @@
 class WXDLLIMPEXP_CORE wxPopupWindow : public wxPopupWindowBase
 {
 public:
-    wxPopupWindow();
-    wxPopupWindow(wxWindow *parent, int flags = wxBORDER_NONE);
+	wxPopupWindow();
+	wxPopupWindow(wxWindow *parent, int flags = wxBORDER_NONE);
 
 protected:
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxPopupWindow);
+	wxDECLARE_DYNAMIC_CLASS(wxPopupWindow);
 };
 
 #endif // _WX_QT_POPUPWIN_H_

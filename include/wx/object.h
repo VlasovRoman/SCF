@@ -66,9 +66,9 @@ class WXDLLIMPEXP_BASE const_iterator                                    \
 // for pluggable classes
 // -----------------------------------
 
-    // NOTE: this should probably be the very first statement
-    //       in the class declaration so wxPluginSentinel is
-    //       the first member initialised and the last destroyed.
+// NOTE: this should probably be the very first statement
+//       in the class declaration so wxPluginSentinel is
+//       the first member initialised and the last destroyed.
 
 // _DECLARE_DL_SENTINEL(name) wxPluginSentinel m_pluginsentinel;
 
@@ -155,8 +155,8 @@ name##PluginSentinel  m_pluginsentinel
 template <class T>
 inline T *wxCheckCast(const void *ptr)
 {
-    wxASSERT_MSG( wxDynamicCast(ptr, T), "wxStaticCast() used incorrectly" );
-    return const_cast<T *>(static_cast<const T *>(ptr));
+	wxASSERT_MSG( wxDynamicCast(ptr, T), "wxStaticCast() used incorrectly" );
+	return const_cast<T *>(static_cast<const T *>(ptr));
 }
 
 #define wxStaticCast(obj, className) wxCheckCast<className>(obj)
@@ -183,21 +183,21 @@ inline T *wxCheckCast(const void *ptr)
 #define _WX_WANT_DELETE_VOID
 
 #if defined(__VISUALC__)
-    #define _WX_WANT_DELETE_VOID_WXCHAR_INT
+#define _WX_WANT_DELETE_VOID_WXCHAR_INT
 #endif
 
 // Now see who (if anyone) gets the array memory operators
 #if wxUSE_ARRAY_MEMORY_OPERATORS
 
-    // Everyone except Visual C++ (cause problems for VC++ - crashes)
-    #if !defined(__VISUALC__)
-        #define _WX_WANT_ARRAY_NEW_SIZET_WXCHAR_INT
-    #endif
+// Everyone except Visual C++ (cause problems for VC++ - crashes)
+#if !defined(__VISUALC__)
+#define _WX_WANT_ARRAY_NEW_SIZET_WXCHAR_INT
+#endif
 
-    // Everyone except Visual C++ (cause problems for VC++ - crashes)
-    #if !defined(__VISUALC__)
-        #define _WX_WANT_ARRAY_DELETE_VOID
-    #endif
+// Everyone except Visual C++ (cause problems for VC++ - crashes)
+#if !defined(__VISUALC__)
+#define _WX_WANT_ARRAY_DELETE_VOID
+#endif
 #endif // wxUSE_ARRAY_MEMORY_OPERATORS
 
 #endif // wxUSE_MEMORY_TRACING
@@ -228,27 +228,36 @@ inline T *wxCheckCast(const void *ptr)
 class WXDLLIMPEXP_BASE wxRefCounter
 {
 public:
-    wxRefCounter() { m_count = 1; }
+	wxRefCounter()
+	{
+		m_count = 1;
+	}
 
-    int GetRefCount() const { return m_count; }
+	int GetRefCount() const
+	{
+		return m_count;
+	}
 
-    void IncRef() { m_count++; }
-    void DecRef();
+	void IncRef()
+	{
+		m_count++;
+	}
+	void DecRef();
 
 protected:
-    // this object should never be destroyed directly but only as a
-    // result of a DecRef() call:
-    virtual ~wxRefCounter() { }
+	// this object should never be destroyed directly but only as a
+	// result of a DecRef() call:
+	virtual ~wxRefCounter() { }
 
 private:
-    // our refcount:
-    int m_count;
+	// our refcount:
+	int m_count;
 
-    // It doesn't make sense to copy the reference counted objects, a new ref
-    // counter should be created for a new object instead and compilation
-    // errors in the code using wxRefCounter due to the lack of copy ctor often
-    // indicate a problem, e.g. a forgotten copy ctor implementation somewhere.
-    wxDECLARE_NO_COPY_CLASS(wxRefCounter);
+	// It doesn't make sense to copy the reference counted objects, a new ref
+	// counter should be created for a new object instead and compilation
+	// errors in the code using wxRefCounter due to the lack of copy ctor often
+	// indicate a problem, e.g. a forgotten copy ctor implementation somewhere.
+	wxDECLARE_NO_COPY_CLASS(wxRefCounter);
 };
 
 // ----------------------------------------------------------------------------
@@ -266,73 +275,76 @@ template <class T>
 class wxObjectDataPtr
 {
 public:
-    typedef T element_type;
+	typedef T element_type;
 
-    explicit wxObjectDataPtr(T *ptr = NULL) : m_ptr(ptr) {}
+	explicit wxObjectDataPtr(T *ptr = NULL) : m_ptr(ptr) {}
 
-    // copy ctor
-    wxObjectDataPtr(const wxObjectDataPtr<T> &tocopy)
-        : m_ptr(tocopy.m_ptr)
-    {
-        if (m_ptr)
-            m_ptr->IncRef();
-    }
+	// copy ctor
+	wxObjectDataPtr(const wxObjectDataPtr<T> &tocopy)
+		: m_ptr(tocopy.m_ptr)
+	{
+		if (m_ptr)
+			m_ptr->IncRef();
+	}
 
-    ~wxObjectDataPtr()
-    {
-        if (m_ptr)
-            m_ptr->DecRef();
-    }
+	~wxObjectDataPtr()
+	{
+		if (m_ptr)
+			m_ptr->DecRef();
+	}
 
-    T *get() const { return m_ptr; }
+	T *get() const
+	{
+		return m_ptr;
+	}
 
-    // test for pointer validity: defining conversion to unspecified_bool_type
-    // and not more obvious bool to avoid implicit conversions to integer types
-    typedef T *(wxObjectDataPtr<T>::*unspecified_bool_type)() const;
-    operator unspecified_bool_type() const
-    {
-        return m_ptr ? &wxObjectDataPtr<T>::get : NULL;
-    }
+	// test for pointer validity: defining conversion to unspecified_bool_type
+	// and not more obvious bool to avoid implicit conversions to integer types
+	typedef T *(wxObjectDataPtr<T>::*unspecified_bool_type)() const;
+	operator unspecified_bool_type() const
+	{
+		return m_ptr ? &wxObjectDataPtr<T>::get : NULL;
+	}
 
-    T& operator*() const
-    {
-        wxASSERT(m_ptr != NULL);
-        return *(m_ptr);
-    }
+	T& operator*() const
+	{
+		wxASSERT(m_ptr != NULL);
+		return *(m_ptr);
+	}
 
-    T *operator->() const
-    {
-        wxASSERT(m_ptr != NULL);
-        return get();
-    }
+	T *operator->() const
+	{
+		wxASSERT(m_ptr != NULL);
+		return get();
+	}
 
-    void reset(T *ptr)
-    {
-        if (m_ptr)
-            m_ptr->DecRef();
-        m_ptr = ptr;
-    }
+	void reset(T *ptr)
+	{
+		if (m_ptr)
+			m_ptr->DecRef();
+		m_ptr = ptr;
+	}
 
-    wxObjectDataPtr& operator=(const wxObjectDataPtr &tocopy)
-    {
-        if (m_ptr)
-            m_ptr->DecRef();
-        m_ptr = tocopy.m_ptr;
-        if (m_ptr)
-            m_ptr->IncRef();
-        return *this;
-    }
+	wxObjectDataPtr& operator=(const wxObjectDataPtr &tocopy)
+	{
+		if (m_ptr)
+			m_ptr->DecRef();
+		m_ptr = tocopy.m_ptr;
+		if (m_ptr)
+			m_ptr->IncRef();
+		return *this;
+	}
 
-    wxObjectDataPtr& operator=(T *ptr)
-    {
-        if (m_ptr)
-            m_ptr->DecRef();
-        m_ptr = ptr;
-        return *this;
-    }
+	wxObjectDataPtr& operator=(T *ptr)
+	{
+		if (m_ptr)
+			m_ptr->DecRef();
+		m_ptr = ptr;
+		return *this;
+	}
 
 private:
-    T *m_ptr;
+	T *m_ptr;
 };
 
 // ----------------------------------------------------------------------------
@@ -341,96 +353,114 @@ private:
 
 class WXDLLIMPEXP_BASE wxObject
 {
-    wxDECLARE_ABSTRACT_CLASS(wxObject);
+	wxDECLARE_ABSTRACT_CLASS(wxObject);
 
 public:
-    wxObject() { m_refData = NULL; }
-    virtual ~wxObject() { UnRef(); }
+	wxObject()
+	{
+		m_refData = NULL;
+	}
+	virtual ~wxObject()
+	{
+		UnRef();
+	}
 
-    wxObject(const wxObject& other)
-    {
-         m_refData = other.m_refData;
-         if (m_refData)
-             m_refData->IncRef();
-    }
+	wxObject(const wxObject& other)
+	{
+		m_refData = other.m_refData;
+		if (m_refData)
+			m_refData->IncRef();
+	}
 
-    wxObject& operator=(const wxObject& other)
-    {
-        if ( this != &other )
-        {
-            Ref(other);
-        }
-        return *this;
-    }
+	wxObject& operator=(const wxObject& other)
+	{
+		if ( this != &other )
+		{
+			Ref(other);
+		}
+		return *this;
+	}
 
-    bool IsKindOf(const wxClassInfo *info) const;
+	bool IsKindOf(const wxClassInfo *info) const;
 
 
-    // Turn on the correct set of new and delete operators
+	// Turn on the correct set of new and delete operators
 
 #ifdef _WX_WANT_NEW_SIZET_WXCHAR_INT
-    void *operator new ( size_t size, const wxChar *fileName = NULL, int lineNum = 0 );
+	void *operator new ( size_t size, const wxChar *fileName = NULL, int lineNum = 0 );
 #endif
 
 #ifdef _WX_WANT_DELETE_VOID
-    void operator delete ( void * buf );
+	void operator delete ( void * buf );
 #endif
 
 #ifdef _WX_WANT_DELETE_VOID_WXCHAR_INT
-    void operator delete ( void *buf, const wxChar*, int );
+	void operator delete ( void *buf, const wxChar*, int );
 #endif
 
 #ifdef _WX_WANT_ARRAY_NEW_SIZET_WXCHAR_INT
-    void *operator new[] ( size_t size, const wxChar *fileName = NULL, int lineNum = 0 );
+	void *operator new[] ( size_t size, const wxChar *fileName = NULL, int lineNum = 0 );
 #endif
 
 #ifdef _WX_WANT_ARRAY_DELETE_VOID
-    void operator delete[] ( void *buf );
+	void operator delete[] ( void *buf );
 #endif
 
 #ifdef _WX_WANT_ARRAY_DELETE_VOID_WXCHAR_INT
-    void operator delete[] (void* buf, const wxChar*, int );
+	void operator delete[] (void* buf, const wxChar*, int );
 #endif
 
-    // ref counted data handling methods
+	// ref counted data handling methods
 
-    // get/set
-    wxObjectRefData *GetRefData() const { return m_refData; }
-    void SetRefData(wxObjectRefData *data) { m_refData = data; }
+	// get/set
+	wxObjectRefData *GetRefData() const
+	{
+		return m_refData;
+	}
+	void SetRefData(wxObjectRefData *data)
+	{
+		m_refData = data;
+	}
 
-    // make a 'clone' of the object
-    void Ref(const wxObject& clone);
+	// make a 'clone' of the object
+	void Ref(const wxObject& clone);
 
-    // destroy a reference
-    void UnRef();
+	// destroy a reference
+	void UnRef();
 
-    // Make sure this object has only one reference
-    void UnShare() { AllocExclusive(); }
+	// Make sure this object has only one reference
+	void UnShare()
+	{
+		AllocExclusive();
+	}
 
-    // check if this object references the same data as the other one
-    bool IsSameAs(const wxObject& o) const { return m_refData == o.m_refData; }
+	// check if this object references the same data as the other one
+	bool IsSameAs(const wxObject& o) const
+	{
+		return m_refData == o.m_refData;
+	}
 
 protected:
-    // ensure that our data is not shared with anybody else: if we have no
-    // data, it is created using CreateRefData() below, if we have shared data
-    // it is copied using CloneRefData(), otherwise nothing is done
-    void AllocExclusive();
+	// ensure that our data is not shared with anybody else: if we have no
+	// data, it is created using CreateRefData() below, if we have shared data
+	// it is copied using CloneRefData(), otherwise nothing is done
+	void AllocExclusive();
 
-    // both methods must be implemented if AllocExclusive() is used, not pure
-    // virtual only because of the backwards compatibility reasons
+	// both methods must be implemented if AllocExclusive() is used, not pure
+	// virtual only because of the backwards compatibility reasons
 
-    // create a new m_refData
-    virtual wxObjectRefData *CreateRefData() const;
+	// create a new m_refData
+	virtual wxObjectRefData *CreateRefData() const;
 
-    // create a new m_refData initialized with the given one
-    virtual wxObjectRefData *CloneRefData(const wxObjectRefData *data) const;
+	// create a new m_refData initialized with the given one
+	virtual wxObjectRefData *CloneRefData(const wxObjectRefData *data) const;
 
-    wxObjectRefData *m_refData;
+	wxObjectRefData *m_refData;
 };
 
 inline wxObject *wxCheckDynamicCast(wxObject *obj, wxClassInfo *classInfo)
 {
-    return obj && obj->GetClassInfo()->IsKindOf(classInfo) ? obj : NULL;
+	return obj && obj->GetClassInfo()->IsKindOf(classInfo) ? obj : NULL;
 }
 
 #include "wx/xti2.h"
@@ -440,15 +470,15 @@ inline wxObject *wxCheckDynamicCast(wxObject *obj, wxClassInfo *classInfo)
 // ----------------------------------------------------------------------------
 
 #if wxUSE_DEBUG_NEW_ALWAYS
-    #define WXDEBUG_NEW new(__TFILE__,__LINE__)
+#define WXDEBUG_NEW new(__TFILE__,__LINE__)
 
-    #if wxUSE_GLOBAL_MEMORY_OPERATORS
-        #define new WXDEBUG_NEW
-    #elif defined(__VISUALC__)
-        // Including this file redefines new and allows leak reports to
-        // contain line numbers
-        #include "wx/msw/msvcrt.h"
-    #endif
+#if wxUSE_GLOBAL_MEMORY_OPERATORS
+#define new WXDEBUG_NEW
+#elif defined(__VISUALC__)
+// Including this file redefines new and allows leak reports to
+// contain line numbers
+#include "wx/msw/msvcrt.h"
+#endif
 #endif // wxUSE_DEBUG_NEW_ALWAYS
 
 // ----------------------------------------------------------------------------

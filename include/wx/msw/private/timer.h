@@ -18,17 +18,23 @@
 class WXDLLIMPEXP_BASE wxMSWTimerImpl : public wxTimerImpl
 {
 public:
-    wxMSWTimerImpl(wxTimer *timer) : wxTimerImpl(timer) { m_id = 0; }
+	wxMSWTimerImpl(wxTimer *timer) : wxTimerImpl(timer)
+	{
+		m_id = 0;
+	}
 
-    virtual bool Start(int milliseconds = -1, bool oneShot = false) wxOVERRIDE;
-    virtual void Stop() wxOVERRIDE;
+	virtual bool Start(int milliseconds = -1, bool oneShot = false) wxOVERRIDE;
+	virtual void Stop() wxOVERRIDE;
 
-    virtual bool IsRunning() const wxOVERRIDE { return m_id != 0; }
+	virtual bool IsRunning() const wxOVERRIDE
+	{
+		return m_id != 0;
+	}
 
 protected:
-    // this must be 64 bit under Win64 as WPARAM (storing timer ids) is 64 bit
-    // there and so the ids may possibly not fit in 32 bits
-    WPARAM m_id;
+	// this must be 64 bit under Win64 as WPARAM (storing timer ids) is 64 bit
+	// there and so the ids may possibly not fit in 32 bits
+	WPARAM m_id;
 };
 
 #endif // wxUSE_TIMER

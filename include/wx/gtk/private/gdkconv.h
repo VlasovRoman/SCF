@@ -15,15 +15,15 @@ namespace wxGTKImpl
 
 inline wxRect wxRectFromGDKRect(const GdkRectangle *r)
 {
-    return wxRect(r->x, r->y, r->width, r->height);
+	return wxRect(r->x, r->y, r->width, r->height);
 }
 
 inline void wxRectToGDKRect(const wxRect& rect, GdkRectangle& r)
 {
-    r.x = rect.x;
-    r.y = rect.y;
-    r.width = rect.width;
-    r.height = rect.height;
+	r.x = rect.x;
+	r.y = rect.y;
+	r.width = rect.width;
+	r.height = rect.height;
 }
 
 } // namespace wxGTKImpl

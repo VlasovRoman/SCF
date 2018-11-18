@@ -15,18 +15,21 @@ class QColorDialog;
 class WXDLLIMPEXP_CORE wxColourDialog : public wxDialog
 {
 public:
-    wxColourDialog() { }
-    wxColourDialog(wxWindow *parent,
-                   wxColourData *data = NULL) { Create(parent, data); }
+	wxColourDialog() { }
+	wxColourDialog(wxWindow *parent,
+	               wxColourData *data = NULL)
+	{
+		Create(parent, data);
+	}
 
-    bool Create(wxWindow *parent, wxColourData *data = NULL);
+	bool Create(wxWindow *parent, wxColourData *data = NULL);
 
-    wxColourData &GetColourData();
+	wxColourData &GetColourData();
 
 private:
-    QColorDialog *GetQColorDialog() const;
+	QColorDialog *GetQColorDialog() const;
 
-    wxColourData m_data;
+	wxColourData m_data;
 };
 
 #endif // _WX_QT_COLORDLG_H_

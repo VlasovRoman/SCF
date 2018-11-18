@@ -17,15 +17,15 @@ class QGLFormat;
 class WXDLLIMPEXP_GL wxGLContext : public wxGLContextBase
 {
 public:
-    wxGLContext(wxGLCanvas *win, const wxGLContext* other = NULL);
+	wxGLContext(wxGLCanvas *win, const wxGLContext* other = NULL);
 ///    virtual ~wxGLContext();
 
-    virtual bool SetCurrent(const wxGLCanvas& win) const wxOVERRIDE;
+	virtual bool SetCurrent(const wxGLCanvas& win) const wxOVERRIDE;
 
 private:
-    QGLContext *m_glContext;
+	QGLContext *m_glContext;
 
-    wxDECLARE_CLASS(wxGLContext);
+	wxDECLARE_CLASS(wxGLContext);
 };
 
 // ----------------------------------------------------------------------------
@@ -35,33 +35,33 @@ private:
 class WXDLLIMPEXP_GL wxGLCanvas : public wxGLCanvasBase
 {
 public:
-    explicit // avoid implicitly converting a wxWindow* to wxGLCanvas
-    wxGLCanvas(wxWindow *parent,
-               wxWindowID id = wxID_ANY,
-               const int *attribList = NULL,
-               const wxPoint& pos = wxDefaultPosition,
-               const wxSize& size = wxDefaultSize,
-               long style = 0,
-               const wxString& name = wxGLCanvasName,
-               const wxPalette& palette = wxNullPalette);
+	explicit // avoid implicitly converting a wxWindow* to wxGLCanvas
+	wxGLCanvas(wxWindow *parent,
+	           wxWindowID id = wxID_ANY,
+	           const int *attribList = NULL,
+	           const wxPoint& pos = wxDefaultPosition,
+	           const wxSize& size = wxDefaultSize,
+	           long style = 0,
+	           const wxString& name = wxGLCanvasName,
+	           const wxPalette& palette = wxNullPalette);
 
-    bool Create(wxWindow *parent,
-                wxWindowID id = wxID_ANY,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = 0,
-                const wxString& name = wxGLCanvasName,
-                const int *attribList = NULL,
-                const wxPalette& palette = wxNullPalette);
+	bool Create(wxWindow *parent,
+	            wxWindowID id = wxID_ANY,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxGLCanvasName,
+	            const int *attribList = NULL,
+	            const wxPalette& palette = wxNullPalette);
 
-    virtual bool SwapBuffers();
+	virtual bool SwapBuffers();
 
-    static bool ConvertWXAttrsToQtGL(const int *wxattrs, QGLFormat &format);
+	static bool ConvertWXAttrsToQtGL(const int *wxattrs, QGLFormat &format);
 
 private:
 
 //    wxDECLARE_EVENT_TABLE();
-    wxDECLARE_CLASS(wxGLCanvas);
+	wxDECLARE_CLASS(wxGLCanvas);
 };
 
 #endif // _WX_GLCANVAS_H_

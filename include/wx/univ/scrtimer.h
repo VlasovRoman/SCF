@@ -27,22 +27,22 @@
 class WXDLLIMPEXP_CORE wxScrollTimer : public wxTimer
 {
 public:
-    // default ctor
-    wxScrollTimer();
+	// default ctor
+	wxScrollTimer();
 
-    // start generating the events
-    void StartAutoScroll();
+	// start generating the events
+	void StartAutoScroll();
 
-    // the base class method
-    virtual void Notify() wxOVERRIDE;
+	// the base class method
+	virtual void Notify() wxOVERRIDE;
 
 protected:
-    // to implement in derived classes: perform the scroll action and return
-    // true to continue scrolling or false to stop
-    virtual bool DoNotify() = 0;
+	// to implement in derived classes: perform the scroll action and return
+	// true to continue scrolling or false to stop
+	virtual bool DoNotify() = 0;
 
-    // should we skip the next timer event?
-    bool m_skipNext;
+	// should we skip the next timer event?
+	bool m_skipNext;
 };
 
 #endif // wxUSE_TIMER

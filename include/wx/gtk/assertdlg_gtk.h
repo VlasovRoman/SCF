@@ -22,30 +22,30 @@ typedef void (*GtkAssertDialogStackFrameCallback)(void *);
 
 struct _GtkAssertDialog
 {
-    GtkDialog parent_instance;
+	GtkDialog parent_instance;
 
-    /* GtkAssertDialog widgets */
-    GtkWidget *expander;
-    GtkWidget *message;
-    GtkWidget *treeview;
+	/* GtkAssertDialog widgets */
+	GtkWidget *expander;
+	GtkWidget *message;
+	GtkWidget *treeview;
 
-    GtkWidget *shownexttime;
+	GtkWidget *shownexttime;
 
-    /* callback for processing the stack frame */
-    GtkAssertDialogStackFrameCallback callback;
-    void *userdata;
+	/* callback for processing the stack frame */
+	GtkAssertDialogStackFrameCallback callback;
+	void *userdata;
 };
 
 struct _GtkAssertDialogClass
 {
-    GtkDialogClass parent_class;
+	GtkDialogClass parent_class;
 };
 
 typedef enum
 {
-    GTK_ASSERT_DIALOG_STOP,
-    GTK_ASSERT_DIALOG_CONTINUE,
-    GTK_ASSERT_DIALOG_CONTINUE_SUPPRESSING
+	GTK_ASSERT_DIALOG_STOP,
+	GTK_ASSERT_DIALOG_CONTINUE,
+	GTK_ASSERT_DIALOG_CONTINUE_SUPPRESSING
 } GtkAssertDialogResponseID;
 
 
@@ -65,13 +65,13 @@ gchar *gtk_assert_dialog_get_backtrace(GtkAssertDialog *assertdlg);
 
 /* sets the callback to use when the user wants to see the stackframe */
 void gtk_assert_dialog_set_backtrace_callback(GtkAssertDialog *assertdlg,
-                                              GtkAssertDialogStackFrameCallback callback,
-                                              void *userdata);
+        GtkAssertDialogStackFrameCallback callback,
+        void *userdata);
 
 /* appends a stack frame to the dialog */
 void gtk_assert_dialog_append_stack_frame(GtkAssertDialog *dlg,
-                                          const gchar *function,
-                                          const gchar *sourcefile,
-                                          guint line_number);
+        const gchar *function,
+        const gchar *sourcefile,
+        guint line_number);
 
 #endif /* _WX_GTK_ASSERTDLG_H_ */

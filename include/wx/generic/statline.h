@@ -18,43 +18,46 @@ class wxStaticBox;
 
 class WXDLLIMPEXP_CORE wxStaticLine : public wxStaticLineBase
 {
-    wxDECLARE_DYNAMIC_CLASS(wxStaticLine);
+	wxDECLARE_DYNAMIC_CLASS(wxStaticLine);
 
 public:
-    // constructors and pseudo-constructors
-    wxStaticLine() { m_statbox = NULL; }
+	// constructors and pseudo-constructors
+	wxStaticLine()
+	{
+		m_statbox = NULL;
+	}
 
-    wxStaticLine( wxWindow *parent,
-                  wxWindowID id = wxID_ANY,
-                  const wxPoint &pos = wxDefaultPosition,
-                  const wxSize &size = wxDefaultSize,
-                  long style = wxLI_HORIZONTAL,
-                  const wxString &name = wxStaticLineNameStr )
-    {
-        Create(parent, id, pos, size, style, name);
-    }
+	wxStaticLine( wxWindow *parent,
+	              wxWindowID id = wxID_ANY,
+	              const wxPoint &pos = wxDefaultPosition,
+	              const wxSize &size = wxDefaultSize,
+	              long style = wxLI_HORIZONTAL,
+	              const wxString &name = wxStaticLineNameStr )
+	{
+		Create(parent, id, pos, size, style, name);
+	}
 
-    virtual ~wxStaticLine();
+	virtual ~wxStaticLine();
 
-    bool Create( wxWindow *parent,
-                 wxWindowID id = wxID_ANY,
-                 const wxPoint &pos = wxDefaultPosition,
-                 const wxSize &size = wxDefaultSize,
-                 long style = wxLI_HORIZONTAL,
-                 const wxString &name = wxStaticLineNameStr );
+	bool Create( wxWindow *parent,
+	             wxWindowID id = wxID_ANY,
+	             const wxPoint &pos = wxDefaultPosition,
+	             const wxSize &size = wxDefaultSize,
+	             long style = wxLI_HORIZONTAL,
+	             const wxString &name = wxStaticLineNameStr );
 
-    // it's necessary to override this wxWindow function because we
-    // will want to return the main widget for m_statbox
-    //
-    WXWidget GetMainWidget() const;
+	// it's necessary to override this wxWindow function because we
+	// will want to return the main widget for m_statbox
+	//
+	WXWidget GetMainWidget() const;
 
-    // override wxWindow methods to make things work
-    virtual void DoSetSize(int x, int y, int width, int height,
-                           int sizeFlags = wxSIZE_AUTO);
-    virtual void DoMoveWindow(int x, int y, int width, int height);
+	// override wxWindow methods to make things work
+	virtual void DoSetSize(int x, int y, int width, int height,
+	                       int sizeFlags = wxSIZE_AUTO);
+	virtual void DoMoveWindow(int x, int y, int width, int height);
 protected:
-    // we implement the static line using a static box
-    wxStaticBox *m_statbox;
+	// we implement the static line using a static box
+	wxStaticBox *m_statbox;
 };
 
 #endif // _WX_GENERIC_STATLINE_H_

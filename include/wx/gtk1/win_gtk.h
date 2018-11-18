@@ -29,10 +29,10 @@ extern "C" {
 /* Shadow types */
 typedef enum
 {
-    GTK_MYSHADOW_NONE,
-    GTK_MYSHADOW_THIN,
-    GTK_MYSHADOW_IN,
-    GTK_MYSHADOW_OUT
+	GTK_MYSHADOW_NONE,
+	GTK_MYSHADOW_THIN,
+	GTK_MYSHADOW_IN,
+	GTK_MYSHADOW_OUT
 } GtkMyShadowType;
 
 typedef struct _GtkPizzaChild    GtkPizzaChild;
@@ -41,44 +41,44 @@ typedef struct _GtkPizzaClass   GtkPizzaClass;
 
 struct _GtkPizzaChild
 {
-    GtkWidget *widget;
-    gint x;
-    gint y;
-    gint width;
-    gint height;
+	GtkWidget *widget;
+	gint x;
+	gint y;
+	gint width;
+	gint height;
 };
 
 struct _GtkPizza
 {
-    GtkContainer container;
-    GList *children;
-    GtkMyShadowType shadow_type;
+	GtkContainer container;
+	GList *children;
+	GtkMyShadowType shadow_type;
 
-    guint width;
-    guint height;
+	guint width;
+	guint height;
 
-    guint xoffset;
-    guint yoffset;
+	guint xoffset;
+	guint yoffset;
 
-    GdkWindow *bin_window;
+	GdkWindow *bin_window;
 
-    GdkVisibilityState visibility;
-    gulong configure_serial;
-    gint scroll_x;
-    gint scroll_y;
+	GdkVisibilityState visibility;
+	gulong configure_serial;
+	gint scroll_x;
+	gint scroll_y;
 
-    gboolean clear_on_draw;
-    gboolean use_filter;
-    gboolean external_expose;
+	gboolean clear_on_draw;
+	gboolean use_filter;
+	gboolean external_expose;
 };
 
 struct _GtkPizzaClass
 {
-  GtkContainerClass parent_class;
+	GtkContainerClass parent_class;
 
-  void  (*set_scroll_adjustments)   (GtkPizza     *pizza,
-                                     GtkAdjustment  *hadjustment,
-                                     GtkAdjustment  *vadjustment);
+	void  (*set_scroll_adjustments)   (GtkPizza     *pizza,
+	                                   GtkAdjustment  *hadjustment,
+	                                   GtkAdjustment  *vadjustment);
 };
 
 WXDLLIMPEXP_CORE

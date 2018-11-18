@@ -31,9 +31,9 @@
 // 7 and later systems (if wxUSE_GRAPHICS_GDIPLUS is also enabled, earlier
 // systems will fall back on using GDI+).
 #if defined(_MSC_VER) && _MSC_VER >= 1600
-    #define wxUSE_GRAPHICS_DIRECT2D wxUSE_GRAPHICS_CONTEXT
+#define wxUSE_GRAPHICS_DIRECT2D wxUSE_GRAPHICS_CONTEXT
 #else
-    #define wxUSE_GRAPHICS_DIRECT2D 0
+#define wxUSE_GRAPHICS_DIRECT2D 0
 #endif
 
 // ----------------------------------------------------------------------------
@@ -73,9 +73,9 @@
 //
 // Recommended setting: 1
 #if defined(_MSC_VER) && _MSC_VER >= 1700 && !defined(_USING_V110_SDK71_)
-    #define wxUSE_WINRT 1
+#define wxUSE_WINRT 1
 #else
-    #define wxUSE_WINRT 0
+#define wxUSE_WINRT 0
 #endif
 
 // wxDC caching implementation
@@ -187,9 +187,9 @@
 //
 // Recommended setting: 1, there is not much gain in disabling this
 #if defined(__VISUALC__) || defined(__MINGW64_TOOLCHAIN__)
-    #define wxUSE_DBGHELP 1
+#define wxUSE_DBGHELP 1
 #else
-    #define wxUSE_DBGHELP 0
+#define wxUSE_DBGHELP 0
 #endif
 
 // Set this to 1 to be able to use wxCrashReport::Generate() to create mini

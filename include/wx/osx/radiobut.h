@@ -13,44 +13,47 @@
 
 class WXDLLIMPEXP_CORE wxRadioButton: public wxControl
 {
-    wxDECLARE_DYNAMIC_CLASS(wxRadioButton);
+	wxDECLARE_DYNAMIC_CLASS(wxRadioButton);
 
 public:
-    wxRadioButton() {}
-    wxRadioButton(wxWindow *parent, wxWindowID id,
-           const wxString& label,
-           const wxPoint& pos = wxDefaultPosition,
-           const wxSize& size = wxDefaultSize, long style = 0,
-           const wxValidator& validator = wxDefaultValidator,
-           const wxString& name = wxRadioButtonNameStr)
-    {
-        Create(parent, id, label, pos, size, style, validator, name);
-    }
-    virtual ~wxRadioButton();
+	wxRadioButton() {}
+	wxRadioButton(wxWindow *parent, wxWindowID id,
+	              const wxString& label,
+	              const wxPoint& pos = wxDefaultPosition,
+	              const wxSize& size = wxDefaultSize, long style = 0,
+	              const wxValidator& validator = wxDefaultValidator,
+	              const wxString& name = wxRadioButtonNameStr)
+	{
+		Create(parent, id, label, pos, size, style, validator, name);
+	}
+	virtual ~wxRadioButton();
 
-    bool Create(wxWindow *parent, wxWindowID id,
-           const wxString& label,
-           const wxPoint& pos = wxDefaultPosition,
-           const wxSize& size = wxDefaultSize, long style = 0,
-           const wxValidator& validator = wxDefaultValidator,
-           const wxString& name = wxRadioButtonNameStr);
+	bool Create(wxWindow *parent, wxWindowID id,
+	            const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize, long style = 0,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxRadioButtonNameStr);
 
-    virtual void SetValue(bool val);
-    virtual bool GetValue() const ;
+	virtual void SetValue(bool val);
+	virtual bool GetValue() const ;
 
-    // implementation
+	// implementation
 
-    void Command(wxCommandEvent& event);
-    wxRadioButton *AddInCycle(wxRadioButton *cycle);
-    void RemoveFromCycle();
-    wxRadioButton *NextInCycle() {return m_cycle;}
+	void Command(wxCommandEvent& event);
+	wxRadioButton *AddInCycle(wxRadioButton *cycle);
+	void RemoveFromCycle();
+	wxRadioButton *NextInCycle()
+	{
+		return m_cycle;
+	}
 
-    // osx specific event handling common for all osx-ports
+	// osx specific event handling common for all osx-ports
 
-    virtual bool        OSXHandleClicked( double timestampsec );
-  protected:
+	virtual bool        OSXHandleClicked( double timestampsec );
+protected:
 
-    wxRadioButton *m_cycle;
+	wxRadioButton *m_cycle;
 };
 
 // Not implemented
@@ -61,33 +64,36 @@ WXDLLIMPEXP_DATA_CORE(extern const wxChar) wxBitmapRadioButtonNameStr[];
 
 class WXDLLIMPEXP_CORE wxBitmapRadioButton: public wxRadioButton
 {
-  wxDECLARE_DYNAMIC_CLASS(wxBitmapRadioButton);
+	wxDECLARE_DYNAMIC_CLASS(wxBitmapRadioButton);
 protected:
-  wxBitmap *theButtonBitmap;
+	wxBitmap *theButtonBitmap;
 public:
-  wxBitmapRadioButton() { theButtonBitmap = NULL; }
-  wxBitmapRadioButton(wxWindow *parent, wxWindowID id,
-           const wxBitmap *label,
-           const wxPoint& pos = wxDefaultPosition,
-           const wxSize& size = wxDefaultSize, long style = 0,
-           const wxValidator& validator = wxDefaultValidator,
-           const wxString& name = wxBitmapRadioButtonNameStr)
-  {
-      Create(parent, id, label, pos, size, style, validator, name);
-  }
+	wxBitmapRadioButton()
+	{
+		theButtonBitmap = NULL;
+	}
+	wxBitmapRadioButton(wxWindow *parent, wxWindowID id,
+	                    const wxBitmap *label,
+	                    const wxPoint& pos = wxDefaultPosition,
+	                    const wxSize& size = wxDefaultSize, long style = 0,
+	                    const wxValidator& validator = wxDefaultValidator,
+	                    const wxString& name = wxBitmapRadioButtonNameStr)
+	{
+		Create(parent, id, label, pos, size, style, validator, name);
+	}
 
-  bool Create(wxWindow *parent, wxWindowID id,
-           const wxBitmap *label,
-           const wxPoint& pos = wxDefaultPosition,
-           const wxSize& size = wxDefaultSize, long style = 0,
-           const wxValidator& validator = wxDefaultValidator,
-           const wxString& name = wxBitmapRadioButtonNameStr);
+	bool Create(wxWindow *parent, wxWindowID id,
+	            const wxBitmap *label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize, long style = 0,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxBitmapRadioButtonNameStr);
 
-  virtual void SetLabel(const wxBitmap *label);
-  virtual void SetValue(bool val) ;
-  virtual bool GetValue() const ;
+	virtual void SetLabel(const wxBitmap *label);
+	virtual void SetValue(bool val) ;
+	virtual bool GetValue() const ;
 };
 #endif
 
 #endif
-    // _WX_RADIOBUT_H_
+// _WX_RADIOBUT_H_

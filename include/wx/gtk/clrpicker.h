@@ -18,46 +18,48 @@
 //-----------------------------------------------------------------------------
 
 class WXDLLIMPEXP_CORE wxColourButton : public wxButton,
-                                        public wxColourPickerWidgetBase
+	public wxColourPickerWidgetBase
 {
 public:
-    wxColourButton() : m_topParent(NULL) {}
-    wxColourButton(wxWindow *parent,
-                   wxWindowID id,
-                   const wxColour& initial = *wxBLACK,
-                   const wxPoint& pos = wxDefaultPosition,
-                   const wxSize& size = wxDefaultSize,
-                   long style = wxCLRBTN_DEFAULT_STYLE,
-                   const wxValidator& validator = wxDefaultValidator,
-                   const wxString& name = wxColourPickerWidgetNameStr)
-        : m_topParent(NULL)
-    {
-        Create(parent, id, initial, pos, size, style, validator, name);
-    }
+	wxColourButton() : m_topParent(NULL) {}
+	wxColourButton(wxWindow *parent,
+	               wxWindowID id,
+	               const wxColour& initial = *wxBLACK,
+	               const wxPoint& pos = wxDefaultPosition,
+	               const wxSize& size = wxDefaultSize,
+	               long style = wxCLRBTN_DEFAULT_STYLE,
+	               const wxValidator& validator = wxDefaultValidator,
+	               const wxString& name = wxColourPickerWidgetNameStr)
+		: m_topParent(NULL)
+	{
+		Create(parent, id, initial, pos, size, style, validator, name);
+	}
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxColour& initial = *wxBLACK,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxCLRBTN_DEFAULT_STYLE,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxColourPickerWidgetNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxColour& initial = *wxBLACK,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxCLRBTN_DEFAULT_STYLE,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxColourPickerWidgetNameStr);
 
-    virtual ~wxColourButton();
+	virtual ~wxColourButton();
 
 protected:
-    void UpdateColour() wxOVERRIDE;
+	void UpdateColour() wxOVERRIDE;
 
 public:     // used by the GTK callback only
 
-    void GTKSetColour(const wxColour& colour)
-        { m_colour = colour; }
+	void GTKSetColour(const wxColour& colour)
+	{
+		m_colour = colour;
+	}
 
-    wxWindow *m_topParent;
+	wxWindow *m_topParent;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxColourButton);
+	wxDECLARE_DYNAMIC_CLASS(wxColourButton);
 };
 
 #endif // _WX_GTK_CLRPICKER_H_

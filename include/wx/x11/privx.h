@@ -41,7 +41,10 @@ extern XColor g_itemColors[];
 extern int wxComputeColours (Display *display, const wxColour * back, const wxColour * fore);
 
 // For convenience
-inline Display* wxGlobalDisplay() { return (Display*) wxGetDisplay(); }
+inline Display* wxGlobalDisplay()
+{
+	return (Display*) wxGetDisplay();
+}
 
 #define wxMAX_RGB           0xff
 #define wxMAX_SV            1000
@@ -50,9 +53,10 @@ inline Display* wxGlobalDisplay() { return (Display*) wxGetDisplay(); }
 #define wxS_WEIGHT          1
 #define wxV_WEIGHT          2
 
-typedef struct wx_hsv {
-                        int h,s,v;
-                      } wxHSV;
+typedef struct wx_hsv
+{
+	int h,s,v;
+} wxHSV;
 
 #define wxMax3(x,y,z) ((x > y) ? ((x > z) ? x : z) : ((y > z) ? y : z))
 #define wxMin3(x,y,z) ((x < y) ? ((x < z) ? x : z) : ((y < z) ? y : z))
@@ -142,26 +146,26 @@ bool wxDoSetShape( Display* xdisplay, Window xwindow, const wxRegion& region );
 class WXDLLIMPEXP_CORE wxXVisualInfo
 {
 public:
-    wxXVisualInfo();
-    ~wxXVisualInfo();
-    void Init( Display* dpy, XVisualInfo* visualInfo );
+	wxXVisualInfo();
+	~wxXVisualInfo();
+	void Init( Display* dpy, XVisualInfo* visualInfo );
 
-    int                   m_visualType;   // TrueColor, DirectColor etc.
-    int                   m_visualDepth;
-    int                   m_visualColormapSize;
-    void                 *m_visualColormap;
-    int                   m_visualScreen;
-    unsigned long         m_visualRedMask;
-    unsigned long         m_visualGreenMask;
-    unsigned long         m_visualBlueMask;
-    int                   m_visualRedShift;
-    int                   m_visualGreenShift;
-    int                   m_visualBlueShift;
-    int                   m_visualRedPrec;
-    int                   m_visualGreenPrec;
-    int                   m_visualBluePrec;
+	int                   m_visualType;   // TrueColor, DirectColor etc.
+	int                   m_visualDepth;
+	int                   m_visualColormapSize;
+	void                 *m_visualColormap;
+	int                   m_visualScreen;
+	unsigned long         m_visualRedMask;
+	unsigned long         m_visualGreenMask;
+	unsigned long         m_visualBlueMask;
+	int                   m_visualRedShift;
+	int                   m_visualGreenShift;
+	int                   m_visualBlueShift;
+	int                   m_visualRedPrec;
+	int                   m_visualGreenPrec;
+	int                   m_visualBluePrec;
 
-    unsigned char        *m_colorCube;
+	unsigned char        *m_colorCube;
 };
 
 bool wxFillXVisualInfo( wxXVisualInfo* vi, Display* dpy );

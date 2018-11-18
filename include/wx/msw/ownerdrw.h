@@ -16,11 +16,11 @@
 class WXDLLIMPEXP_CORE wxOwnerDrawn : public wxOwnerDrawnBase
 {
 public:
-    wxOwnerDrawn() {}
-    virtual ~wxOwnerDrawn() {}
+	wxOwnerDrawn() {}
+	virtual ~wxOwnerDrawn() {}
 
-    virtual bool OnDrawItem(wxDC& dc, const wxRect& rc,
-                            wxODAction act, wxODStatus stat) wxOVERRIDE;
+	virtual bool OnDrawItem(wxDC& dc, const wxRect& rc,
+	                        wxODAction act, wxODStatus stat) wxOVERRIDE;
 };
 
 #endif // wxUSE_OWNER_DRAWN

@@ -25,7 +25,7 @@
 // define this to 0 when building wxBase library - this can also be done from
 // makefile/project file overriding the value here
 #ifndef wxUSE_GUI
-    #define wxUSE_GUI            1
+#define wxUSE_GUI            1
 #endif // wxUSE_GUI
 
 // ----------------------------------------------------------------------------
@@ -195,7 +195,7 @@
 // absolutely necessary -- updating it is strongly recommended as the ANSI mode
 // will disappear completely in future wxWidgets releases.
 #ifndef wxUSE_UNICODE
-    #define wxUSE_UNICODE 1
+#define wxUSE_UNICODE 1
 #endif
 
 // wxUSE_WCHAR_T is required by wxWidgets now, don't change.
@@ -1434,9 +1434,9 @@
 #define wxUSE_DRAGIMAGE 1
 
 #define wxUSE_IPC         1
-                                // 0 for no interprocess comms
+// 0 for no interprocess comms
 #define wxUSE_HELP        1
-                                // 0 for no help facility
+// 0 for no help facility
 
 // Should we use MS HTML help for wxHelpController? If disabled, neither
 // wxCHMHelpController nor wxBestHelpController are available.
@@ -1452,13 +1452,13 @@
 #define wxUSE_WXHTML_HELP 1
 
 #define wxUSE_CONSTRAINTS 1
-                                // 0 for no window layout constraint system
+// 0 for no window layout constraint system
 
 #define wxUSE_SPLINES     1
-                                // 0 for no splines
+// 0 for no splines
 
 #define wxUSE_MOUSEWHEEL        1
-                                // Include mouse wheel support
+// Include mouse wheel support
 
 // Compile wxUIActionSimulator class?
 #define wxUSE_UIACTIONSIMULATOR 1
@@ -1609,4 +1609,4 @@
 /* --- end OSX options --- */
 
 #endif
-    // _WX_SETUP_H_
+// _WX_SETUP_H_

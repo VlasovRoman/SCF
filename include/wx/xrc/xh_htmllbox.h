@@ -17,15 +17,15 @@
 class WXDLLIMPEXP_XRC wxSimpleHtmlListBoxXmlHandler : public wxXmlResourceHandler
 {
 public:
-    wxSimpleHtmlListBoxXmlHandler();
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	wxSimpleHtmlListBoxXmlHandler();
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
 private:
-    bool m_insideBox;
-    wxArrayString strList;
+	bool m_insideBox;
+	wxArrayString strList;
 
-    wxDECLARE_DYNAMIC_CLASS(wxSimpleHtmlListBoxXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxSimpleHtmlListBoxXmlHandler);
 };
 
 #endif // wxUSE_XRC && wxUSE_HTML

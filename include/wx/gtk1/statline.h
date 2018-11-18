@@ -20,26 +20,26 @@
 class WXDLLIMPEXP_CORE wxStaticLine : public wxStaticLineBase
 {
 public:
-    wxStaticLine();
-    wxStaticLine(wxWindow *parent,
-                 wxWindowID id = wxID_ANY,
-                 const wxPoint &pos = wxDefaultPosition,
-                 const wxSize& size = wxDefaultSize,
-                 long style = wxLI_HORIZONTAL,
-                 const wxString &name = wxStaticLineNameStr);
-    bool Create(wxWindow *parent,
-                wxWindowID id = wxID_ANY,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxLI_HORIZONTAL,
-                const wxString &name = wxStaticLineNameStr);
+	wxStaticLine();
+	wxStaticLine(wxWindow *parent,
+	             wxWindowID id = wxID_ANY,
+	             const wxPoint &pos = wxDefaultPosition,
+	             const wxSize& size = wxDefaultSize,
+	             long style = wxLI_HORIZONTAL,
+	             const wxString &name = wxStaticLineNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id = wxID_ANY,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxLI_HORIZONTAL,
+	            const wxString &name = wxStaticLineNameStr);
 
-    static wxVisualAttributes
-    GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
+	static wxVisualAttributes
+	GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
 
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxStaticLine);
+	wxDECLARE_DYNAMIC_CLASS(wxStaticLine);
 };
 
 #endif // wxUSE_STATLINE

@@ -22,22 +22,22 @@ namespace wxGTKImpl
 inline bool ConvertMessageTypeFromWX(int style, GtkMessageType *type)
 {
 #ifdef __WXGTK210__
-    if ( wx_is_at_least_gtk2(10) && (style & wxICON_NONE))
-        *type = GTK_MESSAGE_OTHER;
-    else
+	if ( wx_is_at_least_gtk2(10) && (style & wxICON_NONE))
+		*type = GTK_MESSAGE_OTHER;
+	else
 #endif // __WXGTK210__
-    if (style & wxICON_EXCLAMATION)
-        *type = GTK_MESSAGE_WARNING;
-    else if (style & wxICON_ERROR)
-        *type = GTK_MESSAGE_ERROR;
-    else if (style & wxICON_INFORMATION)
-        *type = GTK_MESSAGE_INFO;
-    else if (style & wxICON_QUESTION)
-        *type = GTK_MESSAGE_QUESTION;
-    else
-        return false;
+		if (style & wxICON_EXCLAMATION)
+			*type = GTK_MESSAGE_WARNING;
+		else if (style & wxICON_ERROR)
+			*type = GTK_MESSAGE_ERROR;
+		else if (style & wxICON_INFORMATION)
+			*type = GTK_MESSAGE_INFO;
+		else if (style & wxICON_QUESTION)
+			*type = GTK_MESSAGE_QUESTION;
+		else
+			return false;
 
-    return true;
+	return true;
 }
 
 } // namespace wxGTKImpl

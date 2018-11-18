@@ -25,12 +25,12 @@ namespace wxPrivate
 template<typename T>
 inline wxSize GetAverageASCIILetterSize(const T& of_what)
 {
-    const wxStringCharType *TEXT_TO_MEASURE =
-        wxS("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+	const wxStringCharType *TEXT_TO_MEASURE =
+	    wxS("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
 
-    wxSize s = of_what.GetTextExtent(TEXT_TO_MEASURE);
-    s.x = (s.x / 26 + 1) / 2;
-    return s;
+	wxSize s = of_what.GetTextExtent(TEXT_TO_MEASURE);
+	s.x = (s.x / 26 + 1) / 2;
+	return s;
 }
 
 } // namespace wxPrivate

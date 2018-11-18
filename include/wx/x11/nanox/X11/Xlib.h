@@ -21,17 +21,19 @@ typedef int Bool;
 typedef long XID;
 typedef GR_SCANCODE KeySym;
 typedef GR_EVENT_KEYSTROKE XKeyEvent;
-typedef struct {
-    GR_FONT_INFO info;
-    GR_FONT_ID fid;
+typedef struct
+{
+	GR_FONT_INFO info;
+	GR_FONT_ID fid;
 } XFontStruct;
-typedef struct {
-    short	lbearing;	/* origin to left edge of raster */
-    short	rbearing;	/* origin to right edge of raster */
-    short	width;		/* advance to next char's origin */
-    short	ascent;		/* baseline to top edge of raster */
-    short	descent;	/* baseline to bottom edge of raster */
-    unsigned short attributes;	/* per char flags (not predefined) */
+typedef struct
+{
+	short	lbearing;	/* origin to left edge of raster */
+	short	rbearing;	/* origin to right edge of raster */
+	short	width;		/* advance to next char's origin */
+	short	ascent;		/* baseline to top edge of raster */
+	short	descent;	/* baseline to bottom edge of raster */
+	unsigned short attributes;	/* per char flags (not predefined) */
 } XCharStruct;
 
 /* Configure window value mask bits */
@@ -45,12 +47,13 @@ typedef struct {
 
 /* Values */
 
-typedef struct {
-        int x, y;
-        int width, height;
-        int border_width;
-        Window sibling;
-        int stack_mode;
+typedef struct
+{
+	int x, y;
+	int width, height;
+	int border_width;
+	Window sibling;
+	int stack_mode;
 } XWindowChanges;
 
 /* typedef unsigned long Time; */
@@ -162,14 +165,16 @@ typedef struct {
 /*
  * Data structure used by color operations
  */
-typedef struct {
+typedef struct
+{
 	unsigned long pixel;
 	unsigned short red, green, blue;
 	char flags;  /* do_red, do_green, do_blue */
 	char pad;
 } XColor;
 
-typedef struct {
+typedef struct
+{
 	int type;
 	Display *display;	/* Display the event was read from */
 	XID resourceid;		/* resource id */
@@ -182,7 +187,8 @@ typedef struct {
 /*
  * Visual structure; contains information about colormapping possible.
  */
-typedef struct {
+typedef struct
+{
 	void *ext_data;	/* hook for extension to hang data */
 	VisualID visualid;	/* visual id of this visual */
 #if defined(__cplusplus) || defined(c_plusplus)
@@ -197,8 +203,9 @@ typedef struct {
 
 /*
  * Depth structure; contains information for each possible depth.
- */	
-typedef struct {
+ */
+typedef struct
+{
 	int depth;		/* this depth (Z) of the depth */
 	int nvisuals;		/* number of Visual types at this depth */
 	Visual *visuals;	/* list of visuals possible at this depth */
@@ -212,7 +219,8 @@ typedef struct {
 
 struct _XDisplay;		/* Forward declare before use for C++ */
 
-typedef struct {
+typedef struct
+{
 	void *ext_data;	/* hook for extension to hang data */
 	struct _XDisplay *display;/* back pointer to display structure */
 	Window root;		/* Root window id. */
@@ -228,33 +236,34 @@ typedef struct {
 	unsigned long black_pixel;	/* White and Black pixel values */
 	int max_maps, min_maps;	/* max and min color maps */
 	int backing_store;	/* Never, WhenMapped, Always */
-	Bool save_unders;	
+	Bool save_unders;
 	long root_input_mask;	/* initial root input mask */
 } Screen;
 
 
-typedef struct {
-     int x, y;		      /* location of window */
-     int width, height;       /* width and height of window */
-     int border_width;	      /* border width of window */
-     int depth; 	      /* depth of window */
-     Visual *visual;	      /* the associated visual structure */
-     Window root;	      /* root of screen containing window */
-     int _class; 	      /* InputOutput, InputOnly*/
-     int bit_gravity;	      /* one of the bit gravity values */
-     int win_gravity;	      /* one of the window gravity values */
-     int backing_store;       /* NotUseful, WhenMapped, Always */
-     unsigned long backing_planes;/* planes to be preserved if possible */
-     unsigned long backing_pixel;/* value to be used when restoring planes */
-     Bool save_under;	      /* boolean, should bits under be saved? */
-     Colormap colormap;       /* color map to be associated with window */
-     Bool map_installed;      /* boolean, is color map currently installed*/
-     int map_state;	      /* IsUnmapped, IsUnviewable, IsViewable */
-     long all_event_masks;    /* set of events all people have interest in*/
-     long your_event_mask;    /* my event mask */
-     long do_not_propagate_mask;/* set of events that should not propagate */
-     Bool override_redirect;  /* boolean value for override-redirect */
-     Screen *screen;	      /* back pointer to correct screen */
+typedef struct
+{
+	int x, y;		      /* location of window */
+	int width, height;       /* width and height of window */
+	int border_width;	      /* border width of window */
+	int depth; 	      /* depth of window */
+	Visual *visual;	      /* the associated visual structure */
+	Window root;	      /* root of screen containing window */
+	int _class; 	      /* InputOutput, InputOnly*/
+	int bit_gravity;	      /* one of the bit gravity values */
+	int win_gravity;	      /* one of the window gravity values */
+	int backing_store;       /* NotUseful, WhenMapped, Always */
+	unsigned long backing_planes;/* planes to be preserved if possible */
+	unsigned long backing_pixel;/* value to be used when restoring planes */
+	Bool save_under;	      /* boolean, should bits under be saved? */
+	Colormap colormap;       /* color map to be associated with window */
+	Bool map_installed;      /* boolean, is color map currently installed*/
+	int map_state;	      /* IsUnmapped, IsUnviewable, IsViewable */
+	long all_event_masks;    /* set of events all people have interest in*/
+	long your_event_mask;    /* my event mask */
+	long do_not_propagate_mask;/* set of events that should not propagate */
+	Bool override_redirect;  /* boolean value for override-redirect */
+	Screen *screen;	      /* back pointer to correct screen */
 } XWindowAttributes;
 
 typedef int (*XErrorHandler) (	    /* WARNING, this type not in Xlib spec */
@@ -302,10 +311,10 @@ Display *XOpenDisplay(char *name);
 Colormap DefaultColormapOfScreen(Screen* /* screen */) ;
 int XSetGraphicsExposures( Display* /* display */, GC /* gc */, Bool /* graphics_exposures */) ;
 int XWarpPointer( Display* /* display */, Window /* srcW */, Window /* destW */,
-                 int /* srcX */, int /* srcY */,
-                 unsigned int /* srcWidth */,
-                 unsigned int /* srcHeight */,
-                 int destX, int destY);
+                  int /* srcX */, int /* srcY */,
+                  unsigned int /* srcWidth */,
+                  unsigned int /* srcHeight */,
+                  int destX, int destY);
 int XSetInputFocus(Display* /* display */, Window focus, int /* revert_to */, Time /* time */) ;
 int XGetInputFocus(Display* /* display */, Window* /* focus_return */, int* /* revert_to_return */) ;
 int XGrabPointer(Display* /* display */, Window /* grab_window */,
@@ -317,8 +326,8 @@ int XCopyArea(Display* /* display */, Drawable src, Drawable dest, GC gc,
               int src_x, int src_y, unsigned int width, unsigned int height,
               int dest_x, int dest_y) ;
 int XCopyPlane(Display* /* display */, Drawable src, Drawable dest, GC gc,
-              int src_x, int src_y, unsigned int width, unsigned int height,
-              int dest_x, int dest_y, unsigned long /* plane */) ;
+               int src_x, int src_y, unsigned int width, unsigned int height,
+               int dest_x, int dest_y, unsigned long /* plane */) ;
 
 XErrorHandler XSetErrorHandler (XErrorHandler /* handler */);
 Screen *XScreenOfDisplay(Display* /* display */,
@@ -333,7 +342,7 @@ int XParseColor(Display* display, Colormap cmap,
 int XDrawLine(Display* display, Window win, GC gc,
               int x1, int y1, int x2, int y2);
 int XTextExtents( XFontStruct* font, char* s, int len, int* direction,
-        int* ascent, int* descent2, XCharStruct* overall);
+                  int* ascent, int* descent2, XCharStruct* overall);
 int XPending(Display *d);
 XFontStruct* XLoadQueryFont(Display* display, const char* fontSpec);
 int XFreeFont(Display* display, XFontStruct* fontStruct);
@@ -353,4 +362,4 @@ void wxNoop();
 #define XMaxRequestSize(display) 16384
 
 #endif
-  /* _DUMMY_XLIBH_ */
+/* _DUMMY_XLIBH_ */

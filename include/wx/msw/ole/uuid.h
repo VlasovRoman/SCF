@@ -20,18 +20,18 @@
 
 // ----- taken from RPC.H
 #ifndef UUID_DEFINED            // in some cases RPC.H will be already
-    typedef struct
-    {
-      unsigned long   Data1;
-      unsigned short  Data2;
-      unsigned short  Data3;
-      unsigned char   Data4[8];
-    } UUID;                     // UUID = GUID = CLSID = LIBID = IID
+typedef struct
+{
+	unsigned long   Data1;
+	unsigned short  Data2;
+	unsigned short  Data3;
+	unsigned char   Data4[8];
+} UUID;                     // UUID = GUID = CLSID = LIBID = IID
 #endif  // UUID_DEFINED
 
 #ifndef GUID_DEFINED
-  typedef UUID GUID;
-  #define UUID_DEFINED          // prevent redefinition
+typedef UUID GUID;
+#define UUID_DEFINED          // prevent redefinition
 #endif  // GUID_DEFINED
 
 typedef unsigned char uchar;
@@ -44,44 +44,71 @@ typedef unsigned char uchar;
 class WXDLLIMPEXP_CORE Uuid
 {
 private:
-  UUID  m_uuid;
-  wxUChar *m_pszUuid;   // this string is alloc'd and freed by RPC
-  wxChar  *m_pszCForm;  // this string is allocated in Set/Create
+	UUID  m_uuid;
+	wxUChar *m_pszUuid;   // this string is alloc'd and freed by RPC
+	wxChar  *m_pszCForm;  // this string is allocated in Set/Create
 
-  void  UuidToCForm();
+	void  UuidToCForm();
 
-  // function used to set initial state by all ctors
-  void  Init() { m_pszUuid = NULL; m_pszCForm = NULL; }
+	// function used to set initial state by all ctors
+	void  Init()
+	{
+		m_pszUuid = NULL;
+		m_pszCForm = NULL;
+	}
 
 public:
-  // ctors & dtor
-  Uuid()                 { Init();            }
-  Uuid(const wxChar *pc) { Init(); Set(pc);   }
-  Uuid(const UUID &uuid) { Init(); Set(uuid); }
- ~Uuid();
+	// ctors & dtor
+	Uuid()
+	{
+		Init();
+	}
+	Uuid(const wxChar *pc)
+	{
+		Init();
+		Set(pc);
+	}
+	Uuid(const UUID &uuid)
+	{
+		Init();
+		Set(uuid);
+	}
+	~Uuid();
 
-  // copy ctor and assignment operator needed for this class
-  Uuid(const Uuid& uuid);
-  Uuid& operator=(const Uuid& uuid);
+	// copy ctor and assignment operator needed for this class
+	Uuid(const Uuid& uuid);
+	Uuid& operator=(const Uuid& uuid);
 
-  // create a brand new UUID
-  void Create();
+	// create a brand new UUID
+	void Create();
 
-  // set value of UUID
-  bool Set(const wxChar *pc); // from a string, returns true if ok
-  void Set(const UUID& uuid); // from another UUID (never fails)
+	// set value of UUID
+	bool Set(const wxChar *pc); // from a string, returns true if ok
+	void Set(const UUID& uuid); // from another UUID (never fails)
 
-  // comparison operators
-  bool operator==(const Uuid& uuid) const;
-  bool operator!=(const Uuid& uuid) const { return !(*this == uuid); }
+	// comparison operators
+	bool operator==(const Uuid& uuid) const;
+	bool operator!=(const Uuid& uuid) const
+	{
+		return !(*this == uuid);
+	}
 
-  // accessors
-  operator const UUID*()   const { return &m_uuid;               }
-  operator const wxChar*() const { return (wxChar *)(m_pszUuid); }
+	// accessors
+	operator const UUID*()   const
+	{
+		return &m_uuid;
+	}
+	operator const wxChar*() const
+	{
+		return (wxChar *)(m_pszUuid);
+	}
 
-  // return string representation of the UUID in the C form
-  // (as in DEFINE_GUID macro)
-  const wxChar *CForm() const    { return m_pszCForm;            }
+	// return string representation of the UUID in the C form
+	// (as in DEFINE_GUID macro)
+	const wxChar *CForm() const
+	{
+		return m_pszCForm;
+	}
 };
 
 #endif //_WX_OLEUUID_H

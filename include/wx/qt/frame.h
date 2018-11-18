@@ -19,42 +19,42 @@ class QScrollArea;
 class WXDLLIMPEXP_CORE wxFrame : public wxFrameBase
 {
 public:
-    wxFrame();
-    wxFrame(wxWindow *parent,
-               wxWindowID id,
-               const wxString& title,
-               const wxPoint& pos = wxDefaultPosition,
-               const wxSize& size = wxDefaultSize,
-               long style = wxDEFAULT_FRAME_STYLE,
-               const wxString& name = wxFrameNameStr);
-    virtual ~wxFrame();
+	wxFrame();
+	wxFrame(wxWindow *parent,
+	        wxWindowID id,
+	        const wxString& title,
+	        const wxPoint& pos = wxDefaultPosition,
+	        const wxSize& size = wxDefaultSize,
+	        long style = wxDEFAULT_FRAME_STYLE,
+	        const wxString& name = wxFrameNameStr);
+	virtual ~wxFrame();
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxString& title,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE,
-                const wxString& name = wxFrameNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxString& title,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxDEFAULT_FRAME_STYLE,
+	            const wxString& name = wxFrameNameStr);
 
-    virtual void SetMenuBar(wxMenuBar *menubar);
-    virtual void SetStatusBar(wxStatusBar *statusBar );
-    virtual void SetToolBar(wxToolBar *toolbar);
-    
-    virtual void SetWindowStyleFlag( long style );
+	virtual void SetMenuBar(wxMenuBar *menubar);
+	virtual void SetStatusBar(wxStatusBar *statusBar );
+	virtual void SetToolBar(wxToolBar *toolbar);
 
-    virtual void AddChild( wxWindowBase *child );
-    virtual void RemoveChild( wxWindowBase *child );
+	virtual void SetWindowStyleFlag( long style );
 
-    QMainWindow *GetQMainWindow() const;
-    virtual QScrollArea *QtGetScrollBarsContainer() const;
+	virtual void AddChild( wxWindowBase *child );
+	virtual void RemoveChild( wxWindowBase *child );
+
+	QMainWindow *GetQMainWindow() const;
+	virtual QScrollArea *QtGetScrollBarsContainer() const;
 
 protected:
-    virtual void DoGetClientSize(int *width, int *height) const;
+	virtual void DoGetClientSize(int *width, int *height) const;
 
 private:
 
-    wxDECLARE_DYNAMIC_CLASS( wxFrame );
+	wxDECLARE_DYNAMIC_CLASS( wxFrame );
 };
 
 

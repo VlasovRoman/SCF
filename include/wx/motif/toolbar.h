@@ -14,69 +14,72 @@
 class WXDLLIMPEXP_CORE wxToolBar : public wxToolBarBase
 {
 public:
-    // ctors and dtor
-    wxToolBar() { Init(); }
+	// ctors and dtor
+	wxToolBar()
+	{
+		Init();
+	}
 
-    wxToolBar(wxWindow *parent,
-        wxWindowID id,
-        const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize,
-        long style = wxTB_DEFAULT_STYLE,
-        const wxString& name = wxToolBarNameStr)
-    {
-        Init();
+	wxToolBar(wxWindow *parent,
+	          wxWindowID id,
+	          const wxPoint& pos = wxDefaultPosition,
+	          const wxSize& size = wxDefaultSize,
+	          long style = wxTB_DEFAULT_STYLE,
+	          const wxString& name = wxToolBarNameStr)
+	{
+		Init();
 
-        Create(parent, id, pos, size, style, name);
-    }
+		Create(parent, id, pos, size, style, name);
+	}
 
-    bool Create(wxWindow *parent,
-        wxWindowID id,
-        const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize,
-        long style = wxTB_DEFAULT_STYLE,
-        const wxString& name = wxToolBarNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxTB_DEFAULT_STYLE,
+	            const wxString& name = wxToolBarNameStr);
 
-    virtual ~wxToolBar();
+	virtual ~wxToolBar();
 
-    // override/implement base class virtuals
-    virtual wxToolBarToolBase *FindToolForPosition(wxCoord x, wxCoord y) const;
+	// override/implement base class virtuals
+	virtual wxToolBarToolBase *FindToolForPosition(wxCoord x, wxCoord y) const;
 
-    virtual bool Realize();
+	virtual bool Realize();
 
-    // implementation from now on
+	// implementation from now on
 
-    // find tool by widget
-    wxToolBarToolBase *FindToolByWidget(WXWidget w) const;
+	// find tool by widget
+	wxToolBarToolBase *FindToolByWidget(WXWidget w) const;
 
 private:
-    // common part of all ctors
-    void Init();
+	// common part of all ctors
+	void Init();
 
-    // implement base class pure virtuals
-    virtual bool DoInsertTool(size_t pos, wxToolBarToolBase *tool);
-    virtual bool DoDeleteTool(size_t pos, wxToolBarToolBase *tool);
+	// implement base class pure virtuals
+	virtual bool DoInsertTool(size_t pos, wxToolBarToolBase *tool);
+	virtual bool DoDeleteTool(size_t pos, wxToolBarToolBase *tool);
 
-    virtual void DoEnableTool(wxToolBarToolBase *tool, bool enable);
-    virtual void DoToggleTool(wxToolBarToolBase *tool, bool toggle);
-    virtual void DoSetToggle(wxToolBarToolBase *tool, bool toggle);
+	virtual void DoEnableTool(wxToolBarToolBase *tool, bool enable);
+	virtual void DoToggleTool(wxToolBarToolBase *tool, bool toggle);
+	virtual void DoSetToggle(wxToolBarToolBase *tool, bool toggle);
 
-    virtual wxToolBarToolBase *CreateTool(int id,
-                                          const wxString& label,
-                                          const wxBitmap& bmpNormal,
-                                          const wxBitmap& bmpDisabled,
-                                          wxItemKind kind,
-                                          wxObject *clientData,
-                                          const wxString& shortHelp,
-                                          const wxString& longHelp);
-    virtual wxToolBarToolBase *CreateTool(wxControl *control,
-                                          const wxString& label);
+	virtual wxToolBarToolBase *CreateTool(int id,
+	                                      const wxString& label,
+	                                      const wxBitmap& bmpNormal,
+	                                      const wxBitmap& bmpDisabled,
+	                                      wxItemKind kind,
+	                                      wxObject *clientData,
+	                                      const wxString& shortHelp,
+	                                      const wxString& longHelp);
+	virtual wxToolBarToolBase *CreateTool(wxControl *control,
+	                                      const wxString& label);
 
-    virtual void DoSetSize(int x, int y,
-                           int width, int height,
-                           int sizeFlags = wxSIZE_AUTO);
+	virtual void DoSetSize(int x, int y,
+	                       int width, int height,
+	                       int sizeFlags = wxSIZE_AUTO);
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxToolBar);
+	wxDECLARE_DYNAMIC_CLASS(wxToolBar);
 };
 
 #endif
-    // _WX_TOOLBAR_H_
+// _WX_TOOLBAR_H_

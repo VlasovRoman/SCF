@@ -19,15 +19,15 @@ class WXDLLIMPEXP_FWD_CORE wxCollapsiblePane;
 class WXDLLIMPEXP_XRC wxCollapsiblePaneXmlHandler : public wxXmlResourceHandler
 {
 public:
-    wxCollapsiblePaneXmlHandler();
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	wxCollapsiblePaneXmlHandler();
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
 private:
-    bool m_isInside;
-    wxCollapsiblePane *m_collpane;
+	bool m_isInside;
+	wxCollapsiblePane *m_collpane;
 
-    wxDECLARE_DYNAMIC_CLASS(wxCollapsiblePaneXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxCollapsiblePaneXmlHandler);
 };
 
 #endif // wxUSE_XRC && wxUSE_COLLPANE

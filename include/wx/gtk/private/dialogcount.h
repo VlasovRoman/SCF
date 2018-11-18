@@ -31,18 +31,18 @@ extern int wxOpenModalDialogsCount;
 class wxOpenModalDialogLocker
 {
 public:
-    wxOpenModalDialogLocker()
-    {
-        wxOpenModalDialogsCount++;
-    }
+	wxOpenModalDialogLocker()
+	{
+		wxOpenModalDialogsCount++;
+	}
 
-    ~wxOpenModalDialogLocker()
-    {
-        wxOpenModalDialogsCount--;
-    }
+	~wxOpenModalDialogLocker()
+	{
+		wxOpenModalDialogsCount--;
+	}
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxOpenModalDialogLocker);
+	wxDECLARE_NO_COPY_CLASS(wxOpenModalDialogLocker);
 };
 
 #endif // _WX_GTK_PRIVATE_DIALOGCOUNT_H_

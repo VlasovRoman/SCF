@@ -24,8 +24,8 @@
 // release the interface pointer (if !NULL)
 inline void ReleaseInterface(IUnknown *pIUnk)
 {
-  if ( pIUnk != NULL )
-    pIUnk->Release();
+	if ( pIUnk != NULL )
+		pIUnk->Release();
 }
 
 // release the interface pointer (if !NULL) and make it NULL
@@ -61,19 +61,44 @@ extern WXDLLIMPEXP_CORE bool IsIidFromList(REFIID riid, const IID *aIids[], size
 class wxAutoULong
 {
 public:
-    wxAutoULong(ULONG value = 0) : m_Value(value) { }
+	wxAutoULong(ULONG value = 0) : m_Value(value) { }
 
-    operator ULONG&() { return m_Value; }
-    ULONG& operator=(ULONG value) { m_Value = value; return m_Value;  }
+	operator ULONG&()
+	{
+		return m_Value;
+	}
+	ULONG& operator=(ULONG value)
+	{
+		m_Value = value;
+		return m_Value;
+	}
 
-    wxAutoULong& operator++() { ++m_Value; return *this; }
-    const wxAutoULong operator++( int ) { wxAutoULong temp = *this; ++m_Value; return temp; }
+	wxAutoULong& operator++()
+	{
+		++m_Value;
+		return *this;
+	}
+	const wxAutoULong operator++( int )
+	{
+		wxAutoULong temp = *this;
+		++m_Value;
+		return temp;
+	}
 
-    wxAutoULong& operator--() { --m_Value; return *this; }
-    const wxAutoULong operator--( int ) { wxAutoULong temp = *this; --m_Value; return temp; }
+	wxAutoULong& operator--()
+	{
+		--m_Value;
+		return *this;
+	}
+	const wxAutoULong operator--( int )
+	{
+		wxAutoULong temp = *this;
+		--m_Value;
+		return temp;
+	}
 
 private:
-    ULONG m_Value;
+	ULONG m_Value;
 };
 
 // declare the methods and the member variable containing reference count
@@ -155,9 +180,9 @@ WXDLLIMPEXP_CORE void wxLogAddRef (const wxChar *szInterface, ULONG cRef);
 WXDLLIMPEXP_CORE void wxLogRelease(const wxChar *szInterface, ULONG cRef);
 
 #else   //!__WXDEBUG__
-  #define   wxLogQueryInterface(szInterface, riid)
-  #define   wxLogAddRef(szInterface, cRef)
-  #define   wxLogRelease(szInterface, cRef)
+#define   wxLogQueryInterface(szInterface, riid)
+#define   wxLogAddRef(szInterface, cRef)
+#define   wxLogRelease(szInterface, cRef)
 #endif  //__WXDEBUG__
 
 #endif // WX_COMIMPL_H

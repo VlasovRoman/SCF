@@ -16,31 +16,31 @@
 #if wxUSE_RIBBON
 
 WXDLLIMPEXP_RIBBON wxColour wxRibbonInterpolateColour(
-                                const wxColour& start_colour,
-                                const wxColour& end_colour,
-                                int position,
-                                int start_position,
-                                int end_position);
+    const wxColour& start_colour,
+    const wxColour& end_colour,
+    int position,
+    int start_position,
+    int end_position);
 
 WXDLLIMPEXP_RIBBON bool wxRibbonCanLabelBreakAtPosition(
-                                const wxString& label,
-                                size_t pos);
+    const wxString& label,
+    size_t pos);
 
 WXDLLIMPEXP_RIBBON void wxRibbonDrawParallelGradientLines(
-                                wxDC& dc,
-                                int nlines,
-                                const wxPoint* line_origins,
-                                int stepx,
-                                int stepy,
-                                int numsteps,
-                                int offset_x,
-                                int offset_y,
-                                const wxColour& start_colour,
-                                const wxColour& end_colour);
+    wxDC& dc,
+    int nlines,
+    const wxPoint* line_origins,
+    int stepx,
+    int stepy,
+    int numsteps,
+    int offset_x,
+    int offset_y,
+    const wxColour& start_colour,
+    const wxColour& end_colour);
 
 WXDLLIMPEXP_RIBBON wxBitmap wxRibbonLoadPixmap(
-                                const char* const* bits,
-                                wxColour fore);
+    const char* const* bits,
+    wxColour fore);
 
 /*
    HSL colour class, using interface as discussed in wx-dev. Provided mainly
@@ -55,26 +55,26 @@ WXDLLIMPEXP_RIBBON wxBitmap wxRibbonLoadPixmap(
 class WXDLLIMPEXP_RIBBON wxRibbonHSLColour
 {
 public:
-   wxRibbonHSLColour()
-       : hue(0.0), saturation(0.0), luminance(0.0) {}
-   wxRibbonHSLColour(float H, float S, float L)
-       : hue(H), saturation(S), luminance(L) { }
-   wxRibbonHSLColour(const wxColour& C);
+	wxRibbonHSLColour()
+		: hue(0.0), saturation(0.0), luminance(0.0) {}
+	wxRibbonHSLColour(float H, float S, float L)
+		: hue(H), saturation(S), luminance(L) { }
+	wxRibbonHSLColour(const wxColour& C);
 
-   wxColour    ToRGB() const;
+	wxColour    ToRGB() const;
 
-   wxRibbonHSLColour& MakeDarker(float delta);
-   wxRibbonHSLColour Darker(float delta) const;
-   wxRibbonHSLColour Lighter(float delta) const;
-   wxRibbonHSLColour Saturated(float delta) const;
-   wxRibbonHSLColour Desaturated(float delta) const;
-   wxRibbonHSLColour ShiftHue(float delta) const;
+	wxRibbonHSLColour& MakeDarker(float delta);
+	wxRibbonHSLColour Darker(float delta) const;
+	wxRibbonHSLColour Lighter(float delta) const;
+	wxRibbonHSLColour Saturated(float delta) const;
+	wxRibbonHSLColour Desaturated(float delta) const;
+	wxRibbonHSLColour ShiftHue(float delta) const;
 
-   float       hue, saturation, luminance;
+	float       hue, saturation, luminance;
 };
 
 WXDLLIMPEXP_RIBBON wxRibbonHSLColour wxRibbonShiftLuminance(
-                                wxRibbonHSLColour colour, float amount);
+    wxRibbonHSLColour colour, float amount);
 
 #endif // wxUSE_RIBBON
 

@@ -33,37 +33,40 @@ class WXDLLIMPEXP_FWD_CORE wxColour;
 class WXDLLIMPEXP_CORE wxColour : public wxColourBase
 {
 public:
-    // constructors
-    // ------------
-    DEFINE_STD_WXCOLOUR_CONSTRUCTORS
+	// constructors
+	// ------------
+	DEFINE_STD_WXCOLOUR_CONSTRUCTORS
 
-    virtual ~wxColour();
+	virtual ~wxColour();
 
-    virtual bool FromString(const wxString& str);
+	virtual bool FromString(const wxString& str);
 
-    bool operator==(const wxColour& col) const;
-    bool operator!=(const wxColour& col) const { return !(*this == col); }
+	bool operator==(const wxColour& col) const;
+	bool operator!=(const wxColour& col) const
+	{
+		return !(*this == col);
+	}
 
-    unsigned char Red() const;
-    unsigned char Green() const;
-    unsigned char Blue() const;
+	unsigned char Red() const;
+	unsigned char Green() const;
+	unsigned char Blue() const;
 
 
-    // Implementation part
-    void CalcPixel( GdkColormap *cmap );
-    int GetPixel() const;
-    GdkColor *GetColor() const;
+	// Implementation part
+	void CalcPixel( GdkColormap *cmap );
+	int GetPixel() const;
+	GdkColor *GetColor() const;
 
 protected:
-    // ref counting code
-    virtual wxGDIRefData *CreateGDIRefData() const;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
+	// ref counting code
+	virtual wxGDIRefData *CreateGDIRefData() const;
+	virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
 
-    virtual void
-    InitRGBA(unsigned char r, unsigned char g, unsigned char b, unsigned char a);
+	virtual void
+	InitRGBA(unsigned char r, unsigned char g, unsigned char b, unsigned char a);
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxColour);
+	wxDECLARE_DYNAMIC_CLASS(wxColour);
 };
 
 #endif // __GTKCOLOURH__

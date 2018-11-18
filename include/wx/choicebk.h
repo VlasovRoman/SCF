@@ -39,66 +39,69 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_CHOICEBOOK_PAGE_CHANGING, wxBo
 class WXDLLIMPEXP_CORE wxChoicebook : public wxNavigationEnabled<wxBookCtrlBase>
 {
 public:
-    wxChoicebook() { }
+	wxChoicebook() { }
 
-    wxChoicebook(wxWindow *parent,
-                 wxWindowID id,
-                 const wxPoint& pos = wxDefaultPosition,
-                 const wxSize& size = wxDefaultSize,
-                 long style = 0,
-                 const wxString& name = wxEmptyString)
-    {
-        (void)Create(parent, id, pos, size, style, name);
-    }
+	wxChoicebook(wxWindow *parent,
+	             wxWindowID id,
+	             const wxPoint& pos = wxDefaultPosition,
+	             const wxSize& size = wxDefaultSize,
+	             long style = 0,
+	             const wxString& name = wxEmptyString)
+	{
+		(void)Create(parent, id, pos, size, style, name);
+	}
 
-    // quasi ctor
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = 0,
-                const wxString& name = wxEmptyString);
+	// quasi ctor
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxEmptyString);
 
 
-    virtual bool SetPageText(size_t n, const wxString& strText) wxOVERRIDE;
-    virtual wxString GetPageText(size_t n) const wxOVERRIDE;
-    virtual int GetPageImage(size_t n) const wxOVERRIDE;
-    virtual bool SetPageImage(size_t n, int imageId) wxOVERRIDE;
-    virtual bool InsertPage(size_t n,
-                            wxWindow *page,
-                            const wxString& text,
-                            bool bSelect = false,
-                            int imageId = NO_IMAGE) wxOVERRIDE;
-    virtual int SetSelection(size_t n) wxOVERRIDE
-        { return DoSetSelection(n, SetSelection_SendEvent); }
-    virtual int ChangeSelection(size_t n) wxOVERRIDE { return DoSetSelection(n); }
-    virtual void SetImageList(wxImageList *imageList) wxOVERRIDE;
+	virtual bool SetPageText(size_t n, const wxString& strText) wxOVERRIDE;
+	virtual wxString GetPageText(size_t n) const wxOVERRIDE;
+	virtual int GetPageImage(size_t n) const wxOVERRIDE;
+	virtual bool SetPageImage(size_t n, int imageId) wxOVERRIDE;
+	virtual bool InsertPage(size_t n,
+	                        wxWindow *page,
+	                        const wxString& text,
+	                        bool bSelect = false,
+	                        int imageId = NO_IMAGE) wxOVERRIDE;
+	virtual int SetSelection(size_t n) wxOVERRIDE
+	{ return DoSetSelection(n, SetSelection_SendEvent); }
+	virtual int ChangeSelection(size_t n) wxOVERRIDE { return DoSetSelection(n); }
+	virtual void SetImageList(wxImageList *imageList) wxOVERRIDE;
 
-    virtual bool DeleteAllPages() wxOVERRIDE;
+	virtual bool DeleteAllPages() wxOVERRIDE;
 
-    // returns the choice control
-    wxChoice* GetChoiceCtrl() const { return (wxChoice*)m_bookctrl; }
+	// returns the choice control
+	wxChoice* GetChoiceCtrl() const
+	{
+		return (wxChoice*)m_bookctrl;
+	}
 
 protected:
-    virtual void DoSetWindowVariant(wxWindowVariant variant) wxOVERRIDE;
+	virtual void DoSetWindowVariant(wxWindowVariant variant) wxOVERRIDE;
 
-    virtual wxWindow *DoRemovePage(size_t page) wxOVERRIDE;
+	virtual wxWindow *DoRemovePage(size_t page) wxOVERRIDE;
 
-    void UpdateSelectedPage(size_t newsel) wxOVERRIDE
-    {
-        m_selection = static_cast<int>(newsel);
-        GetChoiceCtrl()->Select(m_selection);
-    }
+	void UpdateSelectedPage(size_t newsel) wxOVERRIDE
+	{
+		m_selection = static_cast<int>(newsel);
+		GetChoiceCtrl()->Select(m_selection);
+	}
 
-    wxBookCtrlEvent* CreatePageChangingEvent() const wxOVERRIDE;
-    void MakeChangedEvent(wxBookCtrlEvent &event) wxOVERRIDE;
+	wxBookCtrlEvent* CreatePageChangingEvent() const wxOVERRIDE;
+	void MakeChangedEvent(wxBookCtrlEvent &event) wxOVERRIDE;
 
-    // event handlers
-    void OnChoiceSelected(wxCommandEvent& event);
+	// event handlers
+	void OnChoiceSelected(wxCommandEvent& event);
 
 private:
-    wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxChoicebook);
+	wxDECLARE_EVENT_TABLE();
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxChoicebook);
 };
 
 // ----------------------------------------------------------------------------

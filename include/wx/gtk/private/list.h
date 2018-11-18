@@ -17,16 +17,25 @@
 class wxGtkList
 {
 public:
-    explicit wxGtkList(GList* list) : m_list(list) { }
-    ~wxGtkList() { g_list_free(m_list); }
+	explicit wxGtkList(GList* list) : m_list(list) { }
+	~wxGtkList()
+	{
+		g_list_free(m_list);
+	}
 
-    operator GList *() const { return m_list; }
-    GList * operator->() const { return m_list; }
+	operator GList *() const
+	{
+		return m_list;
+	}
+	GList * operator->() const
+	{
+		return m_list;
+	}
 
 protected:
-    GList* const m_list;
+	GList* const m_list;
 
-    wxDECLARE_NO_COPY_CLASS(wxGtkList);
+	wxDECLARE_NO_COPY_CLASS(wxGtkList);
 };
 
 #endif // _WX_GTK_PRIVATE_LIST_H_

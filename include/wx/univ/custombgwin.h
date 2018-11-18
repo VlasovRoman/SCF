@@ -16,21 +16,21 @@
 
 template <class W>
 class wxCustomBackgroundWindow : public W,
-                                 public wxCustomBackgroundWindowBase
+	public wxCustomBackgroundWindowBase
 {
 public:
-    typedef W BaseWindowClass;
+	typedef W BaseWindowClass;
 
-    wxCustomBackgroundWindow() { }
+	wxCustomBackgroundWindow() { }
 
 protected:
-    virtual void DoSetBackgroundBitmap(const wxBitmap& bmp) wxOVERRIDE
-    {
-        // We have support for background bitmap even at the base class level.
-        BaseWindowClass::SetBackground(bmp, wxALIGN_NOT, wxTILE);
-    }
+	virtual void DoSetBackgroundBitmap(const wxBitmap& bmp) wxOVERRIDE
+	{
+		// We have support for background bitmap even at the base class level.
+		BaseWindowClass::SetBackground(bmp, wxALIGN_NOT, wxTILE);
+	}
 
-    wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxCustomBackgroundWindow, W);
+	wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxCustomBackgroundWindow, W);
 };
 
 #endif // _WX_UNIV_CUSTOMBGWIN_H_

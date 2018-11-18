@@ -21,10 +21,10 @@
 
 enum
 {
-    wxFC_OPEN              = 0x0001,
-    wxFC_SAVE              = 0x0002,
-    wxFC_MULTIPLE          = 0x0004,
-    wxFC_NOSHOWHIDDEN      = 0x0008
+	wxFC_OPEN              = 0x0001,
+	wxFC_SAVE              = 0x0002,
+	wxFC_MULTIPLE          = 0x0004,
+	wxFC_NOSHOWHIDDEN      = 0x0008
 };
 
 #define wxFC_DEFAULT_STYLE wxFC_OPEN
@@ -33,33 +33,33 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxFileCtrlNameStr[]; // in filectrlcmn.
 class WXDLLIMPEXP_CORE wxFileCtrlBase
 {
 public:
-    virtual ~wxFileCtrlBase() {}
+	virtual ~wxFileCtrlBase() {}
 
-    virtual void SetWildcard( const wxString& wildCard ) = 0;
-    virtual void SetFilterIndex( int filterindex ) = 0;
-    virtual bool SetDirectory( const wxString& dir ) = 0;
+	virtual void SetWildcard( const wxString& wildCard ) = 0;
+	virtual void SetFilterIndex( int filterindex ) = 0;
+	virtual bool SetDirectory( const wxString& dir ) = 0;
 
-    // Selects a certain file.
-    // In case the filename specified isn't found/couldn't be shown with
-    // currently selected filter, false is returned and nothing happens
-    virtual bool SetFilename( const wxString& name ) = 0;
+	// Selects a certain file.
+	// In case the filename specified isn't found/couldn't be shown with
+	// currently selected filter, false is returned and nothing happens
+	virtual bool SetFilename( const wxString& name ) = 0;
 
-    // chdirs to a certain directory and selects a certain file.
-    // In case the filename specified isn't found/couldn't be shown with
-    // currently selected filter, false is returned and if directory exists
-    // it's chdir'ed to
-    virtual bool SetPath( const wxString& path ) = 0;
+	// chdirs to a certain directory and selects a certain file.
+	// In case the filename specified isn't found/couldn't be shown with
+	// currently selected filter, false is returned and if directory exists
+	// it's chdir'ed to
+	virtual bool SetPath( const wxString& path ) = 0;
 
-    virtual wxString GetFilename() const = 0;
-    virtual wxString GetDirectory() const = 0;
-    virtual wxString GetWildcard() const = 0;
-    virtual wxString GetPath() const = 0;
-    virtual void GetPaths( wxArrayString& paths ) const = 0;
-    virtual void GetFilenames( wxArrayString& files ) const = 0;
-    virtual int GetFilterIndex() const = 0;
+	virtual wxString GetFilename() const = 0;
+	virtual wxString GetDirectory() const = 0;
+	virtual wxString GetWildcard() const = 0;
+	virtual wxString GetPath() const = 0;
+	virtual void GetPaths( wxArrayString& paths ) const = 0;
+	virtual void GetFilenames( wxArrayString& files ) const = 0;
+	virtual int GetFilterIndex() const = 0;
 
-    virtual bool HasMultipleFileSelection() const = 0;
-    virtual void ShowHidden(bool show) = 0;
+	virtual bool HasMultipleFileSelection() const = 0;
+	virtual void ShowHidden(bool show) = 0;
 };
 
 void wxGenerateFilterChangedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd );
@@ -68,11 +68,11 @@ void wxGenerateSelectionChangedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd );
 void wxGenerateFileActivatedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd, const wxString& filename = wxEmptyString );
 
 #if defined(__WXGTK20__) && !defined(__WXUNIVERSAL__)
-    #define wxFileCtrl wxGtkFileCtrl
-    #include "wx/gtk/filectrl.h"
+#define wxFileCtrl wxGtkFileCtrl
+#include "wx/gtk/filectrl.h"
 #else
-    #define wxFileCtrl wxGenericFileCtrl
-    #include "wx/generic/filectrlg.h"
+#define wxFileCtrl wxGenericFileCtrl
+#include "wx/generic/filectrlg.h"
 #endif
 
 // Some documentation
@@ -90,32 +90,53 @@ void wxGenerateFileActivatedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd, cons
 class WXDLLIMPEXP_CORE wxFileCtrlEvent : public wxCommandEvent
 {
 public:
-    wxFileCtrlEvent() {}
-    wxFileCtrlEvent( wxEventType type, wxObject *evtObject, int id )
-            : wxCommandEvent( type, id )
-    {
-        SetEventObject( evtObject );
-    }
+	wxFileCtrlEvent() {}
+	wxFileCtrlEvent( wxEventType type, wxObject *evtObject, int id )
+		: wxCommandEvent( type, id )
+	{
+		SetEventObject( evtObject );
+	}
 
-    // no need for the copy constructor as the default one will be fine.
-    virtual wxEvent *Clone() const wxOVERRIDE { return new wxFileCtrlEvent( *this ); }
+	// no need for the copy constructor as the default one will be fine.
+	virtual wxEvent *Clone() const wxOVERRIDE
+	{
+		return new wxFileCtrlEvent( *this );
+	}
 
-    void SetFiles( const wxArrayString &files ) { m_files = files; }
-    void SetDirectory( const wxString &directory ) { m_directory = directory; }
-    void SetFilterIndex( int filterIndex ) { m_filterIndex = filterIndex; }
+	void SetFiles( const wxArrayString &files )
+	{
+		m_files = files;
+	}
+	void SetDirectory( const wxString &directory )
+	{
+		m_directory = directory;
+	}
+	void SetFilterIndex( int filterIndex )
+	{
+		m_filterIndex = filterIndex;
+	}
 
-    wxArrayString GetFiles() const { return m_files; }
-    wxString GetDirectory() const { return m_directory; }
-    int GetFilterIndex() const { return m_filterIndex; }
+	wxArrayString GetFiles() const
+	{
+		return m_files;
+	}
+	wxString GetDirectory() const
+	{
+		return m_directory;
+	}
+	int GetFilterIndex() const
+	{
+		return m_filterIndex;
+	}
 
-    wxString GetFile() const;
+	wxString GetFile() const;
 
 protected:
-    int m_filterIndex;
-    wxString m_directory;
-    wxArrayString m_files;
+	int m_filterIndex;
+	wxString m_directory;
+	wxArrayString m_files;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxFileCtrlEvent);
+	wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxFileCtrlEvent);
 };
 
 typedef void ( wxEvtHandler::*wxFileCtrlEventFunction )( wxFileCtrlEvent& );

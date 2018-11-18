@@ -46,9 +46,9 @@
     other ones we can just use it directly.
  */
 #ifdef wxCOMPILER_BROKEN_CONCAT_OPER
-    #define wxPREPEND_L(x)      L ## x
-    #define wxAPPEND_i64(x)     x ## i64
-    #define wxAPPEND_ui64(x)    x ## ui64
+#define wxPREPEND_L(x)      L ## x
+#define wxAPPEND_i64(x)     x ## i64
+#define wxAPPEND_ui64(x)    x ## ui64
 #endif /* wxCOMPILER_BROKEN_CONCAT_OPER */
 
 /*
@@ -59,13 +59,13 @@
    differently for VC++
   */
 #if defined(__VISUALC__)
-    /*
-       __LINE__ handling is completely broken in VC++ when using "Edit and
-       Continue" (/ZI option) and results in preprocessor errors if we use it
-       inside the macros. Luckily VC7 has another standard macro which can be
-       used like this and is even better than __LINE__ because it is globally
-       unique.
-     */
+/*
+   __LINE__ handling is completely broken in VC++ when using "Edit and
+   Continue" (/ZI option) and results in preprocessor errors if we use it
+   inside the macros. Luckily VC7 has another standard macro which can be
+   used like this and is even better than __LINE__ because it is globally
+   unique.
+ */
 #   define wxCONCAT_LINE(text)         wxCONCAT(text, __COUNTER__)
 #else /* normal compilers */
 #   define wxCONCAT_LINE(text)         wxCONCAT(text, __LINE__)
@@ -101,28 +101,28 @@
     NULL for the compilers which don't support the latter.
  */
 #ifndef __WXFUNCTION__
-    #if defined(__GNUC__) || \
+#if defined(__GNUC__) || \
           defined(__VISUALC__) || \
           defined(__FUNCTION__)
-        #define __WXFUNCTION__ __FUNCTION__
-    #else
-        /* still define __WXFUNCTION__ to avoid #ifdefs elsewhere */
-        #define __WXFUNCTION__ (NULL)
-    #endif
+#define __WXFUNCTION__ __FUNCTION__
+#else
+/* still define __WXFUNCTION__ to avoid #ifdefs elsewhere */
+#define __WXFUNCTION__ (NULL)
+#endif
 #endif /* __WXFUNCTION__ already defined */
 
 
 /* Auto-detect variadic macros support unless explicitly disabled. */
 #if !defined(HAVE_VARIADIC_MACROS) && !defined(wxNO_VARIADIC_MACROS)
-    /* Any C99 or C++11 compiler should have them. */
-    #if (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L) || \
+/* Any C99 or C++11 compiler should have them. */
+#if (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L) || \
         (defined(__cplusplus) && __cplusplus >= 201103L)
-        #define HAVE_VARIADIC_MACROS 1
-    #elif defined(__GNUC__)
-        #define HAVE_VARIADIC_MACROS 1
-    #elif wxCHECK_VISUALC_VERSION(8)
-        #define HAVE_VARIADIC_MACROS 1
-    #endif
+#define HAVE_VARIADIC_MACROS 1
+#elif defined(__GNUC__)
+#define HAVE_VARIADIC_MACROS 1
+#elif wxCHECK_VISUALC_VERSION(8)
+#define HAVE_VARIADIC_MACROS 1
+#endif
 #endif /* !HAVE_VARIADIC_MACROS */
 
 
@@ -140,7 +140,7 @@
    can do.
  */
 #if defined(__GNUC__) && __GNUC__ == 3
-    #pragma GCC system_header
+#pragma GCC system_header
 #endif /* gcc-3.x */
 
 /*
@@ -189,7 +189,7 @@
     wxCALL_FOR_EACH_(wxCALL_FOR_EACH_NARG(__VA_ARGS__), (what, __VA_ARGS__))
 
 #else
-    #define wxCALL_FOR_EACH  Error_wx_CALL_FOR_EACH_requires_variadic_macros_support
+#define wxCALL_FOR_EACH  Error_wx_CALL_FOR_EACH_requires_variadic_macros_support
 #endif /* HAVE_VARIADIC_MACROS */
 
 #endif /* _WX_CPP_H_ */

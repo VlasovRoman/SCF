@@ -14,10 +14,10 @@
 #include "wx/defs.h"
 
 #if wxUSE_STD_CONTAINERS
-    #include "wx/beforestd.h"
-    #include <vector>
-    #include <algorithm>
-    #include "wx/afterstd.h"
+#include "wx/beforestd.h"
+#include <vector>
+#include <algorithm>
+#include "wx/afterstd.h"
 #endif
 
 /*
@@ -67,7 +67,7 @@
  */
 extern "C"
 {
-typedef int (wxCMPFUNC_CONV *CMPFUNC)(const void* pItem1, const void* pItem2);
+	typedef int (wxCMPFUNC_CONV *CMPFUNC)(const void* pItem1, const void* pItem2);
 }
 
 // ----------------------------------------------------------------------------
@@ -86,26 +86,30 @@ template<class T>
 class wxArray_SortFunction
 {
 public:
-    typedef int (wxCMPFUNC_CONV *CMPFUNC)(T* pItem1, T* pItem2);
+	typedef int (wxCMPFUNC_CONV *CMPFUNC)(T* pItem1, T* pItem2);
 
-    wxArray_SortFunction(CMPFUNC f) : m_f(f) { }
-    bool operator()(const T& i1, const T& i2)
-      { return m_f((T*)&i1, (T*)&i2) < 0; }
+	wxArray_SortFunction(CMPFUNC f) : m_f(f) { }
+	bool operator()(const T& i1, const T& i2)
+	{
+		return m_f((T*)&i1, (T*)&i2) < 0;
+	}
 private:
-    CMPFUNC m_f;
+	CMPFUNC m_f;
 };
 
 template<class T, typename F>
 class wxSortedArray_SortFunction
 {
 public:
-    typedef F CMPFUNC;
+	typedef F CMPFUNC;
 
-    wxSortedArray_SortFunction(CMPFUNC f) : m_f(f) { }
-    bool operator()(const T& i1, const T& i2)
-      { return m_f(i1, i2) < 0; }
+	wxSortedArray_SortFunction(CMPFUNC f) : m_f(f) { }
+	bool operator()(const T& i1, const T& i2)
+	{
+		return m_f(i1, i2) < 0;
+	}
 private:
-    CMPFUNC m_f;
+	CMPFUNC m_f;
 };
 
 #define  _WX_DECLARE_BASEARRAY(T, name, classexp)                   \

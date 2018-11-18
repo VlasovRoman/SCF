@@ -22,20 +22,20 @@ struct wxIfImpl;
 template <>
 struct wxIfImpl<true>
 {
-    template<typename TTrue, typename TFalse> struct Result
-    {
-        typedef TTrue value;
-    };
+	template<typename TTrue, typename TFalse> struct Result
+	{
+		typedef TTrue value;
+	};
 };
 
 // specialization for false:
 template<>
 struct wxIfImpl<false>
 {
-    template<typename TTrue, typename TFalse> struct Result
-    {
-        typedef TFalse value;
-    };
+	template<typename TTrue, typename TFalse> struct Result
+	{
+		typedef TFalse value;
+	};
 };
 
 } // namespace wxPrivate
@@ -48,9 +48,9 @@ struct wxIfImpl<false>
 template<bool Cond, typename TTrue, typename TFalse>
 struct wxIf
 {
-    typedef typename wxPrivate::wxIfImpl<Cond>
-                     ::template Result<TTrue, TFalse>::value
-            value;
+	typedef typename wxPrivate::wxIfImpl<Cond>
+	::template Result<TTrue, TFalse>::value
+	value;
 };
 
 #endif // _WX_META_IF_H_

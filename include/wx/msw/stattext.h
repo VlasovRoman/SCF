@@ -14,44 +14,44 @@
 class WXDLLIMPEXP_CORE wxStaticText : public wxStaticTextBase
 {
 public:
-    wxStaticText() { }
+	wxStaticText() { }
 
-    wxStaticText(wxWindow *parent,
-                 wxWindowID id,
-                 const wxString& label,
-                 const wxPoint& pos = wxDefaultPosition,
-                 const wxSize& size = wxDefaultSize,
-                 long style = 0,
-                 const wxString& name = wxStaticTextNameStr)
-    {
-        Create(parent, id, label, pos, size, style, name);
-    }
+	wxStaticText(wxWindow *parent,
+	             wxWindowID id,
+	             const wxString& label,
+	             const wxPoint& pos = wxDefaultPosition,
+	             const wxSize& size = wxDefaultSize,
+	             long style = 0,
+	             const wxString& name = wxStaticTextNameStr)
+	{
+		Create(parent, id, label, pos, size, style, name);
+	}
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxString& label,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = 0,
-                const wxString& name = wxStaticTextNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxStaticTextNameStr);
 
-    // override some methods to resize the window properly
-    virtual void SetLabel(const wxString& label) wxOVERRIDE;
-    virtual bool SetFont( const wxFont &font ) wxOVERRIDE;
+	// override some methods to resize the window properly
+	virtual void SetLabel(const wxString& label) wxOVERRIDE;
+	virtual bool SetFont( const wxFont &font ) wxOVERRIDE;
 
-    virtual WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const wxOVERRIDE;
+	virtual WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const wxOVERRIDE;
 
 protected:
-    // implement/override some base class virtuals
-    virtual void DoSetSize(int x, int y, int w, int h,
-                           int sizeFlags = wxSIZE_AUTO) wxOVERRIDE;
-    virtual wxSize DoGetBestClientSize() const wxOVERRIDE;
+	// implement/override some base class virtuals
+	virtual void DoSetSize(int x, int y, int w, int h,
+	                       int sizeFlags = wxSIZE_AUTO) wxOVERRIDE;
+	virtual wxSize DoGetBestClientSize() const wxOVERRIDE;
 
-    virtual wxString DoGetLabel() const wxOVERRIDE;
-    virtual void DoSetLabel(const wxString& str) wxOVERRIDE;
+	virtual wxString DoGetLabel() const wxOVERRIDE;
+	virtual void DoSetLabel(const wxString& str) wxOVERRIDE;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxStaticText);
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxStaticText);
 };
 
 #endif
-    // _WX_STATTEXT_H_
+// _WX_STATTEXT_H_

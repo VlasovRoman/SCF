@@ -34,54 +34,54 @@ struct IDataObject;
 class WXDLLIMPEXP_CORE wxDropTarget : public wxDropTargetBase
 {
 public:
-    // ctor & dtor
-    wxDropTarget(wxDataObject *dataObject = NULL);
-    virtual ~wxDropTarget();
+	// ctor & dtor
+	wxDropTarget(wxDataObject *dataObject = NULL);
+	virtual ~wxDropTarget();
 
-    // normally called by wxWindow on window creation/destruction, but might be
-    // called `manually' as well. Register() returns true on success.
-    bool Register(WXHWND hwnd);
-    void Revoke(WXHWND hwnd);
+	// normally called by wxWindow on window creation/destruction, but might be
+	// called `manually' as well. Register() returns true on success.
+	bool Register(WXHWND hwnd);
+	void Revoke(WXHWND hwnd);
 
-    // provide default implementation for base class pure virtuals
-    virtual bool OnDrop(wxCoord x, wxCoord y) wxOVERRIDE;
-    virtual bool GetData() wxOVERRIDE;
+	// provide default implementation for base class pure virtuals
+	virtual bool OnDrop(wxCoord x, wxCoord y) wxOVERRIDE;
+	virtual bool GetData() wxOVERRIDE;
 
-    // Can only be called during OnXXX methods.
-    wxDataFormat GetMatchingPair();
+	// Can only be called during OnXXX methods.
+	wxDataFormat GetMatchingPair();
 
-    // implementation only from now on
-    // -------------------------------
+	// implementation only from now on
+	// -------------------------------
 
-    // do we accept this kind of data?
-    bool MSWIsAcceptedData(IDataObject *pIDataSource) const;
+	// do we accept this kind of data?
+	bool MSWIsAcceptedData(IDataObject *pIDataSource) const;
 
-    // give us the data source from IDropTarget::Drop() - this is later used by
-    // GetData() when it's called from inside OnData()
-    void MSWSetDataSource(IDataObject *pIDataSource);
+	// give us the data source from IDropTarget::Drop() - this is later used by
+	// GetData() when it's called from inside OnData()
+	void MSWSetDataSource(IDataObject *pIDataSource);
 
-    // These functions take care of all things necessary to support native drag
-    // images.
-    //
-    // {Init,End}DragImageSupport() are called during Register/Revoke,
-    // UpdateDragImageOnXXX() functions are called on the corresponding drop
-    // target events.
-    void MSWInitDragImageSupport();
-    void MSWEndDragImageSupport();
-    void MSWUpdateDragImageOnData(wxCoord x, wxCoord y, wxDragResult res);
-    void MSWUpdateDragImageOnDragOver(wxCoord x, wxCoord y, wxDragResult res);
-    void MSWUpdateDragImageOnEnter(wxCoord x, wxCoord y, wxDragResult res);
-    void MSWUpdateDragImageOnLeave();
+	// These functions take care of all things necessary to support native drag
+	// images.
+	//
+	// {Init,End}DragImageSupport() are called during Register/Revoke,
+	// UpdateDragImageOnXXX() functions are called on the corresponding drop
+	// target events.
+	void MSWInitDragImageSupport();
+	void MSWEndDragImageSupport();
+	void MSWUpdateDragImageOnData(wxCoord x, wxCoord y, wxDragResult res);
+	void MSWUpdateDragImageOnDragOver(wxCoord x, wxCoord y, wxDragResult res);
+	void MSWUpdateDragImageOnEnter(wxCoord x, wxCoord y, wxDragResult res);
+	void MSWUpdateDragImageOnLeave();
 
 private:
-    // helper used by IsAcceptedData() and GetData()
-    wxDataFormat MSWGetSupportedFormat(IDataObject *pIDataSource) const;
+	// helper used by IsAcceptedData() and GetData()
+	wxDataFormat MSWGetSupportedFormat(IDataObject *pIDataSource) const;
 
-    wxIDropTarget     *m_pIDropTarget; // the pointer to our COM interface
-    IDataObject       *m_pIDataSource; // the pointer to the source data object
-    wxIDropTargetHelper *m_dropTargetHelper; // the drop target helper
+	wxIDropTarget     *m_pIDropTarget; // the pointer to our COM interface
+	IDataObject       *m_pIDataSource; // the pointer to the source data object
+	wxIDropTargetHelper *m_dropTargetHelper; // the drop target helper
 
-    wxDECLARE_NO_COPY_CLASS(wxDropTarget);
+	wxDECLARE_NO_COPY_CLASS(wxDropTarget);
 };
 
 #endif  //wxUSE_DRAG_AND_DROP

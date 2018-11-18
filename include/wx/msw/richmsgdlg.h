@@ -13,18 +13,18 @@
 class WXDLLIMPEXP_CORE wxRichMessageDialog : public wxGenericRichMessageDialog
 {
 public:
-    wxRichMessageDialog(wxWindow *parent,
-                        const wxString& message,
-                        const wxString& caption = wxMessageBoxCaptionStr,
-                        long style = wxOK | wxCENTRE)
-        : wxGenericRichMessageDialog(parent, message, caption, style)
-        { }
+	wxRichMessageDialog(wxWindow *parent,
+	                    const wxString& message,
+	                    const wxString& caption = wxMessageBoxCaptionStr,
+	                    long style = wxOK | wxCENTRE)
+		: wxGenericRichMessageDialog(parent, message, caption, style)
+	{ }
 
-    // overridden base class method showing the native task dialog if possible
-    virtual int ShowModal() wxOVERRIDE;
+	// overridden base class method showing the native task dialog if possible
+	virtual int ShowModal() wxOVERRIDE;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxRichMessageDialog);
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxRichMessageDialog);
 };
 
 #endif // _WX_MSW_RICHMSGDLG_H_

@@ -16,12 +16,12 @@
 
 class WXDLLIMPEXP_XRC wxStaticBitmapXmlHandler : public wxXmlResourceHandler
 {
-    wxDECLARE_DYNAMIC_CLASS(wxStaticBitmapXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxStaticBitmapXmlHandler);
 
 public:
-    wxStaticBitmapXmlHandler();
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	wxStaticBitmapXmlHandler();
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 };
 
 #endif // wxUSE_XRC && wxUSE_STATBMP

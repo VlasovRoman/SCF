@@ -18,7 +18,7 @@
 #include "wx/msw/missing.h"
 
 #if wxUSE_COMMON_DIALOGS
-    #include <commdlg.h>
+#include <commdlg.h>
 #endif
 
 #include "wx/msw/winundef.h"

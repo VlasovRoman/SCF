@@ -13,28 +13,28 @@ class QFrame;
 class WXDLLIMPEXP_CORE wxStaticLine : public wxStaticLineBase
 {
 public:
-    wxStaticLine();
+	wxStaticLine();
 
-    wxStaticLine( wxWindow *parent,
-                  wxWindowID id = wxID_ANY,
-                  const wxPoint& pos = wxDefaultPosition,
-                  const wxSize& size = wxDefaultSize,
-                  long style = wxLI_HORIZONTAL,
-                  const wxString &name = wxStaticLineNameStr );
+	wxStaticLine( wxWindow *parent,
+	              wxWindowID id = wxID_ANY,
+	              const wxPoint& pos = wxDefaultPosition,
+	              const wxSize& size = wxDefaultSize,
+	              long style = wxLI_HORIZONTAL,
+	              const wxString &name = wxStaticLineNameStr );
 
-    bool Create( wxWindow *parent,
-                 wxWindowID id = wxID_ANY,
-                 const wxPoint& pos = wxDefaultPosition,
-                 const wxSize& size = wxDefaultSize,
-                 long style = wxLI_HORIZONTAL,
-                 const wxString &name = wxStaticLineNameStr );
+	bool Create( wxWindow *parent,
+	             wxWindowID id = wxID_ANY,
+	             const wxPoint& pos = wxDefaultPosition,
+	             const wxSize& size = wxDefaultSize,
+	             long style = wxLI_HORIZONTAL,
+	             const wxString &name = wxStaticLineNameStr );
 
-    virtual QWidget *GetHandle() const;
+	virtual QWidget *GetHandle() const;
 
 private:
-    QFrame *m_qtFrame;
+	QFrame *m_qtFrame;
 
-    wxDECLARE_DYNAMIC_CLASS( wxStaticLine );
+	wxDECLARE_DYNAMIC_CLASS( wxStaticLine );
 };
 
 #endif // _WX_QT_STATLINE_H_

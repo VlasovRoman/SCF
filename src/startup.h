@@ -2,6 +2,7 @@
 #include "temp_data.h"
 #include "moho.h"
 #include "supportCode.h"
+#include "checkSystemInfo.h"
 #include <shlobj.h>
 #include <cstdio>
 #include <windows.h>
@@ -12,9 +13,12 @@
 #include <tchar.h>
 #include <string>
 #include <Shlobj.h>
+#include <dbghelp.h>
 
 // WXWINDGETS-------
-#include <wx/app.h> 
+#include <wx/app.h>
+#include <wx/wxprec.h>
+#include "CScApp.h"
 
 
 //------------------
@@ -44,5 +48,8 @@ __attribute__((cdecl)) void sub_8D1E50(char a1, char a2, char a3);
 void close_criticalSection_file(void);
 FILE set_PerformanceFrequency(const char *a1);
 void debug_pause();
+void wait_thread_object(int _this);
+void wait_thread_object_destruc(int _this);
+unsigned long swap_thread_objs(int a1, unsigned long *Destination);
 //__attribute__((cdecl)) char sub_41B560(char *a1, int a2, char *Str2);
 

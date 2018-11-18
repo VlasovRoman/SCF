@@ -25,91 +25,91 @@ class WXDLLIMPEXP_FWD_CORE wxGraphicsPath;
 class WXDLLIMPEXP_CORE wxNonOwnedWindowBase : public wxWindow
 {
 public:
-    // Set the shape of the window to the given region.
-    // Returns true if the platform supports this feature (and the
-    // operation is successful.)
-    bool SetShape(const wxRegion& region)
-    {
-        // This style is in fact only needed by wxOSX/Carbon so once we don't
-        // use this port any more, we could get rid of this requirement, but
-        // for now you must specify wxFRAME_SHAPED for SetShape() to work on
-        // all platforms.
-        wxCHECK_MSG
-        (
-            HasFlag(wxFRAME_SHAPED), false,
-            wxS("Shaped windows must be created with the wxFRAME_SHAPED style.")
-        );
+	// Set the shape of the window to the given region.
+	// Returns true if the platform supports this feature (and the
+	// operation is successful.)
+	bool SetShape(const wxRegion& region)
+	{
+		// This style is in fact only needed by wxOSX/Carbon so once we don't
+		// use this port any more, we could get rid of this requirement, but
+		// for now you must specify wxFRAME_SHAPED for SetShape() to work on
+		// all platforms.
+		wxCHECK_MSG
+		(
+		    HasFlag(wxFRAME_SHAPED), false,
+		    wxS("Shaped windows must be created with the wxFRAME_SHAPED style.")
+		);
 
-        return region.IsEmpty() ? DoClearShape() : DoSetRegionShape(region);
-    }
+		return region.IsEmpty() ? DoClearShape() : DoSetRegionShape(region);
+	}
 
 #if wxUSE_GRAPHICS_CONTEXT
-    // Set the shape using the specified path.
-    bool SetShape(const wxGraphicsPath& path)
-    {
-        wxCHECK_MSG
-        (
-            HasFlag(wxFRAME_SHAPED), false,
-            wxS("Shaped windows must be created with the wxFRAME_SHAPED style.")
-        );
+	// Set the shape using the specified path.
+	bool SetShape(const wxGraphicsPath& path)
+	{
+		wxCHECK_MSG
+		(
+		    HasFlag(wxFRAME_SHAPED), false,
+		    wxS("Shaped windows must be created with the wxFRAME_SHAPED style.")
+		);
 
-        return DoSetPathShape(path);
-    }
+		return DoSetPathShape(path);
+	}
 #endif // wxUSE_GRAPHICS_CONTEXT
 
 
-    // Overridden base class methods.
-    // ------------------------------
+	// Overridden base class methods.
+	// ------------------------------
 
-    virtual void AdjustForParentClientOrigin(int& WXUNUSED(x), int& WXUNUSED(y),
-                                             int WXUNUSED(sizeFlags) = 0) const wxOVERRIDE
-    {
-        // Non owned windows positions don't need to be adjusted for parent
-        // client area origin so simply do nothing here.
-    }
+	virtual void AdjustForParentClientOrigin(int& WXUNUSED(x), int& WXUNUSED(y),
+	        int WXUNUSED(sizeFlags) = 0) const wxOVERRIDE
+	{
+		// Non owned windows positions don't need to be adjusted for parent
+		// client area origin so simply do nothing here.
+	}
 
-    virtual void InheritAttributes() wxOVERRIDE
-    {
-        // Non owned windows don't inherit attributes from their parent window
-        // (if the parent frame is red, it doesn't mean that all dialogs shown
-        // by it should be red as well), so don't do anything here neither.
-    }
+	virtual void InheritAttributes() wxOVERRIDE
+	{
+		// Non owned windows don't inherit attributes from their parent window
+		// (if the parent frame is red, it doesn't mean that all dialogs shown
+		// by it should be red as well), so don't do anything here neither.
+	}
 
 protected:
-    virtual bool DoClearShape()
-    {
-        return false;
-    }
+	virtual bool DoClearShape()
+	{
+		return false;
+	}
 
-    virtual bool DoSetRegionShape(const wxRegion& WXUNUSED(region))
-    {
-        return false;
-    }
+	virtual bool DoSetRegionShape(const wxRegion& WXUNUSED(region))
+	{
+		return false;
+	}
 
 #if wxUSE_GRAPHICS_CONTEXT
-    virtual bool DoSetPathShape(const wxGraphicsPath& WXUNUSED(path))
-    {
-        return false;
-    }
+	virtual bool DoSetPathShape(const wxGraphicsPath& WXUNUSED(path))
+	{
+		return false;
+	}
 #endif // wxUSE_GRAPHICS_CONTEXT
 };
 
 #if defined(__WXDFB__)
-    #include "wx/dfb/nonownedwnd.h"
+#include "wx/dfb/nonownedwnd.h"
 #elif defined(__WXGTK20__)
-    #include "wx/gtk/nonownedwnd.h"
+#include "wx/gtk/nonownedwnd.h"
 #elif defined(__WXMAC__)
-    #include "wx/osx/nonownedwnd.h"
+#include "wx/osx/nonownedwnd.h"
 #elif defined(__WXMSW__)
-    #include "wx/msw/nonownedwnd.h"
+#include "wx/msw/nonownedwnd.h"
 #elif defined(__WXQT__)
-    #include "wx/qt/nonownedwnd.h"
+#include "wx/qt/nonownedwnd.h"
 #else
-    // No special class needed in other ports, they can derive both wxTLW and
-    // wxPopupWindow directly from wxWindow and don't implement SetShape().
-    class wxNonOwnedWindow : public wxNonOwnedWindowBase
-    {
-    };
+// No special class needed in other ports, they can derive both wxTLW and
+// wxPopupWindow directly from wxWindow and don't implement SetShape().
+class wxNonOwnedWindow : public wxNonOwnedWindowBase
+{
+};
 #endif
 
 #endif // _WX_NONOWNEDWND_H_

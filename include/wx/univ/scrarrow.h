@@ -35,43 +35,43 @@ class WXDLLIMPEXP_FWD_CORE wxRenderer;
 class WXDLLIMPEXP_CORE wxScrollArrows
 {
 public:
-    enum Arrow
-    {
-        Arrow_None = -1,
-        Arrow_First,        // left or top
-        Arrow_Second,       // right or bottom
-        Arrow_Max
-    };
+	enum Arrow
+	{
+		Arrow_None = -1,
+		Arrow_First,        // left or top
+		Arrow_Second,       // right or bottom
+		Arrow_Max
+	};
 
-    // ctor requires a back pointer to wxControlWithArrows
-    wxScrollArrows(wxControlWithArrows *control);
+	// ctor requires a back pointer to wxControlWithArrows
+	wxScrollArrows(wxControlWithArrows *control);
 
-    // draws the arrow on the given DC in the given rectangle, uses
-    // wxControlWithArrows::GetArrowState() to get its current state
-    void DrawArrow(Arrow arrow, wxDC& dc, const wxRect& rect,
-                   bool scrollbarLike = false) const;
+	// draws the arrow on the given DC in the given rectangle, uses
+	// wxControlWithArrows::GetArrowState() to get its current state
+	void DrawArrow(Arrow arrow, wxDC& dc, const wxRect& rect,
+	               bool scrollbarLike = false) const;
 
-    // process a mouse move, enter or leave event, possibly calling
-    // wxControlWithArrows::SetArrowState() if
-    // wxControlWithArrows::HitTestArrow() says that the mouse has left/entered
-    // an arrow
-    bool HandleMouseMove(const wxMouseEvent& event) const;
+	// process a mouse move, enter or leave event, possibly calling
+	// wxControlWithArrows::SetArrowState() if
+	// wxControlWithArrows::HitTestArrow() says that the mouse has left/entered
+	// an arrow
+	bool HandleMouseMove(const wxMouseEvent& event) const;
 
-    // process a mouse click event
-    bool HandleMouse(const wxMouseEvent& event) const;
+	// process a mouse click event
+	bool HandleMouse(const wxMouseEvent& event) const;
 
-    // dtor
-    ~wxScrollArrows();
+	// dtor
+	~wxScrollArrows();
 
 private:
-    // set or clear the wxCONTROL_CURRENT flag for the arrow
-    void UpdateCurrentFlag(Arrow arrow, Arrow arrowCur) const;
+	// set or clear the wxCONTROL_CURRENT flag for the arrow
+	void UpdateCurrentFlag(Arrow arrow, Arrow arrowCur) const;
 
-    // the main control
-    wxControlWithArrows *m_control;
+	// the main control
+	wxControlWithArrows *m_control;
 
-    // the data for the mouse capture
-    struct wxScrollArrowCaptureData *m_captureData;
+	// the data for the mouse capture
+	struct wxScrollArrowCaptureData *m_captureData;
 };
 
 // ----------------------------------------------------------------------------
@@ -81,31 +81,31 @@ private:
 class WXDLLIMPEXP_CORE wxControlWithArrows
 {
 public:
-    virtual ~wxControlWithArrows() {}
+	virtual ~wxControlWithArrows() {}
 
-    // get the renderer to use for drawing the arrows
-    virtual wxRenderer *GetRenderer() const = 0;
+	// get the renderer to use for drawing the arrows
+	virtual wxRenderer *GetRenderer() const = 0;
 
-    // get the controls window (used for mouse capturing)
-    virtual wxWindow *GetWindow() = 0;
+	// get the controls window (used for mouse capturing)
+	virtual wxWindow *GetWindow() = 0;
 
-    // get the orientation of the arrows (vertical or horizontal)
-    virtual bool IsVertical() const = 0;
+	// get the orientation of the arrows (vertical or horizontal)
+	virtual bool IsVertical() const = 0;
 
-    // get the state of this arrow as combination of wxCONTROL_XXX flags
-    virtual int GetArrowState(wxScrollArrows::Arrow arrow) const = 0;
+	// get the state of this arrow as combination of wxCONTROL_XXX flags
+	virtual int GetArrowState(wxScrollArrows::Arrow arrow) const = 0;
 
-    // set or clear the specified flag in the arrow state: this function is
-    // responsible for refreshing the control
-    virtual void SetArrowFlag(wxScrollArrows::Arrow arrow,
-                              int flag, bool set = true) = 0;
+	// set or clear the specified flag in the arrow state: this function is
+	// responsible for refreshing the control
+	virtual void SetArrowFlag(wxScrollArrows::Arrow arrow,
+	                          int flag, bool set = true) = 0;
 
-    // hit testing: return on which arrow the point is (or Arrow_None)
-    virtual wxScrollArrows::Arrow HitTestArrow(const wxPoint& pt) const = 0;
+	// hit testing: return on which arrow the point is (or Arrow_None)
+	virtual wxScrollArrows::Arrow HitTestArrow(const wxPoint& pt) const = 0;
 
-    // called when the arrow is pressed, return true to continue scrolling and
-    // false to stop it
-    virtual bool OnArrow(wxScrollArrows::Arrow arrow) = 0;
+	// called when the arrow is pressed, return true to continue scrolling and
+	// false to stop it
+	virtual bool OnArrow(wxScrollArrows::Arrow arrow) = 0;
 };
 
 #endif // _WX_UNIV_SCRARROW_H_

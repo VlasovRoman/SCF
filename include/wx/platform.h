@@ -80,7 +80,7 @@
 #endif /* Any standard symbol indicating Windows */
 
 #if defined(__WINDOWS__)
-    /* Select wxMSW under Windows if no other port is specified. */
+/* Select wxMSW under Windows if no other port is specified. */
 #   if !defined(__WXMSW__) && !defined(__WXMOTIF__) && !defined(__WXGTK__) && !defined(__WXX11__)
 #       define __WXMSW__
 #   endif
@@ -97,8 +97,8 @@
 #        define __WIN32__
 #   endif
 
-    /* MSVC predefines _WIN64 for 64 bit builds, for gcc we use generic
-       architecture definitions. */
+/* MSVC predefines _WIN64 for 64 bit builds, for gcc we use generic
+   architecture definitions. */
 #   if defined(_WIN64) || defined(__x86_64__)
 #       ifndef __WIN64__
 #           define __WIN64__
@@ -151,7 +151,7 @@
    Convenience for any optional classes that use the wxAnyButton base class.
  */
 #if wxUSE_TOGGLEBTN || wxUSE_BUTTON
-    #define wxHAS_ANY_BUTTON
+#define wxHAS_ANY_BUTTON
 #endif
 
 
@@ -161,27 +161,27 @@
    VC++ defines _M_xxx symbols.
  */
 #if defined(_M_IX86) || defined(i386) || defined(__i386) || defined(__i386__)
-    #ifndef __INTEL__
-        #define __INTEL__
-    #endif
+#ifndef __INTEL__
+#define __INTEL__
+#endif
 #endif /* x86 */
 
 #if defined(_M_IA64)
-    #ifndef __IA64__
-        #define __IA64__
-    #endif
+#ifndef __IA64__
+#define __IA64__
+#endif
 #endif /* ia64 */
 
 #if defined(_M_MPPC) || defined(__PPC__) || defined(__ppc__)
-    #ifndef __POWERPC__
-        #define __POWERPC__
-    #endif
+#ifndef __POWERPC__
+#define __POWERPC__
+#endif
 #endif /* alpha */
 
 #if defined(_M_ALPHA) || defined(__AXP__)
-    #ifndef __ALPHA__
-        #define __ALPHA__
-    #endif
+#ifndef __ALPHA__
+#define __ALPHA__
+#endif
 #endif /* alpha */
 
 
@@ -223,29 +223,29 @@
     workarounds. Mostly pertains to the free command line compiler 5.5.1.
 */
 #if defined(__BORLANDC__) && (__BORLANDC__ <= 0x551)
-    /*
-        The Borland free compiler is unable to handle overloaded enum
-        comparisons under certain conditions e.g. when any class has a
-        conversion ctor for an integral type and there's an overload to
-        compare between an integral type and that class type.
-    */
+/*
+    The Borland free compiler is unable to handle overloaded enum
+    comparisons under certain conditions e.g. when any class has a
+    conversion ctor for an integral type and there's an overload to
+    compare between an integral type and that class type.
+*/
 #   define wxCOMPILER_NO_OVERLOAD_ON_ENUM
 
-    /*
-        This is needed to overcome bugs in 5.5.1 STL, linking errors will
-        result if it is not defined.
-     */
+/*
+    This is needed to overcome bugs in 5.5.1 STL, linking errors will
+    result if it is not defined.
+ */
 #   define _RWSTD_COMPILE_INSTANTIATE
 
-    /*
-        Preprocessor in older Borland compilers have major problems
-        concatenating with ##. Specifically, if the string operands being
-        concatenated have special meaning (e.g. L"str", 123i64 etc)
-        then ## will not concatenate the operands correctly.
+/*
+    Preprocessor in older Borland compilers have major problems
+    concatenating with ##. Specifically, if the string operands being
+    concatenated have special meaning (e.g. L"str", 123i64 etc)
+    then ## will not concatenate the operands correctly.
 
-        As a workaround, define wxPREPEND* and wxAPPEND* without using
-        wxCONCAT_HELPER.
-    */
+    As a workaround, define wxPREPEND* and wxAPPEND* without using
+    wxCONCAT_HELPER.
+*/
 #   define wxCOMPILER_BROKEN_CONCAT_OPER
 #endif /* __BORLANDC__ */
 
@@ -264,33 +264,33 @@
 #    ifdef __SGI__
 #        ifdef __GNUG__
 #        else /* !gcc */
-            /*
-               Note I use the term __SGI_CC__ for both cc and CC, its not a good
-               idea to mix gcc and cc/CC, the name mangling is different
-             */
+/*
+   Note I use the term __SGI_CC__ for both cc and CC, its not a good
+   idea to mix gcc and cc/CC, the name mangling is different
+ */
 #            define __SGI_CC__
 #        endif /* gcc/!gcc */
 
-        /* system headers use this symbol and not __cplusplus in some places */
+/* system headers use this symbol and not __cplusplus in some places */
 #       ifndef _LANGUAGE_C_PLUS_PLUS
 #           define _LANGUAGE_C_PLUS_PLUS
 #       endif
 #    endif  /* SGI */
 
 #    if defined(__INNOTEK_LIBC__)
-        /* Ensure visibility of strnlen declaration */
+/* Ensure visibility of strnlen declaration */
 #        define _GNU_SOURCE
 #    endif
 
-    /* define __HPUX__ for HP-UX where standard macro is __hpux */
+/* define __HPUX__ for HP-UX where standard macro is __hpux */
 #    if defined(__hpux) && !defined(__HPUX__)
 #        define __HPUX__
 #    endif /* HP-UX */
 
-    /*  All of these should already be defined by including configure-
-        generated setup.h but we wish to support Xcode compilation without
-        requiring the user to define these himself.
-     */
+/*  All of these should already be defined by including configure-
+    generated setup.h but we wish to support Xcode compilation without
+    requiring the user to define these himself.
+ */
 #    if defined(__APPLE__) && defined(__MACH__)
 #        ifndef __UNIX__
 #            define __UNIX__ 1
@@ -298,11 +298,11 @@
 #        ifndef __BSD__
 #            define __BSD__ 1
 #        endif
-        /*  __DARWIN__ is our own define to mean OS X or pure Darwin */
+/*  __DARWIN__ is our own define to mean OS X or pure Darwin */
 #        ifndef __DARWIN__
 #            define __DARWIN__ 1
 #        endif
-        /* OS X uses unsigned long size_t for both ILP32 and LP64 modes. */
+/* OS X uses unsigned long size_t for both ILP32 and LP64 modes. */
 #        if !defined(wxSIZE_T_IS_UINT) && !defined(wxSIZE_T_IS_ULONG)
 #            define wxSIZE_T_IS_ULONG
 #        endif
@@ -313,13 +313,13 @@
  */
 #elif defined(__WINDOWS__)
 
-    /* to be changed for Win64! */
+/* to be changed for Win64! */
 #    ifndef __WIN32__
 #        error "__WIN32__ should be defined for Win32 and Win64, Win16 is not supported"
 #    endif
 
-    /* size_t is the same as unsigned int for all Windows compilers we know, */
-    /* so define it if it hadn't been done by configure yet */
+/* size_t is the same as unsigned int for all Windows compilers we know, */
+/* so define it if it hadn't been done by configure yet */
 #    if !defined(wxSIZE_T_IS_UINT) && !defined(wxSIZE_T_IS_ULONG) && !defined(__WIN64__)
 #        define wxSIZE_T_IS_UINT
 #    endif
@@ -604,10 +604,10 @@
     g++) or by editing project files with MSVC so test for it here too.
  */
 #ifndef wxNO_RTTI
-    /*
-        Only 4.3 defines __GXX_RTTI by default so its absence is not an
-        indication of disabled RTTI with the previous versions.
-     */
+/*
+    Only 4.3 defines __GXX_RTTI by default so its absence is not an
+    indication of disabled RTTI with the previous versions.
+ */
 #   if wxCHECK_GCC_VERSION(4, 3)
 #       ifndef __GXX_RTTI
 #           define wxNO_RTTI

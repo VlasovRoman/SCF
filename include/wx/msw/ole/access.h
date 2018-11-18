@@ -32,34 +32,37 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 class WXDLLIMPEXP_CORE wxAccessible : public wxAccessibleBase
 {
 public:
-    wxAccessible(wxWindow *win = NULL);
-    virtual ~wxAccessible();
+	wxAccessible(wxWindow *win = NULL);
+	virtual ~wxAccessible();
 
 // Overridables
 
 // Accessors
 
-    // Returns the wxIAccessible pointer
-    wxIAccessible* GetIAccessible() { return m_pIAccessible; }
+	// Returns the wxIAccessible pointer
+	wxIAccessible* GetIAccessible()
+	{
+		return m_pIAccessible;
+	}
 
-    // Returns the IAccessible standard interface pointer
-    IAccessible* GetIAccessibleStd();
+	// Returns the IAccessible standard interface pointer
+	IAccessible* GetIAccessibleStd();
 
 // Operations
 
-    // Sends an event when something changes in an accessible object.
-    static void NotifyEvent(int eventType, wxWindow* window, wxAccObject objectType,
-                            int objectId);
+	// Sends an event when something changes in an accessible object.
+	static void NotifyEvent(int eventType, wxWindow* window, wxAccObject objectType,
+	                        int objectId);
 
 protected:
-    void Init();
+	void Init();
 
 private:
-    wxIAccessible * m_pIAccessible;  // the pointer to COM interface
-    IAccessible*    m_pIAccessibleStd;  // the pointer to the standard COM interface,
-                                        // for default processing
+	wxIAccessible * m_pIAccessible;  // the pointer to COM interface
+	IAccessible*    m_pIAccessibleStd;  // the pointer to the standard COM interface,
+	// for default processing
 
-    wxDECLARE_NO_COPY_CLASS(wxAccessible);
+	wxDECLARE_NO_COPY_CLASS(wxAccessible);
 };
 
 #endif  //wxUSE_ACCESSIBILITY

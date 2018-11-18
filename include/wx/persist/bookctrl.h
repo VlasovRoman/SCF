@@ -29,38 +29,41 @@
 class wxPersistentBookCtrl : public wxPersistentWindow<wxBookCtrlBase>
 {
 public:
-    wxPersistentBookCtrl(wxBookCtrlBase *book)
-        : wxPersistentWindow<wxBookCtrlBase>(book)
-    {
-    }
+	wxPersistentBookCtrl(wxBookCtrlBase *book)
+		: wxPersistentWindow<wxBookCtrlBase>(book)
+	{
+	}
 
-    virtual void Save() const wxOVERRIDE
-    {
-        SaveValue(wxPERSIST_BOOK_SELECTION, Get()->GetSelection());
-    }
+	virtual void Save() const wxOVERRIDE
+	{
+		SaveValue(wxPERSIST_BOOK_SELECTION, Get()->GetSelection());
+	}
 
-    virtual bool Restore() wxOVERRIDE
-    {
-        long sel;
-        if ( RestoreValue(wxPERSIST_BOOK_SELECTION, &sel) )
-        {
-            wxBookCtrlBase * const book = Get();
-            if ( sel >= 0 && (unsigned)sel < book->GetPageCount() )
-            {
-                book->SetSelection(sel);
-                return true;
-            }
-        }
+	virtual bool Restore() wxOVERRIDE
+	{
+		long sel;
+		if ( RestoreValue(wxPERSIST_BOOK_SELECTION, &sel) )
+		{
+			wxBookCtrlBase * const book = Get();
+			if ( sel >= 0 && (unsigned)sel < book->GetPageCount() )
+			{
+				book->SetSelection(sel);
+				return true;
+			}
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    virtual wxString GetKind() const wxOVERRIDE { return wxPERSIST_BOOK_KIND; }
+	virtual wxString GetKind() const wxOVERRIDE
+	{
+		return wxPERSIST_BOOK_KIND;
+	}
 };
 
 inline wxPersistentObject *wxCreatePersistentObject(wxBookCtrlBase *book)
 {
-    return new wxPersistentBookCtrl(book);
+	return new wxPersistentBookCtrl(book);
 }
 
 #endif // _WX_PERSIST_BOOKCTRL_H_

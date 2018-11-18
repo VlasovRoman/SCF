@@ -17,13 +17,13 @@
 class WXDLLIMPEXP_XRC wxCommandLinkButtonXmlHandler : public wxXmlResourceHandler
 {
 public:
-    wxCommandLinkButtonXmlHandler();
+	wxCommandLinkButtonXmlHandler();
 
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxCommandLinkButtonXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxCommandLinkButtonXmlHandler);
 };
 
 #endif // wxUSE_XRC && wxUSE_COMMANDLINKBUTTON

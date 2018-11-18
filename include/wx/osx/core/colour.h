@@ -22,67 +22,94 @@ struct RGBColor;
 class WXDLLIMPEXP_CORE wxColour: public wxColourBase
 {
 public:
-    // constructors
-    // ------------
-    DEFINE_STD_WXCOLOUR_CONSTRUCTORS
+	// constructors
+	// ------------
+	DEFINE_STD_WXCOLOUR_CONSTRUCTORS
 
-    // default copy ctor and dtor are ok
+	// default copy ctor and dtor are ok
 
-    // accessors
-    virtual bool IsOk() const { return m_cgColour != NULL; }
+	// accessors
+	virtual bool IsOk() const
+	{
+		return m_cgColour != NULL;
+	}
 
-    virtual WXDLLIMPEXP_INLINE_CORE ChannelType Red() const { return m_red; }
-    virtual WXDLLIMPEXP_INLINE_CORE ChannelType Green() const { return m_green; }
-    virtual WXDLLIMPEXP_INLINE_CORE ChannelType Blue() const { return m_blue; }
-    virtual WXDLLIMPEXP_INLINE_CORE ChannelType Alpha() const { return m_alpha; }
+	virtual WXDLLIMPEXP_INLINE_CORE ChannelType Red() const
+	{
+		return m_red;
+	}
+	virtual WXDLLIMPEXP_INLINE_CORE ChannelType Green() const
+	{
+		return m_green;
+	}
+	virtual WXDLLIMPEXP_INLINE_CORE ChannelType Blue() const
+	{
+		return m_blue;
+	}
+	virtual WXDLLIMPEXP_INLINE_CORE ChannelType Alpha() const
+	{
+		return m_alpha;
+	}
 
-    // comparison
-    bool operator == (const wxColour& colour) const;
+	// comparison
+	bool operator == (const wxColour& colour) const;
 
-    bool operator != (const wxColour& colour) const { return !(*this == colour); }
+	bool operator != (const wxColour& colour) const
+	{
+		return !(*this == colour);
+	}
 
-    CGColorRef GetPixel() const { return m_cgColour; }
+	CGColorRef GetPixel() const
+	{
+		return m_cgColour;
+	}
 
-    CGColorRef GetCGColor() const { return m_cgColour; }
-    CGColorRef CreateCGColor() const { return wxCFRetain( (CGColorRef)m_cgColour ); }
+	CGColorRef GetCGColor() const
+	{
+		return m_cgColour;
+	}
+	CGColorRef CreateCGColor() const
+	{
+		return wxCFRetain( (CGColorRef)m_cgColour );
+	}
 
 #if wxOSX_USE_COCOA_OR_CARBON
-    void GetRGBColor( RGBColor *col ) const;
+	void GetRGBColor( RGBColor *col ) const;
 #endif
 
-    // Mac-specific ctor and assignment operator from the native colour
-    // assumes ownership of CGColorRef
-    wxColour( CGColorRef col );
+	// Mac-specific ctor and assignment operator from the native colour
+	// assumes ownership of CGColorRef
+	wxColour( CGColorRef col );
 #if wxOSX_USE_COCOA_OR_CARBON
-    wxColour(const RGBColor& col);
-    wxColour& operator=(const RGBColor& col);
+	wxColour(const RGBColor& col);
+	wxColour& operator=(const RGBColor& col);
 #endif
 #if wxOSX_USE_COCOA
-    // This ctor does not take ownership of the color.
-    explicit wxColour(WX_NSColor color);
-    WX_NSColor OSXGetNSColor() const;
+	// This ctor does not take ownership of the color.
+	explicit wxColour(WX_NSColor color);
+	WX_NSColor OSXGetNSColor() const;
 #endif
-    wxColour& operator=(CGColorRef col);
-    wxColour& operator=(const wxColour& col);
+	wxColour& operator=(CGColorRef col);
+	wxColour& operator=(const wxColour& col);
 
 protected :
-    virtual void
-    InitRGBA(ChannelType r, ChannelType g, ChannelType b, ChannelType a);
+	virtual void
+	InitRGBA(ChannelType r, ChannelType g, ChannelType b, ChannelType a);
 #if wxOSX_USE_COCOA_OR_CARBON
-    void InitRGBColor( const RGBColor& col );
+	void InitRGBColor( const RGBColor& col );
 #endif
-    void InitCGColorRef( CGColorRef col );
+	void InitCGColorRef( CGColorRef col );
 
 private:
-    wxCFRef<CGColorRef>     m_cgColour;
+	wxCFRef<CGColorRef>     m_cgColour;
 
-    ChannelType             m_red;
-    ChannelType             m_blue;
-    ChannelType             m_green;
-    ChannelType             m_alpha;
+	ChannelType             m_red;
+	ChannelType             m_blue;
+	ChannelType             m_green;
+	ChannelType             m_alpha;
 
-    wxDECLARE_DYNAMIC_CLASS(wxColour);
+	wxDECLARE_DYNAMIC_CLASS(wxColour);
 };
 
 #endif
-  // _WX_COLOUR_H_
+// _WX_COLOUR_H_

@@ -40,64 +40,76 @@ typedef wxString wxControlAction;
 class WXDLLIMPEXP_CORE wxControl : public wxControlBase, public wxInputConsumer
 {
 public:
-    wxControl() { Init(); }
+	wxControl()
+	{
+		Init();
+	}
 
-    wxControl(wxWindow *parent,
-              wxWindowID id,
-              const wxPoint& pos = wxDefaultPosition,
-              const wxSize& size = wxDefaultSize, long style = 0,
-              const wxValidator& validator = wxDefaultValidator,
-              const wxString& name = wxControlNameStr)
-    {
-        Init();
+	wxControl(wxWindow *parent,
+	          wxWindowID id,
+	          const wxPoint& pos = wxDefaultPosition,
+	          const wxSize& size = wxDefaultSize, long style = 0,
+	          const wxValidator& validator = wxDefaultValidator,
+	          const wxString& name = wxControlNameStr)
+	{
+		Init();
 
-        Create(parent, id, pos, size, style, validator, name);
-    }
+		Create(parent, id, pos, size, style, validator, name);
+	}
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize, long style = 0,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxControlNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize, long style = 0,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxControlNameStr);
 
-    // this function will filter out '&' characters and will put the
-    // accelerator char (the one immediately after '&') into m_chAccel
-    virtual void SetLabel(const wxString& label) wxOVERRIDE;
+	// this function will filter out '&' characters and will put the
+	// accelerator char (the one immediately after '&') into m_chAccel
+	virtual void SetLabel(const wxString& label) wxOVERRIDE;
 
-    // return the current label
-    virtual wxString GetLabel() const wxOVERRIDE { return wxControlBase::GetLabel(); }
+	// return the current label
+	virtual wxString GetLabel() const wxOVERRIDE
+	{
+		return wxControlBase::GetLabel();
+	}
 
-    // wxUniversal-specific methods
+	// wxUniversal-specific methods
 
-    // return the index of the accel char in the label or -1 if none
-    int GetAccelIndex() const { return m_indexAccel; }
+	// return the index of the accel char in the label or -1 if none
+	int GetAccelIndex() const
+	{
+		return m_indexAccel;
+	}
 
-    // return the accel char itself or 0 if none
-    wxChar GetAccelChar() const
-    {
-        return m_indexAccel == -1 ? wxT('\0') : (wxChar)m_label[m_indexAccel];
-    }
+	// return the accel char itself or 0 if none
+	wxChar GetAccelChar() const
+	{
+		return m_indexAccel == -1 ? wxT('\0') : (wxChar)m_label[m_indexAccel];
+	}
 
-    virtual wxWindow *GetInputWindow() const wxOVERRIDE { return (wxWindow*)this; }
+	virtual wxWindow *GetInputWindow() const wxOVERRIDE
+	{
+		return (wxWindow*)this;
+	}
 
 protected:
-    // common part of all ctors
-    void Init();
+	// common part of all ctors
+	void Init();
 
-    // set m_label and m_indexAccel and refresh the control to show the new
-    // label (but, unlike SetLabel(), don't call the base class SetLabel() thus
-    // avoiding to change wxControlBase::m_labelOrig)
-    void UnivDoSetLabel(const wxString& label);
+	// set m_label and m_indexAccel and refresh the control to show the new
+	// label (but, unlike SetLabel(), don't call the base class SetLabel() thus
+	// avoiding to change wxControlBase::m_labelOrig)
+	void UnivDoSetLabel(const wxString& label);
 
 private:
-    // label and accel info
-    wxString   m_label;
-    int        m_indexAccel;
+	// label and accel info
+	wxString   m_label;
+	int        m_indexAccel;
 
-    wxDECLARE_DYNAMIC_CLASS(wxControl);
-    wxDECLARE_EVENT_TABLE();
-    WX_DECLARE_INPUT_CONSUMER()
+	wxDECLARE_DYNAMIC_CLASS(wxControl);
+	wxDECLARE_EVENT_TABLE();
+	WX_DECLARE_INPUT_CONSUMER()
 };
 
 #endif // _WX_UNIV_CONTROL_H_

@@ -18,26 +18,26 @@
 #include "wx/colourdata.h"
 
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)
-    #include "wx/msw/colordlg.h"
+#include "wx/msw/colordlg.h"
 #elif defined(__WXMAC__) && !defined(__WXUNIVERSAL__)
-    #include "wx/osx/colordlg.h"
+#include "wx/osx/colordlg.h"
 #elif defined(__WXGTK20__) && !defined(__WXUNIVERSAL__)
-    #include "wx/gtk/colordlg.h"
+#include "wx/gtk/colordlg.h"
 #elif defined(__WXQT__)
-    #include "wx/qt/colordlg.h"
+#include "wx/qt/colordlg.h"
 #else
-    #include "wx/generic/colrdlgg.h"
+#include "wx/generic/colrdlgg.h"
 
-    #define wxColourDialog wxGenericColourDialog
+#define wxColourDialog wxGenericColourDialog
 #endif
 
 // get the colour from user and return it
 WXDLLIMPEXP_CORE wxColour wxGetColourFromUser(wxWindow *parent = NULL,
-                                              const wxColour& colInit = wxNullColour,
-                                              const wxString& caption = wxEmptyString,
-                                              wxColourData *data = NULL);
+        const wxColour& colInit = wxNullColour,
+        const wxString& caption = wxEmptyString,
+        wxColourData *data = NULL);
 
 #endif // wxUSE_COLOURDLG
 
 #endif
-    // _WX_COLORDLG_H_BASE_
+// _WX_COLORDLG_H_BASE_

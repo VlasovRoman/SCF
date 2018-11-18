@@ -19,18 +19,18 @@
 
 enum wxPowerType
 {
-    wxPOWER_SOCKET,
-    wxPOWER_BATTERY,
-    wxPOWER_UNKNOWN
+	wxPOWER_SOCKET,
+	wxPOWER_BATTERY,
+	wxPOWER_UNKNOWN
 };
 
 enum wxBatteryState
 {
-    wxBATTERY_NORMAL_STATE,    // system is fully usable
-    wxBATTERY_LOW_STATE,       // start to worry
-    wxBATTERY_CRITICAL_STATE,  // save quickly
-    wxBATTERY_SHUTDOWN_STATE,  // too late
-    wxBATTERY_UNKNOWN_STATE
+	wxBATTERY_NORMAL_STATE,    // system is fully usable
+	wxBATTERY_LOW_STATE,       // start to worry
+	wxBATTERY_CRITICAL_STATE,  // save quickly
+	wxBATTERY_SHUTDOWN_STATE,  // too late
+	wxBATTERY_UNKNOWN_STATE
 };
 
 // ----------------------------------------------------------------------------
@@ -48,28 +48,37 @@ enum wxBatteryState
 class WXDLLIMPEXP_BASE wxPowerEvent : public wxEvent
 {
 public:
-    wxPowerEvent()            // just for use by wxRTTI
-        : m_veto(false) { }
+	wxPowerEvent()            // just for use by wxRTTI
+		: m_veto(false) { }
 
-    wxPowerEvent(wxEventType evtType) : wxEvent(wxID_NONE, evtType)
-    {
-        m_veto = false;
-    }
+	wxPowerEvent(wxEventType evtType) : wxEvent(wxID_NONE, evtType)
+	{
+		m_veto = false;
+	}
 
-    // Veto the operation (only makes sense with EVT_POWER_SUSPENDING)
-    void Veto() { m_veto = true; }
+	// Veto the operation (only makes sense with EVT_POWER_SUSPENDING)
+	void Veto()
+	{
+		m_veto = true;
+	}
 
-    bool IsVetoed() const { return m_veto; }
+	bool IsVetoed() const
+	{
+		return m_veto;
+	}
 
 
-    // default copy ctor, assignment operator and dtor are ok
+	// default copy ctor, assignment operator and dtor are ok
 
-    virtual wxEvent *Clone() const wxOVERRIDE { return new wxPowerEvent(*this); }
+	virtual wxEvent *Clone() const wxOVERRIDE
+	{
+		return new wxPowerEvent(*this);
+	}
 
 private:
-    bool m_veto;
+	bool m_veto;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxPowerEvent);
+	wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxPowerEvent);
 };
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_BASE, wxEVT_POWER_SUSPENDING, wxPowerEvent );
@@ -92,7 +101,7 @@ typedef void (wxEvtHandler::*wxPowerEventFunction)(wxPowerEvent&);
     wx__DECLARE_EVT0(wxEVT_POWER_RESUME, wxPowerEventHandler(func))
 
 #else // no support for power events
-    #undef wxHAS_POWER_EVENTS
+#undef wxHAS_POWER_EVENTS
 #endif // support for power events/no support
 
 // ----------------------------------------------------------------------------
@@ -101,41 +110,44 @@ typedef void (wxEvtHandler::*wxPowerEventFunction)(wxPowerEvent&);
 
 enum wxPowerResourceKind
 {
-    wxPOWER_RESOURCE_SCREEN,
-    wxPOWER_RESOURCE_SYSTEM
+	wxPOWER_RESOURCE_SCREEN,
+	wxPOWER_RESOURCE_SYSTEM
 };
 
 class WXDLLIMPEXP_BASE wxPowerResource
 {
 public:
-    static bool Acquire(wxPowerResourceKind kind,
-                        const wxString& reason = wxString());
-    static void Release(wxPowerResourceKind kind);
+	static bool Acquire(wxPowerResourceKind kind,
+	                    const wxString& reason = wxString());
+	static void Release(wxPowerResourceKind kind);
 };
 
 class wxPowerResourceBlocker
 {
 public:
-    explicit wxPowerResourceBlocker(wxPowerResourceKind kind,
-                                    const wxString& reason = wxString())
-        : m_kind(kind),
-          m_acquired(wxPowerResource::Acquire(kind, reason))
-    {
-    }
+	explicit wxPowerResourceBlocker(wxPowerResourceKind kind,
+	                                const wxString& reason = wxString())
+		: m_kind(kind),
+		  m_acquired(wxPowerResource::Acquire(kind, reason))
+	{
+	}
 
-    bool IsInEffect() const { return m_acquired; }
+	bool IsInEffect() const
+	{
+		return m_acquired;
+	}
 
-    ~wxPowerResourceBlocker()
-    {
-        if ( m_acquired )
-            wxPowerResource::Release(m_kind);
-    }
+	~wxPowerResourceBlocker()
+	{
+		if ( m_acquired )
+			wxPowerResource::Release(m_kind);
+	}
 
 private:
-    const wxPowerResourceKind m_kind;
-    const bool m_acquired;
+	const wxPowerResourceKind m_kind;
+	const bool m_acquired;
 
-    wxDECLARE_NO_COPY_CLASS(wxPowerResourceBlocker);
+	wxDECLARE_NO_COPY_CLASS(wxPowerResourceBlocker);
 };
 
 // ----------------------------------------------------------------------------

@@ -16,7 +16,7 @@
 void wxQtFillMouseButtons( Qt::MouseButtons buttons, wxMouseState *state );
 
 void wxMissingImplementation( const char fileName[], unsigned lineNumber,
-    const char feature[] );
+                              const char feature[] );
 
 #define wxMISSING_IMPLEMENTATION( feature )\
     wxMissingImplementation( __FILE__, __LINE__, feature )

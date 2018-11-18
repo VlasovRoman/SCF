@@ -40,54 +40,71 @@ typedef wxEventFunction wxObjectEventFunction;
 
 class WXDLLIMPEXP_BASE wxHandlerInfo
 {
-    friend class WXDLLIMPEXP_BASE wxDynamicClassInfo;
+	friend class WXDLLIMPEXP_BASE wxDynamicClassInfo;
 
 public:
-    wxHandlerInfo(wxHandlerInfo* &iter,
-                  wxClassInfo* itsClass,
-                  const wxString& name,
-                  wxObjectEventFunction address,
-                  const wxClassInfo* eventClassInfo) :
-            m_eventFunction(address),
-            m_name(name),
-            m_eventClassInfo(eventClassInfo),
-            m_itsClass(itsClass)
-       {
-            Insert(iter);
-       }
+	wxHandlerInfo(wxHandlerInfo* &iter,
+	              wxClassInfo* itsClass,
+	              const wxString& name,
+	              wxObjectEventFunction address,
+	              const wxClassInfo* eventClassInfo) :
+		m_eventFunction(address),
+		m_name(name),
+		m_eventClassInfo(eventClassInfo),
+		m_itsClass(itsClass)
+	{
+		Insert(iter);
+	}
 
-    ~wxHandlerInfo()
-        { Remove(); }
+	~wxHandlerInfo()
+	{
+		Remove();
+	}
 
-    // return the name of this handler
-    const wxString& GetName() const { return m_name; }
+	// return the name of this handler
+	const wxString& GetName() const
+	{
+		return m_name;
+	}
 
-    // return the class info of the event
-    const wxClassInfo *GetEventClassInfo() const { return m_eventClassInfo; }
+	// return the class info of the event
+	const wxClassInfo *GetEventClassInfo() const
+	{
+		return m_eventClassInfo;
+	}
 
-    // get the handler function pointer
-    wxObjectEventFunction GetEventFunction() const { return m_eventFunction; }
+	// get the handler function pointer
+	wxObjectEventFunction GetEventFunction() const
+	{
+		return m_eventFunction;
+	}
 
-    // returns NULL if this is the last handler of this class
-    wxHandlerInfo*     GetNext() const { return m_next; }
+	// returns NULL if this is the last handler of this class
+	wxHandlerInfo*     GetNext() const
+	{
+		return m_next;
+	}
 
-    // return the class this property is declared in
-    const wxClassInfo*   GetDeclaringClass() const { return m_itsClass; }
+	// return the class this property is declared in
+	const wxClassInfo*   GetDeclaringClass() const
+	{
+		return m_itsClass;
+	}
 
 private:
 
-    // inserts this handler at the end of the linked chain which begins
-    // with "iter" handler.
-    void Insert(wxHandlerInfo* &iter);
+	// inserts this handler at the end of the linked chain which begins
+	// with "iter" handler.
+	void Insert(wxHandlerInfo* &iter);
 
-    // removes this handler from the linked chain of the m_itsClass handlers.
-    void Remove();
+	// removes this handler from the linked chain of the m_itsClass handlers.
+	void Remove();
 
-    wxObjectEventFunction m_eventFunction;
-    wxString              m_name;
-    const wxClassInfo*    m_eventClassInfo;
-    wxHandlerInfo*        m_next;
-    wxClassInfo*          m_itsClass;
+	wxObjectEventFunction m_eventFunction;
+	wxString              m_name;
+	const wxClassInfo*    m_eventClassInfo;
+	wxHandlerInfo*        m_next;
+	wxClassInfo*          m_itsClass;
 };
 
 #define wxHANDLER(name,eventClassType)                                               \

@@ -17,47 +17,61 @@
 class WXDLLIMPEXP_CORE wxBitmapDataObject : public wxBitmapDataObjectBase
 {
 public:
-    // ctors
-    wxBitmapDataObject();
-    wxBitmapDataObject(const wxBitmap& bitmap);
+	// ctors
+	wxBitmapDataObject();
+	wxBitmapDataObject(const wxBitmap& bitmap);
 
-    // destr
-    virtual ~wxBitmapDataObject();
+	// destr
+	virtual ~wxBitmapDataObject();
 
-    // override base class virtual to update PNG data too
-    virtual void SetBitmap(const wxBitmap& bitmap) wxOVERRIDE;
+	// override base class virtual to update PNG data too
+	virtual void SetBitmap(const wxBitmap& bitmap) wxOVERRIDE;
 
-    // implement base class pure virtuals
-    // ----------------------------------
+	// implement base class pure virtuals
+	// ----------------------------------
 
-    virtual size_t GetDataSize() const wxOVERRIDE { return m_pngSize; }
-    virtual bool GetDataHere(void *buf) const wxOVERRIDE;
-    virtual bool SetData(size_t len, const void *buf) wxOVERRIDE;
-    // Must provide overloads to avoid hiding them (and warnings about it)
-    virtual size_t GetDataSize(const wxDataFormat&) const wxOVERRIDE
-    {
-        return GetDataSize();
-    }
-    virtual bool GetDataHere(const wxDataFormat&, void *buf) const wxOVERRIDE
-    {
-        return GetDataHere(buf);
-    }
-    virtual bool SetData(const wxDataFormat&, size_t len, const void *buf) wxOVERRIDE
-    {
-        return SetData(len, buf);
-    }
+	virtual size_t GetDataSize() const wxOVERRIDE
+	{
+		return m_pngSize;
+	}
+	virtual bool GetDataHere(void *buf) const wxOVERRIDE;
+	virtual bool SetData(size_t len, const void *buf) wxOVERRIDE;
+	// Must provide overloads to avoid hiding them (and warnings about it)
+	virtual size_t GetDataSize(const wxDataFormat&) const wxOVERRIDE
+	{
+		return GetDataSize();
+	}
+	virtual bool GetDataHere(const wxDataFormat&, void *buf) const wxOVERRIDE
+	{
+		return GetDataHere(buf);
+	}
+	virtual bool SetData(const wxDataFormat&, size_t len, const void *buf) wxOVERRIDE
+	{
+		return SetData(len, buf);
+	}
 
 protected:
-    void Clear() { free(m_pngData); }
-    void ClearAll() { Clear(); Init(); }
+	void Clear()
+	{
+		free(m_pngData);
+	}
+	void ClearAll()
+	{
+		Clear();
+		Init();
+	}
 
-    size_t      m_pngSize;
-    void       *m_pngData;
+	size_t      m_pngSize;
+	void       *m_pngData;
 
-    void DoConvertToPng();
+	void DoConvertToPng();
 
 private:
-    void Init() { m_pngData = NULL; m_pngSize = 0; }
+	void Init()
+	{
+		m_pngData = NULL;
+		m_pngSize = 0;
+	}
 };
 
 // ----------------------------------------------------------------------------
@@ -67,27 +81,27 @@ private:
 class WXDLLIMPEXP_CORE wxFileDataObject : public wxFileDataObjectBase
 {
 public:
-    // implement base class pure virtuals
-    // ----------------------------------
+	// implement base class pure virtuals
+	// ----------------------------------
 
-    void AddFile( const wxString &filename );
+	void AddFile( const wxString &filename );
 
-    virtual size_t GetDataSize() const wxOVERRIDE;
-    virtual bool GetDataHere(void *buf) const wxOVERRIDE;
-    virtual bool SetData(size_t len, const void *buf) wxOVERRIDE;
-    // Must provide overloads to avoid hiding them (and warnings about it)
-    virtual size_t GetDataSize(const wxDataFormat&) const wxOVERRIDE
-    {
-        return GetDataSize();
-    }
-    virtual bool GetDataHere(const wxDataFormat&, void *buf) const wxOVERRIDE
-    {
-        return GetDataHere(buf);
-    }
-    virtual bool SetData(const wxDataFormat&, size_t len, const void *buf) wxOVERRIDE
-    {
-        return SetData(len, buf);
-    }
+	virtual size_t GetDataSize() const wxOVERRIDE;
+	virtual bool GetDataHere(void *buf) const wxOVERRIDE;
+	virtual bool SetData(size_t len, const void *buf) wxOVERRIDE;
+	// Must provide overloads to avoid hiding them (and warnings about it)
+	virtual size_t GetDataSize(const wxDataFormat&) const wxOVERRIDE
+	{
+		return GetDataSize();
+	}
+	virtual bool GetDataHere(const wxDataFormat&, void *buf) const wxOVERRIDE
+	{
+		return GetDataHere(buf);
+	}
+	virtual bool SetData(const wxDataFormat&, size_t len, const void *buf) wxOVERRIDE
+	{
+		return SetData(len, buf);
+	}
 };
 
 // ----------------------------------------------------------------------------
@@ -97,16 +111,16 @@ public:
 class WXDLLIMPEXP_CORE wxURLDataObject : public wxDataObjectComposite
 {
 public:
-    wxURLDataObject(const wxString& url = wxEmptyString);
+	wxURLDataObject(const wxString& url = wxEmptyString);
 
-    wxString GetURL() const;
-    void SetURL(const wxString& url);
+	wxString GetURL() const;
+	void SetURL(const wxString& url);
 
 private:
-    class wxTextURIListDataObject* const m_dobjURIList;
-    wxTextDataObject* const m_dobjText;
+	class wxTextURIListDataObject* const m_dobjURIList;
+	wxTextDataObject* const m_dobjText;
 
-    wxDECLARE_NO_COPY_CLASS(wxURLDataObject);
+	wxDECLARE_NO_COPY_CLASS(wxURLDataObject);
 };
 
 

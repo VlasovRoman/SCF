@@ -46,21 +46,24 @@ class WXDLLIMPEXP_FWD_CORE wxDropSource;
 
 class WXDLLIMPEXP_CORE wxDropTarget: public wxDropTargetBase
 {
-  public:
+public:
 
-    wxDropTarget(wxDataObject *dataObject = NULL );
+	wxDropTarget(wxDataObject *dataObject = NULL );
 
-    virtual wxDragResult OnDragOver(wxCoord x, wxCoord y, wxDragResult def);
-    virtual bool OnDrop(wxCoord x, wxCoord y);
-    virtual wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def);
-    virtual bool GetData();
-    // NOTE: This is needed by the generic wxDataViewCtrl, not sure how to implement.
-    virtual wxDataFormat GetMatchingPair();
+	virtual wxDragResult OnDragOver(wxCoord x, wxCoord y, wxDragResult def);
+	virtual bool OnDrop(wxCoord x, wxCoord y);
+	virtual wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def);
+	virtual bool GetData();
+	// NOTE: This is needed by the generic wxDataViewCtrl, not sure how to implement.
+	virtual wxDataFormat GetMatchingPair();
 
-    bool CurrentDragHasSupportedFormat() ;
-    void SetCurrentDragPasteboard( void* dragpasteboard ) { m_currentDragPasteboard = dragpasteboard ; }
-  protected :
-    void* m_currentDragPasteboard ;
+	bool CurrentDragHasSupportedFormat() ;
+	void SetCurrentDragPasteboard( void* dragpasteboard )
+	{
+		m_currentDragPasteboard = dragpasteboard ;
+	}
+protected :
+	void* m_currentDragPasteboard ;
 };
 
 //-------------------------------------------------------------------------
@@ -70,39 +73,45 @@ class WXDLLIMPEXP_CORE wxDropTarget: public wxDropTargetBase
 class WXDLLIMPEXP_CORE wxDropSource: public wxDropSourceBase
 {
 public:
-    // ctors: if you use default ctor you must call SetData() later!
-    //
-    // NB: the "wxWindow *win" parameter is unused and is here only for wxGTK
-    //     compatibility, as well as both icon parameters
-    wxDropSource( wxWindow *win = NULL,
-                 const wxCursor &cursorCopy = wxNullCursor,
-                 const wxCursor &cursorMove = wxNullCursor,
-                 const wxCursor &cursorStop = wxNullCursor);
+	// ctors: if you use default ctor you must call SetData() later!
+	//
+	// NB: the "wxWindow *win" parameter is unused and is here only for wxGTK
+	//     compatibility, as well as both icon parameters
+	wxDropSource( wxWindow *win = NULL,
+	              const wxCursor &cursorCopy = wxNullCursor,
+	              const wxCursor &cursorMove = wxNullCursor,
+	              const wxCursor &cursorStop = wxNullCursor);
 
-    /* constructor for setting one data object */
-    wxDropSource( wxDataObject& data,
-                  wxWindow *win,
-                 const wxCursor &cursorCopy = wxNullCursor,
-                 const wxCursor &cursorMove = wxNullCursor,
-                 const wxCursor &cursorStop = wxNullCursor);
+	/* constructor for setting one data object */
+	wxDropSource( wxDataObject& data,
+	              wxWindow *win,
+	              const wxCursor &cursorCopy = wxNullCursor,
+	              const wxCursor &cursorMove = wxNullCursor,
+	              const wxCursor &cursorStop = wxNullCursor);
 
-    virtual ~wxDropSource();
+	virtual ~wxDropSource();
 
-    // do it (call this in response to a mouse button press, for example)
-    // params: if bAllowMove is false, data can be only copied
-    virtual wxDragResult DoDragDrop(int flags = wxDrag_CopyOnly);
+	// do it (call this in response to a mouse button press, for example)
+	// params: if bAllowMove is false, data can be only copied
+	virtual wxDragResult DoDragDrop(int flags = wxDrag_CopyOnly);
 
-    wxWindow*     GetWindow() { return m_window ; }
-    void SetCurrentDragPasteboard( void* dragpasteboard ) { m_currentDragPasteboard = dragpasteboard ; }
-    bool MacInstallDefaultCursor(wxDragResult effect) ;
-    static wxDropSource* GetCurrentDropSource();
-  protected :
+	wxWindow*     GetWindow()
+	{
+		return m_window ;
+	}
+	void SetCurrentDragPasteboard( void* dragpasteboard )
+	{
+		m_currentDragPasteboard = dragpasteboard ;
+	}
+	bool MacInstallDefaultCursor(wxDragResult effect) ;
+	static wxDropSource* GetCurrentDropSource();
+protected :
 
-    wxWindow        *m_window;
-    void* m_currentDragPasteboard ;
+	wxWindow        *m_window;
+	void* m_currentDragPasteboard ;
 };
 
 #endif // wxUSE_DRAG_AND_DROP
 
 #endif
-   //_WX_DND_H_
+//_WX_DND_H_

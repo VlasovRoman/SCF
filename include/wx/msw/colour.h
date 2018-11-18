@@ -20,53 +20,74 @@
 class WXDLLIMPEXP_CORE wxColour : public wxColourBase
 {
 public:
-    // constructors
-    // ------------
-    DEFINE_STD_WXCOLOUR_CONSTRUCTORS
+	// constructors
+	// ------------
+	DEFINE_STD_WXCOLOUR_CONSTRUCTORS
 
-    // accessors
-    // ---------
+	// accessors
+	// ---------
 
-    virtual bool IsOk() const wxOVERRIDE { return m_isInit; }
+	virtual bool IsOk() const wxOVERRIDE
+	{
+		return m_isInit;
+	}
 
-    unsigned char Red() const wxOVERRIDE { return m_red; }
-    unsigned char Green() const wxOVERRIDE { return m_green; }
-    unsigned char Blue() const wxOVERRIDE { return m_blue; }
-    unsigned char Alpha() const wxOVERRIDE { return m_alpha ; }
+	unsigned char Red() const wxOVERRIDE
+	{
+		return m_red;
+	}
+	unsigned char Green() const wxOVERRIDE
+	{
+		return m_green;
+	}
+	unsigned char Blue() const wxOVERRIDE
+	{
+		return m_blue;
+	}
+	unsigned char Alpha() const wxOVERRIDE
+	{
+		return m_alpha ;
+	}
 
-    // comparison
-    bool operator==(const wxColour& colour) const
-    {
-        return m_isInit == colour.m_isInit
-            && m_red == colour.m_red
-            && m_green == colour.m_green
-            && m_blue == colour.m_blue
-            && m_alpha == colour.m_alpha;
-    }
+	// comparison
+	bool operator==(const wxColour& colour) const
+	{
+		return m_isInit == colour.m_isInit
+		       && m_red == colour.m_red
+		       && m_green == colour.m_green
+		       && m_blue == colour.m_blue
+		       && m_alpha == colour.m_alpha;
+	}
 
-    bool operator!=(const wxColour& colour) const { return !(*this == colour); }
+	bool operator!=(const wxColour& colour) const
+	{
+		return !(*this == colour);
+	}
 
-    WXCOLORREF GetPixel() const { return m_pixel; }
+	WXCOLORREF GetPixel() const
+	{
+		return m_pixel;
+	}
 
 public:
-    WXCOLORREF m_pixel;
+	WXCOLORREF m_pixel;
 
 protected:
-    // Helper function
-    void Init();
+	// Helper function
+	void Init();
 
-    virtual void
-    InitRGBA(unsigned char r, unsigned char g, unsigned char b, unsigned char a) wxOVERRIDE;
-
-private:
-    bool          m_isInit;
-    unsigned char m_red;
-    unsigned char m_blue;
-    unsigned char m_green;
-    unsigned char m_alpha;
+	virtual void
+	InitRGBA(unsigned char r, unsigned char g, unsigned char b, unsigned char a) wxOVERRIDE;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxColour);
+	bool          m_isInit;
+	unsigned char m_red;
+	unsigned char m_blue;
+	unsigned char m_green;
+	unsigned char m_alpha;
+
+private:
+	wxDECLARE_DYNAMIC_CLASS(wxColour);
 };
 
 #endif // _WX_COLOUR_H_

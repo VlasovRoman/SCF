@@ -43,84 +43,90 @@ wxPersistentObject *wxCreatePersistentObject(T *obj);
 class WXDLLIMPEXP_CORE wxPersistenceManager
 {
 public:
-    // Call this method to specify a non-default persistence manager to use.
-    // This function should usually be called very early to affect creation of
-    // all persistent controls and the object passed to it must have a lifetime
-    // long enough to be still alive when the persistent controls are destroyed
-    // and need it to save their state so typically this would be a global or a
-    // wxApp member.
-    static void Set(wxPersistenceManager& manager);
+	// Call this method to specify a non-default persistence manager to use.
+	// This function should usually be called very early to affect creation of
+	// all persistent controls and the object passed to it must have a lifetime
+	// long enough to be still alive when the persistent controls are destroyed
+	// and need it to save their state so typically this would be a global or a
+	// wxApp member.
+	static void Set(wxPersistenceManager& manager);
 
-    // accessor to the unique persistence manager object
-    static wxPersistenceManager& Get();
+	// accessor to the unique persistence manager object
+	static wxPersistenceManager& Get();
 
-    // trivial but virtual dtor
-    virtual ~wxPersistenceManager();
-
-
-    // globally disable restoring or saving the persistent properties (both are
-    // enabled by default)
-    void DisableSaving() { m_doSave = false; }
-    void DisableRestoring() { m_doRestore = false; }
+	// trivial but virtual dtor
+	virtual ~wxPersistenceManager();
 
 
-    // register an object with the manager: when using the first overload,
-    // wxCreatePersistentObject() must be specialized for this object class;
-    // with the second one the persistent adapter is created by the caller
-    //
-    // the object shouldn't be already registered with us
-    template <class T>
-    wxPersistentObject *Register(T *obj)
-    {
-        return Register(obj, wxCreatePersistentObject(obj));
-    }
-
-    wxPersistentObject *Register(void *obj, wxPersistentObject *po);
-
-    // check if the object is registered and return the associated
-    // wxPersistentObject if it is or NULL otherwise
-    wxPersistentObject *Find(void *obj) const;
-
-    // unregister the object, this is called by wxPersistentObject itself so
-    // there is usually no need to do it explicitly
-    //
-    // deletes the associated wxPersistentObject
-    void Unregister(void *obj);
+	// globally disable restoring or saving the persistent properties (both are
+	// enabled by default)
+	void DisableSaving()
+	{
+		m_doSave = false;
+	}
+	void DisableRestoring()
+	{
+		m_doRestore = false;
+	}
 
 
-    // save/restore the state of an object
-    //
-    // these methods do nothing if DisableSaving/Restoring() was called
-    //
-    // Restore() returns true if the object state was really restored
-    void Save(void *obj);
-    bool Restore(void *obj);
+	// register an object with the manager: when using the first overload,
+	// wxCreatePersistentObject() must be specialized for this object class;
+	// with the second one the persistent adapter is created by the caller
+	//
+	// the object shouldn't be already registered with us
+	template <class T>
+	wxPersistentObject *Register(T *obj)
+	{
+		return Register(obj, wxCreatePersistentObject(obj));
+	}
 
-    // combines both Save() and Unregister() calls
-    void SaveAndUnregister(void *obj)
-    {
-        Save(obj);
-        Unregister(obj);
-    }
+	wxPersistentObject *Register(void *obj, wxPersistentObject *po);
 
-    // combines both Register() and Restore() calls
-    template <class T>
-    bool RegisterAndRestore(T *obj)
-    {
-        return Register(obj) && Restore(obj);
-    }
+	// check if the object is registered and return the associated
+	// wxPersistentObject if it is or NULL otherwise
+	wxPersistentObject *Find(void *obj) const;
 
-    bool RegisterAndRestore(void *obj, wxPersistentObject *po)
-    {
-        return Register(obj, po) && Restore(obj);
-    }
+	// unregister the object, this is called by wxPersistentObject itself so
+	// there is usually no need to do it explicitly
+	//
+	// deletes the associated wxPersistentObject
+	void Unregister(void *obj);
 
 
-    // methods used by the persistent objects to save and restore the data
-    //
-    // currently these methods simply use wxConfig::Get() but they may be
-    // overridden in the derived class (once we allow creating custom
-    // persistent managers)
+	// save/restore the state of an object
+	//
+	// these methods do nothing if DisableSaving/Restoring() was called
+	//
+	// Restore() returns true if the object state was really restored
+	void Save(void *obj);
+	bool Restore(void *obj);
+
+	// combines both Save() and Unregister() calls
+	void SaveAndUnregister(void *obj)
+	{
+		Save(obj);
+		Unregister(obj);
+	}
+
+	// combines both Register() and Restore() calls
+	template <class T>
+	bool RegisterAndRestore(T *obj)
+	{
+		return Register(obj) && Restore(obj);
+	}
+
+	bool RegisterAndRestore(void *obj, wxPersistentObject *po)
+	{
+		return Register(obj, po) && Restore(obj);
+	}
+
+
+	// methods used by the persistent objects to save and restore the data
+	//
+	// currently these methods simply use wxConfig::Get() but they may be
+	// overridden in the derived class (once we allow creating custom
+	// persistent managers)
 #define wxPERSIST_DECLARE_SAVE_RESTORE_FOR(Type)                              \
     virtual bool SaveValue(const wxPersistentObject& who,                     \
                            const wxString& name,                              \
@@ -131,45 +137,48 @@ public:
                  const wxString& name,                                        \
                  Type *value)
 
-    wxPERSIST_DECLARE_SAVE_RESTORE_FOR(bool);
-    wxPERSIST_DECLARE_SAVE_RESTORE_FOR(int);
-    wxPERSIST_DECLARE_SAVE_RESTORE_FOR(long);
-    wxPERSIST_DECLARE_SAVE_RESTORE_FOR(wxString);
+	wxPERSIST_DECLARE_SAVE_RESTORE_FOR(bool);
+	wxPERSIST_DECLARE_SAVE_RESTORE_FOR(int);
+	wxPERSIST_DECLARE_SAVE_RESTORE_FOR(long);
+	wxPERSIST_DECLARE_SAVE_RESTORE_FOR(wxString);
 
 #undef wxPERSIST_DECLARE_SAVE_RESTORE_FOR
 
 protected:
-    // ctor is private, use Get()
-    wxPersistenceManager()
-    {
-        m_doSave =
-        m_doRestore = true;
-    }
+	// ctor is private, use Get()
+	wxPersistenceManager()
+	{
+		m_doSave =
+		    m_doRestore = true;
+	}
 
 
-    // Return the config object to use, by default just the global one but a
-    // different one could be used by the derived class if needed.
-    virtual wxConfigBase *GetConfig() const { return wxConfigBase::Get(); }
+	// Return the config object to use, by default just the global one but a
+	// different one could be used by the derived class if needed.
+	virtual wxConfigBase *GetConfig() const
+	{
+		return wxConfigBase::Get();
+	}
 
-    // Return the path to use for saving the setting with the given name for
-    // the specified object (notice that the name is the name of the setting,
-    // not the name of the object itself which can be retrieved with GetName()).
-    virtual wxString GetKey(const wxPersistentObject& who,
-                            const wxString& name) const;
+	// Return the path to use for saving the setting with the given name for
+	// the specified object (notice that the name is the name of the setting,
+	// not the name of the object itself which can be retrieved with GetName()).
+	virtual wxString GetKey(const wxPersistentObject& who,
+	                        const wxString& name) const;
 
 
 private:
-    // map with the registered objects as keys and associated
-    // wxPersistentObjects as values
-    wxPersistentObjectsMap m_persistentObjects;
+	// map with the registered objects as keys and associated
+	// wxPersistentObjects as values
+	wxPersistentObjectsMap m_persistentObjects;
 
-    // true if we should restore/save the settings (it doesn't make much sense
-    // to use this class when both of them are false but setting one of them to
-    // false may make sense in some situations)
-    bool m_doSave,
-         m_doRestore;
+	// true if we should restore/save the settings (it doesn't make much sense
+	// to use this class when both of them are false but setting one of them to
+	// false may make sense in some situations)
+	bool m_doSave,
+	     m_doRestore;
 
-    wxDECLARE_NO_COPY_CLASS(wxPersistenceManager);
+	wxDECLARE_NO_COPY_CLASS(wxPersistenceManager);
 };
 
 // ----------------------------------------------------------------------------
@@ -179,54 +188,57 @@ private:
 class wxPersistentObject
 {
 public:
-    // ctor associates us with the object whose options we save/restore
-    wxPersistentObject(void *obj) : m_obj(obj) { }
+	// ctor associates us with the object whose options we save/restore
+	wxPersistentObject(void *obj) : m_obj(obj) { }
 
-    // trivial but virtual dtor
-    virtual ~wxPersistentObject() { }
-
-
-    // methods used by wxPersistenceManager
-    // ------------------------------------
-
-    // save/restore the corresponding objects settings
-    //
-    // these methods shouldn't be used directly as they don't respect the
-    // global wxPersistenceManager::DisableSaving/Restoring() settings, use
-    // wxPersistenceManager methods with the same name instead
-    virtual void Save() const = 0;
-    virtual bool Restore() = 0;
+	// trivial but virtual dtor
+	virtual ~wxPersistentObject() { }
 
 
-    // get the kind of the objects we correspond to, e.g. "Frame"
-    virtual wxString GetKind() const = 0;
+	// methods used by wxPersistenceManager
+	// ------------------------------------
 
-    // get the name of the object we correspond to, e.g. "Main"
-    virtual wxString GetName() const = 0;
+	// save/restore the corresponding objects settings
+	//
+	// these methods shouldn't be used directly as they don't respect the
+	// global wxPersistenceManager::DisableSaving/Restoring() settings, use
+	// wxPersistenceManager methods with the same name instead
+	virtual void Save() const = 0;
+	virtual bool Restore() = 0;
 
 
-    // return the associated object
-    void *GetObject() const { return m_obj; }
+	// get the kind of the objects we correspond to, e.g. "Frame"
+	virtual wxString GetKind() const = 0;
+
+	// get the name of the object we correspond to, e.g. "Main"
+	virtual wxString GetName() const = 0;
+
+
+	// return the associated object
+	void *GetObject() const
+	{
+		return m_obj;
+	}
 
 protected:
-    // wrappers for wxPersistenceManager methods which don't require passing
-    // "this" as the first parameter all the time
-    template <typename T>
-    bool SaveValue(const wxString& name, T value) const
-    {
-        return wxPersistenceManager::Get().SaveValue(*this, name, value);
-    }
+	// wrappers for wxPersistenceManager methods which don't require passing
+	// "this" as the first parameter all the time
+	template <typename T>
+	bool SaveValue(const wxString& name, T value) const
+	{
+		return wxPersistenceManager::Get().SaveValue(*this, name, value);
+	}
 
-    template <typename T>
-    bool RestoreValue(const wxString& name, T *value)
-    {
-        return wxPersistenceManager::Get().RestoreValue(*this, name, value);
-    }
+	template <typename T>
+	bool RestoreValue(const wxString& name, T *value)
+	{
+		return wxPersistenceManager::Get().RestoreValue(*this, name, value);
+	}
 
 private:
-    void * const m_obj;
+	void * const m_obj;
 
-    wxDECLARE_NO_COPY_CLASS(wxPersistentObject);
+	wxDECLARE_NO_COPY_CLASS(wxPersistentObject);
 };
 
 // Helper function calling RegisterAndRestore() on the global persistence
@@ -234,9 +246,9 @@ private:
 template <typename T>
 inline bool wxPersistentRegisterAndRestore(T *obj)
 {
-    wxPersistentObject * const pers = wxCreatePersistentObject(obj);
+	wxPersistentObject * const pers = wxCreatePersistentObject(obj);
 
-    return wxPersistenceManager::Get().RegisterAndRestore(obj, pers);
+	return wxPersistenceManager::Get().RegisterAndRestore(obj, pers);
 
 }
 
@@ -245,9 +257,9 @@ inline bool wxPersistentRegisterAndRestore(T *obj)
 template <typename T>
 inline bool wxPersistentRegisterAndRestore(T *obj, const wxString& name)
 {
-    obj->SetName(name);
+	obj->SetName(name);
 
-    return wxPersistentRegisterAndRestore(obj);
+	return wxPersistentRegisterAndRestore(obj);
 }
 
 #endif // _WX_PERSIST_H_

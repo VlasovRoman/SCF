@@ -21,56 +21,77 @@
 class WXDLLIMPEXP_CORE wxRichMessageDialogBase : public wxGenericMessageDialog
 {
 public:
-    wxRichMessageDialogBase( wxWindow *parent,
-                             const wxString& message,
-                             const wxString& caption,
-                             long style )
-        : wxGenericMessageDialog( parent, message, caption, style ),
-          m_detailsExpanderCollapsedLabel( wxGetTranslation("&See details") ),
-          m_detailsExpanderExpandedLabel( wxGetTranslation("&Hide details") ),
-          m_checkBoxValue( false ),
-          m_footerIcon( 0 )
-        { }
+	wxRichMessageDialogBase( wxWindow *parent,
+	                         const wxString& message,
+	                         const wxString& caption,
+	                         long style )
+		: wxGenericMessageDialog( parent, message, caption, style ),
+		  m_detailsExpanderCollapsedLabel( wxGetTranslation("&See details") ),
+		  m_detailsExpanderExpandedLabel( wxGetTranslation("&Hide details") ),
+		  m_checkBoxValue( false ),
+		  m_footerIcon( 0 )
+	{ }
 
-    void ShowCheckBox(const wxString& checkBoxText, bool checked = false)
-    {
-        m_checkBoxText = checkBoxText;
-        m_checkBoxValue = checked;
-    }
+	void ShowCheckBox(const wxString& checkBoxText, bool checked = false)
+	{
+		m_checkBoxText = checkBoxText;
+		m_checkBoxValue = checked;
+	}
 
-    wxString GetCheckBoxText() const { return m_checkBoxText; }
+	wxString GetCheckBoxText() const
+	{
+		return m_checkBoxText;
+	}
 
-    void ShowDetailedText(const wxString& detailedText)
-        { m_detailedText = detailedText; }
+	void ShowDetailedText(const wxString& detailedText)
+	{
+		m_detailedText = detailedText;
+	}
 
-    wxString GetDetailedText() const { return m_detailedText; }
+	wxString GetDetailedText() const
+	{
+		return m_detailedText;
+	}
 
-    virtual bool IsCheckBoxChecked() const { return m_checkBoxValue; }
+	virtual bool IsCheckBoxChecked() const
+	{
+		return m_checkBoxValue;
+	}
 
-    void SetFooterText(const wxString& footerText)
-        { m_footerText = footerText; }
+	void SetFooterText(const wxString& footerText)
+	{
+		m_footerText = footerText;
+	}
 
-    wxString GetFooterText() const { return m_footerText; }
+	wxString GetFooterText() const
+	{
+		return m_footerText;
+	}
 
-    void SetFooterIcon(int icon)
-        { m_footerIcon = icon; }
+	void SetFooterIcon(int icon)
+	{
+		m_footerIcon = icon;
+	}
 
-    int GetFooterIcon() const { return m_footerIcon; }
+	int GetFooterIcon() const
+	{
+		return m_footerIcon;
+	}
 
 protected:
-    const wxString m_detailsExpanderCollapsedLabel;
-    const wxString m_detailsExpanderExpandedLabel;
+	const wxString m_detailsExpanderCollapsedLabel;
+	const wxString m_detailsExpanderExpandedLabel;
 
-    wxString m_checkBoxText;
-    bool m_checkBoxValue;
-    wxString m_detailedText;
-    wxString m_footerText;
-    int m_footerIcon;
+	wxString m_checkBoxText;
+	bool m_checkBoxValue;
+	wxString m_detailedText;
+	wxString m_footerText;
+	int m_footerIcon;
 
 private:
-    void ShowDetails(bool shown);
+	void ShowDetails(bool shown);
 
-    wxDECLARE_NO_COPY_CLASS(wxRichMessageDialogBase);
+	wxDECLARE_NO_COPY_CLASS(wxRichMessageDialogBase);
 };
 
 // Always include the generic version as it's currently used as the base class
@@ -78,22 +99,22 @@ private:
 #include "wx/generic/richmsgdlgg.h"
 
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)
-    #include "wx/msw/richmsgdlg.h"
+#include "wx/msw/richmsgdlg.h"
 #else
-    class WXDLLIMPEXP_CORE wxRichMessageDialog
-                           : public wxGenericRichMessageDialog
-    {
-    public:
-        wxRichMessageDialog( wxWindow *parent,
-                             const wxString& message,
-                             const wxString& caption = wxMessageBoxCaptionStr,
-                             long style = wxOK | wxCENTRE )
-            : wxGenericRichMessageDialog( parent, message, caption, style )
-            { }
+class WXDLLIMPEXP_CORE wxRichMessageDialog
+	: public wxGenericRichMessageDialog
+{
+public:
+	wxRichMessageDialog( wxWindow *parent,
+	                     const wxString& message,
+	                     const wxString& caption = wxMessageBoxCaptionStr,
+	                     long style = wxOK | wxCENTRE )
+		: wxGenericRichMessageDialog( parent, message, caption, style )
+	{ }
 
-    private:
-        wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxRichMessageDialog);
-    };
+private:
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxRichMessageDialog);
+};
 #endif
 
 #endif // wxUSE_RICHMSGDLG

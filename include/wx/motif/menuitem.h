@@ -22,46 +22,67 @@ class WXDLLIMPEXP_FWD_CORE wxMenuBar;
 class WXDLLIMPEXP_CORE wxMenuItem : public wxMenuItemBase
 {
 public:
-    // ctor & dtor
-    wxMenuItem(wxMenu *parentMenu = NULL,
-               int id = wxID_SEPARATOR,
-               const wxString& text = wxEmptyString,
-               const wxString& help = wxEmptyString,
-               wxItemKind kind = wxITEM_NORMAL,
-               wxMenu *subMenu = NULL);
-    virtual ~wxMenuItem();
+	// ctor & dtor
+	wxMenuItem(wxMenu *parentMenu = NULL,
+	           int id = wxID_SEPARATOR,
+	           const wxString& text = wxEmptyString,
+	           const wxString& help = wxEmptyString,
+	           wxItemKind kind = wxITEM_NORMAL,
+	           wxMenu *subMenu = NULL);
+	virtual ~wxMenuItem();
 
-    // accessors (some more are inherited from wxOwnerDrawn or are below)
-    virtual void SetItemLabel(const wxString& label);
-    virtual void Enable(bool enable = true);
-    virtual void Check(bool check = true);
-    // included SetBitmap and GetBitmap as copied from the GTK include file
-    // I'm not sure if this works but it silences the linker in the
-    // menu sample.
-    //     JJ
-    virtual void SetBitmap(const wxBitmap& bitmap) { m_bitmap = bitmap; }
-    virtual const wxBitmap& GetBitmap() const { return m_bitmap; }
+	// accessors (some more are inherited from wxOwnerDrawn or are below)
+	virtual void SetItemLabel(const wxString& label);
+	virtual void Enable(bool enable = true);
+	virtual void Check(bool check = true);
+	// included SetBitmap and GetBitmap as copied from the GTK include file
+	// I'm not sure if this works but it silences the linker in the
+	// menu sample.
+	//     JJ
+	virtual void SetBitmap(const wxBitmap& bitmap)
+	{
+		m_bitmap = bitmap;
+	}
+	virtual const wxBitmap& GetBitmap() const
+	{
+		return m_bitmap;
+	}
 
-    // implementation from now on
-    void CreateItem (WXWidget menu, wxMenuBar * menuBar, wxMenu * topMenu,
-                     size_t index);
-    void DestroyItem(bool full);
+	// implementation from now on
+	void CreateItem (WXWidget menu, wxMenuBar * menuBar, wxMenu * topMenu,
+	                 size_t index);
+	void DestroyItem(bool full);
 
-    WXWidget GetButtonWidget() const { return m_buttonWidget; }
+	WXWidget GetButtonWidget() const
+	{
+		return m_buttonWidget;
+	}
 
-    wxMenuBar* GetMenuBar() const { return m_menuBar; }
-    void SetMenuBar(wxMenuBar* menuBar) { m_menuBar = menuBar; }
+	wxMenuBar* GetMenuBar() const
+	{
+		return m_menuBar;
+	}
+	void SetMenuBar(wxMenuBar* menuBar)
+	{
+		m_menuBar = menuBar;
+	}
 
-    wxMenu* GetTopMenu() const { return m_topMenu; }
-    void SetTopMenu(wxMenu* menu) { m_topMenu = menu; }
+	wxMenu* GetTopMenu() const
+	{
+		return m_topMenu;
+	}
+	void SetTopMenu(wxMenu* menu)
+	{
+		m_topMenu = menu;
+	}
 
 private:
-    WXWidget    m_buttonWidget;
-    wxMenuBar*  m_menuBar;
-    wxMenu*     m_topMenu;        // Top-level menu e.g. popup-menu
-    wxBitmap  m_bitmap; // Bitmap for menuitem, if any
+	WXWidget    m_buttonWidget;
+	wxMenuBar*  m_menuBar;
+	wxMenu*     m_topMenu;        // Top-level menu e.g. popup-menu
+	wxBitmap  m_bitmap; // Bitmap for menuitem, if any
 
-    wxDECLARE_DYNAMIC_CLASS(wxMenuItem);
+	wxDECLARE_DYNAMIC_CLASS(wxMenuItem);
 };
 
 #endif  // _WX_MOTIF_MENUITEM_H

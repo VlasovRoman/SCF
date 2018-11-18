@@ -21,16 +21,16 @@
 class WXDLLIMPEXP_CORE wxScreenDCImpl : public wxPaintDCImpl
 {
 public:
-    wxScreenDCImpl( wxDC *owner);
-    virtual ~wxScreenDCImpl();
+	wxScreenDCImpl( wxDC *owner);
+	virtual ~wxScreenDCImpl();
 
 protected:
-    virtual void DoGetSize(int *width, int *height) const;
+	virtual void DoGetSize(int *width, int *height) const;
 
 private:
-    wxDECLARE_CLASS(wxScreenDCImpl);
+	wxDECLARE_CLASS(wxScreenDCImpl);
 };
 
 
 #endif
-    // _WX_DCSCREEN_H_
+// _WX_DCSCREEN_H_

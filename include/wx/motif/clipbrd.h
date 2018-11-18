@@ -39,40 +39,43 @@ WXDLLIMPEXP_CORE bool wxGetClipboardFormatName(wxDataFormat dataFormat, char *fo
 class WXDLLIMPEXP_CORE wxClipboard : public wxClipboardBase
 {
 public:
-    wxClipboard();
-    virtual ~wxClipboard();
+	wxClipboard();
+	virtual ~wxClipboard();
 
-    // open the clipboard before SetData() and GetData()
-    virtual bool Open();
+	// open the clipboard before SetData() and GetData()
+	virtual bool Open();
 
-    // close the clipboard after SetData() and GetData()
-    virtual void Close();
+	// close the clipboard after SetData() and GetData()
+	virtual void Close();
 
-    // opened?
-    virtual bool IsOpened() const { return m_open; }
+	// opened?
+	virtual bool IsOpened() const
+	{
+		return m_open;
+	}
 
-    // replaces the data on the clipboard with data
-    virtual bool SetData( wxDataObject *data );
+	// replaces the data on the clipboard with data
+	virtual bool SetData( wxDataObject *data );
 
-    // adds data to the clipboard
-    virtual bool AddData( wxDataObject *data );
+	// adds data to the clipboard
+	virtual bool AddData( wxDataObject *data );
 
-    // format available on the clipboard ?
-    virtual bool IsSupported( const wxDataFormat& format );
+	// format available on the clipboard ?
+	virtual bool IsSupported( const wxDataFormat& format );
 
-    // fill data with data on the clipboard (if available)
-    virtual bool GetData( wxDataObject& data );
+	// fill data with data on the clipboard (if available)
+	virtual bool GetData( wxDataObject& data );
 
-    // clears wxTheClipboard and the system's clipboard if possible
-    virtual void Clear();
+	// clears wxTheClipboard and the system's clipboard if possible
+	virtual void Clear();
 
-    // implementation from now on
-    bool              m_open;
-    wxDataObjectList  m_data;
-    wxDataIdToDataObjectList m_idToObject;
+	// implementation from now on
+	bool              m_open;
+	wxDataObjectList  m_data;
+	wxDataIdToDataObjectList m_idToObject;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxClipboard);
+	wxDECLARE_DYNAMIC_CLASS(wxClipboard);
 };
 
 #endif // wxUSE_CLIPBOARD

@@ -16,28 +16,34 @@ class WXDLLIMPEXP_FWD_CORE wxMenu;
 
 class WXDLLIMPEXP_ADV wxTaskBarIcon : public wxTaskBarIconBase
 {
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxTaskBarIcon);
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxTaskBarIcon);
 public:
-    wxTaskBarIcon(wxTaskBarIconType iconType = wxTBI_DEFAULT_TYPE);
-    virtual ~wxTaskBarIcon();
+	wxTaskBarIcon(wxTaskBarIconType iconType = wxTBI_DEFAULT_TYPE);
+	virtual ~wxTaskBarIcon();
 
-    // returns true if the taskbaricon is in the global menubar
+	// returns true if the taskbaricon is in the global menubar
 #if wxOSX_USE_COCOA
-    bool OSXIsStatusItem();
+	bool OSXIsStatusItem();
 #else
-    bool OSXIsStatusItem() { return false; }
+	bool OSXIsStatusItem()
+	{
+		return false;
+	}
 #endif
-    bool IsOk() const { return true; }
+	bool IsOk() const
+	{
+		return true;
+	}
 
-    bool IsIconInstalled() const;
-    bool SetIcon(const wxIcon& icon, const wxString& tooltip = wxEmptyString);
-    bool RemoveIcon();
-    bool PopupMenu(wxMenu *menu);
+	bool IsIconInstalled() const;
+	bool SetIcon(const wxIcon& icon, const wxString& tooltip = wxEmptyString);
+	bool RemoveIcon();
+	bool PopupMenu(wxMenu *menu);
 
 protected:
-    wxTaskBarIconType m_type;
-    class wxTaskBarIconImpl* m_impl;
-    friend class wxTaskBarIconImpl;
+	wxTaskBarIconType m_type;
+	class wxTaskBarIconImpl* m_impl;
+	friend class wxTaskBarIconImpl;
 };
 #endif
-    // _TASKBAR_H_
+// _TASKBAR_H_

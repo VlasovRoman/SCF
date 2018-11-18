@@ -25,78 +25,84 @@ class wxRibbonPageScrollButton;
 class WXDLLIMPEXP_RIBBON wxRibbonPage : public wxRibbonControl
 {
 public:
-    wxRibbonPage();
+	wxRibbonPage();
 
-    wxRibbonPage(wxRibbonBar* parent,
-                 wxWindowID id = wxID_ANY,
-                 const wxString& label = wxEmptyString,
-                 const wxBitmap& icon = wxNullBitmap,
-                 long style = 0);
+	wxRibbonPage(wxRibbonBar* parent,
+	             wxWindowID id = wxID_ANY,
+	             const wxString& label = wxEmptyString,
+	             const wxBitmap& icon = wxNullBitmap,
+	             long style = 0);
 
-    virtual ~wxRibbonPage();
+	virtual ~wxRibbonPage();
 
-    bool Create(wxRibbonBar* parent,
-                wxWindowID id = wxID_ANY,
-                const wxString& label = wxEmptyString,
-                const wxBitmap& icon = wxNullBitmap,
-                long style = 0);
+	bool Create(wxRibbonBar* parent,
+	            wxWindowID id = wxID_ANY,
+	            const wxString& label = wxEmptyString,
+	            const wxBitmap& icon = wxNullBitmap,
+	            long style = 0);
 
-    void SetArtProvider(wxRibbonArtProvider* art) wxOVERRIDE;
+	void SetArtProvider(wxRibbonArtProvider* art) wxOVERRIDE;
 
-    wxBitmap& GetIcon() {return m_icon;}
-    virtual wxSize GetMinSize() const wxOVERRIDE;
-    void SetSizeWithScrollButtonAdjustment(int x, int y, int width, int height);
-    void AdjustRectToIncludeScrollButtons(wxRect* rect) const;
+	wxBitmap& GetIcon()
+	{
+		return m_icon;
+	}
+	virtual wxSize GetMinSize() const wxOVERRIDE;
+	void SetSizeWithScrollButtonAdjustment(int x, int y, int width, int height);
+	void AdjustRectToIncludeScrollButtons(wxRect* rect) const;
 
-    bool DismissExpandedPanel();
+	bool DismissExpandedPanel();
 
-    virtual bool Realize() wxOVERRIDE;
-    virtual bool Show(bool show = true) wxOVERRIDE;
-    virtual bool Layout() wxOVERRIDE;
-    virtual bool ScrollLines(int lines) wxOVERRIDE;
-    bool ScrollPixels(int pixels);
-    bool ScrollSections(int sections);
+	virtual bool Realize() wxOVERRIDE;
+	virtual bool Show(bool show = true) wxOVERRIDE;
+	virtual bool Layout() wxOVERRIDE;
+	virtual bool ScrollLines(int lines) wxOVERRIDE;
+	bool ScrollPixels(int pixels);
+	bool ScrollSections(int sections);
 
-    wxOrientation GetMajorAxis() const;
+	wxOrientation GetMajorAxis() const;
 
-    virtual void RemoveChild(wxWindowBase *child) wxOVERRIDE;
+	virtual void RemoveChild(wxWindowBase *child) wxOVERRIDE;
 
-    void HideIfExpanded();
+	void HideIfExpanded();
 
 protected:
-    virtual wxSize DoGetBestSize() const wxOVERRIDE;
-    virtual wxBorder GetDefaultBorder() const wxOVERRIDE { return wxBORDER_NONE; }
+	virtual wxSize DoGetBestSize() const wxOVERRIDE;
+	virtual wxBorder GetDefaultBorder() const wxOVERRIDE
+	{
+		return wxBORDER_NONE;
+	}
 
-    void DoSetSize(int x, int y, int width, int height, int sizeFlags = wxSIZE_AUTO) wxOVERRIDE;
-    bool DoActualLayout();
-    void OnEraseBackground(wxEraseEvent& evt);
-    void OnPaint(wxPaintEvent& evt);
-    void OnSize(wxSizeEvent& evt);
+	void DoSetSize(int x, int y, int width, int height, int sizeFlags = wxSIZE_AUTO) wxOVERRIDE;
+	bool DoActualLayout();
+	void OnEraseBackground(wxEraseEvent& evt);
+	void OnPaint(wxPaintEvent& evt);
+	void OnSize(wxSizeEvent& evt);
 
-    bool ExpandPanels(wxOrientation direction, int maximum_amount);
-    bool CollapsePanels(wxOrientation direction, int minimum_amount);
-    bool ShowScrollButtons();
-    void HideScrollButtons();
+	bool ExpandPanels(wxOrientation direction, int maximum_amount);
+	bool CollapsePanels(wxOrientation direction, int minimum_amount);
+	bool ShowScrollButtons();
+	void HideScrollButtons();
 
-    void CommonInit(const wxString& label, const wxBitmap& icon);
-    void PopulateSizeCalcArray(wxSize (wxWindow::*get_size)(void) const);
+	void CommonInit(const wxString& label, const wxBitmap& icon);
+	void PopulateSizeCalcArray(wxSize (wxWindow::*get_size)(void) const);
 
-    wxArrayRibbonControl m_collapse_stack;
-    wxBitmap m_icon;
-    wxSize m_old_size;
-    // NB: Scroll button windows are siblings rather than children (to get correct clipping of children)
-    wxRibbonPageScrollButton* m_scroll_left_btn;
-    wxRibbonPageScrollButton* m_scroll_right_btn;
-    wxSize* m_size_calc_array;
-    size_t m_size_calc_array_size;
-    int m_scroll_amount;
-    int m_scroll_amount_limit;
-    int m_size_in_major_axis_for_children;
-    bool m_scroll_buttons_visible;
+	wxArrayRibbonControl m_collapse_stack;
+	wxBitmap m_icon;
+	wxSize m_old_size;
+	// NB: Scroll button windows are siblings rather than children (to get correct clipping of children)
+	wxRibbonPageScrollButton* m_scroll_left_btn;
+	wxRibbonPageScrollButton* m_scroll_right_btn;
+	wxSize* m_size_calc_array;
+	size_t m_size_calc_array_size;
+	int m_scroll_amount;
+	int m_scroll_amount_limit;
+	int m_size_in_major_axis_for_children;
+	bool m_scroll_buttons_visible;
 
 #ifndef SWIG
-    wxDECLARE_CLASS(wxRibbonPage);
-    wxDECLARE_EVENT_TABLE();
+	wxDECLARE_CLASS(wxRibbonPage);
+	wxDECLARE_EVENT_TABLE();
 #endif
 };
 

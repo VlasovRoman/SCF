@@ -15,27 +15,28 @@
 
 #include "wx/frame.h"
 
-class WXDLLIMPEXP_CORE wxMiniFrame: public wxFrame {
+class WXDLLIMPEXP_CORE wxMiniFrame: public wxFrame
+{
 
-    wxDECLARE_DYNAMIC_CLASS(wxMiniFrame);
+	wxDECLARE_DYNAMIC_CLASS(wxMiniFrame);
 
 public:
-    inline wxMiniFrame() {}
-    inline wxMiniFrame(wxWindow *parent,
-        wxWindowID id,
-        const wxString& title,
-        const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize,
-        long style = wxDEFAULT_FRAME_STYLE|wxTINY_CAPTION,
-        const wxString& name = wxFrameNameStr)
-    {
-        // Use wxFrame constructor in absence of more specific code.
-        Create(parent, id, title, pos, size, style, name);
-    }
+	inline wxMiniFrame() {}
+	inline wxMiniFrame(wxWindow *parent,
+	                   wxWindowID id,
+	                   const wxString& title,
+	                   const wxPoint& pos = wxDefaultPosition,
+	                   const wxSize& size = wxDefaultSize,
+	                   long style = wxDEFAULT_FRAME_STYLE|wxTINY_CAPTION,
+	                   const wxString& name = wxFrameNameStr)
+	{
+		// Use wxFrame constructor in absence of more specific code.
+		Create(parent, id, title, pos, size, style, name);
+	}
 
-    virtual ~wxMiniFrame() {}
+	virtual ~wxMiniFrame() {}
 protected:
 };
 
 #endif
-    // _WX_MINIFRAM_H_
+// _WX_MINIFRAM_H_

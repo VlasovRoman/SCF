@@ -22,28 +22,28 @@ class WXDLLIMPEXP_FWD_AUI wxAuiNotebook;
 class WXDLLIMPEXP_AUI wxAuiXmlHandler : public wxXmlResourceHandler
 {
 public:
-    wxAuiXmlHandler();
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	wxAuiXmlHandler();
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
-    // Returns the wxAuiManager for the specified window
-    wxAuiManager *GetAuiManager(wxWindow *managed) const;
+	// Returns the wxAuiManager for the specified window
+	wxAuiManager *GetAuiManager(wxWindow *managed) const;
 
 private:
-    // Used to UnInit() the wxAuiManager before destroying its managed window
-    void OnManagedWindowClose(wxWindowDestroyEvent &event);
+	// Used to UnInit() the wxAuiManager before destroying its managed window
+	void OnManagedWindowClose(wxWindowDestroyEvent &event);
 
-    typedef wxVector<wxAuiManager*> Managers;
-    Managers m_managers; // all wxAuiManagers created in this handler
+	typedef wxVector<wxAuiManager*> Managers;
+	Managers m_managers; // all wxAuiManagers created in this handler
 
-    wxAuiManager    *m_manager;  // Current wxAuiManager
-    wxWindow        *m_window;   // Current managed wxWindow
-    wxAuiNotebook   *m_notebook;
+	wxAuiManager    *m_manager;  // Current wxAuiManager
+	wxWindow        *m_window;   // Current managed wxWindow
+	wxAuiNotebook   *m_notebook;
 
-    bool m_mgrInside; // Are we handling a wxAuiManager or panes inside it?
-    bool m_anbInside; // Are we handling a wxAuiNotebook or pages inside it?
+	bool m_mgrInside; // Are we handling a wxAuiManager or panes inside it?
+	bool m_anbInside; // Are we handling a wxAuiNotebook or pages inside it?
 
-    wxDECLARE_DYNAMIC_CLASS(wxAuiXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxAuiXmlHandler);
 };
 
 #endif //wxUSE_XRC && wxUSE_AUI

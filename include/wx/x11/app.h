@@ -36,71 +36,86 @@ class WXDLLIMPEXP_FWD_CORE wxXVisualInfo;
 class WXDLLIMPEXP_CORE wxApp : public wxAppBase
 {
 public:
-    wxApp();
-    virtual ~wxApp();
+	wxApp();
+	virtual ~wxApp();
 
-    // override base class (pure) virtuals
-    // -----------------------------------
+	// override base class (pure) virtuals
+	// -----------------------------------
 
-    virtual void Exit();
+	virtual void Exit();
 
-    virtual void WakeUpIdle();
+	virtual void WakeUpIdle();
 
-    virtual bool OnInitGui();
+	virtual bool OnInitGui();
 
-    // implementation from now on
-    // --------------------------
+	// implementation from now on
+	// --------------------------
 
-    // Processes an X event.
-    virtual bool ProcessXEvent(WXEvent* event);
+	// Processes an X event.
+	virtual bool ProcessXEvent(WXEvent* event);
 
 public:
-    // Implementation
-    virtual bool Initialize(int& argc, wxChar **argv);
-    virtual void CleanUp();
+	// Implementation
+	virtual bool Initialize(int& argc, wxChar **argv);
+	virtual void CleanUp();
 
-    WXWindow       GetTopLevelWidget() const { return m_topLevelWidget; }
-    WXColormap     GetMainColormap(WXDisplay* display);
-    long           GetMaxRequestSize() const { return m_maxRequestSize; }
+	WXWindow       GetTopLevelWidget() const
+	{
+		return m_topLevelWidget;
+	}
+	WXColormap     GetMainColormap(WXDisplay* display);
+	long           GetMaxRequestSize() const
+	{
+		return m_maxRequestSize;
+	}
 
-    // This handler is called when a property change event occurs
-    virtual bool HandlePropertyChange(WXEvent *event);
+	// This handler is called when a property change event occurs
+	virtual bool HandlePropertyChange(WXEvent *event);
 
-    // Values that can be passed on the command line.
-    // Returns -1, -1 if none specified.
-    const wxSize& GetInitialSize() const { return m_initialSize; }
-    bool GetShowIconic() const { return m_showIconic; }
+	// Values that can be passed on the command line.
+	// Returns -1, -1 if none specified.
+	const wxSize& GetInitialSize() const
+	{
+		return m_initialSize;
+	}
+	bool GetShowIconic() const
+	{
+		return m_showIconic;
+	}
 
 #if wxUSE_UNICODE
-    // Global context for Pango layout. Either use X11
-    // or use Xft rendering according to GDK_USE_XFT
-    // environment variable
-    PangoContext* GetPangoContext();
+	// Global context for Pango layout. Either use X11
+	// or use Xft rendering according to GDK_USE_XFT
+	// environment variable
+	PangoContext* GetPangoContext();
 #endif
 
-    wxXVisualInfo* GetVisualInfo(WXDisplay* WXUNUSED(display))
-    {
-        // this should be implemented correctly for wxBitmap to work
-        // with multiple display
-        return m_visualInfo;
-    }
-    virtual void* GetXVisualInfo() { return NULL; }
+	wxXVisualInfo* GetVisualInfo(WXDisplay* WXUNUSED(display))
+	{
+		// this should be implemented correctly for wxBitmap to work
+		// with multiple display
+		return m_visualInfo;
+	}
+	virtual void* GetXVisualInfo()
+	{
+		return NULL;
+	}
 
 public:
-    static long           sm_lastMessageTime;
-    bool                  m_showIconic;
-    wxSize                m_initialSize;
+	static long           sm_lastMessageTime;
+	bool                  m_showIconic;
+	wxSize                m_initialSize;
 
 #if !wxUSE_NANOX
-    wxXVisualInfo*        m_visualInfo;
+	wxXVisualInfo*        m_visualInfo;
 #endif
 
 protected:
-    WXWindow              m_topLevelWidget;
-    WXColormap            m_mainColormap;
-    long                  m_maxRequestSize;
+	WXWindow              m_topLevelWidget;
+	WXColormap            m_mainColormap;
+	long                  m_maxRequestSize;
 
-    wxDECLARE_DYNAMIC_CLASS(wxApp);
+	wxDECLARE_DYNAMIC_CLASS(wxApp);
 };
 
 #endif // _WX_X11_APP_H_

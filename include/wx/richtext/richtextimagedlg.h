@@ -44,26 +44,26 @@ class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
  */
 
 class WXDLLIMPEXP_RICHTEXT wxRichTextObjectPropertiesDialog: public wxRichTextFormattingDialog
-{    
-    wxDECLARE_DYNAMIC_CLASS(wxRichTextObjectPropertiesDialog);
-    wxDECLARE_EVENT_TABLE();
+{
+	wxDECLARE_DYNAMIC_CLASS(wxRichTextObjectPropertiesDialog);
+	wxDECLARE_EVENT_TABLE();
 
 public:
-    /// Constructors
-    wxRichTextObjectPropertiesDialog();
-    wxRichTextObjectPropertiesDialog( wxRichTextObject* obj, wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_IDNAME, const wxString& caption = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_SIZE, long style = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_STYLE );
+	/// Constructors
+	wxRichTextObjectPropertiesDialog();
+	wxRichTextObjectPropertiesDialog( wxRichTextObject* obj, wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_IDNAME, const wxString& caption = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_SIZE, long style = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_STYLE );
 
-    /// Creation
-    bool Create( wxRichTextObject* obj, wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_IDNAME, const wxString& caption = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_SIZE, long style = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_STYLE );
+	/// Creation
+	bool Create( wxRichTextObject* obj, wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_IDNAME, const wxString& caption = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_SIZE, long style = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_STYLE );
 
-    /// Destructor
-    ~wxRichTextObjectPropertiesDialog();
+	/// Destructor
+	~wxRichTextObjectPropertiesDialog();
 
-    /// Initialises member variables
-    void Init();
+	/// Initialises member variables
+	void Init();
 
-    /// Creates the controls and sizers
-    void CreateControls();
+	/// Creates the controls and sizers
+	void CreateControls();
 
 ////@begin wxRichTextObjectPropertiesDialog event handler declarations
 
@@ -71,23 +71,24 @@ public:
 
 ////@begin wxRichTextObjectPropertiesDialog member function declarations
 
-    /// Retrieves bitmap resources
-    wxBitmap GetBitmapResource( const wxString& name );
+	/// Retrieves bitmap resources
+	wxBitmap GetBitmapResource( const wxString& name );
 
-    /// Retrieves icon resources
-    wxIcon GetIconResource( const wxString& name );
+	/// Retrieves icon resources
+	wxIcon GetIconResource( const wxString& name );
 ////@end wxRichTextObjectPropertiesDialog member function declarations
 
-    /// Should we show tooltips?
-    static bool ShowToolTips();
+	/// Should we show tooltips?
+	static bool ShowToolTips();
 
 ////@begin wxRichTextObjectPropertiesDialog member variables
-    /// Control identifiers
-    enum {
-        ID_RICHTEXTOBJECTPROPERTIESDIALOG = 10650
-    };
+	/// Control identifiers
+	enum
+	{
+		ID_RICHTEXTOBJECTPROPERTIESDIALOG = 10650
+	};
 ////@end wxRichTextObjectPropertiesDialog member variables
 };
 
 #endif
-    // _RICHTEXTIMAGEDLG_H_
+// _RICHTEXTIMAGEDLG_H_

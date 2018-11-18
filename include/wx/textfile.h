@@ -28,24 +28,24 @@
 class WXDLLIMPEXP_BASE wxTextFile : public wxTextBuffer
 {
 public:
-    // constructors
-    wxTextFile() { }
-    wxTextFile(const wxString& strFileName);
+	// constructors
+	wxTextFile() { }
+	wxTextFile(const wxString& strFileName);
 
 protected:
-    // implement the base class pure virtuals
-    virtual bool OnExists() const wxOVERRIDE;
-    virtual bool OnOpen(const wxString &strBufferName,
-                        wxTextBufferOpenMode openMode) wxOVERRIDE;
-    virtual bool OnClose() wxOVERRIDE;
-    virtual bool OnRead(const wxMBConv& conv) wxOVERRIDE;
-    virtual bool OnWrite(wxTextFileType typeNew, const wxMBConv& conv) wxOVERRIDE;
+	// implement the base class pure virtuals
+	virtual bool OnExists() const wxOVERRIDE;
+	virtual bool OnOpen(const wxString &strBufferName,
+	                    wxTextBufferOpenMode openMode) wxOVERRIDE;
+	virtual bool OnClose() wxOVERRIDE;
+	virtual bool OnRead(const wxMBConv& conv) wxOVERRIDE;
+	virtual bool OnWrite(wxTextFileType typeNew, const wxMBConv& conv) wxOVERRIDE;
 
 private:
 
-    wxFile m_file;
+	wxFile m_file;
 
-    wxDECLARE_NO_COPY_CLASS(wxTextFile);
+	wxDECLARE_NO_COPY_CLASS(wxTextFile);
 };
 
 #else // !wxUSE_TEXTFILE

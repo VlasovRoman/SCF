@@ -32,9 +32,9 @@ namespace wxPrivate
 template<typename T>
 struct TypeHierarchy
 {
-    // consider unknown types (e.g. objects, pointers) to be of highest
-    // level, always convert to them if they occur
-    static const int level = 9999;
+	// consider unknown types (e.g. objects, pointers) to be of highest
+	// level, always convert to them if they occur
+	static const int level = 9999;
 };
 
 #define WX_TYPE_HIERARCHY_LEVEL(level_num, type)        \
@@ -60,15 +60,15 @@ WX_TYPE_HIERARCHY_LEVEL(12, double);
 WX_TYPE_HIERARCHY_LEVEL(13, long double);
 
 #if wxWCHAR_T_IS_REAL_TYPE
-    #if SIZEOF_WCHAR_T == SIZEOF_SHORT
-      template<> struct TypeHierarchy<wchar_t> : public TypeHierarchy<short> {};
-    #elif SIZEOF_WCHAR_T == SIZEOF_INT
-      template<> struct TypeHierarchy<wchar_t> : public TypeHierarchy<int> {};
-    #elif SIZEOF_WCHAR_T == SIZEOF_LONG
-      template<> struct TypeHierarchy<wchar_t> : public TypeHierarchy<long> {};
-    #else
-      #error "weird wchar_t size, please update this code"
-    #endif
+#if SIZEOF_WCHAR_T == SIZEOF_SHORT
+template<> struct TypeHierarchy<wchar_t> : public TypeHierarchy<short> {};
+#elif SIZEOF_WCHAR_T == SIZEOF_INT
+template<> struct TypeHierarchy<wchar_t> : public TypeHierarchy<int> {};
+#elif SIZEOF_WCHAR_T == SIZEOF_LONG
+template<> struct TypeHierarchy<wchar_t> : public TypeHierarchy<long> {};
+#else
+#error "weird wchar_t size, please update this code"
+#endif
 #endif
 
 #undef WX_TYPE_HIERARCHY_LEVEL
@@ -80,22 +80,22 @@ WX_TYPE_HIERARCHY_LEVEL(13, long double);
 template<typename T1, typename T2>
 struct wxImplicitConversionType
 {
-    typedef typename wxIf
-            <
-                // if T2 is "higher" type, convert to it
-                (int)(wxPrivate::TypeHierarchy<T1>::level) < (int)(wxPrivate::TypeHierarchy<T2>::level),
-                T2,
-                // otherwise use T1
-                T1
-            >::value
-            value;
+	typedef typename wxIf
+	<
+	// if T2 is "higher" type, convert to it
+	(int)(wxPrivate::TypeHierarchy<T1>::level) < (int)(wxPrivate::TypeHierarchy<T2>::level),
+	T2,
+	// otherwise use T1
+	T1
+	>::value
+	value;
 };
 
 
 template<typename T1, typename T2, typename T3>
 struct wxImplicitConversionType3 : public wxImplicitConversionType<
-                        T1,
-                        typename wxImplicitConversionType<T2,T3>::value>
+	T1,
+	typename wxImplicitConversionType<T2,T3>::value>
 {
 };
 

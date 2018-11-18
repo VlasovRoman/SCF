@@ -19,11 +19,11 @@
 class WXDLLIMPEXP_XRC wxSpinButtonXmlHandler : public wxXmlResourceHandler
 {
 public:
-    wxSpinButtonXmlHandler();
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	wxSpinButtonXmlHandler();
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
-    wxDECLARE_DYNAMIC_CLASS(wxSpinButtonXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxSpinButtonXmlHandler);
 };
 
 #endif // wxUSE_SPINBTN
@@ -33,21 +33,21 @@ public:
 class WXDLLIMPEXP_XRC wxSpinCtrlXmlHandler : public wxXmlResourceHandler
 {
 public:
-    wxSpinCtrlXmlHandler();
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	wxSpinCtrlXmlHandler();
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
-    wxDECLARE_DYNAMIC_CLASS(wxSpinCtrlXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxSpinCtrlXmlHandler);
 };
 
 class WXDLLIMPEXP_XRC wxSpinCtrlDoubleXmlHandler : public wxXmlResourceHandler
 {
 public:
-    wxSpinCtrlDoubleXmlHandler();
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	wxSpinCtrlDoubleXmlHandler();
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
-    wxDECLARE_DYNAMIC_CLASS(wxSpinCtrlDoubleXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxSpinCtrlDoubleXmlHandler);
 };
 
 #endif // wxUSE_SPINCTRL

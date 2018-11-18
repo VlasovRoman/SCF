@@ -39,32 +39,35 @@ enum { wxFONTENCODING_UNKNOWN = -2 };
 class wxFontMapperPathChanger
 {
 public:
-    wxFontMapperPathChanger(wxFontMapperBase *fontMapper, const wxString& path)
-    {
-        m_fontMapper = fontMapper;
-        m_ok = m_fontMapper->ChangePath(path, &m_pathOld);
-    }
+	wxFontMapperPathChanger(wxFontMapperBase *fontMapper, const wxString& path)
+	{
+		m_fontMapper = fontMapper;
+		m_ok = m_fontMapper->ChangePath(path, &m_pathOld);
+	}
 
-    bool IsOk() const { return m_ok; }
+	bool IsOk() const
+	{
+		return m_ok;
+	}
 
-    ~wxFontMapperPathChanger()
-    {
-        if ( IsOk() )
-            m_fontMapper->RestorePath(m_pathOld);
-    }
+	~wxFontMapperPathChanger()
+	{
+		if ( IsOk() )
+			m_fontMapper->RestorePath(m_pathOld);
+	}
 
 private:
-    // the fontmapper object we're working with
-    wxFontMapperBase *m_fontMapper;
+	// the fontmapper object we're working with
+	wxFontMapperBase *m_fontMapper;
 
-    // the old path to be restored if m_ok
-    wxString m_pathOld;
+	// the old path to be restored if m_ok
+	wxString m_pathOld;
 
-    // have we changed the path successfully?
-    bool m_ok;
+	// have we changed the path successfully?
+	bool m_ok;
 
 
-    wxDECLARE_NO_COPY_CLASS(wxFontMapperPathChanger);
+	wxDECLARE_NO_COPY_CLASS(wxFontMapperPathChanger);
 };
 
 #endif // wxUSE_CONFIG

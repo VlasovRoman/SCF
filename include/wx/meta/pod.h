@@ -22,7 +22,7 @@
 template<typename T>
 struct wxIsPod
 {
-    static const bool value = false;
+	static const bool value = false;
 };
 
 // Macro to add wxIsPod<T> specialization for given type that marks it
@@ -57,13 +57,13 @@ WX_DECLARE_TYPE_POD(wxULongLong_t)
 template<typename T>
 struct wxIsPod<T*>
 {
-    static const bool value = true;
+	static const bool value = true;
 };
 
 template<typename T>
 struct wxIsPod<const T*>
 {
-    static const bool value = true;
+	static const bool value = true;
 };
 
 #endif // _WX_META_POD_H_

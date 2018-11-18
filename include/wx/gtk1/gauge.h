@@ -16,61 +16,70 @@
 class WXDLLIMPEXP_CORE wxGauge: public wxGaugeBase
 {
 public:
-    wxGauge() { Init(); }
+	wxGauge()
+	{
+		Init();
+	}
 
-    wxGauge( wxWindow *parent,
-             wxWindowID id,
-             int range,
-             const wxPoint& pos = wxDefaultPosition,
-             const wxSize& size = wxDefaultSize,
-             long style = wxGA_HORIZONTAL,
-             const wxValidator& validator = wxDefaultValidator,
-             const wxString& name = wxGaugeNameStr )
-    {
-        Init();
+	wxGauge( wxWindow *parent,
+	         wxWindowID id,
+	         int range,
+	         const wxPoint& pos = wxDefaultPosition,
+	         const wxSize& size = wxDefaultSize,
+	         long style = wxGA_HORIZONTAL,
+	         const wxValidator& validator = wxDefaultValidator,
+	         const wxString& name = wxGaugeNameStr )
+	{
+		Init();
 
-        Create(parent, id, range, pos, size, style, validator, name);
-    }
+		Create(parent, id, range, pos, size, style, validator, name);
+	}
 
-    bool Create( wxWindow *parent,
-                 wxWindowID id, int range,
-                 const wxPoint& pos = wxDefaultPosition,
-                 const wxSize& size = wxDefaultSize,
-                 long style = wxGA_HORIZONTAL,
-                 const wxValidator& validator = wxDefaultValidator,
-                 const wxString& name = wxGaugeNameStr );
+	bool Create( wxWindow *parent,
+	             wxWindowID id, int range,
+	             const wxPoint& pos = wxDefaultPosition,
+	             const wxSize& size = wxDefaultSize,
+	             long style = wxGA_HORIZONTAL,
+	             const wxValidator& validator = wxDefaultValidator,
+	             const wxString& name = wxGaugeNameStr );
 
-    void SetRange( int r );
-    void SetValue( int pos );
-    int GetRange() const;
-    int GetValue() const;
+	void SetRange( int r );
+	void SetValue( int pos );
+	int GetRange() const;
+	int GetValue() const;
 
-    bool IsVertical() const { return HasFlag(wxGA_VERTICAL); }
+	bool IsVertical() const
+	{
+		return HasFlag(wxGA_VERTICAL);
+	}
 
-    static wxVisualAttributes
-    GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
+	static wxVisualAttributes
+	GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
 
-    // implementation
-    // -------------
+	// implementation
+	// -------------
 
-    // the max and current gauge values
-    int m_rangeMax,
-        m_gaugePos;
+	// the max and current gauge values
+	int m_rangeMax,
+	    m_gaugePos;
 
 protected:
-    // common part of all ctors
-    void Init() { m_rangeMax = m_gaugePos = 0; }
+	// common part of all ctors
+	void Init()
+	{
+		m_rangeMax = m_gaugePos = 0;
+	}
 
-    // set the gauge value to the value of m_gaugePos
-    void DoSetGauge();
+	// set the gauge value to the value of m_gaugePos
+	void DoSetGauge();
 
-    virtual wxSize DoGetBestSize() const;
+	virtual wxSize DoGetBestSize() const;
 
-    virtual wxVisualAttributes GetDefaultAttributes() const;
+	virtual wxVisualAttributes GetDefaultAttributes() const;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxGauge);
+	wxDECLARE_DYNAMIC_CLASS(wxGauge);
 };
 
 #endif
-    // __GTKGAUGEH__
+// __GTKGAUGEH__

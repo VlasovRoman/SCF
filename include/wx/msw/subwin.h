@@ -20,164 +20,171 @@
 class WXDLLIMPEXP_CORE wxSubwindows
 {
 public:
-    // the number of subwindows can be specified either as parameter to ctor or
-    // later in Create()
-    wxSubwindows(size_t n = 0) { Init(); if ( n ) Create(n); }
+	// the number of subwindows can be specified either as parameter to ctor or
+	// later in Create()
+	wxSubwindows(size_t n = 0)
+	{
+		Init();
+		if ( n ) Create(n);
+	}
 
-    // allocate enough space for the given number of windows
-    void Create(size_t n)
-    {
-        wxASSERT_MSG( !m_hwnds, wxT("Create() called twice?") );
+	// allocate enough space for the given number of windows
+	void Create(size_t n)
+	{
+		wxASSERT_MSG( !m_hwnds, wxT("Create() called twice?") );
 
-        m_count = n;
-        m_hwnds = (HWND *)calloc(n, sizeof(HWND));
-        m_ids = new wxWindowIDRef[n];
-    }
+		m_count = n;
+		m_hwnds = (HWND *)calloc(n, sizeof(HWND));
+		m_ids = new wxWindowIDRef[n];
+	}
 
-    // non-virtual dtor, this class is not supposed to be used polymorphically
-    ~wxSubwindows()
-    {
-        for ( size_t n = 0; n < m_count; n++ )
-        {
-            if ( m_hwnds[n] )
-                ::DestroyWindow(m_hwnds[n]);
-        }
+	// non-virtual dtor, this class is not supposed to be used polymorphically
+	~wxSubwindows()
+	{
+		for ( size_t n = 0; n < m_count; n++ )
+		{
+			if ( m_hwnds[n] )
+				::DestroyWindow(m_hwnds[n]);
+		}
 
-        free(m_hwnds);
-        delete [] m_ids;
-    }
+		free(m_hwnds);
+		delete [] m_ids;
+	}
 
-    // get the number of subwindows
-    size_t GetCount() const { return m_count; }
+	// get the number of subwindows
+	size_t GetCount() const
+	{
+		return m_count;
+	}
 
-    // access a given window
-    HWND& Get(size_t n)
-    {
-        wxASSERT_MSG( n < m_count, wxT("subwindow index out of range") );
+	// access a given window
+	HWND& Get(size_t n)
+	{
+		wxASSERT_MSG( n < m_count, wxT("subwindow index out of range") );
 
-        return m_hwnds[n];
-    }
+		return m_hwnds[n];
+	}
 
-    HWND operator[](size_t n) const
-    {
-        return const_cast<wxSubwindows *>(this)->Get(n);
-    }
+	HWND operator[](size_t n) const
+	{
+		return const_cast<wxSubwindows *>(this)->Get(n);
+	}
 
-    // initialize the given window: id will be stored in wxWindowIDRef ensuring
-    // that it is not reused while this object exists
-    void Set(size_t n, HWND hwnd, wxWindowID id)
-    {
-        wxASSERT_MSG( n < m_count, wxT("subwindow index out of range") );
+	// initialize the given window: id will be stored in wxWindowIDRef ensuring
+	// that it is not reused while this object exists
+	void Set(size_t n, HWND hwnd, wxWindowID id)
+	{
+		wxASSERT_MSG( n < m_count, wxT("subwindow index out of range") );
 
-        m_hwnds[n] = hwnd;
-        m_ids[n] = id;
-    }
+		m_hwnds[n] = hwnd;
+		m_ids[n] = id;
+	}
 
-    // check if we have this window
-    bool HasWindow(HWND hwnd)
-    {
-        for ( size_t n = 0; n < m_count; n++ )
-        {
-            if ( m_hwnds[n] == hwnd )
-                return true;
-        }
+	// check if we have this window
+	bool HasWindow(HWND hwnd)
+	{
+		for ( size_t n = 0; n < m_count; n++ )
+		{
+			if ( m_hwnds[n] == hwnd )
+				return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
 
-    // methods which are forwarded to all subwindows
-    // ---------------------------------------------
+	// methods which are forwarded to all subwindows
+	// ---------------------------------------------
 
-    // show/hide everything
-    void Show(bool show)
-    {
-        int sw = show ? SW_SHOW : SW_HIDE;
-        for ( size_t n = 0; n < m_count; n++ )
-        {
-            if ( m_hwnds[n] )
-                ::ShowWindow(m_hwnds[n], sw);
-        }
-    }
+	// show/hide everything
+	void Show(bool show)
+	{
+		int sw = show ? SW_SHOW : SW_HIDE;
+		for ( size_t n = 0; n < m_count; n++ )
+		{
+			if ( m_hwnds[n] )
+				::ShowWindow(m_hwnds[n], sw);
+		}
+	}
 
-    // enable/disable everything
-    void Enable(bool enable)
-    {
-        for ( size_t n = 0; n < m_count; n++ )
-        {
-            if ( m_hwnds[n] )
-                ::EnableWindow(m_hwnds[n], enable);
-        }
-    }
+	// enable/disable everything
+	void Enable(bool enable)
+	{
+		for ( size_t n = 0; n < m_count; n++ )
+		{
+			if ( m_hwnds[n] )
+				::EnableWindow(m_hwnds[n], enable);
+		}
+	}
 
-    // set font for all windows
-    void SetFont(const wxFont& font)
-    {
-        HFONT hfont = GetHfontOf(font);
-        wxCHECK_RET( hfont, wxT("invalid font") );
+	// set font for all windows
+	void SetFont(const wxFont& font)
+	{
+		HFONT hfont = GetHfontOf(font);
+		wxCHECK_RET( hfont, wxT("invalid font") );
 
-        for ( size_t n = 0; n < m_count; n++ )
-        {
-            if ( m_hwnds[n] )
-            {
-                ::SendMessage(m_hwnds[n], WM_SETFONT, (WPARAM)hfont, 0);
+		for ( size_t n = 0; n < m_count; n++ )
+		{
+			if ( m_hwnds[n] )
+			{
+				::SendMessage(m_hwnds[n], WM_SETFONT, (WPARAM)hfont, 0);
 
-                // otherwise the window might not be redrawn correctly
-                ::InvalidateRect(m_hwnds[n], NULL, FALSE /* don't erase bg */);
-            }
-        }
-    }
+				// otherwise the window might not be redrawn correctly
+				::InvalidateRect(m_hwnds[n], NULL, FALSE /* don't erase bg */);
+			}
+		}
+	}
 
-    // add all windows to update region to force redraw
-    void Refresh()
-    {
-        for ( size_t n = 0; n < m_count; n++ )
-        {
-            if ( m_hwnds[n] )
-            {
-                ::InvalidateRect(m_hwnds[n], NULL, FALSE /* don't erase bg */);
-            }
-        }
-    }
+	// add all windows to update region to force redraw
+	void Refresh()
+	{
+		for ( size_t n = 0; n < m_count; n++ )
+		{
+			if ( m_hwnds[n] )
+			{
+				::InvalidateRect(m_hwnds[n], NULL, FALSE /* don't erase bg */);
+			}
+		}
+	}
 
-    // find the bounding box for all windows
-    wxRect GetBoundingBox() const
-    {
-        wxRect r;
-        for ( size_t n = 0; n < m_count; n++ )
-        {
-            if ( m_hwnds[n] )
-            {
-                RECT rc;
+	// find the bounding box for all windows
+	wxRect GetBoundingBox() const
+	{
+		wxRect r;
+		for ( size_t n = 0; n < m_count; n++ )
+		{
+			if ( m_hwnds[n] )
+			{
+				RECT rc;
 
-                ::GetWindowRect(m_hwnds[n], &rc);
+				::GetWindowRect(m_hwnds[n], &rc);
 
-                r.Union(wxRectFromRECT(rc));
-            }
-        }
+				r.Union(wxRectFromRECT(rc));
+			}
+		}
 
-        return r;
-    }
+		return r;
+	}
 
 private:
-    void Init()
-    {
-        m_count = 0;
-        m_hwnds = NULL;
-        m_ids = NULL;
-    }
+	void Init()
+	{
+		m_count = 0;
+		m_hwnds = NULL;
+		m_ids = NULL;
+	}
 
-    // number of elements in m_hwnds array
-    size_t m_count;
+	// number of elements in m_hwnds array
+	size_t m_count;
 
-    // the HWNDs we contain
-    HWND *m_hwnds;
+	// the HWNDs we contain
+	HWND *m_hwnds;
 
-    // the IDs of the windows
-    wxWindowIDRef *m_ids;
+	// the IDs of the windows
+	wxWindowIDRef *m_ids;
 
 
-    wxDECLARE_NO_COPY_CLASS(wxSubwindows);
+	wxDECLARE_NO_COPY_CLASS(wxSubwindows);
 };
 
 // convenient macro to forward a few methods which are usually propagated to

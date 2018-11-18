@@ -11,12 +11,12 @@
 class WXDLLIMPEXP_CORE wxControlWithItems : public wxControlWithItemsBase
 {
 public:
-    wxControlWithItems();
+	wxControlWithItems();
 
 protected:
 
 private:
-    wxDECLARE_ABSTRACT_CLASS(wxControlWithItems);
+	wxDECLARE_ABSTRACT_CLASS(wxControlWithItems);
 };
 
 #endif // _WX_QT_CTRLSUB_H_

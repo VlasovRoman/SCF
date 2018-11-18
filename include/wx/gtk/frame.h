@@ -16,60 +16,66 @@
 class WXDLLIMPEXP_CORE wxFrame : public wxFrameBase
 {
 public:
-    // construction
-    wxFrame() { Init(); }
-    wxFrame(wxWindow *parent,
-               wxWindowID id,
-               const wxString& title,
-               const wxPoint& pos = wxDefaultPosition,
-               const wxSize& size = wxDefaultSize,
-               long style = wxDEFAULT_FRAME_STYLE,
-               const wxString& name = wxFrameNameStr)
-    {
-        Init();
+	// construction
+	wxFrame()
+	{
+		Init();
+	}
+	wxFrame(wxWindow *parent,
+	        wxWindowID id,
+	        const wxString& title,
+	        const wxPoint& pos = wxDefaultPosition,
+	        const wxSize& size = wxDefaultSize,
+	        long style = wxDEFAULT_FRAME_STYLE,
+	        const wxString& name = wxFrameNameStr)
+	{
+		Init();
 
-        Create(parent, id, title, pos, size, style, name);
-    }
+		Create(parent, id, title, pos, size, style, name);
+	}
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxString& title,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE,
-                const wxString& name = wxFrameNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxString& title,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxDEFAULT_FRAME_STYLE,
+	            const wxString& name = wxFrameNameStr);
 
 #if wxUSE_STATUSBAR
-    void SetStatusBar(wxStatusBar *statbar) wxOVERRIDE;
+	void SetStatusBar(wxStatusBar *statbar) wxOVERRIDE;
 #endif // wxUSE_STATUSBAR
 
 #if wxUSE_TOOLBAR
-    void SetToolBar(wxToolBar *toolbar) wxOVERRIDE;
+	void SetToolBar(wxToolBar *toolbar) wxOVERRIDE;
 #endif // wxUSE_TOOLBAR
 
-    virtual bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) wxOVERRIDE;
-    wxPoint GetClientAreaOrigin() const wxOVERRIDE { return wxPoint(0, 0); }
+	virtual bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) wxOVERRIDE;
+	wxPoint GetClientAreaOrigin() const wxOVERRIDE
+	{
+		return wxPoint(0, 0);
+	}
 
-    // implementation from now on
-    // --------------------------
+	// implementation from now on
+	// --------------------------
 
-    virtual bool SendIdleEvents(wxIdleEvent& event) wxOVERRIDE;
+	virtual bool SendIdleEvents(wxIdleEvent& event) wxOVERRIDE;
 
 protected:
-    // override wxWindow methods to take into account tool/menu/statusbars
-    virtual void DoGetClientSize( int *width, int *height ) const wxOVERRIDE;
+	// override wxWindow methods to take into account tool/menu/statusbars
+	virtual void DoGetClientSize( int *width, int *height ) const wxOVERRIDE;
 
 #if wxUSE_MENUS_NATIVE
-    virtual void DetachMenuBar() wxOVERRIDE;
-    virtual void AttachMenuBar(wxMenuBar *menubar) wxOVERRIDE;
+	virtual void DetachMenuBar() wxOVERRIDE;
+	virtual void AttachMenuBar(wxMenuBar *menubar) wxOVERRIDE;
 #endif // wxUSE_MENUS_NATIVE
 
 private:
-    void Init();
+	void Init();
 
-    long m_fsSaveFlag;
+	long m_fsSaveFlag;
 
-    wxDECLARE_DYNAMIC_CLASS(wxFrame);
+	wxDECLARE_DYNAMIC_CLASS(wxFrame);
 };
 
 #endif // _WX_GTK_FRAME_H_

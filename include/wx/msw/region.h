@@ -14,90 +14,115 @@
 class WXDLLIMPEXP_CORE wxRegion : public wxRegionWithCombine
 {
 public:
-    wxRegion();
-    wxRegion(wxCoord x, wxCoord y, wxCoord w, wxCoord h);
-    wxRegion(const wxPoint& topLeft, const wxPoint& bottomRight);
-    wxRegion(const wxRect& rect);
-    wxRegion(WXHRGN hRegion); // Hangs on to this region
-    wxRegion(size_t n, const wxPoint *points, wxPolygonFillMode fillStyle = wxODDEVEN_RULE );
+	wxRegion();
+	wxRegion(wxCoord x, wxCoord y, wxCoord w, wxCoord h);
+	wxRegion(const wxPoint& topLeft, const wxPoint& bottomRight);
+	wxRegion(const wxRect& rect);
+	wxRegion(WXHRGN hRegion); // Hangs on to this region
+	wxRegion(size_t n, const wxPoint *points, wxPolygonFillMode fillStyle = wxODDEVEN_RULE );
 #if wxUSE_IMAGE
-    wxRegion( const wxBitmap& bmp)
-    {
-        Union(bmp);
-    }
-    wxRegion( const wxBitmap& bmp,
-              const wxColour& transColour, int tolerance = 0)
-    {
-        Union(bmp, transColour, tolerance);
-    }
+	wxRegion( const wxBitmap& bmp)
+	{
+		Union(bmp);
+	}
+	wxRegion( const wxBitmap& bmp,
+	          const wxColour& transColour, int tolerance = 0)
+	{
+		Union(bmp, transColour, tolerance);
+	}
 #endif // wxUSE_IMAGE
 
-    virtual ~wxRegion();
+	virtual ~wxRegion();
 
-    // wxRegionBase methods
-    virtual void Clear() wxOVERRIDE;
-    virtual bool IsEmpty() const wxOVERRIDE;
+	// wxRegionBase methods
+	virtual void Clear() wxOVERRIDE;
+	virtual bool IsEmpty() const wxOVERRIDE;
 
-    // Get internal region handle
-    WXHRGN GetHRGN() const;
+	// Get internal region handle
+	WXHRGN GetHRGN() const;
 
 protected:
-    virtual wxGDIRefData *CreateGDIRefData() const wxOVERRIDE;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const wxOVERRIDE;
+	virtual wxGDIRefData *CreateGDIRefData() const wxOVERRIDE;
+	virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const wxOVERRIDE;
 
-    virtual bool DoIsEqual(const wxRegion& region) const wxOVERRIDE;
-    virtual bool DoGetBox(wxCoord& x, wxCoord& y, wxCoord& w, wxCoord& h) const wxOVERRIDE;
-    virtual wxRegionContain DoContainsPoint(wxCoord x, wxCoord y) const wxOVERRIDE;
-    virtual wxRegionContain DoContainsRect(const wxRect& rect) const wxOVERRIDE;
+	virtual bool DoIsEqual(const wxRegion& region) const wxOVERRIDE;
+	virtual bool DoGetBox(wxCoord& x, wxCoord& y, wxCoord& w, wxCoord& h) const wxOVERRIDE;
+	virtual wxRegionContain DoContainsPoint(wxCoord x, wxCoord y) const wxOVERRIDE;
+	virtual wxRegionContain DoContainsRect(const wxRect& rect) const wxOVERRIDE;
 
-    virtual bool DoOffset(wxCoord x, wxCoord y) wxOVERRIDE;
-    virtual bool DoCombine(const wxRegion& region, wxRegionOp op) wxOVERRIDE;
+	virtual bool DoOffset(wxCoord x, wxCoord y) wxOVERRIDE;
+	virtual bool DoCombine(const wxRegion& region, wxRegionOp op) wxOVERRIDE;
 
-    friend class WXDLLIMPEXP_FWD_CORE wxRegionIterator;
+	friend class WXDLLIMPEXP_FWD_CORE wxRegionIterator;
 
-    wxDECLARE_DYNAMIC_CLASS(wxRegion);
+	wxDECLARE_DYNAMIC_CLASS(wxRegion);
 };
 
 class WXDLLIMPEXP_CORE wxRegionIterator : public wxObject
 {
 public:
-    wxRegionIterator() { Init(); }
-    wxRegionIterator(const wxRegion& region);
-    wxRegionIterator(const wxRegionIterator& ri) : wxObject(ri) { Init(); *this = ri; }
+	wxRegionIterator()
+	{
+		Init();
+	}
+	wxRegionIterator(const wxRegion& region);
+	wxRegionIterator(const wxRegionIterator& ri) : wxObject(ri)
+	{
+		Init();
+		*this = ri;
+	}
 
-    wxRegionIterator& operator=(const wxRegionIterator& ri);
+	wxRegionIterator& operator=(const wxRegionIterator& ri);
 
-    virtual ~wxRegionIterator();
+	virtual ~wxRegionIterator();
 
-    void Reset() { m_current = 0; }
-    void Reset(const wxRegion& region);
+	void Reset()
+	{
+		m_current = 0;
+	}
+	void Reset(const wxRegion& region);
 
-    bool HaveRects() const { return (m_current < m_numRects); }
+	bool HaveRects() const
+	{
+		return (m_current < m_numRects);
+	}
 
-    operator bool () const { return HaveRects(); }
+	operator bool () const
+	{
+		return HaveRects();
+	}
 
-    wxRegionIterator& operator++();
-    wxRegionIterator operator++(int);
+	wxRegionIterator& operator++();
+	wxRegionIterator operator++(int);
 
-    wxCoord GetX() const;
-    wxCoord GetY() const;
-    wxCoord GetW() const;
-    wxCoord GetWidth() const { return GetW(); }
-    wxCoord GetH() const;
-    wxCoord GetHeight() const { return GetH(); }
+	wxCoord GetX() const;
+	wxCoord GetY() const;
+	wxCoord GetW() const;
+	wxCoord GetWidth() const
+	{
+		return GetW();
+	}
+	wxCoord GetH() const;
+	wxCoord GetHeight() const
+	{
+		return GetH();
+	}
 
-    wxRect GetRect() const { return wxRect(GetX(), GetY(), GetW(), GetH()); }
+	wxRect GetRect() const
+	{
+		return wxRect(GetX(), GetY(), GetW(), GetH());
+	}
 
 private:
-    // common part of all ctors
-    void Init();
+	// common part of all ctors
+	void Init();
 
-    long     m_current;
-    long     m_numRects;
-    wxRegion m_region;
-    wxRect*  m_rects;
+	long     m_current;
+	long     m_numRects;
+	wxRegion m_region;
+	wxRect*  m_rects;
 
-    wxDECLARE_DYNAMIC_CLASS(wxRegionIterator);
+	wxDECLARE_DYNAMIC_CLASS(wxRegionIterator);
 };
 
 #endif // _WX_MSW_REGION_H_

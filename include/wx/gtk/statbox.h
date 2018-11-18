@@ -16,85 +16,88 @@
 class WXDLLIMPEXP_CORE wxStaticBox : public wxStaticBoxBase
 {
 public:
-    wxStaticBox()
-    {
-    }
+	wxStaticBox()
+	{
+	}
 
-    wxStaticBox( wxWindow *parent,
-                 wxWindowID id,
-                 const wxString &label,
-                 const wxPoint &pos = wxDefaultPosition,
-                 const wxSize &size = wxDefaultSize,
-                 long style = 0,
-                 const wxString &name = wxStaticBoxNameStr )
-    {
-        Create( parent, id, label, pos, size, style, name );
-    }
+	wxStaticBox( wxWindow *parent,
+	             wxWindowID id,
+	             const wxString &label,
+	             const wxPoint &pos = wxDefaultPosition,
+	             const wxSize &size = wxDefaultSize,
+	             long style = 0,
+	             const wxString &name = wxStaticBoxNameStr )
+	{
+		Create( parent, id, label, pos, size, style, name );
+	}
 
-    wxStaticBox( wxWindow *parent,
-                 wxWindowID id,
-                 wxWindow* label,
-                 const wxPoint &pos = wxDefaultPosition,
-                 const wxSize &size = wxDefaultSize,
-                 long style = 0,
-                 const wxString &name = wxStaticBoxNameStr )
-    {
-        Create( parent, id, label, pos, size, style, name );
-    }
+	wxStaticBox( wxWindow *parent,
+	             wxWindowID id,
+	             wxWindow* label,
+	             const wxPoint &pos = wxDefaultPosition,
+	             const wxSize &size = wxDefaultSize,
+	             long style = 0,
+	             const wxString &name = wxStaticBoxNameStr )
+	{
+		Create( parent, id, label, pos, size, style, name );
+	}
 
-    bool Create( wxWindow *parent,
-                 wxWindowID id,
-                 const wxString &label,
-                 const wxPoint &pos = wxDefaultPosition,
-                 const wxSize &size = wxDefaultSize,
-                 long style = 0,
-                 const wxString &name = wxStaticBoxNameStr )
-    {
-        return DoCreate( parent, id, &label, NULL, pos, size, style, name );
-    }
+	bool Create( wxWindow *parent,
+	             wxWindowID id,
+	             const wxString &label,
+	             const wxPoint &pos = wxDefaultPosition,
+	             const wxSize &size = wxDefaultSize,
+	             long style = 0,
+	             const wxString &name = wxStaticBoxNameStr )
+	{
+		return DoCreate( parent, id, &label, NULL, pos, size, style, name );
+	}
 
-    bool Create( wxWindow *parent,
-                 wxWindowID id,
-                 wxWindow* label,
-                 const wxPoint &pos = wxDefaultPosition,
-                 const wxSize &size = wxDefaultSize,
-                 long style = 0,
-                 const wxString &name = wxStaticBoxNameStr )
-    {
-        return DoCreate( parent, id, NULL, label, pos, size, style, name );
-    }
+	bool Create( wxWindow *parent,
+	             wxWindowID id,
+	             wxWindow* label,
+	             const wxPoint &pos = wxDefaultPosition,
+	             const wxSize &size = wxDefaultSize,
+	             long style = 0,
+	             const wxString &name = wxStaticBoxNameStr )
+	{
+		return DoCreate( parent, id, NULL, label, pos, size, style, name );
+	}
 
-    virtual void SetLabel( const wxString &label ) wxOVERRIDE;
+	virtual void SetLabel( const wxString &label ) wxOVERRIDE;
 
-    static wxVisualAttributes
-    GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
+	static wxVisualAttributes
+	GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
 
-    // implementation
+	// implementation
 
-    virtual bool GTKIsTransparentForMouse() const wxOVERRIDE { return true; }
+	virtual bool GTKIsTransparentForMouse() const wxOVERRIDE
+	{
+		return true;
+	}
 
-    virtual void GetBordersForSizer(int *borderTop, int *borderOther) const wxOVERRIDE;
+	virtual void GetBordersForSizer(int *borderTop, int *borderOther) const wxOVERRIDE;
 
-    virtual void AddChild( wxWindowBase *child ) wxOVERRIDE;
+	virtual void AddChild( wxWindowBase *child ) wxOVERRIDE;
 
 protected:
-    // Common implementation of both Create() overloads: exactly one of
-    // labelStr and labelWin parameters must be non-null.
-    bool DoCreate(wxWindow *parent,
-                  wxWindowID id,
-                  const wxString* labelStr,
-                  wxWindow* labelWin,
-                  const wxPoint& pos,
-                  const wxSize& size,
-                  long style,
-                  const wxString& name);
+	// Common implementation of both Create() overloads: exactly one of
+	// labelStr and labelWin parameters must be non-null.
+	bool DoCreate(wxWindow *parent,
+	              wxWindowID id,
+	              const wxString* labelStr,
+	              wxWindow* labelWin,
+	              const wxPoint& pos,
+	              const wxSize& size,
+	              long style,
+	              const wxString& name);
 
-    virtual bool GTKWidgetNeedsMnemonic() const wxOVERRIDE;
-    virtual void GTKWidgetDoSetMnemonic(GtkWidget* w) wxOVERRIDE;
+	virtual bool GTKWidgetNeedsMnemonic() const wxOVERRIDE;
+	virtual void GTKWidgetDoSetMnemonic(GtkWidget* w) wxOVERRIDE;
 
-    void DoApplyWidgetStyle(GtkRcStyle *style) wxOVERRIDE;
+	void DoApplyWidgetStyle(GtkRcStyle *style) wxOVERRIDE;
 
-    wxDECLARE_DYNAMIC_CLASS(wxStaticBox);
+	wxDECLARE_DYNAMIC_CLASS(wxStaticBox);
 };
 
 // Indicate that we have the ctor overload taking wxWindow as label.

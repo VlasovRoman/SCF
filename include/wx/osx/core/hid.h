@@ -55,41 +55,41 @@ extern "C" {
 class WXDLLIMPEXP_CORE wxHIDDevice
 {
 public:
-    wxHIDDevice() : m_ppDevice(NULL), m_ppQueue(NULL), m_pCookies(NULL) {}
+	wxHIDDevice() : m_ppDevice(NULL), m_ppQueue(NULL), m_pCookies(NULL) {}
 
-    bool Create (int nClass = -1, int nType = -1, int nDev = 1);
+	bool Create (int nClass = -1, int nType = -1, int nDev = 1);
 
-    static size_t GetCount(int nClass = -1, int nType = -1);
+	static size_t GetCount(int nClass = -1, int nType = -1);
 
-    void AddCookie(CFTypeRef Data, int i);
-    void AddCookieInQueue(CFTypeRef Data, int i);
-    void InitCookies(size_t dwSize, bool bQueue = false);
+	void AddCookie(CFTypeRef Data, int i);
+	void AddCookieInQueue(CFTypeRef Data, int i);
+	void InitCookies(size_t dwSize, bool bQueue = false);
 
-    //Must be implemented by derived classes
-    //builds the cookie array -
-    //first call InitCookies to initialize the cookie
-    //array, then AddCookie to add a cookie at a certain point in an array
-    virtual void BuildCookies(CFArrayRef Array) = 0;
+	//Must be implemented by derived classes
+	//builds the cookie array -
+	//first call InitCookies to initialize the cookie
+	//array, then AddCookie to add a cookie at a certain point in an array
+	virtual void BuildCookies(CFArrayRef Array) = 0;
 
-    //checks to see whether the cookie at nIndex is active (element value != 0)
-    bool IsActive(int nIndex);
+	//checks to see whether the cookie at nIndex is active (element value != 0)
+	bool IsActive(int nIndex);
 
-    //checks to see whether an element in the internal cookie array
-    //exists
-    bool HasElement(int nIndex);
+	//checks to see whether an element in the internal cookie array
+	//exists
+	bool HasElement(int nIndex);
 
-    //closes the device and cleans the queue and cookies
-    virtual ~wxHIDDevice();
+	//closes the device and cleans the queue and cookies
+	virtual ~wxHIDDevice();
 
 protected:
-    IOHIDDeviceInterface** m_ppDevice; //this, essentially
-    IOHIDQueueInterface**  m_ppQueue;  //queue (if we want one)
-    IOHIDElementCookie*    m_pCookies; //cookies
+	IOHIDDeviceInterface** m_ppDevice; //this, essentially
+	IOHIDQueueInterface**  m_ppQueue;  //queue (if we want one)
+	IOHIDElementCookie*    m_pCookies; //cookies
 
-    wxString    m_szProductName; //product name
-    int         m_nProductId; //product id
-    int         m_nManufacturerId; //manufacturer id
-    mach_port_t m_pPort;            //mach port to use
+	wxString    m_szProductName; //product name
+	int         m_nProductId; //product id
+	int         m_nManufacturerId; //manufacturer id
+	mach_port_t m_pPort;            //mach port to use
 };
 
 // ---------------------------------------------------------------------------
@@ -101,14 +101,14 @@ protected:
 class WXDLLIMPEXP_CORE wxHIDKeyboard : public wxHIDDevice
 {
 public:
-    static int GetCount();
-    bool Create(int nDev = 1);
-    void AddCookie(CFTypeRef Data, int i);
-    virtual void BuildCookies(CFArrayRef Array);
-    void DoBuildCookies(CFArrayRef Array);
+	static int GetCount();
+	bool Create(int nDev = 1);
+	void AddCookie(CFTypeRef Data, int i);
+	virtual void BuildCookies(CFArrayRef Array);
+	void DoBuildCookies(CFArrayRef Array);
 };
 
 #endif //__DARWIN__
 
 #endif
-    // _WX_MACCARBONHID_H_
+// _WX_MACCARBONHID_H_

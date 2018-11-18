@@ -14,51 +14,54 @@
 class WXDLLIMPEXP_CORE wxStaticBox : public wxStaticBoxBase
 {
 public:
-    wxStaticBox() { }
+	wxStaticBox() { }
 
-    wxStaticBox(wxWindow *parent,
-                const wxString& label,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize)
-    {
-        Create(parent, wxID_ANY, label, pos, size);
-    }
+	wxStaticBox(wxWindow *parent,
+	            const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize)
+	{
+		Create(parent, wxID_ANY, label, pos, size);
+	}
 
-    wxStaticBox(wxWindow *parent, wxWindowID id,
-                const wxString& label,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = 0,
-                const wxString& name = wxStaticBoxNameStr)
-    {
-        Create(parent, id, label, pos, size, style, name);
-    }
+	wxStaticBox(wxWindow *parent, wxWindowID id,
+	            const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxStaticBoxNameStr)
+	{
+		Create(parent, id, label, pos, size, style, name);
+	}
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxString& label,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = 0,
-                const wxString& name = wxStaticBoxNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxStaticBoxNameStr);
 
-    // the origin of the static box is inside the border and under the label:
-    // take account of this
-    virtual wxPoint GetBoxAreaOrigin() const;
+	// the origin of the static box is inside the border and under the label:
+	// take account of this
+	virtual wxPoint GetBoxAreaOrigin() const;
 
-    // returning true from here ensures that we act as a container window for
-    // our children
-    virtual bool IsStaticBox() const wxOVERRIDE { return true; }
+	// returning true from here ensures that we act as a container window for
+	// our children
+	virtual bool IsStaticBox() const wxOVERRIDE
+	{
+		return true;
+	}
 
 protected:
-    // draw the control
-    virtual void DoDraw(wxControlRenderer *renderer) wxOVERRIDE;
+	// draw the control
+	virtual void DoDraw(wxControlRenderer *renderer) wxOVERRIDE;
 
-    // get the size of the border
-    wxRect GetBorderGeometry() const;
+	// get the size of the border
+	wxRect GetBorderGeometry() const;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxStaticBox);
+	wxDECLARE_DYNAMIC_CLASS(wxStaticBox);
 };
 
 #endif // _WX_UNIV_STATBOX_H_

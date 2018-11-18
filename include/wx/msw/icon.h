@@ -26,10 +26,13 @@
 class WXDLLIMPEXP_CORE wxIconRefData : public wxGDIImageRefData
 {
 public:
-    wxIconRefData() { }
-    virtual ~wxIconRefData() { Free(); }
+	wxIconRefData() { }
+	virtual ~wxIconRefData()
+	{
+		Free();
+	}
 
-    virtual void Free() wxOVERRIDE;
+	virtual void Free() wxOVERRIDE;
 };
 
 // ---------------------------------------------------------------------------
@@ -39,58 +42,73 @@ public:
 class WXDLLIMPEXP_CORE wxIcon : public wxGDIImage
 {
 public:
-    // ctors
-        // default
-    wxIcon() { }
+	// ctors
+	// default
+	wxIcon() { }
 
-        // from raw data
-    wxIcon(const char bits[], int width, int height);
+	// from raw data
+	wxIcon(const char bits[], int width, int height);
 
-        // from XPM data
-    wxIcon(const char* const* data) { CreateIconFromXpm(data); }
+	// from XPM data
+	wxIcon(const char* const* data)
+	{
+		CreateIconFromXpm(data);
+	}
 #ifdef wxNEEDS_CHARPP
-    wxIcon(char **data) { CreateIconFromXpm(const_cast<const char* const*>(data)); }
+	wxIcon(char **data)
+	{
+		CreateIconFromXpm(const_cast<const char* const*>(data));
+	}
 #endif
-        // from resource/file
-    wxIcon(const wxString& name,
-           wxBitmapType type = wxICON_DEFAULT_TYPE,
-           int desiredWidth = -1, int desiredHeight = -1);
+	// from resource/file
+	wxIcon(const wxString& name,
+	       wxBitmapType type = wxICON_DEFAULT_TYPE,
+	       int desiredWidth = -1, int desiredHeight = -1);
 
-    wxIcon(const wxIconLocation& loc);
+	wxIcon(const wxIconLocation& loc);
 
-    virtual ~wxIcon();
+	virtual ~wxIcon();
 
-    virtual bool LoadFile(const wxString& name,
-                          wxBitmapType type = wxICON_DEFAULT_TYPE,
-                          int desiredWidth = -1, int desiredHeight = -1);
+	virtual bool LoadFile(const wxString& name,
+	                      wxBitmapType type = wxICON_DEFAULT_TYPE,
+	                      int desiredWidth = -1, int desiredHeight = -1);
 
-    bool CreateFromHICON(WXHICON icon);
+	bool CreateFromHICON(WXHICON icon);
 
-    // implementation only from now on
-    wxIconRefData *GetIconData() const { return (wxIconRefData *)m_refData; }
+	// implementation only from now on
+	wxIconRefData *GetIconData() const
+	{
+		return (wxIconRefData *)m_refData;
+	}
 
-    void SetHICON(WXHICON icon) { SetHandle((WXHANDLE)icon); }
-    WXHICON GetHICON() const { return (WXHICON)GetHandle(); }
+	void SetHICON(WXHICON icon)
+	{
+		SetHandle((WXHANDLE)icon);
+	}
+	WXHICON GetHICON() const
+	{
+		return (WXHICON)GetHandle();
+	}
 
-    // create from bitmap (which should have a mask unless it's monochrome):
-    // there shouldn't be any implicit bitmap -> icon conversion (i.e. no
-    // ctors, assignment operators...), but it's ok to have such function
-    void CopyFromBitmap(const wxBitmap& bmp);
+	// create from bitmap (which should have a mask unless it's monochrome):
+	// there shouldn't be any implicit bitmap -> icon conversion (i.e. no
+	// ctors, assignment operators...), but it's ok to have such function
+	void CopyFromBitmap(const wxBitmap& bmp);
 
 protected:
-    virtual wxGDIImageRefData *CreateData() const wxOVERRIDE
-    {
-        return new wxIconRefData;
-    }
+	virtual wxGDIImageRefData *CreateData() const wxOVERRIDE
+	{
+		return new wxIconRefData;
+	}
 
-    virtual wxObjectRefData *CloneRefData(const wxObjectRefData *data) const wxOVERRIDE;
+	virtual wxObjectRefData *CloneRefData(const wxObjectRefData *data) const wxOVERRIDE;
 
-    // create from XPM data
-    void CreateIconFromXpm(const char* const* data);
+	// create from XPM data
+	void CreateIconFromXpm(const char* const* data);
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxIcon);
+	wxDECLARE_DYNAMIC_CLASS(wxIcon);
 };
 
 #endif
-    // _WX_ICON_H_
+// _WX_ICON_H_

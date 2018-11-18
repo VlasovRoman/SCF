@@ -24,136 +24,154 @@ WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxRibbonGalleryItem*, wxArrayRibbonGalleryItem
 class WXDLLIMPEXP_RIBBON wxRibbonGallery : public wxRibbonControl
 {
 public:
-    wxRibbonGallery();
+	wxRibbonGallery();
 
-    wxRibbonGallery(wxWindow* parent,
-                  wxWindowID id = wxID_ANY,
-                  const wxPoint& pos = wxDefaultPosition,
-                  const wxSize& size = wxDefaultSize,
-                  long style = 0);
+	wxRibbonGallery(wxWindow* parent,
+	                wxWindowID id = wxID_ANY,
+	                const wxPoint& pos = wxDefaultPosition,
+	                const wxSize& size = wxDefaultSize,
+	                long style = 0);
 
-    virtual ~wxRibbonGallery();
+	virtual ~wxRibbonGallery();
 
-    bool Create(wxWindow* parent,
-                wxWindowID id = wxID_ANY,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = 0);
+	bool Create(wxWindow* parent,
+	            wxWindowID id = wxID_ANY,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0);
 
-    void Clear();
+	void Clear();
 
-    bool IsEmpty() const;
-    unsigned int GetCount() const;
-    wxRibbonGalleryItem* GetItem(unsigned int n);
-    wxRibbonGalleryItem* Append(const wxBitmap& bitmap, int id);
-    wxRibbonGalleryItem* Append(const wxBitmap& bitmap, int id, void* clientData);
-    wxRibbonGalleryItem* Append(const wxBitmap& bitmap, int id, wxClientData* clientData);
+	bool IsEmpty() const;
+	unsigned int GetCount() const;
+	wxRibbonGalleryItem* GetItem(unsigned int n);
+	wxRibbonGalleryItem* Append(const wxBitmap& bitmap, int id);
+	wxRibbonGalleryItem* Append(const wxBitmap& bitmap, int id, void* clientData);
+	wxRibbonGalleryItem* Append(const wxBitmap& bitmap, int id, wxClientData* clientData);
 
-    void SetItemClientObject(wxRibbonGalleryItem* item, wxClientData* data);
-    wxClientData* GetItemClientObject(const wxRibbonGalleryItem* item) const;
-    void SetItemClientData(wxRibbonGalleryItem* item, void* data);
-    void* GetItemClientData(const wxRibbonGalleryItem* item) const;
+	void SetItemClientObject(wxRibbonGalleryItem* item, wxClientData* data);
+	wxClientData* GetItemClientObject(const wxRibbonGalleryItem* item) const;
+	void SetItemClientData(wxRibbonGalleryItem* item, void* data);
+	void* GetItemClientData(const wxRibbonGalleryItem* item) const;
 
-    void SetSelection(wxRibbonGalleryItem* item);
-    wxRibbonGalleryItem* GetSelection() const;
-    wxRibbonGalleryItem* GetHoveredItem() const;
-    wxRibbonGalleryItem* GetActiveItem() const;
-    wxRibbonGalleryButtonState GetUpButtonState() const;
-    wxRibbonGalleryButtonState GetDownButtonState() const;
-    wxRibbonGalleryButtonState GetExtensionButtonState() const;
+	void SetSelection(wxRibbonGalleryItem* item);
+	wxRibbonGalleryItem* GetSelection() const;
+	wxRibbonGalleryItem* GetHoveredItem() const;
+	wxRibbonGalleryItem* GetActiveItem() const;
+	wxRibbonGalleryButtonState GetUpButtonState() const;
+	wxRibbonGalleryButtonState GetDownButtonState() const;
+	wxRibbonGalleryButtonState GetExtensionButtonState() const;
 
-    bool IsHovered() const;
-    virtual bool IsSizingContinuous() const wxOVERRIDE;
-    virtual bool Realize() wxOVERRIDE;
-    virtual bool Layout() wxOVERRIDE;
+	bool IsHovered() const;
+	virtual bool IsSizingContinuous() const wxOVERRIDE;
+	virtual bool Realize() wxOVERRIDE;
+	virtual bool Layout() wxOVERRIDE;
 
-    virtual bool ScrollLines(int lines) wxOVERRIDE;
-    bool ScrollPixels(int pixels);
-    void EnsureVisible(const wxRibbonGalleryItem* item);
+	virtual bool ScrollLines(int lines) wxOVERRIDE;
+	bool ScrollPixels(int pixels);
+	void EnsureVisible(const wxRibbonGalleryItem* item);
 
 protected:
-    wxBorder GetDefaultBorder() const wxOVERRIDE { return wxBORDER_NONE; }
-    void CommonInit(long style);
-    void CalculateMinSize();
-    bool TestButtonHover(const wxRect& rect, wxPoint pos,
-        wxRibbonGalleryButtonState* state);
+	wxBorder GetDefaultBorder() const wxOVERRIDE
+	{
+		return wxBORDER_NONE;
+	}
+	void CommonInit(long style);
+	void CalculateMinSize();
+	bool TestButtonHover(const wxRect& rect, wxPoint pos,
+	                     wxRibbonGalleryButtonState* state);
 
-    void OnEraseBackground(wxEraseEvent& evt);
-    void OnMouseEnter(wxMouseEvent& evt);
-    void OnMouseMove(wxMouseEvent& evt);
-    void OnMouseLeave(wxMouseEvent& evt);
-    void OnMouseDown(wxMouseEvent& evt);
-    void OnMouseUp(wxMouseEvent& evt);
-    void OnMouseDClick(wxMouseEvent& evt);
-    void OnPaint(wxPaintEvent& evt);
-    void OnSize(wxSizeEvent& evt);
-    int GetScrollLineSize() const;
+	void OnEraseBackground(wxEraseEvent& evt);
+	void OnMouseEnter(wxMouseEvent& evt);
+	void OnMouseMove(wxMouseEvent& evt);
+	void OnMouseLeave(wxMouseEvent& evt);
+	void OnMouseDown(wxMouseEvent& evt);
+	void OnMouseUp(wxMouseEvent& evt);
+	void OnMouseDClick(wxMouseEvent& evt);
+	void OnPaint(wxPaintEvent& evt);
+	void OnSize(wxSizeEvent& evt);
+	int GetScrollLineSize() const;
 
-    virtual wxSize DoGetBestSize() const wxOVERRIDE;
-    virtual wxSize DoGetNextSmallerSize(wxOrientation direction,
-                                        wxSize relative_to) const wxOVERRIDE;
-    virtual wxSize DoGetNextLargerSize(wxOrientation direction,
-                                       wxSize relative_to) const wxOVERRIDE;
+	virtual wxSize DoGetBestSize() const wxOVERRIDE;
+	virtual wxSize DoGetNextSmallerSize(wxOrientation direction,
+	                                    wxSize relative_to) const wxOVERRIDE;
+	virtual wxSize DoGetNextLargerSize(wxOrientation direction,
+	                                   wxSize relative_to) const wxOVERRIDE;
 
-    wxArrayRibbonGalleryItem m_items;
-    wxRibbonGalleryItem* m_selected_item;
-    wxRibbonGalleryItem* m_hovered_item;
-    wxRibbonGalleryItem* m_active_item;
-    wxSize m_bitmap_size;
-    wxSize m_bitmap_padded_size;
-    wxSize m_best_size;
-    wxRect m_client_rect;
-    wxRect m_scroll_up_button_rect;
-    wxRect m_scroll_down_button_rect;
-    wxRect m_extension_button_rect;
-    const wxRect* m_mouse_active_rect;
-    int m_item_separation_x;
-    int m_item_separation_y;
-    int m_scroll_amount;
-    int m_scroll_limit;
-    wxRibbonGalleryButtonState m_up_button_state;
-    wxRibbonGalleryButtonState m_down_button_state;
-    wxRibbonGalleryButtonState m_extension_button_state;
-    bool m_hovered;
+	wxArrayRibbonGalleryItem m_items;
+	wxRibbonGalleryItem* m_selected_item;
+	wxRibbonGalleryItem* m_hovered_item;
+	wxRibbonGalleryItem* m_active_item;
+	wxSize m_bitmap_size;
+	wxSize m_bitmap_padded_size;
+	wxSize m_best_size;
+	wxRect m_client_rect;
+	wxRect m_scroll_up_button_rect;
+	wxRect m_scroll_down_button_rect;
+	wxRect m_extension_button_rect;
+	const wxRect* m_mouse_active_rect;
+	int m_item_separation_x;
+	int m_item_separation_y;
+	int m_scroll_amount;
+	int m_scroll_limit;
+	wxRibbonGalleryButtonState m_up_button_state;
+	wxRibbonGalleryButtonState m_down_button_state;
+	wxRibbonGalleryButtonState m_extension_button_state;
+	bool m_hovered;
 
 #ifndef SWIG
-    wxDECLARE_CLASS(wxRibbonGallery);
-    wxDECLARE_EVENT_TABLE();
+	wxDECLARE_CLASS(wxRibbonGallery);
+	wxDECLARE_EVENT_TABLE();
 #endif
 };
 
 class WXDLLIMPEXP_RIBBON wxRibbonGalleryEvent : public wxCommandEvent
 {
 public:
-    wxRibbonGalleryEvent(wxEventType command_type = wxEVT_NULL,
-                       int win_id = 0,
-                       wxRibbonGallery* gallery = NULL,
-                       wxRibbonGalleryItem* item = NULL)
-        : wxCommandEvent(command_type, win_id)
-        , m_gallery(gallery), m_item(item)
-    {
-    }
+	wxRibbonGalleryEvent(wxEventType command_type = wxEVT_NULL,
+	                     int win_id = 0,
+	                     wxRibbonGallery* gallery = NULL,
+	                     wxRibbonGalleryItem* item = NULL)
+		: wxCommandEvent(command_type, win_id)
+		, m_gallery(gallery), m_item(item)
+	{
+	}
 #ifndef SWIG
-    wxRibbonGalleryEvent(const wxRibbonGalleryEvent& e) : wxCommandEvent(e)
-    {
-        m_gallery = e.m_gallery;
-        m_item = e.m_item;
-    }
+	wxRibbonGalleryEvent(const wxRibbonGalleryEvent& e) : wxCommandEvent(e)
+	{
+		m_gallery = e.m_gallery;
+		m_item = e.m_item;
+	}
 #endif
-    wxEvent *Clone() const wxOVERRIDE { return new wxRibbonGalleryEvent(*this); }
+	wxEvent *Clone() const wxOVERRIDE
+	{
+		return new wxRibbonGalleryEvent(*this);
+	}
 
-    wxRibbonGallery* GetGallery() {return m_gallery;}
-    wxRibbonGalleryItem* GetGalleryItem() {return m_item;}
-    void SetGallery(wxRibbonGallery* gallery) {m_gallery = gallery;}
-    void SetGalleryItem(wxRibbonGalleryItem* item) {m_item = item;}
+	wxRibbonGallery* GetGallery()
+	{
+		return m_gallery;
+	}
+	wxRibbonGalleryItem* GetGalleryItem()
+	{
+		return m_item;
+	}
+	void SetGallery(wxRibbonGallery* gallery)
+	{
+		m_gallery = gallery;
+	}
+	void SetGalleryItem(wxRibbonGalleryItem* item)
+	{
+		m_item = item;
+	}
 
 protected:
-    wxRibbonGallery* m_gallery;
-    wxRibbonGalleryItem* m_item;
+	wxRibbonGallery* m_gallery;
+	wxRibbonGalleryItem* m_item;
 
 #ifndef SWIG
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxRibbonGalleryEvent);
+	wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxRibbonGalleryEvent);
 #endif
 };
 
@@ -182,10 +200,11 @@ typedef void (wxEvtHandler::*wxRibbonGalleryEventFunction)(wxRibbonGalleryEvent&
 %constant wxEventType wxEVT_RIBBONGALLERY_CLICKED;
 
 
-%pythoncode {
-    EVT_RIBBONGALLERY_HOVER_CHANGED = wx.PyEventBinder( wxEVT_RIBBONGALLERY_HOVER_CHANGED, 1 )
-    EVT_RIBBONGALLERY_SELECTED = wx.PyEventBinder( wxEVT_RIBBONGALLERY_SELECTED, 1 )
-    EVT_RIBBONGALLERY_CLICKED = wx.PyEventBinder( wxEVT_RIBBONGALLERY_CLICKED, 1 )
+%pythoncode
+{
+	EVT_RIBBONGALLERY_HOVER_CHANGED = wx.PyEventBinder( wxEVT_RIBBONGALLERY_HOVER_CHANGED, 1 )
+	EVT_RIBBONGALLERY_SELECTED = wx.PyEventBinder( wxEVT_RIBBONGALLERY_SELECTED, 1 )
+	EVT_RIBBONGALLERY_CLICKED = wx.PyEventBinder( wxEVT_RIBBONGALLERY_CLICKED, 1 )
 }
 #endif // SWIG
 

@@ -19,25 +19,28 @@
 class WXDLLIMPEXP_CORE wxMessageDialog : public wxMessageDialogBase
 {
 public:
-    wxMessageDialog(wxWindow *parent,
-                    const wxString& message,
-                    const wxString& caption = wxMessageBoxCaptionStr,
-                    long style = wxOK | wxCENTRE,
-                    const wxPoint& WXUNUSED(pos) = wxDefaultPosition)
-        : wxMessageDialogBase(parent, message, caption, style)
-    {
-    }
+	wxMessageDialog(wxWindow *parent,
+	                const wxString& message,
+	                const wxString& caption = wxMessageBoxCaptionStr,
+	                long style = wxOK | wxCENTRE,
+	                const wxPoint& WXUNUSED(pos) = wxDefaultPosition)
+		: wxMessageDialogBase(parent, message, caption, style)
+	{
+	}
 
-    virtual int ShowModal();
+	virtual int ShowModal();
 
-    // implementation only from now on
-    // called by the Motif callback
-    void SetResult(long result) { m_result = result; }
+	// implementation only from now on
+	// called by the Motif callback
+	void SetResult(long result)
+	{
+		m_result = result;
+	}
 
 protected:
-    long        m_result;
+	long        m_result;
 
-    wxDECLARE_DYNAMIC_CLASS(wxMessageDialog);
+	wxDECLARE_DYNAMIC_CLASS(wxMessageDialog);
 };
 
 #endif // _WX_MSGBOXDLG_H_

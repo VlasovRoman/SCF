@@ -14,44 +14,47 @@
 // Group box
 class WXDLLIMPEXP_CORE wxStaticBox: public wxStaticBoxBase
 {
-    wxDECLARE_DYNAMIC_CLASS(wxStaticBox);
+	wxDECLARE_DYNAMIC_CLASS(wxStaticBox);
 
 public:
-    wxStaticBox();
-    wxStaticBox(wxWindow *parent, wxWindowID id,
-        const wxString& label,
-        const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize,
-        long style = 0,
-        const wxString& name = wxStaticBoxNameStr)
-    {
-        Create(parent, id, label, pos, size, style, name);
-    }
+	wxStaticBox();
+	wxStaticBox(wxWindow *parent, wxWindowID id,
+	            const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxStaticBoxNameStr)
+	{
+		Create(parent, id, label, pos, size, style, name);
+	}
 
-    virtual ~wxStaticBox();
+	virtual ~wxStaticBox();
 
-    bool Create(wxWindow *parent, wxWindowID id,
-        const wxString& label,
-        const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize,
-        long style = 0,
-        const wxString& name = wxStaticBoxNameStr);
+	bool Create(wxWindow *parent, wxWindowID id,
+	            const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxStaticBoxNameStr);
 
-    virtual bool ProcessCommand(wxCommandEvent& WXUNUSED(event))
-    {
-        return false;
-    }
+	virtual bool ProcessCommand(wxCommandEvent& WXUNUSED(event))
+	{
+		return false;
+	}
 
-    virtual WXWidget GetLabelWidget() const { return m_labelWidget; }
+	virtual WXWidget GetLabelWidget() const
+	{
+		return m_labelWidget;
+	}
 
-    virtual void SetLabel(const wxString& label);
-    virtual void GetBordersForSizer(int *borderTop, int *borderOther) const;
+	virtual void SetLabel(const wxString& label);
+	virtual void GetBordersForSizer(int *borderTop, int *borderOther) const;
 
 private:
-    WXWidget  m_labelWidget;
+	WXWidget  m_labelWidget;
 
 private:
-    wxDECLARE_EVENT_TABLE();
+	wxDECLARE_EVENT_TABLE();
 };
 
 #endif

@@ -35,130 +35,130 @@
 
 #if defined(__WXMSW__)
 
-    // space between vertical line and value text
-    #define wxPG_XBEFORETEXT            4
-    // space between vertical line and value editor control
-    #define wxPG_XBEFOREWIDGET          1
+// space between vertical line and value text
+#define wxPG_XBEFORETEXT            4
+// space between vertical line and value editor control
+#define wxPG_XBEFOREWIDGET          1
 
-    // left margin can be set with wxTextEntry::SetMargins()
-    #undef wxPG_TEXTCTRLXADJUST
+// left margin can be set with wxTextEntry::SetMargins()
+#undef wxPG_TEXTCTRLXADJUST
 
-    // comment to use bitmap buttons
-    #define wxPG_ICON_WIDTH             9
-    // 1 if wxRendererNative should be employed
-    #define wxPG_USE_RENDERER_NATIVE    1
+// comment to use bitmap buttons
+#define wxPG_ICON_WIDTH             9
+// 1 if wxRendererNative should be employed
+#define wxPG_USE_RENDERER_NATIVE    1
 
-    // Enable tooltips
-    #define wxPG_SUPPORT_TOOLTIPS       1
+// Enable tooltips
+#define wxPG_SUPPORT_TOOLTIPS       1
 
-    // width of optional bitmap/image in front of property
-    #define wxPG_CUSTOM_IMAGE_WIDTH     20
+// width of optional bitmap/image in front of property
+#define wxPG_CUSTOM_IMAGE_WIDTH     20
 
-    // 1 if splitter drag detect margin and control cannot overlap
-    #define wxPG_NO_CHILD_EVT_MOTION    0
+// 1 if splitter drag detect margin and control cannot overlap
+#define wxPG_NO_CHILD_EVT_MOTION    0
 
-    #define wxPG_NAT_BUTTON_BORDER_ANY          1
-    #define wxPG_NAT_BUTTON_BORDER_X            1
-    #define wxPG_NAT_BUTTON_BORDER_Y            1
+#define wxPG_NAT_BUTTON_BORDER_ANY          1
+#define wxPG_NAT_BUTTON_BORDER_X            1
+#define wxPG_NAT_BUTTON_BORDER_Y            1
 
-    // If 1 then controls are refreshed explicitly in a few places
-    #define wxPG_REFRESH_CONTROLS 0
+// If 1 then controls are refreshed explicitly in a few places
+#define wxPG_REFRESH_CONTROLS 0
 
 #elif defined(__WXGTK__)
 
-    // space between vertical line and value text
-    #define wxPG_XBEFORETEXT            5
-    // space between vertical line and value editor control
-    #define wxPG_XBEFOREWIDGET          1
+// space between vertical line and value text
+#define wxPG_XBEFORETEXT            5
+// space between vertical line and value editor control
+#define wxPG_XBEFOREWIDGET          1
 
-    // x position adjustment for wxTextCtrl (and like)
-    // left margin can be set with wxTextEntry::SetMargins()
-    #undef wxPG_TEXTCTRLXADJUST
+// x position adjustment for wxTextCtrl (and like)
+// left margin can be set with wxTextEntry::SetMargins()
+#undef wxPG_TEXTCTRLXADJUST
 
-    // comment to use bitmap buttons
-    #define wxPG_ICON_WIDTH             9
-    // 1 if wxRendererNative should be employed
-    #define wxPG_USE_RENDERER_NATIVE    1
+// comment to use bitmap buttons
+#define wxPG_ICON_WIDTH             9
+// 1 if wxRendererNative should be employed
+#define wxPG_USE_RENDERER_NATIVE    1
 
-    // Enable tooltips
-    #define wxPG_SUPPORT_TOOLTIPS       1
+// Enable tooltips
+#define wxPG_SUPPORT_TOOLTIPS       1
 
-    // width of optional bitmap/image in front of property
-    #define wxPG_CUSTOM_IMAGE_WIDTH     20
+// width of optional bitmap/image in front of property
+#define wxPG_CUSTOM_IMAGE_WIDTH     20
 
-    // 1 if splitter drag detect margin and control cannot overlap
-    #define wxPG_NO_CHILD_EVT_MOTION    1
+// 1 if splitter drag detect margin and control cannot overlap
+#define wxPG_NO_CHILD_EVT_MOTION    1
 
-    #define wxPG_NAT_BUTTON_BORDER_ANY      1
-    #define wxPG_NAT_BUTTON_BORDER_X        1
-    #define wxPG_NAT_BUTTON_BORDER_Y        1
+#define wxPG_NAT_BUTTON_BORDER_ANY      1
+#define wxPG_NAT_BUTTON_BORDER_X        1
+#define wxPG_NAT_BUTTON_BORDER_Y        1
 
-    // If 1 then controls are refreshed after selected was drawn.
-    #define wxPG_REFRESH_CONTROLS 1
+// If 1 then controls are refreshed after selected was drawn.
+#define wxPG_REFRESH_CONTROLS 1
 
 #elif defined(__WXMAC__)
 
-    // space between vertical line and value text
-    #define wxPG_XBEFORETEXT            4
-    // space between vertical line and value editor widget
-    #define wxPG_XBEFOREWIDGET          1
+// space between vertical line and value text
+#define wxPG_XBEFORETEXT            4
+// space between vertical line and value editor widget
+#define wxPG_XBEFOREWIDGET          1
 
-    // x position adjustment for wxTextCtrl (and like)
-    // left margin cannot be set with wxTextEntry::SetMargins()
-    #define wxPG_TEXTCTRLXADJUST        1
+// x position adjustment for wxTextCtrl (and like)
+// left margin cannot be set with wxTextEntry::SetMargins()
+#define wxPG_TEXTCTRLXADJUST        1
 
-    // comment to use bitmap buttons
-    #define wxPG_ICON_WIDTH             11
-    // 1 if wxRendererNative should be employed
-    #define wxPG_USE_RENDERER_NATIVE    1
+// comment to use bitmap buttons
+#define wxPG_ICON_WIDTH             11
+// 1 if wxRendererNative should be employed
+#define wxPG_USE_RENDERER_NATIVE    1
 
-    // Enable tooltips
-    #define wxPG_SUPPORT_TOOLTIPS       1
+// Enable tooltips
+#define wxPG_SUPPORT_TOOLTIPS       1
 
-    // width of optional bitmap/image in front of property
-    #define wxPG_CUSTOM_IMAGE_WIDTH     20
+// width of optional bitmap/image in front of property
+#define wxPG_CUSTOM_IMAGE_WIDTH     20
 
-    // 1 if splitter drag detect margin and control cannot overlap
-    #define wxPG_NO_CHILD_EVT_MOTION    0
+// 1 if splitter drag detect margin and control cannot overlap
+#define wxPG_NO_CHILD_EVT_MOTION    0
 
-    #define wxPG_NAT_BUTTON_BORDER_ANY      0
-    #define wxPG_NAT_BUTTON_BORDER_X        0
-    #define wxPG_NAT_BUTTON_BORDER_Y        0
+#define wxPG_NAT_BUTTON_BORDER_ANY      0
+#define wxPG_NAT_BUTTON_BORDER_X        0
+#define wxPG_NAT_BUTTON_BORDER_Y        0
 
-    // If 1 then controls are refreshed after selected was drawn.
-    #define wxPG_REFRESH_CONTROLS 0
+// If 1 then controls are refreshed after selected was drawn.
+#define wxPG_REFRESH_CONTROLS 0
 
 #else // defaults
 
-    // space between vertical line and value text
-    #define wxPG_XBEFORETEXT            5
-    // space between vertical line and value editor widget
-    #define wxPG_XBEFOREWIDGET          1
+// space between vertical line and value text
+#define wxPG_XBEFORETEXT            5
+// space between vertical line and value editor widget
+#define wxPG_XBEFOREWIDGET          1
 
-    // x position adjustment for wxTextCtrl (and like)
-    // left margin cannot be set with wxTextEntry::SetMargins()
-    #define wxPG_TEXTCTRLXADJUST        3
+// x position adjustment for wxTextCtrl (and like)
+// left margin cannot be set with wxTextEntry::SetMargins()
+#define wxPG_TEXTCTRLXADJUST        3
 
-    // comment to use bitmap buttons
-    #define wxPG_ICON_WIDTH             9
-    // 1 if wxRendererNative should be employed
-    #define wxPG_USE_RENDERER_NATIVE    0
+// comment to use bitmap buttons
+#define wxPG_ICON_WIDTH             9
+// 1 if wxRendererNative should be employed
+#define wxPG_USE_RENDERER_NATIVE    0
 
-    // Enable tooltips
-    #define wxPG_SUPPORT_TOOLTIPS       0
+// Enable tooltips
+#define wxPG_SUPPORT_TOOLTIPS       0
 
-    // width of optional bitmap/image in front of property
-    #define wxPG_CUSTOM_IMAGE_WIDTH     20
+// width of optional bitmap/image in front of property
+#define wxPG_CUSTOM_IMAGE_WIDTH     20
 
-    // 1 if splitter drag detect margin and control cannot overlap
-    #define wxPG_NO_CHILD_EVT_MOTION    1
+// 1 if splitter drag detect margin and control cannot overlap
+#define wxPG_NO_CHILD_EVT_MOTION    1
 
-    #define wxPG_NAT_BUTTON_BORDER_ANY      0
-    #define wxPG_NAT_BUTTON_BORDER_X        0
-    #define wxPG_NAT_BUTTON_BORDER_Y        0
+#define wxPG_NAT_BUTTON_BORDER_ANY      0
+#define wxPG_NAT_BUTTON_BORDER_X        0
+#define wxPG_NAT_BUTTON_BORDER_Y        0
 
-    // If 1 then controls are refreshed after selected was drawn.
-    #define wxPG_REFRESH_CONTROLS 0
+// If 1 then controls are refreshed after selected was drawn.
+#define wxPG_REFRESH_CONTROLS 0
 #endif // platform
 
 
@@ -173,11 +173,11 @@
 #define wxPG_DRAG_MARGIN                30
 
 #if wxPG_NO_CHILD_EVT_MOTION
-    #define wxPG_SPLITTERX_DETECTMARGIN1    3 // this much on left
-    #define wxPG_SPLITTERX_DETECTMARGIN2    2 // this much on right
+#define wxPG_SPLITTERX_DETECTMARGIN1    3 // this much on left
+#define wxPG_SPLITTERX_DETECTMARGIN2    2 // this much on right
 #else
-    #define wxPG_SPLITTERX_DETECTMARGIN1    3 // this much on left
-    #define wxPG_SPLITTERX_DETECTMARGIN2    2 // this much on right
+#define wxPG_SPLITTERX_DETECTMARGIN1    3 // this much on left
+#define wxPG_SPLITTERX_DETECTMARGIN2    2 // this much on right
 #endif
 
 // Use this macro to generate standard custom image height from
@@ -188,20 +188,20 @@
 //#undef wxPG_ICON_WIDTH
 
 #if WXWIN_COMPATIBILITY_2_8
-    #define wxPG_COMPATIBILITY_1_4      1
+#define wxPG_COMPATIBILITY_1_4      1
 #else
-    #define wxPG_COMPATIBILITY_1_4      0
+#define wxPG_COMPATIBILITY_1_4      0
 #endif
 
 // Need to force disable tooltips?
 #if !wxUSE_TOOLTIPS
-    #undef wxPG_SUPPORT_TOOLTIPS
-    #define wxPG_SUPPORT_TOOLTIPS       0
+#undef wxPG_SUPPORT_TOOLTIPS
+#define wxPG_SUPPORT_TOOLTIPS       0
 #endif
 
 // Set 1 to include advanced properties (wxFontProperty, wxColourProperty, etc.)
 #ifndef wxPG_INCLUDE_ADVPROPS
-    #define wxPG_INCLUDE_ADVPROPS           1
+#define wxPG_INCLUDE_ADVPROPS           1
 #endif
 
 // Set 1 to include checkbox editor class
@@ -319,31 +319,31 @@ enum wxPG_PROPERTYVALUES_FLAGS
 // Flag for wxPropertyGridInterface::SetProperty* functions,
 // wxPropertyGridInterface::HideProperty(), etc.
 // Apply changes only for the property in question.
-wxPG_DONT_RECURSE                 = 0x00000000,
+	wxPG_DONT_RECURSE                 = 0x00000000,
 
 // Flag for wxPropertyGridInterface::GetPropertyValues().
 // Use this flag to retain category structure; each sub-category
 // will be its own wxVariantList of wxVariant.
-wxPG_KEEP_STRUCTURE               = 0x00000010,
+	wxPG_KEEP_STRUCTURE               = 0x00000010,
 
 // Flag for wxPropertyGridInterface::SetProperty* functions,
 // wxPropertyGridInterface::HideProperty(), etc.
 // Apply changes recursively for the property and all its children.
-wxPG_RECURSE                      = 0x00000020,
+	wxPG_RECURSE                      = 0x00000020,
 
 // Flag for wxPropertyGridInterface::GetPropertyValues().
 // Use this flag to include property attributes as well.
-wxPG_INC_ATTRIBUTES               = 0x00000040,
+	wxPG_INC_ATTRIBUTES               = 0x00000040,
 
 // Used when first starting recursion.
-wxPG_RECURSE_STARTS               = 0x00000080,
+	wxPG_RECURSE_STARTS               = 0x00000080,
 
 // Force value change.
-wxPG_FORCE                        = 0x00000100,
+	wxPG_FORCE                        = 0x00000100,
 
 // Only sort categories and their immediate children.
 // Sorting done by wxPG_AUTO_SORT option uses this.
-wxPG_SORT_TOP_LEVEL_ONLY          = 0x00000200
+	wxPG_SORT_TOP_LEVEL_ONLY          = 0x00000200
 };
 
 // -----------------------------------------------------------------------
@@ -351,31 +351,31 @@ wxPG_SORT_TOP_LEVEL_ONLY          = 0x00000200
 // Misc. argument flags.
 enum wxPG_MISC_ARG_FLAGS
 {
-    // Get/Store full value instead of displayed value.
-    wxPG_FULL_VALUE                     = 0x00000001,
+	// Get/Store full value instead of displayed value.
+	wxPG_FULL_VALUE                     = 0x00000001,
 
-    // Perform special action in case of unsuccessful conversion.
-    wxPG_REPORT_ERROR                   = 0x00000002,
+	// Perform special action in case of unsuccessful conversion.
+	wxPG_REPORT_ERROR                   = 0x00000002,
 
-    wxPG_PROPERTY_SPECIFIC              = 0x00000004,
+	wxPG_PROPERTY_SPECIFIC              = 0x00000004,
 
-    // Get/Store editable value instead of displayed one (should only be
-    // different in the case of common values)
-    wxPG_EDITABLE_VALUE                 = 0x00000008,
+	// Get/Store editable value instead of displayed one (should only be
+	// different in the case of common values)
+	wxPG_EDITABLE_VALUE                 = 0x00000008,
 
-    // Used when dealing with fragments of composite string value
-    wxPG_COMPOSITE_FRAGMENT             = 0x00000010,
+	// Used when dealing with fragments of composite string value
+	wxPG_COMPOSITE_FRAGMENT             = 0x00000010,
 
-    // Means property for which final string value is for cannot really be
-    // edited.
-    wxPG_UNEDITABLE_COMPOSITE_FRAGMENT  = 0x00000020,
+	// Means property for which final string value is for cannot really be
+	// edited.
+	wxPG_UNEDITABLE_COMPOSITE_FRAGMENT  = 0x00000020,
 
-    // ValueToString() called from GetValueAsString()
-    // (guarantees that input wxVariant value is current own value)
-    wxPG_VALUE_IS_CURRENT               = 0x00000040,
+	// ValueToString() called from GetValueAsString()
+	// (guarantees that input wxVariant value is current own value)
+	wxPG_VALUE_IS_CURRENT               = 0x00000040,
 
-    // Value is being set programmatically (i.e. not by user)
-    wxPG_PROGRAMMATIC_VALUE             = 0x00000080
+	// Value is being set programmatically (i.e. not by user)
+	wxPG_PROGRAMMATIC_VALUE             = 0x00000080
 };
 
 // -----------------------------------------------------------------------
@@ -383,10 +383,10 @@ enum wxPG_MISC_ARG_FLAGS
 // wxPGProperty::SetValue() flags
 enum wxPG_SETVALUE_FLAGS
 {
-    wxPG_SETVAL_REFRESH_EDITOR      = 0x0001,
-    wxPG_SETVAL_AGGREGATED          = 0x0002,
-    wxPG_SETVAL_FROM_PARENT         = 0x0004,
-    wxPG_SETVAL_BY_USER             = 0x0008  // Set if value changed by user
+	wxPG_SETVAL_REFRESH_EDITOR      = 0x0001,
+	wxPG_SETVAL_AGGREGATED          = 0x0002,
+	wxPG_SETVAL_FROM_PARENT         = 0x0004,
+	wxPG_SETVAL_BY_USER             = 0x0008  // Set if value changed by user
 };
 
 // -----------------------------------------------------------------------
@@ -414,7 +414,7 @@ enum wxPG_SETVALUE_FLAGS
 // Macro for declaring editor class, with optional impexpdecl part.
 #ifndef WX_PG_DECLARE_EDITOR_WITH_DECL
 
-    #define WX_PG_DECLARE_EDITOR_WITH_DECL(EDITOR,DECL) \
+#define WX_PG_DECLARE_EDITOR_WITH_DECL(EDITOR,DECL) \
     extern DECL wxPGEditor* wxPGEditor_##EDITOR; \
     extern DECL wxPGEditor* wxPGConstruct##EDITOR##EditorClass();
 
@@ -446,31 +446,49 @@ WX_PG_DECLARE_EDITOR_WITH_DECL(ChoiceAndButton,WXDLLIMPEXP_PROPGRID)
 template<class T>
 wxVariant WXVARIANT( const T& WXUNUSED(value) )
 {
-    wxFAIL_MSG(wxS("Code should always call specializations of this template"));
-    return wxVariant();
+	wxFAIL_MSG(wxS("Code should always call specializations of this template"));
+	return wxVariant();
 }
 
 template<> inline wxVariant WXVARIANT( const int& value )
-    { return wxVariant((long)value); }
+{
+	return wxVariant((long)value);
+}
 template<> inline wxVariant WXVARIANT( const long& value )
-    { return wxVariant(value); }
+{
+	return wxVariant(value);
+}
 template<> inline wxVariant WXVARIANT( const bool& value )
-    { return wxVariant(value); }
+{
+	return wxVariant(value);
+}
 template<> inline wxVariant WXVARIANT( const double& value )
-    { return wxVariant(value); }
+{
+	return wxVariant(value);
+}
 template<> inline wxVariant WXVARIANT( const wxArrayString& value )
-    { return wxVariant(value); }
+{
+	return wxVariant(value);
+}
 template<> inline wxVariant WXVARIANT( const wxString& value )
-    { return wxVariant(value); }
+{
+	return wxVariant(value);
+}
 #if wxUSE_LONGLONG
 template<> inline wxVariant WXVARIANT( const wxLongLong& value )
-    { return wxVariant(value); }
+{
+	return wxVariant(value);
+}
 template<> inline wxVariant WXVARIANT( const wxULongLong& value )
-    { return wxVariant(value); }
+{
+	return wxVariant(value);
+}
 #endif
 #if wxUSE_DATETIME
 template<> inline wxVariant WXVARIANT( const wxDateTime& value )
-    { return wxVariant(value); }
+{
+	return wxVariant(value);
+}
 #endif
 
 
@@ -613,16 +631,16 @@ WX_PG_DECLARE_VARIANT_DATA_EXPORTED(wxArrayInt, WXDLLIMPEXP_PROPGRID)
 DECLARE_VARIANT_OBJECT_EXPORTED(wxFont, WXDLLIMPEXP_PROPGRID)
 template<> inline wxVariant WXVARIANT( const wxFont& value )
 {
-    wxVariant variant;
-    variant << value;
-    return variant;
+	wxVariant variant;
+	variant << value;
+	return variant;
 }
 
 template<> inline wxVariant WXVARIANT( const wxColour& value )
 {
-    wxVariant variant;
-    variant << value;
-    return variant;
+	wxVariant variant;
+	variant << value;
+	return variant;
 }
 
 // Define constants for common wxVariant type strings
@@ -677,17 +695,17 @@ template<> inline wxVariant WXVARIANT( const wxColour& value )
 class WXDLLIMPEXP_PROPGRID wxPGStringTokenizer
 {
 public:
-    wxPGStringTokenizer( const wxString& str, wxChar delimiter );
-    ~wxPGStringTokenizer();
+	wxPGStringTokenizer( const wxString& str, wxChar delimiter );
+	~wxPGStringTokenizer();
 
-    bool HasMoreTokens(); // not const so we can do some stuff in it
-    wxString GetNextToken();
+	bool HasMoreTokens(); // not const so we can do some stuff in it
+	wxString GetNextToken();
 
 protected:
-    const wxString*             m_str;
-    wxString::const_iterator    m_curPos;
-    wxString                    m_readyToken;
-    wxUniChar                   m_delimiter;
+	const wxString*             m_str;
+	wxString::const_iterator    m_curPos;
+	wxString                    m_readyToken;
+	wxUniChar                   m_delimiter;
 };
 
 #define WX_PG_TOKENIZER2_BEGIN(WXSTRING,DELIMITER) \

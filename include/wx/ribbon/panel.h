@@ -19,123 +19,135 @@
 
 enum wxRibbonPanelOption
 {
-    wxRIBBON_PANEL_NO_AUTO_MINIMISE = 1 << 0,
-    wxRIBBON_PANEL_EXT_BUTTON       = 1 << 3,
-    wxRIBBON_PANEL_MINIMISE_BUTTON  = 1 << 4,
-    wxRIBBON_PANEL_STRETCH          = 1 << 5,
-    wxRIBBON_PANEL_FLEXIBLE         = 1 << 6,
+	wxRIBBON_PANEL_NO_AUTO_MINIMISE = 1 << 0,
+	wxRIBBON_PANEL_EXT_BUTTON       = 1 << 3,
+	wxRIBBON_PANEL_MINIMISE_BUTTON  = 1 << 4,
+	wxRIBBON_PANEL_STRETCH          = 1 << 5,
+	wxRIBBON_PANEL_FLEXIBLE         = 1 << 6,
 
-    wxRIBBON_PANEL_DEFAULT_STYLE    = 0
+	wxRIBBON_PANEL_DEFAULT_STYLE    = 0
 };
 
 class WXDLLIMPEXP_RIBBON wxRibbonPanel : public wxRibbonControl
 {
 public:
-    wxRibbonPanel();
+	wxRibbonPanel();
 
-    wxRibbonPanel(wxWindow* parent,
-                  wxWindowID id = wxID_ANY,
-                  const wxString& label = wxEmptyString,
-                  const wxBitmap& minimised_icon = wxNullBitmap,
-                  const wxPoint& pos = wxDefaultPosition,
-                  const wxSize& size = wxDefaultSize,
-                  long style = wxRIBBON_PANEL_DEFAULT_STYLE);
+	wxRibbonPanel(wxWindow* parent,
+	              wxWindowID id = wxID_ANY,
+	              const wxString& label = wxEmptyString,
+	              const wxBitmap& minimised_icon = wxNullBitmap,
+	              const wxPoint& pos = wxDefaultPosition,
+	              const wxSize& size = wxDefaultSize,
+	              long style = wxRIBBON_PANEL_DEFAULT_STYLE);
 
-    virtual ~wxRibbonPanel();
+	virtual ~wxRibbonPanel();
 
-    bool Create(wxWindow* parent,
-                wxWindowID id = wxID_ANY,
-                const wxString& label = wxEmptyString,
-                const wxBitmap& icon = wxNullBitmap,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxRIBBON_PANEL_DEFAULT_STYLE);
+	bool Create(wxWindow* parent,
+	            wxWindowID id = wxID_ANY,
+	            const wxString& label = wxEmptyString,
+	            const wxBitmap& icon = wxNullBitmap,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxRIBBON_PANEL_DEFAULT_STYLE);
 
-    wxBitmap& GetMinimisedIcon() {return m_minimised_icon;}
-    const wxBitmap& GetMinimisedIcon() const {return m_minimised_icon;}
-    bool IsMinimised() const;
-    bool IsMinimised(wxSize at_size) const;
-    bool IsHovered() const;
-    bool IsExtButtonHovered() const;
-    bool CanAutoMinimise() const;
+	wxBitmap& GetMinimisedIcon()
+	{
+		return m_minimised_icon;
+	}
+	const wxBitmap& GetMinimisedIcon() const
+	{
+		return m_minimised_icon;
+	}
+	bool IsMinimised() const;
+	bool IsMinimised(wxSize at_size) const;
+	bool IsHovered() const;
+	bool IsExtButtonHovered() const;
+	bool CanAutoMinimise() const;
 
-    bool ShowExpanded();
-    bool HideExpanded();
+	bool ShowExpanded();
+	bool HideExpanded();
 
-    void SetArtProvider(wxRibbonArtProvider* art) wxOVERRIDE;
+	void SetArtProvider(wxRibbonArtProvider* art) wxOVERRIDE;
 
-    virtual bool Realize() wxOVERRIDE;
-    virtual bool Layout() wxOVERRIDE;
-    virtual wxSize GetMinSize() const wxOVERRIDE;
+	virtual bool Realize() wxOVERRIDE;
+	virtual bool Layout() wxOVERRIDE;
+	virtual wxSize GetMinSize() const wxOVERRIDE;
 
-    virtual bool IsSizingContinuous() const wxOVERRIDE;
+	virtual bool IsSizingContinuous() const wxOVERRIDE;
 
-    virtual void AddChild(wxWindowBase *child) wxOVERRIDE;
-    virtual void RemoveChild(wxWindowBase *child) wxOVERRIDE;
+	virtual void AddChild(wxWindowBase *child) wxOVERRIDE;
+	virtual void RemoveChild(wxWindowBase *child) wxOVERRIDE;
 
-    virtual bool HasExtButton() const;
+	virtual bool HasExtButton() const;
 
-    wxRibbonPanel* GetExpandedDummy();
-    wxRibbonPanel* GetExpandedPanel();
+	wxRibbonPanel* GetExpandedDummy();
+	wxRibbonPanel* GetExpandedPanel();
 
-    // Finds the best width and height given the parent's width and height
-    virtual wxSize GetBestSizeForParentSize(const wxSize& parentSize) const wxOVERRIDE;
+	// Finds the best width and height given the parent's width and height
+	virtual wxSize GetBestSizeForParentSize(const wxSize& parentSize) const wxOVERRIDE;
 
-    long GetFlags() { return m_flags; }
+	long GetFlags()
+	{
+		return m_flags;
+	}
 
-    void HideIfExpanded();
+	void HideIfExpanded();
 
 protected:
-    virtual wxSize DoGetBestSize() const wxOVERRIDE;
-    virtual wxSize GetPanelSizerBestSize() const;
-    wxSize  GetPanelSizerMinSize() const;
-    wxBorder GetDefaultBorder() const wxOVERRIDE { return wxBORDER_NONE; }
-    wxSize GetMinNotMinimisedSize() const;
+	virtual wxSize DoGetBestSize() const wxOVERRIDE;
+	virtual wxSize GetPanelSizerBestSize() const;
+	wxSize  GetPanelSizerMinSize() const;
+	wxBorder GetDefaultBorder() const wxOVERRIDE
+	{
+		return wxBORDER_NONE;
+	}
+	wxSize GetMinNotMinimisedSize() const;
 
-    virtual wxSize DoGetNextSmallerSize(wxOrientation direction,
-                                      wxSize relative_to) const wxOVERRIDE;
-    virtual wxSize DoGetNextLargerSize(wxOrientation direction,
-                                     wxSize relative_to) const wxOVERRIDE;
+	virtual wxSize DoGetNextSmallerSize(wxOrientation direction,
+	                                    wxSize relative_to) const wxOVERRIDE;
+	virtual wxSize DoGetNextLargerSize(wxOrientation direction,
+	                                   wxSize relative_to) const wxOVERRIDE;
 
-    void DoSetSize(int x, int y, int width, int height, int sizeFlags = wxSIZE_AUTO) wxOVERRIDE;
-    void OnSize(wxSizeEvent& evt);
-    void OnEraseBackground(wxEraseEvent& evt);
-    void OnPaint(wxPaintEvent& evt);
-    void OnMouseEnter(wxMouseEvent& evt);
-    void OnMouseEnterChild(wxMouseEvent& evt);
-    void OnMouseLeave(wxMouseEvent& evt);
-    void OnMouseLeaveChild(wxMouseEvent& evt);
-    void OnMouseClick(wxMouseEvent& evt);
-    void OnMotion(wxMouseEvent& evt);
-    void OnKillFocus(wxFocusEvent& evt);
-    void OnChildKillFocus(wxFocusEvent& evt);
+	void DoSetSize(int x, int y, int width, int height, int sizeFlags = wxSIZE_AUTO) wxOVERRIDE;
+	void OnSize(wxSizeEvent& evt);
+	void OnEraseBackground(wxEraseEvent& evt);
+	void OnPaint(wxPaintEvent& evt);
+	void OnMouseEnter(wxMouseEvent& evt);
+	void OnMouseEnterChild(wxMouseEvent& evt);
+	void OnMouseLeave(wxMouseEvent& evt);
+	void OnMouseLeaveChild(wxMouseEvent& evt);
+	void OnMouseClick(wxMouseEvent& evt);
+	void OnMotion(wxMouseEvent& evt);
+	void OnKillFocus(wxFocusEvent& evt);
+	void OnChildKillFocus(wxFocusEvent& evt);
 
-    void TestPositionForHover(const wxPoint& pos);
-    bool ShouldSendEventToDummy(wxEvent& evt);
-    virtual bool TryAfter(wxEvent& evt) wxOVERRIDE;
+	void TestPositionForHover(const wxPoint& pos);
+	bool ShouldSendEventToDummy(wxEvent& evt);
+	virtual bool TryAfter(wxEvent& evt) wxOVERRIDE;
 
-    void CommonInit(const wxString& label, const wxBitmap& icon, long style);
-    static wxRect GetExpandedPosition(wxRect panel,
-                                      wxSize expanded_size,
-                                      wxDirection direction);
+	void CommonInit(const wxString& label, const wxBitmap& icon, long style);
+	static wxRect GetExpandedPosition(wxRect panel,
+	                                  wxSize expanded_size,
+	                                  wxDirection direction);
 
-    wxBitmap m_minimised_icon;
-    wxBitmap m_minimised_icon_resized;
-    wxSize m_smallest_unminimised_size;
-    wxSize m_minimised_size;
-    wxDirection m_preferred_expand_direction;
-    wxRibbonPanel* m_expanded_dummy;
-    wxRibbonPanel* m_expanded_panel;
-    wxWindow* m_child_with_focus;
-    long m_flags;
-    bool m_minimised;
-    bool m_hovered;
-    bool m_ext_button_hovered;
-    wxRect m_ext_button_rect;
+	wxBitmap m_minimised_icon;
+	wxBitmap m_minimised_icon_resized;
+	wxSize m_smallest_unminimised_size;
+	wxSize m_minimised_size;
+	wxDirection m_preferred_expand_direction;
+	wxRibbonPanel* m_expanded_dummy;
+	wxRibbonPanel* m_expanded_panel;
+	wxWindow* m_child_with_focus;
+	long m_flags;
+	bool m_minimised;
+	bool m_hovered;
+	bool m_ext_button_hovered;
+	wxRect m_ext_button_rect;
 
 #ifndef SWIG
-    wxDECLARE_CLASS(wxRibbonPanel);
-    wxDECLARE_EVENT_TABLE();
+	wxDECLARE_CLASS(wxRibbonPanel);
+	wxDECLARE_EVENT_TABLE();
 #endif
 };
 
@@ -143,30 +155,39 @@ protected:
 class WXDLLIMPEXP_RIBBON wxRibbonPanelEvent : public wxCommandEvent
 {
 public:
-    wxRibbonPanelEvent(wxEventType command_type = wxEVT_NULL,
-                       int win_id = 0,
-                       wxRibbonPanel* panel = NULL)
-        : wxCommandEvent(command_type, win_id)
-        , m_panel(panel)
-    {
-    }
+	wxRibbonPanelEvent(wxEventType command_type = wxEVT_NULL,
+	                   int win_id = 0,
+	                   wxRibbonPanel* panel = NULL)
+		: wxCommandEvent(command_type, win_id)
+		, m_panel(panel)
+	{
+	}
 #ifndef SWIG
-    wxRibbonPanelEvent(const wxRibbonPanelEvent& e) : wxCommandEvent(e)
-    {
-        m_panel = e.m_panel;
-    }
+	wxRibbonPanelEvent(const wxRibbonPanelEvent& e) : wxCommandEvent(e)
+	{
+		m_panel = e.m_panel;
+	}
 #endif
-    wxEvent *Clone() const wxOVERRIDE { return new wxRibbonPanelEvent(*this); }
+	wxEvent *Clone() const wxOVERRIDE
+	{
+		return new wxRibbonPanelEvent(*this);
+	}
 
-    wxRibbonPanel* GetPanel() {return m_panel;}
-    void SetPanel(wxRibbonPanel* panel) {m_panel = panel;}
+	wxRibbonPanel* GetPanel()
+	{
+		return m_panel;
+	}
+	void SetPanel(wxRibbonPanel* panel)
+	{
+		m_panel = panel;
+	}
 
 protected:
-    wxRibbonPanel* m_panel;
+	wxRibbonPanel* m_panel;
 
 #ifndef SWIG
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxRibbonPanelEvent);
+	wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxRibbonPanelEvent);
 #endif
 };
 
@@ -186,8 +207,9 @@ typedef void (wxEvtHandler::*wxRibbonPanelEventFunction)(wxRibbonPanelEvent&);
 // wxpython/swig event work
 %constant wxEventType wxEVT_RIBBONPANEL_EXTBUTTON_ACTIVATED;
 
-%pythoncode {
-    EVT_RIBBONPANEL_EXTBUTTON_ACTIVATED = wx.PyEventBinder( wxEVT_RIBBONPANEL_EXTBUTTON_ACTIVATED, 1 )
+%pythoncode
+{
+	EVT_RIBBONPANEL_EXTBUTTON_ACTIVATED = wx.PyEventBinder( wxEVT_RIBBONPANEL_EXTBUTTON_ACTIVATED, 1 )
 }
 #endif
 

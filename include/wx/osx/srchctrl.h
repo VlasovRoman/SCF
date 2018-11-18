@@ -17,67 +17,67 @@ class wxSearchWidgetImpl;
 class WXDLLIMPEXP_CORE wxSearchCtrl : public wxSearchCtrlBase
 {
 public:
-    // creation
-    // --------
+	// creation
+	// --------
 
-    wxSearchCtrl();
-    wxSearchCtrl(wxWindow *parent, wxWindowID id,
-               const wxString& value = wxEmptyString,
-               const wxPoint& pos = wxDefaultPosition,
-               const wxSize& size = wxDefaultSize,
-               long style = 0,
-               const wxValidator& validator = wxDefaultValidator,
-               const wxString& name = wxSearchCtrlNameStr);
+	wxSearchCtrl();
+	wxSearchCtrl(wxWindow *parent, wxWindowID id,
+	             const wxString& value = wxEmptyString,
+	             const wxPoint& pos = wxDefaultPosition,
+	             const wxSize& size = wxDefaultSize,
+	             long style = 0,
+	             const wxValidator& validator = wxDefaultValidator,
+	             const wxString& name = wxSearchCtrlNameStr);
 
-    virtual ~wxSearchCtrl();
+	virtual ~wxSearchCtrl();
 
-    bool Create(wxWindow *parent, wxWindowID id,
-                const wxString& value = wxEmptyString,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = 0,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxSearchCtrlNameStr);
+	bool Create(wxWindow *parent, wxWindowID id,
+	            const wxString& value = wxEmptyString,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxSearchCtrlNameStr);
 
 #if wxUSE_MENUS
-    // get/set search button menu
-    // --------------------------
-    virtual void SetMenu( wxMenu* menu ) wxOVERRIDE;
-    virtual wxMenu* GetMenu() wxOVERRIDE;
+	// get/set search button menu
+	// --------------------------
+	virtual void SetMenu( wxMenu* menu ) wxOVERRIDE;
+	virtual wxMenu* GetMenu() wxOVERRIDE;
 #endif  // wxUSE_MENUS
 
-    // get/set search options
-    // ----------------------
-    virtual void ShowSearchButton( bool show ) wxOVERRIDE;
-    virtual bool IsSearchButtonVisible() const wxOVERRIDE;
+	// get/set search options
+	// ----------------------
+	virtual void ShowSearchButton( bool show ) wxOVERRIDE;
+	virtual bool IsSearchButtonVisible() const wxOVERRIDE;
 
-    virtual void ShowCancelButton( bool show ) wxOVERRIDE;
-    virtual bool IsCancelButtonVisible() const wxOVERRIDE;
+	virtual void ShowCancelButton( bool show ) wxOVERRIDE;
+	virtual bool IsCancelButtonVisible() const wxOVERRIDE;
 
-    virtual void SetDescriptiveText(const wxString& text) wxOVERRIDE;
-    virtual wxString GetDescriptiveText() const wxOVERRIDE;
+	virtual void SetDescriptiveText(const wxString& text) wxOVERRIDE;
+	virtual wxString GetDescriptiveText() const wxOVERRIDE;
 
-    virtual bool    HandleSearchFieldSearchHit() ;
-    virtual bool    HandleSearchFieldCancelHit() ;
+	virtual bool    HandleSearchFieldSearchHit() ;
+	virtual bool    HandleSearchFieldCancelHit() ;
 
-    wxSearchWidgetImpl * GetSearchPeer() const;
+	wxSearchWidgetImpl * GetSearchPeer() const;
 
 protected:
 
-    wxSize DoGetBestSize() const wxOVERRIDE;
+	wxSize DoGetBestSize() const wxOVERRIDE;
 
-    void Init();
+	void Init();
 
 #if wxUSE_MENUS
-    wxMenu *m_menu;
+	wxMenu *m_menu;
 #endif  // wxUSE_MENUS
 
-    wxString m_descriptiveText;
+	wxString m_descriptiveText;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxSearchCtrl);
+	wxDECLARE_DYNAMIC_CLASS(wxSearchCtrl);
 
-    wxDECLARE_EVENT_TABLE();
+	wxDECLARE_EVENT_TABLE();
 };
 
 #endif // wxUSE_SEARCHCTRL

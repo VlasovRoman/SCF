@@ -22,25 +22,25 @@ class wxFSWatcherImplUNIX;
 class wxFSWatchEntry : public wxFSWatchInfo
 {
 public:
-    wxFSWatchEntry(const wxFSWatchInfo& winfo) :
-        wxFSWatchInfo(winfo)
-    {
-    }
+	wxFSWatchEntry(const wxFSWatchInfo& winfo) :
+		wxFSWatchInfo(winfo)
+	{
+	}
 
-    int GetWatchDescriptor() const
-    {
-        return m_wd;
-    }
+	int GetWatchDescriptor() const
+	{
+		return m_wd;
+	}
 
-    void SetWatchDescriptor(int wd)
-    {
-        m_wd = wd;
-    }
+	void SetWatchDescriptor(int wd)
+	{
+		m_wd = wd;
+	}
 
 private:
-    int m_wd;
+	int m_wd;
 
-    wxDECLARE_NO_COPY_CLASS(wxFSWatchEntry);
+	wxDECLARE_NO_COPY_CLASS(wxFSWatchEntry);
 };
 
 
@@ -56,16 +56,16 @@ class wxFSWatcherImplUnix;
 class wxFSWSourceHandler : public wxEventLoopSourceHandler
 {
 public:
-    wxFSWSourceHandler(wxFSWatcherImplUnix* service) :
-        m_service(service)
-    {  }
+	wxFSWSourceHandler(wxFSWatcherImplUnix* service) :
+		m_service(service)
+	{  }
 
-    virtual void OnReadWaiting() wxOVERRIDE;
-    virtual void OnWriteWaiting() wxOVERRIDE;
-    virtual void OnExceptionWaiting() wxOVERRIDE;
+	virtual void OnReadWaiting() wxOVERRIDE;
+	virtual void OnWriteWaiting() wxOVERRIDE;
+	virtual void OnExceptionWaiting() wxOVERRIDE;
 
 protected:
-    wxFSWatcherImplUnix* m_service;
+	wxFSWatcherImplUnix* m_service;
 };
 
 #endif /* WX_UNIX_PRIVATE_FSWATCHER_INOTIFY_H_ */

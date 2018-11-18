@@ -17,11 +17,11 @@
 // with standard functions of the same name elsewhere, so we have to pay for it
 // by manually redefining them ourselves here
 #ifndef max
-    #define max(a,b)            (((a) > (b)) ? (a) : (b))
+#define max(a,b)            (((a) > (b)) ? (a) : (b))
 #endif
 
 #ifndef min
-    #define min(a,b)            (((a) < (b)) ? (a) : (b))
+#define min(a,b)            (((a) < (b)) ? (a) : (b))
 #endif
 
 // There are many clashes between the names of the member fields and parameters
@@ -29,15 +29,15 @@
 // VC14, so disable this warning for this file as there is no other way to
 // avoid it.
 #ifdef __VISUALC__
-    #pragma warning(push)
-    #pragma warning(disable:4458) // declaration of 'xxx' hides class member
+#pragma warning(push)
+#pragma warning(disable:4458) // declaration of 'xxx' hides class member
 #endif
 
 #include <gdiplus.h>
 using namespace Gdiplus;
 
 #ifdef __VISUALC__
-    #pragma warning(pop)
+#pragma warning(pop)
 #endif
 
 #endif // _WX_MSW_WRAPGDIP_H_

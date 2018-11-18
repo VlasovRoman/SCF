@@ -21,75 +21,81 @@ class WXDLLIMPEXP_FWD_CORE wxDialogModalData;
 class WXDLLIMPEXP_CORE wxDialog : public wxDialogBase
 {
 public:
-    wxDialog() { Init(); }
+	wxDialog()
+	{
+		Init();
+	}
 
-    // full ctor
-    wxDialog(wxWindow *parent, wxWindowID id,
-             const wxString& title,
-             const wxPoint& pos = wxDefaultPosition,
-             const wxSize& size = wxDefaultSize,
-             long style = wxDEFAULT_DIALOG_STYLE,
-             const wxString& name = wxDialogNameStr)
-    {
-        Init();
+	// full ctor
+	wxDialog(wxWindow *parent, wxWindowID id,
+	         const wxString& title,
+	         const wxPoint& pos = wxDefaultPosition,
+	         const wxSize& size = wxDefaultSize,
+	         long style = wxDEFAULT_DIALOG_STYLE,
+	         const wxString& name = wxDialogNameStr)
+	{
+		Init();
 
-        (void)Create(parent, id, title, pos, size, style, name);
-    }
+		(void)Create(parent, id, title, pos, size, style, name);
+	}
 
-    bool Create(wxWindow *parent, wxWindowID id,
-                const wxString& title,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_DIALOG_STYLE,
-                const wxString& name = wxDialogNameStr);
+	bool Create(wxWindow *parent, wxWindowID id,
+	            const wxString& title,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxDEFAULT_DIALOG_STYLE,
+	            const wxString& name = wxDialogNameStr);
 
-    virtual ~wxDialog();
+	virtual ~wxDialog();
 
-    // return true if we're showing the dialog modally
-    virtual bool IsModal() const wxOVERRIDE { return m_modalData != NULL; }
+	// return true if we're showing the dialog modally
+	virtual bool IsModal() const wxOVERRIDE
+	{
+		return m_modalData != NULL;
+	}
 
-    // show the dialog modally and return the value passed to EndModal()
-    virtual int ShowModal() wxOVERRIDE;
+	// show the dialog modally and return the value passed to EndModal()
+	virtual int ShowModal() wxOVERRIDE;
 
-    // may be called to terminate the dialog with the given return code
-    virtual void EndModal(int retCode) wxOVERRIDE;
+	// may be called to terminate the dialog with the given return code
+	virtual void EndModal(int retCode) wxOVERRIDE;
 
 
-    // implementation only from now on
-    // -------------------------------
+	// implementation only from now on
+	// -------------------------------
 
-    // override some base class virtuals
-    virtual bool Show(bool show = true) wxOVERRIDE;
-    virtual void SetWindowStyleFlag(long style) wxOVERRIDE;
+	// override some base class virtuals
+	virtual bool Show(bool show = true) wxOVERRIDE;
+	virtual void SetWindowStyleFlag(long style) wxOVERRIDE;
 
-    // Windows callbacks
-    WXLRESULT MSWWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM lParam) wxOVERRIDE;
+	// Windows callbacks
+	WXLRESULT MSWWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM lParam) wxOVERRIDE;
 
 protected:
-    // common part of all ctors
-    void Init();
+	// common part of all ctors
+	void Init();
 
 private:
-    // these functions deal with the gripper window shown in the corner of
-    // resizable dialogs
-    void CreateGripper();
-    void DestroyGripper();
-    void ShowGripper(bool show);
-    void ResizeGripper();
+	// these functions deal with the gripper window shown in the corner of
+	// resizable dialogs
+	void CreateGripper();
+	void DestroyGripper();
+	void ShowGripper(bool show);
+	void ResizeGripper();
 
-    // this function is used to adjust Z-order of new children relative to the
-    // gripper if we have one
-    void OnWindowCreate(wxWindowCreateEvent& event);
+	// this function is used to adjust Z-order of new children relative to the
+	// gripper if we have one
+	void OnWindowCreate(wxWindowCreateEvent& event);
 
-    // gripper window for a resizable dialog, NULL if we're not resizable
-    WXHWND m_hGripper;
+	// gripper window for a resizable dialog, NULL if we're not resizable
+	WXHWND m_hGripper;
 
-    // this pointer is non-NULL only while the modal event loop is running
-    wxDialogModalData *m_modalData;
+	// this pointer is non-NULL only while the modal event loop is running
+	wxDialogModalData *m_modalData;
 
-    wxDECLARE_DYNAMIC_CLASS(wxDialog);
-    wxDECLARE_NO_COPY_CLASS(wxDialog);
+	wxDECLARE_DYNAMIC_CLASS(wxDialog);
+	wxDECLARE_NO_COPY_CLASS(wxDialog);
 };
 
 #endif
-    // _WX_DIALOG_H_
+// _WX_DIALOG_H_

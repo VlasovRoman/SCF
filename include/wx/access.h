@@ -23,12 +23,12 @@
 
 enum wxAccStatus
 {
-    wxACC_FAIL,
-    wxACC_FALSE,
-    wxACC_OK,
-    wxACC_NOT_IMPLEMENTED,
-    wxACC_NOT_SUPPORTED,
-    wxACC_INVALID_ARG
+	wxACC_FAIL,
+	wxACC_FALSE,
+	wxACC_OK,
+	wxACC_NOT_IMPLEMENTED,
+	wxACC_NOT_SUPPORTED,
+	wxACC_INVALID_ARG
 };
 
 // Child ids are integer identifiers from 1 up.
@@ -39,98 +39,100 @@ enum wxAccStatus
 
 enum wxNavDir
 {
-    wxNAVDIR_DOWN,
-    wxNAVDIR_FIRSTCHILD,
-    wxNAVDIR_LASTCHILD,
-    wxNAVDIR_LEFT,
-    wxNAVDIR_NEXT,
-    wxNAVDIR_PREVIOUS,
-    wxNAVDIR_RIGHT,
-    wxNAVDIR_UP
+	wxNAVDIR_DOWN,
+	wxNAVDIR_FIRSTCHILD,
+	wxNAVDIR_LASTCHILD,
+	wxNAVDIR_LEFT,
+	wxNAVDIR_NEXT,
+	wxNAVDIR_PREVIOUS,
+	wxNAVDIR_RIGHT,
+	wxNAVDIR_UP
 };
 
 // Role constants
 
-enum wxAccRole {
-    wxROLE_NONE,
-    wxROLE_SYSTEM_ALERT,
-    wxROLE_SYSTEM_ANIMATION,
-    wxROLE_SYSTEM_APPLICATION,
-    wxROLE_SYSTEM_BORDER,
-    wxROLE_SYSTEM_BUTTONDROPDOWN,
-    wxROLE_SYSTEM_BUTTONDROPDOWNGRID,
-    wxROLE_SYSTEM_BUTTONMENU,
-    wxROLE_SYSTEM_CARET,
-    wxROLE_SYSTEM_CELL,
-    wxROLE_SYSTEM_CHARACTER,
-    wxROLE_SYSTEM_CHART,
-    wxROLE_SYSTEM_CHECKBUTTON,
-    wxROLE_SYSTEM_CLIENT,
-    wxROLE_SYSTEM_CLOCK,
-    wxROLE_SYSTEM_COLUMN,
-    wxROLE_SYSTEM_COLUMNHEADER,
-    wxROLE_SYSTEM_COMBOBOX,
-    wxROLE_SYSTEM_CURSOR,
-    wxROLE_SYSTEM_DIAGRAM,
-    wxROLE_SYSTEM_DIAL,
-    wxROLE_SYSTEM_DIALOG,
-    wxROLE_SYSTEM_DOCUMENT,
-    wxROLE_SYSTEM_DROPLIST,
-    wxROLE_SYSTEM_EQUATION,
-    wxROLE_SYSTEM_GRAPHIC,
-    wxROLE_SYSTEM_GRIP,
-    wxROLE_SYSTEM_GROUPING,
-    wxROLE_SYSTEM_HELPBALLOON,
-    wxROLE_SYSTEM_HOTKEYFIELD,
-    wxROLE_SYSTEM_INDICATOR,
-    wxROLE_SYSTEM_LINK,
-    wxROLE_SYSTEM_LIST,
-    wxROLE_SYSTEM_LISTITEM,
-    wxROLE_SYSTEM_MENUBAR,
-    wxROLE_SYSTEM_MENUITEM,
-    wxROLE_SYSTEM_MENUPOPUP,
-    wxROLE_SYSTEM_OUTLINE,
-    wxROLE_SYSTEM_OUTLINEITEM,
-    wxROLE_SYSTEM_PAGETAB,
-    wxROLE_SYSTEM_PAGETABLIST,
-    wxROLE_SYSTEM_PANE,
-    wxROLE_SYSTEM_PROGRESSBAR,
-    wxROLE_SYSTEM_PROPERTYPAGE,
-    wxROLE_SYSTEM_PUSHBUTTON,
-    wxROLE_SYSTEM_RADIOBUTTON,
-    wxROLE_SYSTEM_ROW,
-    wxROLE_SYSTEM_ROWHEADER,
-    wxROLE_SYSTEM_SCROLLBAR,
-    wxROLE_SYSTEM_SEPARATOR,
-    wxROLE_SYSTEM_SLIDER,
-    wxROLE_SYSTEM_SOUND,
-    wxROLE_SYSTEM_SPINBUTTON,
-    wxROLE_SYSTEM_STATICTEXT,
-    wxROLE_SYSTEM_STATUSBAR,
-    wxROLE_SYSTEM_TABLE,
-    wxROLE_SYSTEM_TEXT,
-    wxROLE_SYSTEM_TITLEBAR,
-    wxROLE_SYSTEM_TOOLBAR,
-    wxROLE_SYSTEM_TOOLTIP,
-    wxROLE_SYSTEM_WHITESPACE,
-    wxROLE_SYSTEM_WINDOW
+enum wxAccRole
+{
+	wxROLE_NONE,
+	wxROLE_SYSTEM_ALERT,
+	wxROLE_SYSTEM_ANIMATION,
+	wxROLE_SYSTEM_APPLICATION,
+	wxROLE_SYSTEM_BORDER,
+	wxROLE_SYSTEM_BUTTONDROPDOWN,
+	wxROLE_SYSTEM_BUTTONDROPDOWNGRID,
+	wxROLE_SYSTEM_BUTTONMENU,
+	wxROLE_SYSTEM_CARET,
+	wxROLE_SYSTEM_CELL,
+	wxROLE_SYSTEM_CHARACTER,
+	wxROLE_SYSTEM_CHART,
+	wxROLE_SYSTEM_CHECKBUTTON,
+	wxROLE_SYSTEM_CLIENT,
+	wxROLE_SYSTEM_CLOCK,
+	wxROLE_SYSTEM_COLUMN,
+	wxROLE_SYSTEM_COLUMNHEADER,
+	wxROLE_SYSTEM_COMBOBOX,
+	wxROLE_SYSTEM_CURSOR,
+	wxROLE_SYSTEM_DIAGRAM,
+	wxROLE_SYSTEM_DIAL,
+	wxROLE_SYSTEM_DIALOG,
+	wxROLE_SYSTEM_DOCUMENT,
+	wxROLE_SYSTEM_DROPLIST,
+	wxROLE_SYSTEM_EQUATION,
+	wxROLE_SYSTEM_GRAPHIC,
+	wxROLE_SYSTEM_GRIP,
+	wxROLE_SYSTEM_GROUPING,
+	wxROLE_SYSTEM_HELPBALLOON,
+	wxROLE_SYSTEM_HOTKEYFIELD,
+	wxROLE_SYSTEM_INDICATOR,
+	wxROLE_SYSTEM_LINK,
+	wxROLE_SYSTEM_LIST,
+	wxROLE_SYSTEM_LISTITEM,
+	wxROLE_SYSTEM_MENUBAR,
+	wxROLE_SYSTEM_MENUITEM,
+	wxROLE_SYSTEM_MENUPOPUP,
+	wxROLE_SYSTEM_OUTLINE,
+	wxROLE_SYSTEM_OUTLINEITEM,
+	wxROLE_SYSTEM_PAGETAB,
+	wxROLE_SYSTEM_PAGETABLIST,
+	wxROLE_SYSTEM_PANE,
+	wxROLE_SYSTEM_PROGRESSBAR,
+	wxROLE_SYSTEM_PROPERTYPAGE,
+	wxROLE_SYSTEM_PUSHBUTTON,
+	wxROLE_SYSTEM_RADIOBUTTON,
+	wxROLE_SYSTEM_ROW,
+	wxROLE_SYSTEM_ROWHEADER,
+	wxROLE_SYSTEM_SCROLLBAR,
+	wxROLE_SYSTEM_SEPARATOR,
+	wxROLE_SYSTEM_SLIDER,
+	wxROLE_SYSTEM_SOUND,
+	wxROLE_SYSTEM_SPINBUTTON,
+	wxROLE_SYSTEM_STATICTEXT,
+	wxROLE_SYSTEM_STATUSBAR,
+	wxROLE_SYSTEM_TABLE,
+	wxROLE_SYSTEM_TEXT,
+	wxROLE_SYSTEM_TITLEBAR,
+	wxROLE_SYSTEM_TOOLBAR,
+	wxROLE_SYSTEM_TOOLTIP,
+	wxROLE_SYSTEM_WHITESPACE,
+	wxROLE_SYSTEM_WINDOW
 };
 
 // Object types
 
-enum wxAccObject {
-    wxOBJID_WINDOW =    0x00000000,
-    wxOBJID_SYSMENU =   0xFFFFFFFF,
-    wxOBJID_TITLEBAR =  0xFFFFFFFE,
-    wxOBJID_MENU =      0xFFFFFFFD,
-    wxOBJID_CLIENT =    0xFFFFFFFC,
-    wxOBJID_VSCROLL =   0xFFFFFFFB,
-    wxOBJID_HSCROLL =   0xFFFFFFFA,
-    wxOBJID_SIZEGRIP =  0xFFFFFFF9,
-    wxOBJID_CARET =     0xFFFFFFF8,
-    wxOBJID_CURSOR =    0xFFFFFFF7,
-    wxOBJID_ALERT =     0xFFFFFFF6,
-    wxOBJID_SOUND =     0xFFFFFFF5
+enum wxAccObject
+{
+	wxOBJID_WINDOW =    0x00000000,
+	wxOBJID_SYSMENU =   0xFFFFFFFF,
+	wxOBJID_TITLEBAR =  0xFFFFFFFE,
+	wxOBJID_MENU =      0xFFFFFFFD,
+	wxOBJID_CLIENT =    0xFFFFFFFC,
+	wxOBJID_VSCROLL =   0xFFFFFFFB,
+	wxOBJID_HSCROLL =   0xFFFFFFFA,
+	wxOBJID_SIZEGRIP =  0xFFFFFFF9,
+	wxOBJID_CARET =     0xFFFFFFF8,
+	wxOBJID_CURSOR =    0xFFFFFFF7,
+	wxOBJID_ALERT =     0xFFFFFFF6,
+	wxOBJID_SOUND =     0xFFFFFFF5
 };
 
 // Accessible states
@@ -166,12 +168,12 @@ enum wxAccObject {
 
 enum wxAccSelectionFlags
 {
-    wxACC_SEL_NONE            = 0,
-    wxACC_SEL_TAKEFOCUS       = 1,
-    wxACC_SEL_TAKESELECTION   = 2,
-    wxACC_SEL_EXTENDSELECTION = 4,
-    wxACC_SEL_ADDSELECTION    = 8,
-    wxACC_SEL_REMOVESELECTION = 16
+	wxACC_SEL_NONE            = 0,
+	wxACC_SEL_TAKEFOCUS       = 1,
+	wxACC_SEL_TAKESELECTION   = 2,
+	wxACC_SEL_EXTENDSELECTION = 4,
+	wxACC_SEL_ADDSELECTION    = 8,
+	wxACC_SEL_REMOVESELECTION = 16
 };
 
 // Accessibility event identifiers
@@ -230,136 +232,178 @@ class WXDLLIMPEXP_FWD_CORE wxPoint;
 class WXDLLIMPEXP_FWD_CORE wxRect;
 class WXDLLIMPEXP_CORE wxAccessibleBase : public wxObject
 {
-    wxDECLARE_NO_COPY_CLASS(wxAccessibleBase);
+	wxDECLARE_NO_COPY_CLASS(wxAccessibleBase);
 
 public:
-    wxAccessibleBase(wxWindow* win): m_window(win) {}
-    virtual ~wxAccessibleBase() {}
+	wxAccessibleBase(wxWindow* win): m_window(win) {}
+	virtual ~wxAccessibleBase() {}
 
 // Overridables
 
-        // Can return either a child object, or an integer
-        // representing the child element, starting from 1.
-        // pt is in screen coordinates.
-    virtual wxAccStatus HitTest(const wxPoint& WXUNUSED(pt), int* WXUNUSED(childId), wxAccessible** WXUNUSED(childObject))
-         { return wxACC_NOT_IMPLEMENTED; }
+	// Can return either a child object, or an integer
+	// representing the child element, starting from 1.
+	// pt is in screen coordinates.
+	virtual wxAccStatus HitTest(const wxPoint& WXUNUSED(pt), int* WXUNUSED(childId), wxAccessible** WXUNUSED(childObject))
+	{
+		return wxACC_NOT_IMPLEMENTED;
+	}
 
-        // Returns the rectangle for this object (id = 0) or a child element (id > 0).
-        // rect is in screen coordinates.
-    virtual wxAccStatus GetLocation(wxRect& WXUNUSED(rect), int WXUNUSED(elementId))
-         { return wxACC_NOT_IMPLEMENTED; }
+	// Returns the rectangle for this object (id = 0) or a child element (id > 0).
+	// rect is in screen coordinates.
+	virtual wxAccStatus GetLocation(wxRect& WXUNUSED(rect), int WXUNUSED(elementId))
+	{
+		return wxACC_NOT_IMPLEMENTED;
+	}
 
-        // Navigates from fromId to toId/toObject.
-    virtual wxAccStatus Navigate(wxNavDir WXUNUSED(navDir), int WXUNUSED(fromId),
-                int* WXUNUSED(toId), wxAccessible** WXUNUSED(toObject))
-         { return wxACC_NOT_IMPLEMENTED; }
+	// Navigates from fromId to toId/toObject.
+	virtual wxAccStatus Navigate(wxNavDir WXUNUSED(navDir), int WXUNUSED(fromId),
+	                             int* WXUNUSED(toId), wxAccessible** WXUNUSED(toObject))
+	{
+		return wxACC_NOT_IMPLEMENTED;
+	}
 
-        // Gets the name of the specified object.
-    virtual wxAccStatus GetName(int WXUNUSED(childId), wxString* WXUNUSED(name))
-         { return wxACC_NOT_IMPLEMENTED; }
+	// Gets the name of the specified object.
+	virtual wxAccStatus GetName(int WXUNUSED(childId), wxString* WXUNUSED(name))
+	{
+		return wxACC_NOT_IMPLEMENTED;
+	}
 
-        // Gets the number of children.
-    virtual wxAccStatus GetChildCount(int* WXUNUSED(childCount))
-         { return wxACC_NOT_IMPLEMENTED; }
+	// Gets the number of children.
+	virtual wxAccStatus GetChildCount(int* WXUNUSED(childCount))
+	{
+		return wxACC_NOT_IMPLEMENTED;
+	}
 
-        // Gets the specified child (starting from 1).
-        // If *child is NULL and return value is wxACC_OK,
-        // this means that the child is a simple element and
-        // not an accessible object.
-    virtual wxAccStatus GetChild(int WXUNUSED(childId), wxAccessible** WXUNUSED(child))
-         { return wxACC_NOT_IMPLEMENTED; }
+	// Gets the specified child (starting from 1).
+	// If *child is NULL and return value is wxACC_OK,
+	// this means that the child is a simple element and
+	// not an accessible object.
+	virtual wxAccStatus GetChild(int WXUNUSED(childId), wxAccessible** WXUNUSED(child))
+	{
+		return wxACC_NOT_IMPLEMENTED;
+	}
 
-        // Gets the parent, or NULL.
-    virtual wxAccStatus GetParent(wxAccessible** WXUNUSED(parent))
-         { return wxACC_NOT_IMPLEMENTED; }
+	// Gets the parent, or NULL.
+	virtual wxAccStatus GetParent(wxAccessible** WXUNUSED(parent))
+	{
+		return wxACC_NOT_IMPLEMENTED;
+	}
 
-        // Performs the default action. childId is 0 (the action for this object)
-        // or > 0 (the action for a child).
-        // Return wxACC_NOT_SUPPORTED if there is no default action for this
-        // window (e.g. an edit control).
-    virtual wxAccStatus DoDefaultAction(int WXUNUSED(childId))
-         { return wxACC_NOT_IMPLEMENTED; }
+	// Performs the default action. childId is 0 (the action for this object)
+	// or > 0 (the action for a child).
+	// Return wxACC_NOT_SUPPORTED if there is no default action for this
+	// window (e.g. an edit control).
+	virtual wxAccStatus DoDefaultAction(int WXUNUSED(childId))
+	{
+		return wxACC_NOT_IMPLEMENTED;
+	}
 
-        // Gets the default action for this object (0) or > 0 (the action for a child).
-        // Return wxACC_OK even if there is no action. actionName is the action, or the empty
-        // string if there is no action.
-        // The retrieved string describes the action that is performed on an object,
-        // not what the object does as a result. For example, a toolbar button that prints
-        // a document has a default action of "Press" rather than "Prints the current document."
-    virtual wxAccStatus GetDefaultAction(int WXUNUSED(childId), wxString* WXUNUSED(actionName))
-         { return wxACC_NOT_IMPLEMENTED; }
+	// Gets the default action for this object (0) or > 0 (the action for a child).
+	// Return wxACC_OK even if there is no action. actionName is the action, or the empty
+	// string if there is no action.
+	// The retrieved string describes the action that is performed on an object,
+	// not what the object does as a result. For example, a toolbar button that prints
+	// a document has a default action of "Press" rather than "Prints the current document."
+	virtual wxAccStatus GetDefaultAction(int WXUNUSED(childId), wxString* WXUNUSED(actionName))
+	{
+		return wxACC_NOT_IMPLEMENTED;
+	}
 
-        // Returns the description for this object or a child.
-    virtual wxAccStatus GetDescription(int WXUNUSED(childId), wxString* WXUNUSED(description))
-         { return wxACC_NOT_IMPLEMENTED; }
+	// Returns the description for this object or a child.
+	virtual wxAccStatus GetDescription(int WXUNUSED(childId), wxString* WXUNUSED(description))
+	{
+		return wxACC_NOT_IMPLEMENTED;
+	}
 
-        // Returns help text for this object or a child, similar to tooltip text.
-    virtual wxAccStatus GetHelpText(int WXUNUSED(childId), wxString* WXUNUSED(helpText))
-         { return wxACC_NOT_IMPLEMENTED; }
+	// Returns help text for this object or a child, similar to tooltip text.
+	virtual wxAccStatus GetHelpText(int WXUNUSED(childId), wxString* WXUNUSED(helpText))
+	{
+		return wxACC_NOT_IMPLEMENTED;
+	}
 
-        // Returns the keyboard shortcut for this object or child.
-        // Return e.g. ALT+K
-    virtual wxAccStatus GetKeyboardShortcut(int WXUNUSED(childId), wxString* WXUNUSED(shortcut))
-         { return wxACC_NOT_IMPLEMENTED; }
+	// Returns the keyboard shortcut for this object or child.
+	// Return e.g. ALT+K
+	virtual wxAccStatus GetKeyboardShortcut(int WXUNUSED(childId), wxString* WXUNUSED(shortcut))
+	{
+		return wxACC_NOT_IMPLEMENTED;
+	}
 
-        // Returns a role constant.
-    virtual wxAccStatus GetRole(int WXUNUSED(childId), wxAccRole* WXUNUSED(role))
-         { return wxACC_NOT_IMPLEMENTED; }
+	// Returns a role constant.
+	virtual wxAccStatus GetRole(int WXUNUSED(childId), wxAccRole* WXUNUSED(role))
+	{
+		return wxACC_NOT_IMPLEMENTED;
+	}
 
-        // Returns a state constant.
-    virtual wxAccStatus GetState(int WXUNUSED(childId), long* WXUNUSED(state))
-         { return wxACC_NOT_IMPLEMENTED; }
+	// Returns a state constant.
+	virtual wxAccStatus GetState(int WXUNUSED(childId), long* WXUNUSED(state))
+	{
+		return wxACC_NOT_IMPLEMENTED;
+	}
 
-        // Returns a localized string representing the value for the object
-        // or child.
-    virtual wxAccStatus GetValue(int WXUNUSED(childId), wxString* WXUNUSED(strValue))
-         { return wxACC_NOT_IMPLEMENTED; }
+	// Returns a localized string representing the value for the object
+	// or child.
+	virtual wxAccStatus GetValue(int WXUNUSED(childId), wxString* WXUNUSED(strValue))
+	{
+		return wxACC_NOT_IMPLEMENTED;
+	}
 
-        // Selects the object or child.
-    virtual wxAccStatus Select(int WXUNUSED(childId), wxAccSelectionFlags WXUNUSED(selectFlags))
-         { return wxACC_NOT_IMPLEMENTED; }
+	// Selects the object or child.
+	virtual wxAccStatus Select(int WXUNUSED(childId), wxAccSelectionFlags WXUNUSED(selectFlags))
+	{
+		return wxACC_NOT_IMPLEMENTED;
+	}
 
-        // Gets the window with the keyboard focus.
-        // If childId is 0 and child is NULL, no object in
-        // this subhierarchy has the focus.
-        // If this object has the focus, child should be 'this'.
-    virtual wxAccStatus GetFocus(int* WXUNUSED(childId), wxAccessible** WXUNUSED(child))
-         { return wxACC_NOT_IMPLEMENTED; }
+	// Gets the window with the keyboard focus.
+	// If childId is 0 and child is NULL, no object in
+	// this subhierarchy has the focus.
+	// If this object has the focus, child should be 'this'.
+	virtual wxAccStatus GetFocus(int* WXUNUSED(childId), wxAccessible** WXUNUSED(child))
+	{
+		return wxACC_NOT_IMPLEMENTED;
+	}
 
 #if wxUSE_VARIANT
-        // Gets a variant representing the selected children
-        // of this object.
-        // Acceptable values:
-        // - a null variant (IsNull() returns TRUE)
-        // - a list variant (GetType() == wxT("list"))
-        // - an integer representing the selected child element,
-        //   or 0 if this object is selected (GetType() == wxT("long"))
-        // - a "void*" pointer to a wxAccessible child object
-    virtual wxAccStatus GetSelections(wxVariant* WXUNUSED(selections))
-         { return wxACC_NOT_IMPLEMENTED; }
+	// Gets a variant representing the selected children
+	// of this object.
+	// Acceptable values:
+	// - a null variant (IsNull() returns TRUE)
+	// - a list variant (GetType() == wxT("list"))
+	// - an integer representing the selected child element,
+	//   or 0 if this object is selected (GetType() == wxT("long"))
+	// - a "void*" pointer to a wxAccessible child object
+	virtual wxAccStatus GetSelections(wxVariant* WXUNUSED(selections))
+	{
+		return wxACC_NOT_IMPLEMENTED;
+	}
 #endif // wxUSE_VARIANT
 
 // Accessors
 
-        // Returns the window associated with this object.
+	// Returns the window associated with this object.
 
-    wxWindow* GetWindow() { return m_window; }
+	wxWindow* GetWindow()
+	{
+		return m_window;
+	}
 
-        // Sets the window associated with this object.
+	// Sets the window associated with this object.
 
-    void SetWindow(wxWindow* window) { m_window = window; }
+	void SetWindow(wxWindow* window)
+	{
+		m_window = window;
+	}
 
 // Operations
 
-        // Each platform's implementation must define this
-    // static void NotifyEvent(int eventType, wxWindow* window, wxAccObject objectType,
-    //                         int objectId);
+	// Each platform's implementation must define this
+	// static void NotifyEvent(int eventType, wxWindow* window, wxAccObject objectType,
+	//                         int objectId);
 
 private:
 
 // Data members
 
-    wxWindow*   m_window;
+	wxWindow*   m_window;
 };
 
 
@@ -368,7 +412,7 @@ private:
 // ----------------------------------------------------------------------------
 
 #if defined(__WXMSW__)
-    #include "wx/msw/ole/access.h"
+#include "wx/msw/ole/access.h"
 #endif
 
 #endif // wxUSE_ACCESSIBILITY

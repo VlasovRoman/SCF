@@ -17,84 +17,89 @@
 class WXDLLIMPEXP_CORE wxIcon : public wxGDIObject
 {
 public:
-    wxIcon();
+	wxIcon();
 
-    wxIcon(const char* const* data);
-    wxIcon(const char bits[], int width , int height );
-    wxIcon(const wxString& name, wxBitmapType flags = wxICON_DEFAULT_TYPE,
-           int desiredWidth = -1, int desiredHeight = -1);
-    wxIcon(const wxIconLocation& loc)
-    {
-      LoadFile(loc.GetFileName(), wxBITMAP_TYPE_ICON);
-    }
+	wxIcon(const char* const* data);
+	wxIcon(const char bits[], int width, int height );
+	wxIcon(const wxString& name, wxBitmapType flags = wxICON_DEFAULT_TYPE,
+	       int desiredWidth = -1, int desiredHeight = -1);
+	wxIcon(const wxIconLocation& loc)
+	{
+		LoadFile(loc.GetFileName(), wxBITMAP_TYPE_ICON);
+	}
 
-    wxIcon(WXHICON icon, const wxSize& size);
+	wxIcon(WXHICON icon, const wxSize& size);
 
-    virtual ~wxIcon();
+	virtual ~wxIcon();
 
-    bool LoadFile(const wxString& name, wxBitmapType flags = wxICON_DEFAULT_TYPE,
-                  int desiredWidth = -1, int desiredHeight = -1);
+	bool LoadFile(const wxString& name, wxBitmapType flags = wxICON_DEFAULT_TYPE,
+	              int desiredWidth = -1, int desiredHeight = -1);
 
 
-    // create from bitmap (which should have a mask unless it's monochrome):
-    // there shouldn't be any implicit bitmap -> icon conversion (i.e. no
-    // ctors, assignment operators...), but it's ok to have such function
-    void CopyFromBitmap(const wxBitmap& bmp);
+	// create from bitmap (which should have a mask unless it's monochrome):
+	// there shouldn't be any implicit bitmap -> icon conversion (i.e. no
+	// ctors, assignment operators...), but it's ok to have such function
+	void CopyFromBitmap(const wxBitmap& bmp);
 
-    int GetWidth() const;
-    int GetHeight() const;
-    int GetDepth() const;
-    void SetWidth(int w);
-    void SetHeight(int h);
-    void SetDepth(int d);
-    void SetOk(bool isOk);
+	int GetWidth() const;
+	int GetHeight() const;
+	int GetDepth() const;
+	void SetWidth(int w);
+	void SetHeight(int h);
+	void SetDepth(int d);
+	void SetOk(bool isOk);
 
-    wxSize GetSize() const { return wxSize(GetWidth(), GetHeight()); }
+	wxSize GetSize() const
+	{
+		return wxSize(GetWidth(), GetHeight());
+	}
 
-    WXHICON GetHICON() const;
-    
+	WXHICON GetHICON() const;
+
 #if wxOSX_USE_COCOA
-    WX_NSImage GetNSImage() const ;
+	WX_NSImage GetNSImage() const ;
 #endif
-    
+
 protected:
-    virtual wxGDIRefData *CreateGDIRefData() const;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
+	virtual wxGDIRefData *CreateGDIRefData() const;
+	virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxIcon);
+	wxDECLARE_DYNAMIC_CLASS(wxIcon);
 
-    bool LoadIconFromSystemResource(const wxString& resourceName, int desiredWidth, int desiredHeight);
-    bool LoadIconFromBundleResource(const wxString& resourceName, int desiredWidth, int desiredHeight);
-    bool LoadIconFromFile(const wxString& filename, int desiredWidth, int desiredHeight);
-    bool LoadIconAsBitmap(const wxString& filename, wxBitmapType flags = wxICON_DEFAULT_TYPE, int desiredWidth = -1, int desiredHeight = -1);
+	bool LoadIconFromSystemResource(const wxString& resourceName, int desiredWidth, int desiredHeight);
+	bool LoadIconFromBundleResource(const wxString& resourceName, int desiredWidth, int desiredHeight);
+	bool LoadIconFromFile(const wxString& filename, int desiredWidth, int desiredHeight);
+	bool LoadIconAsBitmap(const wxString& filename, wxBitmapType flags = wxICON_DEFAULT_TYPE, int desiredWidth = -1, int desiredHeight = -1);
 };
 
 class WXDLLIMPEXP_CORE wxICONResourceHandler: public wxBitmapHandler
 {
 public:
-    wxICONResourceHandler()
-    {
-        SetName(wxT("ICON resource"));
-        SetExtension(wxEmptyString);
-        SetType(wxBITMAP_TYPE_ICON_RESOURCE);
-    }
+	wxICONResourceHandler()
+	{
+		SetName(wxT("ICON resource"));
+		SetExtension(wxEmptyString);
+		SetType(wxBITMAP_TYPE_ICON_RESOURCE);
+	}
 
-    virtual bool LoadFile(wxBitmap *bitmap,
-                          const wxString& name,
-                          wxBitmapType flags,
-                          int desiredWidth = -1,
-                          int desiredHeight = -1);
+	virtual bool LoadFile(wxBitmap *bitmap,
+	                      const wxString& name,
+	                      wxBitmapType flags,
+	                      int desiredWidth = -1,
+	                      int desiredHeight = -1);
 
-    // unhide the base class virtual
-    virtual bool LoadFile(wxBitmap *bitmap,
-            const wxString& name,
-            wxBitmapType flags)
-        { return LoadFile(bitmap, name, flags, -1, -1); }
+	// unhide the base class virtual
+	virtual bool LoadFile(wxBitmap *bitmap,
+	                      const wxString& name,
+	                      wxBitmapType flags)
+	{
+		return LoadFile(bitmap, name, flags, -1, -1);
+	}
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxICONResourceHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxICONResourceHandler);
 };
 
 #endif
-    // _WX_ICON_H_
+// _WX_ICON_H_

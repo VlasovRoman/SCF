@@ -21,9 +21,9 @@
 //
 // wxPipeOutputStream is similar but has no additional methods at all.
 #if defined(__UNIX__) && !defined(__WINDOWS__)
-    #include "wx/unix/private/pipestream.h"
+#include "wx/unix/private/pipestream.h"
 #elif defined(__WINDOWS__)
-    #include "wx/msw/private/pipestream.h"
+#include "wx/msw/private/pipestream.h"
 #endif
 
 #endif // _WX_PRIVATE_PIPESTREAM_H_

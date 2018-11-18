@@ -27,50 +27,50 @@
 class WXDLLIMPEXP_CORE wxSpinButton : public wxSpinButtonBase
 {
 public:
-    // construction
-    wxSpinButton();
+	// construction
+	wxSpinButton();
 
-    wxSpinButton(wxWindow *parent,
-                 wxWindowID id = -1,
-                 const wxPoint& pos = wxDefaultPosition,
-                 const wxSize& size = wxDefaultSize,
-                 long style = wxSP_VERTICAL | wxSP_ARROW_KEYS,
-                 const wxString& name = wxT("wxSpinButton"))
-    {
-        Create(parent, id, pos, size, style, name);
-    }
+	wxSpinButton(wxWindow *parent,
+	             wxWindowID id = -1,
+	             const wxPoint& pos = wxDefaultPosition,
+	             const wxSize& size = wxDefaultSize,
+	             long style = wxSP_VERTICAL | wxSP_ARROW_KEYS,
+	             const wxString& name = wxT("wxSpinButton"))
+	{
+		Create(parent, id, pos, size, style, name);
+	}
 
-    virtual ~wxSpinButton();
+	virtual ~wxSpinButton();
 
-    bool Create(wxWindow *parent,
-                wxWindowID id = -1,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxSP_VERTICAL | wxSP_ARROW_KEYS,
-                const wxString& name = wxT("wxSpinButton"));
+	bool Create(wxWindow *parent,
+	            wxWindowID id = -1,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxSP_VERTICAL | wxSP_ARROW_KEYS,
+	            const wxString& name = wxT("wxSpinButton"));
 
 
-    // accessors
-    virtual void SetRange(int minVal, int maxVal);
-    virtual int GetValue() const ;
-    virtual void SetValue(int val);
+	// accessors
+	virtual void SetRange(int minVal, int maxVal);
+	virtual int GetValue() const ;
+	virtual void SetValue(int val);
 
-    // implementation
+	// implementation
 
-    virtual void TriggerScrollEvent( wxEventType scrollEvent ) ;
+	virtual void TriggerScrollEvent( wxEventType scrollEvent ) ;
 
-    // osx specific event handling common for all osx-ports
+	// osx specific event handling common for all osx-ports
 
-    virtual bool OSXHandleClicked( double timestampsec );
+	virtual bool OSXHandleClicked( double timestampsec );
 
 protected:
-    void         SendThumbTrackEvent() ;
+	void         SendThumbTrackEvent() ;
 
-    virtual wxSize DoGetBestSize() const;
+	virtual wxSize DoGetBestSize() const;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxSpinButton);
+	wxDECLARE_DYNAMIC_CLASS(wxSpinButton);
 };
 
 #endif
-    // _WX_SPINBUTT_H_
+// _WX_SPINBUTT_H_

@@ -19,137 +19,155 @@
 
 template <class T> class wxBitset
 {
-    friend class wxEnumData ;
+	friend class wxEnumData ;
 public:
-    // creates a wxBitset<> object with all flags initialized to 0
-    wxBitset() { m_data = 0; }
+	// creates a wxBitset<> object with all flags initialized to 0
+	wxBitset()
+	{
+		m_data = 0;
+	}
 
-    // created a wxBitset<> object initialized according to the bits of the
-    // integral value val
-    wxBitset(unsigned long val) { m_data = val ; }
+	// created a wxBitset<> object initialized according to the bits of the
+	// integral value val
+	wxBitset(unsigned long val)
+	{
+		m_data = val ;
+	}
 
-    // copies the content in the new wxBitset<> object from another one
-    wxBitset(const wxBitset &src) { m_data = src.m_data; }
+	// copies the content in the new wxBitset<> object from another one
+	wxBitset(const wxBitset &src)
+	{
+		m_data = src.m_data;
+	}
 
-    // creates a wxBitset<> object that has the specific flag set
-    wxBitset(const T el) { m_data |= 1 << el; }
+	// creates a wxBitset<> object that has the specific flag set
+	wxBitset(const T el)
+	{
+		m_data |= 1 << el;
+	}
 
-    // returns the integral value that the bits of this object represent
-    unsigned long to_ulong() const { return m_data ; }
+	// returns the integral value that the bits of this object represent
+	unsigned long to_ulong() const
+	{
+		return m_data ;
+	}
 
-    // assignment
-    wxBitset &operator =(const wxBitset &rhs)
-    {
-        m_data = rhs.m_data;
-        return *this;
-    }
+	// assignment
+	wxBitset &operator =(const wxBitset &rhs)
+	{
+		m_data = rhs.m_data;
+		return *this;
+	}
 
-    // bitwise or operator, sets all bits that are in rhs and leaves
-    // the rest unchanged
-    wxBitset &operator |=(const wxBitset &rhs)
-    {
-        m_data |= rhs.m_data;
-        return *this;
-    }
+	// bitwise or operator, sets all bits that are in rhs and leaves
+	// the rest unchanged
+	wxBitset &operator |=(const wxBitset &rhs)
+	{
+		m_data |= rhs.m_data;
+		return *this;
+	}
 
-    // bitwsie exclusive-or operator, toggles the value of all bits
-    // that are set in bits and leaves all others unchanged
-    wxBitset &operator ^=(const wxBitset &rhs) // difference
-    {
-        m_data ^= rhs.m_data;
-        return *this;
-    }
+	// bitwsie exclusive-or operator, toggles the value of all bits
+	// that are set in bits and leaves all others unchanged
+	wxBitset &operator ^=(const wxBitset &rhs) // difference
+	{
+		m_data ^= rhs.m_data;
+		return *this;
+	}
 
-    // bitwise and operator, resets all bits that are not in rhs and leaves
-    // all others unchanged
-    wxBitset &operator &=(const wxBitset &rhs) // intersection
-    {
-        m_data &= rhs.m_data;
-        return *this;
-    }
+	// bitwise and operator, resets all bits that are not in rhs and leaves
+	// all others unchanged
+	wxBitset &operator &=(const wxBitset &rhs) // intersection
+	{
+		m_data &= rhs.m_data;
+		return *this;
+	}
 
-    // bitwise or operator, returns a new bitset that has all bits set that set are in
-    // bitset2 or in this bitset
-    wxBitset operator |(const wxBitset &bitset2) const // union
-    {
-        wxBitset<T> s;
-        s.m_data = m_data | bitset2.m_data;
-        return s;
-    }
+	// bitwise or operator, returns a new bitset that has all bits set that set are in
+	// bitset2 or in this bitset
+	wxBitset operator |(const wxBitset &bitset2) const // union
+	{
+		wxBitset<T> s;
+		s.m_data = m_data | bitset2.m_data;
+		return s;
+	}
 
-    // bitwise exclusive-or operator, returns a new bitset that has all bits set that are set either in
-    // bitset2 or in this bitset but not in both
-    wxBitset operator ^(const wxBitset &bitset2) const // difference
-    {
-        wxBitset<T> s;
-        s.m_data = m_data ^ bitset2.m_data;
-        return s;
-    }
+	// bitwise exclusive-or operator, returns a new bitset that has all bits set that are set either in
+	// bitset2 or in this bitset but not in both
+	wxBitset operator ^(const wxBitset &bitset2) const // difference
+	{
+		wxBitset<T> s;
+		s.m_data = m_data ^ bitset2.m_data;
+		return s;
+	}
 
-    // bitwise and operator, returns a new bitset that has all bits set that are set both in
-    // bitset2 and in this bitset
-    wxBitset operator &(const wxBitset &bitset2) const // intersection
-    {
-        wxBitset<T> s;
-        s.m_data = m_data & bitset2.m_data;
-        return s;
-    }
+	// bitwise and operator, returns a new bitset that has all bits set that are set both in
+	// bitset2 and in this bitset
+	wxBitset operator &(const wxBitset &bitset2) const // intersection
+	{
+		wxBitset<T> s;
+		s.m_data = m_data & bitset2.m_data;
+		return s;
+	}
 
-    // sets appropriate the bit to true
-    wxBitset& set(const T el) //Add element
-    {
-        m_data |= 1 << el;
-        return *this;
-    }
+	// sets appropriate the bit to true
+	wxBitset& set(const T el) //Add element
+	{
+		m_data |= 1 << el;
+		return *this;
+	}
 
-    // clears the appropriate flag to false
-    wxBitset& reset(const T el) //remove element
-    {
-        m_data &= ~(1 << el);
-        return *this;
-    }
+	// clears the appropriate flag to false
+	wxBitset& reset(const T el) //remove element
+	{
+		m_data &= ~(1 << el);
+		return *this;
+	}
 
-    // clear all flags
-    wxBitset& reset()
-    {
-        m_data = 0;
-        return *this;
-    }
+	// clear all flags
+	wxBitset& reset()
+	{
+		m_data = 0;
+		return *this;
+	}
 
-    // true if this flag is set
-    bool test(const T el) const
-    {
-        return (m_data & (1 << el)) ? true : false;
-    }
+	// true if this flag is set
+	bool test(const T el) const
+	{
+		return (m_data & (1 << el)) ? true : false;
+	}
 
-    // true if no flag is set
-    bool none() const
-    {
-        return m_data == 0;
-    }
+	// true if no flag is set
+	bool none() const
+	{
+		return m_data == 0;
+	}
 
-    // true if any flag is set
-    bool any() const
-    {
-        return m_data != 0;
-    }
+	// true if any flag is set
+	bool any() const
+	{
+		return m_data != 0;
+	}
 
-    // true if both have the same flags
-    bool operator ==(const wxBitset &rhs) const
-    {
-        return m_data == rhs.m_data;
-    }
+	// true if both have the same flags
+	bool operator ==(const wxBitset &rhs) const
+	{
+		return m_data == rhs.m_data;
+	}
 
-    // true if both differ in their flags set
-    bool operator !=(const wxBitset &rhs) const
-    {
-        return !operator==(rhs);
-    }
+	// true if both differ in their flags set
+	bool operator !=(const wxBitset &rhs) const
+	{
+		return !operator==(rhs);
+	}
 
-    bool operator[] (const T el) const { return test(el) ; }
+	bool operator[] (const T el) const
+	{
+		return test(el) ;
+	}
 
 private :
-    unsigned long m_data;
+	unsigned long m_data;
 };
 
 #if wxUSE_EXTENDED_RTTI
@@ -170,7 +188,7 @@ private :
 #endif
 
 #if WXWIN_COMPATIBILITY_2_8
-    #define WX_DEFINE_FLAGS     wxDEFINE_FLAGS
+#define WX_DEFINE_FLAGS     wxDEFINE_FLAGS
 #endif
 
 #endif

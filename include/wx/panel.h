@@ -30,43 +30,43 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxPanelNameStr[];
 class WXDLLIMPEXP_CORE wxPanelBase : public wxNavigationEnabled<wxWindow>
 {
 public:
-    wxPanelBase() { }
+	wxPanelBase() { }
 
-    // Derived classes should also provide this constructor:
-    /*
-    wxPanelBase(wxWindow *parent,
-                wxWindowID winid = wxID_ANY,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxTAB_TRAVERSAL | wxNO_BORDER,
-                const wxString& name = wxPanelNameStr);
-    */
+	// Derived classes should also provide this constructor:
+	/*
+	wxPanelBase(wxWindow *parent,
+	            wxWindowID winid = wxID_ANY,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxTAB_TRAVERSAL | wxNO_BORDER,
+	            const wxString& name = wxPanelNameStr);
+	*/
 
-    // Pseudo ctor
-    bool Create(wxWindow *parent,
-                wxWindowID winid = wxID_ANY,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxTAB_TRAVERSAL | wxNO_BORDER,
-                const wxString& name = wxPanelNameStr);
+	// Pseudo ctor
+	bool Create(wxWindow *parent,
+	            wxWindowID winid = wxID_ANY,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxTAB_TRAVERSAL | wxNO_BORDER,
+	            const wxString& name = wxPanelNameStr);
 
 
-    // implementation from now on
-    // --------------------------
+	// implementation from now on
+	// --------------------------
 
-    virtual void InitDialog() wxOVERRIDE;
+	virtual void InitDialog() wxOVERRIDE;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxPanelBase);
+	wxDECLARE_NO_COPY_CLASS(wxPanelBase);
 };
 
 #if defined(__WXUNIVERSAL__)
-    #include "wx/univ/panel.h"
+#include "wx/univ/panel.h"
 #elif defined(__WXMSW__)
-    #include "wx/msw/panel.h"
+#include "wx/msw/panel.h"
 #else
-    #define wxHAS_GENERIC_PANEL
-    #include "wx/generic/panelg.h"
+#define wxHAS_GENERIC_PANEL
+#include "wx/generic/panelg.h"
 #endif
 
 #endif // _WX_PANELH_BASE_

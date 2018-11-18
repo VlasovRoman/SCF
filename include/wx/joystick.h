@@ -34,4 +34,4 @@
 #endif // wxUSE_JOYSTICK
 
 #endif
-    // _WX_JOYSTICK_H_BASE_
+// _WX_JOYSTICK_H_BASE_

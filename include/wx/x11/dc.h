@@ -24,28 +24,52 @@
 class WXDLLIMPEXP_CORE wxX11DCImpl : public wxDCImpl
 {
 public:
-    wxX11DCImpl( wxDC *owner );
-    virtual ~wxX11DCImpl() { }
+	wxX11DCImpl( wxDC *owner );
+	virtual ~wxX11DCImpl() { }
 
-    virtual wxSize GetPPI() const;
+	virtual wxSize GetPPI() const;
 
 protected:
-    virtual void DoSetClippingRegion(wxCoord x, wxCoord y,
-        wxCoord width, wxCoord height);
-    virtual void DoGetSizeMM(int* width, int* height) const;
+	virtual void DoSetClippingRegion(wxCoord x, wxCoord y,
+	                                 wxCoord width, wxCoord height);
+	virtual void DoGetSizeMM(int* width, int* height) const;
 
-    // implementation
-    wxCoord XDEV2LOG(wxCoord x) const       { return DeviceToLogicalX(x); }
-    wxCoord XDEV2LOGREL(wxCoord x) const    { return DeviceToLogicalXRel(x); }
-    wxCoord YDEV2LOG(wxCoord y) const       { return DeviceToLogicalY(y); }
-    wxCoord YDEV2LOGREL(wxCoord y) const    { return DeviceToLogicalYRel(y); }
-    wxCoord XLOG2DEV(wxCoord x) const       { return LogicalToDeviceX(x); }
-    wxCoord XLOG2DEVREL(wxCoord x) const    { return LogicalToDeviceXRel(x); }
-    wxCoord YLOG2DEV(wxCoord y) const       { return LogicalToDeviceY(y); }
-    wxCoord YLOG2DEVREL(wxCoord y) const    { return LogicalToDeviceYRel(y); }
+	// implementation
+	wxCoord XDEV2LOG(wxCoord x) const
+	{
+		return DeviceToLogicalX(x);
+	}
+	wxCoord XDEV2LOGREL(wxCoord x) const
+	{
+		return DeviceToLogicalXRel(x);
+	}
+	wxCoord YDEV2LOG(wxCoord y) const
+	{
+		return DeviceToLogicalY(y);
+	}
+	wxCoord YDEV2LOGREL(wxCoord y) const
+	{
+		return DeviceToLogicalYRel(y);
+	}
+	wxCoord XLOG2DEV(wxCoord x) const
+	{
+		return LogicalToDeviceX(x);
+	}
+	wxCoord XLOG2DEVREL(wxCoord x) const
+	{
+		return LogicalToDeviceXRel(x);
+	}
+	wxCoord YLOG2DEV(wxCoord y) const
+	{
+		return LogicalToDeviceY(y);
+	}
+	wxCoord YLOG2DEVREL(wxCoord y) const
+	{
+		return LogicalToDeviceYRel(y);
+	}
 
 private:
-    wxDECLARE_CLASS(wxX11DCImpl);
+	wxDECLARE_CLASS(wxX11DCImpl);
 };
 
 #endif

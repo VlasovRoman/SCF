@@ -20,107 +20,107 @@
 class WXDLLIMPEXP_GL wxGLCanvas : public wxGLCanvasX11
 {
 public:
-    wxGLCanvas(wxWindow *parent,
-               const wxGLAttributes& dispAttrs,
-               wxWindowID id = wxID_ANY,
-               const wxPoint& pos = wxDefaultPosition,
-               const wxSize& size = wxDefaultSize,
-               long style = 0,
-               const wxString& name = wxGLCanvasName,
-               const wxPalette& palette = wxNullPalette);
+	wxGLCanvas(wxWindow *parent,
+	           const wxGLAttributes& dispAttrs,
+	           wxWindowID id = wxID_ANY,
+	           const wxPoint& pos = wxDefaultPosition,
+	           const wxSize& size = wxDefaultSize,
+	           long style = 0,
+	           const wxString& name = wxGLCanvasName,
+	           const wxPalette& palette = wxNullPalette);
 
-    explicit // avoid implicitly converting a wxWindow* to wxGLCanvas
-    wxGLCanvas(wxWindow *parent,
-               wxWindowID id = wxID_ANY,
-               const int *attribList = NULL,
-               const wxPoint& pos = wxDefaultPosition,
-               const wxSize& size = wxDefaultSize,
-               long style = 0,
-               const wxString& name = wxGLCanvasName,
-               const wxPalette& palette = wxNullPalette);
+	explicit // avoid implicitly converting a wxWindow* to wxGLCanvas
+	wxGLCanvas(wxWindow *parent,
+	           wxWindowID id = wxID_ANY,
+	           const int *attribList = NULL,
+	           const wxPoint& pos = wxDefaultPosition,
+	           const wxSize& size = wxDefaultSize,
+	           long style = 0,
+	           const wxString& name = wxGLCanvasName,
+	           const wxPalette& palette = wxNullPalette);
 
-    bool Create(wxWindow *parent,
-                const wxGLAttributes& dispAttrs,
-                wxWindowID id = wxID_ANY,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = 0,
-                const wxString& name = wxGLCanvasName,
-                const wxPalette& palette = wxNullPalette);
+	bool Create(wxWindow *parent,
+	            const wxGLAttributes& dispAttrs,
+	            wxWindowID id = wxID_ANY,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxGLCanvasName,
+	            const wxPalette& palette = wxNullPalette);
 
-    bool Create(wxWindow *parent,
-                wxWindowID id = wxID_ANY,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = 0,
-                const wxString& name = wxGLCanvasName,
-                const int *attribList = NULL,
-                const wxPalette& palette = wxNullPalette);
-
-
-    // implement wxGLCanvasX11 methods
-    // -------------------------------
-
-    virtual Window GetXWindow() const;
+	bool Create(wxWindow *parent,
+	            wxWindowID id = wxID_ANY,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxGLCanvasName,
+	            const int *attribList = NULL,
+	            const wxPalette& palette = wxNullPalette);
 
 
-    // deprecated methods
-    // ------------------
+	// implement wxGLCanvasX11 methods
+	// -------------------------------
+
+	virtual Window GetXWindow() const;
+
+
+	// deprecated methods
+	// ------------------
 
 #if WXWIN_COMPATIBILITY_2_8
-    wxDEPRECATED_CONSTRUCTOR(
-    wxGLCanvas(wxWindow *parent,
-               wxWindowID id = wxID_ANY,
-               const wxPoint& pos = wxDefaultPosition,
-               const wxSize& size = wxDefaultSize,
-               long style = 0,
-               const wxString& name = wxGLCanvasName,
-               const int *attribList = NULL,
-               const wxPalette& palette = wxNullPalette)
-    );
+	wxDEPRECATED_CONSTRUCTOR(
+	    wxGLCanvas(wxWindow *parent,
+	               wxWindowID id = wxID_ANY,
+	               const wxPoint& pos = wxDefaultPosition,
+	               const wxSize& size = wxDefaultSize,
+	               long style = 0,
+	               const wxString& name = wxGLCanvasName,
+	               const int *attribList = NULL,
+	               const wxPalette& palette = wxNullPalette)
+	);
 
-    wxDEPRECATED_CONSTRUCTOR(
-    wxGLCanvas(wxWindow *parent,
-               const wxGLContext *shared,
-               wxWindowID id = wxID_ANY,
-               const wxPoint& pos = wxDefaultPosition,
-               const wxSize& size = wxDefaultSize,
-               long style = 0,
-               const wxString& name = wxGLCanvasName,
-               const int *attribList = NULL,
-               const wxPalette& palette = wxNullPalette)
-    );
+	wxDEPRECATED_CONSTRUCTOR(
+	    wxGLCanvas(wxWindow *parent,
+	               const wxGLContext *shared,
+	               wxWindowID id = wxID_ANY,
+	               const wxPoint& pos = wxDefaultPosition,
+	               const wxSize& size = wxDefaultSize,
+	               long style = 0,
+	               const wxString& name = wxGLCanvasName,
+	               const int *attribList = NULL,
+	               const wxPalette& palette = wxNullPalette)
+	);
 
-    wxDEPRECATED_CONSTRUCTOR(
-    wxGLCanvas(wxWindow *parent,
-               const wxGLCanvas *shared,
-               wxWindowID id = wxID_ANY,
-               const wxPoint& pos = wxDefaultPosition,
-               const wxSize& size = wxDefaultSize,
-               long style = 0,
-               const wxString& name = wxGLCanvasName,
-               const int *attribList = NULL,
-               const wxPalette& palette = wxNullPalette)
-    );
+	wxDEPRECATED_CONSTRUCTOR(
+	    wxGLCanvas(wxWindow *parent,
+	               const wxGLCanvas *shared,
+	               wxWindowID id = wxID_ANY,
+	               const wxPoint& pos = wxDefaultPosition,
+	               const wxSize& size = wxDefaultSize,
+	               long style = 0,
+	               const wxString& name = wxGLCanvasName,
+	               const int *attribList = NULL,
+	               const wxPalette& palette = wxNullPalette)
+	);
 
-    // called from "realized" callback to create the implicit context if needed
-    void GTKInitImplicitContext();
+	// called from "realized" callback to create the implicit context if needed
+	void GTKInitImplicitContext();
 #endif // WXWIN_COMPATIBILITY_2_8
 
-    // implementation from now on
-    virtual void OnInternalIdle();
+	// implementation from now on
+	virtual void OnInternalIdle();
 
 
-    GtkWidget        *m_glWidget;
+	GtkWidget        *m_glWidget;
 
 #if WXWIN_COMPATIBILITY_2_8
-    wxGLContext      *m_sharedContext;
-    wxGLCanvas       *m_sharedContextOf;
-    const bool        m_createImplicitContext;
+	wxGLContext      *m_sharedContext;
+	wxGLCanvas       *m_sharedContextOf;
+	const bool        m_createImplicitContext;
 #endif // WXWIN_COMPATIBILITY_2_8
 
 private:
-    wxDECLARE_CLASS(wxGLCanvas);
+	wxDECLARE_CLASS(wxGLCanvas);
 };
 
 #endif // _WX_GLCANVAS_H_

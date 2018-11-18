@@ -22,55 +22,61 @@
 class WXDLLIMPEXP_CORE wxInfoBar : public wxInfoBarGeneric
 {
 public:
-    wxInfoBar() { Init(); }
+	wxInfoBar()
+	{
+		Init();
+	}
 
-    wxInfoBar(wxWindow *parent, wxWindowID winid = wxID_ANY)
-    {
-        Init();
-        Create(parent, winid);
-    }
+	wxInfoBar(wxWindow *parent, wxWindowID winid = wxID_ANY)
+	{
+		Init();
+		Create(parent, winid);
+	}
 
-    bool Create(wxWindow *parent, wxWindowID winid = wxID_ANY);
+	bool Create(wxWindow *parent, wxWindowID winid = wxID_ANY);
 
-    virtual ~wxInfoBar();
+	virtual ~wxInfoBar();
 
-    // implement base class methods
-    // ----------------------------
+	// implement base class methods
+	// ----------------------------
 
-    virtual void ShowMessage(const wxString& msg,
-                             int flags = wxICON_INFORMATION) wxOVERRIDE;
+	virtual void ShowMessage(const wxString& msg,
+	                         int flags = wxICON_INFORMATION) wxOVERRIDE;
 
-    virtual void Dismiss() wxOVERRIDE;
+	virtual void Dismiss() wxOVERRIDE;
 
-    virtual void AddButton(wxWindowID btnid,
-                           const wxString& label = wxString()) wxOVERRIDE;
+	virtual void AddButton(wxWindowID btnid,
+	                       const wxString& label = wxString()) wxOVERRIDE;
 
-    virtual void RemoveButton(wxWindowID btnid) wxOVERRIDE;
+	virtual void RemoveButton(wxWindowID btnid) wxOVERRIDE;
 
-    virtual size_t GetButtonCount() const wxOVERRIDE;
-    virtual wxWindowID GetButtonId(size_t idx) const wxOVERRIDE;
-    virtual bool HasButtonId(wxWindowID btnid) const wxOVERRIDE;
+	virtual size_t GetButtonCount() const wxOVERRIDE;
+	virtual wxWindowID GetButtonId(size_t idx) const wxOVERRIDE;
+	virtual bool HasButtonId(wxWindowID btnid) const wxOVERRIDE;
 
-    // implementation only
-    // -------------------
+	// implementation only
+	// -------------------
 
-    void GTKResponse(int btnid);
+	void GTKResponse(int btnid);
 
 protected:
-    virtual void DoApplyWidgetStyle(GtkRcStyle *style) wxOVERRIDE;
+	virtual void DoApplyWidgetStyle(GtkRcStyle *style) wxOVERRIDE;
 
 private:
-    void Init() { m_impl = NULL; }
+	void Init()
+	{
+		m_impl = NULL;
+	}
 
-    // add a button with the given id/label and return its widget
-    GtkWidget *GTKAddButton(wxWindowID btnid,
-                            const wxString& label = wxString());
+	// add a button with the given id/label and return its widget
+	GtkWidget *GTKAddButton(wxWindowID btnid,
+	                        const wxString& label = wxString());
 
 
-    // only used when the native implementation is really being used
-    class wxInfoBarGTKImpl *m_impl;
+	// only used when the native implementation is really being used
+	class wxInfoBarGTKImpl *m_impl;
 
-    wxDECLARE_NO_COPY_CLASS(wxInfoBar);
+	wxDECLARE_NO_COPY_CLASS(wxInfoBar);
 };
 
 #endif // _WX_GTK_INFOBAR_H_

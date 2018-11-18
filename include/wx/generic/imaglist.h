@@ -21,39 +21,45 @@ class WXDLLIMPEXP_FWD_CORE wxColour;
 class WXDLLIMPEXP_CORE wxGenericImageList: public wxObject
 {
 public:
-    wxGenericImageList() { m_width = m_height = 0; }
-    wxGenericImageList( int width, int height, bool mask = true, int initialCount = 1 );
-    virtual ~wxGenericImageList();
-    bool Create( int width, int height, bool mask = true, int initialCount = 1 );
-    bool Create();
+	wxGenericImageList()
+	{
+		m_width = m_height = 0;
+	}
+	wxGenericImageList( int width, int height, bool mask = true, int initialCount = 1 );
+	virtual ~wxGenericImageList();
+	bool Create( int width, int height, bool mask = true, int initialCount = 1 );
+	bool Create();
 
-    virtual int GetImageCount() const;
-    virtual bool GetSize( int index, int &width, int &height ) const;
-    virtual wxSize GetSize() const { return wxSize(m_width, m_height); }
+	virtual int GetImageCount() const;
+	virtual bool GetSize( int index, int &width, int &height ) const;
+	virtual wxSize GetSize() const
+	{
+		return wxSize(m_width, m_height);
+	}
 
-    int Add( const wxBitmap& bitmap );
-    int Add( const wxBitmap& bitmap, const wxBitmap& mask );
-    int Add( const wxBitmap& bitmap, const wxColour& maskColour );
-    wxBitmap GetBitmap(int index) const;
-    wxIcon GetIcon(int index) const;
-    bool Replace( int index, const wxBitmap &bitmap );
-    bool Replace( int index, const wxBitmap &bitmap, const wxBitmap& mask );
-    bool Remove( int index );
-    bool RemoveAll();
+	int Add( const wxBitmap& bitmap );
+	int Add( const wxBitmap& bitmap, const wxBitmap& mask );
+	int Add( const wxBitmap& bitmap, const wxColour& maskColour );
+	wxBitmap GetBitmap(int index) const;
+	wxIcon GetIcon(int index) const;
+	bool Replace( int index, const wxBitmap &bitmap );
+	bool Replace( int index, const wxBitmap &bitmap, const wxBitmap& mask );
+	bool Remove( int index );
+	bool RemoveAll();
 
-    virtual bool Draw(int index, wxDC& dc, int x, int y,
-              int flags = wxIMAGELIST_DRAW_NORMAL,
-              bool solidBackground = false);
+	virtual bool Draw(int index, wxDC& dc, int x, int y,
+	                  int flags = wxIMAGELIST_DRAW_NORMAL,
+	                  bool solidBackground = false);
 
-    // Internal use only
-    const wxBitmap *GetBitmapPtr(int index) const;
+	// Internal use only
+	const wxBitmap *GetBitmapPtr(int index) const;
 private:
-    wxObjectList  m_images;
+	wxObjectList  m_images;
 
-    int     m_width;
-    int     m_height;
+	int     m_width;
+	int     m_height;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxGenericImageList);
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxGenericImageList);
 };
 
 #ifndef wxHAS_NATIVE_IMAGELIST
@@ -65,15 +71,15 @@ private:
 
 class WXDLLIMPEXP_CORE wxImageList: public wxGenericImageList
 {
-    wxDECLARE_DYNAMIC_CLASS(wxImageList);
+	wxDECLARE_DYNAMIC_CLASS(wxImageList);
 
 public:
-    wxImageList() {}
+	wxImageList() {}
 
-    wxImageList( int width, int height, bool mask = true, int initialCount = 1 )
-        : wxGenericImageList(width, height, mask, initialCount)
-    {
-    }
+	wxImageList( int width, int height, bool mask = true, int initialCount = 1 )
+		: wxGenericImageList(width, height, mask, initialCount)
+	{
+	}
 };
 #endif // !wxHAS_NATIVE_IMAGELIST
 

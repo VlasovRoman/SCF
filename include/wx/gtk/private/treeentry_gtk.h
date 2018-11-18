@@ -25,12 +25,12 @@ typedef void (*wxTreeEntryDestroy)(wxTreeEntry* entry, void* context);
 
 struct _wxTreeEntry
 {
-    GObject parent;                     /* object instance */
-    gchar*  label;                      /* label - always copied by this object except on get */
-    gchar*  collate_key;                /* collate key used for string comparisons/sorting */
-    gpointer userdata;                  /* untouched userdata */
-    wxTreeEntryDestroy destroy_func;    /* called upon destruction - use for freeing userdata etc. */
-    gpointer destroy_func_data;         /* context passed to destroy_func */
+	GObject parent;                     /* object instance */
+	gchar*  label;                      /* label - always copied by this object except on get */
+	gchar*  collate_key;                /* collate key used for string comparisons/sorting */
+	gpointer userdata;                  /* untouched userdata */
+	wxTreeEntryDestroy destroy_func;    /* called upon destruction - use for freeing userdata etc. */
+	gpointer destroy_func_data;         /* context passed to destroy_func */
 };
 
 wxTreeEntry* wx_tree_entry_new(void);
@@ -48,8 +48,8 @@ void wx_tree_entry_set_label(wxTreeEntry* entry, const char* label);
 void wx_tree_entry_set_userdata(wxTreeEntry* entry, void* userdata);
 
 void wx_tree_entry_set_destroy_func(wxTreeEntry* entry,
-                                        wxTreeEntryDestroy destroy_func,
-                                        gpointer destroy_func_data);
+                                    wxTreeEntryDestroy destroy_func,
+                                    gpointer destroy_func_data);
 
 #ifdef __cplusplus
 }

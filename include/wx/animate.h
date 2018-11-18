@@ -33,24 +33,24 @@ extern WXDLLIMPEXP_DATA_ADV(const char) wxAnimationCtrlNameStr[];
 class WXDLLIMPEXP_ADV wxAnimationBase : public wxObject
 {
 public:
-    wxAnimationBase() {}
+	wxAnimationBase() {}
 
-    virtual bool IsOk() const = 0;
+	virtual bool IsOk() const = 0;
 
-    // can be -1
-    virtual int GetDelay(unsigned int frame) const = 0;
+	// can be -1
+	virtual int GetDelay(unsigned int frame) const = 0;
 
-    virtual unsigned int GetFrameCount() const = 0;
-    virtual wxImage GetFrame(unsigned int frame) const = 0;
-    virtual wxSize GetSize() const = 0;
+	virtual unsigned int GetFrameCount() const = 0;
+	virtual wxImage GetFrame(unsigned int frame) const = 0;
+	virtual wxSize GetSize() const = 0;
 
-    virtual bool LoadFile(const wxString& name,
-                          wxAnimationType type = wxANIMATION_TYPE_ANY) = 0;
-    virtual bool Load(wxInputStream& stream,
-                      wxAnimationType type = wxANIMATION_TYPE_ANY) = 0;
+	virtual bool LoadFile(const wxString& name,
+	                      wxAnimationType type = wxANIMATION_TYPE_ANY) = 0;
+	virtual bool Load(wxInputStream& stream,
+	                  wxAnimationType type = wxANIMATION_TYPE_ANY) = 0;
 
 protected:
-    wxDECLARE_ABSTRACT_CLASS(wxAnimationBase);
+	wxDECLARE_ABSTRACT_CLASS(wxAnimationBase);
 };
 
 
@@ -69,44 +69,46 @@ protected:
 class WXDLLIMPEXP_ADV wxAnimationCtrlBase : public wxControl
 {
 public:
-    wxAnimationCtrlBase() { }
+	wxAnimationCtrlBase() { }
 
-    // public API
-    virtual bool LoadFile(const wxString& filename,
-                          wxAnimationType type = wxANIMATION_TYPE_ANY) = 0;
-    virtual bool Load(wxInputStream& stream,
-                      wxAnimationType type = wxANIMATION_TYPE_ANY) = 0;
+	// public API
+	virtual bool LoadFile(const wxString& filename,
+	                      wxAnimationType type = wxANIMATION_TYPE_ANY) = 0;
+	virtual bool Load(wxInputStream& stream,
+	                  wxAnimationType type = wxANIMATION_TYPE_ANY) = 0;
 
-    virtual void SetAnimation(const wxAnimation &anim) = 0;
-    virtual wxAnimation GetAnimation() const = 0;
+	virtual void SetAnimation(const wxAnimation &anim) = 0;
+	virtual wxAnimation GetAnimation() const = 0;
 
-    virtual bool Play() = 0;
-    virtual void Stop() = 0;
+	virtual bool Play() = 0;
+	virtual void Stop() = 0;
 
-    virtual bool IsPlaying() const = 0;
+	virtual bool IsPlaying() const = 0;
 
-    virtual void SetInactiveBitmap(const wxBitmap &bmp);
+	virtual void SetInactiveBitmap(const wxBitmap &bmp);
 
-    // always return the original bitmap set in this control
-    wxBitmap GetInactiveBitmap() const
-        { return m_bmpStatic; }
+	// always return the original bitmap set in this control
+	wxBitmap GetInactiveBitmap() const
+	{
+		return m_bmpStatic;
+	}
 
 protected:
-    // the inactive bitmap as it was set by the user
-    wxBitmap m_bmpStatic;
+	// the inactive bitmap as it was set by the user
+	wxBitmap m_bmpStatic;
 
-    // the inactive bitmap currently shown in the control
-    // (may differ in the size from m_bmpStatic)
-    wxBitmap m_bmpStaticReal;
+	// the inactive bitmap currently shown in the control
+	// (may differ in the size from m_bmpStatic)
+	wxBitmap m_bmpStaticReal;
 
-    // updates m_bmpStaticReal from m_bmpStatic if needed
-    virtual void UpdateStaticImage();
+	// updates m_bmpStaticReal from m_bmpStatic if needed
+	virtual void UpdateStaticImage();
 
-    // called by SetInactiveBitmap
-    virtual void DisplayStaticImage() = 0;
+	// called by SetInactiveBitmap
+	virtual void DisplayStaticImage() = 0;
 
 private:
-    wxDECLARE_ABSTRACT_CLASS(wxAnimationCtrlBase);
+	wxDECLARE_ABSTRACT_CLASS(wxAnimationCtrlBase);
 };
 
 
@@ -115,9 +117,9 @@ private:
 // ----------------------------------------------------------------------------
 
 #if defined(__WXGTK20__) && !defined(__WXUNIVERSAL__)
-    #include "wx/gtk/animate.h"
+#include "wx/gtk/animate.h"
 #else
-    #include "wx/generic/animate.h"
+#include "wx/generic/animate.h"
 #endif
 
 #endif // wxUSE_ANIMATIONCTRL

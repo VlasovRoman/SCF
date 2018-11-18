@@ -17,22 +17,22 @@
 class wxGTKEventLoopSource : public wxEventLoopSource
 {
 public:
-    // sourceId is the id of the watch in GTK context, not the FD of the file
-    // this source corresponds to
-    wxGTKEventLoopSource(unsigned sourceId,
-                         wxEventLoopSourceHandler *handler,
-                         int flags)
-        : wxEventLoopSource(handler, flags),
-          m_sourceId(sourceId)
-    {
-    }
+	// sourceId is the id of the watch in GTK context, not the FD of the file
+	// this source corresponds to
+	wxGTKEventLoopSource(unsigned sourceId,
+	                     wxEventLoopSourceHandler *handler,
+	                     int flags)
+		: wxEventLoopSource(handler, flags),
+		  m_sourceId(sourceId)
+	{
+	}
 
-    virtual ~wxGTKEventLoopSource();
+	virtual ~wxGTKEventLoopSource();
 
 private:
-    const unsigned m_sourceId;
+	const unsigned m_sourceId;
 
-    wxDECLARE_NO_COPY_CLASS(wxGTKEventLoopSource);
+	wxDECLARE_NO_COPY_CLASS(wxGTKEventLoopSource);
 };
 
 #endif // _WX_GTK_EVTLOOPSRC_H_

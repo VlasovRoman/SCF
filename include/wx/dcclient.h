@@ -18,13 +18,13 @@
 class WXDLLIMPEXP_CORE wxWindowDC : public wxDC
 {
 public:
-    wxWindowDC(wxWindow *win);
+	wxWindowDC(wxWindow *win);
 
 protected:
-    wxWindowDC(wxDCImpl *impl) : wxDC(impl) { }
+	wxWindowDC(wxDCImpl *impl) : wxDC(impl) { }
 
 private:
-    wxDECLARE_ABSTRACT_CLASS(wxWindowDC);
+	wxDECLARE_ABSTRACT_CLASS(wxWindowDC);
 };
 
 //-----------------------------------------------------------------------------
@@ -34,13 +34,13 @@ private:
 class WXDLLIMPEXP_CORE wxClientDC : public wxWindowDC
 {
 public:
-    wxClientDC(wxWindow *win);
+	wxClientDC(wxWindow *win);
 
 protected:
-    wxClientDC(wxDCImpl *impl) : wxWindowDC(impl) { }
+	wxClientDC(wxDCImpl *impl) : wxWindowDC(impl) { }
 
 private:
-    wxDECLARE_ABSTRACT_CLASS(wxClientDC);
+	wxDECLARE_ABSTRACT_CLASS(wxClientDC);
 };
 
 //-----------------------------------------------------------------------------
@@ -50,13 +50,13 @@ private:
 class WXDLLIMPEXP_CORE wxPaintDC : public wxClientDC
 {
 public:
-    wxPaintDC(wxWindow *win);
+	wxPaintDC(wxWindow *win);
 
 protected:
-    wxPaintDC(wxDCImpl *impl) : wxClientDC(impl) { }
+	wxPaintDC(wxDCImpl *impl) : wxClientDC(impl) { }
 
 private:
-    wxDECLARE_ABSTRACT_CLASS(wxPaintDC);
+	wxDECLARE_ABSTRACT_CLASS(wxPaintDC);
 };
 
 #endif // _WX_DCCLIENT_H_BASE_

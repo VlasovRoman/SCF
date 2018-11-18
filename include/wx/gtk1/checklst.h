@@ -17,10 +17,10 @@
 // there is no "right" choice of the checkbox indicators, so allow the user to
 // define them himself if he wants
 #ifndef wxCHECKLBOX_CHECKED
-    #define wxCHECKLBOX_CHECKED   wxT('x')
-    #define wxCHECKLBOX_UNCHECKED wxT(' ')
+#define wxCHECKLBOX_CHECKED   wxT('x')
+#define wxCHECKLBOX_UNCHECKED wxT(' ')
 
-    #define wxCHECKLBOX_STRING    wxT("[ ] ")
+#define wxCHECKLBOX_STRING    wxT("[ ] ")
 #endif
 
 //-----------------------------------------------------------------------------
@@ -30,30 +30,30 @@
 class WXDLLIMPEXP_CORE wxCheckListBox : public wxCheckListBoxBase
 {
 public:
-    wxCheckListBox();
-    wxCheckListBox(wxWindow *parent, wxWindowID id,
-            const wxPoint& pos = wxDefaultPosition,
-            const wxSize& size = wxDefaultSize,
-            int nStrings = 0,
-            const wxString *choices = (const wxString *)NULL,
-            long style = 0,
-            const wxValidator& validator = wxDefaultValidator,
-            const wxString& name = wxListBoxNameStr);
-    wxCheckListBox(wxWindow *parent, wxWindowID id,
-            const wxPoint& pos,
-            const wxSize& size,
-            const wxArrayString& choices,
-            long style = 0,
-            const wxValidator& validator = wxDefaultValidator,
-            const wxString& name = wxListBoxNameStr);
+	wxCheckListBox();
+	wxCheckListBox(wxWindow *parent, wxWindowID id,
+	               const wxPoint& pos = wxDefaultPosition,
+	               const wxSize& size = wxDefaultSize,
+	               int nStrings = 0,
+	               const wxString *choices = (const wxString *)NULL,
+	               long style = 0,
+	               const wxValidator& validator = wxDefaultValidator,
+	               const wxString& name = wxListBoxNameStr);
+	wxCheckListBox(wxWindow *parent, wxWindowID id,
+	               const wxPoint& pos,
+	               const wxSize& size,
+	               const wxArrayString& choices,
+	               long style = 0,
+	               const wxValidator& validator = wxDefaultValidator,
+	               const wxString& name = wxListBoxNameStr);
 
-    bool IsChecked(unsigned int index) const;
-    void Check(unsigned int index, bool check = true);
+	bool IsChecked(unsigned int index) const;
+	void Check(unsigned int index, bool check = true);
 
-    int GetItemHeight() const;
+	int GetItemHeight() const;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxCheckListBox);
+	wxDECLARE_DYNAMIC_CLASS(wxCheckListBox);
 };
 
 #endif   //__GTKCHECKLISTH__

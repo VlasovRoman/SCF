@@ -14,8 +14,8 @@
 #include "wx/defs.h"
 
 #ifndef wxHAS_NATIVE_TAB_TRAVERSAL
-    // We need wxEVT_XXX declarations in this case.
-    #include "wx/event.h"
+// We need wxEVT_XXX declarations in this case.
+#include "wx/event.h"
 #endif
 
 class WXDLLIMPEXP_FWD_CORE wxWindow;
@@ -36,104 +36,115 @@ class WXDLLIMPEXP_FWD_CORE wxWindowBase;
 class WXDLLIMPEXP_CORE wxControlContainerBase
 {
 public:
-    // default ctor, SetContainerWindow() must be called later
-    wxControlContainerBase()
-    {
-        m_winParent = NULL;
+	// default ctor, SetContainerWindow() must be called later
+	wxControlContainerBase()
+	{
+		m_winParent = NULL;
 
-        // By default, we accept focus ourselves.
-        m_acceptsFocusSelf = true;
+		// By default, we accept focus ourselves.
+		m_acceptsFocusSelf = true;
 
-        // But we don't have any children accepting it yet.
-        m_acceptsFocusChildren = false;
+		// But we don't have any children accepting it yet.
+		m_acceptsFocusChildren = false;
 
-        m_inSetFocus = false;
-        m_winLastFocused = NULL;
-    }
-    virtual ~wxControlContainerBase() {}
+		m_inSetFocus = false;
+		m_winLastFocused = NULL;
+	}
+	virtual ~wxControlContainerBase() {}
 
-    void SetContainerWindow(wxWindow *winParent)
-    {
-        wxASSERT_MSG( !m_winParent, wxT("shouldn't be called twice") );
+	void SetContainerWindow(wxWindow *winParent)
+	{
+		wxASSERT_MSG( !m_winParent, wxT("shouldn't be called twice") );
 
-        m_winParent = winParent;
-    }
+		m_winParent = winParent;
+	}
 
-    // This can be called by the window to indicate that it never wants to have
-    // the focus for itself.
-    void DisableSelfFocus()
-        { m_acceptsFocusSelf = false; UpdateParentCanFocus(); }
+	// This can be called by the window to indicate that it never wants to have
+	// the focus for itself.
+	void DisableSelfFocus()
+	{
+		m_acceptsFocusSelf = false;
+		UpdateParentCanFocus();
+	}
 
-    // This can be called to undo the effect of a previous DisableSelfFocus()
-    // (otherwise calling it is not necessary as the window does accept focus
-    // by default).
-    void EnableSelfFocus()
-        { m_acceptsFocusSelf = true; UpdateParentCanFocus(); }
+	// This can be called to undo the effect of a previous DisableSelfFocus()
+	// (otherwise calling it is not necessary as the window does accept focus
+	// by default).
+	void EnableSelfFocus()
+	{
+		m_acceptsFocusSelf = true;
+		UpdateParentCanFocus();
+	}
 
-    // should be called from SetFocus(), returns false if we did nothing with
-    // the focus and the default processing should take place
-    bool DoSetFocus();
+	// should be called from SetFocus(), returns false if we did nothing with
+	// the focus and the default processing should take place
+	bool DoSetFocus();
 
-    // returns whether we should accept focus ourselves or not
-    bool AcceptsFocus() const;
+	// returns whether we should accept focus ourselves or not
+	bool AcceptsFocus() const;
 
-    // Returns whether we or one of our children accepts focus.
-    bool AcceptsFocusRecursively() const
-        { return AcceptsFocus() ||
-            (m_acceptsFocusChildren && HasAnyChildrenAcceptingFocus()); }
+	// Returns whether we or one of our children accepts focus.
+	bool AcceptsFocusRecursively() const
+	{
+		return AcceptsFocus() ||
+		       (m_acceptsFocusChildren && HasAnyChildrenAcceptingFocus());
+	}
 
-    // We accept focus from keyboard if we accept it at all.
-    bool AcceptsFocusFromKeyboard() const { return AcceptsFocusRecursively(); }
+	// We accept focus from keyboard if we accept it at all.
+	bool AcceptsFocusFromKeyboard() const
+	{
+		return AcceptsFocusRecursively();
+	}
 
-    // Call this when the number of children of the window changes.
-    //
-    // Returns true if we have any focusable children, false otherwise.
-    bool UpdateCanFocusChildren();
+	// Call this when the number of children of the window changes.
+	//
+	// Returns true if we have any focusable children, false otherwise.
+	bool UpdateCanFocusChildren();
 
 #ifdef __WXMSW__
-    // This is not strictly related to navigation, but all windows containing
-    // more than one children controls need to return from this method if any
-    // of their parents has an inheritable background, so do this automatically
-    // for all of them (another alternative could be to do it in wxWindow
-    // itself but this would be potentially more backwards incompatible and
-    // could conceivably break some custom windows).
-    bool HasTransparentBackground() const;
+	// This is not strictly related to navigation, but all windows containing
+	// more than one children controls need to return from this method if any
+	// of their parents has an inheritable background, so do this automatically
+	// for all of them (another alternative could be to do it in wxWindow
+	// itself but this would be potentially more backwards incompatible and
+	// could conceivably break some custom windows).
+	bool HasTransparentBackground() const;
 #endif // __WXMSW__
 
 protected:
-    // set the focus to the child which had it the last time
-    virtual bool SetFocusToChild();
+	// set the focus to the child which had it the last time
+	virtual bool SetFocusToChild();
 
-    // return true if we have any children accepting focus
-    bool HasAnyFocusableChildren() const;
+	// return true if we have any children accepting focus
+	bool HasAnyFocusableChildren() const;
 
-    // return true if we have any children that do accept focus right now
-    bool HasAnyChildrenAcceptingFocus() const;
+	// return true if we have any children that do accept focus right now
+	bool HasAnyChildrenAcceptingFocus() const;
 
 
-    // the parent window we manage the children for
-    wxWindow *m_winParent;
+	// the parent window we manage the children for
+	wxWindow *m_winParent;
 
-    // the child which had the focus last time this panel was activated
-    wxWindow *m_winLastFocused;
+	// the child which had the focus last time this panel was activated
+	wxWindow *m_winLastFocused;
 
 private:
-    // Update the window status to reflect whether it is getting focus or not.
-    void UpdateParentCanFocus();
+	// Update the window status to reflect whether it is getting focus or not.
+	void UpdateParentCanFocus();
 
-    // Indicates whether the associated window can ever have focus itself.
-    //
-    // Usually this is the case, e.g. a wxPanel can be used either as a
-    // container for its children or just as a normal window which can be
-    // focused. But sometimes, e.g. for wxStaticBox, we can never have focus
-    // ourselves and can only get it if we have any focusable children.
-    bool m_acceptsFocusSelf;
+	// Indicates whether the associated window can ever have focus itself.
+	//
+	// Usually this is the case, e.g. a wxPanel can be used either as a
+	// container for its children or just as a normal window which can be
+	// focused. But sometimes, e.g. for wxStaticBox, we can never have focus
+	// ourselves and can only get it if we have any focusable children.
+	bool m_acceptsFocusSelf;
 
-    // Cached value remembering whether we have any children accepting focus.
-    bool m_acceptsFocusChildren;
+	// Cached value remembering whether we have any children accepting focus.
+	bool m_acceptsFocusChildren;
 
-    // a guard against infinite recursion
-    bool m_inSetFocus;
+	// a guard against infinite recursion
+	bool m_inSetFocus;
 };
 
 #ifdef wxHAS_NATIVE_TAB_TRAVERSAL
@@ -146,8 +157,8 @@ private:
 class WXDLLIMPEXP_CORE wxControlContainer : public wxControlContainerBase
 {
 protected:
-    // set the focus to the child which had it the last time
-    virtual bool SetFocusToChild() wxOVERRIDE;
+	// set the focus to the child which had it the last time
+	virtual bool SetFocusToChild() wxOVERRIDE;
 };
 
 #else // !wxHAS_NATIVE_TAB_TRAVERSAL
@@ -159,21 +170,21 @@ protected:
 class WXDLLIMPEXP_CORE wxControlContainer : public wxControlContainerBase
 {
 public:
-    // default ctor, SetContainerWindow() must be called later
-    wxControlContainer();
+	// default ctor, SetContainerWindow() must be called later
+	wxControlContainer();
 
-    // the methods to be called from the window event handlers
-    void HandleOnNavigationKey(wxNavigationKeyEvent& event);
-    void HandleOnFocus(wxFocusEvent& event);
-    void HandleOnWindowDestroy(wxWindowBase *child);
+	// the methods to be called from the window event handlers
+	void HandleOnNavigationKey(wxNavigationKeyEvent& event);
+	void HandleOnFocus(wxFocusEvent& event);
+	void HandleOnWindowDestroy(wxWindowBase *child);
 
-    // called from OnChildFocus() handler, i.e. when one of our (grand)
-    // children gets the focus
-    void SetLastFocus(wxWindow *win);
+	// called from OnChildFocus() handler, i.e. when one of our (grand)
+	// children gets the focus
+	void SetLastFocus(wxWindow *win);
 
 protected:
 
-    wxDECLARE_NO_COPY_CLASS(wxControlContainer);
+	wxDECLARE_NO_COPY_CLASS(wxControlContainer);
 };
 
 #endif // wxHAS_NATIVE_TAB_TRAVERSAL/!wxHAS_NATIVE_TAB_TRAVERSAL
@@ -192,106 +203,106 @@ template <class W>
 class wxNavigationEnabled : public W
 {
 public:
-    typedef W BaseWindowClass;
+	typedef W BaseWindowClass;
 
-    wxNavigationEnabled()
-    {
-        m_container.SetContainerWindow(this);
+	wxNavigationEnabled()
+	{
+		m_container.SetContainerWindow(this);
 
 #ifndef wxHAS_NATIVE_TAB_TRAVERSAL
-        BaseWindowClass::Connect(wxEVT_NAVIGATION_KEY,
-                wxNavigationKeyEventHandler(wxNavigationEnabled::OnNavigationKey));
+		BaseWindowClass::Connect(wxEVT_NAVIGATION_KEY,
+		                         wxNavigationKeyEventHandler(wxNavigationEnabled::OnNavigationKey));
 
-        BaseWindowClass::Connect(wxEVT_SET_FOCUS,
-                wxFocusEventHandler(wxNavigationEnabled::OnFocus));
+		BaseWindowClass::Connect(wxEVT_SET_FOCUS,
+		                         wxFocusEventHandler(wxNavigationEnabled::OnFocus));
 
-        BaseWindowClass::Connect(wxEVT_CHILD_FOCUS,
-                wxChildFocusEventHandler(wxNavigationEnabled::OnChildFocus));
+		BaseWindowClass::Connect(wxEVT_CHILD_FOCUS,
+		                         wxChildFocusEventHandler(wxNavigationEnabled::OnChildFocus));
 #endif // !wxHAS_NATIVE_TAB_TRAVERSAL
-    }
+	}
 
-    WXDLLIMPEXP_INLINE_CORE virtual bool AcceptsFocus() const wxOVERRIDE
-    {
-        return m_container.AcceptsFocus();
-    }
+	WXDLLIMPEXP_INLINE_CORE virtual bool AcceptsFocus() const wxOVERRIDE
+	{
+		return m_container.AcceptsFocus();
+	}
 
-    WXDLLIMPEXP_INLINE_CORE virtual bool AcceptsFocusRecursively() const wxOVERRIDE
-    {
-        return m_container.AcceptsFocusRecursively();
-    }
+	WXDLLIMPEXP_INLINE_CORE virtual bool AcceptsFocusRecursively() const wxOVERRIDE
+	{
+		return m_container.AcceptsFocusRecursively();
+	}
 
-    WXDLLIMPEXP_INLINE_CORE virtual bool AcceptsFocusFromKeyboard() const wxOVERRIDE
-    {
-        return m_container.AcceptsFocusFromKeyboard();
-    }
+	WXDLLIMPEXP_INLINE_CORE virtual bool AcceptsFocusFromKeyboard() const wxOVERRIDE
+	{
+		return m_container.AcceptsFocusFromKeyboard();
+	}
 
-    WXDLLIMPEXP_INLINE_CORE virtual void AddChild(wxWindowBase *child) wxOVERRIDE
-    {
-        BaseWindowClass::AddChild(child);
+	WXDLLIMPEXP_INLINE_CORE virtual void AddChild(wxWindowBase *child) wxOVERRIDE
+	{
+		BaseWindowClass::AddChild(child);
 
-        if ( m_container.UpdateCanFocusChildren() )
-        {
-            // Under MSW we must have wxTAB_TRAVERSAL style for TAB navigation
-            // to work.
-            if ( !BaseWindowClass::HasFlag(wxTAB_TRAVERSAL) )
-                BaseWindowClass::ToggleWindowStyle(wxTAB_TRAVERSAL);
-        }
-    }
+		if ( m_container.UpdateCanFocusChildren() )
+		{
+			// Under MSW we must have wxTAB_TRAVERSAL style for TAB navigation
+			// to work.
+			if ( !BaseWindowClass::HasFlag(wxTAB_TRAVERSAL) )
+				BaseWindowClass::ToggleWindowStyle(wxTAB_TRAVERSAL);
+		}
+	}
 
-    WXDLLIMPEXP_INLINE_CORE virtual void RemoveChild(wxWindowBase *child) wxOVERRIDE
-    {
+	WXDLLIMPEXP_INLINE_CORE virtual void RemoveChild(wxWindowBase *child) wxOVERRIDE
+	{
 #ifndef wxHAS_NATIVE_TAB_TRAVERSAL
-        m_container.HandleOnWindowDestroy(child);
+		m_container.HandleOnWindowDestroy(child);
 #endif // !wxHAS_NATIVE_TAB_TRAVERSAL
 
-        BaseWindowClass::RemoveChild(child);
+		BaseWindowClass::RemoveChild(child);
 
-        // We could reset wxTAB_TRAVERSAL here but it doesn't seem to do any
-        // harm to keep it.
-        m_container.UpdateCanFocusChildren();
-    }
+		// We could reset wxTAB_TRAVERSAL here but it doesn't seem to do any
+		// harm to keep it.
+		m_container.UpdateCanFocusChildren();
+	}
 
-    WXDLLIMPEXP_INLINE_CORE virtual void SetFocus() wxOVERRIDE
-    {
-        if ( !m_container.DoSetFocus() )
-            BaseWindowClass::SetFocus();
-    }
+	WXDLLIMPEXP_INLINE_CORE virtual void SetFocus() wxOVERRIDE
+	{
+		if ( !m_container.DoSetFocus() )
+			BaseWindowClass::SetFocus();
+	}
 
-    void SetFocusIgnoringChildren()
-    {
-        BaseWindowClass::SetFocus();
-    }
+	void SetFocusIgnoringChildren()
+	{
+		BaseWindowClass::SetFocus();
+	}
 
 #ifdef __WXMSW__
-    WXDLLIMPEXP_INLINE_CORE virtual bool HasTransparentBackground() wxOVERRIDE
-    {
-        return m_container.HasTransparentBackground();
-    }
+	WXDLLIMPEXP_INLINE_CORE virtual bool HasTransparentBackground() wxOVERRIDE
+	{
+		return m_container.HasTransparentBackground();
+	}
 #endif // __WXMSW__
 
 protected:
 #ifndef wxHAS_NATIVE_TAB_TRAVERSAL
-    void OnNavigationKey(wxNavigationKeyEvent& event)
-    {
-        m_container.HandleOnNavigationKey(event);
-    }
+	void OnNavigationKey(wxNavigationKeyEvent& event)
+	{
+		m_container.HandleOnNavigationKey(event);
+	}
 
-    void OnFocus(wxFocusEvent& event)
-    {
-        m_container.HandleOnFocus(event);
-    }
+	void OnFocus(wxFocusEvent& event)
+	{
+		m_container.HandleOnFocus(event);
+	}
 
-    void OnChildFocus(wxChildFocusEvent& event)
-    {
-        m_container.SetLastFocus(event.GetWindow());
-        event.Skip();
-    }
+	void OnChildFocus(wxChildFocusEvent& event)
+	{
+		m_container.SetLastFocus(event.GetWindow());
+		event.Skip();
+	}
 #endif // !wxHAS_NATIVE_TAB_TRAVERSAL
 
-    wxControlContainer m_container;
+	wxControlContainer m_container;
 
 
-    wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxNavigationEnabled, W);
+	wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxNavigationEnabled, W);
 };
 
 // ----------------------------------------------------------------------------

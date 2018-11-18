@@ -15,13 +15,13 @@
 #if wxUSE_TIPWINDOW
 
 #if wxUSE_POPUPWIN
-    #include "wx/popupwin.h"
+#include "wx/popupwin.h"
 
-    #define wxTipWindowBase wxPopupTransientWindow
+#define wxTipWindowBase wxPopupTransientWindow
 #else
-    #include "wx/frame.h"
+#include "wx/frame.h"
 
-    #define wxTipWindowBase wxFrame
+#define wxTipWindowBase wxFrame
 #endif
 #include "wx/arrstr.h"
 
@@ -34,62 +34,65 @@ class WXDLLIMPEXP_FWD_CORE wxTipWindowView;
 class WXDLLIMPEXP_CORE wxTipWindow : public wxTipWindowBase
 {
 public:
-    // the mandatory ctor parameters are: the parent window and the text to
-    // show
-    //
-    // optionally you may also specify the length at which the lines are going
-    // to be broken in rows (100 pixels by default)
-    //
-    // windowPtr and rectBound are just passed to SetTipWindowPtr() and
-    // SetBoundingRect() - see below
-    wxTipWindow(wxWindow *parent,
-                const wxString& text,
-                wxCoord maxLength = 100,
-                wxTipWindow** windowPtr = NULL,
-                wxRect *rectBound = NULL);
+	// the mandatory ctor parameters are: the parent window and the text to
+	// show
+	//
+	// optionally you may also specify the length at which the lines are going
+	// to be broken in rows (100 pixels by default)
+	//
+	// windowPtr and rectBound are just passed to SetTipWindowPtr() and
+	// SetBoundingRect() - see below
+	wxTipWindow(wxWindow *parent,
+	            const wxString& text,
+	            wxCoord maxLength = 100,
+	            wxTipWindow** windowPtr = NULL,
+	            wxRect *rectBound = NULL);
 
-    virtual ~wxTipWindow();
+	virtual ~wxTipWindow();
 
-    // If windowPtr is not NULL the given address will be NULLed when the
-    // window has closed
-    void SetTipWindowPtr(wxTipWindow** windowPtr) { m_windowPtr = windowPtr; }
+	// If windowPtr is not NULL the given address will be NULLed when the
+	// window has closed
+	void SetTipWindowPtr(wxTipWindow** windowPtr)
+	{
+		m_windowPtr = windowPtr;
+	}
 
-    // If rectBound is not NULL, the window will disappear automatically when
-    // the mouse leave the specified rect: note that rectBound should be in the
-    // screen coordinates!
-    void SetBoundingRect(const wxRect& rectBound);
+	// If rectBound is not NULL, the window will disappear automatically when
+	// the mouse leave the specified rect: note that rectBound should be in the
+	// screen coordinates!
+	void SetBoundingRect(const wxRect& rectBound);
 
-    // Hide and destroy the window
-    void Close();
+	// Hide and destroy the window
+	void Close();
 
 protected:
-    // called by wxTipWindowView only
-    bool CheckMouseInBounds(const wxPoint& pos);
+	// called by wxTipWindowView only
+	bool CheckMouseInBounds(const wxPoint& pos);
 
-    // event handlers
-    void OnMouseClick(wxMouseEvent& event);
+	// event handlers
+	void OnMouseClick(wxMouseEvent& event);
 
 #if !wxUSE_POPUPWIN
-    void OnActivate(wxActivateEvent& event);
-    void OnKillFocus(wxFocusEvent& event);
+	void OnActivate(wxActivateEvent& event);
+	void OnKillFocus(wxFocusEvent& event);
 #else // wxUSE_POPUPWIN
-    virtual void OnDismiss() wxOVERRIDE;
+	virtual void OnDismiss() wxOVERRIDE;
 #endif // wxUSE_POPUPWIN/!wxUSE_POPUPWIN
 
 private:
-    wxArrayString m_textLines;
-    wxCoord m_heightLine;
+	wxArrayString m_textLines;
+	wxCoord m_heightLine;
 
-    wxTipWindowView *m_view;
+	wxTipWindowView *m_view;
 
-    wxTipWindow** m_windowPtr;
-    wxRect m_rectBound;
+	wxTipWindow** m_windowPtr;
+	wxRect m_rectBound;
 
-    wxDECLARE_EVENT_TABLE();
+	wxDECLARE_EVENT_TABLE();
 
-    friend class wxTipWindowView;
+	friend class wxTipWindowView;
 
-    wxDECLARE_NO_COPY_CLASS(wxTipWindow);
+	wxDECLARE_NO_COPY_CLASS(wxTipWindow);
 };
 
 #endif // wxUSE_TIPWINDOW

@@ -37,18 +37,18 @@ WXDLLIMPEXP_BASE void wxDebugFree(void * buf, bool isVect = false);
 // Undefine temporarily (new is #defined in object.h) because we want to
 // declare some new operators.
 #ifdef new
-    #undef new
+#undef new
 #endif
 
 #if defined(__SUNCC__)
-    #define wxUSE_ARRAY_MEMORY_OPERATORS 0
+#define wxUSE_ARRAY_MEMORY_OPERATORS 0
 #elif defined (__SGI_CC_)
-    // only supported by -n32 compilers
-    #ifndef __EDG_ABI_COMPATIBILITY_VERSION
-        #define wxUSE_ARRAY_MEMORY_OPERATORS 0
-    #endif
+// only supported by -n32 compilers
+#ifndef __EDG_ABI_COMPATIBILITY_VERSION
+#define wxUSE_ARRAY_MEMORY_OPERATORS 0
+#endif
 #else
-    #define wxUSE_ARRAY_MEMORY_OPERATORS 1
+#define wxUSE_ARRAY_MEMORY_OPERATORS 1
 #endif
 
 // devik 2000-8-29: All new/delete ops are now inline because they can't
@@ -57,33 +57,33 @@ WXDLLIMPEXP_BASE void wxDebugFree(void * buf, bool isVect = false);
 #if defined(__WINDOWS__) && (defined(WXUSINGDLL) || defined(WXMAKINGDLL_BASE))
 inline void * operator new (size_t size, wxChar * fileName, int lineNum)
 {
-    return wxDebugAlloc(size, fileName, lineNum, false, false);
+	return wxDebugAlloc(size, fileName, lineNum, false, false);
 }
 
 inline void * operator new (size_t size)
 {
-    return wxDebugAlloc(size, NULL, 0, false);
+	return wxDebugAlloc(size, NULL, 0, false);
 }
 
 inline void operator delete (void * buf)
 {
-    wxDebugFree(buf, false);
+	wxDebugFree(buf, false);
 }
 
 #if wxUSE_ARRAY_MEMORY_OPERATORS
 inline void * operator new[] (size_t size)
 {
-    return wxDebugAlloc(size, NULL, 0, false, true);
+	return wxDebugAlloc(size, NULL, 0, false, true);
 }
 
 inline void * operator new[] (size_t size, wxChar * fileName, int lineNum)
 {
-    return wxDebugAlloc(size, fileName, lineNum, false, true);
+	return wxDebugAlloc(size, fileName, lineNum, false, true);
 }
 
 inline void operator delete[] (void * buf)
 {
-    wxDebugFree(buf, true);
+	wxDebugFree(buf, true);
 }
 #endif // wxUSE_ARRAY_MEMORY_OPERATORS
 
@@ -107,11 +107,11 @@ void operator delete[] (void * buf);
 #if defined(__VISUALC__)
 inline void operator delete(void* pData, wxChar* /* fileName */, int /* lineNum */)
 {
-    wxDebugFree(pData, false);
+	wxDebugFree(pData, false);
 }
 inline void operator delete[](void* pData, wxChar* /* fileName */, int /* lineNum */)
 {
-    wxDebugFree(pData, true);
+	wxDebugFree(pData, true);
 }
 #endif // __VISUALC__
 #endif // wxUSE_GLOBAL_MEMORY_OPERATORS
@@ -125,68 +125,78 @@ typedef unsigned int wxMarkerType;
   allocated memory.
 */
 
-class WXDLLIMPEXP_BASE wxMemStruct {
+class WXDLLIMPEXP_BASE wxMemStruct
+{
 
-friend class WXDLLIMPEXP_FWD_BASE wxDebugContext; // access to the m_next pointer for list traversal.
-
-public:
-public:
-    int AssertList ();
-
-    size_t RequestSize () { return m_reqSize; }
-    wxMarkerType Marker () { return m_firstMarker; }
-
-    // When an object is deleted we set the id slot to a specific value.
-    inline void SetDeleted ();
-    inline int IsDeleted ();
-
-    int Append ();
-    int Unlink ();
-
-    // Used to determine if the object is really a wxMemStruct.
-    // Not a foolproof test by any means, but better than none I hope!
-    int AssertIt ();
-
-    // Do all validation on a node.
-    int ValidateNode ();
-
-    // Check the integrity of a node and of the list, node by node.
-    int CheckBlock ();
-    int CheckAllPrevious ();
-
-    // Print a single node.
-    void PrintNode ();
-
-    // Called when the memory linking functions get an error.
-    void ErrorMsg (const char *);
-    void ErrorMsg ();
-
-    inline void *GetActualData(void) const { return m_actualData; }
-
-    void Dump(void);
+	friend class WXDLLIMPEXP_FWD_BASE wxDebugContext; // access to the m_next pointer for list traversal.
 
 public:
-    // Check for underwriting. There are 2 of these checks. This one
-    // inside the struct and another right after the struct.
-    wxMarkerType        m_firstMarker;
+public:
+	int AssertList ();
 
-    // File name and line number are from cpp.
-    wxChar*             m_fileName;
-    int                 m_lineNum;
+	size_t RequestSize ()
+	{
+		return m_reqSize;
+	}
+	wxMarkerType Marker ()
+	{
+		return m_firstMarker;
+	}
 
-    // The amount of memory requested by the caller.
-    size_t              m_reqSize;
+	// When an object is deleted we set the id slot to a specific value.
+	inline void SetDeleted ();
+	inline int IsDeleted ();
 
-    // Used to try to verify that we really are dealing with an object
-    // of the required class. Can be 1 of 2 values these indicating a valid
-    // wxMemStruct object, or a deleted wxMemStruct object.
-    wxMarkerType        m_id;
+	int Append ();
+	int Unlink ();
 
-    wxMemStruct *       m_prev;
-    wxMemStruct *       m_next;
+	// Used to determine if the object is really a wxMemStruct.
+	// Not a foolproof test by any means, but better than none I hope!
+	int AssertIt ();
 
-    void *              m_actualData;
-    bool                m_isObject;
+	// Do all validation on a node.
+	int ValidateNode ();
+
+	// Check the integrity of a node and of the list, node by node.
+	int CheckBlock ();
+	int CheckAllPrevious ();
+
+	// Print a single node.
+	void PrintNode ();
+
+	// Called when the memory linking functions get an error.
+	void ErrorMsg (const char *);
+	void ErrorMsg ();
+
+	inline void *GetActualData(void) const
+	{
+		return m_actualData;
+	}
+
+	void Dump(void);
+
+public:
+	// Check for underwriting. There are 2 of these checks. This one
+	// inside the struct and another right after the struct.
+	wxMarkerType        m_firstMarker;
+
+	// File name and line number are from cpp.
+	wxChar*             m_fileName;
+	int                 m_lineNum;
+
+	// The amount of memory requested by the caller.
+	size_t              m_reqSize;
+
+	// Used to try to verify that we really are dealing with an object
+	// of the required class. Can be 1 of 2 values these indicating a valid
+	// wxMemStruct object, or a deleted wxMemStruct object.
+	wxMarkerType        m_id;
+
+	wxMemStruct *       m_prev;
+	wxMemStruct *       m_next;
+
+	void *              m_actualData;
+	bool                m_isObject;
 };
 
 
@@ -206,112 +216,146 @@ typedef void (*wxShutdownNotifyFunction)();
   globals which have to do with the wxMemStruct class.
 */
 
-class WXDLLIMPEXP_BASE wxDebugContext {
+class WXDLLIMPEXP_BASE wxDebugContext
+{
 
 protected:
-    // Used to set alignment for markers.
-    static size_t CalcAlignment ();
+	// Used to set alignment for markers.
+	static size_t CalcAlignment ();
 
-    // Returns the amount of padding needed after something of the given
-    // size. This is so that when we cast pointers backwards and forwards
-    // the pointer value will be valid for a wxMarkerType.
-    static size_t GetPadding (size_t size) ;
+	// Returns the amount of padding needed after something of the given
+	// size. This is so that when we cast pointers backwards and forwards
+	// the pointer value will be valid for a wxMarkerType.
+	static size_t GetPadding (size_t size) ;
 
-    // Traverse the list.
-    static void TraverseList (PmSFV, wxMemStruct *from = NULL);
+	// Traverse the list.
+	static void TraverseList (PmSFV, wxMemStruct *from = NULL);
 
-    static int debugLevel;
-    static bool debugOn;
+	static int debugLevel;
+	static bool debugOn;
 
-    static int m_balign;            // byte alignment
-    static int m_balignmask;        // mask for performing byte alignment
+	static int m_balign;            // byte alignment
+	static int m_balignmask;        // mask for performing byte alignment
 public:
-    // Set a checkpoint to dump only the memory from
-    // a given point
-    static wxMemStruct *checkPoint;
+	// Set a checkpoint to dump only the memory from
+	// a given point
+	static wxMemStruct *checkPoint;
 
-    wxDebugContext(void);
-    ~wxDebugContext(void);
+	wxDebugContext(void);
+	~wxDebugContext(void);
 
-    static int GetLevel(void) { return debugLevel; }
-    static void SetLevel(int level) { debugLevel = level; }
+	static int GetLevel(void)
+	{
+		return debugLevel;
+	}
+	static void SetLevel(int level)
+	{
+		debugLevel = level;
+	}
 
-    static bool GetDebugMode(void) { return debugOn; }
-    static void SetDebugMode(bool flag) { debugOn = flag; }
+	static bool GetDebugMode(void)
+	{
+		return debugOn;
+	}
+	static void SetDebugMode(bool flag)
+	{
+		debugOn = flag;
+	}
 
-    static void SetCheckpoint(bool all = false);
-    static wxMemStruct *GetCheckpoint(void) { return checkPoint; }
+	static void SetCheckpoint(bool all = false);
+	static wxMemStruct *GetCheckpoint(void)
+	{
+		return checkPoint;
+	}
 
-    // Calculated from the request size and any padding needed
-    // before the final marker.
-    static size_t PaddedSize (size_t reqSize);
+	// Calculated from the request size and any padding needed
+	// before the final marker.
+	static size_t PaddedSize (size_t reqSize);
 
-    // Calc the total amount of space we need from the system
-    // to satisfy a caller request. This includes all padding.
-    static size_t TotSize (size_t reqSize);
+	// Calc the total amount of space we need from the system
+	// to satisfy a caller request. This includes all padding.
+	static size_t TotSize (size_t reqSize);
 
-    // Return valid pointers to offsets within the allocated memory.
-    static char * StructPos (const char * buf);
-    static char * MidMarkerPos (const char * buf);
-    static char * CallerMemPos (const char * buf);
-    static char * EndMarkerPos (const char * buf, size_t size);
+	// Return valid pointers to offsets within the allocated memory.
+	static char * StructPos (const char * buf);
+	static char * MidMarkerPos (const char * buf);
+	static char * CallerMemPos (const char * buf);
+	static char * EndMarkerPos (const char * buf, size_t size);
 
-    // Given a pointer to the start of the caller requested area
-    // return a pointer to the start of the entire alloc\'d buffer.
-    static char * StartPos (const char * caller);
+	// Given a pointer to the start of the caller requested area
+	// return a pointer to the start of the entire alloc\'d buffer.
+	static char * StartPos (const char * caller);
 
-    // Access to the list.
-    static wxMemStruct * GetHead () { return m_head; }
-    static wxMemStruct * GetTail () { return m_tail; }
+	// Access to the list.
+	static wxMemStruct * GetHead ()
+	{
+		return m_head;
+	}
+	static wxMemStruct * GetTail ()
+	{
+		return m_tail;
+	}
 
-    // Set the list sentinals.
-    static wxMemStruct * SetHead (wxMemStruct * st) { return (m_head = st); }
-    static wxMemStruct * SetTail (wxMemStruct * st) { return (m_tail = st); }
+	// Set the list sentinals.
+	static wxMemStruct * SetHead (wxMemStruct * st)
+	{
+		return (m_head = st);
+	}
+	static wxMemStruct * SetTail (wxMemStruct * st)
+	{
+		return (m_tail = st);
+	}
 
-    // If this is set then every new operation checks the validity
-    // of the all previous nodes in the list.
-    static bool GetCheckPrevious () { return m_checkPrevious; }
-    static void SetCheckPrevious (bool value) { m_checkPrevious = value; }
+	// If this is set then every new operation checks the validity
+	// of the all previous nodes in the list.
+	static bool GetCheckPrevious ()
+	{
+		return m_checkPrevious;
+	}
+	static void SetCheckPrevious (bool value)
+	{
+		m_checkPrevious = value;
+	}
 
-    // Checks all nodes, or all nodes if checkAll is true
-    static int Check(bool checkAll = false);
+	// Checks all nodes, or all nodes if checkAll is true
+	static int Check(bool checkAll = false);
 
-    // Print out the list of wxMemStruct nodes.
-    static bool PrintList(void);
+	// Print out the list of wxMemStruct nodes.
+	static bool PrintList(void);
 
-    // Dump objects
-    static bool Dump(void);
+	// Dump objects
+	static bool Dump(void);
 
-    // Print statistics
-    static bool PrintStatistics(bool detailed = true);
+	// Print statistics
+	static bool PrintStatistics(bool detailed = true);
 
-    // Print out the classes in the application.
-    static bool PrintClasses(void);
+	// Print out the classes in the application.
+	static bool PrintClasses(void);
 
-    // Count the number of non-wxDebugContext-related objects
-    // that are outstanding
-    static int CountObjectsLeft(bool sinceCheckpoint = false);
+	// Count the number of non-wxDebugContext-related objects
+	// that are outstanding
+	static int CountObjectsLeft(bool sinceCheckpoint = false);
 
-    // This function is used to output the dump
-    static void OutputDumpLine(const wxChar *szFormat, ...);
+	// This function is used to output the dump
+	static void OutputDumpLine(const wxChar *szFormat, ...);
 
-    static void SetShutdownNotifyFunction(wxShutdownNotifyFunction shutdownFn);
+	static void SetShutdownNotifyFunction(wxShutdownNotifyFunction shutdownFn);
 
 private:
-    // Store these here to allow access to the list without
-    // needing to have a wxMemStruct object.
-    static wxMemStruct*         m_head;
-    static wxMemStruct*         m_tail;
+	// Store these here to allow access to the list without
+	// needing to have a wxMemStruct object.
+	static wxMemStruct*         m_head;
+	static wxMemStruct*         m_tail;
 
-    // Set to false if we're not checking all previous nodes when
-    // we do a new. Set to true when we are.
-    static bool                 m_checkPrevious;
+	// Set to false if we're not checking all previous nodes when
+	// we do a new. Set to true when we are.
+	static bool                 m_checkPrevious;
 
-    // Holds a pointer to an optional application function to call at shutdown.
-    static wxShutdownNotifyFunction sm_shutdownFn;
+	// Holds a pointer to an optional application function to call at shutdown.
+	static wxShutdownNotifyFunction sm_shutdownFn;
 
-    // Have to access our shutdown hook
-    friend class wxDebugContextDumpDelayCounter;
+	// Have to access our shutdown hook
+	friend class wxDebugContextDumpDelayCounter;
 };
 
 // Final cleanup (e.g. deleting the log object and doing memory leak checking)
@@ -322,12 +366,12 @@ private:
 class WXDLLIMPEXP_BASE wxDebugContextDumpDelayCounter
 {
 public:
-    wxDebugContextDumpDelayCounter();
-    ~wxDebugContextDumpDelayCounter();
+	wxDebugContextDumpDelayCounter();
+	~wxDebugContextDumpDelayCounter();
 
 private:
-    void DoDump();
-    static int sm_count;
+	void DoDump();
+	static int sm_count;
 };
 
 // make leak dump after all globals have been destructed
@@ -349,11 +393,11 @@ void WXDLLIMPEXP_BASE wxTraceLevel(int level, const wxChar *fmt ...) WX_ATTRIBUT
 // Borland C++ Builder 6 seems to have troubles with inline functions (see bug
 // 819700)
 #if 0
-    inline void wxTrace(const wxChar *WXUNUSED(fmt)) {}
-    inline void wxTraceLevel(int WXUNUSED(level), const wxChar *WXUNUSED(fmt)) {}
+inline void wxTrace(const wxChar *WXUNUSED(fmt)) {}
+inline void wxTraceLevel(int WXUNUSED(level), const wxChar *WXUNUSED(fmt)) {}
 #else
-    #define wxTrace(fmt)
-    #define wxTraceLevel(l, fmt)
+#define wxTrace(fmt)
+#define wxTraceLevel(l, fmt)
 #endif
 
 #define WXTRACE true ? (void)0 : wxTrace

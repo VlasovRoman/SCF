@@ -48,37 +48,40 @@ class WXDLLIMPEXP_ADV wxHyperlinkCtrlBase : public wxControl
 {
 public:
 
-    // get/set
-    virtual wxColour GetHoverColour() const = 0;
-    virtual void SetHoverColour(const wxColour &colour) = 0;
+	// get/set
+	virtual wxColour GetHoverColour() const = 0;
+	virtual void SetHoverColour(const wxColour &colour) = 0;
 
-    virtual wxColour GetNormalColour() const = 0;
-    virtual void SetNormalColour(const wxColour &colour) = 0;
+	virtual wxColour GetNormalColour() const = 0;
+	virtual void SetNormalColour(const wxColour &colour) = 0;
 
-    virtual wxColour GetVisitedColour() const = 0;
-    virtual void SetVisitedColour(const wxColour &colour) = 0;
+	virtual wxColour GetVisitedColour() const = 0;
+	virtual void SetVisitedColour(const wxColour &colour) = 0;
 
-    virtual wxString GetURL() const = 0;
-    virtual void SetURL (const wxString &url) = 0;
+	virtual wxString GetURL() const = 0;
+	virtual void SetURL (const wxString &url) = 0;
 
-    virtual void SetVisited(bool visited = true) = 0;
-    virtual bool GetVisited() const = 0;
+	virtual void SetVisited(bool visited = true) = 0;
+	virtual bool GetVisited() const = 0;
 
-    // NOTE: also wxWindow::Set/GetLabel, wxWindow::Set/GetBackgroundColour,
-    //       wxWindow::Get/SetFont, wxWindow::Get/SetCursor are important !
+	// NOTE: also wxWindow::Set/GetLabel, wxWindow::Set/GetBackgroundColour,
+	//       wxWindow::Get/SetFont, wxWindow::Get/SetCursor are important !
 
-    virtual bool HasTransparentBackground() wxOVERRIDE { return true; }
+	virtual bool HasTransparentBackground() wxOVERRIDE { return true; }
 
 protected:
-    virtual wxBorder GetDefaultBorder() const wxOVERRIDE { return wxBORDER_NONE; }
+	virtual wxBorder GetDefaultBorder() const wxOVERRIDE
+	{
+		return wxBORDER_NONE;
+	}
 
-    // checks for validity some of the ctor/Create() function parameters
-    void CheckParams(const wxString& label, const wxString& url, long style);
+	// checks for validity some of the ctor/Create() function parameters
+	void CheckParams(const wxString& label, const wxString& url, long style);
 
 public:
-    // not part of the public API but needs to be public as used by
-    // GTK+ callbacks:
-    void SendEvent();
+	// not part of the public API but needs to be public as used by
+	// GTK+ callbacks:
+	void SendEvent();
 };
 
 // ----------------------------------------------------------------------------
@@ -96,28 +99,37 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_ADV, wxEVT_HYPERLINK, wxHyperlinkEvent );
 class WXDLLIMPEXP_ADV wxHyperlinkEvent : public wxCommandEvent
 {
 public:
-    wxHyperlinkEvent() {}
-    wxHyperlinkEvent(wxObject *generator, wxWindowID id, const wxString& url)
-        : wxCommandEvent(wxEVT_HYPERLINK, id),
-          m_url(url)
-    {
-        SetEventObject(generator);
-    }
+	wxHyperlinkEvent() {}
+	wxHyperlinkEvent(wxObject *generator, wxWindowID id, const wxString& url)
+		: wxCommandEvent(wxEVT_HYPERLINK, id),
+		  m_url(url)
+	{
+		SetEventObject(generator);
+	}
 
-    // Returns the URL associated with the hyperlink control
-    // that the user clicked on.
-    wxString GetURL() const { return m_url; }
-    void SetURL(const wxString &url) { m_url=url; }
+	// Returns the URL associated with the hyperlink control
+	// that the user clicked on.
+	wxString GetURL() const
+	{
+		return m_url;
+	}
+	void SetURL(const wxString &url)
+	{
+		m_url=url;
+	}
 
-    // default copy ctor, assignment operator and dtor are ok
-    virtual wxEvent *Clone() const wxOVERRIDE { return new wxHyperlinkEvent(*this); }
+	// default copy ctor, assignment operator and dtor are ok
+	virtual wxEvent *Clone() const wxOVERRIDE
+	{
+		return new wxHyperlinkEvent(*this);
+	}
 
 private:
 
-    // URL associated with the hyperlink control that the used clicked on.
-    wxString m_url;
+	// URL associated with the hyperlink control that the used clicked on.
+	wxString m_url;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxHyperlinkEvent);
+	wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxHyperlinkEvent);
 };
 
 
@@ -135,34 +147,34 @@ typedef void (wxEvtHandler::*wxHyperlinkEventFunction)(wxHyperlinkEvent&);
 
 
 #if defined(__WXGTK210__) && !defined(__WXUNIVERSAL__)
-    #include "wx/gtk/hyperlink.h"
+#include "wx/gtk/hyperlink.h"
 // Note that the native control is only available in Unicode version under MSW.
 #elif defined(__WXMSW__) && wxUSE_UNICODE && !defined(__WXUNIVERSAL__)
-    #include "wx/msw/hyperlink.h"
+#include "wx/msw/hyperlink.h"
 #else
-    #include "wx/generic/hyperlink.h"
+#include "wx/generic/hyperlink.h"
 
-    class WXDLLIMPEXP_ADV wxHyperlinkCtrl : public wxGenericHyperlinkCtrl
-    {
-    public:
-        wxHyperlinkCtrl() { }
+class WXDLLIMPEXP_ADV wxHyperlinkCtrl : public wxGenericHyperlinkCtrl
+{
+public:
+	wxHyperlinkCtrl() { }
 
-        wxHyperlinkCtrl(wxWindow *parent,
-                        wxWindowID id,
-                        const wxString& label,
-                        const wxString& url,
-                        const wxPoint& pos = wxDefaultPosition,
-                        const wxSize& size = wxDefaultSize,
-                        long style = wxHL_DEFAULT_STYLE,
-                        const wxString& name = wxHyperlinkCtrlNameStr)
-            : wxGenericHyperlinkCtrl(parent, id, label, url, pos, size,
-                                     style, name)
-        {
-        }
+	wxHyperlinkCtrl(wxWindow *parent,
+	                wxWindowID id,
+	                const wxString& label,
+	                const wxString& url,
+	                const wxPoint& pos = wxDefaultPosition,
+	                const wxSize& size = wxDefaultSize,
+	                long style = wxHL_DEFAULT_STYLE,
+	                const wxString& name = wxHyperlinkCtrlNameStr)
+		: wxGenericHyperlinkCtrl(parent, id, label, url, pos, size,
+		                         style, name)
+	{
+	}
 
-    private:
-        wxDECLARE_DYNAMIC_CLASS_NO_COPY( wxHyperlinkCtrl );
-    };
+private:
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY( wxHyperlinkCtrl );
+};
 #endif
 
 // old wxEVT_COMMAND_* constants

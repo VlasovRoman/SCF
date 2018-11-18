@@ -34,27 +34,36 @@
 class WXDLLIMPEXP_ADV wxTipProvider
 {
 public:
-    wxTipProvider(size_t currentTip) { m_currentTip = currentTip; }
+	wxTipProvider(size_t currentTip)
+	{
+		m_currentTip = currentTip;
+	}
 
-    // get the current tip and update the internal state to return the next tip
-    // when called for the next time
-    virtual wxString GetTip() = 0;
+	// get the current tip and update the internal state to return the next tip
+	// when called for the next time
+	virtual wxString GetTip() = 0;
 
-    // get the current tip "index" (or whatever allows the tip provider to know
-    // from where to start the next time)
-    size_t GetCurrentTip() const { return m_currentTip; }
+	// get the current tip "index" (or whatever allows the tip provider to know
+	// from where to start the next time)
+	size_t GetCurrentTip() const
+	{
+		return m_currentTip;
+	}
 
-    // virtual dtor for the base class
-    virtual ~wxTipProvider() { }
+	// virtual dtor for the base class
+	virtual ~wxTipProvider() { }
 
 
 #if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED_MSG("this method does nothing, simply don't call it")
-    wxString PreprocessTip(const wxString& tip) { return tip; }
+	wxDEPRECATED_MSG("this method does nothing, simply don't call it")
+	wxString PreprocessTip(const wxString& tip)
+	{
+		return tip;
+	}
 #endif
 
 protected:
-    size_t m_currentTip;
+	size_t m_currentTip;
 };
 
 // a function which returns an implementation of wxTipProvider using the
@@ -63,7 +72,7 @@ protected:
 // NB: the caller is responsible for deleting the pointer!
 #if wxUSE_TEXTFILE
 WXDLLIMPEXP_ADV wxTipProvider *wxCreateFileTipProvider(const wxString& filename,
-                                                       size_t currentTip);
+        size_t currentTip);
 #endif // wxUSE_TEXTFILE
 
 // ----------------------------------------------------------------------------

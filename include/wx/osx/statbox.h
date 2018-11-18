@@ -13,37 +13,40 @@
 
 class WXDLLIMPEXP_CORE wxStaticBox : public wxStaticBoxBase
 {
-    wxDECLARE_DYNAMIC_CLASS(wxStaticBox);
+	wxDECLARE_DYNAMIC_CLASS(wxStaticBox);
 
 public:
-    wxStaticBox() {}
-    wxStaticBox(wxWindow *parent, wxWindowID id,
-           const wxString& label,
-           const wxPoint& pos = wxDefaultPosition,
-           const wxSize& size = wxDefaultSize,
-           long style = 0,
-           const wxString& name = wxStaticBoxNameStr)
-    {
-        Create(parent, id, label, pos, size, style, name);
-    }
+	wxStaticBox() {}
+	wxStaticBox(wxWindow *parent, wxWindowID id,
+	            const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxStaticBoxNameStr)
+	{
+		Create(parent, id, label, pos, size, style, name);
+	}
 
-    bool Create(wxWindow *parent, wxWindowID id,
-           const wxString& label,
-           const wxPoint& pos = wxDefaultPosition,
-           const wxSize& size = wxDefaultSize,
-           long style = 0,
-           const wxString& name = wxStaticBoxNameStr);
+	bool Create(wxWindow *parent, wxWindowID id,
+	            const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxStaticBoxNameStr);
 
-    virtual void Command(wxCommandEvent& WXUNUSED(event)) {}
-    virtual void ProcessCommand(wxCommandEvent& WXUNUSED(event)) {}
+	virtual void Command(wxCommandEvent& WXUNUSED(event)) {}
+	virtual void ProcessCommand(wxCommandEvent& WXUNUSED(event)) {}
 
-    virtual void GetBordersForSizer(int *borderTop, int *borderOther) const;
+	virtual void GetBordersForSizer(int *borderTop, int *borderOther) const;
 
-    virtual bool AcceptsFocus() const { return false; }
+	virtual bool AcceptsFocus() const
+	{
+		return false;
+	}
 
-    // protect native font of box
-    virtual bool SetFont( const wxFont &font );
+	// protect native font of box
+	virtual bool SetFont( const wxFont &font );
 };
 
 #endif
-    // _WX_STATBOX_H_
+// _WX_STATBOX_H_

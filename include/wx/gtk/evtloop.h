@@ -19,29 +19,31 @@ typedef union  _GdkEvent        GdkEvent;
 class WXDLLIMPEXP_CORE wxGUIEventLoop : public wxEventLoopBase
 {
 public:
-    wxGUIEventLoop();
+	wxGUIEventLoop();
 
-    virtual void ScheduleExit(int rc = 0) wxOVERRIDE;
-    virtual bool Pending() const wxOVERRIDE;
-    virtual bool Dispatch() wxOVERRIDE;
-    virtual int DispatchTimeout(unsigned long timeout) wxOVERRIDE;
-    virtual void WakeUp() wxOVERRIDE;
+	virtual void ScheduleExit(int rc = 0) wxOVERRIDE;
+	virtual bool Pending() const wxOVERRIDE;
+	virtual bool Dispatch() wxOVERRIDE;
+	virtual int DispatchTimeout(unsigned long timeout) wxOVERRIDE;
+	virtual void WakeUp() wxOVERRIDE;
 
-    void StoreGdkEventForLaterProcessing(GdkEvent* ev)
-        { m_arrGdkEvents.Add(ev); }
+	void StoreGdkEventForLaterProcessing(GdkEvent* ev)
+	{
+		m_arrGdkEvents.Add(ev);
+	}
 
 protected:
-    virtual int DoRun() wxOVERRIDE;
-    virtual void DoYieldFor(long eventsToProcess) wxOVERRIDE;
+	virtual int DoRun() wxOVERRIDE;
+	virtual void DoYieldFor(long eventsToProcess) wxOVERRIDE;
 
 private:
-    // the exit code of this event loop
-    int m_exitcode;
+	// the exit code of this event loop
+	int m_exitcode;
 
-    // used to temporarily store events in DoYield()
-    wxArrayPtrVoid m_arrGdkEvents;
+	// used to temporarily store events in DoYield()
+	wxArrayPtrVoid m_arrGdkEvents;
 
-    wxDECLARE_NO_COPY_CLASS(wxGUIEventLoop);
+	wxDECLARE_NO_COPY_CLASS(wxGUIEventLoop);
 };
 
 #endif // _WX_GTK_EVTLOOP_H_

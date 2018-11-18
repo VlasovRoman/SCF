@@ -16,18 +16,21 @@
 
 class WXDLLIMPEXP_CORE wxAcceleratorTable: public wxObject
 {
-    wxDECLARE_DYNAMIC_CLASS(wxAcceleratorTable);
+	wxDECLARE_DYNAMIC_CLASS(wxAcceleratorTable);
 public:
-    wxAcceleratorTable();
-    wxAcceleratorTable(int n, const wxAcceleratorEntry entries[]); // Load from array
+	wxAcceleratorTable();
+	wxAcceleratorTable(int n, const wxAcceleratorEntry entries[]); // Load from array
 
-    virtual ~wxAcceleratorTable();
+	virtual ~wxAcceleratorTable();
 
-    bool Ok() const { return IsOk(); }
-    bool IsOk() const;
+	bool Ok() const
+	{
+		return IsOk();
+	}
+	bool IsOk() const;
 
-    int GetCommand( wxKeyEvent &event );
+	int GetCommand( wxKeyEvent &event );
 };
 
 #endif
-    // _WX_ACCEL_H_
+// _WX_ACCEL_H_

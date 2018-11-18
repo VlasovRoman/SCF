@@ -18,20 +18,20 @@
 
 // strict type checking to detect conversion from HFOO to HBAR at compile-time
 #ifndef STRICT
-    #define STRICT 1
+#define STRICT 1
 #endif
 
 // this macro tells windows.h to not define min() and max() as macros: we need
 // this as otherwise they conflict with standard C++ functions
 #ifndef NOMINMAX
-    #define NOMINMAX
+#define NOMINMAX
 #endif // NOMINMAX
 
 
 // For IPv6 support, we must include winsock2.h before winsock.h, and
 // windows.h include winsock.h so do it before including it
 #if wxUSE_IPV6
-    #include <winsock2.h>
+#include <winsock2.h>
 #endif
 
 #include <windows.h>

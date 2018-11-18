@@ -1,7 +1,7 @@
 #include "startup.h"
 #include "moho.h"
 
-Moho::Moho(CScApp__vftable &vft)
+Moho::Moho(CScApp &vft)
 {
 	init_unk_sv(vft, "SupCom", "SupremeCommander");
 	vft.unk1 = 0;
@@ -22,39 +22,9 @@ Moho::Moho(CScApp__vftable &vft)
 	dword_10A6488 = dword_F8D698;
 	dword_10A6480 = dword_F8D690;
 	dword_10A6484 = dword_F8D694;
-	/*
-	  (int a2)
-	  int result; // eax
-	  int v3; // [esp-8h] [ebp-20h]
-	  int *v4; // [esp+8h] [ebp-10h]
-	  int v5; // [esp+14h] [ebp-4h]
-
-	  v4 = &v3;
-	  init_unk_sv(a2, "SupCom", "SupremeCommander");
-	  v5 = 0;
-	  *(_DWORD *)a2 = &CScApp::`vftable';
-	  *(_DWORD *)(a2 + 68) = 0;
-	  *(_BYTE *)(a2 + 72) = 0;
-	  *(_BYTE *)(a2 + 73) = 0;
-	  *(_DWORD *)(a2 + 76) = 0;
-	  *(_DWORD *)(a2 + 80) = 0;
-	  *(_BYTE *)(a2 + 84) = 1;
-	  sub_9556D0((LARGE_INTEGER *)(a2 + 88));
-	  *(_DWORD *)(a2 + 136) = 0;
-	  *(_DWORD *)(a2 + 140) = 0;
-	  LOBYTE(v5) = 1;
-	  sub_4059E0((int)&unk_F5B9C0, "Gas Powered Games", strlen("Gas Powered Games"));
-	  sub_4059E0((int)&unk_F5B9DC, "Supreme Commander Forged Alliance", strlen("Supreme Commander Forged Alliance"));
-	  sub_4059E0((int)&unk_F5B9F8, "SCFA", strlen("SCFA"));
-	  dword_10A647C = dword_F8D68C;
-	  dword_10A6488 = dword_F8D698;
-	  dword_10A6480 = dword_F8D690;
-	  result = a2;
-	  dword_10A6484 = dword_F8D694;
-	  return result;	*/
 }
 
-int Moho::init_unk_sv(CScApp__vftable &vft, string s1, string s2)
+int Moho::init_unk_sv(CScApp &vft, std::string s1, std::string s2)
 {
 	vft.unk10 = 15;
 	vft.unk11 = 0;
@@ -67,25 +37,6 @@ int Moho::init_unk_sv(CScApp__vftable &vft, string s1, string s2)
 	vft.unk_str2 = s2;
 
 	return 1;
-
-	/*
-	  (int a1, void *Src, void *a3)
-	  int v3; // ecx
-	  int v4; // ecx
-
-	  v3 = a1 + 4;
-	  *(_DWORD *)a1 = &off_E4F408;
-	  *(_DWORD *)(v3 + 24) = 15;
-	  *(_DWORD *)(v3 + 20) = 0;
-	  *(_BYTE *)(v3 + 4) = 0;
-	  sub_4059E0(a1 + 4, Src, strlen((const char *)Src));
-	  v4 = a1 + 32;
-	  *(_DWORD *)(v4 + 24) = 15;
-	  *(_DWORD *)(v4 + 20) = 0;
-	  *(_BYTE *)(v4 + 4) = 0;
-	  sub_4059E0(a1 + 32, a3, strlen((const char *)a3));
-	  *(_DWORD *)(a1 + 60) = 0;
-	  return a1; */
 }
 
 LRESULT Moho::fn(int code, WPARAM wParam, LPARAM lParam)
@@ -107,7 +58,7 @@ LRESULT Moho::fn(int code, WPARAM wParam, LPARAM lParam)
 	return result;
 }
 
-void Moho::WIN_AppExecute(CScApp__vftable *vft)
+void Moho::WIN_AppExecute(CScApp *vft)
 {
 	//CScApp__vftable *v1; // esi
 	HMODULE v2; // eax
@@ -137,7 +88,7 @@ void Moho::WIN_AppExecute(CScApp__vftable *vft)
 	char v26; // [esp+57h] [ebp-11h]
 	int *v27; // [esp+58h] [ebp-10h]
 	int v28; // [esp+64h] [ebp-4h]
-	static HHOOK hhookSysMsg; 
+	static HHOOK hhookSysMsg;
 
 	v27 = &v17;
 	if (vft!=nullptr)
@@ -147,164 +98,226 @@ void Moho::WIN_AppExecute(CScApp__vftable *vft)
 		hhookSysMsg = SetWindowsHookExW(WH_KEYBOARD_LL, (HOOKPROC)&fn, v2, 0);
 		wstring foo = towstring(fn);
 		GetModuleHandleExW(6u, &foo[0], (HMODULE *)&vft);
+		//CScApp* pApp = new CScApp();
+		wxApp::SetInstance(vft);
 		wxEntry((HINSTANCE)vft, 0, 0, 0);
-/* 		if ( sub_4F2000() )
+		if (check_OS_compability())
 		{
-			v32 = 2;
-			sub_4141A0(1);
+			v28 = 2;
+			THREAD_SetAffinity(1);
 			InitCommonControls();
 			CoInitialize(0);
-			sub_4A2150();
-			sub_4A2D30();
-			sub_9556F0((LARGE_INTEGER *)&unk_10A9B78);
-			if ( !(*(unsigned __int8 (__thiscall **)(void *))(*(_DWORD *)v2 + 12))(v2) )
-			{
-				v6 = GetCurrentProcess();
-				TerminateProcess(v6, 1u);
-			}
-			v7 = dword_F8F80C;
-			*(_DWORD *)(dword_F8F80C + 68) = 1;
-			*(_BYTE *)(v7 + 92) = 1;
-			_controlfp(0x20000u, 0x30000u);
-			v8 = 1;
-			v30 = 1;
-			v29 = 1;
-			while ( 1 )
-			{
-				while ( 1 )
-				{
-					while ( 1 )
-					{
-						while ( v29 )
+			PLAT_Init();
+			//Moho::PLAT_CatchStructuredExceptions();
+			/* 			gpg::time::Timer::Reset((gpg::time::Timer *)&unk_109BE230);
+						if ( !(*(unsigned __int8 (__thiscall **)(Moho *))(*(_DWORD *)v1 + 12))(v1) )
 						{
-							SleepEx(0, 1);
-							v9 = (int *)sub_4F2480();
-							sub_409AC0(v9);
-							v29 = 0;
+							v5 = GetCurrentProcess();
+							TerminateProcess(v5, 1u);
 						}
-						if ( !(*(unsigned __int8 (**)(void))(*(_DWORD *)dword_F8F80C + 76))() )
-							break;
-						(*(void (**)(void))(*(_DWORD *)dword_F8F80C + 80))();
-						v8 = 1;
-						v30 = 1;
-					}
-					if ( !v8 )
-						break;
-					v8 = (*(int (**)(void))(*(_DWORD *)dword_F8F80C + 88))();
-					v30 = v8;
-				}
-				if ( !*(_BYTE *)(dword_F8F80C + 92) )
-					break;
-				(*(void (__thiscall **)(void *))(*(_DWORD *)v2 + 16))(v2);
-				v8 = 1;
-				v30 = 1;
-				v29 = 1;
-				v10 = (int *)sub_4F24F0();
-				sub_409AC0(v10);
-				sub_4F1540();
-				a2 = flt_10A9B84 - a2;
-				v27 = a2;
-				if ( a2 >= 0.0 )
-				{
-					if ( v27 <= 4294967300.0 )
-					{
-						v17 = a2;
-						*(float *)&v11 = COERCE_FLOAT(sub_40D820(v17));
+						*((_DWORD *)wxTheApp + 17) = 1;
+						*((_BYTE *)wxTheApp + 92) = 1;
+						controlfp(0x20000u, 0x30000u);
+						v6 = 1;
+						v26 = 1;
+						v25 = 1;
+						while ( 1 )
+						{
+							while ( 1 )
+							{
+								while ( 1 )
+								{
+									while ( v25 )
+									{
+										SleepEx(0, 1);
+										v7 = (int *)Moho::WIN_GetBeforeEventsStage();
+										sub_10009390(v7);
+										v25 = 0;
+									}
+									if ( !(*(unsigned __int8 (**)(void))(*(_DWORD *)wxTheApp + 76))() )
+										break;
+									(*(void (**)(void))(*(_DWORD *)wxTheApp + 80))();
+									v6 = 1;
+									v26 = 1;
+								}
+								if ( !v6 )
+									break;
+								v6 = (*(int (**)(void))(*(_DWORD *)wxTheApp + 88))();
+								v26 = v6;
+							}
+							if ( !*((_BYTE *)wxTheApp + 92) )
+								break;
+							(*(void (__thiscall **)(Moho *))(*(_DWORD *)v1 + 16))(v1);
+							v6 = 1;
+							v26 = 1;
+							v25 = 1;
+							v8 = (int *)Moho::WIN_GetBeforeWaitStage();
+							sub_10009390(v8);
+							v9 = flt_109BE23C - gpg::time::Timer::ElapsedMillisecondsAndReset((gpg::time::Timer *)&unk_109BE230);
+							v24 = v9;
+							if ( v9 >= 0.0 )
+							{
+								if ( v24 <= 4294967300.0 )
+								{
+									v16 = v9;
+									v10 = sub_1000BC10(v16);
+								}
+								else
+								{
+									v10 = -1;
+								}
+							}
+							else
+							{
+								v10 = 0;
+							}
+							LODWORD(flt_109BE23C) = dword_109BE210;
+							v11 = v10;
+							v12 = Moho::WIN_GetWaitHandleSet();
+							Moho::CWaitHandleSet::MsgWaitEx(v12, v11, 0x4FFu, 6u);
+						}
+						v28 = -1;
+						(*(void (__thiscall **)(Moho *))(*(_DWORD *)v1 + 20))(v1);
+						Moho::WINX_Exit();
+						Moho::PLAT_Exit();
+						if ( wxTheApp )
+						{
+			LABEL_26:
+							for ( i = 1; ; i = (*(int (**)(void))(v14 + 88))() )
+							{
+								if ( (*(unsigned __int8 (**)(void))(*(_DWORD *)wxTheApp + 76))() )
+								{
+									(*(void (**)(void))(*(_DWORD *)wxTheApp + 80))();
+									goto LABEL_26;
+								}
+								v14 = *(_DWORD *)wxTheApp;
+								if ( !i )
+									break;
+							}
+							(*(void (**)(void))(v14 + 56))();
+							wxApp::CleanUp();
+						}
+						if ( hhk )
+							UnhookWindowsHookEx(hhk);
+						Moho::RES_Exit();
+						dword_109BA7A4 = 0;
 					}
 					else
 					{
-						*(float *)&v11 = -6.8056469e38;
-					}
-				}
-				else
-				{
-					*(float *)&v11 = 0.0;
-				}
-				LODWORD(flt_10A9B84) = dword_10A9B58;
-				v17 = *(float *)&v11;
-				v12 = sub_4F2420();
-				sub_4145E0((int)v12, LODWORD(v17));
-			}
-			v32 = -1;
-			(*(void (__thiscall **)(void *))(*(_DWORD *)v2 + 20))(v2);
-			sub_4F3A60();
-			sub_4A2210();
-			if ( dword_F8F80C )
-			{
-LABEL_30:
-				for ( i = 1; ; i = (*(int (**)(void))(v15 + 88))() )
-				{
-					v14 = (*(int (**)(void))(*(_DWORD *)dword_F8F80C + 76))();
-					v15 = *(_DWORD *)dword_F8F80C;
-					if ( v14 )
-					{
-						(*(void (**)(void))(v15 + 80))();
-						goto LABEL_30;
-					}
-					if ( !i )
-						break;
-				}
-				(*(void (**)(void))(v15 + 56))();
-				sub_992E10();
-			}
-			if ( hhk )
-				UnhookWindowsHookEx(hhk);
-			sub_4ABEB0();
-			dword_10A63BC = 0;
+						std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<char,std::char_traits<char>,std::allocator<char>>(
+						            &v18,
+						            "Old OS Version");
+						v28 = 0;
+						std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<char,std::char_traits<char>,std::allocator<char>>(
+						            &v21,
+						            "This application requires Windows NT, 2000, XP, or newer, to operate.\n"
+						            "Windows 95, 98, and ME are not supported.");
+						LOBYTE(v28) = 1;
+						v3 = v22;
+						if ( v23 < 0x10 )
+							v3 = (int *)&v22;
+						v24 = COERCE_FLOAT(&v16);
+						v16 = *(float *)&v3;
+						v4 = v19;
+						if ( v20 < 0x10 )
+							v4 = (int *)&v19;
+						v24 = COERCE_FLOAT(&v15);
+						Moho::WIN_OkBox((int)v4, SLODWORD(v16));
+						dword_109BA7A4 = 0;
+						LOBYTE(v28) = 0;
+						std::basic_string<char,std::char_traits<char>,std::allocator<char>>::~basic_string<char,std::char_traits<char>,std::allocator<char>>(&v21);
+						v28 = -1;
+						std::basic_string<char,std::char_traits<char>,std::allocator<char>>::~basic_string<char,std::char_traits<char>,std::allocator<char>>(&v18); */
 		}
-		else
-		{
-			sub_405550((int)&v19, "Old OS Version");
-			v32 = 0;
-			sub_405550(
-			    (int)&v23,
-			    "This application requires Windows NT, 2000, XP, or newer, to operate.\n"
-			    "Windows 95, 98, and ME are not supported.");
-			LOBYTE(v32) = 1;
-			*(float *)&v4 = v24;
-			if ( v26 < 0x10 )
-				*(float *)&v4 = COERCE_FLOAT(&v24);
-			v27 = COERCE_FLOAT(&v17);
-			v17 = *(float *)&v4;
-			v5 = (char *)LODWORD(v20);
-			if ( v22 < 0x10 )
-				v5 = (char *)&v20;
-			v27 = COERCE_FLOAT(&v16);
-			sub_4F2800(v5, (char *)LODWORD(v17));
-			dword_10A63BC = 0;
-			LOBYTE(v32) = 0;
-			if ( v26 >= 0x10 )
-			{
-				v17 = v24;
-				sub_957A60();
-			}
-			v26 = 15;
-			v25 = 0;
-			LOBYTE(v24) = 0;
-			v32 = -1;
-			if ( v22 >= 0x10 )
-			{
-				v17 = v20;
-				sub_957A60();
-			}
-			v22 = 15;
-			v21 = 0;
-			LOBYTE(v20) = 0;
-		}*/
-	}	 
+	}
+}
+
+int sub_1009A910()
+{
+	int result; // eax
+
+	result = 1;
+	//if ( !(dword_109DCC04 & 1) )
+	//{
+	//	dword_109DCC04 |= 1u;
+	//	sub_104D9E60(&unk_109DCBFC);
+	//	result = atexit(sub_105BF010);
+	//}
+	//	PLAT_control_var = (int)&unk_109DCBFC;
+	return result;
+}
+
+void Moho::PLAT_Init()
+{
+	int v0; // ecx
+	int v1; // esi
+	HANDLE v2; // eax
+
+	v0 = PLAT_control_var;
+	if ( !PLAT_control_var )
+	{
+		//startup.cpp
+		swap_thread_objs((int)sub_1009A910, &dword_109BA774);
+		v0 = PLAT_control_var;
+	}
+	v1 = v0;
+	wait_thread_object(v0);
+	if ( !byte_109BA76A )
+	{
+		byte_109BA76B = 0;
+		SymSetOptions(0x216u);
+		v2 = GetCurrentProcess();
+		if ( SymInitialize(v2, 0, 1) )
+			byte_109BA76B = 1;
+		CreateMutexA(0, 0, "GPG_MohoEngine_Mutex");
+		byte_109BA76A = 1;
+	}
+	wait_thread_object_destruc(v1);
+}
+
+void Moho::THREAD_SetAffinity(int a1)
+{
+	HANDLE v1; // eax
+	unsigned int v2; // edx
+	char v3; // si
+	char v4; // cl
+	DWORD v5; // ST08_4
+	HANDLE v6; // eax
+	DWORD ProcessAffinityMask; // [esp+Ch] [ebp-8h]
+	DWORD SystemAffinityMask; // [esp+10h] [ebp-4h]
+
+	v1 = GetCurrentProcess();
+	GetProcessAffinityMask(v1, &ProcessAffinityMask, &SystemAffinityMask);
+	v2 = 0;
+	v3 = 31;
+	while ( 1 )
+	{
+		v4 = v2;
+		if ( a1 )
+			v4 = v3;
+		if ( (1 << v4) & ProcessAffinityMask )
+			break;
+		++v2;
+		--v3;
+		if ( v2 >= 0x20 )
+			return;
+	}
+	v5 = 1 << v4;
+	v6 = GetCurrentThread();
+	SetThreadAffinityMask(v6, v5);
 }
 
 //Replace all strings of type in std::string.
 //@@1 target string @@2 pattern string @@3 what to replace pattern with.
-string Moho::replaceAll( const string& s, const string& f, const string& r )
+string Moho::replaceAll( const std::string& s, const std::string& f, const std::string& r )
 {
-	if ( s.empty() || f.empty() || f == r || s.find(f) == string::npos )
+	if ( s.empty() || f.empty() || f == r || s.find(f) == std::string::npos )
 	{
 		return s;
 	}
-	ostringstream build_it;
+	std::ostringstream build_it;
 	size_t i = 0;
-	for ( size_t pos; ( pos = s.find( f, i ) ) != string::npos; )
+	for ( size_t pos; ( pos = s.find( f, i ) ) != std::string::npos; )
 	{
 		build_it.write( &s[i], pos - i );
 		build_it << r;
@@ -318,12 +331,12 @@ string Moho::replaceAll( const string& s, const string& f, const string& r )
 }
 
 //@@ return the string path to Appdata on windows.
-string Moho::USER_GetAppDataDir()
+std::string Moho::USER_GetAppDataDir()
 {
-	string v1; // eax
+	std::string v1; // eax
 	if (SHGetFolderPathA(NULL, CSIDL_LOCAL_APPDATA, NULL, NULL, Path) >=0)
 	{
-		v1 = string(Path);
+		v1 = std::string(Path);
 		v1+="\\";
 		v1+=dev_company;
 		v1+="\\";
@@ -333,9 +346,9 @@ string Moho::USER_GetAppDataDir()
 }
 
 //@@ return the string path to cache folder.
-string Moho::USER_GetAppCacheDir()
+std::string Moho::USER_GetAppCacheDir()
 {
-	string AppDataDir;
+	std::string AppDataDir;
 
 	AppDataDir = USER_GetAppDataDir();
 	AppDataDir = replaceAll( AppDataDir, &leftslash[0],rightslash);
@@ -350,15 +363,15 @@ string Moho::USER_GetAppCacheDir()
 	}
 
 #ifdef DEBUG
-	cout<<__func__<<" Cache dir is : \n";
-	cout<<AppDataDir<<endl;
+	std::cout<<__func__<<" Cache dir is : \n";
+	std::cout<<AppDataDir<<std::endl;
 #endif
 	return AppDataDir;
 }
 
 void Moho::USER_PurgeAppCacheDir()
 {
-	string path;
+	std::string path;
 	int err;
 
 	path = USER_GetAppCacheDir();

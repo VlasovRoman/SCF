@@ -19,27 +19,27 @@
 #    define WXEXPORT __attribute__ ((visibility("default")))
 #    define WXIMPORT __attribute__ ((visibility("default")))
 #elif defined(__WINDOWS__)
-    /*
-       __declspec works in BC++ 5 and later as well as VC++.
-     */
+/*
+   __declspec works in BC++ 5 and later as well as VC++.
+ */
 #    if defined(__VISUALC__) || defined(__BORLANDC__)
 #        define WXEXPORT __declspec(dllexport)
 #        define WXIMPORT __declspec(dllimport)
-    /*
-        While gcc also supports __declspec(dllexport), it created unusably huge
-        DLL files in gcc 4.[56] (while taking horribly long amounts of time),
-        see http://gcc.gnu.org/bugzilla/show_bug.cgi?id=43601. Because of this
-        we rely on binutils auto export/import support which seems to work
-        quite well for 4.5+. However the problem was fixed in 4.7 and later and
-        not exporting everything creates smaller DLLs (~8% size difference), so
-        do use the explicit attributes again for the newer versions.
-     */
+/*
+    While gcc also supports __declspec(dllexport), it created unusably huge
+    DLL files in gcc 4.[56] (while taking horribly long amounts of time),
+    see http://gcc.gnu.org/bugzilla/show_bug.cgi?id=43601. Because of this
+    we rely on binutils auto export/import support which seems to work
+    quite well for 4.5+. However the problem was fixed in 4.7 and later and
+    not exporting everything creates smaller DLLs (~8% size difference), so
+    do use the explicit attributes again for the newer versions.
+ */
 #    elif defined(__GNUC__) && \
         (!wxCHECK_GCC_VERSION(4, 5) || wxCHECK_GCC_VERSION(4, 7))
-        /*
-            __declspec could be used here too but let's use the native
-            __attribute__ instead for clarity.
-        */
+/*
+    __declspec could be used here too but let's use the native
+    __attribute__ instead for clarity.
+*/
 #       define WXEXPORT __attribute__((dllexport))
 #       define WXIMPORT __attribute__((dllimport))
 #    endif
@@ -274,39 +274,39 @@
    of macros for forward declarations to hide this difference:
  */
 #if defined(HAVE_VISIBILITY) || (defined(__WINDOWS__) && defined(__GNUC__))
-    #define WXDLLIMPEXP_FWD_BASE
-    #define WXDLLIMPEXP_FWD_NET
-    #define WXDLLIMPEXP_FWD_CORE
-    #define WXDLLIMPEXP_FWD_ADV
-    #define WXDLLIMPEXP_FWD_QA
-    #define WXDLLIMPEXP_FWD_HTML
-    #define WXDLLIMPEXP_FWD_GL
-    #define WXDLLIMPEXP_FWD_XML
-    #define WXDLLIMPEXP_FWD_XRC
-    #define WXDLLIMPEXP_FWD_AUI
-    #define WXDLLIMPEXP_FWD_PROPGRID
-    #define WXDLLIMPEXP_FWD_RIBBON
-    #define WXDLLIMPEXP_FWD_RICHTEXT
-    #define WXDLLIMPEXP_FWD_MEDIA
-    #define WXDLLIMPEXP_FWD_STC
-    #define WXDLLIMPEXP_FWD_WEBVIEW
+#define WXDLLIMPEXP_FWD_BASE
+#define WXDLLIMPEXP_FWD_NET
+#define WXDLLIMPEXP_FWD_CORE
+#define WXDLLIMPEXP_FWD_ADV
+#define WXDLLIMPEXP_FWD_QA
+#define WXDLLIMPEXP_FWD_HTML
+#define WXDLLIMPEXP_FWD_GL
+#define WXDLLIMPEXP_FWD_XML
+#define WXDLLIMPEXP_FWD_XRC
+#define WXDLLIMPEXP_FWD_AUI
+#define WXDLLIMPEXP_FWD_PROPGRID
+#define WXDLLIMPEXP_FWD_RIBBON
+#define WXDLLIMPEXP_FWD_RICHTEXT
+#define WXDLLIMPEXP_FWD_MEDIA
+#define WXDLLIMPEXP_FWD_STC
+#define WXDLLIMPEXP_FWD_WEBVIEW
 #else
-    #define WXDLLIMPEXP_FWD_BASE      WXDLLIMPEXP_BASE
-    #define WXDLLIMPEXP_FWD_NET       WXDLLIMPEXP_NET
-    #define WXDLLIMPEXP_FWD_CORE      WXDLLIMPEXP_CORE
-    #define WXDLLIMPEXP_FWD_ADV       WXDLLIMPEXP_ADV
-    #define WXDLLIMPEXP_FWD_QA        WXDLLIMPEXP_QA
-    #define WXDLLIMPEXP_FWD_HTML      WXDLLIMPEXP_HTML
-    #define WXDLLIMPEXP_FWD_GL        WXDLLIMPEXP_GL
-    #define WXDLLIMPEXP_FWD_XML       WXDLLIMPEXP_XML
-    #define WXDLLIMPEXP_FWD_XRC       WXDLLIMPEXP_XRC
-    #define WXDLLIMPEXP_FWD_AUI       WXDLLIMPEXP_AUI
-    #define WXDLLIMPEXP_FWD_PROPGRID  WXDLLIMPEXP_PROPGRID
-    #define WXDLLIMPEXP_FWD_RIBBON    WXDLLIMPEXP_RIBBON
-    #define WXDLLIMPEXP_FWD_RICHTEXT  WXDLLIMPEXP_RICHTEXT
-    #define WXDLLIMPEXP_FWD_MEDIA     WXDLLIMPEXP_MEDIA
-    #define WXDLLIMPEXP_FWD_STC       WXDLLIMPEXP_STC
-    #define WXDLLIMPEXP_FWD_WEBVIEW   WXDLLIMPEXP_WEBVIEW
+#define WXDLLIMPEXP_FWD_BASE      WXDLLIMPEXP_BASE
+#define WXDLLIMPEXP_FWD_NET       WXDLLIMPEXP_NET
+#define WXDLLIMPEXP_FWD_CORE      WXDLLIMPEXP_CORE
+#define WXDLLIMPEXP_FWD_ADV       WXDLLIMPEXP_ADV
+#define WXDLLIMPEXP_FWD_QA        WXDLLIMPEXP_QA
+#define WXDLLIMPEXP_FWD_HTML      WXDLLIMPEXP_HTML
+#define WXDLLIMPEXP_FWD_GL        WXDLLIMPEXP_GL
+#define WXDLLIMPEXP_FWD_XML       WXDLLIMPEXP_XML
+#define WXDLLIMPEXP_FWD_XRC       WXDLLIMPEXP_XRC
+#define WXDLLIMPEXP_FWD_AUI       WXDLLIMPEXP_AUI
+#define WXDLLIMPEXP_FWD_PROPGRID  WXDLLIMPEXP_PROPGRID
+#define WXDLLIMPEXP_FWD_RIBBON    WXDLLIMPEXP_RIBBON
+#define WXDLLIMPEXP_FWD_RICHTEXT  WXDLLIMPEXP_RICHTEXT
+#define WXDLLIMPEXP_FWD_MEDIA     WXDLLIMPEXP_MEDIA
+#define WXDLLIMPEXP_FWD_STC       WXDLLIMPEXP_STC
+#define WXDLLIMPEXP_FWD_WEBVIEW   WXDLLIMPEXP_WEBVIEW
 #endif
 
 /* for backwards compatibility, define suffix-less versions too */

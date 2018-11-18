@@ -35,9 +35,9 @@
 // GTK and Mac always have native implementation of the indeterminate mode
 // wxMSW has native implementation only if comctl32.dll >= 6.00
 #if !defined(__WXGTK20__) && !defined(__WXMAC__)
-    #define wxGAUGE_EMULATE_INDETERMINATE_MODE 1
+#define wxGAUGE_EMULATE_INDETERMINATE_MODE 1
 #else
-    #define wxGAUGE_EMULATE_INDETERMINATE_MODE 0
+#define wxGAUGE_EMULATE_INDETERMINATE_MODE 0
 #endif
 
 extern WXDLLIMPEXP_DATA_CORE(const char) wxGaugeNameStr[];
@@ -51,93 +51,108 @@ class WXDLLIMPEXP_FWD_CORE wxAppProgressIndicator;
 class WXDLLIMPEXP_CORE wxGaugeBase : public wxControl
 {
 public:
-    wxGaugeBase() : m_rangeMax(0), m_gaugePos(0),
-        m_appProgressIndicator(NULL) { }
+	wxGaugeBase() : m_rangeMax(0), m_gaugePos(0),
+		m_appProgressIndicator(NULL) { }
 
-    virtual ~wxGaugeBase();
+	virtual ~wxGaugeBase();
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                int range,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxGA_HORIZONTAL,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxGaugeNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            int range,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxGA_HORIZONTAL,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxGaugeNameStr);
 
-    // determinate mode API
+	// determinate mode API
 
-    // set/get the control range
-    virtual void SetRange(int range);
-    virtual int GetRange() const;
+	// set/get the control range
+	virtual void SetRange(int range);
+	virtual int GetRange() const;
 
-    virtual void SetValue(int pos);
-    virtual int GetValue() const;
+	virtual void SetValue(int pos);
+	virtual int GetValue() const;
 
-    // indeterminate mode API
-    virtual void Pulse();
+	// indeterminate mode API
+	virtual void Pulse();
 
-    // simple accessors
-    bool IsVertical() const { return HasFlag(wxGA_VERTICAL); }
+	// simple accessors
+	bool IsVertical() const
+	{
+		return HasFlag(wxGA_VERTICAL);
+	}
 
-    // overridden base class virtuals
-    virtual bool AcceptsFocus() const wxOVERRIDE { return false; }
+	// overridden base class virtuals
+	virtual bool AcceptsFocus() const wxOVERRIDE
+	{
+		return false;
+	}
 
-    // Deprecated methods not doing anything since a long time.
-    wxDEPRECATED_MSG("Remove calls to this method, it doesn't do anything")
-    void SetShadowWidth(int WXUNUSED(w)) { }
+	// Deprecated methods not doing anything since a long time.
+	wxDEPRECATED_MSG("Remove calls to this method, it doesn't do anything")
+	void SetShadowWidth(int WXUNUSED(w)) { }
 
-    wxDEPRECATED_MSG("Remove calls to this method, it always returns 0")
-    int GetShadowWidth() const { return 0; }
+	wxDEPRECATED_MSG("Remove calls to this method, it always returns 0")
+	int GetShadowWidth() const
+	{
+		return 0;
+	}
 
-    wxDEPRECATED_MSG("Remove calls to this method, it doesn't do anything")
-    void SetBezelFace(int WXUNUSED(w)) { }
+	wxDEPRECATED_MSG("Remove calls to this method, it doesn't do anything")
+	void SetBezelFace(int WXUNUSED(w)) { }
 
-    wxDEPRECATED_MSG("Remove calls to this method, it always returns 0")
-    int GetBezelFace() const { return 0; }
+	wxDEPRECATED_MSG("Remove calls to this method, it always returns 0")
+	int GetBezelFace() const
+	{
+		return 0;
+	}
 
 protected:
-    virtual wxBorder GetDefaultBorder() const wxOVERRIDE { return wxBORDER_NONE; }
+	virtual wxBorder GetDefaultBorder() const wxOVERRIDE
+	{
+		return wxBORDER_NONE;
+	}
 
-    // Initialize m_appProgressIndicator if necessary, i.e. if this object has
-    // wxGA_PROGRESS style. This method is supposed to be called from the
-    // derived class Create() if it doesn't call the base class Create(), which
-    // already does it, after initializing the window style and range.
-    void InitProgressIndicatorIfNeeded();
+	// Initialize m_appProgressIndicator if necessary, i.e. if this object has
+	// wxGA_PROGRESS style. This method is supposed to be called from the
+	// derived class Create() if it doesn't call the base class Create(), which
+	// already does it, after initializing the window style and range.
+	void InitProgressIndicatorIfNeeded();
 
 
-    // the max position
-    int m_rangeMax;
+	// the max position
+	int m_rangeMax;
 
-    // the current position
-    int m_gaugePos;
+	// the current position
+	int m_gaugePos;
 
 #if wxGAUGE_EMULATE_INDETERMINATE_MODE
-    int m_nDirection;       // can be wxRIGHT or wxLEFT
+	int m_nDirection;       // can be wxRIGHT or wxLEFT
 #endif
 
-    wxAppProgressIndicator *m_appProgressIndicator;
+	wxAppProgressIndicator *m_appProgressIndicator;
 
-    wxDECLARE_NO_COPY_CLASS(wxGaugeBase);
+	wxDECLARE_NO_COPY_CLASS(wxGaugeBase);
 };
 
 #if defined(__WXUNIVERSAL__)
-    #include "wx/univ/gauge.h"
+#include "wx/univ/gauge.h"
 #elif defined(__WXMSW__)
-    #include "wx/msw/gauge.h"
+#include "wx/msw/gauge.h"
 #elif defined(__WXMOTIF__)
-    #include "wx/motif/gauge.h"
+#include "wx/motif/gauge.h"
 #elif defined(__WXGTK20__)
-    #include "wx/gtk/gauge.h"
+#include "wx/gtk/gauge.h"
 #elif defined(__WXGTK__)
-    #include "wx/gtk1/gauge.h"
+#include "wx/gtk1/gauge.h"
 #elif defined(__WXMAC__)
-    #include "wx/osx/gauge.h"
+#include "wx/osx/gauge.h"
 #elif defined(__WXQT__)
-    #include "wx/qt/gauge.h"
+#include "wx/qt/gauge.h"
 #endif
 
 #endif // wxUSE_GAUGE
 
 #endif
-    // _WX_GAUGE_H_BASE_
+// _WX_GAUGE_H_BASE_

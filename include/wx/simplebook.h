@@ -25,204 +25,204 @@
 class wxSimplebook : public wxBookCtrlBase
 {
 public:
-    wxSimplebook()
-    {
-        Init();
-    }
+	wxSimplebook()
+	{
+		Init();
+	}
 
-    wxSimplebook(wxWindow *parent,
-                 wxWindowID winid = wxID_ANY,
-                 const wxPoint& pos = wxDefaultPosition,
-                 const wxSize& size = wxDefaultSize,
-                 long style = 0,
-                 const wxString& name = wxEmptyString)
-        : wxBookCtrlBase(parent, winid, pos, size, style | wxBK_TOP, name)
-    {
-        Init();
-    }
+	wxSimplebook(wxWindow *parent,
+	             wxWindowID winid = wxID_ANY,
+	             const wxPoint& pos = wxDefaultPosition,
+	             const wxSize& size = wxDefaultSize,
+	             long style = 0,
+	             const wxString& name = wxEmptyString)
+		: wxBookCtrlBase(parent, winid, pos, size, style | wxBK_TOP, name)
+	{
+		Init();
+	}
 
-    bool Create(wxWindow *parent,
-                wxWindowID winid = wxID_ANY,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = 0,
-                const wxString& name = wxEmptyString)
-    {
-        return wxBookCtrlBase::Create(parent, winid, pos, size, style | wxBK_TOP, name);
-    }
-
-
-    // Methods specific to this class.
-
-    // A method allowing to add a new page without any label (which is unused
-    // by this control) and show it immediately.
-    bool ShowNewPage(wxWindow* page)
-    {
-        return AddPage(page, wxString(), true /* select it */);
-    }
+	bool Create(wxWindow *parent,
+	            wxWindowID winid = wxID_ANY,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxEmptyString)
+	{
+		return wxBookCtrlBase::Create(parent, winid, pos, size, style | wxBK_TOP, name);
+	}
 
 
-    // Set effect to use for showing/hiding pages.
-    void SetEffects(wxShowEffect showEffect, wxShowEffect hideEffect)
-    {
-        m_showEffect = showEffect;
-        m_hideEffect = hideEffect;
-    }
+	// Methods specific to this class.
 
-    // Or the same effect for both of them.
-    void SetEffect(wxShowEffect effect)
-    {
-        SetEffects(effect, effect);
-    }
-
-    // And the same for time outs.
-    void SetEffectsTimeouts(unsigned showTimeout, unsigned hideTimeout)
-    {
-        m_showTimeout = showTimeout;
-        m_hideTimeout = hideTimeout;
-    }
-
-    void SetEffectTimeout(unsigned timeout)
-    {
-        SetEffectsTimeouts(timeout, timeout);
-    }
+	// A method allowing to add a new page without any label (which is unused
+	// by this control) and show it immediately.
+	bool ShowNewPage(wxWindow* page)
+	{
+		return AddPage(page, wxString(), true /* select it */);
+	}
 
 
-    // Implement base class pure virtual methods.
+	// Set effect to use for showing/hiding pages.
+	void SetEffects(wxShowEffect showEffect, wxShowEffect hideEffect)
+	{
+		m_showEffect = showEffect;
+		m_hideEffect = hideEffect;
+	}
 
-    // Page management
-    virtual bool InsertPage(size_t n,
-                            wxWindow *page,
-                            const wxString& text,
-                            bool bSelect = false,
-                            int imageId = NO_IMAGE) wxOVERRIDE
-    {
-        if ( !wxBookCtrlBase::InsertPage(n, page, text, bSelect, imageId) )
-            return false;
+	// Or the same effect for both of them.
+	void SetEffect(wxShowEffect effect)
+	{
+		SetEffects(effect, effect);
+	}
 
-        m_pageTexts.insert(m_pageTexts.begin() + n, text);
+	// And the same for time outs.
+	void SetEffectsTimeouts(unsigned showTimeout, unsigned hideTimeout)
+	{
+		m_showTimeout = showTimeout;
+		m_hideTimeout = hideTimeout;
+	}
 
-        if ( !DoSetSelectionAfterInsertion(n, bSelect) )
-            page->Hide();
+	void SetEffectTimeout(unsigned timeout)
+	{
+		SetEffectsTimeouts(timeout, timeout);
+	}
 
-        return true;
-    }
 
-    virtual int SetSelection(size_t n) wxOVERRIDE
-    {
-        return DoSetSelection(n, SetSelection_SendEvent);
-    }
+	// Implement base class pure virtual methods.
 
-    virtual int ChangeSelection(size_t n) wxOVERRIDE
-    {
-        return DoSetSelection(n);
-    }
+	// Page management
+	virtual bool InsertPage(size_t n,
+	                        wxWindow *page,
+	                        const wxString& text,
+	                        bool bSelect = false,
+	                        int imageId = NO_IMAGE) wxOVERRIDE
+	{
+		if ( !wxBookCtrlBase::InsertPage(n, page, text, bSelect, imageId) )
+			return false;
 
-    // Neither labels nor images are supported but we still store the labels
-    // just in case the user code attaches some importance to them.
-    virtual bool SetPageText(size_t n, const wxString& strText) wxOVERRIDE
-    {
-        wxCHECK_MSG( n < GetPageCount(), false, wxS("Invalid page") );
+		m_pageTexts.insert(m_pageTexts.begin() + n, text);
 
-        m_pageTexts[n] = strText;
+		if ( !DoSetSelectionAfterInsertion(n, bSelect) )
+			page->Hide();
 
-        return true;
-    }
+		return true;
+	}
 
-    virtual wxString GetPageText(size_t n) const wxOVERRIDE
-    {
-        wxCHECK_MSG( n < GetPageCount(), wxString(), wxS("Invalid page") );
+	virtual int SetSelection(size_t n) wxOVERRIDE
+	{
+		return DoSetSelection(n, SetSelection_SendEvent);
+	}
 
-        return m_pageTexts[n];
-    }
+	virtual int ChangeSelection(size_t n) wxOVERRIDE
+	{
+		return DoSetSelection(n);
+	}
 
-    virtual bool SetPageImage(size_t WXUNUSED(n), int WXUNUSED(imageId)) wxOVERRIDE
-    {
-        return false;
-    }
+	// Neither labels nor images are supported but we still store the labels
+	// just in case the user code attaches some importance to them.
+	virtual bool SetPageText(size_t n, const wxString& strText) wxOVERRIDE
+	{
+		wxCHECK_MSG( n < GetPageCount(), false, wxS("Invalid page") );
 
-    virtual int GetPageImage(size_t WXUNUSED(n)) const wxOVERRIDE
-    {
-        return NO_IMAGE;
-    }
+		m_pageTexts[n] = strText;
 
-    // Override some wxWindow methods too.
-    virtual void SetFocus() wxOVERRIDE
-    {
-        wxWindow* const page = GetCurrentPage();
-        if ( page )
-            page->SetFocus();
-    }
+		return true;
+	}
+
+	virtual wxString GetPageText(size_t n) const wxOVERRIDE
+	{
+		wxCHECK_MSG( n < GetPageCount(), wxString(), wxS("Invalid page") );
+
+		return m_pageTexts[n];
+	}
+
+	virtual bool SetPageImage(size_t WXUNUSED(n), int WXUNUSED(imageId)) wxOVERRIDE
+	{
+		return false;
+	}
+
+	virtual int GetPageImage(size_t WXUNUSED(n)) const wxOVERRIDE
+	{
+		return NO_IMAGE;
+	}
+
+	// Override some wxWindow methods too.
+	virtual void SetFocus() wxOVERRIDE
+	{
+		wxWindow* const page = GetCurrentPage();
+		if ( page )
+			page->SetFocus();
+	}
 
 protected:
-    virtual void UpdateSelectedPage(size_t newsel) wxOVERRIDE
-    {
-        m_selection = (int)newsel;
-    }
+	virtual void UpdateSelectedPage(size_t newsel) wxOVERRIDE
+	{
+		m_selection = (int)newsel;
+	}
 
-    virtual wxBookCtrlEvent* CreatePageChangingEvent() const wxOVERRIDE
-    {
-        return new wxBookCtrlEvent(wxEVT_BOOKCTRL_PAGE_CHANGING,
-                                   GetId());
-    }
+	virtual wxBookCtrlEvent* CreatePageChangingEvent() const wxOVERRIDE
+	{
+		return new wxBookCtrlEvent(wxEVT_BOOKCTRL_PAGE_CHANGING,
+		                           GetId());
+	}
 
-    virtual void MakeChangedEvent(wxBookCtrlEvent& event) wxOVERRIDE
-    {
-        event.SetEventType(wxEVT_BOOKCTRL_PAGE_CHANGED);
-    }
+	virtual void MakeChangedEvent(wxBookCtrlEvent& event) wxOVERRIDE
+	{
+		event.SetEventType(wxEVT_BOOKCTRL_PAGE_CHANGED);
+	}
 
-    virtual wxWindow *DoRemovePage(size_t page) wxOVERRIDE
-    {
-        wxWindow* const win = wxBookCtrlBase::DoRemovePage(page);
-        if ( win )
-        {
-            m_pageTexts.erase(m_pageTexts.begin() + page);
+	virtual wxWindow *DoRemovePage(size_t page) wxOVERRIDE
+	{
+		wxWindow* const win = wxBookCtrlBase::DoRemovePage(page);
+		if ( win )
+		{
+			m_pageTexts.erase(m_pageTexts.begin() + page);
 
-            DoSetSelectionAfterRemoval(page);
-        }
+			DoSetSelectionAfterRemoval(page);
+		}
 
-        return win;
-    }
+		return win;
+	}
 
-    virtual void DoSize() wxOVERRIDE
-    {
-        wxWindow* const page = GetCurrentPage();
-        if ( page )
-            page->SetSize(GetPageRect());
-    }
+	virtual void DoSize() wxOVERRIDE
+	{
+		wxWindow* const page = GetCurrentPage();
+		if ( page )
+			page->SetSize(GetPageRect());
+	}
 
-    virtual void DoShowPage(wxWindow* page, bool show) wxOVERRIDE
-    {
-        if ( show )
-            page->ShowWithEffect(m_showEffect, m_showTimeout);
-        else
-            page->HideWithEffect(m_hideEffect, m_hideTimeout);
-    }
+	virtual void DoShowPage(wxWindow* page, bool show) wxOVERRIDE
+	{
+		if ( show )
+			page->ShowWithEffect(m_showEffect, m_showTimeout);
+		else
+			page->HideWithEffect(m_hideEffect, m_hideTimeout);
+	}
 
 private:
-    void Init()
-    {
-        // We don't need any border as we don't have anything to separate the
-        // page contents from.
-        SetInternalBorder(0);
+	void Init()
+	{
+		// We don't need any border as we don't have anything to separate the
+		// page contents from.
+		SetInternalBorder(0);
 
-        // No effects by default.
-        m_showEffect =
-        m_hideEffect = wxSHOW_EFFECT_NONE;
+		// No effects by default.
+		m_showEffect =
+		    m_hideEffect = wxSHOW_EFFECT_NONE;
 
-        m_showTimeout =
-        m_hideTimeout = 0;
-    }
+		m_showTimeout =
+		    m_hideTimeout = 0;
+	}
 
-    wxVector<wxString> m_pageTexts;
+	wxVector<wxString> m_pageTexts;
 
-    wxShowEffect m_showEffect,
-                 m_hideEffect;
+	wxShowEffect m_showEffect,
+	             m_hideEffect;
 
-    unsigned m_showTimeout,
-             m_hideTimeout;
+	unsigned m_showTimeout,
+	         m_hideTimeout;
 
-    wxDECLARE_NO_COPY_CLASS(wxSimplebook);
+	wxDECLARE_NO_COPY_CLASS(wxSimplebook);
 };
 
 #endif // wxUSE_BOOKCTRL

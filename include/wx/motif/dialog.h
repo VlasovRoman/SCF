@@ -17,72 +17,80 @@ class WXDLLIMPEXP_FWD_CORE wxEventLoop;
 class WXDLLIMPEXP_CORE wxDialog : public wxDialogBase
 {
 public:
-    wxDialog();
+	wxDialog();
 
-    wxDialog(wxWindow *parent, wxWindowID id,
-        const wxString& title,
-        const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize,
-        long style = wxDEFAULT_DIALOG_STYLE,
-        const wxString& name = wxDialogNameStr)
-    {
-        Create(parent, id, title, pos, size, style, name);
-    }
+	wxDialog(wxWindow *parent, wxWindowID id,
+	         const wxString& title,
+	         const wxPoint& pos = wxDefaultPosition,
+	         const wxSize& size = wxDefaultSize,
+	         long style = wxDEFAULT_DIALOG_STYLE,
+	         const wxString& name = wxDialogNameStr)
+	{
+		Create(parent, id, title, pos, size, style, name);
+	}
 
-    bool Create(wxWindow *parent, wxWindowID id,
-        const wxString& title,
-        const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize,
-        long style = wxDEFAULT_DIALOG_STYLE,
-        const wxString& name = wxDialogNameStr);
+	bool Create(wxWindow *parent, wxWindowID id,
+	            const wxString& title,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxDEFAULT_DIALOG_STYLE,
+	            const wxString& name = wxDialogNameStr);
 
-    virtual ~wxDialog();
+	virtual ~wxDialog();
 
-    virtual bool Destroy();
+	virtual bool Destroy();
 
-    virtual bool Show(bool show = true);
+	virtual bool Show(bool show = true);
 
-    void SetTitle(const wxString& title);
+	void SetTitle(const wxString& title);
 
-    void SetModal(bool flag);
+	void SetModal(bool flag);
 
-    virtual bool IsModal() const
-    { return m_modalShowing; }
+	virtual bool IsModal() const
+	{
+		return m_modalShowing;
+	}
 
-    virtual int ShowModal();
-    virtual void EndModal(int retCode);
+	virtual int ShowModal();
+	virtual void EndModal(int retCode);
 
-    // Implementation
-    virtual void ChangeFont(bool keepOriginalSize = true);
-    virtual void ChangeBackgroundColour();
-    virtual void ChangeForegroundColour();
-    WXWidget GetTopWidget() const { return m_mainWidget; }
-    WXWidget GetClientWidget() const { return m_mainWidget; }
+	// Implementation
+	virtual void ChangeFont(bool keepOriginalSize = true);
+	virtual void ChangeBackgroundColour();
+	virtual void ChangeForegroundColour();
+	WXWidget GetTopWidget() const
+	{
+		return m_mainWidget;
+	}
+	WXWidget GetClientWidget() const
+	{
+		return m_mainWidget;
+	}
 
 private:
-    virtual bool XmDoCreateTLW(wxWindow* parent,
-                               wxWindowID id,
-                               const wxString& title,
-                               const wxPoint& pos,
-                               const wxSize& size,
-                               long style,
-                               const wxString& name);
+	virtual bool XmDoCreateTLW(wxWindow* parent,
+	                           wxWindowID id,
+	                           const wxString& title,
+	                           const wxPoint& pos,
+	                           const wxSize& size,
+	                           long style,
+	                           const wxString& name);
 
 
-    //// Motif-specific
-    bool          m_modalShowing;
-    wxEventLoop*  m_eventLoop;
+	//// Motif-specific
+	bool          m_modalShowing;
+	wxEventLoop*  m_eventLoop;
 
 protected:
-    virtual void DoSetSize(int x, int y,
-                           int width, int height,
-                           int sizeFlags = wxSIZE_AUTO);
+	virtual void DoSetSize(int x, int y,
+	                       int width, int height,
+	                       int sizeFlags = wxSIZE_AUTO);
 
-    virtual void DoSetClientSize(int width, int height);
+	virtual void DoSetClientSize(int width, int height);
 
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxDialog);
+	wxDECLARE_DYNAMIC_CLASS(wxDialog);
 };
 
 #endif // _WX_DIALOG_H_

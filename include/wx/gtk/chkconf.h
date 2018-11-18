@@ -59,11 +59,11 @@
 #   undef  wxUSE_MEDIACTRL
 #   define wxUSE_MEDIACTRL 0
 
-    /*
-        We could use GDK_WINDOWING_X11 for those but this would require
-        including gdk/gdk.h and we don't want to do it from here, so assume
-        we're not using X11 if we're not under Unix.
-     */
+/*
+    We could use GDK_WINDOWING_X11 for those but this would require
+    including gdk/gdk.h and we don't want to do it from here, so assume
+    we're not using X11 if we're not under Unix.
+ */
 
 #   undef  wxUSE_UIACTIONSIMULATOR
 #   define wxUSE_UIACTIONSIMULATOR 0
@@ -87,12 +87,12 @@
 #endif  /* __WINDOWS__ */
 
 #ifdef __WXGTK3__
-    #if !wxUSE_GRAPHICS_CONTEXT
-        #ifdef wxABORT_ON_CONFIG_ERROR
-            #error "GTK+ 3 support requires wxGraphicsContext"
-        #else
-            #undef wxUSE_GRAPHICS_CONTEXT
-            #define wxUSE_GRAPHICS_CONTEXT 1
-        #endif
-    #endif
+#if !wxUSE_GRAPHICS_CONTEXT
+#ifdef wxABORT_ON_CONFIG_ERROR
+#error "GTK+ 3 support requires wxGraphicsContext"
+#else
+#undef wxUSE_GRAPHICS_CONTEXT
+#define wxUSE_GRAPHICS_CONTEXT 1
+#endif
+#endif
 #endif

@@ -17,41 +17,61 @@
 class WXDLLIMPEXP_CORE wxBitmapDataObject : public wxBitmapDataObjectBase
 {
 public:
-    // ctors
-    wxBitmapDataObject();
-    wxBitmapDataObject(const wxBitmap& bitmap);
+	// ctors
+	wxBitmapDataObject();
+	wxBitmapDataObject(const wxBitmap& bitmap);
 
-    // destr
-    virtual ~wxBitmapDataObject();
+	// destr
+	virtual ~wxBitmapDataObject();
 
-    // override base class virtual to update PNG data too
-    virtual void SetBitmap(const wxBitmap& bitmap);
+	// override base class virtual to update PNG data too
+	virtual void SetBitmap(const wxBitmap& bitmap);
 
-    // implement base class pure virtuals
-    // ----------------------------------
+	// implement base class pure virtuals
+	// ----------------------------------
 
-    virtual size_t GetDataSize() const { return m_pngSize; }
-    virtual bool GetDataHere(void *buf) const;
-    virtual bool SetData(size_t len, const void *buf);
+	virtual size_t GetDataSize() const
+	{
+		return m_pngSize;
+	}
+	virtual bool GetDataHere(void *buf) const;
+	virtual bool SetData(size_t len, const void *buf);
 
 protected:
-    void Init() { m_pngData = NULL; m_pngSize = 0; }
-    void Clear() { free(m_pngData); }
-    void ClearAll() { Clear(); Init(); }
+	void Init()
+	{
+		m_pngData = NULL;
+		m_pngSize = 0;
+	}
+	void Clear()
+	{
+		free(m_pngData);
+	}
+	void ClearAll()
+	{
+		Clear();
+		Init();
+	}
 
-    size_t      m_pngSize;
-    void       *m_pngData;
+	size_t      m_pngSize;
+	void       *m_pngData;
 
-    void DoConvertToPng();
+	void DoConvertToPng();
 
 private:
-    // virtual function hiding supression
-    size_t GetDataSize(const wxDataFormat& format) const
-        { return(wxDataObjectSimple::GetDataSize(format)); }
-    bool GetDataHere(const wxDataFormat& format, void* pBuf) const
-        { return(wxDataObjectSimple::GetDataHere(format, pBuf)); }
-    bool SetData(const wxDataFormat& format, size_t nLen, const void* pBuf)
-        { return(wxDataObjectSimple::SetData(format, nLen, pBuf)); }
+	// virtual function hiding supression
+	size_t GetDataSize(const wxDataFormat& format) const
+	{
+		return(wxDataObjectSimple::GetDataSize(format));
+	}
+	bool GetDataHere(const wxDataFormat& format, void* pBuf) const
+	{
+		return(wxDataObjectSimple::GetDataHere(format, pBuf));
+	}
+	bool SetData(const wxDataFormat& format, size_t nLen, const void* pBuf)
+	{
+		return(wxDataObjectSimple::SetData(format, nLen, pBuf));
+	}
 };
 
 // ----------------------------------------------------------------------------
@@ -61,23 +81,29 @@ private:
 class WXDLLIMPEXP_CORE wxFileDataObject : public wxFileDataObjectBase
 {
 public:
-    // implement base class pure virtuals
-    // ----------------------------------
+	// implement base class pure virtuals
+	// ----------------------------------
 
-    void AddFile( const wxString &filename );
+	void AddFile( const wxString &filename );
 
-    virtual size_t GetDataSize() const;
-    virtual bool GetDataHere(void *buf) const;
-    virtual bool SetData(size_t len, const void *buf);
+	virtual size_t GetDataSize() const;
+	virtual bool GetDataHere(void *buf) const;
+	virtual bool SetData(size_t len, const void *buf);
 
 private:
-    // virtual function hiding supression
-    size_t GetDataSize(const wxDataFormat& format) const
-        { return(wxDataObjectSimple::GetDataSize(format)); }
-    bool GetDataHere(const wxDataFormat& format, void* pBuf) const
-        { return(wxDataObjectSimple::GetDataHere(format, pBuf)); }
-    bool SetData(const wxDataFormat& format, size_t nLen, const void* pBuf)
-        { return(wxDataObjectSimple::SetData(format, nLen, pBuf)); }
+	// virtual function hiding supression
+	size_t GetDataSize(const wxDataFormat& format) const
+	{
+		return(wxDataObjectSimple::GetDataSize(format));
+	}
+	bool GetDataHere(const wxDataFormat& format, void* pBuf) const
+	{
+		return(wxDataObjectSimple::GetDataHere(format, pBuf));
+	}
+	bool SetData(const wxDataFormat& format, size_t nLen, const void* pBuf)
+	{
+		return(wxDataObjectSimple::SetData(format, nLen, pBuf));
+	}
 };
 
 #endif // _WX_GTK_DATAOBJ2_H_

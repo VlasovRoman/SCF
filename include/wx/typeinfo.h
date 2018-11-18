@@ -32,9 +32,9 @@
 // leaks reported by the static run-time libraries.
 //
 #if wxCHECK_VISUALC_VERSION(9)
-    #define wxTRUST_CPP_RTTI    1
+#define wxTRUST_CPP_RTTI    1
 #else
-    #define wxTRUST_CPP_RTTI    0
+#define wxTRUST_CPP_RTTI    0
 #endif
 
 #include <typeinfo>
@@ -63,22 +63,22 @@
 class wxTypeIdentifier
 {
 public:
-    wxTypeIdentifier(const char* className)
-    {
-        m_className = className;
-    }
+	wxTypeIdentifier(const char* className)
+	{
+		m_className = className;
+	}
 
-    bool operator==(const wxTypeIdentifier& other) const
-    {
-        return strcmp(m_className, other.m_className) == 0;
-    }
+	bool operator==(const wxTypeIdentifier& other) const
+	{
+		return strcmp(m_className, other.m_className) == 0;
+	}
 
-    bool operator!=(const wxTypeIdentifier& other) const
-    {
-        return !(*this == other);
-    }
+	bool operator!=(const wxTypeIdentifier& other) const
+	{
+		return !(*this == other);
+	}
 private:
-    const char* m_className;
+	const char* m_className;
 };
 
 #define wxTypeId(OBJ) wxTypeIdentifier(typeid(OBJ).name())

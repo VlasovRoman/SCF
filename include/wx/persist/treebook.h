@@ -33,64 +33,70 @@
 class wxPersistentTreeBookCtrl : public wxPersistentBookCtrl
 {
 public:
-    wxPersistentTreeBookCtrl(wxTreebook *book)
-        : wxPersistentBookCtrl(book)
-    {
-    }
+	wxPersistentTreeBookCtrl(wxTreebook *book)
+		: wxPersistentBookCtrl(book)
+	{
+	}
 
-    virtual void Save() const wxOVERRIDE
-    {
-        const wxTreebook * const book = GetTreeBook();
+	virtual void Save() const wxOVERRIDE
+	{
+		const wxTreebook * const book = GetTreeBook();
 
-        wxString expanded;
-        const size_t count = book->GetPageCount();
-        for ( size_t n = 0; n < count; n++ )
-        {
-            if ( book->IsNodeExpanded(n) )
-            {
-                if ( !expanded.empty() )
-                    expanded += wxPERSIST_TREEBOOK_EXPANDED_SEP;
+		wxString expanded;
+		const size_t count = book->GetPageCount();
+		for ( size_t n = 0; n < count; n++ )
+		{
+			if ( book->IsNodeExpanded(n) )
+			{
+				if ( !expanded.empty() )
+					expanded += wxPERSIST_TREEBOOK_EXPANDED_SEP;
 
-                expanded += wxString::Format("%u", static_cast<unsigned>(n));
-            }
-        }
+				expanded += wxString::Format("%u", static_cast<unsigned>(n));
+			}
+		}
 
-        SaveValue(wxPERSIST_TREEBOOK_EXPANDED_BRANCHES, expanded);
+		SaveValue(wxPERSIST_TREEBOOK_EXPANDED_BRANCHES, expanded);
 
-        wxPersistentBookCtrl::Save();
-    }
+		wxPersistentBookCtrl::Save();
+	}
 
-    virtual bool Restore() wxOVERRIDE
-    {
-        wxTreebook * const book = GetTreeBook();
+	virtual bool Restore() wxOVERRIDE
+	{
+		wxTreebook * const book = GetTreeBook();
 
-        wxString expanded;
-        if ( RestoreValue(wxPERSIST_TREEBOOK_EXPANDED_BRANCHES, &expanded) )
-        {
-            const wxArrayString
-                indices(wxSplit(expanded, wxPERSIST_TREEBOOK_EXPANDED_SEP));
+		wxString expanded;
+		if ( RestoreValue(wxPERSIST_TREEBOOK_EXPANDED_BRANCHES, &expanded) )
+		{
+			const wxArrayString
+			indices(wxSplit(expanded, wxPERSIST_TREEBOOK_EXPANDED_SEP));
 
-            const size_t pageCount = book->GetPageCount();
-            const size_t count = indices.size();
-            for ( size_t n = 0; n < count; n++ )
-            {
-                unsigned long idx;
-                if ( indices[n].ToULong(&idx) && idx < pageCount )
-                    book->ExpandNode(idx);
-            }
-        }
+			const size_t pageCount = book->GetPageCount();
+			const size_t count = indices.size();
+			for ( size_t n = 0; n < count; n++ )
+			{
+				unsigned long idx;
+				if ( indices[n].ToULong(&idx) && idx < pageCount )
+					book->ExpandNode(idx);
+			}
+		}
 
-        return wxPersistentBookCtrl::Restore();
-    }
+		return wxPersistentBookCtrl::Restore();
+	}
 
-    virtual wxString GetKind() const wxOVERRIDE { return wxPERSIST_TREEBOOK_KIND; }
+	virtual wxString GetKind() const wxOVERRIDE
+	{
+		return wxPERSIST_TREEBOOK_KIND;
+	}
 
-    wxTreebook *GetTreeBook() const { return static_cast<wxTreebook *>(Get()); }
+	wxTreebook *GetTreeBook() const
+	{
+		return static_cast<wxTreebook *>(Get());
+	}
 };
 
 inline wxPersistentObject *wxCreatePersistentObject(wxTreebook *book)
 {
-    return new wxPersistentTreeBookCtrl(book);
+	return new wxPersistentTreeBookCtrl(book);
 }
 
 #endif // _WX_PERSIST_TREEBOOK_H_

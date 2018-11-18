@@ -17,12 +17,12 @@
 class WXDLLIMPEXP_XRC wxSearchCtrlXmlHandler : public wxXmlResourceHandler
 {
 public:
-    wxSearchCtrlXmlHandler();
+	wxSearchCtrlXmlHandler();
 
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
-    wxDECLARE_DYNAMIC_CLASS(wxSearchCtrlXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxSearchCtrlXmlHandler);
 };
 
 #endif // wxUSE_XRC && wxUSE_SEARCHCTRL

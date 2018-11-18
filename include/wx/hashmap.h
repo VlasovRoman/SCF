@@ -24,18 +24,18 @@
 
 #if (defined(HAVE_EXT_HASH_MAP) || defined(HAVE_HASH_MAP)) \
     && (defined(HAVE_GNU_CXX_HASH_MAP) || defined(HAVE_STD_HASH_MAP))
-    #define HAVE_STL_HASH_MAP
+#define HAVE_STL_HASH_MAP
 #endif
 
 #if wxUSE_STD_CONTAINERS && \
     (defined(HAVE_STD_UNORDERED_MAP) || defined(HAVE_TR1_UNORDERED_MAP))
 
 #if defined(HAVE_STD_UNORDERED_MAP)
-    #include <unordered_map>
-    #define WX_HASH_MAP_NAMESPACE std
+#include <unordered_map>
+#define WX_HASH_MAP_NAMESPACE std
 #elif defined(HAVE_TR1_UNORDERED_MAP)
-    #include <tr1/unordered_map>
-    #define WX_HASH_MAP_NAMESPACE std::tr1
+#include <tr1/unordered_map>
+#define WX_HASH_MAP_NAMESPACE std::tr1
 #endif
 
 #define _WX_DECLARE_HASH_MAP( KEY_T, VALUE_T, HASH_T, KEY_EQ_T, CLASSNAME, CLASSEXP ) \
@@ -44,15 +44,15 @@
 #elif wxUSE_STD_CONTAINERS && defined(HAVE_STL_HASH_MAP)
 
 #if defined(HAVE_EXT_HASH_MAP)
-    #include <ext/hash_map>
+#include <ext/hash_map>
 #elif defined(HAVE_HASH_MAP)
-    #include <hash_map>
+#include <hash_map>
 #endif
 
 #if defined(HAVE_GNU_CXX_HASH_MAP)
-    #define WX_HASH_MAP_NAMESPACE __gnu_cxx
+#define WX_HASH_MAP_NAMESPACE __gnu_cxx
 #elif defined(HAVE_STD_HASH_MAP)
-    #define WX_HASH_MAP_NAMESPACE std
+#define WX_HASH_MAP_NAMESPACE std
 #endif
 
 #define _WX_DECLARE_HASH_MAP( KEY_T, VALUE_T, HASH_T, KEY_EQ_T, CLASSNAME, CLASSEXP ) \
@@ -67,9 +67,9 @@
 // private
 struct WXDLLIMPEXP_BASE _wxHashTable_NodeBase
 {
-    _wxHashTable_NodeBase() : m_next(NULL) {}
+	_wxHashTable_NodeBase() : m_next(NULL) {}
 
-    _wxHashTable_NodeBase* m_next;
+	_wxHashTable_NodeBase* m_next;
 
 // Cannot do this:
 //  wxDECLARE_NO_COPY_CLASS(_wxHashTable_NodeBase);
@@ -80,46 +80,46 @@ struct WXDLLIMPEXP_BASE _wxHashTable_NodeBase
 class WXDLLIMPEXP_BASE _wxHashTableBase2
 {
 public:
-    typedef void (*NodeDtor)(_wxHashTable_NodeBase*);
-    typedef unsigned long (*BucketFromNode)(_wxHashTableBase2*,_wxHashTable_NodeBase*);
-    typedef _wxHashTable_NodeBase* (*ProcessNode)(_wxHashTable_NodeBase*);
+	typedef void (*NodeDtor)(_wxHashTable_NodeBase*);
+	typedef unsigned long (*BucketFromNode)(_wxHashTableBase2*,_wxHashTable_NodeBase*);
+	typedef _wxHashTable_NodeBase* (*ProcessNode)(_wxHashTable_NodeBase*);
 protected:
-    static _wxHashTable_NodeBase* DummyProcessNode(_wxHashTable_NodeBase* node);
-    static void DeleteNodes( size_t buckets, _wxHashTable_NodeBase** table,
-                             NodeDtor dtor );
-    static _wxHashTable_NodeBase* GetFirstNode( size_t buckets,
-                                                _wxHashTable_NodeBase** table )
-    {
-        for( size_t i = 0; i < buckets; ++i )
-            if( table[i] )
-                return table[i];
-        return NULL;
-    }
+	static _wxHashTable_NodeBase* DummyProcessNode(_wxHashTable_NodeBase* node);
+	static void DeleteNodes( size_t buckets, _wxHashTable_NodeBase** table,
+	                         NodeDtor dtor );
+	static _wxHashTable_NodeBase* GetFirstNode( size_t buckets,
+	        _wxHashTable_NodeBase** table )
+	{
+		for( size_t i = 0; i < buckets; ++i )
+			if( table[i] )
+				return table[i];
+		return NULL;
+	}
 
-    // as static const unsigned prime_count = 31 but works with all compilers
-    enum { prime_count = 31 };
-    static const unsigned long ms_primes[prime_count];
+	// as static const unsigned prime_count = 31 but works with all compilers
+	enum { prime_count = 31 };
+	static const unsigned long ms_primes[prime_count];
 
-    // returns the first prime in ms_primes greater than n
-    static unsigned long GetNextPrime( unsigned long n );
+	// returns the first prime in ms_primes greater than n
+	static unsigned long GetNextPrime( unsigned long n );
 
-    // returns the first prime in ms_primes smaller than n
-    // ( or ms_primes[0] if n is very small )
-    static unsigned long GetPreviousPrime( unsigned long n );
+	// returns the first prime in ms_primes smaller than n
+	// ( or ms_primes[0] if n is very small )
+	static unsigned long GetPreviousPrime( unsigned long n );
 
-    static void CopyHashTable( _wxHashTable_NodeBase** srcTable,
-                               size_t srcBuckets, _wxHashTableBase2* dst,
-                               _wxHashTable_NodeBase** dstTable,
-                               BucketFromNode func, ProcessNode proc );
+	static void CopyHashTable( _wxHashTable_NodeBase** srcTable,
+	                           size_t srcBuckets, _wxHashTableBase2* dst,
+	                           _wxHashTable_NodeBase** dstTable,
+	                           BucketFromNode func, ProcessNode proc );
 
-    static void** AllocTable( size_t sz )
-    {
-        return (void **)calloc(sz, sizeof(void*));
-    }
-    static void FreeTable(void *table)
-    {
-        free(table);
-    }
+	static void** AllocTable( size_t sz )
+	{
+		return (void **)calloc(sz, sizeof(void*));
+	}
+	static void FreeTable(void *table)
+	{
+		free(table);
+	}
 };
 
 #define _WX_DECLARE_HASHTABLE( VALUE_T, KEY_T, HASH_T, KEY_EX_T, KEY_EQ_T,\
@@ -458,11 +458,17 @@ public: \
 };
 
 // grow/shrink predicates
-inline bool never_grow( size_t, size_t ) { return false; }
-inline bool never_shrink( size_t, size_t ) { return false; }
+inline bool never_grow( size_t, size_t )
+{
+	return false;
+}
+inline bool never_shrink( size_t, size_t )
+{
+	return false;
+}
 inline bool grow_lf70( size_t buckets, size_t items )
 {
-    return float(items)/float(buckets) >= 0.85f;
+	return float(items)/float(buckets) >= 0.85f;
 }
 
 #endif // various hash map implementations
@@ -481,43 +487,70 @@ inline bool grow_lf70( size_t buckets, size_t items )
 struct WXDLLIMPEXP_BASE wxIntegerHash
 {
 private:
-    WX_HASH_MAP_NAMESPACE::hash<long> longHash;
-    WX_HASH_MAP_NAMESPACE::hash<unsigned long> ulongHash;
-    WX_HASH_MAP_NAMESPACE::hash<int> intHash;
-    WX_HASH_MAP_NAMESPACE::hash<unsigned int> uintHash;
-    WX_HASH_MAP_NAMESPACE::hash<short> shortHash;
-    WX_HASH_MAP_NAMESPACE::hash<unsigned short> ushortHash;
+	WX_HASH_MAP_NAMESPACE::hash<long> longHash;
+	WX_HASH_MAP_NAMESPACE::hash<unsigned long> ulongHash;
+	WX_HASH_MAP_NAMESPACE::hash<int> intHash;
+	WX_HASH_MAP_NAMESPACE::hash<unsigned int> uintHash;
+	WX_HASH_MAP_NAMESPACE::hash<short> shortHash;
+	WX_HASH_MAP_NAMESPACE::hash<unsigned short> ushortHash;
 
 #ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-    // hash<wxLongLong_t> ought to work but doesn't on some compilers
-    #if (!defined SIZEOF_LONG_LONG && SIZEOF_LONG == 4) \
+	// hash<wxLongLong_t> ought to work but doesn't on some compilers
+#if (!defined SIZEOF_LONG_LONG && SIZEOF_LONG == 4) \
         || (defined SIZEOF_LONG_LONG && SIZEOF_LONG_LONG == SIZEOF_LONG * 2)
-    size_t longlongHash( wxLongLong_t x ) const
-    {
-        return longHash( wx_truncate_cast(long, x) ) ^
-               longHash( wx_truncate_cast(long, x >> (sizeof(long) * 8)) );
-    }
-    #elif defined SIZEOF_LONG_LONG && SIZEOF_LONG_LONG == SIZEOF_LONG
-    WX_HASH_MAP_NAMESPACE::hash<long> longlongHash;
-    #else
-    WX_HASH_MAP_NAMESPACE::hash<wxLongLong_t> longlongHash;
-    #endif
+	size_t longlongHash( wxLongLong_t x ) const
+	{
+		return longHash( wx_truncate_cast(long, x) ) ^
+		       longHash( wx_truncate_cast(long, x >> (sizeof(long) * 8)) );
+	}
+#elif defined SIZEOF_LONG_LONG && SIZEOF_LONG_LONG == SIZEOF_LONG
+	WX_HASH_MAP_NAMESPACE::hash<long> longlongHash;
+#else
+	WX_HASH_MAP_NAMESPACE::hash<wxLongLong_t> longlongHash;
+#endif
 #endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
 
 public:
-    wxIntegerHash() { }
-    size_t operator()( long x ) const { return longHash( x ); }
-    size_t operator()( unsigned long x ) const { return ulongHash( x ); }
-    size_t operator()( int x ) const { return intHash( x ); }
-    size_t operator()( unsigned int x ) const { return uintHash( x ); }
-    size_t operator()( short x ) const { return shortHash( x ); }
-    size_t operator()( unsigned short x ) const { return ushortHash( x ); }
+	wxIntegerHash() { }
+	size_t operator()( long x ) const
+	{
+		return longHash( x );
+	}
+	size_t operator()( unsigned long x ) const
+	{
+		return ulongHash( x );
+	}
+	size_t operator()( int x ) const
+	{
+		return intHash( x );
+	}
+	size_t operator()( unsigned int x ) const
+	{
+		return uintHash( x );
+	}
+	size_t operator()( short x ) const
+	{
+		return shortHash( x );
+	}
+	size_t operator()( unsigned short x ) const
+	{
+		return ushortHash( x );
+	}
 #ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-    size_t operator()( wxLongLong_t x ) const { return longlongHash(x); }
-    size_t operator()( wxULongLong_t x ) const { return longlongHash(x); }
+	size_t operator()( wxLongLong_t x ) const
+	{
+		return longlongHash(x);
+	}
+	size_t operator()( wxULongLong_t x ) const
+	{
+		return longlongHash(x);
+	}
 #endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
 
-    wxIntegerHash& operator=(const wxIntegerHash&) { return *this; }
+	wxIntegerHash& operator=(const wxIntegerHash&)
+	{
+		return *this;
+	}
 };
 
 #else // wxNEEDS_WX_HASH_MAP
@@ -525,101 +558,192 @@ public:
 // integer types
 struct WXDLLIMPEXP_BASE wxIntegerHash
 {
-    wxIntegerHash() { }
-    unsigned long operator()( long x ) const { return (unsigned long)x; }
-    unsigned long operator()( unsigned long x ) const { return x; }
-    unsigned long operator()( int x ) const { return (unsigned long)x; }
-    unsigned long operator()( unsigned int x ) const { return x; }
-    unsigned long operator()( short x ) const { return (unsigned long)x; }
-    unsigned long operator()( unsigned short x ) const { return x; }
+	wxIntegerHash() { }
+	unsigned long operator()( long x ) const
+	{
+		return (unsigned long)x;
+	}
+	unsigned long operator()( unsigned long x ) const
+	{
+		return x;
+	}
+	unsigned long operator()( int x ) const
+	{
+		return (unsigned long)x;
+	}
+	unsigned long operator()( unsigned int x ) const
+	{
+		return x;
+	}
+	unsigned long operator()( short x ) const
+	{
+		return (unsigned long)x;
+	}
+	unsigned long operator()( unsigned short x ) const
+	{
+		return x;
+	}
 #ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-    wxULongLong_t operator()( wxLongLong_t x ) const { return static_cast<wxULongLong_t>(x); }
-    wxULongLong_t operator()( wxULongLong_t x ) const { return x; }
+	wxULongLong_t operator()( wxLongLong_t x ) const
+	{
+		return static_cast<wxULongLong_t>(x);
+	}
+	wxULongLong_t operator()( wxULongLong_t x ) const
+	{
+		return x;
+	}
 #endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
 
-    wxIntegerHash& operator=(const wxIntegerHash&) { return *this; }
+	wxIntegerHash& operator=(const wxIntegerHash&)
+	{
+		return *this;
+	}
 };
 
 #endif // !wxNEEDS_WX_HASH_MAP/wxNEEDS_WX_HASH_MAP
 
 struct WXDLLIMPEXP_BASE wxIntegerEqual
 {
-    wxIntegerEqual() { }
-    bool operator()( long a, long b ) const { return a == b; }
-    bool operator()( unsigned long a, unsigned long b ) const { return a == b; }
-    bool operator()( int a, int b ) const { return a == b; }
-    bool operator()( unsigned int a, unsigned int b ) const { return a == b; }
-    bool operator()( short a, short b ) const { return a == b; }
-    bool operator()( unsigned short a, unsigned short b ) const { return a == b; }
+	wxIntegerEqual() { }
+	bool operator()( long a, long b ) const
+	{
+		return a == b;
+	}
+	bool operator()( unsigned long a, unsigned long b ) const
+	{
+		return a == b;
+	}
+	bool operator()( int a, int b ) const
+	{
+		return a == b;
+	}
+	bool operator()( unsigned int a, unsigned int b ) const
+	{
+		return a == b;
+	}
+	bool operator()( short a, short b ) const
+	{
+		return a == b;
+	}
+	bool operator()( unsigned short a, unsigned short b ) const
+	{
+		return a == b;
+	}
 #ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-    bool operator()( wxLongLong_t a, wxLongLong_t b ) const { return a == b; }
-    bool operator()( wxULongLong_t a, wxULongLong_t b ) const { return a == b; }
+	bool operator()( wxLongLong_t a, wxLongLong_t b ) const
+	{
+		return a == b;
+	}
+	bool operator()( wxULongLong_t a, wxULongLong_t b ) const
+	{
+		return a == b;
+	}
 #endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
 
-    wxIntegerEqual& operator=(const wxIntegerEqual&) { return *this; }
+	wxIntegerEqual& operator=(const wxIntegerEqual&)
+	{
+		return *this;
+	}
 };
 
 // pointers
 struct WXDLLIMPEXP_BASE wxPointerHash
 {
-    wxPointerHash() { }
+	wxPointerHash() { }
 
 #ifdef wxNEEDS_WX_HASH_MAP
-    wxUIntPtr operator()( const void* k ) const { return wxPtrToUInt(k); }
+	wxUIntPtr operator()( const void* k ) const
+	{
+		return wxPtrToUInt(k);
+	}
 #else
-    size_t operator()( const void* k ) const { return (size_t)k; }
+	size_t operator()( const void* k ) const
+	{
+		return (size_t)k;
+	}
 #endif
 
-    wxPointerHash& operator=(const wxPointerHash&) { return *this; }
+	wxPointerHash& operator=(const wxPointerHash&)
+	{
+		return *this;
+	}
 };
 
 struct WXDLLIMPEXP_BASE wxPointerEqual
 {
-    wxPointerEqual() { }
-    bool operator()( const void* a, const void* b ) const { return a == b; }
+	wxPointerEqual() { }
+	bool operator()( const void* a, const void* b ) const
+	{
+		return a == b;
+	}
 
-    wxPointerEqual& operator=(const wxPointerEqual&) { return *this; }
+	wxPointerEqual& operator=(const wxPointerEqual&)
+	{
+		return *this;
+	}
 };
 
 // wxString, char*, wchar_t*
 struct WXDLLIMPEXP_BASE wxStringHash
 {
-    wxStringHash() {}
-    unsigned long operator()( const wxString& x ) const
-        { return stringHash( x.wx_str() ); }
-    unsigned long operator()( const wchar_t* x ) const
-        { return stringHash( x ); }
-    unsigned long operator()( const char* x ) const
-        { return stringHash( x ); }
+	wxStringHash() {}
+	unsigned long operator()( const wxString& x ) const
+	{
+		return stringHash( x.wx_str() );
+	}
+	unsigned long operator()( const wchar_t* x ) const
+	{
+		return stringHash( x );
+	}
+	unsigned long operator()( const char* x ) const
+	{
+		return stringHash( x );
+	}
 
 #if WXWIN_COMPATIBILITY_2_8
-    static unsigned long wxCharStringHash( const wxChar* x )
-        { return stringHash(x); }
-    #if wxUSE_UNICODE
-    static unsigned long charStringHash( const char* x )
-        { return stringHash(x); }
-    #endif
+	static unsigned long wxCharStringHash( const wxChar* x )
+	{
+		return stringHash(x);
+	}
+#if wxUSE_UNICODE
+	static unsigned long charStringHash( const char* x )
+	{
+		return stringHash(x);
+	}
+#endif
 #endif // WXWIN_COMPATIBILITY_2_8
 
-    static unsigned long stringHash( const wchar_t* );
-    static unsigned long stringHash( const char* );
+	static unsigned long stringHash( const wchar_t* );
+	static unsigned long stringHash( const char* );
 
-    wxStringHash& operator=(const wxStringHash&) { return *this; }
+	wxStringHash& operator=(const wxStringHash&)
+	{
+		return *this;
+	}
 };
 
 struct WXDLLIMPEXP_BASE wxStringEqual
 {
-    wxStringEqual() {}
-    bool operator()( const wxString& a, const wxString& b ) const
-        { return a == b; }
-    bool operator()( const wxChar* a, const wxChar* b ) const
-        { return wxStrcmp( a, b ) == 0; }
+	wxStringEqual() {}
+	bool operator()( const wxString& a, const wxString& b ) const
+	{
+		return a == b;
+	}
+	bool operator()( const wxChar* a, const wxChar* b ) const
+	{
+		return wxStrcmp( a, b ) == 0;
+	}
 #if wxUSE_UNICODE
-    bool operator()( const char* a, const char* b ) const
-        { return strcmp( a, b ) == 0; }
+	bool operator()( const char* a, const char* b ) const
+	{
+		return strcmp( a, b ) == 0;
+	}
 #endif // wxUSE_UNICODE
 
-    wxStringEqual& operator=(const wxStringEqual&) { return *this; }
+	wxStringEqual& operator=(const wxStringEqual&)
+	{
+		return *this;
+	}
 };
 
 #ifdef wxNEEDS_WX_HASH_MAP

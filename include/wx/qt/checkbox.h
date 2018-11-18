@@ -13,35 +13,35 @@ class QCheckBox;
 class WXDLLIMPEXP_CORE wxCheckBox : public wxCheckBoxBase
 {
 public:
-    wxCheckBox();
-    wxCheckBox( wxWindow *parent, wxWindowID id, const wxString& label,
-            const wxPoint& pos = wxDefaultPosition,
-            const wxSize& size = wxDefaultSize, long style = 0,
-            const wxValidator& validator = wxDefaultValidator,
-            const wxString& name = wxCheckBoxNameStr);
+	wxCheckBox();
+	wxCheckBox( wxWindow *parent, wxWindowID id, const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize, long style = 0,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxCheckBoxNameStr);
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxString& label,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = 0,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxCheckBoxNameStr );
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxCheckBoxNameStr );
 
-    virtual void SetValue(bool value);
-    virtual bool GetValue() const;
+	virtual void SetValue(bool value);
+	virtual bool GetValue() const;
 
-    virtual QWidget *GetHandle() const;
+	virtual QWidget *GetHandle() const;
 
 protected:
-    virtual void DoSet3StateValue(wxCheckBoxState state);
-    virtual wxCheckBoxState DoGet3StateValue() const;
+	virtual void DoSet3StateValue(wxCheckBoxState state);
+	virtual wxCheckBoxState DoGet3StateValue() const;
 
 private:
-    QCheckBox *m_qtCheckBox;
+	QCheckBox *m_qtCheckBox;
 
-    wxDECLARE_DYNAMIC_CLASS(wxCheckBox);
+	wxDECLARE_DYNAMIC_CLASS(wxCheckBox);
 };
 
 #endif // _WX_QT_CHECKBOX_H_

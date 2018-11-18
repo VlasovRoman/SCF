@@ -13,17 +13,17 @@
 class WXDLLIMPEXP_CORE wxScreenDCImpl : public wxWindowDCImpl
 {
 public:
-    wxScreenDCImpl( wxScreenDC *owner );
+	wxScreenDCImpl( wxScreenDC *owner );
 
-    ~wxScreenDCImpl();
+	~wxScreenDCImpl();
 
 protected:
-    virtual void DoGetSize(int *width, int *height) const wxOVERRIDE;
-    virtual bool DoGetPixel(wxCoord x, wxCoord y, wxColour *col) const;
+	virtual void DoGetSize(int *width, int *height) const wxOVERRIDE;
+	virtual bool DoGetPixel(wxCoord x, wxCoord y, wxColour *col) const;
 
-    virtual QImage *GetQImage();
+	virtual QImage *GetQImage();
 
-    wxDECLARE_ABSTRACT_CLASS(wxScreenDCImpl);
+	wxDECLARE_ABSTRACT_CLASS(wxScreenDCImpl);
 };
 
 #endif // _WX_QT_DCSCREEN_H_

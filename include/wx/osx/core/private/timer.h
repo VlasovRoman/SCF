@@ -17,16 +17,16 @@ struct wxOSXTimerInfo;
 class WXDLLIMPEXP_CORE wxOSXTimerImpl : public wxTimerImpl
 {
 public:
-    wxOSXTimerImpl(wxTimer *timer);
-    virtual ~wxOSXTimerImpl();
+	wxOSXTimerImpl(wxTimer *timer);
+	virtual ~wxOSXTimerImpl();
 
-    virtual bool Start(int milliseconds = -1, bool one_shot = false);
-    virtual void Stop();
+	virtual bool Start(int milliseconds = -1, bool one_shot = false);
+	virtual void Stop();
 
-    virtual bool IsRunning() const;
+	virtual bool IsRunning() const;
 
 private:
-    wxOSXTimerInfo *m_info;
+	wxOSXTimerInfo *m_info;
 };
 
 #endif // _WX_OSX_CORE_PRIVATE_TIMER_H_

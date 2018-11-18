@@ -23,17 +23,17 @@
 // compilation errors in e.g. wx/scopeguard.h with at least g++ 4
 #if !wxUSE_EXCEPTIONS || \
         (defined(__GNUG__) && !defined(__EXCEPTIONS))
-    #ifndef wxNO_EXCEPTIONS
-        #define wxNO_EXCEPTIONS
-    #endif
+#ifndef wxNO_EXCEPTIONS
+#define wxNO_EXCEPTIONS
+#endif
 #endif
 
 #ifdef wxNO_EXCEPTIONS
-    #define wxTRY
-    #define wxCATCH_ALL(code)
+#define wxTRY
+#define wxCATCH_ALL(code)
 #else // do use exceptions
-    #define wxTRY try
-    #define wxCATCH_ALL(code) catch ( ... ) { code }
+#define wxTRY try
+#define wxCATCH_ALL(code) catch ( ... ) { code }
 #endif // wxNO_EXCEPTIONS/!wxNO_EXCEPTIONS
 
 #endif // _WX_EXCEPT_H_

@@ -15,99 +15,105 @@
 class WXDLLIMPEXP_CORE wxTextCtrl : public wxTextCtrlBase
 {
 public:
-    // creation
-    // --------
+	// creation
+	// --------
 
-    wxTextCtrl();
-    wxTextCtrl(wxWindow *parent,
-               wxWindowID id,
-               const wxString& value = wxEmptyString,
-               const wxPoint& pos = wxDefaultPosition,
-               const wxSize& size = wxDefaultSize,
-               long style = 0,
-               const wxValidator& validator = wxDefaultValidator,
-               const wxString& name = wxTextCtrlNameStr)
-    {
-        Create(parent, id, value, pos, size, style, validator, name);
-    }
+	wxTextCtrl();
+	wxTextCtrl(wxWindow *parent,
+	           wxWindowID id,
+	           const wxString& value = wxEmptyString,
+	           const wxPoint& pos = wxDefaultPosition,
+	           const wxSize& size = wxDefaultSize,
+	           long style = 0,
+	           const wxValidator& validator = wxDefaultValidator,
+	           const wxString& name = wxTextCtrlNameStr)
+	{
+		Create(parent, id, value, pos, size, style, validator, name);
+	}
 
-    bool Create(wxWindow *parent, wxWindowID id,
-                const wxString& value = wxEmptyString,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize, long style = 0,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxTextCtrlNameStr);
+	bool Create(wxWindow *parent, wxWindowID id,
+	            const wxString& value = wxEmptyString,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize, long style = 0,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxTextCtrlNameStr);
 
-    // accessors
-    // ---------
-    virtual wxString GetValue() const;
+	// accessors
+	// ---------
+	virtual wxString GetValue() const;
 
-    virtual int GetLineLength(long lineNo) const;
-    virtual wxString GetLineText(long lineNo) const;
-    virtual int GetNumberOfLines() const;
+	virtual int GetLineLength(long lineNo) const;
+	virtual wxString GetLineText(long lineNo) const;
+	virtual int GetNumberOfLines() const;
 
-    // operations
-    // ----------
+	// operations
+	// ----------
 
-    virtual void MarkDirty();
-    virtual void DiscardEdits();
-    virtual bool IsModified() const;
+	virtual void MarkDirty();
+	virtual void DiscardEdits();
+	virtual bool IsModified() const;
 
-    virtual long XYToPosition(long x, long y) const;
-    virtual bool PositionToXY(long pos, long *x, long *y) const;
-    virtual void ShowPosition(long pos);
+	virtual long XYToPosition(long x, long y) const;
+	virtual bool PositionToXY(long pos, long *x, long *y) const;
+	virtual void ShowPosition(long pos);
 
-    // callbacks
-    // ---------
-    void OnDropFiles(wxDropFilesEvent& event);
-    void OnChar(wxKeyEvent& event);
-    //  void OnEraseBackground(wxEraseEvent& event);
+	// callbacks
+	// ---------
+	void OnDropFiles(wxDropFilesEvent& event);
+	void OnChar(wxKeyEvent& event);
+	//  void OnEraseBackground(wxEraseEvent& event);
 
-    void OnCut(wxCommandEvent& event);
-    void OnCopy(wxCommandEvent& event);
-    void OnPaste(wxCommandEvent& event);
-    void OnUndo(wxCommandEvent& event);
-    void OnRedo(wxCommandEvent& event);
+	void OnCut(wxCommandEvent& event);
+	void OnCopy(wxCommandEvent& event);
+	void OnPaste(wxCommandEvent& event);
+	void OnUndo(wxCommandEvent& event);
+	void OnRedo(wxCommandEvent& event);
 
-    void OnUpdateCut(wxUpdateUIEvent& event);
-    void OnUpdateCopy(wxUpdateUIEvent& event);
-    void OnUpdatePaste(wxUpdateUIEvent& event);
-    void OnUpdateUndo(wxUpdateUIEvent& event);
-    void OnUpdateRedo(wxUpdateUIEvent& event);
+	void OnUpdateCut(wxUpdateUIEvent& event);
+	void OnUpdateCopy(wxUpdateUIEvent& event);
+	void OnUpdatePaste(wxUpdateUIEvent& event);
+	void OnUpdateUndo(wxUpdateUIEvent& event);
+	void OnUpdateRedo(wxUpdateUIEvent& event);
 
-    virtual void Command(wxCommandEvent& event);
+	virtual void Command(wxCommandEvent& event);
 
-    // implementation from here to the end
-    // -----------------------------------
-    virtual void ChangeFont(bool keepOriginalSize = true);
-    virtual void ChangeBackgroundColour();
-    virtual void ChangeForegroundColour();
-    void SetModified(bool mod) { m_modified = mod; }
-    virtual WXWidget GetTopWidget() const;
+	// implementation from here to the end
+	// -----------------------------------
+	virtual void ChangeFont(bool keepOriginalSize = true);
+	virtual void ChangeBackgroundColour();
+	virtual void ChangeForegroundColour();
+	void SetModified(bool mod)
+	{
+		m_modified = mod;
+	}
+	virtual WXWidget GetTopWidget() const;
 
-    // send the CHAR and TEXT_UPDATED events
-    void DoSendEvents(void /* XmTextVerifyCallbackStruct */ *cbs,
-                      long keycode);
+	// send the CHAR and TEXT_UPDATED events
+	void DoSendEvents(void /* XmTextVerifyCallbackStruct */ *cbs,
+	                  long keycode);
 
 protected:
-    virtual wxSize DoGetBestSize() const;
+	virtual wxSize DoGetBestSize() const;
 
-    virtual void DoSetValue(const wxString& value, int flags = 0);
+	virtual void DoSetValue(const wxString& value, int flags = 0);
 
-    virtual WXWidget GetTextWidget() const { return m_mainWidget; }
+	virtual WXWidget GetTextWidget() const
+	{
+		return m_mainWidget;
+	}
 
 public:
-    // Motif-specific
-    void*     m_tempCallbackStruct;
-    bool      m_modified;
-    wxString  m_value;            // Required for password text controls
+	// Motif-specific
+	void*     m_tempCallbackStruct;
+	bool      m_modified;
+	wxString  m_value;            // Required for password text controls
 
-    // Did we call wxTextCtrl::OnChar? If so, generate a command event.
-    bool      m_processedDefault;
+	// Did we call wxTextCtrl::OnChar? If so, generate a command event.
+	bool      m_processedDefault;
 
 private:
-    wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS(wxTextCtrl);
+	wxDECLARE_EVENT_TABLE();
+	wxDECLARE_DYNAMIC_CLASS(wxTextCtrl);
 };
 
 #endif

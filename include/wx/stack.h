@@ -30,27 +30,45 @@ template <typename T>
 class wxStack
 {
 public:
-    typedef wxVector<T> container_type;
-    typedef typename container_type::size_type size_type;
-    typedef typename container_type::value_type value_type;
+	typedef wxVector<T> container_type;
+	typedef typename container_type::size_type size_type;
+	typedef typename container_type::value_type value_type;
 
-    wxStack() { }
-    explicit wxStack(const container_type& cont) : m_cont(cont) { }
+	wxStack() { }
+	explicit wxStack(const container_type& cont) : m_cont(cont) { }
 
-    // Default copy ctor, assignment operator and dtor are ok.
+	// Default copy ctor, assignment operator and dtor are ok.
 
 
-    bool empty() const { return m_cont.empty(); }
-    size_type size() const { return m_cont.size(); }
+	bool empty() const
+	{
+		return m_cont.empty();
+	}
+	size_type size() const
+	{
+		return m_cont.size();
+	}
 
-    value_type& top() { return m_cont.back(); }
-    const value_type& top() const { return m_cont.back(); }
+	value_type& top()
+	{
+		return m_cont.back();
+	}
+	const value_type& top() const
+	{
+		return m_cont.back();
+	}
 
-    void push(const value_type& val) { m_cont.push_back(val); }
-    void pop() { m_cont.pop_back(); }
+	void push(const value_type& val)
+	{
+		m_cont.push_back(val);
+	}
+	void pop()
+	{
+		m_cont.pop_back();
+	}
 
 private:
-    container_type m_cont;
+	container_type m_cont;
 };
 
 #endif // wxUSE_STD_CONTAINERS/!wxUSE_STD_CONTAINERS

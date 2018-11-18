@@ -27,41 +27,47 @@ class WXDLLIMPEXP_FWD_CORE wxMenuItemImpl ;
 class WXDLLIMPEXP_CORE wxMenuItem: public wxMenuItemBase
 {
 public:
-    // ctor & dtor
-    wxMenuItem(wxMenu *parentMenu = NULL,
-               int id = wxID_SEPARATOR,
-               const wxString& name = wxEmptyString,
-               const wxString& help = wxEmptyString,
-               wxItemKind kind = wxITEM_NORMAL,
-               wxMenu *subMenu = NULL);
-    virtual ~wxMenuItem();
+	// ctor & dtor
+	wxMenuItem(wxMenu *parentMenu = NULL,
+	           int id = wxID_SEPARATOR,
+	           const wxString& name = wxEmptyString,
+	           const wxString& help = wxEmptyString,
+	           wxItemKind kind = wxITEM_NORMAL,
+	           wxMenu *subMenu = NULL);
+	virtual ~wxMenuItem();
 
-    // override base class virtuals
-    virtual void SetItemLabel(const wxString& strName);
+	// override base class virtuals
+	virtual void SetItemLabel(const wxString& strName);
 
-    virtual void Enable(bool bDoEnable = true);
-    virtual void Check(bool bDoCheck = true);
+	virtual void Enable(bool bDoEnable = true);
+	virtual void Check(bool bDoCheck = true);
 
-    virtual void SetBitmap(const wxBitmap& bitmap) ;
-    virtual const wxBitmap& GetBitmap() const { return m_bitmap; }
+	virtual void SetBitmap(const wxBitmap& bitmap) ;
+	virtual const wxBitmap& GetBitmap() const
+	{
+		return m_bitmap;
+	}
 
 
-    // Implementation only from now on.
+	// Implementation only from now on.
 
-    // update the os specific representation
-    void UpdateItemBitmap() ;
-    void UpdateItemText() ;
-    void UpdateItemStatus() ;
+	// update the os specific representation
+	void UpdateItemBitmap() ;
+	void UpdateItemText() ;
+	void UpdateItemStatus() ;
 
-    wxMenuItemImpl* GetPeer() { return m_peer; }
+	wxMenuItemImpl* GetPeer()
+	{
+		return m_peer;
+	}
 private:
-    void UncheckRadio() ;
+	void UncheckRadio() ;
 
-    wxBitmap  m_bitmap; // Bitmap for menuitem, if any
+	wxBitmap  m_bitmap; // Bitmap for menuitem, if any
 
-    wxMenuItemImpl* m_peer;
+	wxMenuItemImpl* m_peer;
 
-    wxDECLARE_DYNAMIC_CLASS(wxMenuItem);
+	wxDECLARE_DYNAMIC_CLASS(wxMenuItem);
 };
 
 #endif  //_MENUITEM_H

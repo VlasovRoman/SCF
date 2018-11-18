@@ -17,18 +17,18 @@
 class WXDLLIMPEXP_CORE wxScreenDCImpl: public wxWindowDCImpl
 {
 public:
-    wxScreenDCImpl( wxDC *owner );
-    virtual ~wxScreenDCImpl();
+	wxScreenDCImpl( wxDC *owner );
+	virtual ~wxScreenDCImpl();
 
-    virtual wxBitmap DoGetAsBitmap(const wxRect *subrect) const;
+	virtual wxBitmap DoGetAsBitmap(const wxRect *subrect) const;
 private:
-    void* m_overlayWindow;
+	void* m_overlayWindow;
 
 private:
-    wxDECLARE_CLASS(wxScreenDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxScreenDCImpl);
+	wxDECLARE_CLASS(wxScreenDCImpl);
+	wxDECLARE_NO_COPY_CLASS(wxScreenDCImpl);
 };
 
 #endif
-    // _WX_DCSCREEN_H_
+// _WX_DCSCREEN_H_
 

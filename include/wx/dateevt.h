@@ -22,24 +22,33 @@
 class WXDLLIMPEXP_ADV wxDateEvent : public wxCommandEvent
 {
 public:
-    wxDateEvent() { }
-    wxDateEvent(wxWindow *win, const wxDateTime& dt, wxEventType type)
-        : wxCommandEvent(type, win->GetId()),
-          m_date(dt)
-    {
-        SetEventObject(win);
-    }
+	wxDateEvent() { }
+	wxDateEvent(wxWindow *win, const wxDateTime& dt, wxEventType type)
+		: wxCommandEvent(type, win->GetId()),
+		  m_date(dt)
+	{
+		SetEventObject(win);
+	}
 
-    const wxDateTime& GetDate() const { return m_date; }
-    void SetDate(const wxDateTime &date) { m_date = date; }
+	const wxDateTime& GetDate() const
+	{
+		return m_date;
+	}
+	void SetDate(const wxDateTime &date)
+	{
+		m_date = date;
+	}
 
-    // default copy ctor, assignment operator and dtor are ok
-    virtual wxEvent *Clone() const wxOVERRIDE { return new wxDateEvent(*this); }
+	// default copy ctor, assignment operator and dtor are ok
+	virtual wxEvent *Clone() const wxOVERRIDE
+	{
+		return new wxDateEvent(*this);
+	}
 
 private:
-    wxDateTime m_date;
+	wxDateTime m_date;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxDateEvent);
+	wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxDateEvent);
 };
 
 // ----------------------------------------------------------------------------

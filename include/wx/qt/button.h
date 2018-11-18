@@ -14,25 +14,25 @@
 class WXDLLIMPEXP_CORE wxButton : public wxButtonBase
 {
 public:
-    wxButton();
-    wxButton(wxWindow *parent, wxWindowID id,
-           const wxString& label = wxEmptyString,
-           const wxPoint& pos = wxDefaultPosition,
-           const wxSize& size = wxDefaultSize, long style = 0,
-           const wxValidator& validator = wxDefaultValidator,
-           const wxString& name = wxButtonNameStr);
+	wxButton();
+	wxButton(wxWindow *parent, wxWindowID id,
+	         const wxString& label = wxEmptyString,
+	         const wxPoint& pos = wxDefaultPosition,
+	         const wxSize& size = wxDefaultSize, long style = 0,
+	         const wxValidator& validator = wxDefaultValidator,
+	         const wxString& name = wxButtonNameStr);
 
-    bool Create(wxWindow *parent, wxWindowID id,
-           const wxString& label = wxEmptyString,
-           const wxPoint& pos = wxDefaultPosition,
-           const wxSize& size = wxDefaultSize, long style = 0,
-           const wxValidator& validator = wxDefaultValidator,
-           const wxString& name = wxButtonNameStr);
+	bool Create(wxWindow *parent, wxWindowID id,
+	            const wxString& label = wxEmptyString,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize, long style = 0,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxButtonNameStr);
 
-   virtual wxWindow *SetDefault();
+	virtual wxWindow *SetDefault();
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxButton);
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxButton);
 };
 
 

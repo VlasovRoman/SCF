@@ -25,60 +25,69 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxStaticBitmapNameStr[];
 class WXDLLIMPEXP_CORE wxStaticBitmapBase : public wxControl
 {
 public:
-    enum ScaleMode
-    {
-        Scale_None,
-        Scale_Fill,
-        Scale_AspectFit,
-        Scale_AspectFill
-    };
+	enum ScaleMode
+	{
+		Scale_None,
+		Scale_Fill,
+		Scale_AspectFit,
+		Scale_AspectFill
+	};
 
-    wxStaticBitmapBase() { }
-    virtual ~wxStaticBitmapBase();
+	wxStaticBitmapBase() { }
+	virtual ~wxStaticBitmapBase();
 
-    // our interface
-    virtual void SetIcon(const wxIcon& icon) = 0;
-    virtual void SetBitmap(const wxBitmap& bitmap) = 0;
-    virtual wxBitmap GetBitmap() const = 0;
-    virtual wxIcon GetIcon() const /* = 0 -- should be pure virtual */
-    {
-        // stub it out here for now as not all ports implement it (but they
-        // should)
-        return wxIcon();
-    }
-    virtual void SetScaleMode(ScaleMode WXUNUSED(scaleMode)) { }
-    virtual ScaleMode GetScaleMode() const { return Scale_None; }
+	// our interface
+	virtual void SetIcon(const wxIcon& icon) = 0;
+	virtual void SetBitmap(const wxBitmap& bitmap) = 0;
+	virtual wxBitmap GetBitmap() const = 0;
+	virtual wxIcon GetIcon() const /* = 0 -- should be pure virtual */
+	{
+		// stub it out here for now as not all ports implement it (but they
+		// should)
+		return wxIcon();
+	}
+	virtual void SetScaleMode(ScaleMode WXUNUSED(scaleMode)) { }
+	virtual ScaleMode GetScaleMode() const
+	{
+		return Scale_None;
+	}
 
-    // overridden base class virtuals
-    virtual bool AcceptsFocus() const wxOVERRIDE { return false; }
-    virtual bool HasTransparentBackground() wxOVERRIDE { return true; }
+	// overridden base class virtuals
+	virtual bool AcceptsFocus() const wxOVERRIDE
+	{
+		return false;
+	}
+	virtual bool HasTransparentBackground() wxOVERRIDE { return true; }
 
 protected:
-    // choose the default border for this window
-    virtual wxBorder GetDefaultBorder() const wxOVERRIDE { return wxBORDER_NONE; }
+	// choose the default border for this window
+	virtual wxBorder GetDefaultBorder() const wxOVERRIDE
+	{
+		return wxBORDER_NONE;
+	}
 
-    virtual wxSize DoGetBestSize() const wxOVERRIDE;
+	virtual wxSize DoGetBestSize() const wxOVERRIDE;
 
-    wxDECLARE_NO_COPY_CLASS(wxStaticBitmapBase);
+	wxDECLARE_NO_COPY_CLASS(wxStaticBitmapBase);
 };
 
 #if defined(__WXUNIVERSAL__)
-    #include "wx/univ/statbmp.h"
+#include "wx/univ/statbmp.h"
 #elif defined(__WXMSW__)
-    #include "wx/msw/statbmp.h"
+#include "wx/msw/statbmp.h"
 #elif defined(__WXMOTIF__)
-    #include "wx/motif/statbmp.h"
+#include "wx/motif/statbmp.h"
 #elif defined(__WXGTK20__)
-    #include "wx/gtk/statbmp.h"
+#include "wx/gtk/statbmp.h"
 #elif defined(__WXGTK__)
-    #include "wx/gtk1/statbmp.h"
+#include "wx/gtk1/statbmp.h"
 #elif defined(__WXMAC__)
-    #include "wx/osx/statbmp.h"
+#include "wx/osx/statbmp.h"
 #elif defined(__WXQT__)
-    #include "wx/qt/statbmp.h"
+#include "wx/qt/statbmp.h"
 #endif
 
 #endif // wxUSE_STATBMP
 
 #endif
-    // _WX_STATBMP_H_BASE_
+// _WX_STATBMP_H_BASE_

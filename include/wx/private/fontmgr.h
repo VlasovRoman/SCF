@@ -31,16 +31,22 @@ WX_DECLARE_LIST(wxFontBundle, wxFontBundleList);
 class wxFontInstanceBase
 {
 protected:
-    wxFontInstanceBase(float ptSize, bool aa) : m_ptSize(ptSize), m_aa(aa) {}
-    virtual ~wxFontInstanceBase() {}
+	wxFontInstanceBase(float ptSize, bool aa) : m_ptSize(ptSize), m_aa(aa) {}
+	virtual ~wxFontInstanceBase() {}
 
 public:
-    float GetPointSize() const { return m_ptSize; }
-    bool IsAntiAliased() const { return m_aa; }
+	float GetPointSize() const
+	{
+		return m_ptSize;
+	}
+	bool IsAntiAliased() const
+	{
+		return m_aa;
+	}
 
 protected:
-    float m_ptSize;
-    bool m_aa;
+	float m_ptSize;
+	bool m_aa;
 };
 
 
@@ -48,41 +54,41 @@ protected:
 class wxFontFaceBase
 {
 protected:
-    /// Ctor. Creates object with reference count = 0, Acquire() must be
-    /// called after the object is created.
-    wxFontFaceBase();
-    virtual ~wxFontFaceBase();
+	/// Ctor. Creates object with reference count = 0, Acquire() must be
+	/// called after the object is created.
+	wxFontFaceBase();
+	virtual ~wxFontFaceBase();
 
 public:
-    /// Increases reference count of the face
-    virtual void Acquire();
+	/// Increases reference count of the face
+	virtual void Acquire();
 
-    /**
-        Decreases reference count of the face. Call this when you no longer
-        use the object returned by wxFontBundle. Note that this doesn't destroy
-        the object, but only optionally shuts it down, so it's possible to
-        call Acquire() and Release() more than once.
-     */
-    virtual void Release();
+	/**
+	    Decreases reference count of the face. Call this when you no longer
+	    use the object returned by wxFontBundle. Note that this doesn't destroy
+	    the object, but only optionally shuts it down, so it's possible to
+	    call Acquire() and Release() more than once.
+	 */
+	virtual void Release();
 
-    /**
-        Returns instance of the font at given size.
+	/**
+	    Returns instance of the font at given size.
 
-        @param ptSize   point size of the font to create; note that this is
-                        a float and not integer, it should be wxFont's point
-                        size multipled by wxDC's scale factor
-        @param aa       should the font be antialiased?
-     */
-    virtual wxFontInstance *GetFontInstance(float ptSize, bool aa);
-
-protected:
-    /// Called to create a new instance of the font by GetFontInstance() if
-    /// it wasn't found it cache.
-    virtual wxFontInstance *CreateFontInstance(float ptSize, bool aa) = 0;
+	    @param ptSize   point size of the font to create; note that this is
+	                    a float and not integer, it should be wxFont's point
+	                    size multipled by wxDC's scale factor
+	    @param aa       should the font be antialiased?
+	 */
+	virtual wxFontInstance *GetFontInstance(float ptSize, bool aa);
 
 protected:
-    unsigned m_refCnt;
-    wxFontInstanceList *m_instances;
+	/// Called to create a new instance of the font by GetFontInstance() if
+	/// it wasn't found it cache.
+	virtual wxFontInstance *CreateFontInstance(float ptSize, bool aa) = 0;
+
+protected:
+	unsigned m_refCnt;
+	wxFontInstanceList *m_instances;
 };
 
 /**
@@ -92,51 +98,54 @@ protected:
 class wxFontBundleBase
 {
 public:
-    wxFontBundleBase();
-    virtual ~wxFontBundleBase();
+	wxFontBundleBase();
+	virtual ~wxFontBundleBase();
 
-    /// Returns name of the bundle
-    virtual wxString GetName() const = 0;
+	/// Returns name of the bundle
+	virtual wxString GetName() const = 0;
 
-    /// Returns true if the font is fixe-width
-    virtual bool IsFixed() const = 0;
+	/// Returns true if the font is fixe-width
+	virtual bool IsFixed() const = 0;
 
-    /// Type of faces in the bundle
-    enum FaceType
-    {
-        // NB: values of these constants are set so that it's possible to
-        //     make OR-combinations of them and still get valid enum element
-        FaceType_Regular       = 0,
-        FaceType_Italic        = 1,
-        FaceType_Bold          = 2,
-        FaceType_BoldItalic    = FaceType_Italic | FaceType_Bold,
+	/// Type of faces in the bundle
+	enum FaceType
+	{
+		// NB: values of these constants are set so that it's possible to
+		//     make OR-combinations of them and still get valid enum element
+		FaceType_Regular       = 0,
+		FaceType_Italic        = 1,
+		FaceType_Bold          = 2,
+		FaceType_BoldItalic    = FaceType_Italic | FaceType_Bold,
 
-        FaceType_Max
-    };
+		FaceType_Max
+	};
 
-    /// Returns true if the given face is available
-    bool HasFace(FaceType type) const { return m_faces[type] != NULL; }
+	/// Returns true if the given face is available
+	bool HasFace(FaceType type) const
+	{
+		return m_faces[type] != NULL;
+	}
 
-    /**
-        Returns font face object that can be used to render font of given type.
+	/**
+	    Returns font face object that can be used to render font of given type.
 
-        Note that this method can only be called if HasFace(type) returns true.
+	    Note that this method can only be called if HasFace(type) returns true.
 
-        Acquire() was called on the returned object, you must call Release()
-        when you stop using it.
-     */
-    wxFontFace *GetFace(FaceType type) const;
+	    Acquire() was called on the returned object, you must call Release()
+	    when you stop using it.
+	 */
+	wxFontFace *GetFace(FaceType type) const;
 
-    /**
-        Returns font face object that can be used to render given font.
+	/**
+	    Returns font face object that can be used to render given font.
 
-        Acquire() was called on the returned object, you must call Release()
-        when you stop using it.
-     */
-    wxFontFace *GetFaceForFont(const wxFontMgrFontRefData& font) const;
+	    Acquire() was called on the returned object, you must call Release()
+	    when you stop using it.
+	 */
+	wxFontFace *GetFaceForFont(const wxFontMgrFontRefData& font) const;
 
 protected:
-    wxFontFace *m_faces[FaceType_Max];
+	wxFontFace *m_faces[FaceType_Max];
 };
 
 
@@ -147,52 +156,55 @@ protected:
 class wxFontsManagerBase
 {
 protected:
-    wxFontsManagerBase();
-    virtual ~wxFontsManagerBase();
+	wxFontsManagerBase();
+	virtual ~wxFontsManagerBase();
 
 public:
-    /// Returns the font manager singleton, creating it if it doesn't exist
-    static wxFontsManager *Get();
+	/// Returns the font manager singleton, creating it if it doesn't exist
+	static wxFontsManager *Get();
 
-    /// Called by wxApp to shut down the manager
-    static void CleanUp();
+	/// Called by wxApp to shut down the manager
+	static void CleanUp();
 
-    /// Returns list of all available font bundles
-    const wxFontBundleList& GetBundles() const { return *m_list; }
+	/// Returns list of all available font bundles
+	const wxFontBundleList& GetBundles() const
+	{
+		return *m_list;
+	}
 
-    /**
-        Returns object representing font bundle with the given name.
+	/**
+	    Returns object representing font bundle with the given name.
 
-        The returned object is owned by wxFontsManager, you must not delete it.
-     */
-    wxFontBundle *GetBundle(const wxString& name) const;
+	    The returned object is owned by wxFontsManager, you must not delete it.
+	 */
+	wxFontBundle *GetBundle(const wxString& name) const;
 
-    /**
-        Returns object representing font bundle that can be used to render
-        given font.
+	/**
+	    Returns object representing font bundle that can be used to render
+	    given font.
 
-        The returned object is owned by wxFontsManager, you must not delete it.
-     */
-    wxFontBundle *GetBundleForFont(const wxFontMgrFontRefData& font) const;
+	    The returned object is owned by wxFontsManager, you must not delete it.
+	 */
+	wxFontBundle *GetBundleForFont(const wxFontMgrFontRefData& font) const;
 
-    /// This method must be called by derived
-    void AddBundle(wxFontBundle *bundle);
+	/// This method must be called by derived
+	void AddBundle(wxFontBundle *bundle);
 
-    /// Returns default facename for given wxFont family
-    virtual wxString GetDefaultFacename(wxFontFamily family) const = 0;
+	/// Returns default facename for given wxFont family
+	virtual wxString GetDefaultFacename(wxFontFamily family) const = 0;
 
 private:
-    wxFontBundleHash *m_hash;
-    wxFontBundleList *m_list;
+	wxFontBundleHash *m_hash;
+	wxFontBundleList *m_list;
 
 protected:
-    static wxFontsManager *ms_instance;
+	static wxFontsManager *ms_instance;
 };
 
 
 
 #if defined(__WXDFB__)
-    #include "wx/dfb/private/fontmgr.h"
+#include "wx/dfb/private/fontmgr.h"
 #endif
 
 
@@ -201,47 +213,74 @@ protected:
 class wxFontMgrFontRefData : public wxGDIRefData
 {
 public:
-    wxFontMgrFontRefData(int size = wxDEFAULT,
-                  wxFontFamily family = wxFONTFAMILY_DEFAULT,
-                  wxFontStyle style = wxFONTSTYLE_NORMAL,
-                  wxFontWeight weight = wxFONTWEIGHT_NORMAL,
-                  bool underlined = false,
-                  const wxString& faceName = wxEmptyString,
-                  wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
-    wxFontMgrFontRefData(const wxFontMgrFontRefData& data);
-    ~wxFontMgrFontRefData();
+	wxFontMgrFontRefData(int size = wxDEFAULT,
+	                     wxFontFamily family = wxFONTFAMILY_DEFAULT,
+	                     wxFontStyle style = wxFONTSTYLE_NORMAL,
+	                     wxFontWeight weight = wxFONTWEIGHT_NORMAL,
+	                     bool underlined = false,
+	                     const wxString& faceName = wxEmptyString,
+	                     wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
+	wxFontMgrFontRefData(const wxFontMgrFontRefData& data);
+	~wxFontMgrFontRefData();
 
-    wxFontBundle *GetFontBundle() const;
-    wxFontInstance *GetFontInstance(float scale, bool antialiased) const;
+	wxFontBundle *GetFontBundle() const;
+	wxFontInstance *GetFontInstance(float scale, bool antialiased) const;
 
-    bool IsFixedWidth() const { return GetFontBundle()->IsFixed(); }
+	bool IsFixedWidth() const
+	{
+		return GetFontBundle()->IsFixed();
+	}
 
-    const wxNativeFontInfo *GetNativeFontInfo() const { return &m_info; }
+	const wxNativeFontInfo *GetNativeFontInfo() const
+	{
+		return &m_info;
+	}
 
-    int GetPointSize() const { return m_info.pointSize; }
-    wxString GetFaceName() const { return m_info.faceName; }
-    wxFontFamily GetFamily() const { return m_info.family; }
-    wxFontStyle GetStyle() const { return m_info.style; }
-    wxFontWeight GetWeight() const { return m_info.weight; }
-    bool GetUnderlined() const { return m_info.underlined; }
-    wxFontEncoding GetEncoding() const { return m_info.encoding; }
+	int GetPointSize() const
+	{
+		return m_info.pointSize;
+	}
+	wxString GetFaceName() const
+	{
+		return m_info.faceName;
+	}
+	wxFontFamily GetFamily() const
+	{
+		return m_info.family;
+	}
+	wxFontStyle GetStyle() const
+	{
+		return m_info.style;
+	}
+	wxFontWeight GetWeight() const
+	{
+		return m_info.weight;
+	}
+	bool GetUnderlined() const
+	{
+		return m_info.underlined;
+	}
+	wxFontEncoding GetEncoding() const
+	{
+		return m_info.encoding;
+	}
 
-    void SetPointSize(int pointSize);
-    void SetFamily(wxFontFamily family);
-    void SetStyle(wxFontStyle style);
-    void SetWeight(wxFontWeight weight);
-    void SetFaceName(const wxString& faceName);
-    void SetUnderlined(bool underlined);
-    void SetEncoding(wxFontEncoding encoding);
+	void SetPointSize(int pointSize);
+	void SetFamily(wxFontFamily family);
+	void SetStyle(wxFontStyle style);
+	void SetWeight(wxFontWeight weight);
+	void SetFaceName(const wxString& faceName);
+	void SetUnderlined(bool underlined);
+	void SetEncoding(wxFontEncoding encoding);
 
 private:
-    void EnsureValidFont();
+	void EnsureValidFont();
 
-    wxNativeFontInfo  m_info;
+	wxNativeFontInfo  m_info;
 
-    wxFontFace       *m_fontFace;
-    wxFontBundle     *m_fontBundle;
-    bool              m_fontValid;
+	wxFontFace       *m_fontFace;
+	wxFontBundle     *m_fontBundle;
+	bool              m_fontValid;
 };
 
 #endif // _WX_PRIVATE_FONTMGR_H_

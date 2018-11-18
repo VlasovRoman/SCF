@@ -30,39 +30,39 @@
 
 enum
 {
-    wxPNG_TYPE_COLOUR = 0,
-    wxPNG_TYPE_GREY = 2,
-    wxPNG_TYPE_GREY_RED = 3,
-    wxPNG_TYPE_PALETTE = 4
+	wxPNG_TYPE_COLOUR = 0,
+	wxPNG_TYPE_GREY = 2,
+	wxPNG_TYPE_GREY_RED = 3,
+	wxPNG_TYPE_PALETTE = 4
 };
 
 class WXDLLIMPEXP_CORE wxPNGHandler: public wxImageHandler
 {
 public:
-    inline wxPNGHandler()
-    {
-        m_name = wxT("PNG file");
-        m_extension = wxT("png");
-        m_type = wxBITMAP_TYPE_PNG;
-        m_mime = wxT("image/png");
-    }
+	inline wxPNGHandler()
+	{
+		m_name = wxT("PNG file");
+		m_extension = wxT("png");
+		m_type = wxBITMAP_TYPE_PNG;
+		m_mime = wxT("image/png");
+	}
 
-    static wxVersionInfo GetLibraryVersionInfo();
+	static wxVersionInfo GetLibraryVersionInfo();
 
 #if wxUSE_STREAMS
-    virtual bool LoadFile( wxImage *image, wxInputStream& stream, bool verbose=true, int index=-1 ) wxOVERRIDE;
-    virtual bool SaveFile( wxImage *image, wxOutputStream& stream, bool verbose=true ) wxOVERRIDE;
+	virtual bool LoadFile( wxImage *image, wxInputStream& stream, bool verbose=true, int index=-1 ) wxOVERRIDE;
+	virtual bool SaveFile( wxImage *image, wxOutputStream& stream, bool verbose=true ) wxOVERRIDE;
 protected:
-    virtual bool DoCanRead( wxInputStream& stream ) wxOVERRIDE;
+	virtual bool DoCanRead( wxInputStream& stream ) wxOVERRIDE;
 #endif
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxPNGHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxPNGHandler);
 };
 
 #endif
-  // wxUSE_LIBPNG
+// wxUSE_LIBPNG
 
 #endif
-  // _WX_IMAGPNG_H_
+// _WX_IMAGPNG_H_
 

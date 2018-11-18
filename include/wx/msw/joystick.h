@@ -15,77 +15,77 @@
 
 class WXDLLIMPEXP_ADV wxJoystick: public wxObject
 {
-  wxDECLARE_DYNAMIC_CLASS(wxJoystick);
+	wxDECLARE_DYNAMIC_CLASS(wxJoystick);
 public:
-  /*
-   * Public interface
-   */
+	/*
+	 * Public interface
+	 */
 
-  wxJoystick(int joystick = wxJOYSTICK1);
+	wxJoystick(int joystick = wxJOYSTICK1);
 
-  // Attributes
-  ////////////////////////////////////////////////////////////////////////////
+	// Attributes
+	////////////////////////////////////////////////////////////////////////////
 
-  wxPoint GetPosition(void) const;
-  int GetPosition(unsigned axis) const;
-  bool GetButtonState(unsigned button) const;
-  int GetZPosition(void) const;
-  int GetButtonState(void) const;
-  int GetPOVPosition(void) const;
-  int GetPOVCTSPosition(void) const;
-  int GetRudderPosition(void) const;
-  int GetUPosition(void) const;
-  int GetVPosition(void) const;
-  int GetMovementThreshold(void) const;
-  void SetMovementThreshold(int threshold) ;
+	wxPoint GetPosition(void) const;
+	int GetPosition(unsigned axis) const;
+	bool GetButtonState(unsigned button) const;
+	int GetZPosition(void) const;
+	int GetButtonState(void) const;
+	int GetPOVPosition(void) const;
+	int GetPOVCTSPosition(void) const;
+	int GetRudderPosition(void) const;
+	int GetUPosition(void) const;
+	int GetVPosition(void) const;
+	int GetMovementThreshold(void) const;
+	void SetMovementThreshold(int threshold) ;
 
-  // Capabilities
-  ////////////////////////////////////////////////////////////////////////////
+	// Capabilities
+	////////////////////////////////////////////////////////////////////////////
 
-  static int GetNumberJoysticks(void);
+	static int GetNumberJoysticks(void);
 
-  bool IsOk(void) const; // Checks that the joystick is functioning
-  int GetManufacturerId(void) const ;
-  int GetProductId(void) const ;
-  wxString GetProductName(void) const ;
-  int GetXMin(void) const;
-  int GetYMin(void) const;
-  int GetZMin(void) const;
-  int GetXMax(void) const;
-  int GetYMax(void) const;
-  int GetZMax(void) const;
-  int GetNumberButtons(void) const;
-  int GetNumberAxes(void) const;
-  int GetMaxButtons(void) const;
-  int GetMaxAxes(void) const;
-  int GetPollingMin(void) const;
-  int GetPollingMax(void) const;
-  int GetRudderMin(void) const;
-  int GetRudderMax(void) const;
-  int GetUMin(void) const;
-  int GetUMax(void) const;
-  int GetVMin(void) const;
-  int GetVMax(void) const;
+	bool IsOk(void) const; // Checks that the joystick is functioning
+	int GetManufacturerId(void) const ;
+	int GetProductId(void) const ;
+	wxString GetProductName(void) const ;
+	int GetXMin(void) const;
+	int GetYMin(void) const;
+	int GetZMin(void) const;
+	int GetXMax(void) const;
+	int GetYMax(void) const;
+	int GetZMax(void) const;
+	int GetNumberButtons(void) const;
+	int GetNumberAxes(void) const;
+	int GetMaxButtons(void) const;
+	int GetMaxAxes(void) const;
+	int GetPollingMin(void) const;
+	int GetPollingMax(void) const;
+	int GetRudderMin(void) const;
+	int GetRudderMax(void) const;
+	int GetUMin(void) const;
+	int GetUMax(void) const;
+	int GetVMin(void) const;
+	int GetVMax(void) const;
 
-  bool HasRudder(void) const;
-  bool HasZ(void) const;
-  bool HasU(void) const;
-  bool HasV(void) const;
-  bool HasPOV(void) const;
-  bool HasPOV4Dir(void) const;
-  bool HasPOVCTS(void) const;
+	bool HasRudder(void) const;
+	bool HasZ(void) const;
+	bool HasU(void) const;
+	bool HasV(void) const;
+	bool HasPOV(void) const;
+	bool HasPOV4Dir(void) const;
+	bool HasPOVCTS(void) const;
 
-  // Operations
-  ////////////////////////////////////////////////////////////////////////////
+	// Operations
+	////////////////////////////////////////////////////////////////////////////
 
-  // pollingFreq = 0 means that movement events are sent when above the threshold.
-  // If pollingFreq > 0, events are received every this many milliseconds.
-  bool SetCapture(wxWindow* win, int pollingFreq = 0);
-  bool ReleaseCapture(void);
+	// pollingFreq = 0 means that movement events are sent when above the threshold.
+	// If pollingFreq > 0, events are received every this many milliseconds.
+	bool SetCapture(wxWindow* win, int pollingFreq = 0);
+	bool ReleaseCapture(void);
 
 protected:
-  int       m_joystick;
+	int       m_joystick;
 };
 
 #endif
-    // _WX_JOYSTICK_H_
+// _WX_JOYSTICK_H_

@@ -24,11 +24,11 @@ class wxFileSystem;
 class WXDLLIMPEXP_WEBVIEW wxWebViewArchiveHandler : public wxWebViewHandler
 {
 public:
-    wxWebViewArchiveHandler(const wxString& scheme);
-    virtual ~wxWebViewArchiveHandler();
-    virtual wxFSFile* GetFile(const wxString &uri) wxOVERRIDE;
+	wxWebViewArchiveHandler(const wxString& scheme);
+	virtual ~wxWebViewArchiveHandler();
+	virtual wxFSFile* GetFile(const wxString &uri) wxOVERRIDE;
 private:
-    wxFileSystem* m_fileSystem;
+	wxFileSystem* m_fileSystem;
 };
 
 #endif // wxUSE_WEBVIEW

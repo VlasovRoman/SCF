@@ -36,40 +36,40 @@ class WXDLLIMPEXP_FWD_CORE wxPalette;
 class WXDLLIMPEXP_CORE wxQuantize: public wxObject
 {
 public:
-    wxDECLARE_DYNAMIC_CLASS(wxQuantize);
+	wxDECLARE_DYNAMIC_CLASS(wxQuantize);
 
 //// Constructor
 
-    wxQuantize() {}
-    virtual ~wxQuantize() {}
+	wxQuantize() {}
+	virtual ~wxQuantize() {}
 
 //// Operations
 
-    // Reduce the colours in the source image and put the result into the
-    // destination image. Both images may be the same, to overwrite the source image.
-    // Specify an optional palette pointer to receive the resulting palette.
-    // This palette may be passed to ConvertImageToBitmap, for example.
-    // If you pass a palette pointer, you must free the palette yourself.
+	// Reduce the colours in the source image and put the result into the
+	// destination image. Both images may be the same, to overwrite the source image.
+	// Specify an optional palette pointer to receive the resulting palette.
+	// This palette may be passed to ConvertImageToBitmap, for example.
+	// If you pass a palette pointer, you must free the palette yourself.
 
-    static bool Quantize(const wxImage& src, wxImage& dest, wxPalette** pPalette, int desiredNoColours = 236,
-        unsigned char** eightBitData = 0, int flags = wxQUANTIZE_INCLUDE_WINDOWS_COLOURS|wxQUANTIZE_FILL_DESTINATION_IMAGE|wxQUANTIZE_RETURN_8BIT_DATA);
+	static bool Quantize(const wxImage& src, wxImage& dest, wxPalette** pPalette, int desiredNoColours = 236,
+	                     unsigned char** eightBitData = 0, int flags = wxQUANTIZE_INCLUDE_WINDOWS_COLOURS|wxQUANTIZE_FILL_DESTINATION_IMAGE|wxQUANTIZE_RETURN_8BIT_DATA);
 
-    // This version sets a palette in the destination image so you don't
-    // have to manage it yourself.
+	// This version sets a palette in the destination image so you don't
+	// have to manage it yourself.
 
-    static bool Quantize(const wxImage& src, wxImage& dest, int desiredNoColours = 236,
-        unsigned char** eightBitData = 0, int flags = wxQUANTIZE_INCLUDE_WINDOWS_COLOURS|wxQUANTIZE_FILL_DESTINATION_IMAGE|wxQUANTIZE_RETURN_8BIT_DATA);
+	static bool Quantize(const wxImage& src, wxImage& dest, int desiredNoColours = 236,
+	                     unsigned char** eightBitData = 0, int flags = wxQUANTIZE_INCLUDE_WINDOWS_COLOURS|wxQUANTIZE_FILL_DESTINATION_IMAGE|wxQUANTIZE_RETURN_8BIT_DATA);
 
 //// Helpers
 
-    // Converts input bitmap(s) into 8bit representation with custom palette
+	// Converts input bitmap(s) into 8bit representation with custom palette
 
-    // in_rows and out_rows are arrays [0..h-1] of pointer to rows
-    // (in_rows contains w * 3 bytes per row, out_rows w bytes per row)
-    // fills out_rows with indexes into palette (which is also stored into palette variable)
-    static void DoQuantize(unsigned w, unsigned h, unsigned char **in_rows, unsigned char **out_rows, unsigned char *palette, int desiredNoColours);
+	// in_rows and out_rows are arrays [0..h-1] of pointer to rows
+	// (in_rows contains w * 3 bytes per row, out_rows w bytes per row)
+	// fills out_rows with indexes into palette (which is also stored into palette variable)
+	static void DoQuantize(unsigned w, unsigned h, unsigned char **in_rows, unsigned char **out_rows, unsigned char *palette, int desiredNoColours);
 
 };
 
 #endif
-    // _WX_QUANTIZE_H_
+// _WX_QUANTIZE_H_

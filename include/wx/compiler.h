@@ -25,16 +25,16 @@
 #endif
 
 #if defined(_MSC_VER)
-    /*
-       define another standard symbol for Microsoft Visual C++: the standard
-       one (_MSC_VER) is also defined by some other compilers.
-     */
+/*
+   define another standard symbol for Microsoft Visual C++: the standard
+   one (_MSC_VER) is also defined by some other compilers.
+ */
 #   define __VISUALC__ _MSC_VER
 
-    /*
-      define special symbols for different VC version instead of writing tests
-      for magic numbers such as 1200, 1300 &c repeatedly
-    */
+/*
+  define special symbols for different VC version instead of writing tests
+  for magic numbers such as 1200, 1300 &c repeatedly
+*/
 #if __VISUALC__ < 1300
 #   error "This Visual C++ version is not supported any longer (at least MSVC 2003 required)."
 #elif __VISUALC__ < 1400
@@ -50,13 +50,13 @@
 #elif __VISUALC__ < 1900
 #   define __VISUALC12__
 #elif __VISUALC__ < 2000
-    /* There is no __VISUALC13__! */
+/* There is no __VISUALC13__! */
 #   define __VISUALC14__
 #else
-    /*
-        Don't forget to update include/msvc/wx/setup.h as well when adding
-        support for a newer MSVC version here.
-     */
+/*
+    Don't forget to update include/msvc/wx/setup.h as well when adding
+    support for a newer MSVC version here.
+ */
 #   pragma message("Please update wx/compiler.h to recognize this VC++ version")
 #endif
 
@@ -82,11 +82,11 @@
 #    endif
 */
 #if defined(__GNUC__) && defined(__GNUC_MINOR__)
-    #define wxCHECK_GCC_VERSION( major, minor ) \
+#define wxCHECK_GCC_VERSION( major, minor ) \
         ( ( __GNUC__ > (major) ) \
             || ( __GNUC__ == (major) && __GNUC_MINOR__ >= (minor) ) )
 #else
-    #define wxCHECK_GCC_VERSION( major, minor ) 0
+#define wxCHECK_GCC_VERSION( major, minor ) 0
 #endif
 
 /*
@@ -96,12 +96,12 @@
 #   define wxVISUALC_VERSION(major) 0
 #   define wxCHECK_VISUALC_VERSION(major) 0
 #else
-    /*
-        Things used to be simple with the _MSC_VER value and the version number
-        increasing in lock step, but _MSC_VER value of 1900 is VC14 and not the
-        non existing (presumably for the superstitious reasons) VC13, so we now
-        need to account for this with an extra offset.
-     */
+/*
+    Things used to be simple with the _MSC_VER value and the version number
+    increasing in lock step, but _MSC_VER value of 1900 is VC14 and not the
+    non existing (presumably for the superstitious reasons) VC13, so we now
+    need to account for this with an extra offset.
+ */
 #   define wxVISUALC_VERSION(major) ( (6 - (major >= 14 ? 1 : 0) + major) * 100 )
 #   define wxCHECK_VISUALC_VERSION(major) ( __VISUALC__ >= wxVISUALC_VERSION(major) )
 #endif
@@ -110,12 +110,12 @@
     This is similar to wxCHECK_GCC_VERSION but for Sun CC compiler.
  */
 #ifdef __SUNCC__
-    /*
-       __SUNCC__ is 0xVRP where V is major version, R release and P patch level
-     */
-    #define wxCHECK_SUNCC_VERSION(maj, min) (__SUNCC__ >= (((maj)<<8) | ((min)<<4)))
+/*
+   __SUNCC__ is 0xVRP where V is major version, R release and P patch level
+ */
+#define wxCHECK_SUNCC_VERSION(maj, min) (__SUNCC__ >= (((maj)<<8) | ((min)<<4)))
 #else
-    #define wxCHECK_SUNCC_VERSION(maj, min) (0)
+#define wxCHECK_SUNCC_VERSION(maj, min) (0)
 #endif
 
 /*

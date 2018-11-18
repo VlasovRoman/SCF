@@ -19,7 +19,7 @@
 // fail all version tests if the GTK+ version is so ancient that it doesn't
 // even have GTK_CHECK_VERSION
 #ifndef GTK_CHECK_VERSION
-    #define GTK_CHECK_VERSION(a, b, c) 0
+#define GTK_CHECK_VERSION(a, b, c) 0
 #endif
 
 #define wxGTK_CONV(s) s.c_str()
@@ -35,9 +35,9 @@
 // gtk_editable_{copy|cut|paste}_clipboard() had an extra argument under
 // previous GTK+ versions but no more
 #if defined(__WXGTK20__) || (GTK_MINOR_VERSION > 0)
-    #define DUMMY_CLIPBOARD_ARG
+#define DUMMY_CLIPBOARD_ARG
 #else
-    #define DUMMY_CLIPBOARD_ARG  ,0
+#define DUMMY_CLIPBOARD_ARG  ,0
 #endif
 
 // _GtkEditable is private in GTK2
@@ -54,37 +54,37 @@
 // translate a GTK+ scroll type to a wxEventType
 inline wxEventType GtkScrollTypeToWx(guint scrollType)
 {
-    wxEventType command;
-    switch ( scrollType )
-    {
-        case GTK_SCROLL_STEP_BACKWARD:
-            command = wxEVT_SCROLL_LINEUP;
-            break;
+	wxEventType command;
+	switch ( scrollType )
+	{
+	case GTK_SCROLL_STEP_BACKWARD:
+		command = wxEVT_SCROLL_LINEUP;
+		break;
 
-        case GTK_SCROLL_STEP_FORWARD:
-            command = wxEVT_SCROLL_LINEDOWN;
-            break;
+	case GTK_SCROLL_STEP_FORWARD:
+		command = wxEVT_SCROLL_LINEDOWN;
+		break;
 
-        case GTK_SCROLL_PAGE_BACKWARD:
-            command = wxEVT_SCROLL_PAGEUP;
-            break;
+	case GTK_SCROLL_PAGE_BACKWARD:
+		command = wxEVT_SCROLL_PAGEUP;
+		break;
 
-        case GTK_SCROLL_PAGE_FORWARD:
-            command = wxEVT_SCROLL_PAGEDOWN;
-            break;
+	case GTK_SCROLL_PAGE_FORWARD:
+		command = wxEVT_SCROLL_PAGEDOWN;
+		break;
 
-        default:
-            command = wxEVT_SCROLL_THUMBTRACK;
-    }
+	default:
+		command = wxEVT_SCROLL_THUMBTRACK;
+	}
 
-    return command;
+	return command;
 }
 
 inline wxEventType GtkScrollWinTypeToWx(guint scrollType)
 {
-    // GtkScrollTypeToWx() returns SCROLL_XXX, not SCROLLWIN_XXX as we need
-    return GtkScrollTypeToWx(scrollType) +
-            wxEVT_SCROLLWIN_TOP - wxEVT_SCROLL_TOP;
+	// GtkScrollTypeToWx() returns SCROLL_XXX, not SCROLLWIN_XXX as we need
+	return GtkScrollTypeToWx(scrollType) +
+	       wxEVT_SCROLLWIN_TOP - wxEVT_SCROLL_TOP;
 }
 
 // Needed for implementing e.g. combobox on wxGTK within a modal dialog.

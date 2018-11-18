@@ -43,12 +43,12 @@ namespace wxPrivate
 
 template<int val> struct FlagsHaveConflictingValues
 {
-    // no value here - triggers compilation error
+	// no value here - triggers compilation error
 };
 
 template<int val> struct FlagValue
 {
-    enum { value = val };
+	enum { value = val };
 };
 
 // This template adds its template parameter integer 'add' to another integer
@@ -58,19 +58,19 @@ template<int val> struct FlagValue
 // another (different) SafelyAddToMask<> instantiation.
 template<int all, int add> struct SafelyAddToMask
 {
-    // This typedefs ensures that no flags in the list conflict. If there's
-    // any overlap between the already constructed part of the mask ('all')
-    // and the value being added to it ('add'), the test that is wxIf<>'s
-    // first parameter will be non-zero and so Added value will be
-    // FlagsHaveConflictingValues<add>. The next statement will try to use
-    // AddedValue::value, but there's no such thing in
-    // FlagsHaveConflictingValues<> and so compilation will fail.
-    typedef typename wxIf<(all & add) == 0,
-                          FlagValue<add>,
-                          FlagsHaveConflictingValues<add> >::value
-            AddedValue;
+	// This typedefs ensures that no flags in the list conflict. If there's
+	// any overlap between the already constructed part of the mask ('all')
+	// and the value being added to it ('add'), the test that is wxIf<>'s
+	// first parameter will be non-zero and so Added value will be
+	// FlagsHaveConflictingValues<add>. The next statement will try to use
+	// AddedValue::value, but there's no such thing in
+	// FlagsHaveConflictingValues<> and so compilation will fail.
+	typedef typename wxIf<(all & add) == 0,
+	        FlagValue<add>,
+	        FlagsHaveConflictingValues<add> >::value
+	        AddedValue;
 
-    enum { value = all | AddedValue::value };
+	enum { value = all | AddedValue::value };
 };
 
 } // wxPrivate namespace
@@ -105,7 +105,7 @@ template<int all, int add> struct SafelyAddToMask
     ::wxPrivate::SafelyAddToMask<f, others>::value
 
 #else
-    #define wxADD_FLAG(f, others) (f | others)
+#define wxADD_FLAG(f, others) (f | others)
 #endif
 
 // Checks if flags value 'f' is within the mask of allowed values

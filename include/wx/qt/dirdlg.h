@@ -13,34 +13,34 @@ class QFileDialog;
 class WXDLLIMPEXP_CORE wxDirDialog : public wxDirDialogBase
 {
 public:
-    wxDirDialog() { }
+	wxDirDialog() { }
 
-    wxDirDialog(wxWindow *parent,
-                const wxString& message = wxDirSelectorPromptStr,
-                const wxString& defaultPath = wxEmptyString,
-                long style = wxDD_DEFAULT_STYLE,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                const wxString& name = wxDirDialogNameStr);
+	wxDirDialog(wxWindow *parent,
+	            const wxString& message = wxDirSelectorPromptStr,
+	            const wxString& defaultPath = wxEmptyString,
+	            long style = wxDD_DEFAULT_STYLE,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            const wxString& name = wxDirDialogNameStr);
 
-    bool Create(wxWindow *parent,
-                const wxString& message = wxDirSelectorPromptStr,
-                const wxString& defaultPath = wxEmptyString,
-                long style = wxDD_DEFAULT_STYLE,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                const wxString& name = wxDirDialogNameStr);
+	bool Create(wxWindow *parent,
+	            const wxString& message = wxDirSelectorPromptStr,
+	            const wxString& defaultPath = wxEmptyString,
+	            long style = wxDD_DEFAULT_STYLE,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            const wxString& name = wxDirDialogNameStr);
 
 public:     // overrides from wxGenericDirDialog
 
-    wxString GetPath() const wxOVERRIDE;
-    void SetPath(const wxString& path) wxOVERRIDE;
+	wxString GetPath() const wxOVERRIDE;
+	void SetPath(const wxString& path) wxOVERRIDE;
 
 private:
 
-    virtual QFileDialog *GetQFileDialog() const;
+	virtual QFileDialog *GetQFileDialog() const;
 
-    wxDECLARE_DYNAMIC_CLASS(wxDirDialog);
+	wxDECLARE_DYNAMIC_CLASS(wxDirDialog);
 };
 
 #endif // _WX_QT_DIRDLG_H_

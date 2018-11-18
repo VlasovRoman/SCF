@@ -11,35 +11,38 @@
 class WXDLLIMPEXP_CORE wxMDIParentFrame : public wxMDIParentFrameBase
 {
 public:
-    wxMDIParentFrame();
-    wxMDIParentFrame(wxWindow *parent,
-                     wxWindowID id,
-                     const wxString& title,
-                     const wxPoint& pos = wxDefaultPosition,
-                     const wxSize& size = wxDefaultSize,
-                     long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
-                     const wxString& name = wxFrameNameStr);
+	wxMDIParentFrame();
+	wxMDIParentFrame(wxWindow *parent,
+	                 wxWindowID id,
+	                 const wxString& title,
+	                 const wxPoint& pos = wxDefaultPosition,
+	                 const wxSize& size = wxDefaultSize,
+	                 long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
+	                 const wxString& name = wxFrameNameStr);
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxString& title,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
-                const wxString& name = wxFrameNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxString& title,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
+	            const wxString& name = wxFrameNameStr);
 
-    // override/implement base class [pure] virtual methods
-    // ----------------------------------------------------
+	// override/implement base class [pure] virtual methods
+	// ----------------------------------------------------
 
-    static bool IsTDI() { return false; }
+	static bool IsTDI()
+	{
+		return false;
+	}
 
-    virtual void ActivateNext();
-    virtual void ActivatePrevious();
+	virtual void ActivateNext();
+	virtual void ActivatePrevious();
 
 protected:
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxMDIParentFrame);
+	wxDECLARE_DYNAMIC_CLASS(wxMDIParentFrame);
 };
 
 
@@ -47,24 +50,24 @@ private:
 class WXDLLIMPEXP_CORE wxMDIChildFrame : public wxMDIChildFrameBase
 {
 public:
-    wxMDIChildFrame();
-    wxMDIChildFrame(wxMDIParentFrame *parent,
-                    wxWindowID id,
-                    const wxString& title,
-                    const wxPoint& pos = wxDefaultPosition,
-                    const wxSize& size = wxDefaultSize,
-                    long style = wxDEFAULT_FRAME_STYLE,
-                    const wxString& name = wxFrameNameStr);
+	wxMDIChildFrame();
+	wxMDIChildFrame(wxMDIParentFrame *parent,
+	                wxWindowID id,
+	                const wxString& title,
+	                const wxPoint& pos = wxDefaultPosition,
+	                const wxSize& size = wxDefaultSize,
+	                long style = wxDEFAULT_FRAME_STYLE,
+	                const wxString& name = wxFrameNameStr);
 
-    bool Create(wxMDIParentFrame *parent,
-                wxWindowID id,
-                const wxString& title,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE,
-                const wxString& name = wxFrameNameStr);
+	bool Create(wxMDIParentFrame *parent,
+	            wxWindowID id,
+	            const wxString& title,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxDEFAULT_FRAME_STYLE,
+	            const wxString& name = wxFrameNameStr);
 
-    virtual void Activate();
+	virtual void Activate();
 };
 
 
@@ -72,9 +75,9 @@ public:
 class WXDLLIMPEXP_CORE wxMDIClientWindow : public wxMDIClientWindowBase
 {
 public:
-    wxMDIClientWindow();
-    
-    virtual bool CreateClient(wxMDIParentFrame *parent, long style = wxVSCROLL | wxHSCROLL);
+	wxMDIClientWindow();
+
+	virtual bool CreateClient(wxMDIParentFrame *parent, long style = wxVSCROLL | wxHSCROLL);
 };
 
 #endif // _WX_QT_MDI_H_

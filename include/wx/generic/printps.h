@@ -23,15 +23,15 @@
 class WXDLLIMPEXP_CORE wxPostScriptPrinter : public wxPrinterBase
 {
 public:
-    wxPostScriptPrinter(wxPrintDialogData *data = NULL);
-    virtual ~wxPostScriptPrinter();
+	wxPostScriptPrinter(wxPrintDialogData *data = NULL);
+	virtual ~wxPostScriptPrinter();
 
-    virtual bool Print(wxWindow *parent, wxPrintout *printout, bool prompt = true) wxOVERRIDE;
-    virtual wxDC* PrintDialog(wxWindow *parent) wxOVERRIDE;
-    virtual bool Setup(wxWindow *parent) wxOVERRIDE;
+	virtual bool Print(wxWindow *parent, wxPrintout *printout, bool prompt = true) wxOVERRIDE;
+	virtual wxDC* PrintDialog(wxWindow *parent) wxOVERRIDE;
+	virtual bool Setup(wxWindow *parent) wxOVERRIDE;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxPostScriptPrinter);
+	wxDECLARE_DYNAMIC_CLASS(wxPostScriptPrinter);
 };
 
 // ----------------------------------------------------------------------------
@@ -42,23 +42,23 @@ private:
 class WXDLLIMPEXP_CORE wxPostScriptPrintPreview : public wxPrintPreviewBase
 {
 public:
-    wxPostScriptPrintPreview(wxPrintout *printout,
-                             wxPrintout *printoutForPrinting = NULL,
-                             wxPrintDialogData *data = NULL);
-    wxPostScriptPrintPreview(wxPrintout *printout,
-                             wxPrintout *printoutForPrinting,
-                             wxPrintData *data);
+	wxPostScriptPrintPreview(wxPrintout *printout,
+	                         wxPrintout *printoutForPrinting = NULL,
+	                         wxPrintDialogData *data = NULL);
+	wxPostScriptPrintPreview(wxPrintout *printout,
+	                         wxPrintout *printoutForPrinting,
+	                         wxPrintData *data);
 
-    virtual ~wxPostScriptPrintPreview();
+	virtual ~wxPostScriptPrintPreview();
 
-    virtual bool Print(bool interactive) wxOVERRIDE;
-    virtual void DetermineScaling() wxOVERRIDE;
-
-private:
-    void Init(wxPrintout *printout, wxPrintout *printoutForPrinting);
+	virtual bool Print(bool interactive) wxOVERRIDE;
+	virtual void DetermineScaling() wxOVERRIDE;
 
 private:
-    wxDECLARE_CLASS(wxPostScriptPrintPreview);
+	void Init(wxPrintout *printout, wxPrintout *printoutForPrinting);
+
+private:
+	wxDECLARE_CLASS(wxPostScriptPrintPreview);
 };
 
 #endif

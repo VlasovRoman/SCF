@@ -13,50 +13,52 @@
 
 class WXDLLIMPEXP_CORE wxStaticText: public wxStaticTextBase
 {
-    wxDECLARE_DYNAMIC_CLASS(wxStaticText);
+	wxDECLARE_DYNAMIC_CLASS(wxStaticText);
 
 public:
-    wxStaticText() { }
+	wxStaticText() { }
 
-    wxStaticText(wxWindow *parent, wxWindowID id,
-        const wxString& label,
-        const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize,
-        long style = 0,
-        const wxString& name = wxStaticTextNameStr)
-    {
-        Create(parent, id, label, pos, size, style, name);
-    }
+	wxStaticText(wxWindow *parent, wxWindowID id,
+	             const wxString& label,
+	             const wxPoint& pos = wxDefaultPosition,
+	             const wxSize& size = wxDefaultSize,
+	             long style = 0,
+	             const wxString& name = wxStaticTextNameStr)
+	{
+		Create(parent, id, label, pos, size, style, name);
+	}
 
-    bool Create(wxWindow *parent, wxWindowID id,
-        const wxString& label,
-        const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize,
-        long style = 0,
-        const wxString& name = wxStaticTextNameStr);
+	bool Create(wxWindow *parent, wxWindowID id,
+	            const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxString& name = wxStaticTextNameStr);
 
-    // implementation
-    // --------------
+	// implementation
+	// --------------
 
-    // operations
-    virtual bool ProcessCommand(wxCommandEvent& WXUNUSED(event))
-    {
-        return false;
-    }
+	// operations
+	virtual bool ProcessCommand(wxCommandEvent& WXUNUSED(event))
+	{
+		return false;
+	}
 
-    virtual void SetLabel(const wxString& label);
+	virtual void SetLabel(const wxString& label);
 
-    // Get the widget that corresponds to the label
-    // (for font setting, label setting etc.)
-    virtual WXWidget GetLabelWidget() const
-        { return m_labelWidget; }
+	// Get the widget that corresponds to the label
+	// (for font setting, label setting etc.)
+	virtual WXWidget GetLabelWidget() const
+	{
+		return m_labelWidget;
+	}
 
-    virtual void DoSetLabel(const wxString& str);
-    virtual wxString DoGetLabel() const;
+	virtual void DoSetLabel(const wxString& str);
+	virtual wxString DoGetLabel() const;
 
-    virtual wxSize DoGetBestSize() const;
+	virtual wxSize DoGetBestSize() const;
 protected:
-    WXWidget              m_labelWidget;
+	WXWidget              m_labelWidget;
 };
 
 #endif

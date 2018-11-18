@@ -34,11 +34,11 @@
 #include "wx/vector.h"
 
 #if wxUSE_STD_CONTAINERS
-    #include "wx/beforestd.h"
-    #include <algorithm>
-    #include <iterator>
-    #include <list>
-    #include "wx/afterstd.h"
+#include "wx/beforestd.h"
+#include <algorithm>
+#include <iterator>
+#include <list>
+#include "wx/afterstd.h"
 #endif
 
 // ----------------------------------------------------------------------------
@@ -69,11 +69,13 @@ template<class T>
 class wxList_SortFunction
 {
 public:
-    wxList_SortFunction(wxSortCompareFunction f) : m_f(f) { }
-    bool operator()(const T& i1, const T& i2)
-      { return m_f((T*)&i1, (T*)&i2) < 0; }
+	wxList_SortFunction(wxSortCompareFunction f) : m_f(f) { }
+	bool operator()(const T& i1, const T& i2)
+	{
+		return m_f((T*)&i1, (T*)&i2) < 0;
+	}
 private:
-    wxSortCompareFunction m_f;
+	wxSortCompareFunction m_f;
 };
 
 /*
@@ -318,8 +320,8 @@ private:
 
 union wxListKeyValue
 {
-    long integer;
-    wxString *string;
+	long integer;
+	wxString *string;
 };
 
 // a struct which may contain both types of keys
@@ -331,40 +333,57 @@ union wxListKeyValue
 class WXDLLIMPEXP_BASE wxListKey
 {
 public:
-    // implicit ctors
-    wxListKey() : m_keyType(wxKEY_NONE)
-        { }
-    wxListKey(long i) : m_keyType(wxKEY_INTEGER)
-        { m_key.integer = i; }
-    wxListKey(const wxString& s) : m_keyType(wxKEY_STRING)
-        { m_key.string = new wxString(s); }
-    wxListKey(const char *s) : m_keyType(wxKEY_STRING)
-        { m_key.string = new wxString(s); }
-    wxListKey(const wchar_t *s) : m_keyType(wxKEY_STRING)
-        { m_key.string = new wxString(s); }
+	// implicit ctors
+	wxListKey() : m_keyType(wxKEY_NONE)
+	{ }
+	wxListKey(long i) : m_keyType(wxKEY_INTEGER)
+	{
+		m_key.integer = i;
+	}
+	wxListKey(const wxString& s) : m_keyType(wxKEY_STRING)
+	{
+		m_key.string = new wxString(s);
+	}
+	wxListKey(const char *s) : m_keyType(wxKEY_STRING)
+	{
+		m_key.string = new wxString(s);
+	}
+	wxListKey(const wchar_t *s) : m_keyType(wxKEY_STRING)
+	{
+		m_key.string = new wxString(s);
+	}
 
-    // accessors
-    wxKeyType GetKeyType() const { return m_keyType; }
-    const wxString GetString() const
-        { wxASSERT( m_keyType == wxKEY_STRING ); return *m_key.string; }
-    long GetNumber() const
-        { wxASSERT( m_keyType == wxKEY_INTEGER ); return m_key.integer; }
+	// accessors
+	wxKeyType GetKeyType() const
+	{
+		return m_keyType;
+	}
+	const wxString GetString() const
+	{
+		wxASSERT( m_keyType == wxKEY_STRING );
+		return *m_key.string;
+	}
+	long GetNumber() const
+	{
+		wxASSERT( m_keyType == wxKEY_INTEGER );
+		return m_key.integer;
+	}
 
-    // comparison
-    // Note: implementation moved to list.cpp to prevent BC++ inline
-    // expansion warning.
-    bool operator==(wxListKeyValue value) const ;
+	// comparison
+	// Note: implementation moved to list.cpp to prevent BC++ inline
+	// expansion warning.
+	bool operator==(wxListKeyValue value) const ;
 
-    // dtor
-    ~wxListKey()
-    {
-        if ( m_keyType == wxKEY_STRING )
-            delete m_key.string;
-    }
+	// dtor
+	~wxListKey()
+	{
+		if ( m_keyType == wxKEY_STRING )
+			delete m_key.string;
+	}
 
 private:
-    wxKeyType m_keyType;
-    wxListKeyValue m_key;
+	wxKeyType m_keyType;
+	wxListKeyValue m_key;
 };
 
 // -----------------------------------------------------------------------------
@@ -377,58 +396,85 @@ class WXDLLIMPEXP_FWD_BASE wxListBase;
 
 class WXDLLIMPEXP_BASE wxNodeBase
 {
-friend class wxListBase;
+	friend class wxListBase;
 public:
-    // ctor
-    wxNodeBase(wxListBase *list = NULL,
-               wxNodeBase *previous = NULL,
-               wxNodeBase *next = NULL,
-               void *data = NULL,
-               const wxListKey& key = wxDefaultListKey);
+	// ctor
+	wxNodeBase(wxListBase *list = NULL,
+	           wxNodeBase *previous = NULL,
+	           wxNodeBase *next = NULL,
+	           void *data = NULL,
+	           const wxListKey& key = wxDefaultListKey);
 
-    virtual ~wxNodeBase();
+	virtual ~wxNodeBase();
 
-    // FIXME no check is done that the list is really keyed on strings
-    wxString GetKeyString() const { return *m_key.string; }
-    long GetKeyInteger() const { return m_key.integer; }
+	// FIXME no check is done that the list is really keyed on strings
+	wxString GetKeyString() const
+	{
+		return *m_key.string;
+	}
+	long GetKeyInteger() const
+	{
+		return m_key.integer;
+	}
 
-    // Necessary for some existing code
-    void SetKeyString(const wxString& s) { m_key.string = new wxString(s); }
-    void SetKeyInteger(long i) { m_key.integer = i; }
+	// Necessary for some existing code
+	void SetKeyString(const wxString& s)
+	{
+		m_key.string = new wxString(s);
+	}
+	void SetKeyInteger(long i)
+	{
+		m_key.integer = i;
+	}
 
 #ifdef wxLIST_COMPATIBILITY
-    // compatibility methods, use Get* instead.
-    wxDEPRECATED( wxNode *Next() const );
-    wxDEPRECATED( wxNode *Previous() const );
-    wxDEPRECATED( wxObject *Data() const );
+	// compatibility methods, use Get* instead.
+	wxDEPRECATED( wxNode *Next() const );
+	wxDEPRECATED( wxNode *Previous() const );
+	wxDEPRECATED( wxObject *Data() const );
 #endif // wxLIST_COMPATIBILITY
 
 protected:
-    // all these are going to be "overloaded" in the derived classes
-    wxNodeBase *GetNext() const { return m_next; }
-    wxNodeBase *GetPrevious() const { return m_previous; }
+	// all these are going to be "overloaded" in the derived classes
+	wxNodeBase *GetNext() const
+	{
+		return m_next;
+	}
+	wxNodeBase *GetPrevious() const
+	{
+		return m_previous;
+	}
 
-    void *GetData() const { return m_data; }
-    void SetData(void *data) { m_data = data; }
+	void *GetData() const
+	{
+		return m_data;
+	}
+	void SetData(void *data)
+	{
+		m_data = data;
+	}
 
-    // get 0-based index of this node within the list or wxNOT_FOUND
-    int IndexOf() const;
+	// get 0-based index of this node within the list or wxNOT_FOUND
+	int IndexOf() const;
 
-    virtual void DeleteData() { }
+	virtual void DeleteData() { }
 public:
-    // for wxList::iterator
-    void** GetDataPtr() const { return &(const_cast<wxNodeBase*>(this)->m_data); }
+	// for wxList::iterator
+	void** GetDataPtr() const
+	{
+		return &(const_cast<wxNodeBase*>(this)->m_data);
+	}
 private:
-    // optional key stuff
-    wxListKeyValue m_key;
+	// optional key stuff
+	wxListKeyValue m_key;
 
-    void        *m_data;        // user data
-    wxNodeBase  *m_next,        // next and previous nodes in the list
-                *m_previous;
+	void        *m_data;        // user data
+	wxNodeBase  *m_next,        // next and previous nodes in the list
+	            *m_previous;
 
-    wxListBase  *m_list;        // list we belong to
+	wxListBase  *m_list;        // list we belong to
 
-    wxDECLARE_NO_COPY_CLASS(wxNodeBase);
+	wxDECLARE_NO_COPY_CLASS(wxNodeBase);
 };
 
 // -----------------------------------------------------------------------------
@@ -439,160 +485,193 @@ class WXDLLIMPEXP_FWD_BASE wxList;
 
 class WXDLLIMPEXP_BASE wxListBase
 {
-friend class wxNodeBase; // should be able to call DetachNode()
-friend class wxHashTableBase;   // should be able to call untyped Find()
+	friend class wxNodeBase; // should be able to call DetachNode()
+	friend class wxHashTableBase;   // should be able to call untyped Find()
 
 public:
-    // default ctor & dtor
-    wxListBase(wxKeyType keyType = wxKEY_NONE)
-        { Init(keyType); }
-    virtual ~wxListBase();
+	// default ctor & dtor
+	wxListBase(wxKeyType keyType = wxKEY_NONE)
+	{
+		Init(keyType);
+	}
+	virtual ~wxListBase();
 
-    // accessors
-        // count of items in the list
-    size_t GetCount() const { return m_count; }
+	// accessors
+	// count of items in the list
+	size_t GetCount() const
+	{
+		return m_count;
+	}
 
-        // return true if this list is empty
-    bool IsEmpty() const { return m_count == 0; }
+	// return true if this list is empty
+	bool IsEmpty() const
+	{
+		return m_count == 0;
+	}
 
-    // operations
+	// operations
 
-        // delete all nodes
-    void Clear();
+	// delete all nodes
+	void Clear();
 
-        // instruct it to destroy user data when deleting nodes
-    void DeleteContents(bool destroy) { m_destroy = destroy; }
+	// instruct it to destroy user data when deleting nodes
+	void DeleteContents(bool destroy)
+	{
+		m_destroy = destroy;
+	}
 
-       // query if to delete
-    bool GetDeleteContents() const
-        { return m_destroy; }
+	// query if to delete
+	bool GetDeleteContents() const
+	{
+		return m_destroy;
+	}
 
-      // get the keytype
-    wxKeyType GetKeyType() const
-        { return m_keyType; }
+	// get the keytype
+	wxKeyType GetKeyType() const
+	{
+		return m_keyType;
+	}
 
-      // set the keytype (required by the serial code)
-    void SetKeyType(wxKeyType keyType)
-        { wxASSERT( m_count==0 ); m_keyType = keyType; }
+	// set the keytype (required by the serial code)
+	void SetKeyType(wxKeyType keyType)
+	{
+		wxASSERT( m_count==0 );
+		m_keyType = keyType;
+	}
 
 #ifdef wxLIST_COMPATIBILITY
-    // compatibility methods from old wxList
-    wxDEPRECATED( int Number() const );             // use GetCount instead.
-    wxDEPRECATED( wxNode *First() const );          // use GetFirst
-    wxDEPRECATED( wxNode *Last() const );           // use GetLast
-    wxDEPRECATED( wxNode *Nth(size_t n) const );    // use Item
+	// compatibility methods from old wxList
+	wxDEPRECATED( int Number() const );             // use GetCount instead.
+	wxDEPRECATED( wxNode *First() const );          // use GetFirst
+	wxDEPRECATED( wxNode *Last() const );           // use GetLast
+	wxDEPRECATED( wxNode *Nth(size_t n) const );    // use Item
 
-    // kludge for typesafe list migration in core classes.
-    wxDEPRECATED( operator wxList&() const );
+	// kludge for typesafe list migration in core classes.
+	wxDEPRECATED( operator wxList&() const );
 #endif // wxLIST_COMPATIBILITY
 
 protected:
 
-    // all methods here are "overloaded" in derived classes to provide compile
-    // time type checking
+	// all methods here are "overloaded" in derived classes to provide compile
+	// time type checking
 
-    // create a node for the list of this type
-    virtual wxNodeBase *CreateNode(wxNodeBase *prev, wxNodeBase *next,
-                                   void *data,
-                                   const wxListKey& key = wxDefaultListKey) = 0;
+	// create a node for the list of this type
+	virtual wxNodeBase *CreateNode(wxNodeBase *prev, wxNodeBase *next,
+	                               void *data,
+	                               const wxListKey& key = wxDefaultListKey) = 0;
 
 
-    // ctors
-        // from an array
-    wxListBase(size_t count, void *elements[]);
-        // from a sequence of objects
-    wxListBase(void *object, ... /* terminate with NULL */);
+	// ctors
+	// from an array
+	wxListBase(size_t count, void *elements[]);
+	// from a sequence of objects
+	wxListBase(void *object, ... /* terminate with NULL */);
 
 protected:
-    void Assign(const wxListBase& list)
-        { Clear(); DoCopy(list); }
+	void Assign(const wxListBase& list)
+	{
+		Clear();
+		DoCopy(list);
+	}
 
-        // get list head/tail
-    wxNodeBase *GetFirst() const { return m_nodeFirst; }
-    wxNodeBase *GetLast() const { return m_nodeLast; }
+	// get list head/tail
+	wxNodeBase *GetFirst() const
+	{
+		return m_nodeFirst;
+	}
+	wxNodeBase *GetLast() const
+	{
+		return m_nodeLast;
+	}
 
-        // by (0-based) index
-    wxNodeBase *Item(size_t index) const;
+	// by (0-based) index
+	wxNodeBase *Item(size_t index) const;
 
-        // get the list item's data
-    void *operator[](size_t n) const
-    {
-        wxNodeBase *node = Item(n);
+	// get the list item's data
+	void *operator[](size_t n) const
+	{
+		wxNodeBase *node = Item(n);
 
-        return node ? node->GetData() : NULL;
-    }
+		return node ? node->GetData() : NULL;
+	}
 
-    // operations
-        // append to end of list
-    wxNodeBase *Prepend(void *object)
-        { return (wxNodeBase *)wxListBase::Insert(object); }
-        // append to beginning of list
-    wxNodeBase *Append(void *object);
-        // insert a new item at the beginning of the list
-    wxNodeBase *Insert(void *object)
-        { return Insert(static_cast<wxNodeBase *>(NULL), object); }
-        // insert a new item at the given position
-    wxNodeBase *Insert(size_t pos, void *object)
-        { return pos == GetCount() ? Append(object)
-                                   : Insert(Item(pos), object); }
-        // insert before given node or at front of list if prev == NULL
-    wxNodeBase *Insert(wxNodeBase *prev, void *object);
+	// operations
+	// append to end of list
+	wxNodeBase *Prepend(void *object)
+	{
+		return (wxNodeBase *)wxListBase::Insert(object);
+	}
+	// append to beginning of list
+	wxNodeBase *Append(void *object);
+	// insert a new item at the beginning of the list
+	wxNodeBase *Insert(void *object)
+	{
+		return Insert(static_cast<wxNodeBase *>(NULL), object);
+	}
+	// insert a new item at the given position
+	wxNodeBase *Insert(size_t pos, void *object)
+	{
+		return pos == GetCount() ? Append(object)
+		       : Insert(Item(pos), object);
+	}
+	// insert before given node or at front of list if prev == NULL
+	wxNodeBase *Insert(wxNodeBase *prev, void *object);
 
-        // keyed append
-    wxNodeBase *Append(long key, void *object);
-    wxNodeBase *Append(const wxString& key, void *object);
+	// keyed append
+	wxNodeBase *Append(long key, void *object);
+	wxNodeBase *Append(const wxString& key, void *object);
 
-        // removes node from the list but doesn't delete it (returns pointer
-        // to the node or NULL if it wasn't found in the list)
-    wxNodeBase *DetachNode(wxNodeBase *node);
-        // delete element from list, returns false if node not found
-    bool DeleteNode(wxNodeBase *node);
-        // finds object pointer and deletes node (and object if DeleteContents
-        // is on), returns false if object not found
-    bool DeleteObject(void *object);
+	// removes node from the list but doesn't delete it (returns pointer
+	// to the node or NULL if it wasn't found in the list)
+	wxNodeBase *DetachNode(wxNodeBase *node);
+	// delete element from list, returns false if node not found
+	bool DeleteNode(wxNodeBase *node);
+	// finds object pointer and deletes node (and object if DeleteContents
+	// is on), returns false if object not found
+	bool DeleteObject(void *object);
 
-    // search (all return NULL if item not found)
-        // by data
-    wxNodeBase *Find(const void *object) const;
+	// search (all return NULL if item not found)
+	// by data
+	wxNodeBase *Find(const void *object) const;
 
-        // by key
-    wxNodeBase *Find(const wxListKey& key) const;
+	// by key
+	wxNodeBase *Find(const wxListKey& key) const;
 
-    // get 0-based index of object or wxNOT_FOUND
-    int IndexOf( void *object ) const;
+	// get 0-based index of object or wxNOT_FOUND
+	int IndexOf( void *object ) const;
 
-    // this function allows the sorting of arbitrary lists by giving
-    // a function to compare two list elements. The list is sorted in place.
-    void Sort(const wxSortCompareFunction compfunc);
+	// this function allows the sorting of arbitrary lists by giving
+	// a function to compare two list elements. The list is sorted in place.
+	void Sort(const wxSortCompareFunction compfunc);
 
-    // functions for iterating over the list
-    void *FirstThat(wxListIterateFunction func);
-    void ForEach(wxListIterateFunction func);
-    void *LastThat(wxListIterateFunction func);
+	// functions for iterating over the list
+	void *FirstThat(wxListIterateFunction func);
+	void ForEach(wxListIterateFunction func);
+	void *LastThat(wxListIterateFunction func);
 
-    // for STL interface, "last" points to one after the last node
-    // of the controlled sequence (NULL for the end of the list)
-    void Reverse();
-    void DeleteNodes(wxNodeBase* first, wxNodeBase* last);
+	// for STL interface, "last" points to one after the last node
+	// of the controlled sequence (NULL for the end of the list)
+	void Reverse();
+	void DeleteNodes(wxNodeBase* first, wxNodeBase* last);
 private:
 
-        // common part of all ctors
-    void Init(wxKeyType keyType = wxKEY_NONE);
+	// common part of all ctors
+	void Init(wxKeyType keyType = wxKEY_NONE);
 
-    // helpers
-        // common part of copy ctor and assignment operator
-    void DoCopy(const wxListBase& list);
-        // common part of all Append()s
-    wxNodeBase *AppendCommon(wxNodeBase *node);
-        // free node's data and node itself
-    void DoDeleteNode(wxNodeBase *node);
+	// helpers
+	// common part of copy ctor and assignment operator
+	void DoCopy(const wxListBase& list);
+	// common part of all Append()s
+	wxNodeBase *AppendCommon(wxNodeBase *node);
+	// free node's data and node itself
+	void DoDeleteNode(wxNodeBase *node);
 
-    size_t m_count;             // number of elements in the list
-    bool m_destroy;             // destroy user data when deleting list items?
-    wxNodeBase *m_nodeFirst,    // pointers to the head and tail of the list
-               *m_nodeLast;
+	size_t m_count;             // number of elements in the list
+	bool m_destroy;             // destroy user data when deleting list items?
+	wxNodeBase *m_nodeFirst,    // pointers to the head and tail of the list
+	           *m_nodeLast;
 
-    wxKeyType m_keyType;        // type of our keys (may be wxKEY_NONE)
+	wxKeyType m_keyType;        // type of our keys (may be wxKEY_NONE)
 };
 
 // -----------------------------------------------------------------------------
@@ -1129,19 +1208,43 @@ private:
 // wxNodeBase deprecated methods
 // ----------------------------------------------------------------------------
 
-inline wxNode *wxNodeBase::Next() const { return (wxNode *)GetNext(); }
-inline wxNode *wxNodeBase::Previous() const { return (wxNode *)GetPrevious(); }
-inline wxObject *wxNodeBase::Data() const { return (wxObject *)GetData(); }
+inline wxNode *wxNodeBase::Next() const
+{
+	return (wxNode *)GetNext();
+}
+inline wxNode *wxNodeBase::Previous() const
+{
+	return (wxNode *)GetPrevious();
+}
+inline wxObject *wxNodeBase::Data() const
+{
+	return (wxObject *)GetData();
+}
 
 // ----------------------------------------------------------------------------
 // wxListBase deprecated methods
 // ----------------------------------------------------------------------------
 
-inline int wxListBase::Number() const { return (int)GetCount(); }
-inline wxNode *wxListBase::First() const { return (wxNode *)GetFirst(); }
-inline wxNode *wxListBase::Last() const { return (wxNode *)GetLast(); }
-inline wxNode *wxListBase::Nth(size_t n) const { return (wxNode *)Item(n); }
-inline wxListBase::operator wxList&() const { return *(wxList*)this; }
+inline int wxListBase::Number() const
+{
+	return (int)GetCount();
+}
+inline wxNode *wxListBase::First() const
+{
+	return (wxNode *)GetFirst();
+}
+inline wxNode *wxListBase::Last() const
+{
+	return (wxNode *)GetLast();
+}
+inline wxNode *wxListBase::Nth(size_t n) const
+{
+	return (wxNode *)Item(n);
+}
+inline wxListBase::operator wxList&() const
+{
+	return *(wxList*)this;
+}
 
 #endif
 
@@ -1153,42 +1256,48 @@ inline wxListBase::operator wxList&() const { return *(wxList*)this; }
 // ----------------------------------------------------------------------------
 
 WX_DECLARE_LIST_2(wxObject, wxObjectList, wxObjectListNode,
-                        class WXDLLIMPEXP_BASE);
+                  class WXDLLIMPEXP_BASE);
 
 class WXDLLIMPEXP_BASE wxList : public wxObjectList
 {
 public:
 #if defined(wxWARN_COMPAT_LIST_USE) && !wxUSE_STD_CONTAINERS
-    wxList() { }
-    wxDEPRECATED( wxList(int key_type) );
+	wxList() { }
+	wxDEPRECATED( wxList(int key_type) );
 #elif !wxUSE_STD_CONTAINERS
-    wxList(int key_type = wxKEY_NONE);
+	wxList(int key_type = wxKEY_NONE);
 #endif
 
-    // this destructor is required for Darwin
-   ~wxList() { }
+	// this destructor is required for Darwin
+	~wxList() { }
 
 #if !wxUSE_STD_CONTAINERS
-    wxList& operator=(const wxList& list)
-        { if (&list != this) Assign(list); return *this; }
+	wxList& operator=(const wxList& list)
+	{
+		if (&list != this) Assign(list);
+		return *this;
+	}
 
-    // compatibility methods
-    void Sort(wxSortCompareFunction compfunc) { wxListBase::Sort(compfunc); }
+	// compatibility methods
+	void Sort(wxSortCompareFunction compfunc)
+	{
+		wxListBase::Sort(compfunc);
+	}
 #endif // !wxUSE_STD_CONTAINERS
 
-    template<typename T>
-    wxVector<T> AsVector() const
-    {
-        wxVector<T> vector(size());
-        size_t i = 0;
+	template<typename T>
+	wxVector<T> AsVector() const
+	{
+		wxVector<T> vector(size());
+		size_t i = 0;
 
-        for ( const_iterator it = begin(); it != end(); ++it )
-        {
-            vector[i++] = static_cast<T>(*it);
-        }
+		for ( const_iterator it = begin(); it != end(); ++it )
+		{
+			vector[i++] = static_cast<T>(*it);
+		}
 
-        return vector;
-    }
+		return vector;
+	}
 
 };
 
@@ -1202,46 +1311,50 @@ WX_DECLARE_LIST_2(wxChar, wxStringListBase, wxStringListNode, class WXDLLIMPEXP_
 class WXDLLIMPEXP_BASE wxStringList : public wxStringListBase
 {
 public:
-    // ctors and such
-        // default
+	// ctors and such
+	// default
 #ifdef wxWARN_COMPAT_LIST_USE
-    wxStringList();
-    wxDEPRECATED( wxStringList(const wxChar *first ...) ); // FIXME-UTF8
+	wxStringList();
+	wxDEPRECATED( wxStringList(const wxChar *first ...) ); // FIXME-UTF8
 #else
-    wxStringList();
-    wxStringList(const wxChar *first ...); // FIXME-UTF8
+	wxStringList();
+	wxStringList(const wxChar *first ...); // FIXME-UTF8
 #endif
 
-        // copying the string list: the strings are copied, too (extremely
-        // inefficient!)
-    wxStringList(const wxStringList& other) : wxStringListBase() { DeleteContents(true); DoCopy(other); }
-    wxStringList& operator=(const wxStringList& other)
-    {
-        if (&other != this)
-        {
-            Clear();
-            DoCopy(other);
-        }
-        return *this;
-    }
+	// copying the string list: the strings are copied, too (extremely
+	// inefficient!)
+	wxStringList(const wxStringList& other) : wxStringListBase()
+	{
+		DeleteContents(true);
+		DoCopy(other);
+	}
+	wxStringList& operator=(const wxStringList& other)
+	{
+		if (&other != this)
+		{
+			Clear();
+			DoCopy(other);
+		}
+		return *this;
+	}
 
-    // operations
-        // makes a copy of the string
-    wxNode *Add(const wxChar *s);
+	// operations
+	// makes a copy of the string
+	wxNode *Add(const wxChar *s);
 
-        // Append to beginning of list
-    wxNode *Prepend(const wxChar *s);
+	// Append to beginning of list
+	wxNode *Prepend(const wxChar *s);
 
-    bool Delete(const wxChar *s);
+	bool Delete(const wxChar *s);
 
-    wxChar **ListToArray(bool new_copies = false) const;
-    bool Member(const wxChar *s) const;
+	wxChar **ListToArray(bool new_copies = false) const;
+	bool Member(const wxChar *s) const;
 
-    // alphabetic sort
-    void Sort();
+	// alphabetic sort
+	void Sort();
 
 private:
-    void DoCopy(const wxStringList&); // common part of copy ctor and operator=
+	void DoCopy(const wxStringList&); // common part of copy ctor and operator=
 };
 
 #else // if wxUSE_STD_CONTAINERS
@@ -1251,20 +1364,34 @@ WX_DECLARE_LIST_XO(wxString, wxStringListBase, class WXDLLIMPEXP_BASE);
 class WXDLLIMPEXP_BASE wxStringList : public wxStringListBase
 {
 public:
-    compatibility_iterator Append(wxChar* s)
-        { wxString tmp = s; delete[] s; return wxStringListBase::Append(tmp); }
-    compatibility_iterator Insert(wxChar* s)
-        { wxString tmp = s; delete[] s; return wxStringListBase::Insert(tmp); }
-    compatibility_iterator Insert(size_t pos, wxChar* s)
-    {
-        wxString tmp = s;
-        delete[] s;
-        return wxStringListBase::Insert(pos, tmp);
-    }
-    compatibility_iterator Add(const wxChar* s)
-        { push_back(s); return GetLast(); }
-    compatibility_iterator Prepend(const wxChar* s)
-        { push_front(s); return GetFirst(); }
+	compatibility_iterator Append(wxChar* s)
+	{
+		wxString tmp = s;
+		delete[] s;
+		return wxStringListBase::Append(tmp);
+	}
+	compatibility_iterator Insert(wxChar* s)
+	{
+		wxString tmp = s;
+		delete[] s;
+		return wxStringListBase::Insert(tmp);
+	}
+	compatibility_iterator Insert(size_t pos, wxChar* s)
+	{
+		wxString tmp = s;
+		delete[] s;
+		return wxStringListBase::Insert(pos, tmp);
+	}
+	compatibility_iterator Add(const wxChar* s)
+	{
+		push_back(s);
+		return GetLast();
+	}
+	compatibility_iterator Prepend(const wxChar* s)
+	{
+		push_front(s);
+		return GetFirst();
+	}
 };
 
 #endif // wxUSE_STD_CONTAINERS

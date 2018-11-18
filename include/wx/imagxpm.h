@@ -20,23 +20,23 @@
 class WXDLLIMPEXP_CORE wxXPMHandler : public wxImageHandler
 {
 public:
-    inline wxXPMHandler()
-    {
-        m_name = wxT("XPM file");
-        m_extension = wxT("xpm");
-        m_type = wxBITMAP_TYPE_XPM;
-        m_mime = wxT("image/xpm");
-    }
+	inline wxXPMHandler()
+	{
+		m_name = wxT("XPM file");
+		m_extension = wxT("xpm");
+		m_type = wxBITMAP_TYPE_XPM;
+		m_mime = wxT("image/xpm");
+	}
 
 #if wxUSE_STREAMS
-    virtual bool LoadFile( wxImage *image, wxInputStream& stream, bool verbose=true, int index=-1 ) wxOVERRIDE;
-    virtual bool SaveFile( wxImage *image, wxOutputStream& stream, bool verbose=true ) wxOVERRIDE;
+	virtual bool LoadFile( wxImage *image, wxInputStream& stream, bool verbose=true, int index=-1 ) wxOVERRIDE;
+	virtual bool SaveFile( wxImage *image, wxOutputStream& stream, bool verbose=true ) wxOVERRIDE;
 protected:
-    virtual bool DoCanRead( wxInputStream& stream ) wxOVERRIDE;
+	virtual bool DoCanRead( wxInputStream& stream ) wxOVERRIDE;
 #endif
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxXPMHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxXPMHandler);
 };
 
 #endif // wxUSE_XPM

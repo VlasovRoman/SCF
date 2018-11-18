@@ -30,7 +30,7 @@
 #endif
 
 #endif
-    // wxUSE_TOOLTIPS
+// wxUSE_TOOLTIPS
 
 #endif
-    // _WX_TOOLTIP_H_BASE_
+// _WX_TOOLTIP_H_BASE_

@@ -24,40 +24,40 @@
 class WXDLLIMPEXP_CORE wxPrinterDCImpl : public wxMSWDCImpl
 {
 public:
-    // Create from print data
-    wxPrinterDCImpl( wxPrinterDC *owner, const wxPrintData& data );
-    wxPrinterDCImpl( wxPrinterDC *owner, WXHDC theDC );
+	// Create from print data
+	wxPrinterDCImpl( wxPrinterDC *owner, const wxPrintData& data );
+	wxPrinterDCImpl( wxPrinterDC *owner, WXHDC theDC );
 
-    // override some base class virtuals
-    virtual bool StartDoc(const wxString& message) wxOVERRIDE;
-    virtual void EndDoc() wxOVERRIDE;
-    virtual void StartPage() wxOVERRIDE;
-    virtual void EndPage() wxOVERRIDE;
+	// override some base class virtuals
+	virtual bool StartDoc(const wxString& message) wxOVERRIDE;
+	virtual void EndDoc() wxOVERRIDE;
+	virtual void StartPage() wxOVERRIDE;
+	virtual void EndPage() wxOVERRIDE;
 
-    virtual wxRect GetPaperRect() const wxOVERRIDE;
+	virtual wxRect GetPaperRect() const wxOVERRIDE;
 
 protected:
-    virtual void DoDrawBitmap(const wxBitmap &bmp, wxCoord x, wxCoord y,
-                              bool useMask = false) wxOVERRIDE;
-    virtual bool DoBlit(wxCoord xdest, wxCoord ydest,
-                        wxCoord width, wxCoord height,
-                        wxDC *source, wxCoord xsrc, wxCoord ysrc,
-                        wxRasterOperationMode rop = wxCOPY, bool useMask = false,
-                        wxCoord xsrcMask = wxDefaultCoord, wxCoord ysrcMask = wxDefaultCoord) wxOVERRIDE;
-    virtual void DoGetSize(int *w, int *h) const wxOVERRIDE
-    {
-        GetDeviceSize(w, h);
-    }
+	virtual void DoDrawBitmap(const wxBitmap &bmp, wxCoord x, wxCoord y,
+	                          bool useMask = false) wxOVERRIDE;
+	virtual bool DoBlit(wxCoord xdest, wxCoord ydest,
+	                    wxCoord width, wxCoord height,
+	                    wxDC *source, wxCoord xsrc, wxCoord ysrc,
+	                    wxRasterOperationMode rop = wxCOPY, bool useMask = false,
+	                    wxCoord xsrcMask = wxDefaultCoord, wxCoord ysrcMask = wxDefaultCoord) wxOVERRIDE;
+	virtual void DoGetSize(int *w, int *h) const wxOVERRIDE
+	{
+		GetDeviceSize(w, h);
+	}
 
 
-    // init the dc
-    void Init();
+	// init the dc
+	void Init();
 
-    wxPrintData m_printData;
+	wxPrintData m_printData;
 
 private:
-    wxDECLARE_CLASS(wxPrinterDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxPrinterDCImpl);
+	wxDECLARE_CLASS(wxPrinterDCImpl);
+	wxDECLARE_NO_COPY_CLASS(wxPrinterDCImpl);
 };
 
 // Gets an HDC for the specified printer configuration
@@ -70,10 +70,10 @@ WXHDC WXDLLIMPEXP_CORE wxGetPrinterDC(const wxPrintData& data);
 class WXDLLIMPEXP_CORE wxPrinterDCFromHDC: public wxPrinterDC
 {
 public:
-    wxPrinterDCFromHDC( WXHDC theDC )
-        : wxPrinterDC(new wxPrinterDCImpl(this, theDC))
-    {
-    }
+	wxPrinterDCFromHDC( WXHDC theDC )
+		: wxPrinterDC(new wxPrinterDCImpl(this, theDC))
+	{
+	}
 };
 
 #endif // wxUSE_PRINTING_ARCHITECTURE

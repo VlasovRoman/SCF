@@ -36,14 +36,14 @@ class wxRichToolTipImpl;
 // so the tooltip itself is located beneath its associated window.
 enum wxTipKind
 {
-    wxTipKind_None,
-    wxTipKind_TopLeft,
-    wxTipKind_Top,
-    wxTipKind_TopRight,
-    wxTipKind_BottomLeft,
-    wxTipKind_Bottom,
-    wxTipKind_BottomRight,
-    wxTipKind_Auto
+	wxTipKind_None,
+	wxTipKind_TopLeft,
+	wxTipKind_Top,
+	wxTipKind_TopRight,
+	wxTipKind_BottomLeft,
+	wxTipKind_Bottom,
+	wxTipKind_BottomRight,
+	wxTipKind_Auto
 };
 
 // ----------------------------------------------------------------------------
@@ -54,48 +54,48 @@ enum wxTipKind
 class WXDLLIMPEXP_ADV wxRichToolTip
 {
 public:
-    // Ctor must specify the tooltip title and main message, additional
-    // attributes can be set later.
-    wxRichToolTip(const wxString& title, const wxString& message);
+	// Ctor must specify the tooltip title and main message, additional
+	// attributes can be set later.
+	wxRichToolTip(const wxString& title, const wxString& message);
 
-    // Set the background colour: if two colours are specified, the background
-    // is drawn using a gradient from top to bottom, otherwise a single solid
-    // colour is used.
-    void SetBackgroundColour(const wxColour& col,
-                             const wxColour& colEnd = wxColour());
+	// Set the background colour: if two colours are specified, the background
+	// is drawn using a gradient from top to bottom, otherwise a single solid
+	// colour is used.
+	void SetBackgroundColour(const wxColour& col,
+	                         const wxColour& colEnd = wxColour());
 
-    // Set the small icon to show: either one of the standard information/
-    // warning/error ones (the question icon doesn't make sense for a tooltip)
-    // or a custom icon.
-    void SetIcon(int icon = wxICON_INFORMATION);
-    void SetIcon(const wxIcon& icon);
+	// Set the small icon to show: either one of the standard information/
+	// warning/error ones (the question icon doesn't make sense for a tooltip)
+	// or a custom icon.
+	void SetIcon(int icon = wxICON_INFORMATION);
+	void SetIcon(const wxIcon& icon);
 
-    // Set timeout after which the tooltip should disappear, in milliseconds.
-    // By default the tooltip is hidden after system-dependent interval of time
-    // elapses but this method can be used to change this or also disable
-    // hiding the tooltip automatically entirely by passing 0 in this parameter
-    // (but doing this can result in native version not being used).
-    // Optionally specify a show delay.
-    void SetTimeout(unsigned milliseconds, unsigned millisecondsShowdelay = 0);
+	// Set timeout after which the tooltip should disappear, in milliseconds.
+	// By default the tooltip is hidden after system-dependent interval of time
+	// elapses but this method can be used to change this or also disable
+	// hiding the tooltip automatically entirely by passing 0 in this parameter
+	// (but doing this can result in native version not being used).
+	// Optionally specify a show delay.
+	void SetTimeout(unsigned milliseconds, unsigned millisecondsShowdelay = 0);
 
-    // Choose the tip kind, possibly none. By default the tip is positioned
-    // automatically, as if wxTipKind_Auto was used.
-    void SetTipKind(wxTipKind tipKind);
+	// Choose the tip kind, possibly none. By default the tip is positioned
+	// automatically, as if wxTipKind_Auto was used.
+	void SetTipKind(wxTipKind tipKind);
 
-    // Set the title text font. By default it's emphasized using the font style
-    // or colour appropriate for the current platform.
-    void SetTitleFont(const wxFont& font);
+	// Set the title text font. By default it's emphasized using the font style
+	// or colour appropriate for the current platform.
+	void SetTitleFont(const wxFont& font);
 
-    // Show the tooltip for the given window and optionally a specified area.
-    void ShowFor(wxWindow* win, const wxRect* rect = NULL);
+	// Show the tooltip for the given window and optionally a specified area.
+	void ShowFor(wxWindow* win, const wxRect* rect = NULL);
 
-    // Non-virtual dtor as this class is not supposed to be derived from.
-    ~wxRichToolTip();
+	// Non-virtual dtor as this class is not supposed to be derived from.
+	~wxRichToolTip();
 
 private:
-    wxRichToolTipImpl* const m_impl;
+	wxRichToolTipImpl* const m_impl;
 
-    wxDECLARE_NO_COPY_CLASS(wxRichToolTip);
+	wxDECLARE_NO_COPY_CLASS(wxRichToolTip);
 };
 
 #endif // wxUSE_RICHTOOLTIP

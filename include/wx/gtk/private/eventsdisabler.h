@@ -20,22 +20,22 @@ template <typename T>
 class wxGtkEventsDisabler
 {
 public:
-    // Disable the events for the specified (non-NULL, having lifetime greater
-    // than ours) window for the lifetime of this object.
-    explicit wxGtkEventsDisabler(T* win) : m_win(win)
-    {
-        m_win->GTKDisableEvents();
-    }
+	// Disable the events for the specified (non-NULL, having lifetime greater
+	// than ours) window for the lifetime of this object.
+	explicit wxGtkEventsDisabler(T* win) : m_win(win)
+	{
+		m_win->GTKDisableEvents();
+	}
 
-    ~wxGtkEventsDisabler()
-    {
-        m_win->GTKEnableEvents();
-    }
+	~wxGtkEventsDisabler()
+	{
+		m_win->GTKEnableEvents();
+	}
 
 private:
-    T* const m_win;
+	T* const m_win;
 
-    wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxGtkEventsDisabler, T);
+	wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxGtkEventsDisabler, T);
 };
 
 #endif // _GTK_PRIVATE_EVENTSDISABLER_H_

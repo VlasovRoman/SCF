@@ -21,17 +21,17 @@ class QTimerEvent;
 class WXDLLIMPEXP_CORE wxQtTimerImpl : public wxTimerImpl, QObject
 {
 public:
-    wxQtTimerImpl( wxTimer* timer );
+	wxQtTimerImpl( wxTimer* timer );
 
-    virtual bool Start( int millisecs = -1, bool oneShot = false );
-    virtual void Stop();
-    virtual bool IsRunning() const;
+	virtual bool Start( int millisecs = -1, bool oneShot = false );
+	virtual void Stop();
+	virtual bool IsRunning() const;
 
 protected:
-    virtual void timerEvent( QTimerEvent * event );
-    
+	virtual void timerEvent( QTimerEvent * event );
+
 private:
-    int m_timerId;
+	int m_timerId;
 };
 
 #endif // wxUSE_TIMER

@@ -27,31 +27,40 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 class WXDLLIMPEXP_CORE wxToolTip : public wxObject
 {
 public:
-    // globally change the tooltip parameters
-    static void Enable( bool flag );
-    static void SetDelay( long msecs );
-        // set the delay after which the tooltip disappears or how long the tooltip remains visible
-    static void SetAutoPop(long msecs);
-        // set the delay between subsequent tooltips to appear
-    static void SetReshow(long msecs);
+	// globally change the tooltip parameters
+	static void Enable( bool flag );
+	static void SetDelay( long msecs );
+	// set the delay after which the tooltip disappears or how long the tooltip remains visible
+	static void SetAutoPop(long msecs);
+	// set the delay between subsequent tooltips to appear
+	static void SetReshow(long msecs);
 
-    wxToolTip( const wxString &tip );
+	wxToolTip( const wxString &tip );
 
-    // get/set the tooltip text
-    void SetTip( const wxString &tip );
-    wxString GetTip() const { return m_text; }
+	// get/set the tooltip text
+	void SetTip( const wxString &tip );
+	wxString GetTip() const
+	{
+		return m_text;
+	}
 
-    wxWindow *GetWindow() const { return m_window; }
-    bool IsOk() const { return m_window != NULL; }
+	wxWindow *GetWindow() const
+	{
+		return m_window;
+	}
+	bool IsOk() const
+	{
+		return m_window != NULL;
+	}
 
-    // implementation
-    void Apply( wxWindow *win );
+	// implementation
+	void Apply( wxWindow *win );
 
 private:
-    wxString     m_text;
-    wxWindow    *m_window;
+	wxString     m_text;
+	wxWindow    *m_window;
 
-    wxDECLARE_ABSTRACT_CLASS(wxToolTip);
+	wxDECLARE_ABSTRACT_CLASS(wxToolTip);
 };
 
 #endif // __GTKTOOLTIPH__

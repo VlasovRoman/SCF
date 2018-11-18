@@ -40,95 +40,124 @@ typedef wxObject *(*wxObjectConstructorFn)(void);
 
 class WXDLLIMPEXP_BASE wxClassInfo
 {
-    friend class WXDLLIMPEXP_FWD_BASE wxObject;
-    friend WXDLLIMPEXP_BASE wxObject *wxCreateDynamicObject(const wxString& name);
+	friend class WXDLLIMPEXP_FWD_BASE wxObject;
+	friend WXDLLIMPEXP_BASE wxObject *wxCreateDynamicObject(const wxString& name);
 public:
-    wxClassInfo( const wxChar *className,
-                 const wxClassInfo *baseInfo1,
-                 const wxClassInfo *baseInfo2,
-                 int size,
-                 wxObjectConstructorFn ctor )
-        : m_className(className)
-        , m_objectSize(size)
-        , m_objectConstructor(ctor)
-        , m_baseInfo1(baseInfo1)
-        , m_baseInfo2(baseInfo2)
-        , m_next(sm_first)
-        {
-            sm_first = this;
-            Register();
-        }
+	wxClassInfo( const wxChar *className,
+	             const wxClassInfo *baseInfo1,
+	             const wxClassInfo *baseInfo2,
+	             int size,
+	             wxObjectConstructorFn ctor )
+		: m_className(className)
+		, m_objectSize(size)
+		, m_objectConstructor(ctor)
+		, m_baseInfo1(baseInfo1)
+		, m_baseInfo2(baseInfo2)
+		, m_next(sm_first)
+	{
+		sm_first = this;
+		Register();
+	}
 
-    ~wxClassInfo();
+	~wxClassInfo();
 
-    wxObject *CreateObject() const
-        { return m_objectConstructor ? (*m_objectConstructor)() : 0; }
-    bool IsDynamic() const { return (NULL != m_objectConstructor); }
+	wxObject *CreateObject() const
+	{
+		return m_objectConstructor ? (*m_objectConstructor)() : 0;
+	}
+	bool IsDynamic() const
+	{
+		return (NULL != m_objectConstructor);
+	}
 
-    const wxChar       *GetClassName() const { return m_className; }
-    const wxChar       *GetBaseClassName1() const
-        { return m_baseInfo1 ? m_baseInfo1->GetClassName() : NULL; }
-    const wxChar       *GetBaseClassName2() const
-        { return m_baseInfo2 ? m_baseInfo2->GetClassName() : NULL; }
-    const wxClassInfo  *GetBaseClass1() const { return m_baseInfo1; }
-    const wxClassInfo  *GetBaseClass2() const { return m_baseInfo2; }
-    int                 GetSize() const { return m_objectSize; }
+	const wxChar       *GetClassName() const
+	{
+		return m_className;
+	}
+	const wxChar       *GetBaseClassName1() const
+	{
+		return m_baseInfo1 ? m_baseInfo1->GetClassName() : NULL;
+	}
+	const wxChar       *GetBaseClassName2() const
+	{
+		return m_baseInfo2 ? m_baseInfo2->GetClassName() : NULL;
+	}
+	const wxClassInfo  *GetBaseClass1() const
+	{
+		return m_baseInfo1;
+	}
+	const wxClassInfo  *GetBaseClass2() const
+	{
+		return m_baseInfo2;
+	}
+	int                 GetSize() const
+	{
+		return m_objectSize;
+	}
 
-    wxObjectConstructorFn      GetConstructor() const
-        { return m_objectConstructor; }
-    static const wxClassInfo  *GetFirst() { return sm_first; }
-    const wxClassInfo         *GetNext() const { return m_next; }
-    static wxClassInfo        *FindClass(const wxString& className);
+	wxObjectConstructorFn      GetConstructor() const
+	{
+		return m_objectConstructor;
+	}
+	static const wxClassInfo  *GetFirst()
+	{
+		return sm_first;
+	}
+	const wxClassInfo         *GetNext() const
+	{
+		return m_next;
+	}
+	static wxClassInfo        *FindClass(const wxString& className);
 
-        // Climb upwards through inheritance hierarchy.
-        // Dual inheritance is catered for.
+	// Climb upwards through inheritance hierarchy.
+	// Dual inheritance is catered for.
 
-    bool IsKindOf(const wxClassInfo *info) const
-    {
-        if ( info == this )
-            return true;
+	bool IsKindOf(const wxClassInfo *info) const
+	{
+		if ( info == this )
+			return true;
 
-        if ( m_baseInfo1 )
-        {
-            if ( m_baseInfo1->IsKindOf(info) )
-                return true;
-        }
+		if ( m_baseInfo1 )
+		{
+			if ( m_baseInfo1->IsKindOf(info) )
+				return true;
+		}
 
-        if ( m_baseInfo2 )
-        {
-            if ( m_baseInfo2->IsKindOf(info) )
-                return true;
-        }
+		if ( m_baseInfo2 )
+		{
+			if ( m_baseInfo2->IsKindOf(info) )
+				return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    wxDECLARE_CLASS_INFO_ITERATORS();
+	wxDECLARE_CLASS_INFO_ITERATORS();
 
 private:
-    const wxChar            *m_className;
-    int                      m_objectSize;
-    wxObjectConstructorFn    m_objectConstructor;
+	const wxChar            *m_className;
+	int                      m_objectSize;
+	wxObjectConstructorFn    m_objectConstructor;
 
-        // Pointers to base wxClassInfos
+	// Pointers to base wxClassInfos
 
-    const wxClassInfo       *m_baseInfo1;
-    const wxClassInfo       *m_baseInfo2;
+	const wxClassInfo       *m_baseInfo1;
+	const wxClassInfo       *m_baseInfo2;
 
-        // class info object live in a linked list:
-        // pointers to its head and the next element in it
+	// class info object live in a linked list:
+	// pointers to its head and the next element in it
 
-    static wxClassInfo      *sm_first;
-    wxClassInfo             *m_next;
+	static wxClassInfo      *sm_first;
+	wxClassInfo             *m_next;
 
-    static wxHashTable      *sm_classTable;
+	static wxHashTable      *sm_classTable;
 
 protected:
-    // registers the class
-    void Register();
-    void Unregister();
+	// registers the class
+	void Register();
+	void Unregister();
 
-    wxDECLARE_NO_COPY_CLASS(wxClassInfo);
+	wxDECLARE_NO_COPY_CLASS(wxClassInfo);
 };
 
 WXDLLIMPEXP_BASE wxObject *wxCreateDynamicObject(const wxString& name);
@@ -181,13 +210,13 @@ WXDLLIMPEXP_BASE wxObject *wxCreateDynamicObject(const wxString& name);
 // for concrete classes
 // -----------------------------------
 
-    // Single inheritance with one base class
+// Single inheritance with one base class
 #define wxIMPLEMENT_DYNAMIC_CLASS(name, basename)                             \
     wxIMPLEMENT_CLASS_COMMON1(name, basename, name::wxCreateObject)           \
     wxObject* name::wxCreateObject()                                          \
         { return new name; }
 
-    // Multiple inheritance with two base classes
+// Multiple inheritance with two base classes
 #define wxIMPLEMENT_DYNAMIC_CLASS2(name, basename1, basename2)                \
     wxIMPLEMENT_CLASS_COMMON2(name, basename1, basename2,                     \
                               name::wxCreateObject)                           \
@@ -198,11 +227,11 @@ WXDLLIMPEXP_BASE wxObject *wxCreateDynamicObject(const wxString& name);
 // for abstract classes
 // -----------------------------------
 
-    // Single inheritance with one base class
+// Single inheritance with one base class
 #define wxIMPLEMENT_ABSTRACT_CLASS(name, basename)                            \
     wxIMPLEMENT_CLASS_COMMON1(name, basename, NULL)
 
-    // Multiple inheritance with two base classes
+// Multiple inheritance with two base classes
 #define wxIMPLEMENT_ABSTRACT_CLASS2(name, basename1, basename2)               \
     wxIMPLEMENT_CLASS_COMMON2(name, basename1, basename2, NULL)
 

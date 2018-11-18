@@ -50,3 +50,28 @@
   return result;
 }
 } */
+
+bool check_OS_compability()
+{
+	OSVERSIONINFO osvi;
+	BOOL bIsWindowsXPorLater;
+
+	ZeroMemory(&osvi, sizeof(OSVERSIONINFO));
+	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
+
+	GetVersionEx(&osvi);
+
+	bIsWindowsXPorLater =
+	    ( (osvi.dwMajorVersion > 5) ||
+	      ( (osvi.dwMajorVersion == 5) && (osvi.dwMinorVersion >= 1) ));
+
+	if(bIsWindowsXPorLater)
+	{
+		return true;
+	}
+	else
+	{
+		puts("The system does not meet the requirements.\n");
+		return false;
+	}
+}

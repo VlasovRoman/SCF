@@ -15,14 +15,14 @@ class QMessageBox;
 class WXDLLIMPEXP_CORE wxMessageDialog : public wxMessageDialogBase
 {
 public:
-    wxMessageDialog(wxWindow *parent, const wxString& message,
-                    const wxString& caption = wxMessageBoxCaptionStr,
-                    long style = wxOK|wxCENTRE,
-                    const wxPoint& pos = wxDefaultPosition);
-    virtual ~wxMessageDialog();
+	wxMessageDialog(wxWindow *parent, const wxString& message,
+	                const wxString& caption = wxMessageBoxCaptionStr,
+	                long style = wxOK|wxCENTRE,
+	                const wxPoint& pos = wxDefaultPosition);
+	virtual ~wxMessageDialog();
 
-    // Reimplemented to translate return codes from Qt to wx
-    virtual int ShowModal();
+	// Reimplemented to translate return codes from Qt to wx
+	virtual int ShowModal();
 };
 
 #endif // _WX_QT_MSGDLG_H_

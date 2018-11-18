@@ -17,8 +17,8 @@
 #include "wx/gtk/private/gtk2-compat.h"
 
 #ifndef G_VALUE_INIT
-    // introduced in GLib 2.30
-    #define G_VALUE_INIT { 0, { { 0 } } }
+// introduced in GLib 2.30
+#define G_VALUE_INIT { 0, { { 0 } } }
 #endif
 
 // pango_version_check symbol is quite recent ATM (4/2007)... so we
@@ -32,74 +32,74 @@
 extern const gchar *wx_pango_version_check(int major, int minor, int micro);
 
 #if wxUSE_UNICODE
-    #define wxGTK_CONV(s) (s).utf8_str()
-    #define wxGTK_CONV_ENC(s, enc) wxGTK_CONV((s))
-    #define wxGTK_CONV_FONT(s, font) wxGTK_CONV((s))
-    #define wxGTK_CONV_SYS(s) wxGTK_CONV((s))
+#define wxGTK_CONV(s) (s).utf8_str()
+#define wxGTK_CONV_ENC(s, enc) wxGTK_CONV((s))
+#define wxGTK_CONV_FONT(s, font) wxGTK_CONV((s))
+#define wxGTK_CONV_SYS(s) wxGTK_CONV((s))
 
-    #define wxGTK_CONV_BACK(s) wxString::FromUTF8Unchecked(s)
-    #define wxGTK_CONV_BACK_ENC(s, enc) wxGTK_CONV_BACK(s)
-    #define wxGTK_CONV_BACK_FONT(s, font) wxGTK_CONV_BACK(s)
-    #define wxGTK_CONV_BACK_SYS(s) wxGTK_CONV_BACK(s)
+#define wxGTK_CONV_BACK(s) wxString::FromUTF8Unchecked(s)
+#define wxGTK_CONV_BACK_ENC(s, enc) wxGTK_CONV_BACK(s)
+#define wxGTK_CONV_BACK_FONT(s, font) wxGTK_CONV_BACK(s)
+#define wxGTK_CONV_BACK_SYS(s) wxGTK_CONV_BACK(s)
 #else
-    #include "wx/font.h"
+#include "wx/font.h"
 
-    // convert the text between the given encoding and UTF-8 used by wxGTK
-    extern WXDLLIMPEXP_CORE wxCharBuffer
-    wxConvertToGTK(const wxString& s,
-                   wxFontEncoding enc = wxFONTENCODING_SYSTEM);
+// convert the text between the given encoding and UTF-8 used by wxGTK
+extern WXDLLIMPEXP_CORE wxCharBuffer
+wxConvertToGTK(const wxString& s,
+               wxFontEncoding enc = wxFONTENCODING_SYSTEM);
 
-    extern WXDLLIMPEXP_CORE wxCharBuffer
-    wxConvertFromGTK(const wxString& s,
-                     wxFontEncoding enc = wxFONTENCODING_SYSTEM);
+extern WXDLLIMPEXP_CORE wxCharBuffer
+wxConvertFromGTK(const wxString& s,
+                 wxFontEncoding enc = wxFONTENCODING_SYSTEM);
 
-    // helper: use the encoding of the given font if it's valid
-    inline wxCharBuffer wxConvertToGTK(const wxString& s, const wxFont& font)
-    {
-        return wxConvertToGTK(s, font.IsOk() ? font.GetEncoding()
-                                           : wxFONTENCODING_SYSTEM);
-    }
+// helper: use the encoding of the given font if it's valid
+inline wxCharBuffer wxConvertToGTK(const wxString& s, const wxFont& font)
+{
+	return wxConvertToGTK(s, font.IsOk() ? font.GetEncoding()
+	                      : wxFONTENCODING_SYSTEM);
+}
 
-    inline wxCharBuffer wxConvertFromGTK(const wxString& s, const wxFont& font)
-    {
-        return wxConvertFromGTK(s, font.IsOk() ? font.GetEncoding()
-                                             : wxFONTENCODING_SYSTEM);
-    }
+inline wxCharBuffer wxConvertFromGTK(const wxString& s, const wxFont& font)
+{
+	return wxConvertFromGTK(s, font.IsOk() ? font.GetEncoding()
+	                        : wxFONTENCODING_SYSTEM);
+}
 
-    // more helpers: allow passing GTK+ strings directly
-    inline wxCharBuffer
-    wxConvertFromGTK(const wxGtkString& gs,
-                     wxFontEncoding enc = wxFONTENCODING_SYSTEM)
-    {
-        return wxConvertFromGTK(gs.c_str(), enc);
-    }
+// more helpers: allow passing GTK+ strings directly
+inline wxCharBuffer
+wxConvertFromGTK(const wxGtkString& gs,
+                 wxFontEncoding enc = wxFONTENCODING_SYSTEM)
+{
+	return wxConvertFromGTK(gs.c_str(), enc);
+}
 
-    inline wxCharBuffer
-    wxConvertFromGTK(const wxGtkString& gs, const wxFont& font)
-    {
-        return wxConvertFromGTK(gs.c_str(), font);
-    }
+inline wxCharBuffer
+wxConvertFromGTK(const wxGtkString& gs, const wxFont& font)
+{
+	return wxConvertFromGTK(gs.c_str(), font);
+}
 
-    #define wxGTK_CONV(s) wxGTK_CONV_FONT((s), m_font)
-    #define wxGTK_CONV_ENC(s, enc) wxConvertToGTK((s), (enc))
-    #define wxGTK_CONV_FONT(s, font) wxConvertToGTK((s), (font))
-    #define wxGTK_CONV_SYS(s) wxConvertToGTK((s))
+#define wxGTK_CONV(s) wxGTK_CONV_FONT((s), m_font)
+#define wxGTK_CONV_ENC(s, enc) wxConvertToGTK((s), (enc))
+#define wxGTK_CONV_FONT(s, font) wxConvertToGTK((s), (font))
+#define wxGTK_CONV_SYS(s) wxConvertToGTK((s))
 
-    #define wxGTK_CONV_BACK(s) wxConvertFromGTK((s), m_font)
-    #define wxGTK_CONV_BACK_ENC(s, enc) wxConvertFromGTK((s), (enc))
-    #define wxGTK_CONV_BACK_FONT(s, font) wxConvertFromGTK((s), (font))
-    #define wxGTK_CONV_BACK_SYS(s) wxConvertFromGTK((s))
+#define wxGTK_CONV_BACK(s) wxConvertFromGTK((s), m_font)
+#define wxGTK_CONV_BACK_ENC(s, enc) wxConvertFromGTK((s), (enc))
+#define wxGTK_CONV_BACK_FONT(s, font) wxConvertFromGTK((s), (font))
+#define wxGTK_CONV_BACK_SYS(s) wxConvertFromGTK((s))
 #endif
 
 // Define a macro for converting wxString to char* in appropriate encoding for
 // the file names.
 #ifdef G_OS_WIN32
-    // Under MSW, UTF-8 file name encodings are always used.
-    #define wxGTK_CONV_FN(s) (s).utf8_str()
+// Under MSW, UTF-8 file name encodings are always used.
+#define wxGTK_CONV_FN(s) (s).utf8_str()
 #else
-    // Under Unix use GLib file name encoding (which is also UTF-8 by default
-    // but may be different from it).
-    #define wxGTK_CONV_FN(s) (s).fn_str()
+// Under Unix use GLib file name encoding (which is also UTF-8 by default
+// but may be different from it).
+#define wxGTK_CONV_FN(s) (s).fn_str()
 #endif
 
 // ----------------------------------------------------------------------------

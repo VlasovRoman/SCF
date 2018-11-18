@@ -55,28 +55,28 @@ class WXDLLIMPEXP_FWD_CORE wxImage;
 //     GIF disposal codes. Do not change them !!
 enum wxAnimationDisposal
 {
-    // No disposal specified. The decoder is not required to take any action.
-    wxANIM_UNSPECIFIED = -1,
+	// No disposal specified. The decoder is not required to take any action.
+	wxANIM_UNSPECIFIED = -1,
 
-    // Do not dispose. The graphic is to be left in place.
-    wxANIM_DONOTREMOVE = 0,
+	// Do not dispose. The graphic is to be left in place.
+	wxANIM_DONOTREMOVE = 0,
 
-    // Restore to background color. The area used by the graphic must be
-    // restored to the background color.
-    wxANIM_TOBACKGROUND = 1,
+	// Restore to background color. The area used by the graphic must be
+	// restored to the background color.
+	wxANIM_TOBACKGROUND = 1,
 
-    // Restore to previous. The decoder is required to restore the area
-    // overwritten by the graphic with what was there prior to rendering the graphic.
-    wxANIM_TOPREVIOUS = 2
+	// Restore to previous. The decoder is required to restore the area
+	// overwritten by the graphic with what was there prior to rendering the graphic.
+	wxANIM_TOPREVIOUS = 2
 };
 
 enum wxAnimationType
 {
-    wxANIMATION_TYPE_INVALID,
-    wxANIMATION_TYPE_GIF,
-    wxANIMATION_TYPE_ANI,
+	wxANIMATION_TYPE_INVALID,
+	wxANIMATION_TYPE_GIF,
+	wxANIMATION_TYPE_ANI,
 
-    wxANIMATION_TYPE_ANY
+	wxANIMATION_TYPE_ANY
 };
 
 
@@ -87,81 +87,90 @@ enum wxAnimationType
 class WXDLLIMPEXP_CORE wxAnimationDecoder : public wxObjectRefData
 {
 public:
-    wxAnimationDecoder()
-    {
-        m_nFrames = 0;
-    }
+	wxAnimationDecoder()
+	{
+		m_nFrames = 0;
+	}
 
-    virtual bool Load( wxInputStream& stream ) = 0;
+	virtual bool Load( wxInputStream& stream ) = 0;
 
-    bool CanRead( wxInputStream& stream ) const
-    {
-        // NOTE: this code is the same of wxImageHandler::CallDoCanRead
+	bool CanRead( wxInputStream& stream ) const
+	{
+		// NOTE: this code is the same of wxImageHandler::CallDoCanRead
 
-        if ( !stream.IsSeekable() )
-            return false;        // can't test unseekable stream
+		if ( !stream.IsSeekable() )
+			return false;        // can't test unseekable stream
 
-        wxFileOffset posOld = stream.TellI();
-        bool ok = DoCanRead(stream);
+		wxFileOffset posOld = stream.TellI();
+		bool ok = DoCanRead(stream);
 
-        // restore the old position to be able to test other formats and so on
-        if ( stream.SeekI(posOld) == wxInvalidOffset )
-        {
-            wxLogDebug(wxT("Failed to rewind the stream in wxAnimationDecoder!"));
+		// restore the old position to be able to test other formats and so on
+		if ( stream.SeekI(posOld) == wxInvalidOffset )
+		{
+			wxLogDebug(wxT("Failed to rewind the stream in wxAnimationDecoder!"));
 
-            // reading would fail anyhow as we're not at the right position
-            return false;
-        }
+			// reading would fail anyhow as we're not at the right position
+			return false;
+		}
 
-        return ok;
-    }
+		return ok;
+	}
 
-    virtual wxAnimationDecoder *Clone() const = 0;
-    virtual wxAnimationType GetType() const = 0;
+	virtual wxAnimationDecoder *Clone() const = 0;
+	virtual wxAnimationType GetType() const = 0;
 
-    // convert given frame to wxImage
-    virtual bool ConvertToImage(unsigned int frame, wxImage *image) const = 0;
+	// convert given frame to wxImage
+	virtual bool ConvertToImage(unsigned int frame, wxImage *image) const = 0;
 
 
-    // frame specific data getters
+	// frame specific data getters
 
-    // not all frames may be of the same size; e.g. GIF allows to
-    // specify that between two frames only a smaller portion of the
-    // entire animation has changed.
-    virtual wxSize GetFrameSize(unsigned int frame) const = 0;
+	// not all frames may be of the same size; e.g. GIF allows to
+	// specify that between two frames only a smaller portion of the
+	// entire animation has changed.
+	virtual wxSize GetFrameSize(unsigned int frame) const = 0;
 
-    // the position of this frame in case it's not as big as m_szAnimation
-    // or wxPoint(0,0) otherwise.
-    virtual wxPoint GetFramePosition(unsigned int frame) const = 0;
+	// the position of this frame in case it's not as big as m_szAnimation
+	// or wxPoint(0,0) otherwise.
+	virtual wxPoint GetFramePosition(unsigned int frame) const = 0;
 
-    // what should be done after displaying this frame.
-    virtual wxAnimationDisposal GetDisposalMethod(unsigned int frame) const = 0;
+	// what should be done after displaying this frame.
+	virtual wxAnimationDisposal GetDisposalMethod(unsigned int frame) const = 0;
 
-    // the number of milliseconds this frame should be displayed.
-    // if returns -1 then the frame must be displayed forever.
-    virtual long GetDelay(unsigned int frame) const = 0;
+	// the number of milliseconds this frame should be displayed.
+	// if returns -1 then the frame must be displayed forever.
+	virtual long GetDelay(unsigned int frame) const = 0;
 
-    // the transparent colour for this frame if any or wxNullColour.
-    virtual wxColour GetTransparentColour(unsigned int frame) const = 0;
+	// the transparent colour for this frame if any or wxNullColour.
+	virtual wxColour GetTransparentColour(unsigned int frame) const = 0;
 
-    // get global data
-    wxSize GetAnimationSize() const { return m_szAnimation; }
-    wxColour GetBackgroundColour() const { return m_background; }
-    unsigned int GetFrameCount() const { return m_nFrames; }
+	// get global data
+	wxSize GetAnimationSize() const
+	{
+		return m_szAnimation;
+	}
+	wxColour GetBackgroundColour() const
+	{
+		return m_background;
+	}
+	unsigned int GetFrameCount() const
+	{
+		return m_nFrames;
+	}
 
 protected:
-    // checks the signature of the data in the given stream and returns true if it
-    // appears to be a valid animation format recognized by the animation decoder;
-    // this function should modify the stream current position without taking care
-    // of restoring it since CanRead() will do it.
-    virtual bool DoCanRead(wxInputStream& stream) const = 0;
+	// checks the signature of the data in the given stream and returns true if it
+	// appears to be a valid animation format recognized by the animation decoder;
+	// this function should modify the stream current position without taking care
+	// of restoring it since CanRead() will do it.
+	virtual bool DoCanRead(wxInputStream& stream) const = 0;
 
-    wxSize m_szAnimation;
-    unsigned int m_nFrames;
+	wxSize m_szAnimation;
+	unsigned int m_nFrames;
 
-    // this is the colour to use for the wxANIM_TOBACKGROUND disposal.
-    // if not specified by the animation, it's set to wxNullColour
-    wxColour m_background;
+	// this is the colour to use for the wxANIM_TOBACKGROUND disposal.
+	// if not specified by the animation, it's set to wxNullColour
+	wxColour m_background;
 };
 
 #endif  // wxUSE_STREAMS

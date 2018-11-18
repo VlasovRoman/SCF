@@ -21,28 +21,28 @@ namespace wxOSXImpl
 // (in which case nil is returned).
 inline NSDate* NSDateFromWX(const wxDateTime& dt)
 {
-    if ( !dt.IsValid() )
-        return nil;
+	if ( !dt.IsValid() )
+		return nil;
 
-    // Get the internal representation as a double used by NSDate.
-    double ticks = dt.GetValue().ToDouble();
+	// Get the internal representation as a double used by NSDate.
+	double ticks = dt.GetValue().ToDouble();
 
-    // wxDateTime uses milliseconds while NSDate uses (fractional) seconds.
-    return [NSDate dateWithTimeIntervalSince1970:ticks/1000.];
+	// wxDateTime uses milliseconds while NSDate uses (fractional) seconds.
+	return [NSDate dateWithTimeIntervalSince1970:ticks/1000.];
 }
 
 
 // Returns wxDateTime corresponding to the given NSDate (which may be nil).
 inline wxDateTime NSDateToWX(const NSDate* d)
 {
-    if ( !d )
-        return wxDefaultDateTime;
+	if ( !d )
+		return wxDefaultDateTime;
 
-    // Reverse everything done above.
-    wxLongLong ll;
-    ll.Assign([d timeIntervalSince1970]*1000);
-    wxDateTime dt(ll);
-    return dt;
+	// Reverse everything done above.
+	wxLongLong ll;
+	ll.Assign([d timeIntervalSince1970]*1000);
+	wxDateTime dt(ll);
+	return dt;
 }
 
 } // namespace wxOSXImpl

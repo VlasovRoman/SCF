@@ -15,22 +15,28 @@
 class WXDLLIMPEXP_CORE wxMotifTimerImpl : public wxTimerImpl
 {
 public:
-    wxMotifTimerImpl(wxTimer* timer) : wxTimerImpl(timer) { m_id = 0; }
-    virtual ~wxMotifTimerImpl();
+	wxMotifTimerImpl(wxTimer* timer) : wxTimerImpl(timer)
+	{
+		m_id = 0;
+	}
+	virtual ~wxMotifTimerImpl();
 
-    virtual bool Start(int milliseconds = -1, bool oneShot = false);
-    virtual void Stop();
-    virtual bool IsRunning() const { return m_id != 0; }
+	virtual bool Start(int milliseconds = -1, bool oneShot = false);
+	virtual void Stop();
+	virtual bool IsRunning() const
+	{
+		return m_id != 0;
+	}
 
-    // override this to rearm the timer if necessary (i.e. if not one shot) as
-    // X timeouts are removed automatically when they expire
-    virtual void Notify();
+	// override this to rearm the timer if necessary (i.e. if not one shot) as
+	// X timeouts are removed automatically when they expire
+	virtual void Notify();
 
 protected:
-    // common part of Start() and Notify()
-    void DoStart();
+	// common part of Start() and Notify()
+	void DoStart();
 
-    long m_id;
+	long m_id;
 };
 
 #endif // _WX_MOTIF_PRIVATE_TIMER_H_

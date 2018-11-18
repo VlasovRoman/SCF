@@ -30,120 +30,134 @@
 class WXDLLIMPEXP_CORE wxCheckBox : public wxCheckBoxBase
 {
 public:
-    // checkbox constants
-    enum State
-    {
-        State_Normal,
-        State_Pressed,
-        State_Disabled,
-        State_Current,
-        State_Max
-    };
+	// checkbox constants
+	enum State
+	{
+		State_Normal,
+		State_Pressed,
+		State_Disabled,
+		State_Current,
+		State_Max
+	};
 
-    enum Status
-    {
-        Status_Checked,
-        Status_Unchecked,
-        Status_3rdState,
-        Status_Max
-    };
+	enum Status
+	{
+		Status_Checked,
+		Status_Unchecked,
+		Status_3rdState,
+		Status_Max
+	};
 
-    // constructors
-    wxCheckBox() { Init(); }
+	// constructors
+	wxCheckBox()
+	{
+		Init();
+	}
 
-    wxCheckBox(wxWindow *parent,
-               wxWindowID id,
-               const wxString& label,
-               const wxPoint& pos = wxDefaultPosition,
-               const wxSize& size = wxDefaultSize,
-               long style = 0,
-               const wxValidator& validator = wxDefaultValidator,
-               const wxString& name = wxCheckBoxNameStr)
-    {
-        Init();
+	wxCheckBox(wxWindow *parent,
+	           wxWindowID id,
+	           const wxString& label,
+	           const wxPoint& pos = wxDefaultPosition,
+	           const wxSize& size = wxDefaultSize,
+	           long style = 0,
+	           const wxValidator& validator = wxDefaultValidator,
+	           const wxString& name = wxCheckBoxNameStr)
+	{
+		Init();
 
-        Create(parent, id, label, pos, size, style, validator, name);
-    }
+		Create(parent, id, label, pos, size, style, validator, name);
+	}
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxString& label,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = 0,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxCheckBoxNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxString& label,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = 0,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxCheckBoxNameStr);
 
-    // implement the checkbox interface
-    virtual void SetValue(bool value) wxOVERRIDE;
-    virtual bool GetValue() const wxOVERRIDE;
+	// implement the checkbox interface
+	virtual void SetValue(bool value) wxOVERRIDE;
+	virtual bool GetValue() const wxOVERRIDE;
 
-    // set/get the bitmaps to use for the checkbox indicator
-    void SetBitmap(const wxBitmap& bmp, State state, Status status);
-    virtual wxBitmap GetBitmap(State state, Status status) const;
+	// set/get the bitmaps to use for the checkbox indicator
+	void SetBitmap(const wxBitmap& bmp, State state, Status status);
+	virtual wxBitmap GetBitmap(State state, Status status) const;
 
-    // wxCheckBox actions
-    void Toggle();
-    virtual void Press();
-    virtual void Release();
-    virtual void ChangeValue(bool value);
+	// wxCheckBox actions
+	void Toggle();
+	virtual void Press();
+	virtual void Release();
+	virtual void ChangeValue(bool value);
 
-    // overridden base class virtuals
-    virtual bool IsPressed() const wxOVERRIDE { return m_isPressed; }
+	// overridden base class virtuals
+	virtual bool IsPressed() const wxOVERRIDE
+	{
+		return m_isPressed;
+	}
 
-    virtual bool PerformAction(const wxControlAction& action,
-                               long numArg = -1,
-                               const wxString& strArg = wxEmptyString) wxOVERRIDE;
+	virtual bool PerformAction(const wxControlAction& action,
+	                           long numArg = -1,
+	                           const wxString& strArg = wxEmptyString) wxOVERRIDE;
 
-    virtual bool CanBeHighlighted() const wxOVERRIDE { return true; }
-    virtual wxInputHandler *CreateStdInputHandler(wxInputHandler *handlerDef);
-    virtual wxInputHandler *DoGetStdInputHandler(wxInputHandler *handlerDef) wxOVERRIDE
-    {
-        return CreateStdInputHandler(handlerDef);
-    }
+	virtual bool CanBeHighlighted() const wxOVERRIDE
+	{
+		return true;
+	}
+	virtual wxInputHandler *CreateStdInputHandler(wxInputHandler *handlerDef);
+	virtual wxInputHandler *DoGetStdInputHandler(wxInputHandler *handlerDef) wxOVERRIDE
+	{
+		return CreateStdInputHandler(handlerDef);
+	}
 
 protected:
-    virtual void DoSet3StateValue(wxCheckBoxState WXUNUSED(state)) wxOVERRIDE;
-    virtual wxCheckBoxState DoGet3StateValue() const wxOVERRIDE;
+	virtual void DoSet3StateValue(wxCheckBoxState WXUNUSED(state)) wxOVERRIDE;
+	virtual wxCheckBoxState DoGet3StateValue() const wxOVERRIDE;
 
-    virtual void DoDraw(wxControlRenderer *renderer) wxOVERRIDE;
-    virtual wxSize DoGetBestClientSize() const wxOVERRIDE;
+	virtual void DoDraw(wxControlRenderer *renderer) wxOVERRIDE;
+	virtual wxSize DoGetBestClientSize() const wxOVERRIDE;
 
-    // get the size of the bitmap using either the current one or the default
-    // one (query renderer then)
-    virtual wxSize GetBitmapSize() const;
+	// get the size of the bitmap using either the current one or the default
+	// one (query renderer then)
+	virtual wxSize GetBitmapSize() const;
 
-    // common part of all ctors
-    void Init();
+	// common part of all ctors
+	void Init();
 
-    // send command event notifying about the checkbox state change
-    virtual void SendEvent();
+	// send command event notifying about the checkbox state change
+	virtual void SendEvent();
 
-    // called when the checkbox becomes checked - radio button hook
-    virtual void OnCheck();
+	// called when the checkbox becomes checked - radio button hook
+	virtual void OnCheck();
 
-    // get the state corresponding to the flags (combination of wxCONTROL_XXX)
-    wxCheckBox::State GetState(int flags) const;
+	// get the state corresponding to the flags (combination of wxCONTROL_XXX)
+	wxCheckBox::State GetState(int flags) const;
 
-    // directly access the bitmaps array without trying to find a valid bitmap
-    // to use as GetBitmap() does
-    wxBitmap DoGetBitmap(State state, Status status) const
-        { return m_bitmaps[state][status]; }
+	// directly access the bitmaps array without trying to find a valid bitmap
+	// to use as GetBitmap() does
+	wxBitmap DoGetBitmap(State state, Status status) const
+	{
+		return m_bitmaps[state][status];
+	}
 
-    // get the current status
-    Status GetStatus() const { return m_status; }
+	// get the current status
+	Status GetStatus() const
+	{
+		return m_status;
+	}
 
 private:
-    // the current check status
-    Status m_status;
+	// the current check status
+	Status m_status;
 
-    // the bitmaps to use for the different states
-    wxBitmap m_bitmaps[State_Max][Status_Max];
+	// the bitmaps to use for the different states
+	wxBitmap m_bitmaps[State_Max][Status_Max];
 
-    // is the checkbox currently pressed?
-    bool m_isPressed;
+	// is the checkbox currently pressed?
+	bool m_isPressed;
 
-    wxDECLARE_DYNAMIC_CLASS(wxCheckBox);
+	wxDECLARE_DYNAMIC_CLASS(wxCheckBox);
 };
 
 #endif // _WX_UNIV_CHECKBOX_H_

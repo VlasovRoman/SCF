@@ -34,143 +34,146 @@
 class WXDLLIMPEXP_CORE wxTransformMatrix: public wxObject
 {
 public:
-    wxTransformMatrix(void);
-    wxTransformMatrix(const wxTransformMatrix& mat);
+	wxTransformMatrix(void);
+	wxTransformMatrix(const wxTransformMatrix& mat);
 
-    //get the value in the matrix at col,row
-    //rows are horizontal (second index of m_matrix member)
-    //columns are vertical (first index of m_matrix member)
-    double GetValue(int col, int row) const;
+	//get the value in the matrix at col,row
+	//rows are horizontal (second index of m_matrix member)
+	//columns are vertical (first index of m_matrix member)
+	double GetValue(int col, int row) const;
 
-    //set the value in the matrix at col,row
-    //rows are horizontal (second index of m_matrix member)
-    //columns are vertical (first index of m_matrix member)
-    void SetValue(int col, int row, double value);
+	//set the value in the matrix at col,row
+	//rows are horizontal (second index of m_matrix member)
+	//columns are vertical (first index of m_matrix member)
+	void SetValue(int col, int row, double value);
 
-    void operator = (const wxTransformMatrix& mat);
-    bool operator == (const wxTransformMatrix& mat) const;
-    bool operator != (const wxTransformMatrix& mat) const;
+	void operator = (const wxTransformMatrix& mat);
+	bool operator == (const wxTransformMatrix& mat) const;
+	bool operator != (const wxTransformMatrix& mat) const;
 
-    //multiply every element by t
-    wxTransformMatrix&          operator*=(const double& t);
-    //divide every element by t
-    wxTransformMatrix&          operator/=(const double& t);
-    //add matrix m to this t
-    wxTransformMatrix&          operator+=(const wxTransformMatrix& m);
-    //subtract matrix m from this
-    wxTransformMatrix&          operator-=(const wxTransformMatrix& m);
-    //multiply matrix m with this
-    wxTransformMatrix&          operator*=(const wxTransformMatrix& m);
+	//multiply every element by t
+	wxTransformMatrix&          operator*=(const double& t);
+	//divide every element by t
+	wxTransformMatrix&          operator/=(const double& t);
+	//add matrix m to this t
+	wxTransformMatrix&          operator+=(const wxTransformMatrix& m);
+	//subtract matrix m from this
+	wxTransformMatrix&          operator-=(const wxTransformMatrix& m);
+	//multiply matrix m with this
+	wxTransformMatrix&          operator*=(const wxTransformMatrix& m);
 
-    // constant operators
+	// constant operators
 
-    //multiply every element by t  and return result
-    wxTransformMatrix           operator*(const double& t) const;
-    //divide this matrix by t and return result
-    wxTransformMatrix           operator/(const double& t) const;
-    //add matrix m to this and return result
-    wxTransformMatrix           operator+(const wxTransformMatrix& m) const;
-    //subtract matrix m from this and return result
-    wxTransformMatrix           operator-(const wxTransformMatrix& m) const;
-    //multiply this by matrix m and return result
-    wxTransformMatrix           operator*(const wxTransformMatrix& m) const;
-    wxTransformMatrix           operator-() const;
+	//multiply every element by t  and return result
+	wxTransformMatrix           operator*(const double& t) const;
+	//divide this matrix by t and return result
+	wxTransformMatrix           operator/(const double& t) const;
+	//add matrix m to this and return result
+	wxTransformMatrix           operator+(const wxTransformMatrix& m) const;
+	//subtract matrix m from this and return result
+	wxTransformMatrix           operator-(const wxTransformMatrix& m) const;
+	//multiply this by matrix m and return result
+	wxTransformMatrix           operator*(const wxTransformMatrix& m) const;
+	wxTransformMatrix           operator-() const;
 
-    //rows are horizontal (second index of m_matrix member)
-    //columns are vertical (first index of m_matrix member)
-    double& operator()(int col, int row);
+	//rows are horizontal (second index of m_matrix member)
+	//columns are vertical (first index of m_matrix member)
+	double& operator()(int col, int row);
 
-    //rows are horizontal (second index of m_matrix member)
-    //columns are vertical (first index of m_matrix member)
-    double operator()(int col, int row) const;
+	//rows are horizontal (second index of m_matrix member)
+	//columns are vertical (first index of m_matrix member)
+	double operator()(int col, int row) const;
 
-    // Invert matrix
-    bool Invert(void);
+	// Invert matrix
+	bool Invert(void);
 
-    // Make into identity matrix
-    bool Identity(void);
+	// Make into identity matrix
+	bool Identity(void);
 
-    // Is the matrix the identity matrix?
-    // Only returns a flag, which is set whenever an operation
-    // is done.
-    inline bool IsIdentity(void) const { return m_isIdentity; }
+	// Is the matrix the identity matrix?
+	// Only returns a flag, which is set whenever an operation
+	// is done.
+	inline bool IsIdentity(void) const
+	{
+		return m_isIdentity;
+	}
 
-    // This does an actual check.
-    inline bool IsIdentity1(void) const ;
+	// This does an actual check.
+	inline bool IsIdentity1(void) const ;
 
-    //Scale by scale (isotropic scaling i.e. the same in x and y):
-    //!ex:
-    //!code:           | scale  0      0      |
-    //!code: matrix' = |  0     scale  0      | x matrix
-    //!code:           |  0     0      scale  |
-    bool Scale(double scale);
+	//Scale by scale (isotropic scaling i.e. the same in x and y):
+	//!ex:
+	//!code:           | scale  0      0      |
+	//!code: matrix' = |  0     scale  0      | x matrix
+	//!code:           |  0     0      scale  |
+	bool Scale(double scale);
 
-    //Scale with center point and x/y scale
-    //
-    //!ex:
-    //!code:           |  xs    0      xc(1-xs) |
-    //!code: matrix' = |  0    ys      yc(1-ys) | x matrix
-    //!code:           |  0     0      1        |
-    wxTransformMatrix&  Scale(const double &xs, const double &ys,const double &xc, const double &yc);
+	//Scale with center point and x/y scale
+	//
+	//!ex:
+	//!code:           |  xs    0      xc(1-xs) |
+	//!code: matrix' = |  0    ys      yc(1-ys) | x matrix
+	//!code:           |  0     0      1        |
+	wxTransformMatrix&  Scale(const double &xs, const double &ys,const double &xc, const double &yc);
 
-    // mirror a matrix in x, y
-    //!ex:
-    //!code:           | -1     0      0 |
-    //!code: matrix' = |  0    -1      0 | x matrix
-    //!code:           |  0     0      1 |
-    wxTransformMatrix&  Mirror(bool x=true, bool y=false);
-    // Translate by dx, dy:
-    //!ex:
-    //!code:           | 1  0 dx |
-    //!code: matrix' = | 0  1 dy | x matrix
-    //!code:           | 0  0  1 |
-    bool Translate(double x, double y);
+	// mirror a matrix in x, y
+	//!ex:
+	//!code:           | -1     0      0 |
+	//!code: matrix' = |  0    -1      0 | x matrix
+	//!code:           |  0     0      1 |
+	wxTransformMatrix&  Mirror(bool x=true, bool y=false);
+	// Translate by dx, dy:
+	//!ex:
+	//!code:           | 1  0 dx |
+	//!code: matrix' = | 0  1 dy | x matrix
+	//!code:           | 0  0  1 |
+	bool Translate(double x, double y);
 
-    // Rotate clockwise by the given number of degrees:
-    //!ex:
-    //!code:           |  cos sin 0 |
-    //!code: matrix' = | -sin cos 0 | x matrix
-    //!code:           |   0   0  1 |
-    bool Rotate(double angle);
+	// Rotate clockwise by the given number of degrees:
+	//!ex:
+	//!code:           |  cos sin 0 |
+	//!code: matrix' = | -sin cos 0 | x matrix
+	//!code:           |   0   0  1 |
+	bool Rotate(double angle);
 
-    //Rotate counter clockwise with point of rotation
-    //
-    //!ex:
-    //!code:           |  cos(r) -sin(r)    x(1-cos(r))+y(sin(r)|
-    //!code: matrix' = |  sin(r)  cos(r)    y(1-cos(r))-x(sin(r)| x matrix
-    //!code:           |   0          0                       1 |
-    wxTransformMatrix&  Rotate(const double &r, const double &x, const double &y);
+	//Rotate counter clockwise with point of rotation
+	//
+	//!ex:
+	//!code:           |  cos(r) -sin(r)    x(1-cos(r))+y(sin(r)|
+	//!code: matrix' = |  sin(r)  cos(r)    y(1-cos(r))-x(sin(r)| x matrix
+	//!code:           |   0          0                       1 |
+	wxTransformMatrix&  Rotate(const double &r, const double &x, const double &y);
 
-    // Transform X value from logical to device
-    inline double TransformX(double x) const;
+	// Transform X value from logical to device
+	inline double TransformX(double x) const;
 
-    // Transform Y value from logical to device
-    inline double TransformY(double y) const;
+	// Transform Y value from logical to device
+	inline double TransformY(double y) const;
 
-    // Transform a point from logical to device coordinates
-    bool TransformPoint(double x, double y, double& tx, double& ty) const;
+	// Transform a point from logical to device coordinates
+	bool TransformPoint(double x, double y, double& tx, double& ty) const;
 
-    // Transform a point from device to logical coordinates.
-    // Example of use:
-    //   wxTransformMatrix mat = dc.GetTransformation();
-    //   mat.Invert();
-    //   mat.InverseTransformPoint(x, y, x1, y1);
-    // OR (shorthand:)
-    //   dc.LogicalToDevice(x, y, x1, y1);
-    // The latter is slightly less efficient if we're doing several
-    // conversions, since the matrix is inverted several times.
-    // N.B. 'this' matrix is the inverse at this point
-    bool InverseTransformPoint(double x, double y, double& tx, double& ty) const;
+	// Transform a point from device to logical coordinates.
+	// Example of use:
+	//   wxTransformMatrix mat = dc.GetTransformation();
+	//   mat.Invert();
+	//   mat.InverseTransformPoint(x, y, x1, y1);
+	// OR (shorthand:)
+	//   dc.LogicalToDevice(x, y, x1, y1);
+	// The latter is slightly less efficient if we're doing several
+	// conversions, since the matrix is inverted several times.
+	// N.B. 'this' matrix is the inverse at this point
+	bool InverseTransformPoint(double x, double y, double& tx, double& ty) const;
 
-    double Get_scaleX();
-    double Get_scaleY();
-    double GetRotation();
-    void   SetRotation(double rotation);
+	double Get_scaleX();
+	double Get_scaleY();
+	double GetRotation();
+	void   SetRotation(double rotation);
 
 
 public:
-    double  m_matrix[3][3];
-    bool    m_isIdentity;
+	double  m_matrix[3][3];
+	bool    m_isIdentity;
 };
 
 
@@ -188,10 +191,10 @@ known if he matrix has been inverted. Be careful when using it.
 // it in the logical coordinate system, use TransformPoint
 inline double wxTransformMatrix::TransformX(double x) const
 {
-    //normally like this, but since no rotation is involved (only mirror and scale)
-    //we can do without Y -> m_matrix[1]{0] is -sin(rotation angle) and therefore zero
-    //(x * m_matrix[0][0] + y * m_matrix[1][0] + m_matrix[2][0]))
-    return (m_isIdentity ? x : (x * m_matrix[0][0] +  m_matrix[2][0]));
+	//normally like this, but since no rotation is involved (only mirror and scale)
+	//we can do without Y -> m_matrix[1]{0] is -sin(rotation angle) and therefore zero
+	//(x * m_matrix[0][0] + y * m_matrix[1][0] + m_matrix[2][0]))
+	return (m_isIdentity ? x : (x * m_matrix[0][0] +  m_matrix[2][0]));
 }
 
 // Transform Y value from logical to device
@@ -202,10 +205,10 @@ inline double wxTransformMatrix::TransformX(double x) const
 // it in the logical coordinate system, use TransformPoint
 inline double wxTransformMatrix::TransformY(double y) const
 {
-    //normally like this, but since no rotation is involved (only mirror and scale)
-    //we can do without X -> m_matrix[0]{1] is sin(rotation angle) and therefore zero
-    //(x * m_matrix[0][1] + y * m_matrix[1][1] + m_matrix[2][1]))
-    return (m_isIdentity ? y : (y * m_matrix[1][1] + m_matrix[2][1]));
+	//normally like this, but since no rotation is involved (only mirror and scale)
+	//we can do without X -> m_matrix[0]{1] is sin(rotation angle) and therefore zero
+	//(x * m_matrix[0][1] + y * m_matrix[1][1] + m_matrix[2][1]))
+	return (m_isIdentity ? y : (y * m_matrix[1][1] + m_matrix[2][1]));
 }
 
 
@@ -213,22 +216,22 @@ inline double wxTransformMatrix::TransformY(double y) const
 // Each operation checks whether the result is still the identity matrix and sets a flag.
 inline bool wxTransformMatrix::IsIdentity1(void) const
 {
-    return
-    ( wxIsSameDouble(m_matrix[0][0], 1.0) &&
-      wxIsSameDouble(m_matrix[1][1], 1.0) &&
-      wxIsSameDouble(m_matrix[2][2], 1.0) &&
-      wxIsSameDouble(m_matrix[1][0], 0.0) &&
-      wxIsSameDouble(m_matrix[2][0], 0.0) &&
-      wxIsSameDouble(m_matrix[0][1], 0.0) &&
-      wxIsSameDouble(m_matrix[2][1], 0.0) &&
-      wxIsSameDouble(m_matrix[0][2], 0.0) &&
-      wxIsSameDouble(m_matrix[1][2], 0.0) );
+	return
+	    ( wxIsSameDouble(m_matrix[0][0], 1.0) &&
+	      wxIsSameDouble(m_matrix[1][1], 1.0) &&
+	      wxIsSameDouble(m_matrix[2][2], 1.0) &&
+	      wxIsSameDouble(m_matrix[1][0], 0.0) &&
+	      wxIsSameDouble(m_matrix[2][0], 0.0) &&
+	      wxIsSameDouble(m_matrix[0][1], 0.0) &&
+	      wxIsSameDouble(m_matrix[2][1], 0.0) &&
+	      wxIsSameDouble(m_matrix[0][2], 0.0) &&
+	      wxIsSameDouble(m_matrix[1][2], 0.0) );
 }
 
 // Calculates the determinant of a 2 x 2 matrix
 inline double wxCalculateDet(double a11, double a21, double a12, double a22)
 {
-    return a11 * a22 - a12 * a21;
+	return a11 * a22 - a12 * a21;
 }
 
 #endif // _WX_MATRIXH__

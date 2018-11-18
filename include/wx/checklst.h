@@ -24,34 +24,34 @@
 class WXDLLIMPEXP_CORE wxCheckListBoxBase : public wxListBox
 {
 public:
-    wxCheckListBoxBase() { }
+	wxCheckListBoxBase() { }
 
-    // check list box specific methods
-    virtual bool IsChecked(unsigned int item) const = 0;
-    virtual void Check(unsigned int item, bool check = true) = 0;
+	// check list box specific methods
+	virtual bool IsChecked(unsigned int item) const = 0;
+	virtual void Check(unsigned int item, bool check = true) = 0;
 
-    virtual unsigned int GetCheckedItems(wxArrayInt& checkedItems) const;
+	virtual unsigned int GetCheckedItems(wxArrayInt& checkedItems) const;
 
-    wxDECLARE_NO_COPY_CLASS(wxCheckListBoxBase);
+	wxDECLARE_NO_COPY_CLASS(wxCheckListBoxBase);
 };
 
 #if defined(__WXUNIVERSAL__)
-    #include "wx/univ/checklst.h"
+#include "wx/univ/checklst.h"
 #elif defined(__WXMSW__)
-    #include "wx/msw/checklst.h"
+#include "wx/msw/checklst.h"
 #elif defined(__WXMOTIF__)
-    #include "wx/motif/checklst.h"
+#include "wx/motif/checklst.h"
 #elif defined(__WXGTK20__)
-    #include "wx/gtk/checklst.h"
+#include "wx/gtk/checklst.h"
 #elif defined(__WXGTK__)
-    #include "wx/gtk1/checklst.h"
+#include "wx/gtk1/checklst.h"
 #elif defined(__WXMAC__)
-    #include "wx/osx/checklst.h"
+#include "wx/osx/checklst.h"
 #elif defined(__WXQT__)
-    #include "wx/qt/checklst.h"
+#include "wx/qt/checklst.h"
 #endif
 
 #endif // wxUSE_CHECKLISTBOX
 
 #endif
-    // _WX_CHECKLST_H_BASE_
+// _WX_CHECKLST_H_BASE_

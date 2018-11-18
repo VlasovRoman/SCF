@@ -16,13 +16,13 @@
 class WXDLLIMPEXP_CORE wxPrinterDC: public wxDC
 {
 public:
-    wxDECLARE_CLASS(wxPrinterDC);
+	wxDECLARE_CLASS(wxPrinterDC);
 
-    // Create a printer DC
-    wxPrinterDC(const wxString& driver, const wxString& device, const wxString& output, bool interactive = TRUE, wxPrintOrientation orientation = wxPORTRAIT);
+	// Create a printer DC
+	wxPrinterDC(const wxString& driver, const wxString& device, const wxString& output, bool interactive = TRUE, wxPrintOrientation orientation = wxPORTRAIT);
 
-    virtual ~wxPrinterDC();
+	virtual ~wxPrinterDC();
 };
 
 #endif
-    // _WX_DCPRINT_H_
+// _WX_DCPRINT_H_

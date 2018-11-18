@@ -21,29 +21,29 @@
 class WXDLLIMPEXP_CORE wxAffineMatrix2D : public wxAffineMatrix2DBase
 {
 public:
-    wxAffineMatrix2D() : m_11(1), m_12(0),
-                         m_21(0), m_22(1),
-                         m_tx(0), m_ty(0)
-    {
-    }
+	wxAffineMatrix2D() : m_11(1), m_12(0),
+		m_21(0), m_22(1),
+		m_tx(0), m_ty(0)
+	{
+	}
 
-    // Implement base class pure virtual methods.
-    virtual void Set(const wxMatrix2D& mat2D, const wxPoint2DDouble& tr) wxOVERRIDE;
-    virtual void Get(wxMatrix2D* mat2D, wxPoint2DDouble* tr) const wxOVERRIDE;
-    virtual void Concat(const wxAffineMatrix2DBase& t) wxOVERRIDE;
-    virtual bool Invert() wxOVERRIDE;
-    virtual bool IsIdentity() const wxOVERRIDE;
-    virtual bool IsEqual(const wxAffineMatrix2DBase& t) const wxOVERRIDE;
-    virtual void Translate(wxDouble dx, wxDouble dy) wxOVERRIDE;
-    virtual void Scale(wxDouble xScale, wxDouble yScale) wxOVERRIDE;
-    virtual void Rotate(wxDouble cRadians) wxOVERRIDE;
+	// Implement base class pure virtual methods.
+	virtual void Set(const wxMatrix2D& mat2D, const wxPoint2DDouble& tr) wxOVERRIDE;
+	virtual void Get(wxMatrix2D* mat2D, wxPoint2DDouble* tr) const wxOVERRIDE;
+	virtual void Concat(const wxAffineMatrix2DBase& t) wxOVERRIDE;
+	virtual bool Invert() wxOVERRIDE;
+	virtual bool IsIdentity() const wxOVERRIDE;
+	virtual bool IsEqual(const wxAffineMatrix2DBase& t) const wxOVERRIDE;
+	virtual void Translate(wxDouble dx, wxDouble dy) wxOVERRIDE;
+	virtual void Scale(wxDouble xScale, wxDouble yScale) wxOVERRIDE;
+	virtual void Rotate(wxDouble cRadians) wxOVERRIDE;
 
 protected:
-    virtual wxPoint2DDouble DoTransformPoint(const wxPoint2DDouble& p) const wxOVERRIDE;
-    virtual wxPoint2DDouble DoTransformDistance(const wxPoint2DDouble& p) const wxOVERRIDE;
+	virtual wxPoint2DDouble DoTransformPoint(const wxPoint2DDouble& p) const wxOVERRIDE;
+	virtual wxPoint2DDouble DoTransformDistance(const wxPoint2DDouble& p) const wxOVERRIDE;
 
 private:
-    wxDouble m_11, m_12, m_21, m_22, m_tx, m_ty;
+	wxDouble m_11, m_12, m_21, m_22, m_tx, m_ty;
 };
 
 #endif // wxUSE_GEOMETRY

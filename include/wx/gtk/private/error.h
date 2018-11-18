@@ -20,38 +20,47 @@
 class wxGtkError
 {
 public:
-    wxGtkError() { m_error = NULL; }
-    explicit wxGtkError(GError* error) { m_error = error; }
-    ~wxGtkError() { if ( m_error ) g_error_free(m_error); }
+	wxGtkError()
+	{
+		m_error = NULL;
+	}
+	explicit wxGtkError(GError* error)
+	{
+		m_error = error;
+	}
+	~wxGtkError()
+	{
+		if ( m_error ) g_error_free(m_error);
+	}
 
-    GError** Out()
-    {
-        // This would result in a GError leak.
-        wxASSERT_MSG( !m_error, wxS("Can't reuse the same object.") );
+	GError** Out()
+	{
+		// This would result in a GError leak.
+		wxASSERT_MSG( !m_error, wxS("Can't reuse the same object.") );
 
-        return &m_error;
-    }
+		return &m_error;
+	}
 
-    // Check if any error actually occurred.
-    operator bool() const
-    {
-        return m_error != NULL;
-    }
+	// Check if any error actually occurred.
+	operator bool() const
+	{
+		return m_error != NULL;
+	}
 
-    operator GError*() const
-    {
-        return m_error;
-    }
+	operator GError*() const
+	{
+		return m_error;
+	}
 
-    wxString GetMessage() const
-    {
-        return wxString::FromUTF8(m_error->message);
-    }
+	wxString GetMessage() const
+	{
+		return wxString::FromUTF8(m_error->message);
+	}
 
 private:
-    GError* m_error;
+	GError* m_error;
 
-    wxDECLARE_NO_COPY_CLASS(wxGtkError);
+	wxDECLARE_NO_COPY_CLASS(wxGtkError);
 };
 
 #endif // _WX_GTK_PRIVATE_ERROR_H_

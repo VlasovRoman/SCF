@@ -24,34 +24,34 @@ namespace wxMSWImpl
 class CustomDraw
 {
 public:
-    // Trivial default ctor needed for non-copyable class.
-    CustomDraw()
-    {
-    }
+	// Trivial default ctor needed for non-copyable class.
+	CustomDraw()
+	{
+	}
 
-    // Virtual dtor for the base class.
-    virtual ~CustomDraw()
-    {
-    }
+	// Virtual dtor for the base class.
+	virtual ~CustomDraw()
+	{
+	}
 
-    // Implementation of NM_CUSTOMDRAW handler, returns one of CDRF_XXX
-    // constants, possibly CDRF_DODEFAULT if custom drawing is not necessary.
-    LPARAM HandleCustomDraw(LPARAM lParam);
+	// Implementation of NM_CUSTOMDRAW handler, returns one of CDRF_XXX
+	// constants, possibly CDRF_DODEFAULT if custom drawing is not necessary.
+	LPARAM HandleCustomDraw(LPARAM lParam);
 
 private:
-    // Return true if we need custom drawing at all.
-    virtual bool HasCustomDrawnItems() const = 0;
+	// Return true if we need custom drawing at all.
+	virtual bool HasCustomDrawnItems() const = 0;
 
-    // Return the attribute to use for the given item, can return NULL if this
-    // item doesn't need to be custom-drawn.
-    virtual const wxItemAttr* GetItemAttr(DWORD_PTR dwItemSpec) const = 0;
+	// Return the attribute to use for the given item, can return NULL if this
+	// item doesn't need to be custom-drawn.
+	virtual const wxItemAttr* GetItemAttr(DWORD_PTR dwItemSpec) const = 0;
 
 
-    // Set the colours and font for the specified HDC, return CDRF_NEWFONT if
-    // the font was changed.
-    LPARAM HandleItemPrepaint(const wxItemAttr& attr, HDC hdc);
+	// Set the colours and font for the specified HDC, return CDRF_NEWFONT if
+	// the font was changed.
+	LPARAM HandleItemPrepaint(const wxItemAttr& attr, HDC hdc);
 
-    wxDECLARE_NO_COPY_CLASS(CustomDraw);
+	wxDECLARE_NO_COPY_CLASS(CustomDraw);
 };
 
 } // namespace wxMSWImpl

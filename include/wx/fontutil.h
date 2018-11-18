@@ -22,11 +22,11 @@
 #include "wx/font.h"        // for wxFont and wxFontEncoding
 
 #if defined(__WXMSW__)
-    #include "wx/msw/wrapwin.h"
+#include "wx/msw/wrapwin.h"
 #endif
 
 #if defined(__WXQT__)
-    #include <QtGui/QFont>
+#include <QtGui/QFont>
 #endif
 
 class WXDLLIMPEXP_FWD_BASE wxArrayString;
@@ -40,21 +40,21 @@ struct WXDLLIMPEXP_FWD_CORE wxNativeEncodingInfo;
 //     registry field) as we never use nor generate it anyhow
 enum wxXLFDField
 {
-    wxXLFD_FOUNDRY,     // adobe
-    wxXLFD_FAMILY,      // courier, times, ...
-    wxXLFD_WEIGHT,      // black, bold, demibold, medium, regular, light
-    wxXLFD_SLANT,       // r/i/o (roman/italique/oblique)
-    wxXLFD_SETWIDTH,    // condensed, expanded, ...
-    wxXLFD_ADDSTYLE,    // whatever - usually nothing
-    wxXLFD_PIXELSIZE,   // size in pixels
-    wxXLFD_POINTSIZE,   // size in points
-    wxXLFD_RESX,        // 72, 75, 100, ...
-    wxXLFD_RESY,
-    wxXLFD_SPACING,     // m/p/c (monospaced/proportional/character cell)
-    wxXLFD_AVGWIDTH,    // average width in 1/10 pixels
-    wxXLFD_REGISTRY,    // iso8859, rawin, koi8, ...
-    wxXLFD_ENCODING,    // 1, r, r, ...
-    wxXLFD_MAX
+	wxXLFD_FOUNDRY,     // adobe
+	wxXLFD_FAMILY,      // courier, times, ...
+	wxXLFD_WEIGHT,      // black, bold, demibold, medium, regular, light
+	wxXLFD_SLANT,       // r/i/o (roman/italique/oblique)
+	wxXLFD_SETWIDTH,    // condensed, expanded, ...
+	wxXLFD_ADDSTYLE,    // whatever - usually nothing
+	wxXLFD_PIXELSIZE,   // size in pixels
+	wxXLFD_POINTSIZE,   // size in points
+	wxXLFD_RESX,        // 72, 75, 100, ...
+	wxXLFD_RESY,
+	wxXLFD_SPACING,     // m/p/c (monospaced/proportional/character cell)
+	wxXLFD_AVGWIDTH,    // average width in 1/10 pixels
+	wxXLFD_REGISTRY,    // iso8859, rawin, koi8, ...
+	wxXLFD_ENCODING,    // 1, r, r, ...
+	wxXLFD_MAX
 };
 
 #endif // _WX_X_FONTLIKE
@@ -73,221 +73,239 @@ class WXDLLIMPEXP_CORE wxNativeFontInfo
 {
 public:
 #if wxUSE_PANGO
-    PangoFontDescription *description;
+	PangoFontDescription *description;
 
-    // Pango font description doesn't have these attributes, so we store them
-    // separately and handle them ourselves in {To,From}String() methods.
-    bool m_underlined;
-    bool m_strikethrough;
+	// Pango font description doesn't have these attributes, so we store them
+	// separately and handle them ourselves in {To,From}String() methods.
+	bool m_underlined;
+	bool m_strikethrough;
 #elif defined(_WX_X_FONTLIKE)
-    // the members can't be accessed directly as we only parse the
-    // xFontName on demand
+	// the members can't be accessed directly as we only parse the
+	// xFontName on demand
 private:
-    // the components of the XLFD
-    wxString     fontElements[wxXLFD_MAX];
+	// the components of the XLFD
+	wxString     fontElements[wxXLFD_MAX];
 
-    // the full XLFD
-    wxString     xFontName;
+	// the full XLFD
+	wxString     xFontName;
 
-    // true until SetXFontName() is called
-    bool         m_isDefault;
+	// true until SetXFontName() is called
+	bool         m_isDefault;
 
-    // return true if we have already initialized fontElements
-    inline bool HasElements() const;
+	// return true if we have already initialized fontElements
+	inline bool HasElements() const;
 
 public:
-    // init the elements from an XLFD, return true if ok
-    bool FromXFontName(const wxString& xFontName);
+	// init the elements from an XLFD, return true if ok
+	bool FromXFontName(const wxString& xFontName);
 
-    // return false if we were never initialized with a valid XLFD
-    bool IsDefault() const { return m_isDefault; }
+	// return false if we were never initialized with a valid XLFD
+	bool IsDefault() const
+	{
+		return m_isDefault;
+	}
 
-    // return the XLFD (using the fontElements if necessary)
-    wxString GetXFontName() const;
+	// return the XLFD (using the fontElements if necessary)
+	wxString GetXFontName() const;
 
-    // get the given XFLD component
-    wxString GetXFontComponent(wxXLFDField field) const;
+	// get the given XFLD component
+	wxString GetXFontComponent(wxXLFDField field) const;
 
-    // change the font component
-    void SetXFontComponent(wxXLFDField field, const wxString& value);
+	// change the font component
+	void SetXFontComponent(wxXLFDField field, const wxString& value);
 
-    // set the XFLD
-    void SetXFontName(const wxString& xFontName);
+	// set the XFLD
+	void SetXFontName(const wxString& xFontName);
 #elif defined(__WXMSW__)
-    wxNativeFontInfo(const LOGFONT& lf_) : lf(lf_) { }
+	wxNativeFontInfo(const LOGFONT& lf_) : lf(lf_) { }
 
-    LOGFONT      lf;
+	LOGFONT      lf;
 #elif defined(__WXOSX__)
 public:
-    wxNativeFontInfo(const wxNativeFontInfo& info) { Init(info); }
-    wxNativeFontInfo( int size,
-                  wxFontFamily family,
-                  wxFontStyle style,
-                  wxFontWeight weight,
-                  bool underlined,
-                  bool strikethrough,
-                  const wxString& faceName,
-                  wxFontEncoding encoding)
-    {
-        Init(size, family, style, weight,
-             underlined, strikethrough,
-             faceName, encoding);
-    }
+	wxNativeFontInfo(const wxNativeFontInfo& info)
+	{
+		Init(info);
+	}
+	wxNativeFontInfo( int size,
+	                  wxFontFamily family,
+	                  wxFontStyle style,
+	                  wxFontWeight weight,
+	                  bool underlined,
+	                  bool strikethrough,
+	                  const wxString& faceName,
+	                  wxFontEncoding encoding)
+	{
+		Init(size, family, style, weight,
+		     underlined, strikethrough,
+		     faceName, encoding);
+	}
 
-    ~wxNativeFontInfo() { Free(); }
+	~wxNativeFontInfo()
+	{
+		Free();
+	}
 
-    wxNativeFontInfo& operator=(const wxNativeFontInfo& info)
-    {
-        if (this != &info)
-        {
-            Free();
-            Init(info);
-        }
-        return *this;
-    }
+	wxNativeFontInfo& operator=(const wxNativeFontInfo& info)
+	{
+		if (this != &info)
+		{
+			Free();
+			Init(info);
+		}
+		return *this;
+	}
 
-    void Init(CTFontDescriptorRef descr);
-    void Init(const wxNativeFontInfo& info);
-    void Init(int size,
-                  wxFontFamily family,
-                  wxFontStyle style,
-                  wxFontWeight weight,
-                  bool underlined,
-                  bool strikethrough,
-                  const wxString& faceName ,
-                  wxFontEncoding encoding);
+	void Init(CTFontDescriptorRef descr);
+	void Init(const wxNativeFontInfo& info);
+	void Init(int size,
+	          wxFontFamily family,
+	          wxFontStyle style,
+	          wxFontWeight weight,
+	          bool underlined,
+	          bool strikethrough,
+	          const wxString& faceName,
+	          wxFontEncoding encoding);
 
-    void Free();
-    
-    static void UpdateNamesMap(const wxString& familyname, CTFontDescriptorRef descr);
-    static void UpdateNamesMap(const wxString& familyname, CTFontRef font);
+	void Free();
 
-    int           m_pointSize;
-    wxFontFamily  m_family;
-    wxFontStyle   m_style;
-    wxFontWeight  m_weight;
-    bool          m_underlined;
-    bool          m_strikethrough;
-    wxString      m_faceName;
-    wxFontEncoding m_encoding;
+	static void UpdateNamesMap(const wxString& familyname, CTFontDescriptorRef descr);
+	static void UpdateNamesMap(const wxString& familyname, CTFontRef font);
+
+	int           m_pointSize;
+	wxFontFamily  m_family;
+	wxFontStyle   m_style;
+	wxFontWeight  m_weight;
+	bool          m_underlined;
+	bool          m_strikethrough;
+	wxString      m_faceName;
+	wxFontEncoding m_encoding;
 public :
 #elif defined(__WXQT__)
-    QFont m_qtFont;
+	QFont m_qtFont;
 #else // other platforms
-    //
-    //  This is a generic implementation that should work on all ports
-    //  without specific support by the port.
-    //
-    #define wxNO_NATIVE_FONTINFO
+	//
+	//  This is a generic implementation that should work on all ports
+	//  without specific support by the port.
+	//
+#define wxNO_NATIVE_FONTINFO
 
-    int           pointSize;
-    wxFontFamily  family;
-    wxFontStyle   style;
-    wxFontWeight  weight;
-    bool          underlined;
-    bool          strikethrough;
-    wxString      faceName;
-    wxFontEncoding encoding;
+	int           pointSize;
+	wxFontFamily  family;
+	wxFontStyle   style;
+	wxFontWeight  weight;
+	bool          underlined;
+	bool          strikethrough;
+	wxString      faceName;
+	wxFontEncoding encoding;
 #endif // platforms
 
-    // default ctor (default copy ctor is ok)
-    wxNativeFontInfo() { Init(); }
+	// default ctor (default copy ctor is ok)
+	wxNativeFontInfo()
+	{
+		Init();
+	}
 
 #if wxUSE_PANGO
 private:
-    void Init(const wxNativeFontInfo& info);
-    void Free();
+	void Init(const wxNativeFontInfo& info);
+	void Free();
 
 public:
-    wxNativeFontInfo(const wxNativeFontInfo& info) { Init(info); }
-    ~wxNativeFontInfo() { Free(); }
+	wxNativeFontInfo(const wxNativeFontInfo& info)
+	{
+		Init(info);
+	}
+	~wxNativeFontInfo()
+	{
+		Free();
+	}
 
-    wxNativeFontInfo& operator=(const wxNativeFontInfo& info)
-    {
-        if (this != &info)
-        {
-            Free();
-            Init(info);
-        }
-        return *this;
-    }
+	wxNativeFontInfo& operator=(const wxNativeFontInfo& info)
+	{
+		if (this != &info)
+		{
+			Free();
+			Init(info);
+		}
+		return *this;
+	}
 #endif // wxUSE_PANGO
 
-    // reset to the default state
-    void Init();
+	// reset to the default state
+	void Init();
 
-    // init with the parameters of the given font
-    void InitFromFont(const wxFont& font)
-    {
+	// init with the parameters of the given font
+	void InitFromFont(const wxFont& font)
+	{
 #if wxUSE_PANGO
-        Init(*font.GetNativeFontInfo());
+		Init(*font.GetNativeFontInfo());
 #else
-        // translate all font parameters
-        SetStyle((wxFontStyle)font.GetStyle());
-        SetWeight((wxFontWeight)font.GetWeight());
-        SetUnderlined(font.GetUnderlined());
-        SetStrikethrough(font.GetStrikethrough());
+		// translate all font parameters
+		SetStyle((wxFontStyle)font.GetStyle());
+		SetWeight((wxFontWeight)font.GetWeight());
+		SetUnderlined(font.GetUnderlined());
+		SetStrikethrough(font.GetStrikethrough());
 #if defined(__WXMSW__)
-        if ( font.IsUsingSizeInPixels() )
-            SetPixelSize(font.GetPixelSize());
-        else
-            SetPointSize(font.GetPointSize());
+		if ( font.IsUsingSizeInPixels() )
+			SetPixelSize(font.GetPixelSize());
+		else
+			SetPointSize(font.GetPointSize());
 #else
-        SetPointSize(font.GetPointSize());
+		SetPointSize(font.GetPointSize());
 #endif
 
-        // set the family/facename
-        SetFamily((wxFontFamily)font.GetFamily());
-        const wxString& facename = font.GetFaceName();
-        if ( !facename.empty() )
-        {
-            SetFaceName(facename);
-        }
+		// set the family/facename
+		SetFamily((wxFontFamily)font.GetFamily());
+		const wxString& facename = font.GetFaceName();
+		if ( !facename.empty() )
+		{
+			SetFaceName(facename);
+		}
 
-        // deal with encoding now (it may override the font family and facename
-        // so do it after setting them)
-        SetEncoding(font.GetEncoding());
+		// deal with encoding now (it may override the font family and facename
+		// so do it after setting them)
+		SetEncoding(font.GetEncoding());
 #endif // !wxUSE_PANGO
-    }
+	}
 
-    // accessors and modifiers for the font elements
-    int GetPointSize() const;
-    wxSize GetPixelSize() const;
-    wxFontStyle GetStyle() const;
-    wxFontWeight GetWeight() const;
-    bool GetUnderlined() const;
-    bool GetStrikethrough() const;
-    wxString GetFaceName() const;
-    wxFontFamily GetFamily() const;
-    wxFontEncoding GetEncoding() const;
+	// accessors and modifiers for the font elements
+	int GetPointSize() const;
+	wxSize GetPixelSize() const;
+	wxFontStyle GetStyle() const;
+	wxFontWeight GetWeight() const;
+	bool GetUnderlined() const;
+	bool GetStrikethrough() const;
+	wxString GetFaceName() const;
+	wxFontFamily GetFamily() const;
+	wxFontEncoding GetEncoding() const;
 
-    void SetPointSize(int pointsize);
-    void SetPixelSize(const wxSize& pixelSize);
-    void SetStyle(wxFontStyle style);
-    void SetWeight(wxFontWeight weight);
-    void SetUnderlined(bool underlined);
-    void SetStrikethrough(bool strikethrough);
-    bool SetFaceName(const wxString& facename);
-    void SetFamily(wxFontFamily family);
-    void SetEncoding(wxFontEncoding encoding);
+	void SetPointSize(int pointsize);
+	void SetPixelSize(const wxSize& pixelSize);
+	void SetStyle(wxFontStyle style);
+	void SetWeight(wxFontWeight weight);
+	void SetUnderlined(bool underlined);
+	void SetStrikethrough(bool strikethrough);
+	bool SetFaceName(const wxString& facename);
+	void SetFamily(wxFontFamily family);
+	void SetEncoding(wxFontEncoding encoding);
 
-    // sets the first facename in the given array which is found
-    // to be valid. If no valid facename is given, sets the
-    // first valid facename returned by wxFontEnumerator::GetFacenames().
-    // Does not return a bool since it cannot fail.
-    void SetFaceName(const wxArrayString &facenames);
+	// sets the first facename in the given array which is found
+	// to be valid. If no valid facename is given, sets the
+	// first valid facename returned by wxFontEnumerator::GetFacenames().
+	// Does not return a bool since it cannot fail.
+	void SetFaceName(const wxArrayString &facenames);
 
 
-    // it is important to be able to serialize wxNativeFontInfo objects to be
-    // able to store them (in config file, for example)
-    bool FromString(const wxString& s);
-    wxString ToString() const;
+	// it is important to be able to serialize wxNativeFontInfo objects to be
+	// able to store them (in config file, for example)
+	bool FromString(const wxString& s);
+	wxString ToString() const;
 
-    // we also want to present the native font descriptions to the user in some
-    // human-readable form (it is not platform independent neither, but can
-    // hopefully be understood by the user)
-    bool FromUserString(const wxString& s);
-    wxString ToUserString() const;
+	// we also want to present the native font descriptions to the user in some
+	// human-readable form (it is not platform independent neither, but can
+	// hopefully be understood by the user)
+	bool FromUserString(const wxString& s);
+	wxString ToUserString() const;
 };
 
 // ----------------------------------------------------------------------------
@@ -298,7 +316,7 @@ public:
 // returning true if an (exact) macth could be found, false otherwise (without
 // attempting any substitutions)
 WXDLLIMPEXP_CORE bool wxGetNativeFontEncoding(wxFontEncoding encoding,
-                                              wxNativeEncodingInfo *info);
+        wxNativeEncodingInfo *info);
 
 // test for the existence of the font described by this facename/encoding,
 // return true if such font(s) exist, false otherwise
@@ -309,7 +327,7 @@ WXDLLIMPEXP_CORE bool wxTestFontEncoding(const wxNativeEncodingInfo& info);
 // ----------------------------------------------------------------------------
 
 #ifdef _WX_X_FONTLIKE
-    #include "wx/unix/fontutil.h"
+#include "wx/unix/fontutil.h"
 #endif // X || GDK
 
 #endif // _WX_FONTUTIL_H_

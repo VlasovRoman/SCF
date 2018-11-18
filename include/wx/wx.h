@@ -97,14 +97,14 @@
 // bloating the PCH and (worse) rebuilding the entire library when it changes
 // when building the library itself
 #ifndef WXBUILDING
-    #include "wx/mdi.h"
+#include "wx/mdi.h"
 #endif
 
 // always include, even if !wxUSE_VALIDATORS because we need wxDefaultValidator
 #include "wx/validate.h"
 
 #if wxUSE_VALIDATORS
-    #include "wx/valtext.h"
+#include "wx/valtext.h"
 #endif // wxUSE_VALIDATORS
 
 #endif // wxUSE_GUI

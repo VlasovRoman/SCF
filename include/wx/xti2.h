@@ -23,41 +23,41 @@
 
 class WXDLLIMPEXP_BASE wxDynamicObject : public wxObject
 {
-    friend class WXDLLIMPEXP_FWD_BASE wxDynamicClassInfo ;
+	friend class WXDLLIMPEXP_FWD_BASE wxDynamicClassInfo ;
 public:
-    // instantiates this object with an instance of its superclass
-    wxDynamicObject(wxObject* superClassInstance, const wxDynamicClassInfo *info) ;
-    virtual ~wxDynamicObject();
+	// instantiates this object with an instance of its superclass
+	wxDynamicObject(wxObject* superClassInstance, const wxDynamicClassInfo *info) ;
+	virtual ~wxDynamicObject();
 
-    void SetProperty (const wxChar *propertyName, const wxAny &value);
-    wxAny GetProperty (const wxChar *propertyName) const ;
+	void SetProperty (const wxChar *propertyName, const wxAny &value);
+	wxAny GetProperty (const wxChar *propertyName) const ;
 
-    // get the runtime identity of this object
-    wxClassInfo *GetClassInfo() const
-    {
+	// get the runtime identity of this object
+	wxClassInfo *GetClassInfo() const
+	{
 #ifdef _MSC_VER
-        return (wxClassInfo*) m_classInfo;
+		return (wxClassInfo*) m_classInfo;
 #else
-        wxDynamicClassInfo *nonconst = const_cast<wxDynamicClassInfo *>(m_classInfo);
-        return static_cast<wxClassInfo *>(nonconst);
+		wxDynamicClassInfo *nonconst = const_cast<wxDynamicClassInfo *>(m_classInfo);
+		return static_cast<wxClassInfo *>(nonconst);
 #endif
-    }
+	}
 
-    wxObject* GetSuperClassInstance() const
-    {
-        return m_superClassInstance ;
-    }
+	wxObject* GetSuperClassInstance() const
+	{
+		return m_superClassInstance ;
+	}
 private :
-    // removes an existing runtime-property
-    void RemoveProperty( const wxChar *propertyName ) ;
+	// removes an existing runtime-property
+	void RemoveProperty( const wxChar *propertyName ) ;
 
-    // renames an existing runtime-property
-    void RenameProperty( const wxChar *oldPropertyName , const wxChar *newPropertyName ) ;
+	// renames an existing runtime-property
+	void RenameProperty( const wxChar *oldPropertyName, const wxChar *newPropertyName ) ;
 
-    wxObject *m_superClassInstance ;
-    const wxDynamicClassInfo *m_classInfo;
-    struct wxDynamicObjectInternal;
-    wxDynamicObjectInternal *m_data;
+	wxObject *m_superClassInstance ;
+	const wxDynamicClassInfo *m_classInfo;
+	struct wxDynamicObjectInternal;
+	wxDynamicObjectInternal *m_data;
 };
 
 // ----------------------------------------------------------------------------
@@ -92,7 +92,7 @@ private :
 
 #define _DEFAULT_CONSTRUCTOR(name)                                          \
 wxObject* wxConstructorFor##name()                                          \
-{ return new name; }                                                        
+{ return new name; }
 
 #define _DEFAULT_CONVERTERS(name)                                          \
 wxObject* wxVariantOfPtrToObjectConverter##name ( const wxAny &data )        \
@@ -258,34 +258,40 @@ template<typename T>
 void wxStringWriteValue( wxString &s, const T &data);
 
 template<typename T>
-void wxToStringConverter( const wxAny &v, wxString &s ) 
-{ wxStringWriteValue(s, v.As<T>()); }
+void wxToStringConverter( const wxAny &v, wxString &s )
+{
+	wxStringWriteValue(s, v.As<T>());
+}
 
 template<typename T>
-void wxFromStringConverter( const wxString &s, wxAny &v) 
-{ T d; wxStringReadValue(s, d); v = wxAny(d); }
+void wxFromStringConverter( const wxString &s, wxAny &v)
+{
+	T d;
+	wxStringReadValue(s, d);
+	v = wxAny(d);
+}
 
 // --------------------------------------------------------------------------
 // Collection Support
 // --------------------------------------------------------------------------
 
-template<typename iter, typename collection_t > void wxListCollectionToAnyList( 
-                                                                               const collection_t& coll, wxAnyList &value )
+template<typename iter, typename collection_t > void wxListCollectionToAnyList(
+    const collection_t& coll, wxAnyList &value )
 {
-    for ( iter current = coll.GetFirst(); current; 
-         current = current->GetNext() )
-    {
-        value.Append( new wxAny(current->GetData()) );
-    }
+	for ( iter current = coll.GetFirst(); current;
+	        current = current->GetNext() )
+	{
+		value.Append( new wxAny(current->GetData()) );
+	}
 }
 
-template<typename collection_t> void wxArrayCollectionToVariantArray( 
-                                                                     const collection_t& coll, wxAnyList &value )
+template<typename collection_t> void wxArrayCollectionToVariantArray(
+    const collection_t& coll, wxAnyList &value )
 {
-    for( size_t i = 0; i < coll.GetCount(); i++ )
-    {
-        value.Append( new wxAny(coll[i]) );
-    }
+	for( size_t i = 0; i < coll.GetCount(); i++ )
+	{
+		value.Append( new wxAny(coll[i]) );
+	}
 }
 
 #endif

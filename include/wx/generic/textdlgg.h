@@ -36,59 +36,65 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxGetPasswordFromUserPromptStr[];
 class WXDLLIMPEXP_CORE wxTextEntryDialog : public wxDialog
 {
 public:
-    wxTextEntryDialog()
-    {
-        m_textctrl = NULL;
-    }
+	wxTextEntryDialog()
+	{
+		m_textctrl = NULL;
+	}
 
-    wxTextEntryDialog(wxWindow *parent,
-                      const wxString& message,
-                      const wxString& caption = wxGetTextFromUserPromptStr,
-                      const wxString& value = wxEmptyString,
-                      long style = wxTextEntryDialogStyle,
-                      const wxPoint& pos = wxDefaultPosition)
-    {
-        Create(parent, message, caption, value, style, pos);
-    }
+	wxTextEntryDialog(wxWindow *parent,
+	                  const wxString& message,
+	                  const wxString& caption = wxGetTextFromUserPromptStr,
+	                  const wxString& value = wxEmptyString,
+	                  long style = wxTextEntryDialogStyle,
+	                  const wxPoint& pos = wxDefaultPosition)
+	{
+		Create(parent, message, caption, value, style, pos);
+	}
 
-    bool Create(wxWindow *parent,
-                const wxString& message,
-                const wxString& caption = wxGetTextFromUserPromptStr,
-                const wxString& value = wxEmptyString,
-                long style = wxTextEntryDialogStyle,
-                const wxPoint& pos = wxDefaultPosition);
+	bool Create(wxWindow *parent,
+	            const wxString& message,
+	            const wxString& caption = wxGetTextFromUserPromptStr,
+	            const wxString& value = wxEmptyString,
+	            long style = wxTextEntryDialogStyle,
+	            const wxPoint& pos = wxDefaultPosition);
 
-    void SetValue(const wxString& val);
-    wxString GetValue() const { return m_value; }
+	void SetValue(const wxString& val);
+	wxString GetValue() const
+	{
+		return m_value;
+	}
 
-    void SetMaxLength(unsigned long len);
+	void SetMaxLength(unsigned long len);
 
-    void ForceUpper();
+	void ForceUpper();
 
 #if wxUSE_VALIDATORS
-    void SetTextValidator( const wxTextValidator& validator );
+	void SetTextValidator( const wxTextValidator& validator );
 #if WXWIN_COMPATIBILITY_2_8
-    wxDEPRECATED( void SetTextValidator( long style ) );
+	wxDEPRECATED( void SetTextValidator( long style ) );
 #endif
-    void SetTextValidator( wxTextValidatorStyle style = wxFILTER_NONE );
-    wxTextValidator* GetTextValidator() { return (wxTextValidator*)m_textctrl->GetValidator(); }
+	void SetTextValidator( wxTextValidatorStyle style = wxFILTER_NONE );
+	wxTextValidator* GetTextValidator()
+	{
+		return (wxTextValidator*)m_textctrl->GetValidator();
+	}
 #endif // wxUSE_VALIDATORS
 
-    virtual bool TransferDataToWindow() wxOVERRIDE;
-    virtual bool TransferDataFromWindow() wxOVERRIDE;
+	virtual bool TransferDataToWindow() wxOVERRIDE;
+	virtual bool TransferDataFromWindow() wxOVERRIDE;
 
-    // implementation only
-    void OnOK(wxCommandEvent& event);
+	// implementation only
+	void OnOK(wxCommandEvent& event);
 
 protected:
-    wxTextCtrl *m_textctrl;
-    wxString    m_value;
-    long        m_dialogStyle;
+	wxTextCtrl *m_textctrl;
+	wxString    m_value;
+	long        m_dialogStyle;
 
 private:
-    wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS(wxTextEntryDialog);
-    wxDECLARE_NO_COPY_CLASS(wxTextEntryDialog);
+	wxDECLARE_EVENT_TABLE();
+	wxDECLARE_DYNAMIC_CLASS(wxTextEntryDialog);
+	wxDECLARE_NO_COPY_CLASS(wxTextEntryDialog);
 };
 
 // ----------------------------------------------------------------------------
@@ -98,28 +104,28 @@ private:
 class WXDLLIMPEXP_CORE wxPasswordEntryDialog : public wxTextEntryDialog
 {
 public:
-    wxPasswordEntryDialog() { }
-    wxPasswordEntryDialog(wxWindow *parent,
-                      const wxString& message,
-                      const wxString& caption = wxGetPasswordFromUserPromptStr,
-                      const wxString& value = wxEmptyString,
-                      long style = wxTextEntryDialogStyle,
-                      const wxPoint& pos = wxDefaultPosition)
-    {
-        Create(parent, message, caption, value, style, pos);
-    }
+	wxPasswordEntryDialog() { }
+	wxPasswordEntryDialog(wxWindow *parent,
+	                      const wxString& message,
+	                      const wxString& caption = wxGetPasswordFromUserPromptStr,
+	                      const wxString& value = wxEmptyString,
+	                      long style = wxTextEntryDialogStyle,
+	                      const wxPoint& pos = wxDefaultPosition)
+	{
+		Create(parent, message, caption, value, style, pos);
+	}
 
-    bool Create(wxWindow *parent,
-                const wxString& message,
-                const wxString& caption = wxGetPasswordFromUserPromptStr,
-                const wxString& value = wxEmptyString,
-                long style = wxTextEntryDialogStyle,
-                const wxPoint& pos = wxDefaultPosition);
+	bool Create(wxWindow *parent,
+	            const wxString& message,
+	            const wxString& caption = wxGetPasswordFromUserPromptStr,
+	            const wxString& value = wxEmptyString,
+	            long style = wxTextEntryDialogStyle,
+	            const wxPoint& pos = wxDefaultPosition);
 
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxPasswordEntryDialog);
-    wxDECLARE_NO_COPY_CLASS(wxPasswordEntryDialog);
+	wxDECLARE_DYNAMIC_CLASS(wxPasswordEntryDialog);
+	wxDECLARE_NO_COPY_CLASS(wxPasswordEntryDialog);
 };
 
 // ----------------------------------------------------------------------------
@@ -127,23 +133,23 @@ private:
 // ----------------------------------------------------------------------------
 
 WXDLLIMPEXP_CORE wxString
-    wxGetTextFromUser(const wxString& message,
-                    const wxString& caption = wxGetTextFromUserPromptStr,
-                    const wxString& default_value = wxEmptyString,
-                    wxWindow *parent = NULL,
-                    wxCoord x = wxDefaultCoord,
-                    wxCoord y = wxDefaultCoord,
-                    bool centre = true);
+wxGetTextFromUser(const wxString& message,
+                  const wxString& caption = wxGetTextFromUserPromptStr,
+                  const wxString& default_value = wxEmptyString,
+                  wxWindow *parent = NULL,
+                  wxCoord x = wxDefaultCoord,
+                  wxCoord y = wxDefaultCoord,
+                  bool centre = true);
 
 WXDLLIMPEXP_CORE wxString
-    wxGetPasswordFromUser(const wxString& message,
-                        const wxString& caption = wxGetPasswordFromUserPromptStr,
-                        const wxString& default_value = wxEmptyString,
-                        wxWindow *parent = NULL,
-                        wxCoord x = wxDefaultCoord,
-                        wxCoord y = wxDefaultCoord,
-                        bool centre = true);
+wxGetPasswordFromUser(const wxString& message,
+                      const wxString& caption = wxGetPasswordFromUserPromptStr,
+                      const wxString& default_value = wxEmptyString,
+                      wxWindow *parent = NULL,
+                      wxCoord x = wxDefaultCoord,
+                      wxCoord y = wxDefaultCoord,
+                      bool centre = true);
 
 #endif
-    // wxUSE_TEXTDLG
+// wxUSE_TEXTDLG
 #endif // _WX_TEXTDLGG_H_

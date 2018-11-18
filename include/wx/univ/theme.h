@@ -29,50 +29,53 @@ struct WXDLLIMPEXP_FWD_CORE wxThemeInfo;
 class WXDLLIMPEXP_CORE wxTheme
 {
 public:
-    // static methods
-    // --------------
+	// static methods
+	// --------------
 
-    // create the default theme
-    static bool CreateDefault();
+	// create the default theme
+	static bool CreateDefault();
 
-    // create the theme by name (will return NULL if not found)
-    static wxTheme *Create(const wxString& name);
+	// create the theme by name (will return NULL if not found)
+	static wxTheme *Create(const wxString& name);
 
-    // change the current scheme
-    static wxTheme *Set(wxTheme *theme);
+	// change the current scheme
+	static wxTheme *Set(wxTheme *theme);
 
-    // get the current theme (never NULL)
-    static wxTheme *Get() { return ms_theme; }
+	// get the current theme (never NULL)
+	static wxTheme *Get()
+	{
+		return ms_theme;
+	}
 
-    // the theme methods
-    // -----------------
+	// the theme methods
+	// -----------------
 
-    // get the renderer implementing all the control-drawing operations in
-    // this theme
-    virtual wxRenderer *GetRenderer() = 0;
+	// get the renderer implementing all the control-drawing operations in
+	// this theme
+	virtual wxRenderer *GetRenderer() = 0;
 
-    // get the art provider to be used together with this theme
-    virtual wxArtProvider *GetArtProvider() = 0;
+	// get the art provider to be used together with this theme
+	virtual wxArtProvider *GetArtProvider() = 0;
 
-    // get the input handler of the given type, forward to the standard one
-    virtual wxInputHandler *GetInputHandler(const wxString& handlerType,
-                                            wxInputConsumer *consumer) = 0;
+	// get the input handler of the given type, forward to the standard one
+	virtual wxInputHandler *GetInputHandler(const wxString& handlerType,
+	                                        wxInputConsumer *consumer) = 0;
 
-    // get the colour scheme for the control with this name
-    virtual wxColourScheme *GetColourScheme() = 0;
+	// get the colour scheme for the control with this name
+	virtual wxColourScheme *GetColourScheme() = 0;
 
-    // implementation only from now on
-    // -------------------------------
+	// implementation only from now on
+	// -------------------------------
 
-    virtual ~wxTheme();
+	virtual ~wxTheme();
 
 private:
-    // the list of descriptions of all known themes
-    static wxThemeInfo *ms_allThemes;
+	// the list of descriptions of all known themes
+	static wxThemeInfo *ms_allThemes;
 
-    // the current theme
-    static wxTheme *ms_theme;
-    friend struct wxThemeInfo;
+	// the current theme
+	static wxTheme *ms_theme;
+	friend struct wxThemeInfo;
 };
 
 // ----------------------------------------------------------------------------
@@ -85,22 +88,22 @@ private:
 class WXDLLIMPEXP_CORE wxDelegateTheme : public wxTheme
 {
 public:
-    wxDelegateTheme(const wxString& theme);
-    virtual ~wxDelegateTheme();
+	wxDelegateTheme(const wxString& theme);
+	virtual ~wxDelegateTheme();
 
-    virtual wxRenderer *GetRenderer();
-    virtual wxArtProvider *GetArtProvider();
-    virtual wxInputHandler *GetInputHandler(const wxString& control,
-                                            wxInputConsumer *consumer);
-    virtual wxColourScheme *GetColourScheme();
+	virtual wxRenderer *GetRenderer();
+	virtual wxArtProvider *GetArtProvider();
+	virtual wxInputHandler *GetInputHandler(const wxString& control,
+	                                        wxInputConsumer *consumer);
+	virtual wxColourScheme *GetColourScheme();
 
 protected:
-    // gets or creates theme and sets m_theme to point to it,
-    // returns true on success
-    bool GetOrCreateTheme();
+	// gets or creates theme and sets m_theme to point to it,
+	// returns true on success
+	bool GetOrCreateTheme();
 
-    wxString    m_themeName;
-    wxTheme    *m_theme;
+	wxString    m_themeName;
+	wxTheme    *m_theme;
 };
 
 // ----------------------------------------------------------------------------
@@ -109,19 +112,19 @@ protected:
 
 struct WXDLLIMPEXP_CORE wxThemeInfo
 {
-    typedef wxTheme *(*Constructor)();
+	typedef wxTheme *(*Constructor)();
 
-    // theme name and (user readable) description
-    wxString name, desc;
+	// theme name and (user readable) description
+	wxString name, desc;
 
-    // the function to create a theme object
-    Constructor ctor;
+	// the function to create a theme object
+	Constructor ctor;
 
-    // next node in the linked list or NULL
-    wxThemeInfo *next;
+	// next node in the linked list or NULL
+	wxThemeInfo *next;
 
-    // constructor for the struct itself
-    wxThemeInfo(Constructor ctor, const wxString& name, const wxString& desc);
+	// constructor for the struct itself
+	wxThemeInfo(Constructor ctor, const wxString& name, const wxString& desc);
 };
 
 // ----------------------------------------------------------------------------
@@ -162,40 +165,40 @@ struct WXDLLIMPEXP_CORE wxThemeInfo
 // ----------------------------------------------------------------------------
 
 #if wxUSE_ALL_THEMES
-    #undef  wxUSE_THEME_WIN32
-    #define wxUSE_THEME_WIN32  1
-    #undef  wxUSE_THEME_GTK
-    #define wxUSE_THEME_GTK    1
-    #undef  wxUSE_THEME_MONO
-    #define wxUSE_THEME_MONO   1
-    #undef  wxUSE_THEME_METAL
-    #define wxUSE_THEME_METAL  1
+#undef  wxUSE_THEME_WIN32
+#define wxUSE_THEME_WIN32  1
+#undef  wxUSE_THEME_GTK
+#define wxUSE_THEME_GTK    1
+#undef  wxUSE_THEME_MONO
+#define wxUSE_THEME_MONO   1
+#undef  wxUSE_THEME_METAL
+#define wxUSE_THEME_METAL  1
 #endif // wxUSE_ALL_THEMES
 
 // determine the default theme to use:
 #if defined(__WXGTK__) && wxUSE_THEME_GTK
-    #define wxUNIV_DEFAULT_THEME gtk
+#define wxUNIV_DEFAULT_THEME gtk
 #elif defined(__WXDFB__) && wxUSE_THEME_MONO
-    // use mono theme for DirectFB port because it cannot correctly
-    // render neither win32 nor gtk themes yet:
-    #define wxUNIV_DEFAULT_THEME mono
+// use mono theme for DirectFB port because it cannot correctly
+// render neither win32 nor gtk themes yet:
+#define wxUNIV_DEFAULT_THEME mono
 #endif
 
 // if no theme was picked, get any theme compiled in (sorted by
 // quality/completeness of the theme):
 #ifndef wxUNIV_DEFAULT_THEME
-    #if wxUSE_THEME_GTK
-        #define wxUNIV_DEFAULT_THEME gtk
-    #elif wxUSE_THEME_WIN32
-        #define wxUNIV_DEFAULT_THEME win32
-    #elif wxUSE_THEME_MONO
-        #define wxUNIV_DEFAULT_THEME mono
-    #endif
-    // If nothing matches, no themes are compiled and the app must provide
-    // some theme itself
-    // (note that wxUSE_THEME_METAL depends on win32 theme, so we don't have to
-    // try it)
-    //
+#if wxUSE_THEME_GTK
+#define wxUNIV_DEFAULT_THEME gtk
+#elif wxUSE_THEME_WIN32
+#define wxUNIV_DEFAULT_THEME win32
+#elif wxUSE_THEME_MONO
+#define wxUNIV_DEFAULT_THEME mono
+#endif
+// If nothing matches, no themes are compiled and the app must provide
+// some theme itself
+// (note that wxUSE_THEME_METAL depends on win32 theme, so we don't have to
+// try it)
+//
 #endif // !wxUNIV_DEFAULT_THEME
 
 #endif // _WX_UNIV_THEME_H_

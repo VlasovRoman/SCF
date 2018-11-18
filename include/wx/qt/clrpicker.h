@@ -22,27 +22,27 @@
 class WXDLLIMPEXP_CORE wxColourPickerWidget : public wxGenericColourButton
 {
 public:
-    wxColourPickerWidget();
-    wxColourPickerWidget(wxWindow *parent,
-                   wxWindowID id,
-                   const wxColour& initial = *wxBLACK,
-                   const wxPoint& pos = wxDefaultPosition,
-                   const wxSize& size = wxDefaultSize,
-                   long style = wxCLRBTN_DEFAULT_STYLE,
-                   const wxValidator& validator = wxDefaultValidator,
-                   const wxString& name = wxColourPickerWidgetNameStr);
+	wxColourPickerWidget();
+	wxColourPickerWidget(wxWindow *parent,
+	                     wxWindowID id,
+	                     const wxColour& initial = *wxBLACK,
+	                     const wxPoint& pos = wxDefaultPosition,
+	                     const wxSize& size = wxDefaultSize,
+	                     long style = wxCLRBTN_DEFAULT_STYLE,
+	                     const wxValidator& validator = wxDefaultValidator,
+	                     const wxString& name = wxColourPickerWidgetNameStr);
 
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxColour& initial = *wxBLACK,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxCLRBTN_DEFAULT_STYLE,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxColourPickerWidgetNameStr);
+	bool Create(wxWindow *parent,
+	            wxWindowID id,
+	            const wxColour& initial = *wxBLACK,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxCLRBTN_DEFAULT_STYLE,
+	            const wxValidator& validator = wxDefaultValidator,
+	            const wxString& name = wxColourPickerWidgetNameStr);
 
 protected:
-    virtual void UpdateColour();
+	virtual void UpdateColour();
 
 private:
 };

@@ -15,40 +15,43 @@
 class WXDLLIMPEXP_CORE wxAppProgressIndicatorBase
 {
 public:
-    wxAppProgressIndicatorBase() {}
-    virtual ~wxAppProgressIndicatorBase() {}
+	wxAppProgressIndicatorBase() {}
+	virtual ~wxAppProgressIndicatorBase() {}
 
-    virtual bool IsAvailable() const = 0;
+	virtual bool IsAvailable() const = 0;
 
-    virtual void SetValue(int value) = 0;
-    virtual void SetRange(int range) = 0;
-    virtual void Pulse() = 0;
-    virtual void Reset() = 0;
+	virtual void SetValue(int value) = 0;
+	virtual void SetRange(int range) = 0;
+	virtual void Pulse() = 0;
+	virtual void Reset() = 0;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxAppProgressIndicatorBase);
+	wxDECLARE_NO_COPY_CLASS(wxAppProgressIndicatorBase);
 };
 
 #if defined(__WXMSW__) && wxUSE_TASKBARBUTTON
-    #include "wx/msw/appprogress.h"
+#include "wx/msw/appprogress.h"
 #elif defined(__WXOSX_COCOA__)
-    #include "wx/osx/appprogress.h"
+#include "wx/osx/appprogress.h"
 #else
-    class wxAppProgressIndicator : public wxAppProgressIndicatorBase
-    {
-    public:
-        wxAppProgressIndicator(wxWindow* WXUNUSED(parent) = NULL,
-                               int WXUNUSED(maxValue) = 100)
-        {
-        }
+class wxAppProgressIndicator : public wxAppProgressIndicatorBase
+{
+public:
+	wxAppProgressIndicator(wxWindow* WXUNUSED(parent) = NULL,
+	                       int WXUNUSED(maxValue) = 100)
+	{
+	}
 
-        virtual bool IsAvailable() const wxOVERRIDE { return false; }
+	virtual bool IsAvailable() const wxOVERRIDE
+	{
+		return false;
+	}
 
-        virtual void SetValue(int WXUNUSED(value)) wxOVERRIDE { }
-        virtual void SetRange(int WXUNUSED(range)) wxOVERRIDE { }
-        virtual void Pulse() wxOVERRIDE { }
-        virtual void Reset() wxOVERRIDE { }
-    };
+	virtual void SetValue(int WXUNUSED(value)) wxOVERRIDE { }
+	virtual void SetRange(int WXUNUSED(range)) wxOVERRIDE { }
+	virtual void Pulse() wxOVERRIDE { }
+	virtual void Reset() wxOVERRIDE { }
+};
 #endif
 
 #endif  // _WX_APPPROG_H_

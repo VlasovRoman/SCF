@@ -19,20 +19,20 @@ class wxNonOwnedWindowShapeImpl;
 class WXDLLIMPEXP_CORE wxNonOwnedWindow : public wxNonOwnedWindowBase
 {
 public:
-    wxNonOwnedWindow();
-    virtual ~wxNonOwnedWindow();
+	wxNonOwnedWindow();
+	virtual ~wxNonOwnedWindow();
 
 protected:
-    virtual bool DoClearShape() wxOVERRIDE;
-    virtual bool DoSetRegionShape(const wxRegion& region) wxOVERRIDE;
+	virtual bool DoClearShape() wxOVERRIDE;
+	virtual bool DoSetRegionShape(const wxRegion& region) wxOVERRIDE;
 #if wxUSE_GRAPHICS_CONTEXT
-    virtual bool DoSetPathShape(const wxGraphicsPath& path) wxOVERRIDE;
+	virtual bool DoSetPathShape(const wxGraphicsPath& path) wxOVERRIDE;
 
 private:
-    wxNonOwnedWindowShapeImpl* m_shapeImpl;
+	wxNonOwnedWindowShapeImpl* m_shapeImpl;
 #endif // wxUSE_GRAPHICS_CONTEXT
 
-    wxDECLARE_NO_COPY_CLASS(wxNonOwnedWindow);
+	wxDECLARE_NO_COPY_CLASS(wxNonOwnedWindow);
 };
 
 #endif // _WX_MSW_NONOWNEDWND_H_

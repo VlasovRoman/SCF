@@ -22,11 +22,17 @@ extern long WXDLLIMPEXP_BASE wxGetLocalTime();
 extern long WXDLLIMPEXP_BASE wxGetUTCTime();
 
 #if wxUSE_LONGLONG
-    typedef wxLongLong wxMilliClock_t;
-    inline long wxMilliClockToLong(wxLongLong ll) { return ll.ToLong(); }
+typedef wxLongLong wxMilliClock_t;
+inline long wxMilliClockToLong(wxLongLong ll)
+{
+	return ll.ToLong();
+}
 #else
-    typedef double wxMilliClock_t;
-    inline long wxMilliClockToLong(double d) { return wx_truncate_cast(long, d); }
+typedef double wxMilliClock_t;
+inline long wxMilliClockToLong(double d)
+{
+	return wx_truncate_cast(long, d);
+}
 #endif // wxUSE_LONGLONG
 
 // Get number of milliseconds since local time 00:00:00 Jan 1st 1970
@@ -45,11 +51,11 @@ wxLongLong WXDLLIMPEXP_BASE wxGetUTCTimeUSec();
 // on some really old systems gettimeofday() doesn't have the second argument,
 // define wxGetTimeOfDay() to hide this difference
 #ifdef HAVE_GETTIMEOFDAY
-    #ifdef WX_GETTIMEOFDAY_NO_TZ
-        #define wxGetTimeOfDay(tv)      gettimeofday(tv)
-    #else
-        #define wxGetTimeOfDay(tv)      gettimeofday((tv), NULL)
-    #endif
+#ifdef WX_GETTIMEOFDAY_NO_TZ
+#define wxGetTimeOfDay(tv)      gettimeofday(tv)
+#else
+#define wxGetTimeOfDay(tv)      gettimeofday((tv), NULL)
+#endif
 #endif // HAVE_GETTIMEOFDAY
 
 /* Two wrapper functions for thread safety */
@@ -58,7 +64,7 @@ wxLongLong WXDLLIMPEXP_BASE wxGetUTCTimeUSec();
 #else
 WXDLLIMPEXP_BASE struct tm *wxLocaltime_r(const time_t*, struct tm*);
 #if wxUSE_THREADS && !defined(__WINDOWS__)
-     // On Windows, localtime _is_ threadsafe!
+// On Windows, localtime _is_ threadsafe!
 #warning using pseudo thread-safe wrapper for localtime to emulate localtime_r
 #endif
 #endif
@@ -68,7 +74,7 @@ WXDLLIMPEXP_BASE struct tm *wxLocaltime_r(const time_t*, struct tm*);
 #else
 WXDLLIMPEXP_BASE struct tm *wxGmtime_r(const time_t*, struct tm*);
 #if wxUSE_THREADS && !defined(__WINDOWS__)
-     // On Windows, gmtime _is_ threadsafe!
+// On Windows, gmtime _is_ threadsafe!
 #warning using pseudo thread-safe wrapper for gmtime to emulate gmtime_r
 #endif
 #endif

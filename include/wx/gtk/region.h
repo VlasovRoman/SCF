@@ -20,74 +20,74 @@ typedef struct _cairo_region cairo_region_t;
 class WXDLLIMPEXP_CORE wxRegion : public wxRegionBase
 {
 public:
-    wxRegion() { }
+	wxRegion() { }
 
-    wxRegion( wxCoord x, wxCoord y, wxCoord w, wxCoord h )
-    {
-        InitRect(x, y, w, h);
-    }
+	wxRegion( wxCoord x, wxCoord y, wxCoord w, wxCoord h )
+	{
+		InitRect(x, y, w, h);
+	}
 
-    wxRegion( const wxPoint& topLeft, const wxPoint& bottomRight )
-    {
-        InitRect(topLeft.x, topLeft.y,
-                 bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
-    }
+	wxRegion( const wxPoint& topLeft, const wxPoint& bottomRight )
+	{
+		InitRect(topLeft.x, topLeft.y,
+		         bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
+	}
 
-    wxRegion( const wxRect& rect )
-    {
-        InitRect(rect.x, rect.y, rect.width, rect.height);
-    }
+	wxRegion( const wxRect& rect )
+	{
+		InitRect(rect.x, rect.y, rect.width, rect.height);
+	}
 
-    wxRegion( size_t n, const wxPoint *points,
-              wxPolygonFillMode fillStyle = wxODDEVEN_RULE );
+	wxRegion( size_t n, const wxPoint *points,
+	          wxPolygonFillMode fillStyle = wxODDEVEN_RULE );
 
 #if wxUSE_IMAGE
-    wxRegion( const wxBitmap& bmp)
-    {
-        Union(bmp);
-    }
-    wxRegion( const wxBitmap& bmp,
-              const wxColour& transColour, int tolerance = 0)
-    {
-        Union(bmp, transColour, tolerance);
-    }
+	wxRegion( const wxBitmap& bmp)
+	{
+		Union(bmp);
+	}
+	wxRegion( const wxBitmap& bmp,
+	          const wxColour& transColour, int tolerance = 0)
+	{
+		Union(bmp, transColour, tolerance);
+	}
 #endif // wxUSE_IMAGE
 
-    virtual ~wxRegion();
+	virtual ~wxRegion();
 
-    // wxRegionBase methods
-    virtual void Clear() wxOVERRIDE;
-    virtual bool IsEmpty() const wxOVERRIDE;
+	// wxRegionBase methods
+	virtual void Clear() wxOVERRIDE;
+	virtual bool IsEmpty() const wxOVERRIDE;
 
 #ifdef __WXGTK3__
-    cairo_region_t* GetRegion() const;
+	cairo_region_t* GetRegion() const;
 #else
-    wxRegion(const GdkRegion* region);
-    GdkRegion *GetRegion() const;
+	wxRegion(const GdkRegion* region);
+	GdkRegion *GetRegion() const;
 #endif
 
 protected:
-    virtual wxGDIRefData *CreateGDIRefData() const wxOVERRIDE;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const wxOVERRIDE;
+	virtual wxGDIRefData *CreateGDIRefData() const wxOVERRIDE;
+	virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const wxOVERRIDE;
 
-    // wxRegionBase pure virtuals
-    virtual bool DoIsEqual(const wxRegion& region) const wxOVERRIDE;
-    virtual bool DoGetBox(wxCoord& x, wxCoord& y, wxCoord& w, wxCoord& h) const wxOVERRIDE;
-    virtual wxRegionContain DoContainsPoint(wxCoord x, wxCoord y) const wxOVERRIDE;
-    virtual wxRegionContain DoContainsRect(const wxRect& rect) const wxOVERRIDE;
+	// wxRegionBase pure virtuals
+	virtual bool DoIsEqual(const wxRegion& region) const wxOVERRIDE;
+	virtual bool DoGetBox(wxCoord& x, wxCoord& y, wxCoord& w, wxCoord& h) const wxOVERRIDE;
+	virtual wxRegionContain DoContainsPoint(wxCoord x, wxCoord y) const wxOVERRIDE;
+	virtual wxRegionContain DoContainsRect(const wxRect& rect) const wxOVERRIDE;
 
-    virtual bool DoOffset(wxCoord x, wxCoord y) wxOVERRIDE;
-    virtual bool DoUnionWithRect(const wxRect& rect) wxOVERRIDE;
-    virtual bool DoUnionWithRegion(const wxRegion& region) wxOVERRIDE;
-    virtual bool DoIntersect(const wxRegion& region) wxOVERRIDE;
-    virtual bool DoSubtract(const wxRegion& region) wxOVERRIDE;
-    virtual bool DoXor(const wxRegion& region) wxOVERRIDE;
+	virtual bool DoOffset(wxCoord x, wxCoord y) wxOVERRIDE;
+	virtual bool DoUnionWithRect(const wxRect& rect) wxOVERRIDE;
+	virtual bool DoUnionWithRegion(const wxRegion& region) wxOVERRIDE;
+	virtual bool DoIntersect(const wxRegion& region) wxOVERRIDE;
+	virtual bool DoSubtract(const wxRegion& region) wxOVERRIDE;
+	virtual bool DoXor(const wxRegion& region) wxOVERRIDE;
 
-    // common part of ctors for a rectangle region
-    void InitRect(wxCoord x, wxCoord y, wxCoord w, wxCoord h);
+	// common part of ctors for a rectangle region
+	void InitRect(wxCoord x, wxCoord y, wxCoord w, wxCoord h);
 
 private:
-    wxDECLARE_DYNAMIC_CLASS(wxRegion);
+	wxDECLARE_DYNAMIC_CLASS(wxRegion);
 };
 
 // ----------------------------------------------------------------------------
@@ -97,42 +97,58 @@ private:
 class WXDLLIMPEXP_CORE wxRegionIterator: public wxObject
 {
 public:
-    wxRegionIterator();
-    wxRegionIterator(const wxRegion& region);
-    wxRegionIterator(const wxRegionIterator& ri) : wxObject(ri) { Init(); *this = ri; }
-    ~wxRegionIterator();
+	wxRegionIterator();
+	wxRegionIterator(const wxRegion& region);
+	wxRegionIterator(const wxRegionIterator& ri) : wxObject(ri)
+	{
+		Init();
+		*this = ri;
+	}
+	~wxRegionIterator();
 
-    wxRegionIterator& operator=(const wxRegionIterator& ri);
+	wxRegionIterator& operator=(const wxRegionIterator& ri);
 
-    void Reset() { m_current = 0u; }
-    void Reset(const wxRegion& region);
+	void Reset()
+	{
+		m_current = 0u;
+	}
+	void Reset(const wxRegion& region);
 
-    bool HaveRects() const;
-    operator bool () const { return HaveRects(); }
+	bool HaveRects() const;
+	operator bool () const
+	{
+		return HaveRects();
+	}
 
-    wxRegionIterator& operator ++ ();
-    wxRegionIterator operator ++ (int);
+	wxRegionIterator& operator ++ ();
+	wxRegionIterator operator ++ (int);
 
-    wxCoord GetX() const;
-    wxCoord GetY() const;
-    wxCoord GetW() const;
-    wxCoord GetWidth() const { return GetW(); }
-    wxCoord GetH() const;
-    wxCoord GetHeight() const { return GetH(); }
-    wxRect GetRect() const;
+	wxCoord GetX() const;
+	wxCoord GetY() const;
+	wxCoord GetW() const;
+	wxCoord GetWidth() const
+	{
+		return GetW();
+	}
+	wxCoord GetH() const;
+	wxCoord GetHeight() const
+	{
+		return GetH();
+	}
+	wxRect GetRect() const;
 
 private:
-    void Init();
-    void CreateRects( const wxRegion& r );
+	void Init();
+	void CreateRects( const wxRegion& r );
 
-    wxRegion m_region;
-    wxRect *m_rects;
-    int m_numRects;
-    int m_current;
+	wxRegion m_region;
+	wxRect *m_rects;
+	int m_numRects;
+	int m_current;
 
-    wxDECLARE_DYNAMIC_CLASS(wxRegionIterator);
+	wxDECLARE_DYNAMIC_CLASS(wxRegionIterator);
 };
 
 
 #endif
-        // _WX_GTK_REGION_H_
+// _WX_GTK_REGION_H_

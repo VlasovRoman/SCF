@@ -13,7 +13,7 @@
 #include "wx/preferences.h"
 
 #if wxUSE_TOOLBAR && defined(__WXOSX_COCOA__) && wxOSX_USE_NATIVE_TOOLBAR
-    #define wxHAS_PREF_EDITOR_NATIVE
+#define wxHAS_PREF_EDITOR_NATIVE
 #endif
 
 // ----------------------------------------------------------------------------
@@ -23,18 +23,18 @@
 class wxPreferencesEditorImpl
 {
 public:
-    // This is implemented in a platform-specific way.
-    static wxPreferencesEditorImpl* Create(const wxString& title);
+	// This is implemented in a platform-specific way.
+	static wxPreferencesEditorImpl* Create(const wxString& title);
 
-    // These methods simply mirror the public wxPreferencesEditor ones.
-    virtual void AddPage(wxPreferencesPage* page) = 0;
-    virtual void Show(wxWindow* parent) = 0;
-    virtual void Dismiss() = 0;
+	// These methods simply mirror the public wxPreferencesEditor ones.
+	virtual void AddPage(wxPreferencesPage* page) = 0;
+	virtual void Show(wxWindow* parent) = 0;
+	virtual void Dismiss() = 0;
 
-    virtual ~wxPreferencesEditorImpl() {}
+	virtual ~wxPreferencesEditorImpl() {}
 
 protected:
-    wxPreferencesEditorImpl() {}
+	wxPreferencesEditorImpl() {}
 };
 
 #endif // _WX_PRIVATE_PREFERENCES_H_

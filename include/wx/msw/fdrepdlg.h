@@ -18,44 +18,50 @@
 class WXDLLIMPEXP_CORE wxFindReplaceDialog : public wxFindReplaceDialogBase
 {
 public:
-    // ctors and such
-    wxFindReplaceDialog() { Init(); }
-    wxFindReplaceDialog(wxWindow *parent,
-                        wxFindReplaceData *data,
-                        const wxString &title,
-                        int style = 0);
+	// ctors and such
+	wxFindReplaceDialog()
+	{
+		Init();
+	}
+	wxFindReplaceDialog(wxWindow *parent,
+	                    wxFindReplaceData *data,
+	                    const wxString &title,
+	                    int style = 0);
 
-    bool Create(wxWindow *parent,
-                wxFindReplaceData *data,
-                const wxString &title,
-                int style = 0);
+	bool Create(wxWindow *parent,
+	            wxFindReplaceData *data,
+	            const wxString &title,
+	            int style = 0);
 
-    virtual ~wxFindReplaceDialog();
+	virtual ~wxFindReplaceDialog();
 
-    // implementation only from now on
+	// implementation only from now on
 
-    wxFindReplaceDialogImpl *GetImpl() const { return m_impl; }
+	wxFindReplaceDialogImpl *GetImpl() const
+	{
+		return m_impl;
+	}
 
-    // override some base class virtuals
-    virtual bool Show(bool show = true) wxOVERRIDE;
-    virtual void SetTitle( const wxString& title) wxOVERRIDE;
-    virtual wxString GetTitle() const wxOVERRIDE;
+	// override some base class virtuals
+	virtual bool Show(bool show = true) wxOVERRIDE;
+	virtual void SetTitle( const wxString& title) wxOVERRIDE;
+	virtual wxString GetTitle() const wxOVERRIDE;
 
 protected:
-    virtual void DoGetSize(int *width, int *height) const wxOVERRIDE;
-    virtual void DoGetClientSize(int *width, int *height) const wxOVERRIDE;
-    virtual void DoSetSize(int x, int y,
-                           int width, int height,
-                           int sizeFlags = wxSIZE_AUTO) wxOVERRIDE;
+	virtual void DoGetSize(int *width, int *height) const wxOVERRIDE;
+	virtual void DoGetClientSize(int *width, int *height) const wxOVERRIDE;
+	virtual void DoSetSize(int x, int y,
+	                       int width, int height,
+	                       int sizeFlags = wxSIZE_AUTO) wxOVERRIDE;
 
-    void Init();
+	void Init();
 
-    wxString                m_title;
+	wxString                m_title;
 
-    wxFindReplaceDialogImpl *m_impl;
+	wxFindReplaceDialogImpl *m_impl;
 
-    wxDECLARE_DYNAMIC_CLASS(wxFindReplaceDialog);
-    wxDECLARE_NO_COPY_CLASS(wxFindReplaceDialog);
+	wxDECLARE_DYNAMIC_CLASS(wxFindReplaceDialog);
+	wxDECLARE_NO_COPY_CLASS(wxFindReplaceDialog);
 };
 
 #endif // _WX_MSW_FDREPDLG_H_

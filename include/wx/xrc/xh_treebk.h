@@ -30,17 +30,17 @@ WX_DEFINE_USER_EXPORTED_ARRAY_SIZE_T(size_t, wxArrayTbkPageIndexes,
 // it cannot be greater than the previous page depth plus one
 class WXDLLIMPEXP_XRC wxTreebookXmlHandler : public wxXmlResourceHandler
 {
-    wxDECLARE_DYNAMIC_CLASS(wxTreebookXmlHandler);
+	wxDECLARE_DYNAMIC_CLASS(wxTreebookXmlHandler);
 
 public:
-    wxTreebookXmlHandler();
-    virtual wxObject *DoCreateResource() wxOVERRIDE;
-    virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
+	wxTreebookXmlHandler();
+	virtual wxObject *DoCreateResource() wxOVERRIDE;
+	virtual bool CanHandle(wxXmlNode *node) wxOVERRIDE;
 
 private:
-    wxTreebook *m_tbk;
-    wxArrayTbkPageIndexes m_treeContext;
-    bool m_isInside;
+	wxTreebook *m_tbk;
+	wxArrayTbkPageIndexes m_treeContext;
+	bool m_isInside;
 };
 
 

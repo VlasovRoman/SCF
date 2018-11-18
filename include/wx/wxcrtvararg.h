@@ -38,39 +38,39 @@
 
 #if defined(HAVE_VSNPRINTF) && !defined(HAVE_VSNPRINTF_DECL)
 #ifdef __cplusplus
-    extern "C"
+extern "C"
 #else
-    extern
+extern
 #endif
-    int vsnprintf(char *str, size_t size, const char *format, va_list ap);
+int vsnprintf(char *str, size_t size, const char *format, va_list ap);
 #endif /* !HAVE_VSNPRINTF_DECL */
 
 #if defined(HAVE_SNPRINTF) && !defined(HAVE_SNPRINTF_DECL)
 #ifdef __cplusplus
-    extern "C"
+extern "C"
 #else
-    extern
+extern
 #endif
-    int snprintf(char *str, size_t size, const char *format, ...);
+int snprintf(char *str, size_t size, const char *format, ...);
 #endif /* !HAVE_SNPRINTF_DECL */
 
 #if defined(HAVE_VSSCANF) && !defined(HAVE_VSSCANF_DECL)
 #ifdef __cplusplus
-    extern "C"
+extern "C"
 #else
-    extern
+extern
 #endif
-    int vsscanf(const char *str, const char *format, va_list ap);
+int vsscanf(const char *str, const char *format, va_list ap);
 #endif /* !HAVE_VSSCANF_DECL */
 
 /* Wrapper for vsnprintf if it's 3rd parameter is non-const. Note: the
  * same isn't done for snprintf below, the builtin wxSnprintf_ is used
  * instead since it's already a simple wrapper */
 #if defined __cplusplus && defined HAVE_BROKEN_VSNPRINTF_DECL
-    inline int wx_fixed_vsnprintf(char *str, size_t size, const char *format, va_list ap)
-    {
-        return vsnprintf(str, size, (char*)format, ap);
-    }
+inline int wx_fixed_vsnprintf(char *str, size_t size, const char *format, va_list ap)
+{
+	return vsnprintf(str, size, (char*)format, ap);
+}
 #endif
 
 #endif /* __UNIX__ */
@@ -82,106 +82,106 @@
    version 5.1 which we can use.
  */
 #ifdef __MINGW32__
-    #if defined(_STLPORT_VERSION) && _STLPORT_VERSION >= 0x510
-        #ifndef HAVE_VSWPRINTF
-            #define HAVE_VSWPRINTF
-        #endif
-    #elif defined(HAVE_VSWPRINTF)
-        /* can't use non-standard vswprintf() */
-        #undef HAVE_VSWPRINTF
-    #endif
+#if defined(_STLPORT_VERSION) && _STLPORT_VERSION >= 0x510
+#ifndef HAVE_VSWPRINTF
+#define HAVE_VSWPRINTF
+#endif
+#elif defined(HAVE_VSWPRINTF)
+/* can't use non-standard vswprintf() */
+#undef HAVE_VSWPRINTF
+#endif
 #endif /* __MINGW32__ */
 
 #if wxUSE_PRINTF_POS_PARAMS
-    /*
-        The systems where vsnprintf() supports positional parameters should
-        define the HAVE_UNIX98_PRINTF symbol.
+/*
+    The systems where vsnprintf() supports positional parameters should
+    define the HAVE_UNIX98_PRINTF symbol.
 
-        On systems which don't (e.g. Windows) we are forced to use
-        our wxVsnprintf() implementation.
-    */
-    #if defined(HAVE_UNIX98_PRINTF)
-        #ifdef HAVE_VSWPRINTF
-            #define wxCRT_VsnprintfW   vswprintf
-        #endif
-        #ifdef HAVE_BROKEN_VSNPRINTF_DECL
-            #define wxCRT_VsnprintfA    wx_fixed_vsnprintf
-        #else
-            #define wxCRT_VsnprintfA    vsnprintf
-        #endif
-    #else /* !HAVE_UNIX98_PRINTF */
-        /*
-            The only compiler with positional parameters support under Windows
-            is VC++ 8.0 which provides a new xxprintf_p() functions family.
-            The 2003 PSDK includes a slightly earlier version of VC8 than the
-            main release and does not have the printf_p functions.
-         */
-        #if defined _MSC_FULL_VER && _MSC_FULL_VER >= 140050727
-            #define wxCRT_VsnprintfA    _vsprintf_p
-            #define wxCRT_VsnprintfW    _vswprintf_p
-        #endif
-    #endif /* HAVE_UNIX98_PRINTF/!HAVE_UNIX98_PRINTF */
+    On systems which don't (e.g. Windows) we are forced to use
+    our wxVsnprintf() implementation.
+*/
+#if defined(HAVE_UNIX98_PRINTF)
+#ifdef HAVE_VSWPRINTF
+#define wxCRT_VsnprintfW   vswprintf
+#endif
+#ifdef HAVE_BROKEN_VSNPRINTF_DECL
+#define wxCRT_VsnprintfA    wx_fixed_vsnprintf
+#else
+#define wxCRT_VsnprintfA    vsnprintf
+#endif
+#else /* !HAVE_UNIX98_PRINTF */
+/*
+    The only compiler with positional parameters support under Windows
+    is VC++ 8.0 which provides a new xxprintf_p() functions family.
+    The 2003 PSDK includes a slightly earlier version of VC8 than the
+    main release and does not have the printf_p functions.
+ */
+#if defined _MSC_FULL_VER && _MSC_FULL_VER >= 140050727
+#define wxCRT_VsnprintfA    _vsprintf_p
+#define wxCRT_VsnprintfW    _vswprintf_p
+#endif
+#endif /* HAVE_UNIX98_PRINTF/!HAVE_UNIX98_PRINTF */
 #else /* !wxUSE_PRINTF_POS_PARAMS */
-    /*
-       We always want to define safe snprintf() function to be used instead of
-       sprintf(). Some compilers already have it (or rather vsnprintf() which
-       we really need...), otherwise we implement it using our own printf()
-       code.
+/*
+   We always want to define safe snprintf() function to be used instead of
+   sprintf(). Some compilers already have it (or rather vsnprintf() which
+   we really need...), otherwise we implement it using our own printf()
+   code.
 
-       We define function with a trailing underscore here because the real one
-       is a wrapper around it as explained below
-     */
+   We define function with a trailing underscore here because the real one
+   is a wrapper around it as explained below
+ */
 
-    #if defined(__VISUALC__) || \
+#if defined(__VISUALC__) || \
             (defined(__BORLANDC__) && __BORLANDC__ >= 0x540)
-        #define wxCRT_VsnprintfA    _vsnprintf
-        #define wxCRT_VsnprintfW    _vsnwprintf
-    #else
-        #if defined(HAVE__VSNWPRINTF)
-            #define wxCRT_VsnprintfW    _vsnwprintf
-        #elif defined(HAVE_VSWPRINTF)
-            #define wxCRT_VsnprintfW     vswprintf
-        #endif
+#define wxCRT_VsnprintfA    _vsnprintf
+#define wxCRT_VsnprintfW    _vsnwprintf
+#else
+#if defined(HAVE__VSNWPRINTF)
+#define wxCRT_VsnprintfW    _vsnwprintf
+#elif defined(HAVE_VSWPRINTF)
+#define wxCRT_VsnprintfW     vswprintf
+#endif
 
-        #if defined(HAVE_VSNPRINTF)
-            #ifdef HAVE_BROKEN_VSNPRINTF_DECL
-                #define wxCRT_VsnprintfA    wx_fixed_vsnprintf
-            #else
-                #define wxCRT_VsnprintfA    vsnprintf
-            #endif
-        #endif
-    #endif
+#if defined(HAVE_VSNPRINTF)
+#ifdef HAVE_BROKEN_VSNPRINTF_DECL
+#define wxCRT_VsnprintfA    wx_fixed_vsnprintf
+#else
+#define wxCRT_VsnprintfA    vsnprintf
+#endif
+#endif
+#endif
 #endif /* wxUSE_PRINTF_POS_PARAMS/!wxUSE_PRINTF_POS_PARAMS */
 
 #ifndef wxCRT_VsnprintfW
-    /* no (suitable) vsnprintf(), cook our own */
-    WXDLLIMPEXP_BASE int
-    wxCRT_VsnprintfW(wchar_t *buf, size_t len, const wchar_t *format, va_list argptr);
-    #define wxUSE_WXVSNPRINTFW 1
+/* no (suitable) vsnprintf(), cook our own */
+WXDLLIMPEXP_BASE int
+wxCRT_VsnprintfW(wchar_t *buf, size_t len, const wchar_t *format, va_list argptr);
+#define wxUSE_WXVSNPRINTFW 1
 #else
-    #define wxUSE_WXVSNPRINTFW 0
+#define wxUSE_WXVSNPRINTFW 0
 #endif
 
 #ifndef wxCRT_VsnprintfA
-        /* no (suitable) vsnprintf(), cook our own */
-        WXDLLIMPEXP_BASE int
-        wxCRT_VsnprintfA(char *buf, size_t len, const char *format, va_list argptr);
-        #define wxUSE_WXVSNPRINTFA 1
+/* no (suitable) vsnprintf(), cook our own */
+WXDLLIMPEXP_BASE int
+wxCRT_VsnprintfA(char *buf, size_t len, const char *format, va_list argptr);
+#define wxUSE_WXVSNPRINTFA 1
 #else
-        #define wxUSE_WXVSNPRINTFA 0
+#define wxUSE_WXVSNPRINTFA 0
 #endif
 
 // for wxString code, define wxUSE_WXVSNPRINTF to indicate that wx
 // implementation is used no matter what (in UTF-8 build, either *A or *W
 // version may be called):
 #if !wxUSE_UNICODE
-    #define wxUSE_WXVSNPRINTF wxUSE_WXVSNPRINTFA
+#define wxUSE_WXVSNPRINTF wxUSE_WXVSNPRINTFA
 #elif wxUSE_UNICODE_WCHAR
-    #define wxUSE_WXVSNPRINTF wxUSE_WXVSNPRINTFW
+#define wxUSE_WXVSNPRINTF wxUSE_WXVSNPRINTFW
 #elif wxUSE_UTF8_LOCALE_ONLY
-    #define wxUSE_WXVSNPRINTF wxUSE_WXVSNPRINTFA
+#define wxUSE_WXVSNPRINTF wxUSE_WXVSNPRINTFA
 #else // UTF-8 under any locale
-    #define wxUSE_WXVSNPRINTF (wxUSE_WXVSNPRINTFA && wxUSE_WXVSNPRINTFW)
+#define wxUSE_WXVSNPRINTF (wxUSE_WXVSNPRINTFA && wxUSE_WXVSNPRINTFW)
 #endif
 
 #define wxCRT_FprintfA       fprintf
@@ -196,34 +196,34 @@
    case.
  */
 #if !defined(wxHAVE_TCHAR_SUPPORT) && !defined(HAVE_WPRINTF)
-    #define wxNEED_WPRINTF
+#define wxNEED_WPRINTF
 #endif
 #if !defined(wxHAVE_TCHAR_SUPPORT) && !defined(HAVE_VSWSCANF) && defined(HAVE_VSSCANF)
-    #define wxNEED_VSWSCANF
+#define wxNEED_VSWSCANF
 #endif
 
 
 #if defined(wxNEED_WPRINTF)
-    /*
-        we need to implement all wide character printf functions either because
-        we don't have them at all or because they don't have the semantics we
-        need
-     */
-    int wxCRT_PrintfW( const wchar_t *format, ... );
-    int wxCRT_FprintfW( FILE *stream, const wchar_t *format, ... );
-    int wxCRT_VfprintfW( FILE *stream, const wchar_t *format, va_list ap );
-    int wxCRT_VprintfW( const wchar_t *format, va_list ap );
-    int wxCRT_VsprintfW( wchar_t *str, const wchar_t *format, va_list ap );
+/*
+    we need to implement all wide character printf functions either because
+    we don't have them at all or because they don't have the semantics we
+    need
+ */
+int wxCRT_PrintfW( const wchar_t *format, ... );
+int wxCRT_FprintfW( FILE *stream, const wchar_t *format, ... );
+int wxCRT_VfprintfW( FILE *stream, const wchar_t *format, va_list ap );
+int wxCRT_VprintfW( const wchar_t *format, va_list ap );
+int wxCRT_VsprintfW( wchar_t *str, const wchar_t *format, va_list ap );
 #else /* !wxNEED_WPRINTF */
-    #define wxCRT_FprintfW      fwprintf
-    #define wxCRT_PrintfW       wprintf
-    #define wxCRT_VfprintfW     vfwprintf
-    #define wxCRT_VprintfW      vwprintf
+#define wxCRT_FprintfW      fwprintf
+#define wxCRT_PrintfW       wprintf
+#define wxCRT_VfprintfW     vfwprintf
+#define wxCRT_VprintfW      vwprintf
 
-    #if defined(__WINDOWS__) && !defined(HAVE_VSWPRINTF)
-        // only non-standard vswprintf() without buffer size argument can be used here
-        #define  wxCRT_VsprintfW     vswprintf
-    #endif
+#if defined(__WINDOWS__) && !defined(HAVE_VSWPRINTF)
+// only non-standard vswprintf() without buffer size argument can be used here
+#define  wxCRT_VsprintfW     vswprintf
+#endif
 #endif /* wxNEED_WPRINTF */
 
 
@@ -235,44 +235,44 @@
 /* vsscanf() may have a wrong declaration with non-const first parameter, fix
  * this by wrapping it if necessary. */
 #if defined __cplusplus && defined HAVE_BROKEN_VSSCANF_DECL
-    inline int wxCRT_VsscanfA(const char *str, const char *format, va_list ap)
-    {
-        return vsscanf(const_cast<char *>(str), format, ap);
-    }
+inline int wxCRT_VsscanfA(const char *str, const char *format, va_list ap)
+{
+	return vsscanf(const_cast<char *>(str), format, ap);
+}
 #else
-    wxDECL_FOR_STRICT_MINGW32(int, vsscanf, (const char*, const char*, va_list))
+wxDECL_FOR_STRICT_MINGW32(int, vsscanf, (const char*, const char*, va_list))
 
-    #define wxCRT_VsscanfA   vsscanf
+#define wxCRT_VsscanfA   vsscanf
 #endif
 
 #if defined(wxNEED_WPRINTF)
-    int wxCRT_ScanfW(const wchar_t *format, ...);
-    int wxCRT_SscanfW(const wchar_t *str, const wchar_t *format, ...);
-    int wxCRT_FscanfW(FILE *stream, const wchar_t *format, ...);
+int wxCRT_ScanfW(const wchar_t *format, ...);
+int wxCRT_SscanfW(const wchar_t *str, const wchar_t *format, ...);
+int wxCRT_FscanfW(FILE *stream, const wchar_t *format, ...);
 #else
-    #define wxCRT_ScanfW     wxVMS_USE_STD wscanf
-    #define wxCRT_SscanfW    wxVMS_USE_STD swscanf
-    #define wxCRT_FscanfW    wxVMS_USE_STD fwscanf
+#define wxCRT_ScanfW     wxVMS_USE_STD wscanf
+#define wxCRT_SscanfW    wxVMS_USE_STD swscanf
+#define wxCRT_FscanfW    wxVMS_USE_STD fwscanf
 #endif
 #ifdef wxNEED_VSWSCANF
-    int wxCRT_VsscanfW(const wchar_t *str, const wchar_t *format, va_list ap);
+int wxCRT_VsscanfW(const wchar_t *str, const wchar_t *format, va_list ap);
 #else
-    wxDECL_FOR_STRICT_MINGW32(int, vswscanf, (const wchar_t*, const wchar_t*, va_list))
+wxDECL_FOR_STRICT_MINGW32(int, vswscanf, (const wchar_t*, const wchar_t*, va_list))
 
-    #define wxCRT_VsscanfW   wxVMS_USE_STD vswscanf
+#define wxCRT_VsscanfW   wxVMS_USE_STD vswscanf
 #endif
 
 // ----------------------------------------------------------------------------
 // user-friendly wrappers to CRT functions
 // ----------------------------------------------------------------------------
 
-    // FIXME-UTF8: remove this
+// FIXME-UTF8: remove this
 #if wxUSE_UNICODE
-    #define wxCRT_PrintfNative wxCRT_PrintfW
-    #define wxCRT_FprintfNative wxCRT_FprintfW
+#define wxCRT_PrintfNative wxCRT_PrintfW
+#define wxCRT_FprintfNative wxCRT_FprintfW
 #else
-    #define wxCRT_PrintfNative wxCRT_PrintfA
-    #define wxCRT_FprintfNative wxCRT_FprintfA
+#define wxCRT_PrintfNative wxCRT_PrintfA
+#define wxCRT_FprintfNative wxCRT_FprintfA
 #endif
 
 
@@ -280,48 +280,48 @@ WX_DEFINE_VARARG_FUNC_SANS_N0(int, wxPrintf, 1, (const wxFormatString&),
                               wxCRT_PrintfNative, wxCRT_PrintfA)
 inline int wxPrintf(const wxFormatString& s)
 {
-    return wxPrintf("%s", s.InputAsString());
+	return wxPrintf("%s", s.InputAsString());
 }
 
 WX_DEFINE_VARARG_FUNC_SANS_N0(int, wxFprintf, 2, (FILE*, const wxFormatString&),
                               wxCRT_FprintfNative, wxCRT_FprintfA)
 inline int wxFprintf(FILE *f, const wxFormatString& s)
 {
-    return wxFprintf(f, "%s", s.InputAsString());
+	return wxFprintf(f, "%s", s.InputAsString());
 }
 
 // va_list versions of printf functions simply forward to the respective
 // CRT function; note that they assume that va_list was created using
 // wxArgNormalizer<T>!
 #if wxUSE_UNICODE_UTF8
-    #if wxUSE_UTF8_LOCALE_ONLY
-        #define WX_VARARG_VFOO_IMPL(args, implW, implA)              \
+#if wxUSE_UTF8_LOCALE_ONLY
+#define WX_VARARG_VFOO_IMPL(args, implW, implA)              \
             return implA args
-    #else
-        #define WX_VARARG_VFOO_IMPL(args, implW, implA)              \
+#else
+#define WX_VARARG_VFOO_IMPL(args, implW, implA)              \
             if ( wxLocaleIsUtf8 ) return implA args;                 \
             else return implW args
-    #endif
+#endif
 #elif wxUSE_UNICODE_WCHAR
-    #define WX_VARARG_VFOO_IMPL(args, implW, implA)                  \
+#define WX_VARARG_VFOO_IMPL(args, implW, implA)                  \
         return implW args
 #else // ANSI
-    #define WX_VARARG_VFOO_IMPL(args, implW, implA)                  \
+#define WX_VARARG_VFOO_IMPL(args, implW, implA)                  \
         return implA args
 #endif
 
 inline int
 wxVprintf(const wxString& format, va_list ap)
 {
-    WX_VARARG_VFOO_IMPL((wxFormatString(format), ap),
-                        wxCRT_VprintfW, wxCRT_VprintfA);
+	WX_VARARG_VFOO_IMPL((wxFormatString(format), ap),
+	                    wxCRT_VprintfW, wxCRT_VprintfA);
 }
 
 inline int
 wxVfprintf(FILE *f, const wxString& format, va_list ap)
 {
-    WX_VARARG_VFOO_IMPL((f, wxFormatString(format), ap),
-                        wxCRT_VfprintfW, wxCRT_VfprintfA);
+	WX_VARARG_VFOO_IMPL((f, wxFormatString(format), ap),
+	                    wxCRT_VfprintfW, wxCRT_VfprintfA);
 }
 
 #undef WX_VARARG_VFOO_IMPL
@@ -416,10 +416,10 @@ wxVsnprintf(wchar_t *str, size_t size, const wxString& format, va_list argptr);
 // this is needed to normalize the format string, see src/common/strvararg.cpp
 // for more details
 #ifdef __WINDOWS__
-    #define wxScanfConvertFormatW(fmt) fmt
+#define wxScanfConvertFormatW(fmt) fmt
 #else
-    const wxScopedWCharBuffer
-    WXDLLIMPEXP_BASE wxScanfConvertFormatW(const wchar_t *format);
+const wxScopedWCharBuffer
+WXDLLIMPEXP_BASE wxScanfConvertFormatW(const wchar_t *format);
 #endif
 
 WX_DEFINE_SCANFUNC(wxScanf, 1, (const char *format),

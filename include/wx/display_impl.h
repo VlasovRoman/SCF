@@ -19,24 +19,24 @@
 class WXDLLIMPEXP_CORE wxDisplayFactory
 {
 public:
-    wxDisplayFactory() { }
-    virtual ~wxDisplayFactory() { }
+	wxDisplayFactory() { }
+	virtual ~wxDisplayFactory() { }
 
-    // create a new display object
-    //
-    // it can return a NULL pointer if the display creation failed
-    virtual wxDisplayImpl *CreateDisplay(unsigned n) = 0;
+	// create a new display object
+	//
+	// it can return a NULL pointer if the display creation failed
+	virtual wxDisplayImpl *CreateDisplay(unsigned n) = 0;
 
-    // get the total number of displays
-    virtual unsigned GetCount() = 0;
+	// get the total number of displays
+	virtual unsigned GetCount() = 0;
 
-    // return the display for the given point or wxNOT_FOUND
-    virtual int GetFromPoint(const wxPoint& pt) = 0;
+	// return the display for the given point or wxNOT_FOUND
+	virtual int GetFromPoint(const wxPoint& pt) = 0;
 
-    // return the display for the given window or wxNOT_FOUND
-    //
-    // the window pointer must not be NULL (i.e. caller should check it)
-    virtual int GetFromWindow(const wxWindow *window);
+	// return the display for the given window or wxNOT_FOUND
+	//
+	// the window pointer must not be NULL (i.e. caller should check it)
+	virtual int GetFromWindow(const wxWindow *window);
 };
 
 // ----------------------------------------------------------------------------
@@ -46,49 +46,58 @@ public:
 class WXDLLIMPEXP_CORE wxDisplayImpl
 {
 public:
-    // virtual dtor for this base class
-    virtual ~wxDisplayImpl() { }
+	// virtual dtor for this base class
+	virtual ~wxDisplayImpl() { }
 
 
-    // return the full area of this display
-    virtual wxRect GetGeometry() const = 0;
+	// return the full area of this display
+	virtual wxRect GetGeometry() const = 0;
 
-    // return the area of the display available for normal windows
-    virtual wxRect GetClientArea() const { return GetGeometry(); }
+	// return the area of the display available for normal windows
+	virtual wxRect GetClientArea() const
+	{
+		return GetGeometry();
+	}
 
-    // return the name (may be empty)
-    virtual wxString GetName() const = 0;
+	// return the name (may be empty)
+	virtual wxString GetName() const = 0;
 
-    // return the index of this display
-    unsigned GetIndex() const { return m_index; }
+	// return the index of this display
+	unsigned GetIndex() const
+	{
+		return m_index;
+	}
 
-    // return true if this is the primary monitor (usually one with index 0)
-    virtual bool IsPrimary() const { return GetIndex() == 0; }
+	// return true if this is the primary monitor (usually one with index 0)
+	virtual bool IsPrimary() const
+	{
+		return GetIndex() == 0;
+	}
 
 
 #if wxUSE_DISPLAY
-    // implements wxDisplay::GetModes()
-    virtual wxArrayVideoModes GetModes(const wxVideoMode& mode) const = 0;
+	// implements wxDisplay::GetModes()
+	virtual wxArrayVideoModes GetModes(const wxVideoMode& mode) const = 0;
 
-    // get current video mode
-    virtual wxVideoMode GetCurrentMode() const = 0;
+	// get current video mode
+	virtual wxVideoMode GetCurrentMode() const = 0;
 
-    // change current mode, return true if succeeded, false otherwise
-    virtual bool ChangeMode(const wxVideoMode& mode) = 0;
+	// change current mode, return true if succeeded, false otherwise
+	virtual bool ChangeMode(const wxVideoMode& mode) = 0;
 #endif // wxUSE_DISPLAY
 
 protected:
-    // create the object providing access to the display with the given index
-    wxDisplayImpl(unsigned n) : m_index(n) { }
+	// create the object providing access to the display with the given index
+	wxDisplayImpl(unsigned n) : m_index(n) { }
 
 
-    // the index of this display (0 is always the primary one)
-    const unsigned m_index;
+	// the index of this display (0 is always the primary one)
+	const unsigned m_index;
 
 
-    friend class wxDisplayFactory;
+	friend class wxDisplayFactory;
 
-    wxDECLARE_NO_COPY_CLASS(wxDisplayImpl);
+	wxDECLARE_NO_COPY_CLASS(wxDisplayImpl);
 };
 
 // ----------------------------------------------------------------------------
@@ -100,9 +109,9 @@ protected:
 class WXDLLIMPEXP_CORE wxDisplayFactorySingle : public wxDisplayFactory
 {
 public:
-    virtual wxDisplayImpl *CreateDisplay(unsigned n) wxOVERRIDE;
-    virtual unsigned GetCount() wxOVERRIDE { return 1; }
-    virtual int GetFromPoint(const wxPoint& pt) wxOVERRIDE;
+	virtual wxDisplayImpl *CreateDisplay(unsigned n) wxOVERRIDE;
+	virtual unsigned GetCount() wxOVERRIDE { return 1; }
+	virtual int GetFromPoint(const wxPoint& pt) wxOVERRIDE;
 };
 
 #endif // _WX_DISPLAY_IMPL_H_BASE_

@@ -132,7 +132,7 @@
 /* --- start common options --- */
 
 #ifndef wxUSE_GUI
-    #define wxUSE_GUI 1
+#define wxUSE_GUI 1
 #endif
 
 
@@ -167,7 +167,7 @@
 
 
 #ifndef wxUSE_UNICODE
-    #define wxUSE_UNICODE 1
+#define wxUSE_UNICODE 1
 #endif
 
 #define wxUSE_WCHAR_T 1
@@ -658,9 +658,9 @@
 #define wxUSE_GRAPHICS_GDIPLUS wxUSE_GRAPHICS_CONTEXT
 
 #if defined(_MSC_VER) && _MSC_VER >= 1600
-    #define wxUSE_GRAPHICS_DIRECT2D wxUSE_GRAPHICS_CONTEXT
+#define wxUSE_GRAPHICS_DIRECT2D wxUSE_GRAPHICS_CONTEXT
 #else
-    #define wxUSE_GRAPHICS_DIRECT2D 0
+#define wxUSE_GRAPHICS_DIRECT2D 0
 #endif
 
 
@@ -671,9 +671,9 @@
 #define wxUSE_ACTIVEX 1
 
 #if defined(_MSC_VER) && _MSC_VER >= 1700 && !defined(_USING_V110_SDK71_)
-    #define wxUSE_WINRT 0
+#define wxUSE_WINRT 0
 #else
-    #define wxUSE_WINRT 0
+#define wxUSE_WINRT 0
 #endif
 
 #define wxUSE_DC_CACHEING 1
@@ -707,9 +707,9 @@
 
 
 #if defined(__VISUALC__) || defined(__MINGW64_TOOLCHAIN__)
-    #define wxUSE_DBGHELP 0
+#define wxUSE_DBGHELP 0
 #else
-    #define wxUSE_DBGHELP 0
+#define wxUSE_DBGHELP 0
 #endif
 
 #define wxUSE_CRASHREPORT 1
@@ -915,7 +915,7 @@
 /* #undef WX_STATFS_T */
 
 /* The signal handler prototype */
-#define wxTYPE_SA_HANDLER 
+#define wxTYPE_SA_HANDLER
 
 /* gettimeofday() usually takes 2 arguments, but some really old systems might
  * have only one, in which case define WX_GETTIMEOFDAY_NO_TZ */
@@ -1186,7 +1186,7 @@
 /* #undef HAVE_ICONV */
 
 /* Define as "const" if the declaration of iconv() needs const.  */
-#define ICONV_CONST 
+#define ICONV_CONST
 
 /* Define if you have the <langinfo.h> header file.  */
 /* #undef HAVE_LANGINFO_H */

@@ -17,22 +17,22 @@
 #include "wx/textctrl.h"
 
 #if !defined(__WXUNIVERSAL__) && defined(__WXMAC__)
-    // search control was introduced in Mac OS X 10.3 Panther
-    #define wxUSE_NATIVE_SEARCH_CONTROL 1
+// search control was introduced in Mac OS X 10.3 Panther
+#define wxUSE_NATIVE_SEARCH_CONTROL 1
 
-    #define wxSearchCtrlBaseBaseClass wxTextCtrl
+#define wxSearchCtrlBaseBaseClass wxTextCtrl
 #else
-    // no native version, use the generic one
-    #define wxUSE_NATIVE_SEARCH_CONTROL 0
+// no native version, use the generic one
+#define wxUSE_NATIVE_SEARCH_CONTROL 0
 
-    #include "wx/compositewin.h"
-    #include "wx/containr.h"
+#include "wx/compositewin.h"
+#include "wx/containr.h"
 
-    class WXDLLIMPEXP_CORE wxSearchCtrlBaseBaseClass
-        : public wxCompositeWindow< wxNavigationEnabled<wxControl> >,
-          public wxTextCtrlIface
-    {
-    };
+class WXDLLIMPEXP_CORE wxSearchCtrlBaseBaseClass
+	: public wxCompositeWindow< wxNavigationEnabled<wxControl> >,
+	  public wxTextCtrlIface
+{
+};
 #endif
 
 // ----------------------------------------------------------------------------
@@ -52,38 +52,38 @@ wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_SEARCH, wxCommandEvent);
 class WXDLLIMPEXP_CORE wxSearchCtrlBase : public wxSearchCtrlBaseBaseClass
 {
 public:
-    wxSearchCtrlBase() { }
-    virtual ~wxSearchCtrlBase() { }
+	wxSearchCtrlBase() { }
+	virtual ~wxSearchCtrlBase() { }
 
-    // search control
+	// search control
 #if wxUSE_MENUS
-    virtual void SetMenu(wxMenu *menu) = 0;
-    virtual wxMenu *GetMenu() = 0;
+	virtual void SetMenu(wxMenu *menu) = 0;
+	virtual wxMenu *GetMenu() = 0;
 #endif // wxUSE_MENUS
 
-    // get/set options
-    virtual void ShowSearchButton( bool show ) = 0;
-    virtual bool IsSearchButtonVisible() const = 0;
+	// get/set options
+	virtual void ShowSearchButton( bool show ) = 0;
+	virtual bool IsSearchButtonVisible() const = 0;
 
-    virtual void ShowCancelButton( bool show ) = 0;
-    virtual bool IsCancelButtonVisible() const = 0;
+	virtual void ShowCancelButton( bool show ) = 0;
+	virtual bool IsCancelButtonVisible() const = 0;
 
-    virtual void SetDescriptiveText(const wxString& text) = 0;
-    virtual wxString GetDescriptiveText() const = 0;
+	virtual void SetDescriptiveText(const wxString& text) = 0;
+	virtual wxString GetDescriptiveText() const = 0;
 
 private:
-    // implement wxTextEntry pure virtual method
-    virtual wxWindow *GetEditableWindow() wxOVERRIDE { return this; }
+	// implement wxTextEntry pure virtual method
+	virtual wxWindow *GetEditableWindow() wxOVERRIDE { return this; }
 };
 
 
 // include the platform-dependent class implementation
 #if wxUSE_NATIVE_SEARCH_CONTROL
-    #if defined(__WXMAC__)
-        #include "wx/osx/srchctrl.h"
-    #endif
+#if defined(__WXMAC__)
+#include "wx/osx/srchctrl.h"
+#endif
 #else
-    #include "wx/generic/srchctlg.h"
+#include "wx/generic/srchctlg.h"
 #endif
 
 // ----------------------------------------------------------------------------

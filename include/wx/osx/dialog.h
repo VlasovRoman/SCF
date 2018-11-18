@@ -19,77 +19,80 @@ class WXDLLIMPEXP_FWD_CORE wxModalEventLoop ;
 // Dialog boxes
 class WXDLLIMPEXP_CORE wxDialog : public wxDialogBase
 {
-    wxDECLARE_DYNAMIC_CLASS(wxDialog);
+	wxDECLARE_DYNAMIC_CLASS(wxDialog);
 
 public:
-    wxDialog() { Init(); }
+	wxDialog()
+	{
+		Init();
+	}
 
-    // Constructor with no modal flag - the new convention.
-    wxDialog(wxWindow *parent, wxWindowID id,
-             const wxString& title,
-             const wxPoint& pos = wxDefaultPosition,
-             const wxSize& size = wxDefaultSize,
-             long style = wxDEFAULT_DIALOG_STYLE,
-             const wxString& name = wxDialogNameStr)
-    {
-        Init();
-        Create(parent, id, title, pos, size, style, name);
-    }
+	// Constructor with no modal flag - the new convention.
+	wxDialog(wxWindow *parent, wxWindowID id,
+	         const wxString& title,
+	         const wxPoint& pos = wxDefaultPosition,
+	         const wxSize& size = wxDefaultSize,
+	         long style = wxDEFAULT_DIALOG_STYLE,
+	         const wxString& name = wxDialogNameStr)
+	{
+		Init();
+		Create(parent, id, title, pos, size, style, name);
+	}
 
-    bool Create(wxWindow *parent, wxWindowID id,
-                const wxString& title,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_DIALOG_STYLE,
-                const wxString& name = wxDialogNameStr);
+	bool Create(wxWindow *parent, wxWindowID id,
+	            const wxString& title,
+	            const wxPoint& pos = wxDefaultPosition,
+	            const wxSize& size = wxDefaultSize,
+	            long style = wxDEFAULT_DIALOG_STYLE,
+	            const wxString& name = wxDialogNameStr);
 
-    virtual ~wxDialog();
+	virtual ~wxDialog();
 
 //    virtual bool Destroy();
-    virtual bool Show(bool show = true);
+	virtual bool Show(bool show = true);
 
-    // return true if we're showing the dialog modally
-    virtual bool IsModal() const;
+	// return true if we're showing the dialog modally
+	virtual bool IsModal() const;
 
-    // show the dialog modally and return the value passed to EndModal()
-    virtual int ShowModal();
+	// show the dialog modally and return the value passed to EndModal()
+	virtual int ShowModal();
 
-    virtual void ShowWindowModal();
+	virtual void ShowWindowModal();
 
-    // may be called to terminate the dialog with the given return code
-    virtual void EndModal(int retCode);
+	// may be called to terminate the dialog with the given return code
+	virtual void EndModal(int retCode);
 
-    static bool OSXHasModalDialogsOpen();
-    static void OSXBeginModalDialog();
-    static void OSXEndModalDialog();
+	static bool OSXHasModalDialogsOpen();
+	static void OSXBeginModalDialog();
+	static void OSXEndModalDialog();
 
-    // implementation
-    // --------------
+	// implementation
+	// --------------
 
-    wxDialogModality GetModality() const;
+	wxDialogModality GetModality() const;
 
 #if wxOSX_USE_COCOA
-    virtual void ModalFinishedCallback(void* WXUNUSED(panel), int WXUNUSED(returnCode)) {}
+	virtual void ModalFinishedCallback(void* WXUNUSED(panel), int WXUNUSED(returnCode)) {}
 #endif
 
 protected:
-    // show window modal dialog
-    void DoShowWindowModal();
+	// show window modal dialog
+	void DoShowWindowModal();
 
-    // end window modal dialog.
-    void EndWindowModal();
+	// end window modal dialog.
+	void EndWindowModal();
 
-    // mac also takes command-period as cancel
-    virtual bool IsEscapeKey(const wxKeyEvent& event);
+	// mac also takes command-period as cancel
+	virtual bool IsEscapeKey(const wxKeyEvent& event);
 
 
-    wxDialogModality m_modality;
+	wxDialogModality m_modality;
 
-    wxModalEventLoop* m_eventLoop;
+	wxModalEventLoop* m_eventLoop;
 
 private:
-    void Init();
+	void Init();
 };
 
 #endif
-    // _WX_DIALOG_H_
+// _WX_DIALOG_H_

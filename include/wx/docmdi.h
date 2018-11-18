@@ -27,29 +27,29 @@
 // ----------------------------------------------------------------------------
 
 typedef
-  wxDocParentFrameAny<wxMDIParentFrame> wxDocMDIParentFrameBase;
+wxDocParentFrameAny<wxMDIParentFrame> wxDocMDIParentFrameBase;
 
 class WXDLLIMPEXP_CORE wxDocMDIParentFrame : public wxDocMDIParentFrameBase
 {
 public:
-    wxDocMDIParentFrame() : wxDocMDIParentFrameBase() { }
+	wxDocMDIParentFrame() : wxDocMDIParentFrameBase() { }
 
-    wxDocMDIParentFrame(wxDocManager *manager,
-                        wxFrame *parent,
-                        wxWindowID id,
-                        const wxString& title,
-                        const wxPoint& pos = wxDefaultPosition,
-                        const wxSize& size = wxDefaultSize,
-                        long style = wxDEFAULT_FRAME_STYLE,
-                        const wxString& name = wxFrameNameStr)
-        : wxDocMDIParentFrameBase(manager,
-                                  parent, id, title, pos, size, style, name)
-    {
-    }
+	wxDocMDIParentFrame(wxDocManager *manager,
+	                    wxFrame *parent,
+	                    wxWindowID id,
+	                    const wxString& title,
+	                    const wxPoint& pos = wxDefaultPosition,
+	                    const wxSize& size = wxDefaultSize,
+	                    long style = wxDEFAULT_FRAME_STYLE,
+	                    const wxString& name = wxFrameNameStr)
+		: wxDocMDIParentFrameBase(manager,
+		                          parent, id, title, pos, size, style, name)
+	{
+	}
 
 private:
-    wxDECLARE_CLASS(wxDocMDIParentFrame);
-    wxDECLARE_NO_COPY_CLASS(wxDocMDIParentFrame);
+	wxDECLARE_CLASS(wxDocMDIParentFrame);
+	wxDECLARE_NO_COPY_CLASS(wxDocMDIParentFrame);
 };
 
 // ----------------------------------------------------------------------------
@@ -57,30 +57,30 @@ private:
 // ----------------------------------------------------------------------------
 
 typedef
-  wxDocChildFrameAny<wxMDIChildFrame, wxMDIParentFrame> wxDocMDIChildFrameBase;
+wxDocChildFrameAny<wxMDIChildFrame, wxMDIParentFrame> wxDocMDIChildFrameBase;
 
 class WXDLLIMPEXP_CORE wxDocMDIChildFrame : public wxDocMDIChildFrameBase
 {
 public:
-    wxDocMDIChildFrame() { }
+	wxDocMDIChildFrame() { }
 
-    wxDocMDIChildFrame(wxDocument *doc,
-                       wxView *view,
-                       wxMDIParentFrame *parent,
-                       wxWindowID id,
-                       const wxString& title,
-                       const wxPoint& pos = wxDefaultPosition,
-                       const wxSize& size = wxDefaultSize,
-                       long style = wxDEFAULT_FRAME_STYLE,
-                       const wxString& name = wxFrameNameStr)
-        : wxDocMDIChildFrameBase(doc, view,
-                                 parent, id, title, pos, size, style, name)
-    {
-    }
+	wxDocMDIChildFrame(wxDocument *doc,
+	                   wxView *view,
+	                   wxMDIParentFrame *parent,
+	                   wxWindowID id,
+	                   const wxString& title,
+	                   const wxPoint& pos = wxDefaultPosition,
+	                   const wxSize& size = wxDefaultSize,
+	                   long style = wxDEFAULT_FRAME_STYLE,
+	                   const wxString& name = wxFrameNameStr)
+		: wxDocMDIChildFrameBase(doc, view,
+		                         parent, id, title, pos, size, style, name)
+	{
+	}
 
 private:
-    wxDECLARE_CLASS(wxDocMDIChildFrame);
-    wxDECLARE_NO_COPY_CLASS(wxDocMDIChildFrame);
+	wxDECLARE_CLASS(wxDocMDIChildFrame);
+	wxDECLARE_NO_COPY_CLASS(wxDocMDIChildFrame);
 };
 
 #endif // wxUSE_MDI_ARCHITECTURE

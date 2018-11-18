@@ -22,7 +22,10 @@
 
 // return the size needed for the buffer containing the encoded representation
 // of a buffer of given length
-inline size_t wxBase64EncodedSize(size_t len) { return 4*((len+2)/3); }
+inline size_t wxBase64EncodedSize(size_t len)
+{
+	return 4*((len+2)/3);
+}
 
 // raw base64 encoding function which encodes the contents of a buffer of the
 // specified length into the buffer of the specified size
@@ -38,16 +41,16 @@ wxBase64Encode(char *dst, size_t dstLen, const void *src, size_t srcLen);
 // (there is no error return)
 inline wxString wxBase64Encode(const void *src, size_t srcLen)
 {
-    const size_t dstLen = wxBase64EncodedSize(srcLen);
-    wxCharBuffer dst(dstLen);
-    wxBase64Encode(dst.data(), dstLen, src, srcLen);
+	const size_t dstLen = wxBase64EncodedSize(srcLen);
+	wxCharBuffer dst(dstLen);
+	wxBase64Encode(dst.data(), dstLen, src, srcLen);
 
-    return dst;
+	return dst;
 }
 
 inline wxString wxBase64Encode(const wxMemoryBuffer& buf)
 {
-    return wxBase64Encode(buf.GetData(), buf.GetDataLen());
+	return wxBase64Encode(buf.GetData(), buf.GetDataLen());
 }
 
 // ----------------------------------------------------------------------------
@@ -58,19 +61,22 @@ inline wxString wxBase64Encode(const wxMemoryBuffer& buf)
 // when an invalid character is encountered
 enum wxBase64DecodeMode
 {
-    // normal behaviour: stop at any invalid characters
-    wxBase64DecodeMode_Strict,
+	// normal behaviour: stop at any invalid characters
+	wxBase64DecodeMode_Strict,
 
-    // skip whitespace characters
-    wxBase64DecodeMode_SkipWS,
+	// skip whitespace characters
+	wxBase64DecodeMode_SkipWS,
 
-    // the most lenient behaviour: simply ignore all invalid characters
-    wxBase64DecodeMode_Relaxed
+	// the most lenient behaviour: simply ignore all invalid characters
+	wxBase64DecodeMode_Relaxed
 };
 
 // return the buffer size necessary for decoding a base64 string of the given
 // length
-inline size_t wxBase64DecodedSize(size_t srcLen) { return 3*srcLen/4; }
+inline size_t wxBase64DecodedSize(size_t srcLen)
+{
+	return 3*srcLen/4;
+}
 
 // raw decoding function which decodes the contents of the string of specified
 // length (or NUL-terminated by default) into the provided buffer of the given
@@ -96,9 +102,9 @@ wxBase64Decode(void *dst, size_t dstLen,
                wxBase64DecodeMode mode = wxBase64DecodeMode_Strict,
                size_t *posErr = NULL)
 {
-    // don't use str.length() here as the ASCII buffer is shorter than it for
-    // strings with embedded NULs
-    return wxBase64Decode(dst, dstLen, src.ToAscii(), wxNO_LEN, mode, posErr);
+	// don't use str.length() here as the ASCII buffer is shorter than it for
+	// strings with embedded NULs
+	return wxBase64Decode(dst, dstLen, src.ToAscii(), wxNO_LEN, mode, posErr);
 }
 
 // decode the contents of the given string; the returned buffer is empty if an
@@ -113,9 +119,9 @@ wxBase64Decode(const wxString& src,
                wxBase64DecodeMode mode = wxBase64DecodeMode_Strict,
                size_t *posErr = NULL)
 {
-    // don't use str.length() here as the ASCII buffer is shorter than it for
-    // strings with embedded NULs
-    return wxBase64Decode(src.ToAscii(), wxNO_LEN, mode, posErr);
+	// don't use str.length() here as the ASCII buffer is shorter than it for
+	// strings with embedded NULs
+	return wxBase64Decode(src.ToAscii(), wxNO_LEN, mode, posErr);
 }
 
 #endif // wxUSE_BASE64

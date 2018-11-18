@@ -30,41 +30,41 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_TOGGLEBUTTON, wxCommandEvent )
 class WXDLLIMPEXP_CORE wxToggleButtonBase : public wxAnyButton
 {
 public:
-    wxToggleButtonBase() { }
+	wxToggleButtonBase() { }
 
-    // Get/set the value
-    virtual void SetValue(bool state) = 0;
-    virtual bool GetValue() const = 0;
+	// Get/set the value
+	virtual void SetValue(bool state) = 0;
+	virtual bool GetValue() const = 0;
 
-    // The current "normal" state for the toggle button depends upon its value.
-    virtual State GetNormalState() const wxOVERRIDE
-    {
-        return GetValue() ? State_Pressed : State_Normal;
-    }
+	// The current "normal" state for the toggle button depends upon its value.
+	virtual State GetNormalState() const wxOVERRIDE
+	{
+		return GetValue() ? State_Pressed : State_Normal;
+	}
 
-    void UpdateWindowUI(long flags) wxOVERRIDE
-    {
-        wxControl::UpdateWindowUI(flags);
+	void UpdateWindowUI(long flags) wxOVERRIDE
+	{
+		wxControl::UpdateWindowUI(flags);
 
-        if ( !IsShown() )
-            return;
+		if ( !IsShown() )
+			return;
 
-        wxWindow *tlw = wxGetTopLevelParent( this );
-        if (tlw && wxPendingDelete.Member( tlw ))
-           return;
+		wxWindow *tlw = wxGetTopLevelParent( this );
+		if (tlw && wxPendingDelete.Member( tlw ))
+			return;
 
-        wxUpdateUIEvent event( GetId() );
-        event.SetEventObject(this);
+		wxUpdateUIEvent event( GetId() );
+		event.SetEventObject(this);
 
-        if (GetEventHandler()->ProcessEvent(event) )
-        {
-            if ( event.GetSetChecked() )
-                SetValue( event.GetChecked() );
-        }
-    }
+		if (GetEventHandler()->ProcessEvent(event) )
+		{
+			if ( event.GetSetChecked() )
+				SetValue( event.GetChecked() );
+		}
+	}
 
 protected:
-    wxDECLARE_NO_COPY_CLASS(wxToggleButtonBase);
+	wxDECLARE_NO_COPY_CLASS(wxToggleButtonBase);
 };
 
 
@@ -72,22 +72,22 @@ protected:
     wx__DECLARE_EVT1(wxEVT_TOGGLEBUTTON, id, wxCommandEventHandler(fn))
 
 #if defined(__WXUNIVERSAL__)
-    #include "wx/univ/tglbtn.h"
+#include "wx/univ/tglbtn.h"
 #elif defined(__WXMSW__)
-    #include "wx/msw/tglbtn.h"
-    #define wxHAS_BITMAPTOGGLEBUTTON
+#include "wx/msw/tglbtn.h"
+#define wxHAS_BITMAPTOGGLEBUTTON
 #elif defined(__WXGTK20__)
-    #include "wx/gtk/tglbtn.h"
-    #define wxHAS_BITMAPTOGGLEBUTTON
+#include "wx/gtk/tglbtn.h"
+#define wxHAS_BITMAPTOGGLEBUTTON
 #elif defined(__WXGTK__)
-    #include "wx/gtk1/tglbtn.h"
+#include "wx/gtk1/tglbtn.h"
 # elif defined(__WXMOTIF__)
-    #include "wx/motif/tglbtn.h"
+#include "wx/motif/tglbtn.h"
 #elif defined(__WXMAC__)
-    #include "wx/osx/tglbtn.h"
-    #define wxHAS_BITMAPTOGGLEBUTTON
+#include "wx/osx/tglbtn.h"
+#define wxHAS_BITMAPTOGGLEBUTTON
 #elif defined(__WXQT__)
-    #include "wx/qt/tglbtn.h"
+#include "wx/qt/tglbtn.h"
 #endif
 
 // old wxEVT_COMMAND_* constants

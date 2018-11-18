@@ -26,94 +26,103 @@
 class WXDLLIMPEXP_CORE wxStatusBarGeneric : public wxStatusBarBase
 {
 public:
-    wxStatusBarGeneric() { Init(); }
-    wxStatusBarGeneric(wxWindow *parent,
-                       wxWindowID winid = wxID_ANY,
-                       long style = wxSTB_DEFAULT_STYLE,
-                       const wxString& name = wxStatusBarNameStr)
-    {
-        Init();
+	wxStatusBarGeneric()
+	{
+		Init();
+	}
+	wxStatusBarGeneric(wxWindow *parent,
+	                   wxWindowID winid = wxID_ANY,
+	                   long style = wxSTB_DEFAULT_STYLE,
+	                   const wxString& name = wxStatusBarNameStr)
+	{
+		Init();
 
-        Create(parent, winid, style, name);
-    }
+		Create(parent, winid, style, name);
+	}
 
-    virtual ~wxStatusBarGeneric();
+	virtual ~wxStatusBarGeneric();
 
-    bool Create(wxWindow *parent, wxWindowID winid = wxID_ANY,
-                long style = wxSTB_DEFAULT_STYLE,
-                const wxString& name = wxStatusBarNameStr);
+	bool Create(wxWindow *parent, wxWindowID winid = wxID_ANY,
+	            long style = wxSTB_DEFAULT_STYLE,
+	            const wxString& name = wxStatusBarNameStr);
 
-    // implement base class methods
-    virtual void SetStatusWidths(int n, const int widths_field[]) wxOVERRIDE;
-    virtual bool GetFieldRect(int i, wxRect& rect) const wxOVERRIDE;
-    virtual void SetMinHeight(int height) wxOVERRIDE;
+	// implement base class methods
+	virtual void SetStatusWidths(int n, const int widths_field[]) wxOVERRIDE;
+	virtual bool GetFieldRect(int i, wxRect& rect) const wxOVERRIDE;
+	virtual void SetMinHeight(int height) wxOVERRIDE;
 
-    virtual int GetBorderX() const wxOVERRIDE { return m_borderX; }
-    virtual int GetBorderY() const wxOVERRIDE { return m_borderY; }
+	virtual int GetBorderX() const wxOVERRIDE
+	{
+		return m_borderX;
+	}
+	virtual int GetBorderY() const wxOVERRIDE
+	{
+		return m_borderY;
+	}
 
 
-    // implementation only (not part of wxStatusBar public API):
+	// implementation only (not part of wxStatusBar public API):
 
-    int GetFieldFromPoint(const wxPoint& point) const;
-
-protected:
-    virtual void DoUpdateStatusText(int number) wxOVERRIDE;
-
-    // event handlers
-    void OnPaint(wxPaintEvent& event);
-    void OnSize(wxSizeEvent& event);
-
-    void OnLeftDown(wxMouseEvent& event);
-    void OnRightDown(wxMouseEvent& event);
-
-    // Responds to colour changes
-    void OnSysColourChanged(wxSysColourChangedEvent& event);
+	int GetFieldFromPoint(const wxPoint& point) const;
 
 protected:
+	virtual void DoUpdateStatusText(int number) wxOVERRIDE;
 
-    virtual void DrawFieldText(wxDC& dc, const wxRect& rc, int i, int textHeight);
-    virtual void DrawField(wxDC& dc, int i, int textHeight);
+	// event handlers
+	void OnPaint(wxPaintEvent& event);
+	void OnSize(wxSizeEvent& event);
 
-    void SetBorderX(int x);
-    void SetBorderY(int y);
+	void OnLeftDown(wxMouseEvent& event);
+	void OnRightDown(wxMouseEvent& event);
 
-    virtual void InitColours();
+	// Responds to colour changes
+	void OnSysColourChanged(wxSysColourChangedEvent& event);
 
-    // true if the status bar shows the size grip: for this it must have
-    // wxSTB_SIZEGRIP style and the window it is attached to must be resizable
-    // and not maximized
-    bool ShowsSizeGrip() const;
+protected:
 
-    // returns the position and the size of the size grip
-    wxRect GetSizeGripRect() const;
+	virtual void DrawFieldText(wxDC& dc, const wxRect& rc, int i, int textHeight);
+	virtual void DrawField(wxDC& dc, int i, int textHeight);
 
-    // common part of all ctors
-    void Init();
+	void SetBorderX(int x);
+	void SetBorderY(int y);
 
-    // the last known size, fields widths must be updated whenever it's out of
-    // date
-    wxSize m_lastClientSize;
+	virtual void InitColours();
 
-    // the absolute widths of the status bar panes in pixels
-    wxArrayInt        m_widthsAbs;
+	// true if the status bar shows the size grip: for this it must have
+	// wxSTB_SIZEGRIP style and the window it is attached to must be resizable
+	// and not maximized
+	bool ShowsSizeGrip() const;
 
-    int               m_borderX;
-    int               m_borderY;
+	// returns the position and the size of the size grip
+	wxRect GetSizeGripRect() const;
 
-    wxPen             m_mediumShadowPen;
-    wxPen             m_hilightPen;
+	// common part of all ctors
+	void Init();
 
-    virtual wxSize DoGetBestSize() const wxOVERRIDE;
+	// the last known size, fields widths must be updated whenever it's out of
+	// date
+	wxSize m_lastClientSize;
+
+	// the absolute widths of the status bar panes in pixels
+	wxArrayInt        m_widthsAbs;
+
+	int               m_borderX;
+	int               m_borderY;
+
+	wxPen             m_mediumShadowPen;
+	wxPen             m_hilightPen;
+
+	virtual wxSize DoGetBestSize() const wxOVERRIDE;
 
 private:
-    // Update m_lastClientSize and m_widthsAbs from the current size.
-    void DoUpdateFieldWidths();
+	// Update m_lastClientSize and m_widthsAbs from the current size.
+	void DoUpdateFieldWidths();
 
-    wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxStatusBarGeneric);
+	wxDECLARE_EVENT_TABLE();
+	wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxStatusBarGeneric);
 };
 
 #endif // wxUSE_STATUSBAR
 
 #endif
-    // _WX_GENERIC_STATUSBR_H_
+// _WX_GENERIC_STATUSBR_H_
